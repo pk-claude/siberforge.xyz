@@ -1,25 +1,42 @@
-# Siberforge — Macro & Markets Dashboard
+# Siberforge
 
-Economic indicators tracker with S&P 500 / sector ETF correlation. Static front-end + Vercel serverless functions that proxy FRED and Finnhub with server-side keys.
+Landing page + project hub. The root `index.html` is a directory of Siberforge projects; each project lives under `core/` and is linked from the hub.
+
+Currently shipped:
+
+- **Macro & Markets Dashboard** (`/core/macro/`) — economic indicators tracker with S&P 500 / sector ETF correlation. Static front-end + Vercel serverless functions that proxy FRED and Finnhub with server-side keys.
 
 ## Architecture
 
 ```
 siberforge/
-├── index.html          # dashboard UI
-├── styles.css          # dark theme
-├── dashboard.js        # client controller (ES module)
-├── lib/
-│   └── analytics.js    # correlation, regression, z-score, alignment
-├── api/
-│   ├── fred.js         # /api/fred      -- FRED proxy (6h edge cache)
-│   └── stocks.js       # /api/stocks    -- Finnhub proxy (60s quote, 24h history)
+├── index.html              # landing-page hub (links to projects under /core/)
+├── README.md
 ├── package.json
-├── vercel.json
-└── .gitignore
+├── vercel.json             # functions at core/api/*.js; /api/* rewrites -> /core/api/*
+├── .gitignore
+└── core/
+    ├── macro/              # Macro & Markets Dashboard
+    │   ├── index.html      # dashboard UI (served at /core/macro/)
+    │   ├── dashboard.js    # client controller (ES module)
+    │   └── styles.css      # dark theme
+    ├── api/
+    │   ├── fred.js         # public URL /api/fred   (rewritten to /core/api/fred)
+    │   └── stocks.js       # public URL /api/stocks (rewritten to /core/api/stocks)
+    └── lib/
+        └── analytics.js    # correlation, regression, z-score, alignment
 ```
 
+**Routing note.** Serverless functions physically live at `core/api/*.js`, registered via the `functions` key in `vercel.json`. A rewrite (`/api/:path* -> /core/api/:path*`) keeps the public API surface at `/api/*`, so the client code in `core/macro/dashboard.js` still fetches `/api/fred` and `/api/stocks` exactly as before.
+
 **Why a proxy layer?** So API keys stay server-side and cache headers throttle upstream requests. Clients hit `/api/*`; Vercel's CDN caches responses; Finnhub/FRED see one request per TTL, not one per viewer.
+
+## Adding a new project
+
+1. Create a new subfolder under `core/` (e.g. `core/fx/`).
+2. Add an `index.html` (+ any project-specific `.js` / `.css`) inside it. It will be served at `/core/fx/`.
+3. Shared libraries go in `core/lib/`; new serverless endpoints go in `core/api/` (accessed publicly via `/api/<name>` thanks to the rewrite).
+4. Add a `<a class="card" href="/core/fx/">` to the root `index.html` so it shows up on the hub.
 
 ## Data sources
 
@@ -119,3 +136,4 @@ Below the tabs: an **indicator × sector** correlation heatmap (14 × 12) comput
 - **Finnhub (quotes):** free = 60/min. Per user visit: 12 quote requests on load, then 12/min after. Vercel edge caching collapses that to **12 upstream requests per 60s total across all users**. At the 60/min limit that's 5× headroom.
 - **Yahoo (history):** no documented rate limit for this endpoint. 24h edge cache means ~12 upstream calls per day regardless of traffic.
 - **FRED:** no hard limit documented. 6h edge cache.
+                                                                                                                  

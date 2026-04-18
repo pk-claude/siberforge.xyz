@@ -9,7 +9,7 @@ import {
   pearson,
   zscore,
   logReturns,
-} from '/lib/analytics.js';
+} from '/core/lib/analytics.js';
 
 // ---------- state ----------
 const state = {

@@ -32,6 +32,19 @@ html, body {
   background: var(--panel);
 }
 
+.brand { display: flex; align-items: center; gap: 14px; }
+
+.home-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: color .15s, background-color .15s;
+}
+.home-link:hover { color: var(--accent); background: var(--panel-2); }
+
 .brand .mark {
   font-weight: 700;
   letter-spacing: 2px;

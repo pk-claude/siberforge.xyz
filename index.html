@@ -3,90 +3,157 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge &mdash; Macro &amp; Markets</title>
-<link rel="stylesheet" href="/styles.css" />
-<!-- Chart.js via CDN. date-fns adapter for time axes. -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<title>Siberforge</title>
+<style>
+  :root {
+    --bg: #0b0d10;
+    --panel: #13171c;
+    --panel-2: #1a2028;
+    --line: #232b35;
+    --text: #e5e9ee;
+    --muted: #8a94a3;
+    --accent: #f7a700;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+  header {
+    padding: 28px 32px 20px;
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .mark {
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent);
+    font-size: 20px;
+    display: block;
+  }
+  .sub {
+    color: var(--muted);
+    margin-top: 6px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px;
+  }
+  .section-label {
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0 0 18px;
+    font-weight: 500;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    display: block;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 22px 22px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s, transform .15s, background-color .15s;
+  }
+  .card:hover {
+    border-color: var(--accent);
+    background: var(--panel-2);
+    transform: translateY(-1px);
+  }
+  .card .tag {
+    display: inline-block;
+    color: var(--accent);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 600;
+  }
+  .card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .card .arrow {
+    display: block;
+    margin-top: 14px;
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 1px;
+  }
+  .card:hover .arrow { color: var(--accent); }
+  .card.placeholder {
+    border-style: dashed;
+    opacity: 0.5;
+    cursor: default;
+  }
+  .card.placeholder:hover {
+    border-color: var(--line);
+    background: var(--panel);
+    transform: none;
+  }
+  .card.placeholder .arrow { display: none; }
+  footer {
+    padding: 20px 32px;
+    color: var(--muted);
+    font-size: 11px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+</style>
 </head>
 <body>
-<header class="top">
-  <div class="brand">
-    <span class="mark">SIBERFORGE</span>
-    <span class="sub">Macro &amp; Markets</span>
-  </div>
-  <div class="status">
-    <span id="refresh-indicator" class="dot"></span>
-    <span id="refresh-text">Initializing&hellip;</span>
-  </div>
+
+<header>
+  <span class="mark">SIBERFORGE</span>
+  <span class="sub">Research &amp; market intelligence</span>
 </header>
 
-<section class="quotes" id="quotes-strip">
-  <!-- Live SPY + sector ETF tiles injected here. -->
-</section>
+<main>
+  <p class="section-label">Projects</p>
+  <div class="grid">
 
-<section class="controls">
-  <div class="control">
-    <label>Indicator</label>
-    <select id="indicator-select"></select>
-  </div>
-  <div class="control">
-    <label>Benchmark</label>
-    <select id="benchmark-select"></select>
-  </div>
-  <div class="control">
-    <label>History</label>
-    <select id="years-select">
-      <option value="3">3y</option>
-      <option value="5" selected>5y</option>
-      <option value="10">10y</option>
-      <option value="15">15y</option>
-    </select>
-  </div>
-  <div class="control">
-    <label>Rolling window</label>
-    <select id="window-select">
-      <option value="30">30d</option>
-      <option value="60">60d</option>
-      <option value="90" selected>90d</option>
-      <option value="180">180d</option>
-      <option value="252">252d (1y)</option>
-    </select>
-  </div>
-</section>
+    <a class="card" href="/core/macro/">
+      <span class="tag">Live</span>
+      <h3>Macro &amp; Markets Dashboard</h3>
+      <p>Economic indicator tracker with S&amp;P 500 / sector ETF correlation. FRED macro series, live quotes, rolling correlations, regression, and sector heatmap.</p>
+      <span class="arrow">Open &rarr;</span>
+    </a>
 
-<nav class="tabs">
-  <button class="tab active" data-tab="rolling">Rolling correlation</button>
-  <button class="tab" data-tab="regression">Scatter + regression</button>
-  <button class="tab" data-tab="overlay">Time-series overlay</button>
-</nav>
+    <div class="card placeholder">
+      <span class="tag">Planned</span>
+      <h3>Next project</h3>
+      <p>Space reserved for future dashboards and tools.</p>
+    </div>
 
-<section class="panel">
-  <div id="tab-rolling" class="tab-panel active">
-    <div class="chart-wrap"><canvas id="chart-rolling"></canvas></div>
-    <p class="note" id="rolling-note"></p>
   </div>
-  <div id="tab-regression" class="tab-panel">
-    <div class="chart-wrap"><canvas id="chart-regression"></canvas></div>
-    <p class="note" id="regression-note"></p>
-  </div>
-  <div id="tab-overlay" class="tab-panel">
-    <div class="chart-wrap"><canvas id="chart-overlay"></canvas></div>
-    <p class="note" id="overlay-note"></p>
-  </div>
-</section>
-
-<section class="heatmap-section">
-  <h2>Indicator &times; Sector correlation matrix</h2>
-  <p class="sub">Pearson correlation between each indicator (YoY or level) and each sector ETF (daily log returns aligned to macro release cadence). Green = positive, red = negative.</p>
-  <div id="heatmap"></div>
-</section>
+</main>
 
 <footer>
-  <span>Data: FRED, Finnhub. SPY proxies the S&amp;P 500. ISM PMI substituted with Industrial Production (ISM data is not licensed to FRED).</span>
-  <span id="last-updated"></span>
+  &copy; Siberforge
 </footer>
 
-<script type="module" src="/dashboard.js"></script>
 </body>
 </html>
