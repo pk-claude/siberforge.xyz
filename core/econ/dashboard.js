@@ -1,13 +1,16 @@
 // Economic Indicators dashboard — controller.
 //
 // Responsibilities:
-//   1. Render skeleton cards for all 22 indicators.
-//   2. Batch-fetch FRED series, transform them, and populate the cards.
-//   3. Render nowcast placeholders (wired in Phase 2).
-//   4. Per-card error handling — one failure doesn't wipe the page.
+//   1. Render skeleton cards for all indicators.
+//   2. Batch-fetch FRED series in parallel with the release calendar.
+//   3. Apply per-indicator transforms; cache transformed series for derivation.
+//   4. Compute 'derived' indicators (real wages) from the cache.
+//   5. Render release-calendar chip strip above the grid.
+//   6. Per-card error handling — one failure doesn't wipe the page.
 
 import { INDICATORS, INDICATORS_BY_CATEGORY } from './indicators.js';
 import { renderSparkline, renderContextStrip } from './sparklines.js';
+import { renderReleaseStrip } from './releases.js';
 
 const BATCH_SIZE = 8;              // max series per /api/fred call
 const HISTORY_START = '2017-01-01'; // enough runway for 5yr YoY windows
@@ -15,6 +18,8 @@ const HISTORY_START = '2017-01-01'; // enough runway for 5yr YoY windows
 const state = {
   loaded: 0,
   failed: 0,
+  // Cache transformed observations by indicator id — used by 'derived' sources.
+  transformed: {},
 };
 
 // ============================================================================
@@ -48,10 +53,16 @@ function fmtSigned(value, decimals = 1) {
 
 function fmtDate(iso) {
   if (!iso) return '';
-  // "2026-03-14" → "Mar 2026" for monthly/quarterly, "Mar 14" for high-freq
-  const [y, m, d] = iso.split('-');
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-  return `${months[+m - 1]} ${y}`;
+  // "2026-03-14" → "Mar 2026"
+  const isoMatch = /^(\d{4})-(\d{1,2})(?:-\d{1,2})?$/.exec(String(iso).trim());
+  if (isoMatch) {
+    const y = isoMatch[1];
+    const m = Number(isoMatch[2]);
+    if (m >= 1 && m <= 12) return `${months[m - 1]} ${y}`;
+  }
+  // Accept other formats as-is (e.g. "Mar 2026", "2026 Q1")
+  return String(iso);
 }
 
 // ============================================================================
@@ -167,10 +178,24 @@ function buildSkeletonCards() {
       card.dataset.id = ind.id;
       if (ind.placeholder) card.classList.add('placeholder');
 
+      const badge = ind.placeholder
+        ? 'Phase 3'
+        : ind.source === 'nowcast' ? 'Nowcast'
+        : ind.source === 'derived' ? 'Derived'
+        : ind.id;
+      const idHint = ind.fredId || ind.id;
+      const sparkBlock = ind.cardType === 'compact'
+        ? ''
+        : `<div class="card-spark"></div>
+           <div class="card-context">
+             <div class="strip"></div>
+             <span class="pctl">—</span>
+           </div>`;
+
       card.innerHTML = `
         <div class="card-header">
-          <span class="card-label" title="${ind.fredId || ind.id}">${ind.shortLabel}</span>
-          <span class="card-badge">${ind.placeholder ? 'Phase 2' : ind.id}</span>
+          <span class="card-label" title="${idHint}">${ind.shortLabel}</span>
+          <span class="card-badge">${badge}</span>
         </div>
         <div class="card-value">
           <span class="primary">—</span><span class="unit">${ind.unit}</span>
@@ -179,11 +204,7 @@ function buildSkeletonCards() {
           <span class="delta neutral">—</span>
           <span class="as-of"></span>
         </div>
-        <div class="card-spark"></div>
-        <div class="card-context">
-          <div class="strip"></div>
-          <span class="pctl">—</span>
-        </div>
+        ${sparkBlock}
         <div class="card-note">${ind.context}</div>
       `;
 
@@ -225,6 +246,22 @@ function populateCard(ind, observations) {
     renderCardError(ind, 'Insufficient history');
     return;
   }
+
+  // Cache transformed series for derived indicators to consume.
+  state.transformed[ind.id] = transformed;
+
+  renderCardFromTransformed(ind, transformed);
+}
+
+/**
+ * Render a standard card from an already-transformed series. Used by both
+ * the FRED fetch path (after applyTransform) and the 'derived' path
+ * (where deriveFn returns a ready series).
+ */
+function renderCardFromTransformed(ind, transformed) {
+  const card = document.querySelector(`.card[data-id="${ind.id}"]`);
+  if (!card) return;
+  card.classList.remove('loading');
 
   // Slice last 5yr for spark + percentile
   const recent = lastNYears(transformed, 5);
@@ -326,7 +363,35 @@ async function fetchBatch(indicators) {
   return data.series || [];
 }
 
-async function loadAll() {
+function computeDerived() {
+  const derivedInds = INDICATORS.filter(i => i.source === 'derived');
+  for (const ind of derivedInds) {
+    try {
+      const deps = {};
+      let missing = false;
+      for (const depId of ind.dependsOn || []) {
+        if (!state.transformed[depId]) { missing = true; break; }
+        deps[depId] = state.transformed[depId];
+      }
+      if (missing) {
+        renderCardError(ind, 'Missing dependency');
+        continue;
+      }
+      const series = ind.deriveFn(deps);
+      if (!series || series.length < 2) {
+        renderCardError(ind, 'Not enough derived data');
+        continue;
+      }
+      state.transformed[ind.id] = series;
+      renderCardFromTransformed(ind, series);
+    } catch (err) {
+      console.error(`Derive failed for ${ind.id}:`, err);
+      renderCardError(ind, 'Derive failed');
+    }
+  }
+}
+
+async function loadFredSeries() {
   const fredInds = INDICATORS.filter(i => i.source === 'fred');
 
   const batches = [];
@@ -347,17 +412,29 @@ async function loadAll() {
         populateCard(ind, payload.observations);
       }
     } catch (err) {
-      // Whole batch failed → error-card every indicator in it
-      for (const ind of batch) renderCardError(ind, `Fetch failed`);
+      for (const ind of batch) renderCardError(ind, 'Fetch failed');
       console.error('Batch failed:', err);
     }
   }));
+}
 
-  const total = fredInds.length;
+async function loadAll() {
+  // Kick off release strip in parallel with data fetches (non-blocking)
+  const stripEl = $('release-strip');
+  if (stripEl) renderReleaseStrip(stripEl).catch(err => console.error('Strip failed:', err));
+
+  // FRED batches
+  await loadFredSeries();
+
+  // Derived indicators depend on transformed FRED data being ready
+  computeDerived();
+
+  // Status summary
+  const totalReal = INDICATORS.filter(i => !i.placeholder).length;
   if (state.failed === 0) {
-    setStatus('live', `All ${total} series loaded`);
+    setStatus('live', `All ${totalReal} indicators loaded`);
   } else if (state.loaded > 0) {
-    setStatus('stale', `${state.loaded}/${total} loaded · ${state.failed} errors`);
+    setStatus('stale', `${state.loaded}/${totalReal} loaded · ${state.failed} errors`);
   } else {
     setStatus('error', 'No data loaded');
   }

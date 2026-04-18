@@ -35,6 +35,11 @@ const CATALOG = {
   // Growth
   T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   GACDISA066MSFRBNY:     { label: 'Empire State Mfg Index',  freq: 'monthly',   unit: 'index',   transform: 'level',   group: 'econ' },
+  GDPNOW:                { label: 'Atlanta Fed GDPNow',      freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  // Yield curve (Phase 2 additions)
+  DGS2:                  { label: '2Y Treasury Yield',       freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  DGS5:                  { label: '5Y Treasury Yield',       freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  T10Y2Y:                { label: '10Y–2Y Spread (2s10s)',   freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   // Inflation
   PCEPILFE:              { label: 'Core PCE Price Index',    freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
   CPILFESL:              { label: 'Core CPI',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },

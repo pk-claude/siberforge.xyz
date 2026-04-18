@@ -2,30 +2,30 @@
 //
 // Each entry describes one indicator: where to pull it, how to transform it,
 // and how to frame it for a reader. The dashboard reads this registry,
-// fetches each series from /api/fred (or a nowcast source), and renders cards
-// driven entirely by these definitions.
+// fetches each series, and renders cards driven entirely by these definitions.
 //
 // Fields:
 //   id          : stable internal key (used in URLs for drill-downs)
-//   source      : 'fred' | 'nowcast' (nowcast = external, wired in Phase 2)
+//   source      : 'fred' | 'derived'
+//                   fred    — pulled from /api/fred
+//                   derived — computed client-side from other indicators
 //   fredId      : FRED series ID (for source='fred')
+//   dependsOn   : array of indicator IDs this derived series needs
+//   deriveFn    : (depsMap) => [{date, value}, ...] (for source='derived')
 //   category    : 'growth' | 'inflation' | 'consumer' | 'housing'
 //   label       : full display name
 //   shortLabel  : compact label for dense grids
 //   unit        : display unit suffix ('%', ' bps', 'K', '')
 //   decimals    : display precision
 //   freq        : 'daily' | 'weekly' | 'monthly' | 'quarterly'
-//   transform   : 'level' | 'yoy' | 'mom' | 'mom_diff' | 'qoq_saar'
-//                   level      : raw value
-//                   yoy        : % change vs 12 months prior
-//                   mom        : % change vs prior period
-//                   mom_diff   : absolute change vs prior period (e.g. jobs added)
-//                   qoq_saar   : quarter/quarter annualized, seasonally adjusted
+//   transform   : 'level' | 'level_k' | 'level_bps' | 'yoy' | 'mom_diff' | 'mom_diff_k'
+//                   (applied server-response → card-ready values)
 //   release     : human-readable cadence note
 //   context     : one-line plain-English description of what this measures / why it matters
 //   direction   : 'higher_better' | 'lower_better' | 'target_band' | 'neutral'
 //   target      : optional numeric target (for direction='target_band')
-//   placeholder : if true, render as "coming soon" (Phase 2)
+//   placeholder : if true, render as disabled "coming soon" card
+//   cardType    : 'standard' (default) | 'compact' — compact skips sparkline & percentile
 //
 // Keep context strings tight (< 90 chars). Any detail should live on the
 // drill-down page, not the card.
@@ -56,7 +56,8 @@ export const INDICATORS = [
   },
   {
     id: 'GDPNOW',
-    source: 'nowcast',
+    source: 'fred',
+    fredId: 'GDPNOW',
     category: 'growth',
     label: 'Atlanta Fed GDPNow',
     shortLabel: 'GDPNow',
@@ -67,7 +68,6 @@ export const INDICATORS = [
     release: 'Updated several times per week through the quarter',
     context: 'Real-time nowcast of current-quarter Real GDP (QoQ SAAR). Model-based, not a forecast.',
     direction: 'higher_better',
-    placeholder: true,
   },
   {
     id: 'T10Y3M',
@@ -114,6 +114,52 @@ export const INDICATORS = [
     context: 'NY Fed diffusion index. >0 expansion, <0 contraction. First US manufacturing datapoint each month.',
     direction: 'higher_better',
   },
+  // Yield-curve additions (Phase 2)
+  {
+    id: 'DGS2',
+    source: 'fred',
+    fredId: 'DGS2',
+    category: 'growth',
+    label: '2Y Treasury Yield',
+    shortLabel: '2Y Yield',
+    unit: '%',
+    decimals: 2,
+    freq: 'daily',
+    transform: 'level',
+    release: 'Daily',
+    context: 'Front-end rate. Most sensitive to near-term Fed policy expectations.',
+    direction: 'neutral',
+  },
+  {
+    id: 'DGS5',
+    source: 'fred',
+    fredId: 'DGS5',
+    category: 'growth',
+    label: '5Y Treasury Yield',
+    shortLabel: '5Y Yield',
+    unit: '%',
+    decimals: 2,
+    freq: 'daily',
+    transform: 'level',
+    release: 'Daily',
+    context: 'Belly of the curve. Reflects medium-term growth + inflation expectations.',
+    direction: 'neutral',
+  },
+  {
+    id: 'T10Y2Y',
+    source: 'fred',
+    fredId: 'T10Y2Y',
+    category: 'growth',
+    label: '10Y–2Y Spread (2s10s)',
+    shortLabel: '10Y–2Y Spread',
+    unit: ' bps',
+    decimals: 0,
+    freq: 'daily',
+    transform: 'level_bps',
+    release: 'Daily',
+    context: 'Classic recession indicator. Inversion historically leads recessions by 12–18 months.',
+    direction: 'higher_better',
+  },
 
   // --------------------------------------------------------------- INFLATION
   {
@@ -147,22 +193,6 @@ export const INDICATORS = [
     context: 'Consumer price inflation ex food & energy. Typically runs ~0.4ppt above Core PCE.',
     direction: 'target_band',
     target: 2.0,
-  },
-  {
-    id: 'CLEVELAND_NOWCAST',
-    source: 'nowcast',
-    category: 'inflation',
-    label: 'Cleveland Fed Inflation Nowcast',
-    shortLabel: 'Cleveland Nowcast',
-    unit: '%',
-    decimals: 2,
-    freq: 'daily',
-    transform: 'level',
-    release: 'Updated daily',
-    context: 'Live nowcast for next CPI / PCE release. Updated as new daily data lands.',
-    direction: 'target_band',
-    target: 2.0,
-    placeholder: true,
   },
   {
     id: 'STICKY',
@@ -240,7 +270,37 @@ export const INDICATORS = [
     freq: 'monthly',
     transform: 'yoy',
     release: 'First Friday of month, with payrolls',
-    context: 'Nominal wage growth. Real wages = this minus CPI YoY (Phase 2 will derive and show).',
+    context: 'Nominal wage growth. Pairs with real wage card below to show purchasing-power change.',
+    direction: 'higher_better',
+  },
+  {
+    // Real wage growth: nominal AHE YoY minus Core CPI YoY, aligned by date.
+    // Core CPI (not headline) as deflator — smoother, more signal, fewer
+    // energy-driven oscillations. Common practice for labor economists.
+    id: 'REAL_WAGES',
+    source: 'derived',
+    dependsOn: ['AHE', 'CPILFESL'],
+    deriveFn: (deps) => {
+      const ahe = deps.AHE;        // transformed YoY % values
+      const cpi = deps.CPILFESL;    // transformed YoY % values
+      if (!ahe || !cpi) return [];
+      const cpiByDate = new Map(cpi.map(o => [o.date, o.value]));
+      const out = [];
+      for (const a of ahe) {
+        const c = cpiByDate.get(a.date);
+        if (c != null) out.push({ date: a.date, value: a.value - c });
+      }
+      return out;
+    },
+    category: 'consumer',
+    label: 'Real Wages (AHE − Core CPI, YoY)',
+    shortLabel: 'Real Wages',
+    unit: '%',
+    decimals: 2,
+    freq: 'monthly',
+    transform: 'level', // inputs are already YoY; we subtract directly
+    release: 'Monthly, with payrolls + CPI',
+    context: 'Nominal wage growth minus Core CPI. >0 = workers gaining purchasing power, <0 = losing it.',
     direction: 'higher_better',
   },
   {
