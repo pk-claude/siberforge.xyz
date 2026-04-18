@@ -271,7 +271,9 @@ function legendPlugin() {
 
 // ---------- heatmap (indicator x sector) ----------
 async function renderHeatmap() {
-  const indicators = Object.keys(state.catalog);
+  // Filter out entries that belong to the econ dashboard — they share the
+  // same CATALOG allowlist in /api/fred but are not meant to appear here.
+  const indicators = Object.keys(state.catalog).filter(id => state.catalog[id].group !== 'econ');
   const sectors = state.tickers.filter(t => t.group === 'sector').map(t => t.symbol);
   const sym = ['SPY', ...sectors];
   const history = await loadStockHistory(sym, 10);
@@ -334,6 +336,7 @@ function wireControls() {
   // Populate indicator dropdown, grouped visually by inserting separators.
   const indSel = el('indicator-select');
   for (const [id, meta] of Object.entries(state.catalog)) {
+    if (meta.group === 'econ') continue; // skip econ-only entries
     const opt = document.createElement('option');
     opt.value = id;
     opt.textContent = `${meta.label} (${id})`;

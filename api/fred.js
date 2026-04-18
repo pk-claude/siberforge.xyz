@@ -6,7 +6,13 @@ const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
 // Catalog of indicators we expose. Front-end references the `id` keys.
 // Meta data (frequency, unit) is used for display and for resampling decisions.
+//
+// The `group` field is used by the old macro dashboard to filter what to
+// render in its dropdown and heatmap. Entries with `group: 'econ'` are for
+// the Economic Dashboard (core/econ/) and are ignored by the macro dashboard.
+// Entries without a `group` default to the macro dashboard for back-compat.
 const CATALOG = {
+  // ====================== MACRO DASHBOARD (/core/macro/) ======================
   // Core macro
   CPIAUCSL:  { label: 'CPI (Headline)',          freq: 'monthly',   unit: 'index',   transform: 'yoy_pct' },
   DFF:       { label: 'Fed Funds Rate',          freq: 'daily',     unit: 'percent', transform: 'level' },
@@ -24,6 +30,28 @@ const CATALOG = {
   WALCL:     { label: 'Fed Balance Sheet',       freq: 'weekly',    unit: 'mm_usd',  transform: 'level' },
   RRPONTSYD: { label: 'Reverse Repo (ON)',       freq: 'daily',     unit: 'bn_usd',  transform: 'level' },
   WTREGEN:   { label: 'Treasury General Account',freq: 'weekly',    unit: 'bn_usd',  transform: 'level' },
+
+  // ===================== ECON DASHBOARD (/core/econ/) =====================
+  // Growth
+  T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  GACDISA066MSFRBNY:     { label: 'Empire State Mfg Index',  freq: 'monthly',   unit: 'index',   transform: 'level',   group: 'econ' },
+  // Inflation
+  PCEPILFE:              { label: 'Core PCE Price Index',    freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
+  CPILFESL:              { label: 'Core CPI',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
+  CORESTICKM159SFRBATL:  { label: 'Sticky-Price Core CPI',   freq: 'monthly',   unit: 'percent', transform: 'level',   group: 'econ' },
+  T5YIFR:                { label: '5Y5Y Forward Inflation',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  // Consumer & Labor
+  PAYEMS:                { label: 'Nonfarm Payrolls',        freq: 'monthly',   unit: 'count',   transform: 'level',   group: 'econ' },
+  CES0500000003:         { label: 'Avg Hourly Earnings',     freq: 'monthly',   unit: 'usd',     transform: 'yoy_pct', group: 'econ' },
+  RRSFS:                 { label: 'Real Retail Sales',       freq: 'monthly',   unit: 'mm_usd',  transform: 'yoy_pct', group: 'econ' },
+  IC4WSA:                { label: 'Jobless Claims (4wk MA)', freq: 'weekly',    unit: 'count',   transform: 'level',   group: 'econ' },
+  DRCCLACBS:             { label: 'Credit Card Delinquency', freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'econ' },
+  // Housing
+  HOUST:                 { label: 'Housing Starts',          freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'econ' },
+  EXHOSLUSM495S:         { label: 'Existing Home Sales',     freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'econ' },
+  HSN1F:                 { label: 'New Home Sales',          freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'econ' },
+  MORTGAGE30US:          { label: '30Y Fixed Mortgage Rate', freq: 'weekly',    unit: 'percent', transform: 'level',   group: 'econ' },
+  CSUSHPISA:             { label: 'Case-Shiller Home Prices',freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
 };
 
 async function fetchSeries(id, key, start) {

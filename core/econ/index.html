@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Economic Indicators — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Siberforge home">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Economic Indicators</span>
+  </div>
+  <div class="status" id="status">
+    <span class="dot" id="status-dot"></span>
+    <span id="status-text">Loading…</span>
+  </div>
+</div>
+
+<main>
+  <h1 class="page-title">US Economic Indicators</h1>
+  <p class="page-sub">
+    Growth, inflation, consumer health, and housing — at a glance. Each card shows
+    the latest reading, year-over-year change, a five-year spark, and a context strip
+    showing where today sits relative to its five-year range.
+  </p>
+
+  <section class="category" data-cat="growth">
+    <div class="category-header">
+      <span class="swatch" style="background:#3b82f6"></span>
+      <h2>Growth</h2>
+      <span class="count" id="count-growth"></span>
+    </div>
+    <div class="grid" id="grid-growth"></div>
+  </section>
+
+  <section class="category" data-cat="inflation">
+    <div class="category-header">
+      <span class="swatch" style="background:#ef4444"></span>
+      <h2>Inflation</h2>
+      <span class="count" id="count-inflation"></span>
+    </div>
+    <div class="grid" id="grid-inflation"></div>
+  </section>
+
+  <section class="category" data-cat="consumer">
+    <div class="category-header">
+      <span class="swatch" style="background:#10b981"></span>
+      <h2>Consumer &amp; Labor</h2>
+      <span class="count" id="count-consumer"></span>
+    </div>
+    <div class="grid" id="grid-consumer"></div>
+  </section>
+
+  <section class="category" data-cat="housing">
+    <div class="category-header">
+      <span class="swatch" style="background:#a855f7"></span>
+      <h2>Housing</h2>
+      <span class="count" id="count-housing"></span>
+    </div>
+    <div class="grid" id="grid-housing"></div>
+  </section>
+</main>
+
+<footer>
+  Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (St. Louis Fed)</a> ·
+  Nowcasts (Phase 2): Atlanta Fed GDPNow, Cleveland Fed Inflation Nowcast ·
+  Series cached at the edge for 6h — FRED releases on a fixed schedule so more-frequent polling
+  buys nothing. <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./dashboard.js"></script>
+
+</body>
+</html>

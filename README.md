@@ -4,6 +4,7 @@ Landing page + project hub. The root `index.html` is a directory of Siberforge p
 
 Currently shipped:
 
+- **Economic Indicators** (`/core/econ/`) — 22-indicator overview of US growth, inflation, consumer/labor, and housing. Latest print, YoY/MoM change, 5yr sparkline, and historical-percentile context strip per card. Pulls from FRED.
 - **Macro & Markets Dashboard** (`/core/macro/`) — economic indicators tracker with S&P 500 / sector ETF correlation. Static front-end + Vercel serverless functions that proxy FRED and Finnhub with server-side keys.
 
 ## Architecture
@@ -19,6 +20,12 @@ siberforge/
 │   ├── fred.js             # /api/fred    -- FRED proxy (6h edge cache)
 │   └── stocks.js           # /api/stocks  -- Finnhub proxy (60s quote, 24h history)
 └── core/
+    ├── econ/               # Economic Indicators overview (22 FRED series)
+    │   ├── index.html      # overview UI (served at /core/econ/)
+    │   ├── dashboard.js    # controller: batch-fetch, transform, render
+    │   ├── indicators.js   # indicator registry (FRED IDs, transforms, categories, context)
+    │   ├── sparklines.js   # reusable SVG sparkline + percentile-strip renderers
+    │   └── styles.css      # local styles (category accents, dense card grid)
     ├── macro/              # Macro & Markets Dashboard
     │   ├── index.html      # dashboard UI (served at /core/macro/)
     │   ├── dashboard.js    # client controller (ES module)
