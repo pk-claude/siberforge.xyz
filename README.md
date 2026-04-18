@@ -13,21 +13,21 @@ siberforge/
 ├── index.html              # landing-page hub (links to projects under /core/)
 ├── README.md
 ├── package.json
-├── vercel.json             # functions at core/api/*.js; /api/* rewrites -> /core/api/*
+├── vercel.json
 ├── .gitignore
+├── api/                    # serverless functions (required at root by Vercel)
+│   ├── fred.js             # /api/fred    -- FRED proxy (6h edge cache)
+│   └── stocks.js           # /api/stocks  -- Finnhub proxy (60s quote, 24h history)
 └── core/
     ├── macro/              # Macro & Markets Dashboard
     │   ├── index.html      # dashboard UI (served at /core/macro/)
     │   ├── dashboard.js    # client controller (ES module)
     │   └── styles.css      # dark theme
-    ├── api/
-    │   ├── fred.js         # public URL /api/fred   (rewritten to /core/api/fred)
-    │   └── stocks.js       # public URL /api/stocks (rewritten to /core/api/stocks)
     └── lib/
         └── analytics.js    # correlation, regression, z-score, alignment
 ```
 
-**Routing note.** Serverless functions physically live at `core/api/*.js`, registered via the `functions` key in `vercel.json`. A rewrite (`/api/:path* -> /core/api/:path*`) keeps the public API surface at `/api/*`, so the client code in `core/macro/dashboard.js` still fetches `/api/fred` and `/api/stocks` exactly as before.
+**Why `api/` sits at the repo root.** Vercel's serverless-function file-based routing only discovers functions under `api/` at the project root — the `functions` key in `vercel.json` configures already-discovered functions but can't relocate them. So `api/` is a platform-imposed exception to the "everything under `core/`" rule. Everything else that isn't a Vercel-handled root file lives under `core/`.
 
 **Why a proxy layer?** So API keys stay server-side and cache headers throttle upstream requests. Clients hit `/api/*`; Vercel's CDN caches responses; Finnhub/FRED see one request per TTL, not one per viewer.
 
@@ -35,7 +35,7 @@ siberforge/
 
 1. Create a new subfolder under `core/` (e.g. `core/fx/`).
 2. Add an `index.html` (+ any project-specific `.js` / `.css`) inside it. It will be served at `/core/fx/`.
-3. Shared libraries go in `core/lib/`; new serverless endpoints go in `core/api/` (accessed publicly via `/api/<name>` thanks to the rewrite).
+3. Shared libraries go in `core/lib/`; new serverless endpoints go in `api/` at the repo root (Vercel requires functions there — see routing note above).
 4. Add a `<a class="card" href="/core/fx/">` to the root `index.html` so it shows up on the hub.
 
 ## Data sources
