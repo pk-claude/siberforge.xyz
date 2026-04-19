@@ -5,24 +5,15 @@
    Light theme. Colors pulled from CSS custom properties so they stay
    in sync with the stylesheet. */
 
-const COLORS = (() => {
-  const s = getComputedStyle(document.documentElement);
-  const g = name => s.getPropertyValue(name).trim();
-  return {
-    cfo: g('--cat-cfo'),
-    cfi: g('--cat-cfi'),
-    cff: g('--cat-cff'),
-    fcf: g('--cat-fcf'),
-    capex: g('--cat-capex'),
-    net: g('--cat-net'),
-    cash_total: g('--cat-cash-total'),
-    cash_basic: g('--cat-cash-basic'),
-    text: g('--text'),
-    muted: g('--muted'),
-    panel: g('--panel'),
-    line: g('--line'),
-  };
-})();
+/* ---- shared palette (from /core/lib/plotly-theme.js), with local aliases ---- */
+const _P = window.PlotlyTheme.readPalette();
+const COLORS = {
+  cfo: _P.cfo, cfi: _P.cfi, cff: _P.cff, fcf: _P.fcf,
+  capex: _P.capex, net: _P.net,
+  cash_total: _P.cashTotal, cash_basic: _P.cashBasic,
+  text: _P.text, muted: _P.muted, panel: _P.panel, line: _P.line,
+  accent: _P.accent, tooltipBg: _P.tooltipBg, tooltipFg: _P.tooltipFg,
+};
 
 // ------ helpers ------
 const m = v => (v === null || v === undefined) ? null : Math.round(v / 1e6 * 100) / 100;
@@ -180,9 +171,9 @@ async function init() {
       },
       hovermode: 'closest',
       hoverlabel: {
-        bgcolor: '#1e293b',
-        bordercolor: '#c47f00',
-        font: { size: 12.5, color: '#f8fafc', family: "Inter, sans-serif" },
+        bgcolor: COLORS.tooltipBg,
+        bordercolor: COLORS.accent,
+        font: { size: 12.5, color: COLORS.tooltipFg, family: "Inter, sans-serif" },
         align: 'left',
       },
     };
