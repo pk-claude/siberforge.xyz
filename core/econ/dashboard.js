@@ -86,6 +86,12 @@ function transformLevelBps(obs) {
   return obs.map(o => ({ date: o.date, value: o.value * 100 }));
 }
 
+function transformLevelM(obs) {
+  // Display in millions (divide raw by 1,000,000).
+  // Used for series published in counts of units (e.g. homes sold).
+  return obs.map(o => ({ date: o.date, value: o.value / 1_000_000 }));
+}
+
 function transformYoy(obs) {
   // Align by looking back approximately 12 months by date.
   // FRED returns observations at native frequency — monthly series have ~12
@@ -127,6 +133,7 @@ const TRANSFORMS = {
   'level':        transformLevel,
   'level_k':      transformLevelK,
   'level_bps':    transformLevelBps,
+  'level_m':      transformLevelM,
   'yoy':          transformYoy,
   'mom_diff':     transformMomDiff,
   'mom_diff_k':   transformMomDiffK,

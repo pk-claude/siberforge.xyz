@@ -18,7 +18,7 @@
 //   unit        : display unit suffix ('%', ' bps', 'K', '')
 //   decimals    : display precision
 //   freq        : 'daily' | 'weekly' | 'monthly' | 'quarterly'
-//   transform   : 'level' | 'level_k' | 'level_bps' | 'yoy' | 'mom_diff' | 'mom_diff_k'
+//   transform   : 'level' | 'level_k' | 'level_m' | 'level_bps' | 'yoy' | 'mom_diff' | 'mom_diff_k'
 //                   (applied server-response → card-ready values)
 //   release     : human-readable cadence note
 //   context     : one-line plain-English description of what this measures / why it matters
@@ -381,18 +381,22 @@ export const INDICATORS = [
     direction: 'higher_better',
   },
   {
+    // NOTE: FRED's EXHOSLUSM495S series only began ~Feb 2025 (NAR data
+    // licensing reset). Too short for YoY — showing SAAR level in millions
+    // instead. Revisit transform to 'yoy' once the series has 2+ years of
+    // history (~early 2027).
     id: 'EXHOSLUS',
     source: 'fred',
     fredId: 'EXHOSLUSM495S',
     category: 'housing',
-    label: 'Existing Home Sales (YoY)',
+    label: 'Existing Home Sales (SAAR)',
     shortLabel: 'Existing Sales',
-    unit: '%',
-    decimals: 1,
+    unit: 'M',
+    decimals: 2,
     freq: 'monthly',
-    transform: 'yoy',
+    transform: 'level_m',
     release: 'Third week of month, prior month',
-    context: '~90% of total home sales. Weakness here is the clearest transmission of higher mortgage rates.',
+    context: '~90% of total home sales. Reported as seasonally-adjusted annualized rate in millions of units.',
     direction: 'higher_better',
   },
   {
