@@ -10,25 +10,26 @@ const FRED_RELEASES_URL = 'https://api.stlouisfed.org/fred/releases/dates';
 
 // Release IDs we surface on the dashboard → display metadata.
 //
-// To add a release: find its ID via FRED's /releases endpoint or by viewing
-// a series' Release link on fred.stlouisfed.org. The `series_ids` array maps
-// back to indicator cards so the UI can scroll to them on click.
+// All IDs below verified via FRED /fred/series/release?series_id=... lookups.
+// To add a release: hit /series/release for the series you care about and
+// paste the returned release_id + name. The `series_ids` array maps back to
+// indicator cards so the UI can scroll to them on click.
 const RELEASE_MAP = {
-  10:  { short: 'CPI',             name: 'Consumer Price Index',                 series_ids: ['CPILFESL', 'CPIAUCSL'] },
-  21:  { short: 'PCE',             name: 'Personal Income & Outlays (PCE)',      series_ids: ['PCEPILFE'] },
-  50:  { short: 'Employment',      name: 'Employment Situation',                 series_ids: ['UNRATE', 'PAYEMS', 'CES0500000003'] },
-  53:  { short: 'GDP',             name: 'Gross Domestic Product',               series_ids: ['GDPC1'] },
-  13:  { short: 'Housing Starts',  name: 'New Residential Construction',         series_ids: ['PERMIT', 'HOUST'] },
-  64:  { short: 'Retail Sales',    name: 'Advance Retail Sales',                 series_ids: ['RRSFS'] },
-  97:  { short: 'New Home Sales',  name: 'New Residential Sales',                series_ids: ['HSN1F'] },
-  175: { short: 'Ind. Production', name: 'Industrial Production',                series_ids: ['INDPRO'] },
-  151: { short: 'Case-Shiller',    name: 'S&P/Case-Shiller Home Price Indices',  series_ids: ['CSUSHPISA'] },
-  180: { short: 'Jobless Claims',  name: 'Unemployment Insurance Weekly Claims', series_ids: ['IC4WSA'] },
-  83:  { short: 'Empire State',    name: 'Empire State Manufacturing Survey',    series_ids: ['GACDISA066MSFRBNY'] },
-  // Existing Home Sales (NAR) — FRED release id appears as 101 historically
-  101: { short: 'Existing Sales',  name: 'Existing Home Sales',                  series_ids: ['EXHOSLUSM495S'] },
-  // Freddie Mac PMMS (mortgage rates)
-  114: { short: 'Mortgage Rates',  name: 'Primary Mortgage Market Survey',       series_ids: ['MORTGAGE30US'] },
+  10:  { short: 'CPI',              name: 'Consumer Price Index',                 series_ids: ['CPILFESL'] },
+  13:  { short: 'Ind. Production',  name: 'Industrial Production & Cap Util',     series_ids: ['INDPRO'] },
+  27:  { short: 'Housing Starts',   name: 'New Residential Construction',         series_ids: ['PERMIT', 'HOUST'] },
+  50:  { short: 'Employment',       name: 'Employment Situation',                 series_ids: ['UNRATE', 'PAYEMS', 'CES0500000003'] },
+  53:  { short: 'GDP',              name: 'Gross Domestic Product',               series_ids: ['GDPC1'] },
+  54:  { short: 'PCE',              name: 'Personal Income & Outlays',            series_ids: ['PCEPILFE'] },
+  92:  { short: 'Retail Sales',     name: 'Selected Real Retail Sales',           series_ids: ['RRSFS'] },
+  97:  { short: 'New Home Sales',   name: 'New Residential Sales',                series_ids: ['HSN1F'] },
+  180: { short: 'Jobless Claims',   name: 'Unemployment Insurance Weekly Claims', series_ids: ['IC4WSA'] },
+  190: { short: 'Mortgage Rates',   name: 'Primary Mortgage Market Survey',       series_ids: ['MORTGAGE30US'] },
+  199: { short: 'Case-Shiller',     name: 'S&P Cotality Case-Shiller HPI',        series_ids: ['CSUSHPISA'] },
+  231: { short: 'CC Delinquency',   name: 'Charge-Off & Delinquency Rates',       series_ids: ['DRCCLACBS'] },
+  291: { short: 'Existing Sales',   name: 'Existing Home Sales',                  series_ids: ['EXHOSLUSM495S'] },
+  313: { short: 'Sticky CPI',       name: 'Sticky Price CPI',                     series_ids: ['CORESTICKM159SFRBATL'] },
+  321: { short: 'Empire State',     name: 'Empire State Manufacturing Survey',    series_ids: ['GACDISA066MSFRBNY'] },
 };
 
 function todayUTC() {
