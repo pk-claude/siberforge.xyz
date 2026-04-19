@@ -10,10 +10,12 @@
 //      Pearson correlation, rendered in a secondary uPlot chart below.
 //   6. Wire the range / mode / swap / copy-link controls.
 //
-// Transforms are inlined (same pattern as drilldown.js — see note there for
-// rationale on deduplication later).
+// Transforms, FRED fetch, and chart helpers come from core/lib/ now.
 
 import { INDICATORS, INDICATORS_BY_ID, CATEGORIES } from './indicators.js';
+import { applyTransform } from '../lib/transforms.js';
+import { fetchFredObs } from '../lib/fred-client.js';
+import { dateToTs, obsToXs, DARK_AXIS_BASE } from '../lib/charts.js';
 
 const HISTORY_START = '1980-01-01';
 const CORR_WINDOW = 60; // rolling correlation window in aligned observations
@@ -51,66 +53,11 @@ function fmt(v, d = 2) {
 }
 
 // ============================================================================
-// Transforms (mirror of drilldown.js / dashboard.js)
-// ============================================================================
-function tLevel(o)  { return o.map(x => ({ date: x.date, value: x.value })); }
-function tLevelK(o) { return o.map(x => ({ date: x.date, value: x.value / 1000 })); }
-function tLevelM(o) { return o.map(x => ({ date: x.date, value: x.value / 1_000_000 })); }
-function tLevelBps(o) { return o.map(x => ({ date: x.date, value: x.value * 100 })); }
-
-function tYoy(obs) {
-  const dates = obs.map(o => new Date(o.date).getTime());
-  const out = [];
-  for (let i = 0; i < obs.length; i++) {
-    const target = dates[i] - 365 * 24 * 3600 * 1000;
-    let j = -1;
-    for (let k = i - 1; k >= 0; k--) {
-      if (dates[k] <= target) { j = k; break; }
-    }
-    if (j < 0) continue;
-    const prior = obs[j].value;
-    if (prior === 0 || !Number.isFinite(prior)) continue;
-    out.push({ date: obs[i].date, value: (obs[i].value / prior - 1) * 100 });
-  }
-  return out;
-}
-
-function tMomDiff(obs) {
-  const out = [];
-  for (let i = 1; i < obs.length; i++) {
-    out.push({ date: obs[i].date, value: obs[i].value - obs[i - 1].value });
-  }
-  return out;
-}
-
-const TRANSFORMS = {
-  level: tLevel, level_k: tLevelK, level_m: tLevelM, level_bps: tLevelBps,
-  yoy: tYoy, mom_diff: tMomDiff, mom_diff_k: tMomDiff,
-};
-function applyTransform(obs, t) {
-  const fn = TRANSFORMS[t];
-  if (!fn) { console.warn(`Unknown transform: ${t}`); return obs; }
-  return fn(obs);
-}
-
-// ============================================================================
 // Fetching
 // ============================================================================
-async function fetchFred(fredId) {
-  const url = new URL('/api/fred', window.location.origin);
-  url.searchParams.set('series', fredId);
-  url.searchParams.set('start', HISTORY_START);
-  const res = await fetch(url.toString());
-  if (!res.ok) throw new Error(`FRED ${fredId} HTTP ${res.status}`);
-  const body = await res.json();
-  const s = body.series?.[0];
-  if (!s) throw new Error(`FRED ${fredId}: empty response`);
-  return s.observations || [];
-}
-
 async function fetchIndicatorSeries(ind) {
   if (ind.source === 'fred') {
-    const raw = await fetchFred(ind.fredId);
+    const raw = await fetchFredObs(ind.fredId, { start: HISTORY_START });
     return applyTransform(raw, ind.transform);
   }
   if (ind.source === 'derived') {
@@ -119,7 +66,7 @@ async function fetchIndicatorSeries(ind) {
     await Promise.all((ind.dependsOn || []).map(async (dep) => {
       const depInd = INDICATORS_BY_ID[dep];
       if (!depInd) throw new Error(`missing dep ${dep}`);
-      const raw = await fetchFred(depInd.fredId);
+      const raw = await fetchFredObs(depInd.fredId, { start: HISTORY_START });
       depMap[dep] = applyTransform(raw, depInd.transform);
     }));
     return ind.deriveFn(depMap) || [];
@@ -243,9 +190,7 @@ function sliceToRange(obs, range) {
 let overlayChart = null;
 let corrChart = null;
 
-function obsToXs(obs) {
-  return obs.map(o => Math.floor(new Date(o.date + 'T00:00:00Z').getTime() / 1000));
-}
+// obsToXs / dateToTs come from core/lib/charts.js.
 
 // Build a merged x-axis that is the union of A and B dates (sorted, de-duped).
 // Then for each merged x, find y-A and y-B (or null if missing on that date).
@@ -255,7 +200,7 @@ function mergeForOverlay(obsA, obsB) {
   for (const o of obsA) mapA.set(o.date, o.value);
   for (const o of obsB) mapB.set(o.date, o.value);
   const allDates = Array.from(new Set([...mapA.keys(), ...mapB.keys()])).sort();
-  const xs = allDates.map(d => Math.floor(new Date(d + 'T00:00:00Z').getTime() / 1000));
+  const xs = allDates.map(dateToTs);
   const ysA = allDates.map(d => mapA.has(d) ? mapA.get(d) : null);
   const ysB = allDates.map(d => mapB.has(d) ? mapB.get(d) : null);
   return { xs, ysA, ysB };
@@ -286,18 +231,18 @@ function renderOverlay(indA, indB, obsA, obsB, range, mode) {
   // In z-score mode: single shared Y axis. In levels: dual axis (A=left, B=right).
   const axes = mode === 'zscore'
     ? [
-        axisCommonX(),
-        { stroke: '#94a3b8', grid: { stroke: 'rgba(148,163,184,0.08)' },
-          ticks: { stroke: 'rgba(148,163,184,0.15)' },
+        { ...DARK_AXIS_BASE },
+        { ...DARK_AXIS_BASE,
           values: (u, splits) => splits.map(v => fmt(v, 2) + 'σ') },
       ]
     : [
-        axisCommonX(),
-        { stroke: COLOR_A, grid: { stroke: 'rgba(148,163,184,0.08)' },
-          ticks: { stroke: 'rgba(148,163,184,0.15)' },
+        { ...DARK_AXIS_BASE },
+        { ...DARK_AXIS_BASE,
+          stroke: COLOR_A,
           values: (u, splits) => splits.map(v => fmt(v, decA) + unitA) },
-        { stroke: COLOR_B, grid: { show: false },
-          ticks: { stroke: 'rgba(148,163,184,0.15)' },
+        { ...DARK_AXIS_BASE,
+          stroke: COLOR_B,
+          grid: { show: false },
           side: 1, scale: 'y2',
           values: (u, splits) => splits.map(v => fmt(v, decB) + unitB) },
       ];
@@ -342,13 +287,7 @@ function renderOverlay(indA, indB, obsA, obsB, range, mode) {
   renderOverlayLegend(indA, indB, mode);
 }
 
-function axisCommonX() {
-  return {
-    stroke: '#94a3b8',
-    grid:  { stroke: 'rgba(148, 163, 184, 0.08)' },
-    ticks: { stroke: 'rgba(148, 163, 184, 0.15)' },
-  };
-}
+// axisCommonX() removed — use `{ ...DARK_AXIS_BASE }` directly.
 
 function renderOverlayLegend(indA, indB, mode) {
   const el = $('overlay-legend');
@@ -390,7 +329,7 @@ function renderCorrelation(obsA, obsB, range) {
 
   const width = wrap.clientWidth || 800;
   const height = 180;
-  const xs = corrObs.map(o => Math.floor(new Date(o.date + 'T00:00:00Z').getTime() / 1000));
+  const xs = corrObs.map(o => dateToTs(o.date));
   const ys = corrObs.map(o => Number.isFinite(o.corr) ? o.corr : null);
   const latest = ys[ys.length - 1];
 
@@ -398,11 +337,8 @@ function renderCorrelation(obsA, obsB, range) {
     width, height, title: '',
     scales: { x: { time: true }, y: { range: [-1, 1] } },
     axes: [
-      axisCommonX(),
-      {
-        stroke: '#94a3b8',
-        grid:  { stroke: 'rgba(148, 163, 184, 0.08)' },
-        ticks: { stroke: 'rgba(148, 163, 184, 0.15)' },
+      { ...DARK_AXIS_BASE },
+      { ...DARK_AXIS_BASE,
         values: (u, splits) => splits.map(v => fmt(v, 2)),
       },
     ],

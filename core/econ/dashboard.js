@@ -11,6 +11,8 @@
 import { INDICATORS, INDICATORS_BY_CATEGORY } from './indicators.js';
 import { renderSparkline, renderContextStrip } from './sparklines.js';
 import { renderReleaseStrip } from './releases.js';
+import { applyTransform } from '../lib/transforms.js';
+import { fetchFred } from '../lib/fred-client.js';
 
 const BATCH_SIZE = 8;              // max series per /api/fred call
 const HISTORY_START = '2017-01-01'; // enough runway for 5yr YoY windows
@@ -63,89 +65,6 @@ function fmtDate(iso) {
   }
   // Accept other formats as-is (e.g. "Mar 2026", "2026 Q1")
   return String(iso);
-}
-
-// ============================================================================
-// Transforms
-// ============================================================================
-// Each transform takes an ascending-by-date observations array and returns a
-// new observations array with the transformed values. Observations that can't
-// be transformed (no lookback) are dropped — so the result is shorter than input.
-
-function transformLevel(obs) {
-  return obs.map(o => ({ date: o.date, value: o.value }));
-}
-
-function transformLevelK(obs) {
-  // Display in thousands (divide raw by 1000)
-  return obs.map(o => ({ date: o.date, value: o.value / 1000 }));
-}
-
-function transformLevelBps(obs) {
-  // Display in basis points (multiply raw % by 100)
-  return obs.map(o => ({ date: o.date, value: o.value * 100 }));
-}
-
-function transformLevelM(obs) {
-  // Display in millions (divide raw by 1,000,000).
-  // Used for series published in counts of units (e.g. homes sold).
-  return obs.map(o => ({ date: o.date, value: o.value / 1_000_000 }));
-}
-
-function transformYoy(obs) {
-  // Align by looking back approximately 12 months by date.
-  // FRED returns observations at native frequency — monthly series have ~12
-  // obs per year, weekly have ~52. Rather than compute by index, pair each
-  // observation with the one whose date is closest to 365 days earlier.
-  const dates = obs.map(o => new Date(o.date).getTime());
-  const out = [];
-  for (let i = 0; i < obs.length; i++) {
-    const target = dates[i] - 365 * 24 * 3600 * 1000;
-    // Binary search is overkill for ~200 points; linear scan is fine.
-    let j = -1;
-    for (let k = i - 1; k >= 0; k--) {
-      if (dates[k] <= target) { j = k; break; }
-    }
-    if (j < 0) continue;
-    const prior = obs[j].value;
-    if (prior === 0 || !Number.isFinite(prior)) continue;
-    const v = (obs[i].value / prior - 1) * 100;
-    out.push({ date: obs[i].date, value: v });
-  }
-  return out;
-}
-
-function transformMomDiff(obs) {
-  const out = [];
-  for (let i = 1; i < obs.length; i++) {
-    out.push({ date: obs[i].date, value: obs[i].value - obs[i - 1].value });
-  }
-  return out;
-}
-
-// MoM diff expressed in thousands (e.g. PAYEMS: series in thousands of persons,
-// so raw diff is already thousands — but we keep the explicit transform for clarity)
-function transformMomDiffK(obs) {
-  return transformMomDiff(obs);
-}
-
-const TRANSFORMS = {
-  'level':        transformLevel,
-  'level_k':      transformLevelK,
-  'level_bps':    transformLevelBps,
-  'level_m':      transformLevelM,
-  'yoy':          transformYoy,
-  'mom_diff':     transformMomDiff,
-  'mom_diff_k':   transformMomDiffK,
-};
-
-function applyTransform(obs, transform) {
-  const fn = TRANSFORMS[transform];
-  if (!fn) {
-    console.warn(`Unknown transform: ${transform}`);
-    return obs;
-  }
-  return fn(obs);
 }
 
 // ============================================================================
@@ -369,16 +288,12 @@ function renderCardError(ind, msg) {
 // ============================================================================
 // Fetch
 // ============================================================================
+// Returns a { [fredId]: observations[] } map for the given indicator batch.
 async function fetchBatch(indicators) {
-  const ids = indicators.map(i => i.fredId).join(',');
-  const url = `/api/fred?series=${ids}&start=${HISTORY_START}`;
-  const res = await fetch(url);
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`${res.status}: ${text.slice(0, 200)}`);
-  }
-  const data = await res.json();
-  return data.series || [];
+  const map = await fetchFred(indicators.map(i => i.fredId), { start: HISTORY_START });
+  const out = {};
+  for (const [id, payload] of Object.entries(map)) out[id] = payload.observations;
+  return out;
 }
 
 function computeDerived() {
@@ -419,15 +334,14 @@ async function loadFredSeries() {
 
   await Promise.all(batches.map(async (batch) => {
     try {
-      const results = await fetchBatch(batch);
-      const byId = Object.fromEntries(results.map(r => [r.id, r]));
+      const byId = await fetchBatch(batch);
       for (const ind of batch) {
-        const payload = byId[ind.fredId];
-        if (!payload) {
+        const obs = byId[ind.fredId];
+        if (!obs) {
           renderCardError(ind, 'Missing in response');
           continue;
         }
-        populateCard(ind, payload.observations);
+        populateCard(ind, obs);
       }
     } catch (err) {
       for (const ind of batch) renderCardError(ind, 'Fetch failed');

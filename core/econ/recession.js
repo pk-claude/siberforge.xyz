@@ -20,6 +20,9 @@
 // Daily/weekly series are resampled to month-end by taking the last observation
 // in each calendar month.
 
+import { fetchFred } from '../lib/fred-client.js';
+import { dateToTs, DARK_AXIS_BASE } from '../lib/charts.js';
+
 // ============================================================================
 // Config
 // ============================================================================
@@ -159,16 +162,9 @@ function escapeHtml(s) {
 // Fetching
 // ============================================================================
 async function fetchAll() {
-  const url = new URL('/api/fred', window.location.origin);
-  url.searchParams.set('series', SERIES.join(','));
-  url.searchParams.set('start', HISTORY_START);
-  const res = await fetch(url.toString());
-  if (!res.ok) throw new Error(`FRED HTTP ${res.status}`);
-  const body = await res.json();
+  const map = await fetchFred(SERIES, { start: HISTORY_START });
   const out = {};
-  for (const s of body.series || []) {
-    out[s.id] = s.observations || [];
-  }
+  for (const id of SERIES) out[id] = (map[id] && map[id].observations) || [];
   return out;
 }
 
@@ -362,7 +358,7 @@ function drawSignalSparkline(sig) {
   const last = sig.series.slice(-120); // monthly → ~120 = 10 yrs
   if (!last.length) { el.innerHTML = '<div class="spark-empty">no data</div>'; return; }
 
-  const xs = last.map(o => Math.floor(new Date(o.date + 'T00:00:00Z').getTime() / 1000));
+  const xs = last.map(o => dateToTs(o.date));
   const ys = last.map(o => o.value);
 
   const width = el.clientWidth || 260;
@@ -435,8 +431,8 @@ function shadeNberRecessions(u) {
   ctx.save();
   ctx.fillStyle = 'rgba(148, 163, 184, 0.12)';
   for (const [pk, tr] of NBER_RECESSIONS) {
-    const xStart = Math.floor(new Date(pk + '-01T00:00:00Z').getTime() / 1000);
-    const xEnd   = Math.floor(new Date(tr + '-28T00:00:00Z').getTime() / 1000);
+    const xStart = dateToTs(`${pk}-01`);
+    const xEnd   = dateToTs(`${tr}-28`);
     const px1 = u.valToPos(xStart, 'x', true);
     const px2 = u.valToPos(xEnd,   'x', true);
     // Clip to the plot area so we don't draw off the edge.
@@ -462,7 +458,7 @@ function renderTimeline(composite) {
     return;
   }
 
-  const xs = composite.map(o => Math.floor(new Date(o.date + 'T00:00:00Z').getTime() / 1000));
+  const xs = composite.map(o => dateToTs(o.date));
   const ys = composite.map(o => o.count);
 
   const width = el.clientWidth || 800;
@@ -475,15 +471,8 @@ function renderTimeline(composite) {
       y: { range: [0, 5.5] },
     },
     axes: [
-      {
-        stroke: '#94a3b8',
-        grid:  { stroke: 'rgba(148, 163, 184, 0.08)' },
-        ticks: { stroke: 'rgba(148, 163, 184, 0.15)' },
-      },
-      {
-        stroke: '#94a3b8',
-        grid:  { stroke: 'rgba(148, 163, 184, 0.08)' },
-        ticks: { stroke: 'rgba(148, 163, 184, 0.15)' },
+      { ...DARK_AXIS_BASE },
+      { ...DARK_AXIS_BASE,
         splits: [0, 1, 2, 3, 4, 5],
         values: (u, splits) => splits.map(v => String(Math.round(v))),
       },

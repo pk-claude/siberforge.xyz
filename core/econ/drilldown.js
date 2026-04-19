@@ -11,11 +11,12 @@
 //   6. If hasVintages: fetch the series at 4 quarterly realtime_end snapshots,
 //      render each as a faded overlay on the chart, and show a revision table.
 //
-// Transforms are inlined rather than imported from dashboard.js — dashboard.js
-// is a controller, not a module. If transform logic grows, extract to
-// ./transforms.js and import from both places.
+// Transforms, FRED fetch, and chart helpers now live in core/lib/.
 
 import { INDICATORS, INDICATORS_BY_ID, CATEGORIES } from './indicators.js';
+import { applyTransform } from '../lib/transforms.js';
+import { fetchFredObs } from '../lib/fred-client.js';
+import { dateToTs, obsToUplotArrays, DARK_AXIS_BASE } from '../lib/charts.js';
 
 // Wide start — enough for "Max" range on monthly series. Daily series get
 // capped by FRED's own history.
@@ -82,75 +83,16 @@ function fmtDateLong(iso) {
 }
 
 // ============================================================================
-// Transforms (inlined — mirror of dashboard.js)
+// Data fetching — wrappers around the shared FRED client.
 // ============================================================================
-function transformLevel(obs)     { return obs.map(o => ({ date: o.date, value: o.value })); }
-function transformLevelK(obs)    { return obs.map(o => ({ date: o.date, value: o.value / 1000 })); }
-function transformLevelBps(obs)  { return obs.map(o => ({ date: o.date, value: o.value * 100 })); }
-function transformLevelM(obs)    { return obs.map(o => ({ date: o.date, value: o.value / 1_000_000 })); }
-
-function transformYoy(obs) {
-  const dates = obs.map(o => new Date(o.date).getTime());
-  const out = [];
-  for (let i = 0; i < obs.length; i++) {
-    const target = dates[i] - 365 * 24 * 3600 * 1000;
-    let j = -1;
-    for (let k = i - 1; k >= 0; k--) {
-      if (dates[k] <= target) { j = k; break; }
-    }
-    if (j < 0) continue;
-    const prior = obs[j].value;
-    if (prior === 0 || !Number.isFinite(prior)) continue;
-    const v = (obs[i].value / prior - 1) * 100;
-    out.push({ date: obs[i].date, value: v });
-  }
-  return out;
-}
-
-function transformMomDiff(obs) {
-  const out = [];
-  for (let i = 1; i < obs.length; i++) {
-    out.push({ date: obs[i].date, value: obs[i].value - obs[i - 1].value });
-  }
-  return out;
-}
-
-const TRANSFORMS = {
-  'level':        transformLevel,
-  'level_k':      transformLevelK,
-  'level_bps':    transformLevelBps,
-  'level_m':      transformLevelM,
-  'yoy':          transformYoy,
-  'mom_diff':     transformMomDiff,
-  'mom_diff_k':   transformMomDiff,
-};
-
-function applyTransform(obs, transform) {
-  const fn = TRANSFORMS[transform];
-  if (!fn) {
-    console.warn(`Unknown transform: ${transform}`);
-    return obs;
-  }
-  return fn(obs);
-}
-
-// ============================================================================
-// Data fetching
-// ============================================================================
-async function fetchFredSeries(fredId, { realtimeEnd } = {}) {
-  const url = new URL('/api/fred', window.location.origin);
-  url.searchParams.set('series', fredId);
-  url.searchParams.set('start', HISTORY_START);
+function fetchFredSeries(fredId, { realtimeEnd } = {}) {
+  const opts = { start: HISTORY_START };
   if (realtimeEnd) {
-    url.searchParams.set('realtime_start', realtimeEnd);
-    url.searchParams.set('realtime_end', realtimeEnd);
+    // Same-day vintage: realtime_start = realtime_end = the snapshot date.
+    opts.realtimeStart = realtimeEnd;
+    opts.realtimeEnd   = realtimeEnd;
   }
-  const res = await fetch(url.toString());
-  if (!res.ok) throw new Error(`FRED ${fredId} HTTP ${res.status}`);
-  const body = await res.json();
-  const series = body.series?.[0];
-  if (!series) throw new Error(`FRED ${fredId}: no series in response`);
-  return series.observations || [];
+  return fetchFredObs(fredId, opts);
 }
 
 // For derived indicators: fetch each dependency (transformed), return map.
@@ -189,20 +131,14 @@ function sliceToRange(obs, range) {
 // ============================================================================
 let chartInstance = null;
 
-// Convert observations ({date, value}) → uPlot-shaped [xs, ys] (xs are unix ms/1000).
-function obsToUplotArrays(obs) {
-  const xs = obs.map(o => Math.floor(new Date(o.date + 'T00:00:00Z').getTime() / 1000));
-  const ys = obs.map(o => o.value);
-  return [xs, ys];
-}
+// obsToUplotArrays comes from core/lib/charts.js.
 
 // For vintages, align each vintage's x-axis onto the current series' x-axis.
 // Each vintage may have a different endpoint / history.
 function alignVintageToMaster(masterXs, vintageObs) {
   const map = new Map();
   for (const o of vintageObs) {
-    const t = Math.floor(new Date(o.date + 'T00:00:00Z').getTime() / 1000);
-    map.set(t, o.value);
+    map.set(dateToTs(o.date), o.value);
   }
   return masterXs.map(t => {
     const v = map.get(t);
@@ -245,15 +181,8 @@ function buildUplotOpts(ind, range, hasVintages, vintageLabels = []) {
     title: '',
     scales: { x: { time: true } },
     axes: [
-      {
-        stroke: '#94a3b8',
-        grid:  { stroke: 'rgba(148, 163, 184, 0.08)' },
-        ticks: { stroke: 'rgba(148, 163, 184, 0.15)' },
-      },
-      {
-        stroke: '#94a3b8',
-        grid:  { stroke: 'rgba(148, 163, 184, 0.08)' },
-        ticks: { stroke: 'rgba(148, 163, 184, 0.15)' },
+      { ...DARK_AXIS_BASE },
+      { ...DARK_AXIS_BASE,
         values: (u, splits) => splits.map(v => fmt(v, decimals) + unitSuffix),
       },
     ],

@@ -1,53 +1,22 @@
-// Client-side analytics: date alignment, transforms, correlation, regression, z-score.
+// Client-side analytics: date alignment, correlation, regression, z-score.
+// Transforms live in ./transforms.js (canonical). This module re-exports
+// applyTransform / yoyPct / logReturns for back-compat with the macro
+// dashboard's existing import list.
+//
 // All functions assume input series are arrays of { date: 'YYYY-MM-DD', value: number }.
 
-// ---------- transforms ----------
+import {
+  applyTransform as applyTransformCanonical,
+  transformYoy,
+  transformLogReturn,
+} from './transforms.js';
 
-// Year-over-year percent change. For monthly data, "prior year" = obs roughly
-// 12 periods back, but for irregular cadence (e.g. after holidays) we match by
-// actual date string minus 365 days and take the nearest preceding observation.
-export function yoyPct(series) {
-  if (!series.length) return [];
-  const byDate = new Map(series.map(o => [o.date, o.value]));
-  const out = [];
-  for (const obs of series) {
-    const d = new Date(obs.date);
-    d.setFullYear(d.getFullYear() - 1);
-    const target = d.toISOString().slice(0, 10);
-    // Find nearest prior observation on or before `target`.
-    let prior = null;
-    for (let i = series.length - 1; i >= 0; i--) {
-      if (series[i].date <= target) { prior = series[i].value; break; }
-    }
-    if (prior && prior !== 0) {
-      out.push({ date: obs.date, value: ((obs.value / prior) - 1) * 100 });
-    }
-  }
-  return out;
-}
+// ---------- transforms (re-exports) ----------
 
-// Log returns from a price series. Standard for equity correlation work.
-export function logReturns(series) {
-  const out = [];
-  for (let i = 1; i < series.length; i++) {
-    const prev = series[i - 1].value;
-    const curr = series[i].value;
-    if (prev > 0 && curr > 0) {
-      out.push({ date: series[i].date, value: Math.log(curr / prev) });
-    }
-  }
-  return out;
-}
-
-// Apply a named transform.
-export function applyTransform(series, transform) {
-  switch (transform) {
-    case 'yoy_pct':    return yoyPct(series);
-    case 'log_return': return logReturns(series);
-    case 'level':
-    default:           return series;
-  }
-}
+export const applyTransform = applyTransformCanonical;
+// Historical names kept for back-compat with macro/dashboard.js import.
+export const yoyPct     = transformYoy;
+export const logReturns = transformLogReturn;
 
 // ---------- alignment ----------
 
