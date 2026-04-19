@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Recession Risk — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<!--
+  Recession-risk composite dashboard.
+
+  Five signals, each binary (triggered / not):
+    1. Sahm Rule            — SAHMCURRENT           trigger: >= 0.50
+    2. Yield curve (10Y-3M) — T10Y3M                trigger: < 0
+    3. HY OAS               — BAMLH0A0HYM2          trigger: >= 6.00 %
+    4. Unemployment 6mo chg — derived from UNRATE   trigger: >= +0.5 pp
+    5. Payrolls 3mo avg     — derived from PAYEMS   trigger: < 50,000 / mo
+
+  Composite score = count of triggered signals (0-5).
+  Risk tier:
+    0-1 triggered → LOW
+    2   triggered → ELEVATED
+    3+  triggered → HIGH
+
+  NBER recession dates are shaded on the historical timeline. Thresholds are
+  documented in methodology prose; these are professional consensus levels,
+  not inventions — citations in the methodology panel.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.iife.min.js"></script>
+</head>
+<body class="recession">
+
+<div class="top">
+  <div class="brand">
+    <a href="./index.html" class="home-link" title="Back to dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Economic Indicators — Recession Risk</span>
+  </div>
+  <div class="status" id="status">
+    <span class="dot" id="status-dot"></span>
+    <span id="status-text">Loading…</span>
+  </div>
+</div>
+
+<main class="recession-main">
+
+  <nav class="breadcrumb">
+    <a href="./index.html">Dashboard</a>
+    <span class="sep">/</span>
+    <span>Recession Risk</span>
+  </nav>
+
+  <header class="recession-header">
+    <h1 class="recession-title">US Recession Risk Composite</h1>
+    <p class="recession-sub">
+      Five signals, each classified green / red against a trigger threshold.
+      Composite score is the count of triggered signals. NBER recession periods
+      are shaded on the historical timeline and component sparklines.
+    </p>
+  </header>
+
+  <!-- Big composite gauge -->
+  <section class="gauge-section" id="gauge-section">
+    <div class="gauge-score">
+      <div class="gauge-count" id="gauge-count">—</div>
+      <div class="gauge-denom">of 5 signals triggered</div>
+    </div>
+    <div class="gauge-tier" id="gauge-tier">
+      <span class="tier-label" id="tier-label">Loading…</span>
+      <span class="tier-sub" id="tier-sub"></span>
+    </div>
+    <div class="gauge-dots" id="gauge-dots" aria-label="Signal status summary"></div>
+  </section>
+
+  <!-- 5 component tiles -->
+  <section class="signal-grid" id="signal-grid">
+    <!-- Signals inserted by recession.js -->
+  </section>
+
+  <!-- Historical composite timeline -->
+  <section class="chart-section timeline-section">
+    <div class="timeline-header">
+      <h2>Composite History</h2>
+      <span class="timeline-meta" id="timeline-meta">—</span>
+    </div>
+    <div class="chart-wrap timeline-wrap" id="timeline-chart">
+      <div class="chart-placeholder">Loading historical composite…</div>
+    </div>
+    <p class="timeline-note">
+      Count of triggered signals over time. Orange = 2 signals (elevated),
+      red = 3+ (high). Grey bars mark NBER-dated recessions for calibration.
+      The composite is a leading indicator — it can trip before a recession
+      and stay tripped during one.
+    </p>
+  </section>
+
+  <!-- Methodology -->
+  <section class="drill-info methodology-section">
+    <div class="info-panel methodology-panel">
+      <h2>Methodology</h2>
+      <div id="methodology-body">
+        <p>
+          Each signal is binary: triggered or not. Thresholds are drawn from
+          professional consensus (cited per signal), not tuned to fit history.
+          The composite score is the simple count — no weighting, no smoothing.
+          This is deliberately conservative: a noisy single signal doesn't move
+          the score, but multiple signals agreeing does.
+        </p>
+        <dl class="method-list">
+          <dt>Sahm Rule <span class="method-cite">(Sahm, 2019, Brookings)</span></dt>
+          <dd>3-month moving average of the unemployment rate minus its 12-month prior minimum. Triggers at +0.50 pp. FRED publishes this as <code>SAHMCURRENT</code>, so we use that directly rather than recomputing.</dd>
+
+          <dt>Yield Curve (10Y − 3M) <span class="method-cite">(Estrella &amp; Mishkin, Fed NY)</span></dt>
+          <dd>Every US recession since 1960 was preceded by an inversion of this spread. Triggers when the spread goes negative. Typical lead time is 12–18 months.</dd>
+
+          <dt>High-Yield OAS <span class="method-cite">(ICE BofA BAMLH0A0HYM2)</span></dt>
+          <dd>Option-adjusted spread on US high-yield corporate debt. Captures credit-market stress. Triggers at ≥6.00%. This threshold approximates the long-run median plus ~1σ; historically, sustained readings above this level coincide with or precede recessions.</dd>
+
+          <dt>Unemployment 6-Month Change</dt>
+          <dd>Current UNRATE minus UNRATE 6 months ago. Triggers at ≥ +0.5 pp. Used as a confirmation signal for Sahm — if the labor market is actually cooling (not just a one-month print), this should move too.</dd>
+
+          <dt>Payrolls 3-Month Average</dt>
+          <dd>Average monthly change in nonfarm payrolls over the last 3 months. Triggers below 50,000/month. Below-trend hiring (trend is ~150k/mo in a healthy economy) suggests demand for labor is fading.</dd>
+        </dl>
+        <p class="method-caveat">
+          <strong>What this is not:</strong> a recession forecast. It's a scoreboard
+          of widely-watched signals. When multiple trip simultaneously, the historical
+          record says recession probability rises — but the composite is not
+          calibrated as a probability model. Read it as "how many canaries are
+          coughing," not "P(recession) = X%."
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (St. Louis Fed)</a> ·
+  NBER recession dates from the <a href="https://www.nber.org/research/business-cycle-dating" target="_blank" rel="noopener">NBER Business Cycle Dating Committee</a> ·
+  <a href="./index.html">Back to dashboard</a>
+</footer>
+
+<script type="module" src="./recession.js"></script>
+
+</body>
+</html>

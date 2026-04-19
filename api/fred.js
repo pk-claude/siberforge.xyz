@@ -63,6 +63,12 @@ const CATALOG = {
   HSN1F:                 { label: 'New Home Sales',          freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'econ' },
   MORTGAGE30US:          { label: '30Y Fixed Mortgage Rate', freq: 'weekly',    unit: 'percent', transform: 'level',   group: 'econ' },
   CSUSHPISA:             { label: 'Case-Shiller Home Prices',freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
+
+  // ===================== RECESSION DASHBOARD (/core/econ/recession.html) =====
+  // Standalone allowlist entries — consumed only by recession.js, not exposed
+  // as cards on the main econ dashboard (no entries in indicators.js INDICATORS).
+  SAHMCURRENT:           { label: 'Sahm Rule Recession Indicator',  freq: 'monthly', unit: 'percent', transform: 'level', group: 'recession' },
+  BAMLH0A0HYM2:          { label: 'High-Yield OAS',                 freq: 'daily',   unit: 'percent', transform: 'level', group: 'recession' },
 };
 
 async function fetchSeries(id, key, start, opts = {}) {
