@@ -1,0 +1,7390 @@
+[
+  {
+    "period": "2015-Q1",
+    "year": 2015,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2015",
+    "qend": "2015-03-31",
+    "cfo": -13644836,
+    "cfi": -229459,
+    "cff": -793566,
+    "capex": -229459,
+    "net": -14667861,
+    "cash_basic": 131537210,
+    "cash_total": null,
+    "fcf": -13874295,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -11051821
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -8323925
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 7357314
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -3160055
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -2148723
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1697130
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -229459
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -926733
+      },
+      {
+        "name": "Option exercises",
+        "val": 133167
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -11051821
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -8323925
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 7357314
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -3160055
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -2148723
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1697130
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 901606
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 608444
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 475194
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -229459
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -926733
+      },
+      {
+        "name": "Option exercises",
+        "val": 133167
+      }
+    ]
+  },
+  {
+    "period": "2015-Q2",
+    "year": 2015,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2015",
+    "qend": "2015-06-30",
+    "cfo": -10610164,
+    "cfi": -1156541,
+    "cff": -10631434,
+    "capex": -1158541,
+    "net": -22398139,
+    "cash_basic": 109139000,
+    "cash_total": null,
+    "fcf": -11768705,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -9225179
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -8444277
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 4752925
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": -2436000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 2015055
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1737870
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1158541
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -10631434
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -9225179
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -8444277
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 4752925
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": -2436000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 2015055
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1737870
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 795686
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 493806
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -413606
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 113556
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1158541
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -10631434
+      }
+    ]
+  },
+  {
+    "period": "2015-Q3",
+    "year": 2015,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2015",
+    "qend": "2015-09-30",
+    "cfo": -13041000,
+    "cfi": 295000,
+    "cff": -11433000,
+    "capex": -1514000,
+    "net": -24130000,
+    "cash_basic": 85009000,
+    "cash_total": null,
+    "fcf": -14555000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -23217000
+      },
+      {
+        "name": "Net loss",
+        "val": -10213000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 7639000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 6470000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 5107000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2400000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Business acquisitions",
+        "val": 1811000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1514000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -18657000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 7224000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -23217000
+      },
+      {
+        "name": "Net loss",
+        "val": -10213000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 7639000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 6470000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 5107000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2400000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -1852000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 512000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 113000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Business acquisitions",
+        "val": 1811000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1514000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -18657000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 7224000
+      }
+    ]
+  },
+  {
+    "period": "2015-Q4",
+    "year": 2015,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2015",
+    "qend": "2015-12-31",
+    "cfo": -9978000,
+    "cfi": -933000,
+    "cff": -10065000,
+    "capex": -618000,
+    "net": -21048000,
+    "cash_basic": 63961000,
+    "cash_total": 111796000,
+    "fcf": -10596000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -25200000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 15443000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -13344000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 4102000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 3529000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1982000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -618000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -315000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -17648000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 7830000
+      },
+      {
+        "name": "Treasury purchases",
+        "val": -247000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -25200000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 15443000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -13344000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 4102000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 3529000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1982000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 1889000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 950000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 525000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 146000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -618000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -315000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -17648000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 7830000
+      },
+      {
+        "name": "Treasury purchases",
+        "val": -247000
+      }
+    ]
+  },
+  {
+    "period": "2016-Q1",
+    "year": 2016,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2016",
+    "qend": "2016-03-31",
+    "cfo": -6916000,
+    "cfi": -13636000,
+    "cff": 23396000,
+    "capex": -1889000,
+    "net": 2921000,
+    "cash_basic": 66882000,
+    "cash_total": null,
+    "fcf": -8805000,
+    "cfo_drivers_top": [
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -11966000
+      },
+      {
+        "name": "Net loss",
+        "val": -11754000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 6398000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 3218000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 2423000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2217000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -11747000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1889000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 23874000
+      },
+      {
+        "name": "Other",
+        "val": -587000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 109000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -11966000
+      },
+      {
+        "name": "Net loss",
+        "val": -11754000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 6398000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 3218000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 2423000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2217000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 1832000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 571000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 145000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -11747000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1889000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 23874000
+      },
+      {
+        "name": "Other",
+        "val": -587000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 109000
+      }
+    ]
+  },
+  {
+    "period": "2016-Q2",
+    "year": 2016,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2016",
+    "qend": "2016-06-30",
+    "cfo": -8845000,
+    "cfi": -15206000,
+    "cff": 23218000,
+    "capex": -636000,
+    "net": -842000,
+    "cash_basic": 66040000,
+    "cash_total": null,
+    "fcf": -9481000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -13128000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -4222000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 4154000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2160000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 1993000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -1633000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -14570000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -636000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Repay short-term debt",
+        "val": -25000000
+      },
+      {
+        "name": "Other",
+        "val": 24343000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 23875000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -13128000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -4222000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 4154000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2160000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 1993000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -1633000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 957000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 724000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 150000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -14570000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -636000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Repay short-term debt",
+        "val": -25000000
+      },
+      {
+        "name": "Other",
+        "val": 24343000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 23875000
+      }
+    ]
+  },
+  {
+    "period": "2016-Q3",
+    "year": 2016,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2016",
+    "qend": "2016-09-30",
+    "cfo": -13908000,
+    "cfi": -16296000,
+    "cff": 6746000,
+    "capex": 61000,
+    "net": -23554000,
+    "cash_basic": 42486000,
+    "cash_total": null,
+    "fcf": -13847000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -13394000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -6529000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2368000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 1384000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 993000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 927000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -16357000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": 7415000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": -468000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": -201000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -13394000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -6529000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2368000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 1384000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 993000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 927000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 866000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -671000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 148000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -16357000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": 7415000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": -468000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": -201000
+      }
+    ]
+  },
+  {
+    "period": "2016-Q4",
+    "year": 2016,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2016",
+    "qend": "2016-12-31",
+    "cfo": 33000,
+    "cfi": -12937000,
+    "cff": 16525000,
+    "capex": -279000,
+    "net": -11160000,
+    "cash_basic": 46014000,
+    "cash_total": 100636000,
+    "fcf": -246000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 24835000
+      },
+      {
+        "name": "Net loss",
+        "val": -19211000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -7719000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -5854000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 3268000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2545000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -12658000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -279000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Repay long-term debt",
+        "val": -25000000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 23993000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 13000000
+      },
+      {
+        "name": "Other",
+        "val": 4714000
+      },
+      {
+        "name": "Treasury purchases",
+        "val": -182000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 24835000
+      },
+      {
+        "name": "Net loss",
+        "val": -19211000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -7719000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -5854000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 3268000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2545000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 1738000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 284000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 147000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -12658000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -279000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Repay long-term debt",
+        "val": -25000000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 23993000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 13000000
+      },
+      {
+        "name": "Other",
+        "val": 4714000
+      },
+      {
+        "name": "Treasury purchases",
+        "val": -182000
+      }
+    ]
+  },
+  {
+    "period": "2017-Q1",
+    "year": 2017,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2017",
+    "qend": "2017-03-31",
+    "cfo": -23859000,
+    "cfi": -9639000,
+    "cff": -786000,
+    "capex": -303000,
+    "net": -34983000,
+    "cash_basic": 11765000,
+    "cash_total": 65653000,
+    "fcf": -24162000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -24039000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -7584000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 5961000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -5021000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 3786000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2462000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -9336000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -303000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -786000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -24039000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -7584000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 5961000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -5021000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 3786000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2462000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2002000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -1569000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 143000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -9336000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -303000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -786000
+      }
+    ]
+  },
+  {
+    "period": "2017-Q2",
+    "year": 2017,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2017",
+    "qend": "2017-06-30",
+    "cfo": -34476000,
+    "cfi": -10906000,
+    "cff": 35584000,
+    "capex": -754000,
+    "net": -11531000,
+    "cash_basic": 2090000,
+    "cash_total": 54122000,
+    "fcf": -35230000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -42619000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -16199000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 8977000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 8366000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2330000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2181000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -10152000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -754000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 19534000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 17702000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -1228000
+      },
+      {
+        "name": "Other",
+        "val": -1045000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 621000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -42619000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -16199000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 8977000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 8366000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2330000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2181000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 1503000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 838000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 147000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -10152000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -754000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 19534000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 17702000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -1228000
+      },
+      {
+        "name": "Other",
+        "val": -1045000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 621000
+      }
+    ]
+  },
+  {
+    "period": "2017-Q3",
+    "year": 2017,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2017",
+    "qend": "2017-09-30",
+    "cfo": -22959000,
+    "cfi": -7746000,
+    "cff": 36444000,
+    "capex": -763000,
+    "net": 2405000,
+    "cash_basic": 7957000,
+    "cash_total": 56527000,
+    "fcf": -23722000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -40983000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -40549000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 37601000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 13270000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2496000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2413000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -6983000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -763000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Long-term debt issuance",
+        "val": 19526000
+      },
+      {
+        "name": "Other",
+        "val": 18771000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -2983000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 1130000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -40983000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -40549000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 37601000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 13270000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2496000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2413000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 1984000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 656000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 153000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -6983000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -763000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Long-term debt issuance",
+        "val": 19526000
+      },
+      {
+        "name": "Other",
+        "val": 18771000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -2983000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 1130000
+      }
+    ]
+  },
+  {
+    "period": "2017-Q4",
+    "year": 2017,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2017",
+    "qend": "2017-12-31",
+    "cfo": 21112000,
+    "cfi": -16072000,
+    "cff": 11769000,
+    "capex": -2270000,
+    "net": 11528000,
+    "cash_basic": 24828000,
+    "cash_total": 68055000,
+    "fcf": 18842000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 53489000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -37538000
+      },
+      {
+        "name": "Net loss",
+        "val": -19439000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": 7144000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 4906000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 4089000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -13802000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2270000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": 17472000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -8031000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 2328000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 53489000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -37538000
+      },
+      {
+        "name": "Net loss",
+        "val": -19439000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": 7144000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 4906000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 4089000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 3546000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2594000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 1921000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 250000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 150000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -13802000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2270000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": 17472000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -8031000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 2328000
+      }
+    ]
+  },
+  {
+    "period": "2018-Q1",
+    "year": 2018,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2018",
+    "qend": "2018-03-31",
+    "cfo": -24028000,
+    "cfi": -4303000,
+    "cff": 49199000,
+    "capex": -1026000,
+    "net": 20914000,
+    "cash_basic": 46746000,
+    "cash_total": 88969000,
+    "fcf": -25054000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -19835000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -15046000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 7655000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 3125000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2780000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -2066000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -3277000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1026000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 96057000
+      },
+      {
+        "name": "Other",
+        "val": -42209000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -4649000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -19835000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -15046000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 7655000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 3125000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2780000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -2066000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2005000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -1428000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -1376000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 158000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -3277000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1026000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 96057000
+      },
+      {
+        "name": "Other",
+        "val": -42209000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -4649000
+      }
+    ]
+  },
+  {
+    "period": "2018-Q2",
+    "year": 2018,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2018",
+    "qend": "2018-06-30",
+    "cfo": -21151000,
+    "cfi": -12057000,
+    "cff": -257000,
+    "capex": -1317000,
+    "net": -33547000,
+    "cash_basic": 15035000,
+    "cash_total": 55422000,
+    "fcf": -22468000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -25868000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 8523000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -5060000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -4619000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 3015000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2320000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -9861000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1317000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -879000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Repay long-term debt",
+        "val": -1072000
+      },
+      {
+        "name": "Other",
+        "val": 1016000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": -201000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -25868000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 8523000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -5060000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -4619000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 3015000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2320000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 1483000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -942000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -180000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 177000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -9861000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1317000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -879000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Repay long-term debt",
+        "val": -1072000
+      },
+      {
+        "name": "Other",
+        "val": 1016000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": -201000
+      }
+    ]
+  },
+  {
+    "period": "2018-Q3",
+    "year": 2018,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2018",
+    "qend": "2018-09-30",
+    "cfo": 3537000,
+    "cfi": -1168000,
+    "cff": 4274000,
+    "capex": -925000,
+    "net": 6630000,
+    "cash_basic": 13825000,
+    "cash_total": 62052000,
+    "fcf": 2612000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 23539000
+      },
+      {
+        "name": "Net loss",
+        "val": -15565000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -6788000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -6066000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 3274000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2797000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -925000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -243000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Repay long-term debt",
+        "val": -6223000
+      },
+      {
+        "name": "Other",
+        "val": 5585000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 4912000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 23539000
+      },
+      {
+        "name": "Net loss",
+        "val": -15565000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -6788000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -6066000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 3274000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2797000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2064000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -924000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 746000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 284000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 176000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -925000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -243000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Repay long-term debt",
+        "val": -6223000
+      },
+      {
+        "name": "Other",
+        "val": 5585000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 4912000
+      }
+    ]
+  },
+  {
+    "period": "2018-Q4",
+    "year": 2018,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2018",
+    "qend": "2018-12-31",
+    "cfo": -15975000,
+    "cfi": -2044000,
+    "cff": 66128000,
+    "capex": -1874000,
+    "net": 48101000,
+    "cash_basic": 38602000,
+    "cash_total": 110153000,
+    "fcf": -17849000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 20737000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -18665000
+      },
+      {
+        "name": "Net loss",
+        "val": -16847000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -9249000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -6487000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 5926000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1874000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -120000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 95856000
+      },
+      {
+        "name": "Other",
+        "val": -27765000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -4246000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 2283000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 20737000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -18665000
+      },
+      {
+        "name": "Net loss",
+        "val": -16847000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -9249000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -6487000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 5926000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 5345000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -5305000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 5008000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -2657000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2422000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2382000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 880000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 353000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 182000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1874000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -120000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 95856000
+      },
+      {
+        "name": "Other",
+        "val": -27765000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -4246000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 2283000
+      }
+    ]
+  },
+  {
+    "period": "2019-Q1",
+    "year": 2019,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2019",
+    "qend": "2019-03-31",
+    "cfo": -36263000,
+    "cfi": -2274000,
+    "cff": 37650000,
+    "capex": -1468000,
+    "net": -922000,
+    "cash_basic": 39336000,
+    "cash_total": 109231000,
+    "fcf": -37731000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -33938000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -17639000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 17564000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -4978000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 2819000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -2781000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1468000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -806000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Long-term debt issuance",
+        "val": 84761000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -54170000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 23498000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -17153000
+      },
+      {
+        "name": "Other",
+        "val": 714000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -33938000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -17639000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 17564000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -4978000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 2819000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -2781000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2776000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2497000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -2372000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -1018000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 518000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 307000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -193000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 175000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1468000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -806000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Long-term debt issuance",
+        "val": 84761000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -54170000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 23498000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -17153000
+      },
+      {
+        "name": "Other",
+        "val": 714000
+      }
+    ]
+  },
+  {
+    "period": "2019-Q2",
+    "year": 2019,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2019",
+    "qend": "2019-06-30",
+    "cfo": -12225000,
+    "cfi": -4042000,
+    "cff": 42376000,
+    "capex": -1376000,
+    "net": 26096000,
+    "cash_basic": 19845000,
+    "cash_total": 135327000,
+    "fcf": -13601000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -18561000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -8604000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 7716000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -4870000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 4013000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2720000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Intangible asset purchases",
+        "val": -1860000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1376000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -1181000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 25609000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 14785000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 4767000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1743000
+      },
+      {
+        "name": "Other",
+        "val": -798000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -368000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -18561000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -8604000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 7716000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -4870000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 4013000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2720000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2626000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 1637000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 1478000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -851000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 600000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -292000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 163000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Intangible asset purchases",
+        "val": -1860000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1376000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -1181000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 25609000
+      },
+      {
+        "name": "Long-term debt issuance",
+        "val": 14785000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 4767000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1743000
+      },
+      {
+        "name": "Other",
+        "val": -798000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -368000
+      },
+      {
+        "name": "Option exercises",
+        "val": 124000
+      }
+    ]
+  },
+  {
+    "period": "2019-Q3",
+    "year": 2019,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2019",
+    "qend": "2019-09-30",
+    "cfo": -3313000,
+    "cfi": -2655000,
+    "cff": 69029000,
+    "capex": -1791000,
+    "net": 62990000,
+    "cash_basic": 43275000,
+    "cash_total": 198317000,
+    "fcf": -5104000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -21229000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 12061000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 7411000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -5593000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 3448000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2804000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1791000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -864000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 39052000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 13443000
+      },
+      {
+        "name": "Other",
+        "val": 12112000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 9833000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -3665000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1746000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -21229000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 12061000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 7411000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -5593000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 3448000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2804000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -1854000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -887000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 346000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 180000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1791000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -864000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 39052000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 13443000
+      },
+      {
+        "name": "Other",
+        "val": 12112000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 9833000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -3665000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1746000
+      }
+    ]
+  },
+  {
+    "period": "2019-Q4",
+    "year": 2019,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2019",
+    "qend": "2019-12-31",
+    "cfo": 279000,
+    "cfi": -5273000,
+    "cff": 176005000,
+    "capex": -1048000,
+    "net": 171183000,
+    "cash_basic": 139496000,
+    "cash_total": 369500000,
+    "fcf": -769000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 29972000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -14628000
+      },
+      {
+        "name": "Net loss",
+        "val": -11737000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -9336000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -8932000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 8537000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -3681000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1048000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -544000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 120330000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": 57404000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 14089000
+      },
+      {
+        "name": "Other",
+        "val": -13172000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -3641000
+      },
+      {
+        "name": "Option exercises",
+        "val": 995000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 29972000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -14628000
+      },
+      {
+        "name": "Net loss",
+        "val": -11737000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -9336000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -8932000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 8537000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -8210000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 6586000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 3045000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 2963000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 1056000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 728000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 394000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -339000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 180000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -3681000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -1048000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -544000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 120330000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": 57404000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 14089000
+      },
+      {
+        "name": "Other",
+        "val": -13172000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -3641000
+      },
+      {
+        "name": "Option exercises",
+        "val": 995000
+      }
+    ]
+  },
+  {
+    "period": "2020-Q1",
+    "year": 2020,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2020",
+    "qend": "2020-03-31",
+    "cfo": -60015000,
+    "cfi": -6355000,
+    "cff": 4083000,
+    "capex": -2507000,
+    "net": -62286000,
+    "cash_basic": 74340000,
+    "cash_total": 307214000,
+    "fcf": -62522000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -41265000
+      },
+      {
+        "name": "Net loss",
+        "val": -37479000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 20581000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 10794000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -7330000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -5793000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -3848000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2507000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 9024000
+      },
+      {
+        "name": "Option exercises",
+        "val": 6100000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -5315000
+      },
+      {
+        "name": "Other",
+        "val": -3116000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2610000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -41265000
+      },
+      {
+        "name": "Net loss",
+        "val": -37479000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 20581000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 10794000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -7330000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -5793000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 3045000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -2933000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2850000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -1649000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -1011000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 175000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -3848000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2507000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 9024000
+      },
+      {
+        "name": "Option exercises",
+        "val": 6100000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -5315000
+      },
+      {
+        "name": "Other",
+        "val": -3116000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2610000
+      }
+    ]
+  },
+  {
+    "period": "2020-Q2",
+    "year": 2020,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2020",
+    "qend": "2020-06-30",
+    "cfo": -51232000,
+    "cfi": -50196000,
+    "cff": 177482000,
+    "capex": -2502000,
+    "net": 76039000,
+    "cash_basic": 152492000,
+    "cash_total": 383253000,
+    "fcf": -53734000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -81114000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 19404000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 17402000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": -13222000
+      },
+      {
+        "name": "Net loss",
+        "val": -8656000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 7632000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Business acquisitions",
+        "val": -45286000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2502000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -2408000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 205100000
+      },
+      {
+        "name": "Other",
+        "val": -43417000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 18654000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2586000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": -269000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -81114000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 19404000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 17402000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": -13222000
+      },
+      {
+        "name": "Net loss",
+        "val": -8656000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 7632000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 3143000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2933000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 1023000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 223000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Business acquisitions",
+        "val": -45286000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2502000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -2408000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 205100000
+      },
+      {
+        "name": "Other",
+        "val": -43417000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 18654000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2586000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": -269000
+      }
+    ]
+  },
+  {
+    "period": "2020-Q3",
+    "year": 2020,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2020",
+    "qend": "2020-09-30",
+    "cfo": -45663000,
+    "cfi": -15164000,
+    "cff": 409022000,
+    "capex": -6256000,
+    "net": 348119000,
+    "cash_basic": 448140000,
+    "cash_total": 731372000,
+    "fcf": -51919000,
+    "cfo_drivers_top": [
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 67611000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -65108000
+      },
+      {
+        "name": "Net loss",
+        "val": -39379000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -38000000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -31397000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 31049000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -7443000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -6256000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -1638000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": 173000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 344667000
+      },
+      {
+        "name": "Other",
+        "val": 56334000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 19890000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -9218000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2651000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 67611000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -65108000
+      },
+      {
+        "name": "Net loss",
+        "val": -39379000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -38000000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -31397000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 31049000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 19735000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 8452000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -6861000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 3598000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 3070000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 1130000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 437000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -7443000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -6256000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -1638000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": 173000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 344667000
+      },
+      {
+        "name": "Other",
+        "val": 56334000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 19890000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -9218000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2651000
+      }
+    ]
+  },
+  {
+    "period": "2020-Q4",
+    "year": 2020,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2020",
+    "qend": "2020-12-31",
+    "cfo": 1434000,
+    "cfi": -23619000,
+    "cff": 924942000,
+    "capex": -11261000,
+    "net": 902912000,
+    "cash_basic": 1312404000,
+    "cash_total": 1634284000,
+    "fcf": -9827000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 552999000
+      },
+      {
+        "name": "Net loss",
+        "val": -510641000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -70303000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 35473000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -31475000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -23507000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -12039000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -11261000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -319000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 927316000
+      },
+      {
+        "name": "Other",
+        "val": -27441000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 17691000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": 7376000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 552999000
+      },
+      {
+        "name": "Net loss",
+        "val": -510641000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -70303000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 35473000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -31475000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -23507000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 16132000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 13445000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 7877000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 6430000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 6400000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -6160000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 5671000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 5053000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": -4464000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -2496000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 700000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 300000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -12039000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -11261000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -319000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 927316000
+      },
+      {
+        "name": "Other",
+        "val": -27441000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 17691000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": 7376000
+      }
+    ]
+  },
+  {
+    "period": "2021-Q1",
+    "year": 2021,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2021",
+    "qend": "2021-03-31",
+    "cfo": -117099000,
+    "cfi": -418379000,
+    "cff": 3594373000,
+    "capex": -9879000,
+    "net": 3058844000,
+    "cash_basic": 4349066000,
+    "cash_total": 4693128000,
+    "fcf": -126978000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -90143000
+      },
+      {
+        "name": "Net loss",
+        "val": -60746000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 46791000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -23516000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -16433000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 9695000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Buy AFS securities",
+        "val": -405168000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -9879000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -3332000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 3587825000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -433000000
+      },
+      {
+        "name": "Other",
+        "val": 413442000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 15445000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 10661000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -90143000
+      },
+      {
+        "name": "Net loss",
+        "val": -60746000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 46791000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -23516000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -16433000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 9695000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 5514000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 4641000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": 3388000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 1485000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 1180000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 790000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 364000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -109000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Buy AFS securities",
+        "val": -405168000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -9879000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -3332000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 3587825000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -433000000
+      },
+      {
+        "name": "Other",
+        "val": 413442000
+      },
+      {
+        "name": "Warrant exercises",
+        "val": 15445000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 10661000
+      }
+    ]
+  },
+  {
+    "period": "2021-Q2",
+    "year": 2021,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2021",
+    "qend": "2021-06-30",
+    "cfo": -129536000,
+    "cfi": -986838000,
+    "cff": 12921000,
+    "capex": -23183000,
+    "net": -1103565000,
+    "cash_basic": 3160170000,
+    "cash_total": 3589563000,
+    "fcf": -152719000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -138723000
+      },
+      {
+        "name": "Net loss",
+        "val": -99634000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 48427000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 27563000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 23797000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -20768000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Buy AFS securities",
+        "val": -1099723000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": 260313000
+      },
+      {
+        "name": "Other",
+        "val": -119979000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -23183000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4266000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Finance lease principal",
+        "val": -733000000
+      },
+      {
+        "name": "Other",
+        "val": 724423000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 21498000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -138723000
+      },
+      {
+        "name": "Net loss",
+        "val": -99634000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 48427000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 27563000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 23797000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -20768000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 18326000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -15815000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 11120000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 6694000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 5460000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 4211000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -560000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 366000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Buy AFS securities",
+        "val": -1099723000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": 260313000
+      },
+      {
+        "name": "Other",
+        "val": -119979000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -23183000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4266000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Finance lease principal",
+        "val": -733000000
+      },
+      {
+        "name": "Other",
+        "val": 724423000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 21498000
+      }
+    ]
+  },
+  {
+    "period": "2021-Q3",
+    "year": 2021,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2021",
+    "qend": "2021-09-30",
+    "cfo": -101866000,
+    "cfi": 390923000,
+    "cff": -25532000,
+    "capex": -58322000,
+    "net": 263629000,
+    "cash_basic": 3371962000,
+    "cash_total": 3853192000,
+    "fcf": -160188000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -106671000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -82523000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 41011000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 24945000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -21930000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -20427000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Sell/mature securities",
+        "val": 845561000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -358060000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -58322000
+      },
+      {
+        "name": "Other",
+        "val": -27954000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -10302000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -1179958000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": 1163872000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -30734000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 21288000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -106671000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -82523000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 41011000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 24945000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -21930000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -20427000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 19840000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 13998000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 8530000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 7462000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 6178000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 5498000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 2265000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -1736000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 1329000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 365000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Sell/mature securities",
+        "val": 845561000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -358060000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -58322000
+      },
+      {
+        "name": "Other",
+        "val": -27954000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -10302000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -1179958000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": 1163872000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -30734000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 21288000
+      }
+    ]
+  },
+  {
+    "period": "2021-Q4",
+    "year": 2021,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2021",
+    "qend": "2021-12-31",
+    "cfo": -9675000,
+    "cfi": -726597000,
+    "cff": 16017000,
+    "capex": -80782000,
+    "net": -720998000,
+    "cash_basic": 2481269000,
+    "cash_total": 3132194000,
+    "fcf": -90457000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": 287711000
+      },
+      {
+        "name": "Net loss",
+        "val": -192914000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -67495000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -61728000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -58299000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 56347000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Buy AFS securities",
+        "val": -1296421000
+      },
+      {
+        "name": "Other",
+        "val": 1118168000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": -327836000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -136526000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -80782000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -2272000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 55478000
+      },
+      {
+        "name": "Other",
+        "val": -35042000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -1541000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1520000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1358000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": 287711000
+      },
+      {
+        "name": "Net loss",
+        "val": -192914000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -67495000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -61728000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -58299000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 56347000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -50935000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 41657000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 10200000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 8895000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 8363000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 4997000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -4084000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -3968000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 3927000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 2416000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 2158000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 1703000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 1374000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Buy AFS securities",
+        "val": -1296421000
+      },
+      {
+        "name": "Other",
+        "val": 1118168000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": -327836000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -136526000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -80782000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -2272000
+      },
+      {
+        "name": "Intangible asset purchases",
+        "val": -928000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 55478000
+      },
+      {
+        "name": "Other",
+        "val": -35042000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -1541000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1520000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1358000
+      }
+    ]
+  },
+  {
+    "period": "2022-Q1",
+    "year": 2022,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2022",
+    "qend": "2022-03-31",
+    "cfo": -209919000,
+    "cfi": 273914000,
+    "cff": -18241000,
+    "capex": -78394000,
+    "net": 14345000,
+    "cash_basic": 2495614000,
+    "cash_total": 3178582000,
+    "fcf": -288313000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -156489000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -117922000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 63702000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -45050000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 43386000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -36170000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Sell/mature securities",
+        "val": 469563000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -114173000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -78394000
+      },
+      {
+        "name": "Other",
+        "val": 30187000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -26473000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -6796000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -29514000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 17273000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -2667000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1868000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1465000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -156489000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -117922000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 63702000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -45050000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 43386000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -36170000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": 27905000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 27107000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -25096000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 5190000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -3833000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 2842000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 2461000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 2048000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Sell/mature securities",
+        "val": 469563000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -114173000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -78394000
+      },
+      {
+        "name": "Other",
+        "val": 30187000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -26473000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -6796000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -29514000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 17273000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -2667000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -1868000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1465000
+      }
+    ]
+  },
+  {
+    "period": "2022-Q2",
+    "year": 2022,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2022",
+    "qend": "2022-06-30",
+    "cfo": -195194000,
+    "cfi": -8547000,
+    "cff": -12475000,
+    "capex": -79444000,
+    "net": -239663000,
+    "cash_basic": 2255951000,
+    "cash_total": 2961677000,
+    "fcf": -274638000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -234930000
+      },
+      {
+        "name": "Net loss",
+        "val": -173296000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 95743000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 63759000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -55323000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 44859000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Other",
+        "val": 102313000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -79444000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -29057000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -8472000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": 6113000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Repay long-term debt",
+        "val": -36089000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 17775000
+      },
+      {
+        "name": "Other",
+        "val": 9081000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2047000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1195000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -234930000
+      },
+      {
+        "name": "Net loss",
+        "val": -173296000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 95743000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 63759000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -55323000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 44859000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": 27480000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 24547000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 8362000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 5184000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -5066000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 4180000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -2191000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 1068000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 430000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Other",
+        "val": 102313000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -79444000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -29057000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -8472000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": 6113000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Repay long-term debt",
+        "val": -36089000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 17775000
+      },
+      {
+        "name": "Other",
+        "val": 9081000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2047000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1195000
+      }
+    ]
+  },
+  {
+    "period": "2022-Q3",
+    "year": 2022,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2022",
+    "qend": "2022-09-30",
+    "cfo": -116936000,
+    "cfi": -286016000,
+    "cff": -10597000,
+    "capex": -159715000,
+    "net": -508198000,
+    "cash_basic": 1747753000,
+    "cash_total": 2555090000,
+    "fcf": -276651000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -170758000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -160361000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 86325000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 74289000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -61440000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 46739000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -159715000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -152099000
+      },
+      {
+        "name": "Other",
+        "val": 33315000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -7517000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 48932000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -26705000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -20151000
+      },
+      {
+        "name": "Other",
+        "val": -10422000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2251000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -170758000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -160361000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 86325000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 74289000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -61440000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 46739000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 33970000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 31003000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -15255000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 8997000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 6641000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4864000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -4280000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 1567000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 763000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -159715000
+      },
+      {
+        "name": "Buy AFS securities",
+        "val": -152099000
+      },
+      {
+        "name": "Other",
+        "val": 33315000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -7517000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 48932000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -26705000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -20151000
+      },
+      {
+        "name": "Other",
+        "val": -10422000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2251000
+      }
+    ]
+  },
+  {
+    "period": "2022-Q4",
+    "year": 2022,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2022",
+    "qend": "2022-12-31",
+    "cfo": -306574000,
+    "cfi": -658721000,
+    "cff": -36144000,
+    "capex": -119057000,
+    "net": -1057123000,
+    "cash_basic": 690630000,
+    "cash_total": 1549344000,
+    "fcf": -425631000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -223666000
+      },
+      {
+        "name": "Net loss",
+        "val": -223465000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 117939000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -47922000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 44643000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -40753000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Buy AFS securities",
+        "val": -543293000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -119057000
+      },
+      {
+        "name": "Other",
+        "val": 38540000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -30433000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4478000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Repay long-term debt",
+        "val": -58595000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 38906000
+      },
+      {
+        "name": "Other",
+        "val": -12664000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2867000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -924000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -223666000
+      },
+      {
+        "name": "Net loss",
+        "val": -223465000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 117939000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -47922000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 44643000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -40753000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -35737000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 32488000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 28940000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -24494000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 19073000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 18612000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 10201000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 9864000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -9862000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 5957000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 4455000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 2710000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 1957000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 1500000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 986000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Buy AFS securities",
+        "val": -543293000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -119057000
+      },
+      {
+        "name": "Other",
+        "val": 38540000
+      },
+      {
+        "name": "Business acquisitions",
+        "val": -30433000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4478000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Repay long-term debt",
+        "val": -58595000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 38906000
+      },
+      {
+        "name": "Other",
+        "val": -12664000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2867000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -924000
+      }
+    ]
+  },
+  {
+    "period": "2023-Q1",
+    "year": 2023,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2023",
+    "qend": "2023-03-31",
+    "cfo": -276919000,
+    "cfi": 95796000,
+    "cff": 7181000,
+    "capex": -168565000,
+    "net": -215769000,
+    "cash_basic": 474861000,
+    "cash_total": 1373306000,
+    "fcf": -445484000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -223292000
+      },
+      {
+        "name": "Net loss",
+        "val": -206561000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 129572000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -90488000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 43302000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 14677000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Sell/mature securities",
+        "val": 315827000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -168565000
+      },
+      {
+        "name": "Other",
+        "val": -40077000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -11389000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 27927000
+      },
+      {
+        "name": "Other",
+        "val": -13767000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -2590000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2059000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -2000000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -330000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -223292000
+      },
+      {
+        "name": "Net loss",
+        "val": -206561000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 129572000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -90488000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 43302000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 14677000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 13821000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 9789000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": 9748000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 8769000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 6981000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 5522000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -5317000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4959000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 2009000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -1730000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 1083000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 237000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Sell/mature securities",
+        "val": 315827000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -168565000
+      },
+      {
+        "name": "Other",
+        "val": -40077000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -11389000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 27927000
+      },
+      {
+        "name": "Other",
+        "val": -13767000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -2590000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2059000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -2000000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -330000
+      }
+    ]
+  },
+  {
+    "period": "2023-Q2",
+    "year": 2023,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2023",
+    "qend": "2023-06-30",
+    "cfo": -348092000,
+    "cfi": 509691000,
+    "cff": 18463000,
+    "capex": -150757000,
+    "net": 104557000,
+    "cash_basic": 579418000,
+    "cash_total": 1553325000,
+    "fcf": -498849000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -356960000
+      },
+      {
+        "name": "Net loss",
+        "val": -236398000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 140135000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 89821000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 39918000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -31586000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Sell/mature securities",
+        "val": 592922000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -150757000
+      },
+      {
+        "name": "Other",
+        "val": 75446000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -7920000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 49662000
+      },
+      {
+        "name": "Other",
+        "val": -15559000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -8105000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -5077000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2094000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -364000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -356960000
+      },
+      {
+        "name": "Net loss",
+        "val": -236398000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 140135000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 89821000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 39918000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -31586000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -25200000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 15308000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -14700000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -14541000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 11477000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 9986000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 9751000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 9130000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -7623000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 6740000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4796000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 1195000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 659000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Sell/mature securities",
+        "val": 592922000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -150757000
+      },
+      {
+        "name": "Other",
+        "val": 75446000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -7920000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Short-term debt issuance",
+        "val": 49662000
+      },
+      {
+        "name": "Other",
+        "val": -15559000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -8105000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -5077000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2094000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -364000
+      }
+    ]
+  },
+  {
+    "period": "2023-Q3",
+    "year": 2023,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2023",
+    "qend": "2023-09-30",
+    "cfo": -238908000,
+    "cfi": -144999000,
+    "cff": -11197000,
+    "capex": -164708000,
+    "net": -468609000,
+    "cash_basic": 110809000,
+    "cash_total": 1162490000,
+    "fcf": -403616000,
+    "cfo_drivers_top": [
+      {
+        "name": "Other reconciling items",
+        "val": -502926000
+      },
+      {
+        "name": "Net loss",
+        "val": -283479000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 281178000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 142030000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -53406000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 45854000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -164708000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": 52411000
+      },
+      {
+        "name": "Other",
+        "val": -25917000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -6785000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -16410000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 12676000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -4968000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2192000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -303000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Other reconciling items",
+        "val": -502926000
+      },
+      {
+        "name": "Net loss",
+        "val": -283479000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 281178000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 142030000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -53406000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 45854000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 41473000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 22129000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 21941000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 16544000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 15601000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 15233000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -7030000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4403000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 2239000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -1861000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 665000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 504000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -164708000
+      },
+      {
+        "name": "Sell/mature securities",
+        "val": 52411000
+      },
+      {
+        "name": "Other",
+        "val": -25917000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -6785000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -16410000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 12676000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -4968000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2192000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -303000
+      }
+    ]
+  },
+  {
+    "period": "2023-Q4",
+    "year": 2023,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2023",
+    "qend": "2023-12-31",
+    "cfo": -242651000,
+    "cfi": 267564000,
+    "cff": -8330000,
+    "capex": -181178000,
+    "net": 24224000,
+    "cash_basic": 135033000,
+    "cash_total": 1169144000,
+    "fcf": -423829000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -642395000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 375694000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -259491000
+      },
+      {
+        "name": "Impairment: goodwill",
+        "val": 249480000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -103372000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 88083000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Sell/mature securities",
+        "val": 345264000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -181178000
+      },
+      {
+        "name": "Other",
+        "val": 108302000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4824000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Other",
+        "val": -17638000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 13986000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2293000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -2085000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -300000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -642395000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 375694000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": -259491000
+      },
+      {
+        "name": "Impairment: goodwill",
+        "val": 249480000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -103372000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 88083000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 59853000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -38972000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -34705000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 33834000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 30181000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -21816000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 14176000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": -8634000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 7459000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4939000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 3708000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -3106000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 1218000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 514000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 501000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 200000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Sell/mature securities",
+        "val": 345264000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -181178000
+      },
+      {
+        "name": "Other",
+        "val": 108302000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4824000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Other",
+        "val": -17638000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 13986000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2293000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -2085000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -300000
+      }
+    ]
+  },
+  {
+    "period": "2024-Q1",
+    "year": 2024,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2024",
+    "qend": "2024-03-31",
+    "cfo": -167728000,
+    "cfi": -120584000,
+    "cff": 283065000,
+    "capex": -92621000,
+    "net": 37840000,
+    "cash_basic": 172873000,
+    "cash_total": 1168084000,
+    "fcf": -260349000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -295776000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -96436000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 54672000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 44667000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 39675000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 38312000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -92621000
+      },
+      {
+        "name": "Other",
+        "val": -21891000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -6072000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 305346000
+      },
+      {
+        "name": "Other",
+        "val": -18595000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2272000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -836000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -300000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -278000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -295776000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -96436000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 54672000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 44667000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 39675000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 38312000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -32500000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 25755000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 16606000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 15111000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 14496000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 14047000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 13704000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -13113000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -9200000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4725000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": -1447000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -1356000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 330000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -92621000
+      },
+      {
+        "name": "Other",
+        "val": -21891000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -6072000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 305346000
+      },
+      {
+        "name": "Other",
+        "val": -18595000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2272000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -836000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -300000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -278000
+      }
+    ]
+  },
+  {
+    "period": "2024-Q2",
+    "year": 2024,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2024",
+    "qend": "2024-06-30",
+    "cfo": -254738000,
+    "cfi": -148074000,
+    "cff": 243686000,
+    "capex": -101302000,
+    "net": -110514000,
+    "cash_basic": 62359000,
+    "cash_total": 1018906000,
+    "fcf": -356040000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -262333000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -60825000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -41573000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 41175000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -26387000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 26309000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -101302000
+      },
+      {
+        "name": "Other",
+        "val": -41822000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4950000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 266774000
+      },
+      {
+        "name": "Other",
+        "val": -19065000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2314000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -1000000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -385000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -324000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -262333000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": -60825000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -41573000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 41175000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -26387000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 26309000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 19203000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 17997000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 17024000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 13684000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -9956000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -7240000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 6368000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4709000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 4253000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 3768000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": -1048000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 134000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -101302000
+      },
+      {
+        "name": "Other",
+        "val": -41822000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4950000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 266774000
+      },
+      {
+        "name": "Other",
+        "val": -19065000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2314000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -1000000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -385000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -324000
+      }
+    ]
+  },
+  {
+    "period": "2024-Q3",
+    "year": 2024,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2024",
+    "qend": "2024-09-30",
+    "cfo": -174936000,
+    "cfi": -89871000,
+    "cff": 252424000,
+    "capex": -59225000,
+    "net": 31581000,
+    "cash_basic": 93940000,
+    "cash_total": 1000195000,
+    "fcf": -234161000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -211168000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -53972000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 52824000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -42793000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 25929000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 24107000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -59225000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -30491000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 221129000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 54416000
+      },
+      {
+        "name": "Other",
+        "val": -19644000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2402000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1075000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -211168000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -53972000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 52824000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -42793000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 25929000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 24107000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -22786000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 21971000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 17036000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 14409000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -13365000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 11952000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -8690000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 5862000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 4760000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": -1013000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 146000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": -145000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -59225000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -30491000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 221129000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 54416000
+      },
+      {
+        "name": "Other",
+        "val": -19644000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2402000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -1075000
+      }
+    ]
+  },
+  {
+    "period": "2024-Q4",
+    "year": 2024,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2024",
+    "qend": "2024-12-31",
+    "cfo": -131241000,
+    "cfi": -43835000,
+    "cff": 203995000,
+    "capex": -33950000,
+    "net": 111753000,
+    "cash_basic": 205693000,
+    "cash_total": 1040709000,
+    "fcf": -165191000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -1335424000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 681200000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 503976000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -215030000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 145427000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 104212000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -33950000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -5637000
+      },
+      {
+        "name": "Other",
+        "val": -4248000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 190000000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 64623000
+      },
+      {
+        "name": "Other",
+        "val": -42599000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -18060000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 10163000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 5871000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -1335424000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 681200000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 503976000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -215030000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 145427000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 104212000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -98423000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 44125000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 30372000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -30281000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 20394000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 18083000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -12356000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -11660000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": 10751000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -10561000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 9476000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 9247000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 7229000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -3134000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 2231000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": -1095000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -33950000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -5637000
+      },
+      {
+        "name": "Other",
+        "val": -4248000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 190000000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 64623000
+      },
+      {
+        "name": "Other",
+        "val": -42599000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -18060000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 10163000
+      },
+      {
+        "name": "Short-term debt issuance",
+        "val": 5871000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -2800000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -2353000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -850000
+      }
+    ]
+  },
+  {
+    "period": "2025-Q1",
+    "year": 2025,
+    "quarter": 1,
+    "months": "Jan\u2013Mar 2025",
+    "qend": "2025-03-31",
+    "cfo": -105568000,
+    "cfi": -46573000,
+    "cff": 193232000,
+    "capex": -40451000,
+    "net": 90151000,
+    "cash_basic": 295844000,
+    "cash_total": 1076611000,
+    "fcf": -146019000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -196656000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 47578000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 40804000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -40576000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 27360000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -21697000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -40451000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -5608000
+      },
+      {
+        "name": "Other",
+        "val": -514000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 276053000
+      },
+      {
+        "name": "Other",
+        "val": -81239000
+      },
+      {
+        "name": "Debt extinguishment costs",
+        "val": -1238000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -344000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -196656000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 47578000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 40804000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -40576000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 27360000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -21697000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": 18357000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -12251000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 12134000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -11819000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 11087000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": 9460000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 8262000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 3652000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -2370000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 2007000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -580000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": -320000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -40451000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -5608000
+      },
+      {
+        "name": "Other",
+        "val": -514000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 276053000
+      },
+      {
+        "name": "Other",
+        "val": -81239000
+      },
+      {
+        "name": "Debt extinguishment costs",
+        "val": -1238000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -344000
+      }
+    ]
+  },
+  {
+    "period": "2025-Q2",
+    "year": 2025,
+    "quarter": 2,
+    "months": "Apr\u2013Jun 2025",
+    "qend": "2025-06-30",
+    "cfo": -191810000,
+    "cfi": -40743000,
+    "cff": 32832000,
+    "capex": -38618000,
+    "net": -155108000,
+    "cash_basic": 140736000,
+    "cash_total": 876801000,
+    "fcf": -230428000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -227099000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 131384000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -51655000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -45850000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -34713000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -33241000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -38618000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -1801000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Secured debt issuance",
+        "val": 199500000
+      },
+      {
+        "name": "Other",
+        "val": -164461000
+      },
+      {
+        "name": "Debt extinguishment costs",
+        "val": -2594000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 750000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -344000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -158000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -227099000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 131384000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": -51655000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -45850000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -34713000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -33241000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 29414000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": -13953000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 13080000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 12904000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 12776000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 5790000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 5475000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 4632000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 2001000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -1578000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": -1115000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -168000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 106000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -38618000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -1801000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Secured debt issuance",
+        "val": 199500000
+      },
+      {
+        "name": "Other",
+        "val": -164461000
+      },
+      {
+        "name": "Debt extinguishment costs",
+        "val": -2594000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 750000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -344000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -158000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": 139000
+      }
+    ]
+  },
+  {
+    "period": "2025-Q3",
+    "year": 2025,
+    "quarter": 3,
+    "months": "Jul\u2013Sep 2025",
+    "qend": "2025-09-30",
+    "cfo": -89814000,
+    "cfi": -30392000,
+    "cff": 87020000,
+    "capex": -27705000,
+    "net": 25159000,
+    "cash_basic": 165895000,
+    "cash_total": 849022000,
+    "fcf": -117519000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -361869000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 84727000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 78460000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 60500000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 41733000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -25421000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -27705000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -2395000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Common stock issuance",
+        "val": 75756000
+      },
+      {
+        "name": "Secured debt issuance",
+        "val": 49875000
+      },
+      {
+        "name": "Other",
+        "val": -23913000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -10711000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -4264000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 775000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -361869000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 84727000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 78460000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 60500000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 41733000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -25421000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -16165000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 13292000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 12237000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 10134000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 8122000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 6900000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 4065000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -3262000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": -2041000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 2011000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": -1435000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": -1264000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -1129000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 591000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "CapEx (PP&E)",
+        "val": -27705000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -2395000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Common stock issuance",
+        "val": 75756000
+      },
+      {
+        "name": "Secured debt issuance",
+        "val": 49875000
+      },
+      {
+        "name": "Other",
+        "val": -23913000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -10711000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -4264000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 775000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -498000
+      }
+    ]
+  },
+  {
+    "period": "2025-Q4",
+    "year": 2025,
+    "quarter": 4,
+    "months": "Oct\u2013Dec 2025",
+    "qend": "2025-12-31",
+    "cfo": -148643000,
+    "cfi": -21300000,
+    "cff": 316869000,
+    "capex": -4390000,
+    "net": 202645000,
+    "cash_basic": 368540000,
+    "cash_total": 993984000,
+    "fcf": -153033000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -845970000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 600778000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 279267000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -164665000
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": -128101000
+      },
+      {
+        "name": "Impairment: equity method",
+        "val": 42500000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Buy HTM securities",
+        "val": -10200000
+      },
+      {
+        "name": "Other",
+        "val": -8538000
+      },
+      {
+        "name": "Sell equity-method investment",
+        "val": 6500000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4672000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -4390000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 399984000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -252478000
+      },
+      {
+        "name": "Other",
+        "val": 245947000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": -29595000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -14338000
+      },
+      {
+        "name": "Debt extinguishment costs",
+        "val": -13970000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -845970000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 600778000
+      },
+      {
+        "name": "Other reconciling items",
+        "val": 279267000
+      },
+      {
+        "name": "Deferred income tax",
+        "val": -164665000
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": -128101000
+      },
+      {
+        "name": "Impairment: equity method",
+        "val": 42500000
+      },
+      {
+        "name": "\u0394 Contract asset",
+        "val": 38070000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 22374000
+      },
+      {
+        "name": "\u0394 Contract liability",
+        "val": -21321000
+      },
+      {
+        "name": "\u0394 Accounts receivable",
+        "val": 21221000
+      },
+      {
+        "name": "\u0394 Inventory",
+        "val": -19373000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": -17973000
+      },
+      {
+        "name": "Contract liab. revenue recognized",
+        "val": 15947000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 14141000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 10491000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": -10370000
+      },
+      {
+        "name": "\u0394 Prepaid & other assets",
+        "val": 6778000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 4578000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": -3579000
+      },
+      {
+        "name": "\u0394 Accounts payable & accrued",
+        "val": 3028000
+      },
+      {
+        "name": "Impairment: finance leases",
+        "val": 2602000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": -2564000
+      },
+      {
+        "name": "Impairment: operating leases",
+        "val": 1688000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 931000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 879000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Buy HTM securities",
+        "val": -10200000
+      },
+      {
+        "name": "Other",
+        "val": -8538000
+      },
+      {
+        "name": "Sell equity-method investment",
+        "val": 6500000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -4672000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -4390000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Convertible debt issuance",
+        "val": 399984000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -252478000
+      },
+      {
+        "name": "Other",
+        "val": 245947000
+      },
+      {
+        "name": "Common stock issuance",
+        "val": -29595000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -14338000
+      },
+      {
+        "name": "Debt extinguishment costs",
+        "val": -13970000
+      },
+      {
+        "name": "Finance lease principal",
+        "val": -9926000
+      },
+      {
+        "name": "Secured debt issuance",
+        "val": -6069000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -2941000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 255000
+      }
+    ]
+  }
+]

@@ -6,13 +6,15 @@
 <title>Siberforge</title>
 <style>
   :root {
-    --bg: #0b0d10;
-    --panel: #13171c;
-    --panel-2: #1a2028;
-    --line: #232b35;
-    --text: #e5e9ee;
-    --muted: #8a94a3;
-    --accent: #f7a700;
+    --bg: #fafbfc;
+    --panel: #ffffff;
+    --panel-2: #f3f5f8;
+    --line: #e2e6ec;
+    --text: #0f172a;
+    --muted: #64748b;
+    --muted-2: #94a3b8;
+    --accent: #c47f00;
+    --accent-bg: #fff5dc;
   }
   * { box-sizing: border-box; }
   html, body {
@@ -21,11 +23,12 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 14px;
+    font-size: 15.5px;
+    line-height: 1.45;
     min-height: 100vh;
   }
   header {
-    padding: 28px 32px 20px;
+    padding: 32px 36px 24px;
     border-bottom: 1px solid var(--line);
     background: var(--panel);
   }
@@ -33,92 +36,93 @@
     font-weight: 700;
     letter-spacing: 3px;
     color: var(--accent);
-    font-size: 20px;
+    font-size: 22px;
     display: block;
   }
   .sub {
     color: var(--muted);
-    margin-top: 6px;
-    font-size: 13px;
+    margin-top: 8px;
+    font-size: 14px;
     letter-spacing: 0.5px;
   }
   main {
-    max-width: 1100px;
+    max-width: 1180px;
     margin: 0 auto;
-    padding: 48px 32px;
+    padding: 52px 36px;
   }
   .section-label {
-    color: var(--muted);
-    font-size: 11px;
+    color: var(--muted-2);
+    font-size: 11.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    margin: 0 0 18px;
-    font-weight: 500;
+    margin: 0 0 20px;
+    font-weight: 600;
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
   }
   .card {
     display: block;
     background: var(--panel);
     border: 1px solid var(--line);
     border-radius: 8px;
-    padding: 22px 22px 20px;
+    padding: 24px 24px 22px;
     text-decoration: none;
     color: inherit;
-    transition: border-color .15s, transform .15s, background-color .15s;
+    transition: border-color .15s, transform .15s, box-shadow .15s;
   }
   .card:hover {
     border-color: var(--accent);
-    background: var(--panel-2);
+    box-shadow: 0 4px 14px rgba(196,127,0,.08);
     transform: translateY(-1px);
   }
   .card .tag {
     display: inline-block;
     color: var(--accent);
-    font-size: 10px;
+    font-size: 10.5px;
     letter-spacing: 2px;
     text-transform: uppercase;
     margin-bottom: 10px;
-    font-weight: 600;
+    font-weight: 700;
   }
   .card h3 {
     margin: 0 0 8px;
-    font-size: 16px;
+    font-size: 17px;
     color: var(--text);
     font-weight: 600;
   }
   .card p {
     margin: 0;
     color: var(--muted);
-    font-size: 13px;
-    line-height: 1.5;
+    font-size: 14px;
+    line-height: 1.55;
   }
   .card .arrow {
     display: block;
-    margin-top: 14px;
+    margin-top: 16px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 12.5px;
     letter-spacing: 1px;
   }
   .card:hover .arrow { color: var(--accent); }
   .card.placeholder {
     border-style: dashed;
-    opacity: 0.5;
+    opacity: 0.55;
     cursor: default;
   }
   .card.placeholder:hover {
     border-color: var(--line);
     background: var(--panel);
     transform: none;
+    box-shadow: none;
   }
   .card.placeholder .arrow { display: none; }
   footer {
-    padding: 20px 32px;
+    padding: 22px 36px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     border-top: 1px solid var(--line);
     text-align: center;
   }
@@ -132,8 +136,8 @@
 </header>
 
 <main>
-  <p class="section-label">Projects</p>
-  <div class="grid">
+  <p class="section-label">Macro</p>
+  <div class="grid" style="margin-bottom:32px;">
 
     <a class="card" href="/core/econ/">
       <span class="tag">Live</span>
@@ -149,10 +153,22 @@
       <span class="arrow">Open &rarr;</span>
     </a>
 
+  </div>
+
+  <p class="section-label">Equities</p>
+  <div class="grid">
+
+    <a class="card" href="/core/plug/">
+      <span class="tag">Live</span>
+      <h3>Plug Power (PLUG)</h3>
+      <p>Quarterly cash flow and operating drivers back to 2015, built from SEC EDGAR XBRL filings. Interactive CFO / CFI / CFF breakdown with cash-position overlay and click-to-expand accounting drivers.</p>
+      <span class="arrow">Open &rarr;</span>
+    </a>
+
     <div class="card placeholder">
       <span class="tag">Planned</span>
-      <h3>Next project</h3>
-      <p>Space reserved for future dashboards and tools.</p>
+      <h3>Next ticker</h3>
+      <p>Space reserved for additional single-name views.</p>
     </div>
 
   </div>
