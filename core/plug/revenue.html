@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plug Power — Revenue &amp; Segment Analysis — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./revenue.css" />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Siberforge home">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Plug Power · Revenue &amp; Segment Analysis</span>
+    <a href="./index.html" class="nav-link" title="Plug Power views">Plug views</a>
+    <span class="live-pill"><span class="pulse-dot"></span>EDGAR XBRL</span>
+  </div>
+</div>
+
+<main>
+  <span class="eyebrow">Revenue deep-dive</span>
+  <h1 class="page-title">Plug Power (PLUG) — Revenue by Product Line (FY2015&ndash;FY2025)</h1>
+  <p class="page-sub">
+    Revenue and cost of revenue broken out by product line, annual. Sourced from the FY2015, FY2016, FY2018, FY2020, FY2022, and FY2025 10-K filings on SEC EDGAR. Uses <span class="term" data-def="Plug's major 2021 restatement reclassified items including common-stock warrant charges (Amazon, Walmart) as a contra-revenue offset. The FY2020 restated 10-K (filed May 14, 2021) restated 2018-2020. Pre-restatement figures are used for 2015-2017, restated figures for 2018 onward.">restated figures</span> for 2018 onward, pre-restatement for 2015&ndash;2017.
+  </p>
+
+  <!-- Panel 1: Revenue Stack Chart -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Net Revenue by Product Line</h2>
+      <span class="panel-sub">Stacked annual bars &mdash; click a year to see the GM mix below</span>
+    </div>
+
+    <div id="chart-rev" class="chart-lg"></div>
+
+    <div class="legend-row">
+      <span class="lg-dot" style="background: #7ba4cf"></span><span class="lg-lbl">Equipment &amp; infrastructure</span>
+      <span class="lg-dot" style="background: #8cbfc7"></span><span class="lg-lbl">Services (fuel-cell maintenance)</span>
+      <span class="lg-dot" style="background: #e2b87f"></span><span class="lg-lbl">Power purchase agreements</span>
+      <span class="lg-dot" style="background: #b39ddb"></span><span class="lg-lbl">Fuel delivered</span>
+      <span class="lg-dot" style="background: #b0b7c0"></span><span class="lg-lbl">Other</span>
+    </div>
+  </section>
+
+  <!-- Panel 2: Gross Margin -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Gross Margin by Product Line</h2>
+      <span class="panel-sub">Gross profit % computed as (Revenue &minus; COGS) &divide; Revenue; negative values are loss-making</span>
+    </div>
+
+    <div id="chart-gm" class="chart-lg"></div>
+
+    <div class="note">
+      <strong>Where losses concentrate.</strong> Fuel delivery and PPA have been the deepest and most persistent negative-margin lines since at least 2017. Equipment sales turned positive only briefly (2018, 2019, pre-warrant 2022). Services swung from heavily negative (loss-contract provisions 2015 and 2019&ndash;2023) to positive in 2025 following the $24.6M loss-contract benefit reversal.
+    </div>
+    <div class="note">
+      <strong>The service loss-contract line.</strong> Plug books a <span class="term" data-def="When Plug signs multi-year service contracts with customers (typically bundled with fuel-cell systems), it estimates expected lifetime service costs. If those costs are expected to exceed contract revenue, it books a provision for the shortfall &mdash; a non-cash accounting charge that flows through COGS. Reversals occur when later experience indicates the reserve was too high.">provision for loss contracts related to service</span> separately within services COGS. The chart combines this line into the services bar so the margin matches the as-reported financial-statement logic.
+    </div>
+    <div class="note">
+      <strong>FY2020 gaps.</strong> Equipment, Services, Fuel, and Total gross-margin series are intentionally blank in FY2020 because the warrant contra-revenue charge turned line-level revenue negative. Computing a percentage against a negative denominator produces a figure that describes the warrant accounting, not operating margin economics. PPA, which was not warrant-exposed, remains plotted.
+    </div>
+  </section>
+
+  <!-- Panel 3: Revenue Mix -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Revenue Mix Evolution</h2>
+      <span class="panel-sub">Product-line share of net revenue &mdash; shows the shift from equipment-heavy to services/fuel</span>
+    </div>
+
+    <div id="chart-mix" class="chart-lg"></div>
+
+    <div class="note">
+      <strong>The mix tells a story.</strong> In 2015&ndash;2017, equipment sales were 60&ndash;80% of revenue. The 2020 contra-revenue hit distorted the picture. 2021&ndash;2023 saw equipment push back up to 78&ndash;80% as the electrolyzer push took off. By 2024&ndash;2025, equipment share fell to 52&ndash;62% while services, PPA, and fuel rose proportionally &mdash; reflecting the growing installed fleet (service/PPA revenue is annuity-like) and the commissioning of the three new liquid-H2 plants (fuel revenue). Plug's business is gradually migrating from transactional equipment sales toward recurring cash flows.
+    </div>
+  </section>
+
+  <!-- Panel 4: Data Table -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Annual Revenue &amp; COGS Detail</h2>
+      <span class="panel-sub">As reported &mdash; all figures in $ millions</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="data" id="rev-table">
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Equipment rev</th>
+            <th>Services rev</th>
+            <th>PPA rev</th>
+            <th>Fuel rev</th>
+            <th>Other rev</th>
+            <th>Total rev</th>
+            <th>Total COGS</th>
+            <th>Gross P/(L)</th>
+            <th>GM%</th>
+          </tr>
+        </thead>
+        <tbody id="rev-tbody"></tbody>
+      </table>
+      <p style="margin-top:10px; font-size: 11.5px; color: var(--muted);">
+        Services COGS includes the separately disclosed "provision/(benefit) for loss contracts related to service" line. FY2015&ndash;2017 from original 10-K filings; FY2018&ndash;2020 from restated FY2020 10-K (filed May 14, 2021); FY2021&ndash;2022 from FY2022 10-K; FY2023&ndash;2025 from FY2025 10-K. Small reclassification differences exist for 2016 services/other between the FY2016 and FY2018 filings (~$3M); this view uses the later filing's reclassified figures.
+      </p>
+    </div>
+  </section>
+
+  <!-- Panel 5: Commentary -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>What the Revenue Picture Reveals</h2>
+      <span class="panel-sub">Read-through to the rest of the business</span>
+    </div>
+
+    <div class="note">
+      <strong>Equipment is the cyclical engine.</strong> Each year's revenue print is driven more by equipment-sale timing than by the services/PPA/fuel recurring book. FY2023 stood out because of a concentration of cryogenic-trailer and electrolyzer deliveries (new-customer builds). FY2024&ndash;2025 equipment revenue fell 45% from peak. The 10-K's customer-concentration footnote indicates a single-digit group of customers drove the lump.
+    </div>
+
+    <div class="note">
+      <strong>Fuel and PPA are value-destructive as disclosed.</strong> Cumulatively 2015&ndash;2025, fuel and PPA have posted ~$1.0B of gross losses combined. These lines are fixed-price (or fixed-margin) long-duration commitments made when Plug expected lower hydrogen costs via the DOE-funded green-H2 plants. The <span class="term" data-def="48 U.S.C. § 13101 et seq. The Inflation Reduction Act Section 45V provides a per-kg production tax credit for clean hydrogen. The credit ranges from $0.60 to $3.00 per kg depending on lifecycle emissions. Implementation guidance finalized late 2024; IRS proposed new rules under OBBBA in 2025 that tightened 'three pillar' rules (new generation, deliverability, time-matching).">§45V PTC</span> and bringing own-H2 production onstream is the primary path to get these lines to break-even.
+    </div>
+
+    <div class="note">
+      <strong>Services has structurally improved.</strong> The FY2025 service-line gross profit (with the $24.6M loss-contract benefit) is the first positive services GM since 2014. Whether this sticks depends on (a) the accuracy of the new loss-contract reserve baseline, and (b) fleet composition &mdash; newer GenDrive systems have lower service cost than the 2015&ndash;2019-vintage fleet. The 10-K disclosed that Plug shortened contract terms and raised prices on new services contracts in 2024, which should flow through as older contracts roll off.
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; Siberforge &middot; Data via SEC EDGAR XBRL &middot; FY2015&ndash;FY2025 10-K filings &middot; Plotly.js under MIT license</footer>
+
+<script src="./revenue.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>

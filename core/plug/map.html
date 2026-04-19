@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plug Power — US Production Footprint — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./balance.css" />
+<link rel="stylesheet" href="./map.css" />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Siberforge home">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Plug Power · US Production Footprint</span>
+    <a href="./index.html" class="nav-link" title="Plug Power views">Plug views</a>
+    <span class="live-pill"><span class="pulse-dot"></span>10-K Item 2</span>
+  </div>
+</div>
+
+<main>
+  <span class="eyebrow">Operations map</span>
+  <h1 class="page-title">Plug Power (PLUG) — US Production &amp; Manufacturing Footprint</h1>
+  <p class="page-sub">
+    Facilities disclosed in Item 2 (Properties) of the FY2025 10-K, filed March 2, 2026. Includes three operational liquid-hydrogen plants, the Rochester electrolyzer gigafactory, the Slingerlands corporate/manufacturing campus, and seven additional mfg, R&amp;D, and service sites. The Western-NY (Alabama, Genesee County) plant is excluded from the current Properties list and appears here as a divesting site under the Feb 24, 2026 Stream Data Centers sale agreement.
+  </p>
+
+  <!-- Panel 1: KPIs -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Footprint Summary</h2>
+      <span class="panel-sub">Site counts by function and status — Dec 31, 2025</span>
+    </div>
+
+    <div class="kpi-row kpi-row-4">
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--cat-cfo)">Operational H2 capacity</div>
+        <div class="kpi-val">40 TPD</div>
+        <div class="kpi-sub">Kingsland 15 · Charleston 10 · St. Gabriel 15 (JV)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--red)">Divesting capacity</div>
+        <div class="kpi-val">45 TPD</div>
+        <div class="kpi-sub">Alabama (Genesee), NY — $290M orig. capex, $132.5–142M sale to Stream DC</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--cat-cff)">Disclosed mfg capex</div>
+        <div class="kpi-val">$250M+</div>
+        <div class="kpi-sub">Rochester gigafactory $125M + Slingerlands $125M (ex other sites)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--accent)">Suspended (DOE)</div>
+        <div class="kpi-val">NY + TX</div>
+        <div class="kpi-sub">Green-H2 plants previously contemplated under $1.66B DOE loan; activities suspended Nov 7, 2025</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Reading the footprint.</strong> The operational H2 production network runs at 40 TPD across the Southeast/Gulf Coast (TN, GA, LA) — all came onstream 2024–2025. The Alabama NY plant (45 TPD) would have added more than the combined operational capacity, but is held-for-sale to Stream Data Centers. The manufacturing/engineering footprint remains heavily concentrated in upstate New York (Rochester, Slingerlands).
+    </div>
+
+    <div class="note">
+      <strong>Sourcing.</strong> The FY2025 10-K (Item 2 Properties) discloses location, square footage, and ownership but <em>not</em> per-plant TPD or capex. TPD and capex figures are from Plug press releases, state-government announcements (NY ESD, Gov. Hochul / Gov. Cuomo offices), and local trade press. Cells marked "Not disclosed" had no publicly reported standalone figure. Pin size on the map is proportional to <span class="term" data-def="Square footage is the only capacity proxy Plug reports consistently across all sites. It correlates loosely with production/manufacturing scale but does not adjust for equipment density.">square footage</span>, not TPD, so pin size and TPD are independent signals.
+    </div>
+  </section>
+
+  <!-- Panel 2: Map -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Facility Map</h2>
+      <span class="panel-sub">Scattergeo — Albers USA projection, pin size proportional to sq ft</span>
+    </div>
+
+    <div id="chart-map" class="chart-lg"></div>
+
+    <div class="legend-row">
+      <span class="lg-dot" style="background: #0891b2"></span><span class="lg-lbl">H2 production</span>
+      <span class="lg-dot" style="background: #1d4ed8"></span><span class="lg-lbl">Electrolyzer / fuel-cell mfg</span>
+      <span class="lg-dot" style="background: #d97706"></span><span class="lg-lbl">R&amp;D / corporate</span>
+      <span class="lg-dot" style="background: #64748b"></span><span class="lg-lbl">Service center</span>
+      <span class="lg-dot lg-ring" style="background: #dc2626"></span><span class="lg-lbl">Divesting / held-for-sale</span>
+    </div>
+  </section>
+
+  <!-- Panel 3: Detail Table -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Site Detail</h2>
+      <span class="panel-sub">Size, function, ownership, and notes</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="data" id="site-table">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>State</th>
+            <th>Function</th>
+            <th>Size (sq ft)</th>
+            <th>TPD</th>
+            <th>Capex</th>
+            <th>Ownership</th>
+            <th>Status</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="site-tbody"></tbody>
+      </table>
+      <p style="margin-top:10px; font-size: 11.5px; color: var(--muted);">
+        Hover the <em>Capex</em> cell to see the sourcing note. TPD capacity not disclosed in the FY25 10-K; sourced from Plug press releases (Jan/Feb 2024 for Woodbine GA, Charleston TN; Apr 2025 for St. Gabriel LA) and NY State announcements (WNY 2021). Mfg capex from NY Governor press releases at groundbreaking/completion.
+      </p>
+    </div>
+  </section>
+
+  <!-- Panel 4: Forward Pipeline -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Forward Pipeline &amp; DOE Loan Status</h2>
+      <span class="panel-sub">Plants beyond the current footprint — what&apos;s alive, what&apos;s paused, what&apos;s gone</span>
+    </div>
+
+    <div class="pipe-grid">
+      <div class="pipe-col pipe-active">
+        <div class="pipe-hdr">Active / evaluating</div>
+        <div class="pipe-item">
+          <div class="pipe-name">AccionaPlug — Spain &amp; Portugal</div>
+          <div class="pipe-meta">50/50 JV with Acciona Energía S.A. · outside US footprint</div>
+          <div class="pipe-body">
+            FY25 10-K: JV received <em>initial project financing commitments</em> during 2025. Plug recorded a $55.1M equity-method loss and an other-than-temporary impairment on its JV investment. Projects target Iberian-peninsula green-H2 production using Plug electrolyzers. No announced US component.
+          </div>
+        </div>
+        <div class="pipe-item">
+          <div class="pipe-name">Hidrogenii — expansion beyond St. Gabriel</div>
+          <div class="pipe-meta">50/50 JV with Niloco (Olin) · US Gulf</div>
+          <div class="pipe-body">
+            St. Gabriel LA (15 TPD) is Phase 1. 2022 JV formation language framed St. Gabriel as the "foundation for broader collaboration" across Olin's chlor-alkali footprint. No Phase 2 site publicly named as of the FY25 filing.
+          </div>
+        </div>
+      </div>
+
+      <div class="pipe-col pipe-pause">
+        <div class="pipe-hdr">Suspended — DOE-funded</div>
+        <div class="pipe-item">
+          <div class="pipe-name">New York green-H2 plant</div>
+          <div class="pipe-meta">Contemplated under $1.66B DOE loan · never broke ground</div>
+          <div class="pipe-body">
+            Suspended <strong>Nov 7, 2025</strong>. Site selection and permitting work halted pending DOE reframe discussions. $13.2M of capitalized closing fees charged off in FY25.
+          </div>
+        </div>
+        <div class="pipe-item">
+          <div class="pipe-name">Texas green-H2 plant</div>
+          <div class="pipe-meta">Contemplated under $1.66B DOE loan · flagged for possible pivot</div>
+          <div class="pipe-body">
+            Same Nov 7, 2025 suspension. 10-K risk factor is blunter on TX than NY: Plug discloses it <em>"may defer, modify or pivot away from&hellip; facilities previously contemplated&hellip; such as the Texas hydrogen plant."</em> Weakest odds of revival among the DOE-contemplated sites.
+          </div>
+        </div>
+      </div>
+
+      <div class="pipe-col pipe-dead">
+        <div class="pipe-hdr">Wound down</div>
+        <div class="pipe-item">
+          <div class="pipe-name">SK Plug Hyverse — South Korea</div>
+          <div class="pipe-meta">Former 49/51 JV with SK E&amp;S · dissolved</div>
+          <div class="pipe-body">
+            Referenced in FY25 10-K as a <em>former</em> JV. Originally contemplated a Korean gigafactory and regional H2 distribution. Wound down during 2024 as SK E&amp;S pivoted strategy. No residual Plug exposure.
+          </div>
+        </div>
+        <div class="pipe-item">
+          <div class="pipe-name">Clean H2 Infra Fund — deployments</div>
+          <div class="pipe-meta">Minority LP interest · no Plug-owned plants</div>
+          <div class="pipe-body">
+            Third-party fund where Plug electrolyzers may be specified by portfolio projects. Equipment-sale opportunity set, not a Plug production facility. Not part of Plug's owned/JV plant roster.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>DOE loan — four-question breakdown.</strong>
+    </div>
+
+    <div class="doe-grid">
+      <div class="doe-cell">
+        <div class="doe-q">1. What&apos;s the hold-up?</div>
+        <div class="doe-a">
+          The new administration&apos;s energy-priorities review. Plug&apos;s 10-K cites the suspension was taken <em>&ldquo;in light of the current administration&apos;s priorities regarding the review and prioritization of federal energy financing programs and the advancement of American energy dominance through revised Department of Energy policy directives.&rdquo;</em> DOE-guaranteed loans to electrolytic green-H2 projects are not aligned with the current policy frame, which favors domestic fossil/nuclear-adjacent energy.
+        </div>
+      </div>
+
+      <div class="doe-cell">
+        <div class="doe-q">2. What is pending?</div>
+        <div class="doe-a">
+          Bilateral reframe discussions between Plug and DOE on modified project scope. Plug has not withdrawn from the loan; the guarantee commitment remains legally in place, but draws are suspended. The $1.66B facility is a multi-draw term loan from the Federal Financing Bank (DOE guarantee); borrower entity is <em>Plug Power Energy Loan Borrower LLC</em>. Originally contemplated six plants, of which NY and TX were the un-built ones.
+        </div>
+      </div>
+
+      <div class="doe-cell">
+        <div class="doe-q">3. What is needed to resume?</div>
+        <div class="doe-a">
+          (a) DOE consent to a modified development plan acceptable to both parties; (b) written confirmation the loan guarantee remains available on economically viable terms (10-K: <em>"no assurance that the loan guarantee will remain available under the same terms"</em>); (c) Plug satisfying outstanding conditions precedent and project milestones; (d) likely a favorable re-read of the OBBBA foreign-component criteria so the plants still qualify for Section 48 credits on the liquefaction/storage side.
+        </div>
+      </div>
+
+      <div class="doe-cell">
+        <div class="doe-q">4. What would permanently cancel?</div>
+        <div class="doe-a">
+          Three pathways. (i) <strong>DOE termination</strong> — 10-K: <em>"the agency could terminate its loan guarantee commitment"</em> if Plug misses conditions or milestones. (ii) <strong>Plug pivots away</strong> — the Texas plant is already flagged under the "may defer, modify or pivot away" language; NY is implicitly on the same rail. (iii) <strong>No mutual reframe</strong> — if DOE discussions fail to land a revised scope both sides will fund/accept, the facility is unusable and would be allowed to lapse. A permanent cancellation would likely crystallize as an additional charge beyond the $13.2M fees already written off, though Plug has not quantified a ceiling.
+        </div>
+      </div>
+    </div>
+
+    <div class="note" style="margin-top:10px">
+      <strong>Takeaway.</strong> The NY+TX plants are not in the current footprint and are unlikely to enter it within FY26. Any credible restart date depends on federal-policy posture rather than Plug execution. For a reader modeling capacity additions near-term, treat NY+TX as <em>optionality worth zero until DOE signals</em>, the active growth vector as AccionaPlug (Iberian, outside US), and any Hidrogenii Phase-2 as upside not yet disclosed.
+    </div>
+  </section>
+
+  <!-- Panel 5: Commentary -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Geographic Concentration &amp; Build-out Risk</h2>
+      <span class="panel-sub">What the footprint reveals about strategy</span>
+    </div>
+
+    <div class="note">
+      <strong>Southeast/Gulf Coast H2 corridor.</strong> All three operational liquid-H2 plants sit in a 700-mile arc from Charleston, TN through Kingsland, GA to St. Gabriel, LA. This concentrates delivery logistics (trailers + cryogenic storage) and shortens the haul to Plug's primary material-handling customer base in the Southeast. Kingsland, at 882,556 sq ft, is nearly 4× the footprint of Charleston — a rough indicator of production and/or site-expansion capacity not captured by per-plant TPD disclosure.
+    </div>
+
+    <div class="note">
+      <strong>Upstate NY mfg concentration.</strong> Rochester (electrolyzer gigafactory + MEA) and Slingerlands (350,000 sq ft — the largest US mfg footprint) together form the company's engineering center of gravity. The absence of a Latham, NY entry in the FY25 Properties list indicates the historical HQ was consolidated into Slingerlands during 2024–2025.
+    </div>
+
+    <div class="note">
+      <strong>Divestiture and DOE-suspension effects.</strong> Two structural shifts reshape the footprint:
+      (1) the Feb 24, 2026 Alabama, NY land-sale definitive agreement monetizes the legacy WNY production asset for $132.5M–$142M;
+      (2) the Nov 7, 2025 DOE-loan suspension shelves the previously-contemplated <em>green</em> H2 plants in New York and Texas. Combined, these actions compress the near-term network to the Southeast/Gulf footprint and push any expansion decision into the DOE-reframe window.
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; Siberforge · Data via SEC EDGAR XBRL and Plug Power FY2025 10-K (Item 2 Properties) · Plotly.js under MIT license</footer>
+
+<script src="./map.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plug Power — Balance-sheet Health — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./balance.css" />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Siberforge home">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Plug Power · Balance-sheet Health</span>
+    <a href="./index.html" class="nav-link" title="Plug Power views">Plug views</a>
+    <span class="live-pill"><span class="pulse-dot"></span>EDGAR XBRL</span>
+  </div>
+</div>
+
+<main>
+  <span class="eyebrow">Balance sheet</span>
+  <h1 class="page-title">Plug Power (PLUG) — Balance-sheet Health</h1>
+  <p class="page-sub">
+    Snapshot as of December 31, 2025 from the FY2025 10-K (filed March 2, 2026).
+    Historical series built from 10-K filings via SEC EDGAR <span class="term" data-def="eXtensible Business Reporting Language. The structured-data format filers use for SEC filings. Each line item is tagged with a standardized US-GAAP concept name, making the data machine-readable.">XBRL</span>.
+    All figures in US$ unless noted. Panels in order: liquidity snapshot, dilution tracker, post-balance-sheet events, debt-maturity ladder, working-capital turns.
+  </p>
+
+  <!-- Liquidity Snapshot -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Liquidity Snapshot — December 31, 2025</h2>
+      <span class="panel-sub">Cash, restricted cash, and working capital</span>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-lbl"><span class="term" data-def="Cash and cash equivalents only, excluding restricted cash. Cash equivalents are highly-liquid investments with original maturities of three months or less. Represents liquidity immediately available for general corporate use.">Unrestricted cash</span></div>
+        <div class="kpi-val">$368.5M</div>
+        <div class="kpi-delta pos">+$162.8M vs FY24</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl"><span class="term" data-def="Cash that the company does not control for general use — typically pledged as collateral for operating obligations, held in escrow for specific projects, or backing letters of credit. Reported on the balance sheet but cannot fund operations.">Restricted cash</span></div>
+        <div class="kpi-val">$625.4M</div>
+        <div class="kpi-delta neg">−$209.6M vs FY24</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Total cash position</div>
+        <div class="kpi-val">$994.0M</div>
+        <div class="kpi-delta neg">−$46.7M vs FY24</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl"><span class="term" data-def="Current assets minus current liabilities. Measures short-term financial cushion — the buffer available to fund operations, inventory build, and debt service within the next 12 months.">Working capital</span></div>
+        <div class="kpi-val">$799.7M</div>
+        <div class="kpi-delta pos">+$70.7M vs FY24</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl"><span class="term" data-def="Current assets divided by current liabilities. Values above 1.0 indicate the company can cover near-term obligations from its current asset base; values above 2.0 are considered healthy for manufacturers.">Current ratio</span></div>
+        <div class="kpi-val">2.31x</div>
+        <div class="kpi-delta pos">vs 1.97x FY24</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl"><span class="term" data-def="Total liabilities divided by stockholders' equity. Measures financial leverage. Rising D/E with declining equity flags that losses are eroding the capital base faster than new debt is being serviced.">Debt-to-equity</span></div>
+        <div class="kpi-val">1.63x</div>
+        <div class="kpi-delta neg">vs 1.04x FY24</div>
+      </div>
+    </div>
+
+    <div class="split">
+      <div class="half">
+        <div class="chart-title">Cash composition (restricted-cash detail)</div>
+        <div id="chart-cash" class="chart-sm"></div>
+      </div>
+      <div class="half">
+        <div class="chart-title">Total cash position — FY2021 to FY2025</div>
+        <div id="chart-cash-history" class="chart-sm"></div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Restricted-cash detail.</strong> Of the $625.4M restricted balance, $352.3M collateralizes
+      <span class="term" data-def="A financing transaction in which the company sells an asset (typically a fuel cell system or hydrogen equipment) to a financial institution and simultaneously leases it back to use with a customer. Cash from the sale is restricted until the lease term runs off — it is not available to fund general operations.">sale/leaseback</span>
+      agreements, $193.1M backs letters of credit and bank guarantees (of which $159.6M relates to the same leasing program and $33.5M to customs), and $80.0M is held in escrow for hydrogen-plant construction.
+    </div>
+  </section>
+
+  <!-- Dilution Tracker -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Dilution Tracker</h2>
+      <span class="panel-sub">Share count history, authorized headroom, and equity-raise capacity</span>
+    </div>
+
+    <div class="split">
+      <div class="half">
+        <div class="chart-title">Shares issued — year-end history</div>
+        <div id="chart-shares" class="chart-sm"></div>
+      </div>
+      <div class="half">
+        <div class="chart-title">Authorized headroom &amp; equity program capacity</div>
+        <div id="chart-headroom" class="chart-sm"></div>
+      </div>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-lbl">Shares outstanding (Feb 17, 2026)</div>
+        <div class="kpi-val">1,394.0M</div>
+        <div class="kpi-sub">+459.8M since FY23</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Authorized shares</div>
+        <div class="kpi-val">3,000.0M</div>
+        <div class="kpi-sub">Increased from 1,500M on Feb 12, 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">
+          <span class="term" data-def="An at-the-market equity offering program. The company registers a block of shares with the SEC and a broker-dealer sells them into the open market on demand, at prevailing prices. Proceeds are variable and subject to market conditions. Plug's ATM is with B. Riley Securities and Yorkville Securities, capped at $1.0B aggregate.">ATM</span> remaining capacity
+        </div>
+        <div class="kpi-val">$944.1M</div>
+        <div class="kpi-sub">of $1.0B program; 2025 used $55.9M</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">
+          <span class="term" data-def="Standby Equity Purchase Agreement with Yorkville. Gives Plug the right (but not obligation) to force Yorkville to purchase up to $1.0B of common stock at its discretion, capped at $10M per trading day. Expires February 10, 2027.">SEPA</span> (Yorkville) capacity
+        </div>
+        <div class="kpi-val">$1,000.0M</div>
+        <div class="kpi-sub">Unused as of Dec 31, 2025</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">
+          <span class="term" data-def="Warrants to purchase common stock at $7.75 per share, issued October 8, 2025 as part of the warrant-exercise inducement. Exercisable February 28, 2026 through March 20, 2028. Liability-classified due to the Change-of-Control Cash Election.">$7.75 Warrants</span> outstanding
+        </div>
+        <div class="kpi-val">185.4M shares</div>
+        <div class="kpi-sub">Strike $7.75, expires Mar 20, 2028</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">FY2025 share issuances</div>
+        <div class="kpi-val">+460.1M</div>
+        <div class="kpi-sub">49% of beginning-of-year count</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Structural overhang.</strong> FY2025 share count grew 49% (934M to 1,394M) via three channels: the March 2025 registered offering (pre-funded warrants exercised Q2), the October 2025 warrant inducement (New Pre-Funded Warrants exercised Q4 for $354.7M net), and the ATM program ($55.9M at $1.62 average). The Feb 2026 doubling of authorized shares from 1.5B to 3.0B explicitly creates runway for further equity issuance. Combined un-drawn capacity (ATM $944M + SEPA $1.0B + 185M $7.75 warrants) represents substantial additional dilution potential.
+    </div>
+  </section>
+
+  <!-- Subsequent events / liquidity optionality -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Post-Balance-Sheet Liquidity Events</h2>
+      <span class="panel-sub">Subsequent events from FY2025 10-K Note 29 and active programs</span>
+    </div>
+
+    <div class="event-list">
+      <div class="event-row">
+        <div class="event-date">Feb 12, 2026</div>
+        <div class="event-body">
+          <strong>Authorized shares doubled.</strong> Stockholders approved an amendment raising authorized common stock from 1,500,000,000 to 3,000,000,000 shares. Effective immediately upon filing with Delaware.
+        </div>
+      </div>
+      <div class="event-row">
+        <div class="event-date">Feb 24, 2026</div>
+        <div class="event-body">
+          <strong>WNY land sale — Stream US Data Centers.</strong> Plug agreed to sell real property and assets in Alabama, NY (Genesee County) for $132.5M–$142.0M (range depends on closing timing and whether hydrogen storage spheres are removed). Expected to close on or before June 30, 2026.
+        </div>
+      </div>
+      <div class="event-row">
+        <div class="event-date">Nov 2025</div>
+        <div class="event-body">
+          <strong>DOE Loan — suspended.</strong> Plug suspended activities under the January 2025 $1.66B DOE loan guarantee. $13.2M charge taken on capitalized closing fees. Active discussions with DOE continuing to "reframe" activities; outcome uncertain.
+        </div>
+      </div>
+      <div class="event-row">
+        <div class="event-date">Ongoing</div>
+        <div class="event-body">
+          <strong>Equity programs.</strong> ATM ($944.1M remaining through Aug 15, 2027) and SEPA ($1.0B unused through Feb 10, 2027) provide contingent equity capacity but at the cost of further dilution.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Debt Maturity Ladder -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Debt & Obligation Maturity Ladder</h2>
+      <span class="panel-sub">Principal and lease payments by year — December 31, 2025</span>
+    </div>
+
+    <div id="chart-debt" class="chart-md"></div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-lbl">6.75% Conv. Sr. Notes due 2033</div>
+        <div class="kpi-val">$431.3M</div>
+        <div class="kpi-sub">Issued Nov 21, 2025</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">7.00% Conv. Sr. Notes due 2026</div>
+        <div class="kpi-val">$2.6M</div>
+        <div class="kpi-sub">Residual after Nov 2025 repurchase</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Finance obligations (sale/leaseback)</div>
+        <div class="kpi-val">$268.0M</div>
+        <div class="kpi-sub">$76.2M within 12 months</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Operating lease liability</div>
+        <div class="kpi-val">$405.1M</div>
+        <div class="kpi-sub">Undiscounted; PV $265.1M</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl"><span class="term" data-def="A derivative liability recorded at fair value for the $7.75 Warrants issued October 2025. Liability-classified because the warrants contain a Change-of-Control Cash Election — if Plug is acquired, the holder can demand cash settlement at Black-Scholes value.">$7.75 Warrant liability</span></div>
+        <div class="kpi-val">$52.3M</div>
+        <div class="kpi-sub">Exercisable Feb 28, 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Long-term debt</div>
+        <div class="kpi-val">$1.9M</div>
+        <div class="kpi-sub">$0.6M within 12 months</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Capital structure simplification.</strong> In November 2025, Plug issued $431.3M of 6.75% Convertible Senior Notes due 2033 and used the proceeds to (1) repay in full the 15.00% Yorkville Secured Debenture, eliminating a first lien, and (2) repurchase $137.8M of the 7.00% 2026 notes, leaving a $2.6M residual. The 3.75% 2025 notes matured June 1, 2025 and are fully settled. Convertible-note maturity has been extended from 2026 to 2033, but sale/leaseback finance obligations ($76M current) and operating-lease payments ($94M next 12 months) remain material near-term cash calls.
+      <br><br>
+      <em>Methodology note.</em> Operating- and finance-lease bars are undiscounted payment schedules (from 10-K Note 10). Convertible-note bars show principal at stated maturity. The $268M finance-obligation balance is shown as $76.2M current (2026) and the remaining $191.8M spread evenly across 2027–2029 because the 10-K does not disclose year-by-year beyond the 12-month split.
+    </div>
+  </section>
+
+  <!-- Working Capital Turns -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Working-Capital Turns</h2>
+      <span class="panel-sub">Days-based efficiency metrics, FY2022–FY2025</span>
+    </div>
+
+    <div id="chart-wcturns" class="chart-md"></div>
+
+    <div class="tbl-wrap wc-table">
+      <table class="data" id="wc-table">
+        <thead>
+          <tr>
+            <th>Metric</th>
+            <th>FY2022</th>
+            <th>FY2023</th>
+            <th>FY2024</th>
+            <th>FY2025</th>
+            <th>Δ 25 vs 24</th>
+          </tr>
+        </thead>
+        <tbody id="wc-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Interpretation.</strong> The <span class="term" data-def="Cash Conversion Cycle = DSO + DIO − DPO. Measures the number of days of operating cash tied up in the working-capital cycle. Lower is better. A falling CCC means the company is freeing up cash from working capital; a rising CCC means cash is being consumed to build inventory or extend customer terms.">cash conversion cycle</span> tightened from 237 days in FY2024 to 204 days in FY2025, driven by faster AR collections (DSO 91 → 69) and longer payables (DPO 53 → 65). Inventory days (DIO) held roughly flat at ~200, down sharply from the 2023 peak of 251 as Plug ran down inventory to fund operations.
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; Siberforge · Data via SEC EDGAR XBRL and Plug Power FY2025 10-K · Plotly.js under MIT license</footer>
+
+<script src="./balance.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>

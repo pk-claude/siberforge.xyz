@@ -1,0 +1,50 @@
+/* revenue.css — Phase 2 revenue-by-product-line view */
+
+.kpi-row-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.chart-lg { height: 480px; }
+
+.legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 22px;
+  align-items: center;
+  margin-top: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--muted);
+}
+.lg-dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-right: 6px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  vertical-align: middle;
+}
+.lg-lbl {
+  color: var(--text);
+  font-weight: 500;
+}
+
+#rev-table td,
+#rev-table th {
+  font-size: 12.5px;
+  padding: 7px 10px;
+}
+#rev-table td.c-num {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+#rev-table td.c-num.pos { color: var(--green); }
+#rev-table td.c-num.neg { color: var(--red); }
+#rev-table tr.total-row td {
+  font-weight: 700;
+  border-top: 1.5px solid var(--line);
+  background: rgba(241, 245, 249, 0.4);
+}
+#rev-table tbody tr:hover td {
+  background: rgba(241, 245, 249, 0.6);
+}
+

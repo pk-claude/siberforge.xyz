@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Plug Power — Liquidity Options — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./balance.css" />
+<link rel="stylesheet" href="./liquidity.css" />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+</head>
+<body>
+
+<div class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Siberforge home">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Plug Power · Liquidity Options</span>
+    <a href="./index.html" class="nav-link" title="Plug Power views">Plug views</a>
+    <span class="live-pill"><span class="pulse-dot"></span>EDGAR XBRL</span>
+  </div>
+</div>
+
+<main>
+  <span class="eyebrow">Capital stack</span>
+  <h1 class="page-title">Plug Power (PLUG) — Liquidity Options &amp; Dependencies</h1>
+  <p class="page-sub">
+    What levers Plug can pull to raise or preserve cash, and what has to go right for each. Nine sources mapped to seven dependency categories.
+    Capacity figures from the FY2025 10-K (filed March 2, 2026). Scenario model computes equity-raise proceeds at user-selected share prices.
+  </p>
+
+  <!-- Panel 1: Capacity Summary -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Capacity Summary</h2>
+      <span class="panel-sub">Grouped by controllability — who decides whether the lever fires</span>
+    </div>
+
+    <div class="kpi-row kpi-row-4">
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--green)">Committed</div>
+        <div class="kpi-val">$137M</div>
+        <div class="kpi-sub">WNY land sale — closing by Jun 30, 2026</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--cat-cfo)">Plug-controlled</div>
+        <div class="kpi-val">$1,944M</div>
+        <div class="kpi-sub">ATM $944M + SEPA $1,000M (draw at Plug's discretion)</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--accent)">Contingent / holder-controlled</div>
+        <div class="kpi-val">$1,437M</div>
+        <div class="kpi-sub">$7.75 Warrants — 185.4M shares, exercisable Feb 2026–Mar 2028</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl" style="color: var(--red)">Suspended / uncertain</div>
+        <div class="kpi-val">$1,660M</div>
+        <div class="kpi-sub">DOE Loan — activities suspended Nov 2025</div>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Reading the totals.</strong> The four buckets sum to ~$5.2B of gross capacity <em>on paper</em>, but each has sharply different realization odds. Plug-controlled capacity is the only capacity it can self-fund; the rest depend on counterparty decisions, asset-closing mechanics, or federal policy. Equity levers also dilute share count, so their <em>net</em> value to existing shareholders is lower than their gross proceeds imply.
+    </div>
+  </section>
+
+  <!-- Panel 2: Options Detail -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Options Detail</h2>
+      <span class="panel-sub">Each lever — capacity, who controls it, cost, and dependencies</span>
+    </div>
+    <div class="opt-grid" id="opt-grid"></div>
+  </section>
+
+  <!-- Panel 3: Dependency Graph -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Dependency Graph</h2>
+      <span class="panel-sub">Sankey: liquidity source → primary dependency → controllability tier</span>
+    </div>
+
+    <div id="chart-sankey" class="chart-lg"></div>
+
+    <div class="note">
+      <strong>Reading the Sankey.</strong> The left column is the liquidity source, sized by gross capacity. The middle column shows the dependency that gates access. The right column groups dependencies by controllability. Link and node labels are in $M. Note that <strong>share price</strong> and <strong>authorized share headroom</strong> together gate four distinct levers — a single constraint (like a sustained sub-$2 share price or a shareholder vote against further authorization) sinks multiple options simultaneously.
+    </div>
+  </section>
+
+  <!-- Panel 4: Shared Dependencies -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Shared-Dependency Risk</h2>
+      <span class="panel-sub">Which dependencies gate multiple options — the failure modes that compound</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="data" id="dep-table">
+        <thead>
+          <tr>
+            <th>Dependency</th>
+            <th>Gates which levers</th>
+            <th>Aggregate capacity at risk</th>
+            <th>Current status</th>
+          </tr>
+        </thead>
+        <tbody id="dep-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <strong>Concentration risk.</strong> A sustained low share price is the single largest shared risk — it caps ATM/SEPA yield and keeps the $7.75 Warrants out-of-the-money. Conversely, a share-price recovery above $7.75 unlocks $1.4B of warrant proceeds but still requires authorized-share headroom, which was doubled in Feb 2026 specifically to create that runway.
+    </div>
+  </section>
+
+  <!-- Panel 5: Scenario Model -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Scenario Model — Equity Proceeds by Share Price</h2>
+      <span class="panel-sub">Live-computed under a user-selected share price</span>
+    </div>
+
+    <div class="scn-wrap">
+      <div class="scn-ctrl">
+        <label class="scn-label" for="scn-price">Share price</label>
+        <input type="range" id="scn-price" min="0.50" max="15.00" step="0.10" value="1.62" />
+        <div class="scn-readout">
+          <span class="scn-val" id="scn-price-val">$1.62</span>
+          <span class="scn-hint">FY2025 ATM weighted-avg sale price</span>
+        </div>
+        <div class="scn-presets">
+          <button data-p="1.62">$1.62 (FY25 avg)</button>
+          <button data-p="2.00">$2.00 (warrant strike)</button>
+          <button data-p="5.00">$5.00</button>
+          <button data-p="7.75">$7.75 ($7.75 strike)</button>
+          <button data-p="10.00">$10.00</button>
+        </div>
+      </div>
+
+      <div class="scn-output">
+        <div class="scn-totals">
+          <div class="scn-total-box">
+            <div class="scn-total-lbl">Equity proceeds at this price</div>
+            <div class="scn-total-val" id="scn-total-cash">—</div>
+          </div>
+          <div class="scn-total-box">
+            <div class="scn-total-lbl">Incremental shares issued</div>
+            <div class="scn-total-val" id="scn-total-shares">—</div>
+          </div>
+          <div class="scn-total-box">
+            <div class="scn-total-lbl">Dilution vs current count</div>
+            <div class="scn-total-val" id="scn-total-dilut">—</div>
+          </div>
+        </div>
+
+        <table class="data scn-table" id="scn-table">
+          <thead>
+            <tr>
+              <th>Lever</th>
+              <th>Capacity</th>
+              <th>Gate / condition</th>
+              <th>Proceeds at price</th>
+              <th>Shares issued</th>
+            </tr>
+          </thead>
+          <tbody id="scn-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="note">
+      <strong>Assumptions.</strong> ATM and SEPA proceeds are capped at their $944.1M / $1,000M remaining programs and scale inversely to the share price (more dilution when price is low). $7.75 Warrants are assumed exercised only when the price is at or above $7.75 (standard rational-holder assumption; actual holder election cannot be compelled by Plug). Dilution denominator is the Feb 17, 2026 share count of 1,394.0M. The model ignores the 4% SEPA pricing discount.
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; Siberforge · Data via SEC EDGAR XBRL and Plug Power FY2025 10-K · Plotly.js under MIT license</footer>
+
+<script src="./liquidity.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>

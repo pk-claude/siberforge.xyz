@@ -3,61 +3,359 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge</title>
+<title>Siberforge — Analyst-grade research, built from the source</title>
+<meta name="description" content="Interactive financial research reconstructed from SEC EDGAR filings and FRED series. Every line item traceable. No aggregators, no black-box transformations." />
 <style>
+  /* -------- Design tokens -------- */
   :root {
-    --bg: #fafbfc;
-    --panel: #ffffff;
-    --panel-2: #f3f5f8;
-    --line: #e2e6ec;
-    --text: #0f172a;
-    --muted: #64748b;
-    --muted-2: #94a3b8;
-    --accent: #c47f00;
-    --accent-bg: #fff5dc;
+    --bg:         #fafbfc;
+    --bg-2:       #f3f5f8;
+    --panel:      #ffffff;
+    --panel-2:    #f7f8fa;
+    --line:       #e2e6ec;
+    --line-soft:  #eef1f5;
+    --ink:        #0f172a;
+    --ink-2:      #1e293b;
+    --muted:      #64748b;
+    --muted-2:    #94a3b8;
+    --accent:     #c47f00;
+    --accent-2:   #b36f00;
+    --accent-bg:  #fff5dc;
+    --green:      #16a34a;
+    --max:        1200px;
+    --radius:     12px;
+    --shadow-sm:  0 1px 2px rgba(15,23,42,.04);
+    --shadow-md:  0 4px 16px rgba(15,23,42,.06);
+    --shadow-lg:  0 12px 32px rgba(15,23,42,.10);
+    --shadow-accent: 0 12px 28px rgba(196,127,0,.12);
   }
+
   * { box-sizing: border-box; }
-  html, body {
+  html { scroll-behavior: smooth; }
+  body {
     margin: 0;
-    padding: 0;
     background: var(--bg);
-    color: var(--text);
+    color: var(--ink);
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 15.5px;
-    line-height: 1.45;
-    min-height: 100vh;
+    font-size: 16px;
+    line-height: 1.5;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
-  header {
-    padding: 32px 36px 24px;
-    border-bottom: 1px solid var(--line);
-    background: var(--panel);
+
+  a { color: inherit; }
+  ::selection { background: var(--accent-bg); color: var(--accent-2); }
+
+  /* -------- Nav (glass, sticky) -------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    padding: 18px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(250, 251, 252, 0.78);
+    -webkit-backdrop-filter: blur(12px) saturate(1.2);
+    backdrop-filter: blur(12px) saturate(1.2);
+    border-bottom: 1px solid transparent;
+    transition: border-color .25s, background .25s, padding .25s;
   }
-  .mark {
+  .nav.scrolled {
+    border-bottom-color: var(--line);
+    padding-top: 14px;
+    padding-bottom: 14px;
+  }
+  .nav .mark {
     font-weight: 700;
     letter-spacing: 3px;
     color: var(--accent);
-    font-size: 22px;
-    display: block;
+    font-size: 17px;
+    text-decoration: none;
   }
-  .sub {
+  .nav-links {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .nav-links a {
     color: var(--muted);
-    margin-top: 8px;
+    text-decoration: none;
     font-size: 14px;
-    letter-spacing: 0.5px;
+    padding: 8px 14px;
+    border-radius: 6px;
+    transition: color .15s, background .15s;
   }
-  main {
-    max-width: 1180px;
+  .nav-links a:hover { color: var(--ink); background: var(--panel-2); }
+  .nav-cta {
+    background: var(--ink) !important;
+    color: #fff !important;
+    font-weight: 600;
+    padding: 9px 16px !important;
+    transition: background .15s, transform .15s !important;
+  }
+  .nav-cta:hover { background: var(--ink-2) !important; transform: translateY(-1px); }
+
+  /* -------- Hero -------- */
+  .hero-wrap {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-wrap::before,
+  .hero-wrap::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-wrap::before {
+    width: 520px; height: 520px;
+    background: radial-gradient(circle, rgba(196,127,0,0.14), transparent 70%);
+    top: -120px; right: -120px;
+  }
+  .hero-wrap::after {
+    width: 380px; height: 380px;
+    background: radial-gradient(circle, rgba(29,78,216,0.08), transparent 70%);
+    bottom: -160px; left: -100px;
+  }
+  .hero {
+    position: relative;
+    z-index: 1;
+    max-width: var(--max);
     margin: 0 auto;
-    padding: 52px 36px;
+    padding: 72px 40px 108px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    min-height: 78vh;
   }
-  .section-label {
-    color: var(--muted-2);
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     font-size: 11.5px;
-    letter-spacing: 2px;
+    color: var(--muted);
+    letter-spacing: 1.8px;
     text-transform: uppercase;
-    margin: 0 0 20px;
+    margin-bottom: 24px;
+    font-weight: 700;
+    padding: 6px 12px 6px 10px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 100px;
+    box-shadow: var(--shadow-sm);
+  }
+  .pulse-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 0 0 rgba(22,163,74,.55);
+    animation: pulse 2.2s infinite;
+    flex: none;
+  }
+  @keyframes pulse {
+    0%   { box-shadow: 0 0 0 0 rgba(22,163,74,.55); }
+    70%  { box-shadow: 0 0 0 12px rgba(22,163,74,0); }
+    100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
+  }
+  .hero h1 {
+    font-size: 60px;
+    line-height: 1.04;
+    font-weight: 700;
+    margin: 0 0 22px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .hero h1 .accent {
+    color: var(--accent);
+    position: relative;
+    display: inline-block;
+  }
+  .hero h1 .accent::after {
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 4px;
+    height: 10px;
+    background: var(--accent-bg);
+    z-index: -1;
+    border-radius: 2px;
+  }
+  .hero .lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--muted);
+    margin: 0 0 36px;
+    max-width: 540px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--ink);
+    color: #fff;
+    text-decoration: none;
+    padding: 15px 26px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 15px;
+    transition: background .18s, transform .18s, box-shadow .18s;
+    box-shadow: var(--shadow-md);
+  }
+  .cta-primary:hover {
+    background: var(--ink-2);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
+  }
+  .cta-primary .arrow { transition: transform .2s; display: inline-block; }
+  .cta-primary:hover .arrow { transform: translateX(4px); }
+  .cta-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14.5px;
+    font-weight: 500;
+    padding: 15px 18px;
+    border-radius: 8px;
+    transition: color .15s, background .15s;
+  }
+  .cta-secondary:hover { color: var(--ink); background: var(--panel-2); }
+
+  /* -------- Hero visual -------- */
+  .hero-visual {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+    aspect-ratio: 1 / 1;
+    justify-self: end;
+    will-change: transform;
+    transition: transform .4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .hero-visual svg { width: 100%; height: 100%; display: block; }
+  .hv-draw {
+    stroke-dasharray: 2000;
+    stroke-dashoffset: 2000;
+    animation: draw 2.6s ease-out .4s forwards;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .hv-pulse { animation: markerPulse 2s infinite 2.4s; transform-origin: center; transform-box: fill-box; }
+  @keyframes markerPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50%      { transform: scale(1.5); opacity: 0.6; }
+  }
+  .hv-badge {
+    opacity: 0;
+    animation: fadeIn .6s ease-out forwards;
+  }
+  .hv-badge.b1 { animation-delay: 1.6s; }
+  .hv-badge.b2 { animation-delay: 2.0s; }
+  .hv-badge.b3 { animation-delay: 2.4s; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* -------- Proof strip -------- */
+  .proof {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--panel);
+  }
+  .proof-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 34px 40px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+  }
+  .proof-item {
+    border-left: 2px solid var(--accent);
+    padding: 6px 18px;
+  }
+  .proof-num {
+    font-size: 34px;
+    font-weight: 700;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .proof-num .suffix {
+    font-size: 22px;
+    color: var(--accent);
+    font-weight: 600;
+    margin-left: 2px;
+  }
+  .proof-lbl {
+    font-size: 11.5px;
+    color: var(--muted);
+    letter-spacing: 0.6px;
+    line-height: 1.45;
+    text-transform: uppercase;
     font-weight: 600;
   }
+
+  /* -------- Dashboards -------- */
+  .dashboards {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 110px 40px 40px;
+  }
+  .section-hdr { margin-bottom: 56px; max-width: 720px; }
+  .eyebrow {
+    color: var(--accent);
+    font-size: 11.5px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 14px;
+    display: inline-block;
+  }
+  .section-hdr h2 {
+    font-size: 40px;
+    line-height: 1.1;
+    font-weight: 700;
+    margin: 0 0 16px;
+    letter-spacing: -0.015em;
+  }
+  .section-hdr p {
+    font-size: 17.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin: 0;
+  }
+  .subsection-label {
+    color: var(--muted-2);
+    font-size: 11px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin: 44px 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .subsection-label:first-of-type { margin-top: 0; }
+  .subsection-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -67,19 +365,32 @@
     display: block;
     background: var(--panel);
     border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 24px 24px 22px;
+    border-radius: var(--radius);
+    padding: 22px 24px 22px;
     text-decoration: none;
     color: inherit;
-    transition: border-color .15s, transform .15s, box-shadow .15s;
+    transition: border-color .25s, transform .25s, box-shadow .25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -120%;
+    width: 80%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    transition: left .7s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
   .card:hover {
     border-color: var(--accent);
-    box-shadow: 0 4px 14px rgba(196,127,0,.08);
-    transform: translateY(-1px);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-accent);
   }
+  .card:hover::before { left: 120%; }
   .card .tag {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     color: var(--accent);
     font-size: 10.5px;
     letter-spacing: 2px;
@@ -87,96 +398,675 @@
     margin-bottom: 10px;
     font-weight: 700;
   }
+  .card .tag::before {
+    content: "";
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    flex: none;
+  }
   .card h3 {
     margin: 0 0 8px;
-    font-size: 17px;
-    color: var(--text);
+    font-size: 17.5px;
+    color: var(--ink);
     font-weight: 600;
+    letter-spacing: -0.005em;
   }
   .card p {
     margin: 0;
     color: var(--muted);
     font-size: 14px;
-    line-height: 1.55;
+    line-height: 1.6;
   }
   .card .arrow {
-    display: block;
+    display: inline-block;
     margin-top: 16px;
     color: var(--muted);
     font-size: 12.5px;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color .15s, transform .2s;
   }
-  .card:hover .arrow { color: var(--accent); }
+  .card:hover .arrow { color: var(--accent); transform: translateX(3px); }
   .card.placeholder {
     border-style: dashed;
-    opacity: 0.55;
+    opacity: 0.6;
     cursor: default;
   }
+  .card.placeholder .tag::before { background: var(--muted-2); }
   .card.placeholder:hover {
     border-color: var(--line);
     background: var(--panel);
     transform: none;
     box-shadow: none;
   }
+  .card.placeholder:hover::before { left: -120%; }
   .card.placeholder .arrow { display: none; }
-  footer {
-    padding: 22px 36px;
-    color: var(--muted);
-    font-size: 12px;
+  .card-illust {
+    width: 100%;
+    height: 96px;
+    margin: -4px 0 16px;
+    display: block;
+    border-radius: 6px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+    border: 1px solid transparent;
+    transition: border-color .2s, background .2s;
+  }
+  .card:hover .card-illust {
+    border-color: var(--line);
+    background: linear-gradient(180deg, #fffaf0 0%, #ffffff 100%);
+  }
+  .card.placeholder .card-illust { opacity: 0.5; }
+
+  /* -------- Methodology -------- */
+  .methodology {
+    background: linear-gradient(180deg, var(--panel) 0%, var(--bg-2) 100%);
     border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: 96px 40px;
+    margin-top: 80px;
+  }
+  .meth-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 64px;
+  }
+  .meth-left h3 {
+    font-size: 32px;
+    font-weight: 700;
+    margin: 0 0 14px;
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+  }
+  .meth-left p {
+    font-size: 15.5px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+  .meth-points {
+    display: grid;
+    gap: 28px;
+  }
+  .meth-pt {
+    padding-left: 22px;
+    border-left: 2px solid var(--accent);
+    transition: border-color .2s, transform .2s;
+  }
+  .meth-pt:hover {
+    border-left-color: var(--ink);
+    transform: translateX(3px);
+  }
+  .meth-pt strong {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--ink);
+    font-size: 15.5px;
+  }
+  .meth-pt p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 14.5px;
+    line-height: 1.6;
+  }
+
+  /* -------- Footer -------- */
+  footer {
+    padding: 44px 40px;
     text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--line);
+    background: var(--panel);
+  }
+  footer .mark {
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--accent);
+    font-size: 14px;
+    display: block;
+    margin-bottom: 10px;
+  }
+  footer .meta { font-size: 12.5px; }
+  footer .meta span { margin: 0 8px; color: var(--muted-2); }
+
+  /* -------- Scroll reveal -------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .8s cubic-bezier(0.2, 0.8, 0.2, 1), transform .8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  .reveal[data-delay="1"] { transition-delay: .08s; }
+  .reveal[data-delay="2"] { transition-delay: .16s; }
+  .reveal[data-delay="3"] { transition-delay: .24s; }
+  .reveal[data-delay="4"] { transition-delay: .32s; }
+
+  /* -------- Responsive -------- */
+  @media (max-width: 960px) {
+    .nav { padding: 14px 24px; }
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 48px 24px 72px;
+      gap: 44px;
+      min-height: 0;
+    }
+    .hero h1 { font-size: 40px; }
+    .hero .lead { font-size: 17px; }
+    .hero-visual { max-width: 360px; justify-self: start; }
+    .proof-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px; }
+    .proof-num { font-size: 28px; }
+    .dashboards { padding: 72px 24px 24px; }
+    .section-hdr h2 { font-size: 30px; }
+    .methodology { padding: 72px 24px; margin-top: 48px; }
+    .meth-inner { grid-template-columns: 1fr; gap: 28px; }
+    .meth-left h3 { font-size: 26px; }
+  }
+
+  /* -------- Reduced motion -------- */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .reveal { opacity: 1; transform: none; }
+    .hv-draw { stroke-dashoffset: 0; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <span class="mark">SIBERFORGE</span>
-  <span class="sub">Research &amp; market intelligence</span>
-</header>
+<nav class="nav" id="nav">
+  <a href="/" class="mark">SIBERFORGE</a>
+  <div class="nav-links">
+    <a href="#research">Research</a>
+    <a href="#methodology">Methodology</a>
+    <a href="#research" class="nav-cta">Open dashboards</a>
+  </div>
+</nav>
 
-<main>
-  <p class="section-label">Macro</p>
-  <div class="grid" style="margin-bottom:32px;">
+<div class="hero-wrap">
+  <section class="hero">
+    <div class="hero-copy">
+      <span class="hero-tag"><span class="pulse-dot"></span> Live &middot; updated with each filing</span>
+      <h1>Read the <span class="accent">filing</span>.<br>Not the summary.</h1>
+      <p class="lead">
+        Interactive financial research reconstructed from SEC EDGAR and FRED. Every line item ties back to a filing or series &mdash; no third-party aggregators, no black-box transformations, no "as-reported" database abstractions.
+      </p>
+      <div class="cta-row">
+        <a href="#research" class="cta-primary">Open the research <span class="arrow">&rarr;</span></a>
+        <a href="#methodology" class="cta-secondary">How it's built &rarr;</a>
+      </div>
+    </div>
 
-    <a class="card" href="/core/econ/">
+    <div class="hero-visual" id="hero-visual" aria-hidden="true">
+      <svg viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#c47f00" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#c47f00" stop-opacity="0"/>
+          </linearGradient>
+          <linearGradient id="stackA" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#7ba4cf" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#7ba4cf" stop-opacity="0.08"/>
+          </linearGradient>
+          <linearGradient id="stackB" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#8cbfc7" stop-opacity="0.3"/>
+            <stop offset="100%" stop-color="#8cbfc7" stop-opacity="0.05"/>
+          </linearGradient>
+          <linearGradient id="stackC" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#b39ddb" stop-opacity="0.25"/>
+            <stop offset="100%" stop-color="#b39ddb" stop-opacity="0.04"/>
+          </linearGradient>
+          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="0.4"/>
+          </filter>
+        </defs>
+
+        <!-- Panel background -->
+        <rect x="30" y="50" width="420" height="380" rx="12" fill="#ffffff" stroke="#e2e6ec" stroke-width="1"/>
+
+        <!-- Grid lines -->
+        <g stroke="#eef1f5" stroke-width="1">
+          <line x1="60" y1="120" x2="420" y2="120"/>
+          <line x1="60" y1="180" x2="420" y2="180"/>
+          <line x1="60" y1="240" x2="420" y2="240"/>
+          <line x1="60" y1="300" x2="420" y2="300"/>
+          <line x1="60" y1="360" x2="420" y2="360"/>
+        </g>
+
+        <!-- Y-axis labels -->
+        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">
+          <text x="54" y="124">$800M</text>
+          <text x="54" y="184">$600M</text>
+          <text x="54" y="244">$400M</text>
+          <text x="54" y="304">$200M</text>
+          <text x="54" y="364">$0</text>
+        </g>
+
+        <!-- X-axis labels -->
+        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">
+          <text x="75"  y="385">'15</text>
+          <text x="110" y="385">'17</text>
+          <text x="145" y="385">'19</text>
+          <text x="180" y="385">'21</text>
+          <text x="215" y="385">'23</text>
+          <text x="250" y="385">'25</text>
+        </g>
+
+        <!-- Stacked area layer A (equipment-like) -->
+        <path d="M 60 340
+                 L 92 332 L 124 322 L 156 302 L 188 270
+                 L 220 310 L 252 230 L 284 170 L 316 120
+                 L 348 180 L 380 195 L 412 190
+                 L 412 360 L 60 360 Z" fill="url(#stackA)"/>
+
+        <!-- Stacked area layer B (services-like) -->
+        <path d="M 60 350
+                 L 92 344 L 124 340 L 156 332 L 188 320
+                 L 220 340 L 252 310 L 284 288 L 316 260
+                 L 348 270 L 380 265 L 412 255
+                 L 412 360 L 60 360 Z" fill="url(#stackB)"/>
+
+        <!-- Stacked area layer C (fuel-like) -->
+        <path d="M 60 356
+                 L 92 352 L 124 350 L 156 346 L 188 340
+                 L 220 352 L 252 332 L 284 318 L 316 304
+                 L 348 310 L 380 308 L 412 300
+                 L 412 360 L 60 360 Z" fill="url(#stackC)"/>
+
+        <!-- Foreground line: total with area fill -->
+        <path d="M 60 340 L 92 332 L 124 322 L 156 302 L 188 270
+                 L 220 310 L 252 230 L 284 170 L 316 120
+                 L 348 180 L 380 195 L 412 190
+                 L 412 360 L 60 360 Z" fill="url(#areaGrad)"/>
+        <polyline class="hv-draw"
+                  points="60,340 92,332 124,322 156,302 188,270 220,310 252,230 284,170 316,120 348,180 380,195 412,190"
+                  fill="none" stroke="#c47f00" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+
+        <!-- Data points -->
+        <g fill="#c47f00">
+          <circle cx="60"  cy="340" r="2.5"/>
+          <circle cx="92"  cy="332" r="2.5"/>
+          <circle cx="124" cy="322" r="2.5"/>
+          <circle cx="156" cy="302" r="2.5"/>
+          <circle cx="188" cy="270" r="2.5"/>
+          <circle cx="220" cy="310" r="2.5"/>
+          <circle cx="252" cy="230" r="2.5"/>
+          <circle cx="284" cy="170" r="2.5"/>
+          <circle cx="316" cy="120" r="3.5" class="hv-pulse"/>
+          <circle cx="348" cy="180" r="2.5"/>
+          <circle cx="380" cy="195" r="2.5"/>
+          <circle cx="412" cy="190" r="2.5"/>
+        </g>
+
+        <!-- Peak annotation -->
+        <g class="hv-badge b1">
+          <line x1="316" y1="95" x2="316" y2="116" stroke="#c47f00" stroke-width="1" stroke-dasharray="2,2"/>
+          <rect x="270" y="70" width="92" height="24" rx="12" fill="#0f172a"/>
+          <text x="316" y="86" font-family="Inter,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">$891M · FY2023</text>
+        </g>
+
+        <!-- Source pills (top-left) -->
+        <g class="hv-badge b2" transform="translate(50, 60)">
+          <rect x="0" y="0" width="78" height="22" rx="11" fill="#ffffff" stroke="#e2e6ec" stroke-width="1"/>
+          <circle cx="11" cy="11" r="3" fill="#16a34a"/>
+          <text x="20" y="15" font-family="Inter,sans-serif" font-size="10" fill="#0f172a" font-weight="600">SEC EDGAR</text>
+        </g>
+
+        <g class="hv-badge b3" transform="translate(134, 60)">
+          <rect x="0" y="0" width="58" height="22" rx="11" fill="#ffffff" stroke="#e2e6ec" stroke-width="1"/>
+          <circle cx="11" cy="11" r="3" fill="#1d4ed8"/>
+          <text x="20" y="15" font-family="Inter,sans-serif" font-size="10" fill="#0f172a" font-weight="600">XBRL</text>
+        </g>
+
+        <!-- Caption bottom -->
+        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8">
+          <text x="60" y="412" font-weight="600" fill="#64748b">PLUG · Net revenue, FY2015–FY2025</text>
+          <text x="60" y="426">Reconstructed from 5 filing vintages · restatements preserved</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+</div>
+
+<!-- Proof strip -->
+<section class="proof">
+  <div class="proof-inner">
+    <div class="proof-item reveal" data-delay="1">
+      <div class="proof-num" data-target="44">0</div>
+      <div class="proof-lbl">Quarters of cash flow, reconstructed from YTD 10-Q / 10-K filings</div>
+    </div>
+    <div class="proof-item reveal" data-delay="2">
+      <div class="proof-num" data-target="22">0</div>
+      <div class="proof-lbl">FRED macro series with latest print, YoY, and 5-year percentile</div>
+    </div>
+    <div class="proof-item reveal" data-delay="3">
+      <div class="proof-num" data-target="11">0</div>
+      <div class="proof-lbl">Years of revenue-by-product-line detail, FY2015 &ndash; FY2025</div>
+    </div>
+    <div class="proof-item reveal" data-delay="4">
+      <div class="proof-num" data-target="0">0</div>
+      <div class="proof-lbl">Third-party data aggregators in the pipeline</div>
+    </div>
+  </div>
+</section>
+
+<!-- Dashboards -->
+<section class="dashboards" id="research">
+  <div class="section-hdr reveal">
+    <span class="eyebrow">The research</span>
+    <h2>Four dashboards. Every figure traceable.</h2>
+    <p>Each view starts with a primary-source filing or series, pulls structured data, and exposes the accounting machinery that the summary metric buries.</p>
+  </div>
+
+  <p class="subsection-label reveal">Macro</p>
+  <div class="grid">
+
+    <a class="card reveal" data-delay="1" href="/core/econ/">
+      <span class="card-illust" aria-hidden="true">
+        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
+          <g transform="translate(10,10)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,14 14,10 24,12 34,8 44,6 54,9 66,4" fill="none" stroke="#16a34a" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(90,10)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,4 14,6 24,5 34,10 44,14 54,16 66,14" fill="none" stroke="#dc2626" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(170,10)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,12 14,14 24,10 34,8 44,10 54,6 66,8" fill="none" stroke="#1d4ed8" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(250,10)">
+            <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,16 12,12 20,14 28,10 36,8 44,12 56,14" fill="none" stroke="#c47f00" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(10,38)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,10 14,8 24,12 34,14 44,10 54,6 66,8" fill="none" stroke="#7c3aed" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(90,38)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,14 14,12 24,10 34,8 44,6 54,4 66,2" fill="none" stroke="#16a34a" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(170,38)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,6 14,8 24,4 34,10 44,14 54,12 66,16" fill="none" stroke="#dc2626" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(250,38)">
+            <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,8 12,10 20,6 28,12 36,8 44,14 56,10" fill="none" stroke="#0891b2" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(10,66)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,16 14,14 24,10 34,12 44,8 54,10 66,6" fill="none" stroke="#1d4ed8" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(90,66)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,8 14,10 24,14 34,12 44,8 54,6 66,10" fill="none" stroke="#c47f00" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(170,66)">
+            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,12 14,14 24,10 34,6 44,4 54,8 66,10" fill="none" stroke="#16a34a" stroke-width="1.3"/>
+          </g>
+          <g transform="translate(250,66)">
+            <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
+            <polyline points="4,14 12,10 20,12 28,8 36,10 44,6 56,8" fill="none" stroke="#7c3aed" stroke-width="1.3"/>
+          </g>
+        </svg>
+      </span>
       <span class="tag">Live</span>
       <h3>Economic Indicators</h3>
-      <p>Growth, inflation, consumer health, and housing at a glance. Latest print, YoY change, 5-year spark, and historical-percentile context for 22 FRED series.</p>
+      <p>Growth, inflation, consumer health, housing. 22 FRED series with latest print, YoY, 5-year spark, and historical-percentile context.</p>
       <span class="arrow">Open &rarr;</span>
     </a>
 
-    <a class="card" href="/core/macro/">
+    <a class="card reveal" data-delay="2" href="/core/macro/">
+      <span class="card-illust" aria-hidden="true">
+        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
+          <g transform="translate(10,10)">
+            <line x1="0" y1="76" x2="130" y2="76" stroke="#cbd5e1" stroke-width="1"/>
+            <line x1="0" y1="0" x2="0" y2="76" stroke="#cbd5e1" stroke-width="1"/>
+            <circle cx="12" cy="68" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="22" cy="62" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="30" cy="64" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="38" cy="56" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="46" cy="50" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="54" cy="52" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="62" cy="44" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="72" cy="42" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="82" cy="36" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="92" cy="32" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="100" cy="28" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="108" cy="22" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="118" cy="18" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <circle cx="126" cy="12" r="2" fill="#1d4ed8" opacity="0.7"/>
+            <line x1="6" y1="70" x2="126" y2="14" stroke="#c47f00" stroke-width="1.4" stroke-dasharray="3,2"/>
+          </g>
+          <line x1="160" y1="10" x2="160" y2="86" stroke="#e2e6ec" stroke-width="1" stroke-dasharray="2,2"/>
+          <g transform="translate(175,12)">
+            <rect x="0"   y="0"  width="32" height="16" fill="#16a34a" opacity="0.85"/>
+            <rect x="34"  y="0"  width="32" height="16" fill="#16a34a" opacity="0.5"/>
+            <rect x="68"  y="0"  width="32" height="16" fill="#dc2626" opacity="0.4"/>
+            <rect x="102" y="0"  width="32" height="16" fill="#16a34a" opacity="0.3"/>
+            <rect x="0"   y="18" width="32" height="16" fill="#16a34a" opacity="0.5"/>
+            <rect x="34"  y="18" width="32" height="16" fill="#16a34a" opacity="0.85"/>
+            <rect x="68"  y="18" width="32" height="16" fill="#dc2626" opacity="0.6"/>
+            <rect x="102" y="18" width="32" height="16" fill="#16a34a" opacity="0.45"/>
+            <rect x="0"   y="36" width="32" height="16" fill="#dc2626" opacity="0.4"/>
+            <rect x="34"  y="36" width="32" height="16" fill="#dc2626" opacity="0.6"/>
+            <rect x="68"  y="36" width="32" height="16" fill="#16a34a" opacity="0.85"/>
+            <rect x="102" y="36" width="32" height="16" fill="#dc2626" opacity="0.3"/>
+            <rect x="0"   y="54" width="32" height="16" fill="#16a34a" opacity="0.3"/>
+            <rect x="34"  y="54" width="32" height="16" fill="#16a34a" opacity="0.45"/>
+            <rect x="68"  y="54" width="32" height="16" fill="#dc2626" opacity="0.3"/>
+            <rect x="102" y="54" width="32" height="16" fill="#16a34a" opacity="0.85"/>
+          </g>
+        </svg>
+      </span>
       <span class="tag">Live</span>
       <h3>Macro &amp; Markets Dashboard</h3>
-      <p>Economic indicator tracker with S&amp;P 500 / sector ETF correlation. Rolling correlations, regression, and sector heatmap against FRED macro series.</p>
+      <p>Economic indicators paired with S&amp;P 500 and sector-ETF correlation. Rolling correlations, regression, sector heatmap.</p>
       <span class="arrow">Open &rarr;</span>
     </a>
 
   </div>
 
-  <p class="section-label">Equities</p>
+  <p class="subsection-label reveal">Equities</p>
   <div class="grid">
 
-    <a class="card" href="/core/plug/">
+    <a class="card reveal" data-delay="1" href="/core/plug/">
+      <span class="card-illust" aria-hidden="true">
+        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
+          <line x1="10" y1="56" x2="310" y2="56" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,3"/>
+          <text x="50"  y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CFO</text>
+          <text x="130" y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CFI</text>
+          <text x="210" y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CFF</text>
+          <text x="285" y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CASH</text>
+          <rect x="18" y="56" width="10" height="10" fill="#1d4ed8" opacity="0.85"/>
+          <rect x="30" y="56" width="10" height="16" fill="#1d4ed8" opacity="0.85"/>
+          <rect x="42" y="56" width="10" height="12" fill="#1d4ed8" opacity="0.85"/>
+          <rect x="54" y="56" width="10" height="22" fill="#1d4ed8" opacity="0.85"/>
+          <rect x="66" y="56" width="10" height="18" fill="#1d4ed8" opacity="0.85"/>
+          <rect x="78" y="56" width="10" height="14" fill="#1d4ed8" opacity="0.85"/>
+          <rect x="98"  y="56" width="10" height="8"  fill="#c47f00" opacity="0.85"/>
+          <rect x="110" y="56" width="10" height="14" fill="#c47f00" opacity="0.85"/>
+          <rect x="122" y="56" width="10" height="20" fill="#c47f00" opacity="0.85"/>
+          <rect x="134" y="56" width="10" height="12" fill="#c47f00" opacity="0.85"/>
+          <rect x="146" y="56" width="10" height="16" fill="#c47f00" opacity="0.85"/>
+          <rect x="158" y="56" width="10" height="10" fill="#c47f00" opacity="0.85"/>
+          <rect x="178" y="42" width="10" height="14" fill="#7c3aed" opacity="0.85"/>
+          <rect x="190" y="30" width="10" height="26" fill="#7c3aed" opacity="0.85"/>
+          <rect x="202" y="18" width="10" height="38" fill="#7c3aed" opacity="0.85"/>
+          <rect x="214" y="36" width="10" height="20" fill="#7c3aed" opacity="0.85"/>
+          <rect x="226" y="22" width="10" height="34" fill="#7c3aed" opacity="0.85"/>
+          <rect x="238" y="44" width="10" height="12" fill="#7c3aed" opacity="0.85"/>
+          <polyline points="258,52 268,40 278,28 288,22 298,34 308,44"
+                    fill="none" stroke="#0891b2" stroke-width="1.8"/>
+          <circle cx="258" cy="52" r="2"   fill="#0891b2"/>
+          <circle cx="308" cy="44" r="2.5" fill="#0891b2"/>
+        </svg>
+      </span>
       <span class="tag">Live</span>
       <h3>Plug Power (PLUG)</h3>
-      <p>Quarterly cash flow and operating drivers back to 2015, built from SEC EDGAR XBRL filings. Interactive CFO / CFI / CFF breakdown with cash-position overlay and click-to-expand accounting drivers.</p>
+      <p>Quarterly cash flow 2015&ndash;2025 from EDGAR XBRL. Interactive CFO / CFI / CFF drivers, revenue by product line, balance-sheet health, liquidity dependencies, and US production footprint.</p>
       <span class="arrow">Open &rarr;</span>
     </a>
 
-    <div class="card placeholder">
-      <span class="tag">Planned</span>
+    <div class="card placeholder reveal" data-delay="2">
+      <span class="card-illust" aria-hidden="true">
+        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
+          <rect x="14" y="16" width="80"  height="10" fill="#e2e6ec" rx="2"/>
+          <rect x="14" y="32" width="120" height="6"  fill="#eef1f5" rx="2"/>
+          <rect x="14" y="44" width="100" height="6"  fill="#eef1f5" rx="2"/>
+          <rect x="160" y="16" width="140" height="64" fill="none" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="3,3" rx="4"/>
+          <line x1="170" y1="60" x2="290" y2="60" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,2"/>
+          <polyline points="170,55 190,48 210,52 230,42 250,46 270,38 290,40" fill="none" stroke="#cbd5e1" stroke-width="1.2" stroke-dasharray="2,2"/>
+          <g transform="translate(228,70)">
+            <line x1="-6" y1="0" x2="6" y2="0" stroke="#94a3b8" stroke-width="1.5"/>
+            <line x1="0" y1="-6" x2="0" y2="6" stroke="#94a3b8" stroke-width="1.5"/>
+          </g>
+        </svg>
+      </span>
+      <span class="tag" style="color: var(--muted-2);">Planned</span>
       <h3>Next ticker</h3>
       <p>Space reserved for additional single-name views.</p>
     </div>
 
   </div>
-</main>
+</section>
+
+<!-- Methodology -->
+<section class="methodology" id="methodology">
+  <div class="meth-inner">
+    <div class="meth-left reveal">
+      <span class="eyebrow">Methodology</span>
+      <h3>Primary sources. No shortcuts.</h3>
+      <p>Every dashboard is built from the actual filing or time series &mdash; not a vendor's pre-cleaned database. The arithmetic is the arithmetic an analyst would do manually, automated across decades.</p>
+    </div>
+    <div class="meth-points">
+      <div class="meth-pt reveal" data-delay="1">
+        <strong>SEC EDGAR XBRL, direct.</strong>
+        <p>Structured financials pulled from the SEC's XBRL API. No Bloomberg, no consensus estimates, no "as-reported" database abstractions. The number on screen is the number in the filing.</p>
+      </div>
+      <div class="meth-pt reveal" data-delay="2">
+        <strong>Restatements preserved.</strong>
+        <p>When a company restates (Plug's 2021 Amazon/Walmart warrant reclass, for example), both vintages are kept. The chart knows which year came from which filing &mdash; pre-restatement and post, side by side.</p>
+      </div>
+      <div class="meth-pt reveal" data-delay="3">
+        <strong>YTD &rarr; standalone, automated.</strong>
+        <p>Quarterly cash flow series are reconstructed by differencing YTD 10-Q filings. 44 quarters of CFO / CFI / CFF, rebuilt the same way a human analyst would &mdash; but across every vintage, every ticker.</p>
+      </div>
+      <div class="meth-pt reveal" data-delay="4">
+        <strong>Footnotes surfaced inline.</strong>
+        <p>Any dotted-underlined term shows the accounting definition on hover. Warrant contra-revenue, loss-contract provisions, DOE loan mechanics, ATM/SEPA dilution math &mdash; explained where they appear, not buried in a glossary.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
 <footer>
-  &copy; Siberforge
+  <span class="mark">SIBERFORGE</span>
+  <div class="meta">
+    &copy; 2026 &middot; Research from primary sources
+    <span>&middot;</span>
+    Data: SEC EDGAR XBRL, FRED
+    <span>&middot;</span>
+    Not investment advice
+  </div>
 </footer>
+
+<script>
+  // Nav border + compression on scroll
+  (function () {
+    const nav = document.getElementById('nav');
+    const onScroll = () => { nav.classList.toggle('scrolled', window.scrollY > 24); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+
+  // Hero parallax — scroll + mouse
+  (function () {
+    const el = document.getElementById('hero-visual');
+    if (!el) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    let scrollY = 0, mx = 0, my = 0, raf = null;
+    function apply() {
+      el.style.transform = `translate3d(${mx.toFixed(2)}px, ${(scrollY * 0.12 + my).toFixed(2)}px, 0)`;
+      raf = null;
+    }
+    function schedule() { if (!raf) raf = requestAnimationFrame(apply); }
+
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth < 960) return;
+      scrollY = window.scrollY;
+      schedule();
+    }, { passive: true });
+
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      hero.addEventListener('mousemove', (e) => {
+        const r = hero.getBoundingClientRect();
+        const nx = ((e.clientX - r.left) / r.width) - 0.5;
+        const ny = ((e.clientY - r.top) / r.height) - 0.5;
+        mx = nx * 14;
+        my = ny * 10;
+        schedule();
+      });
+      hero.addEventListener('mouseleave', () => {
+        mx = 0; my = 0;
+        schedule();
+      });
+    }
+  })();
+
+  // Scroll reveal + count-up on proof numbers
+  (function () {
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('in');
+        const num = entry.target.classList.contains('proof-num')
+          ? entry.target
+          : entry.target.querySelector('.proof-num[data-target]');
+        if (num && !num.dataset.animated) {
+          num.dataset.animated = '1';
+          if (prefersReduced) {
+            num.textContent = num.dataset.target;
+          } else {
+            animateNum(num);
+          }
+        }
+        io.unobserve(entry.target);
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    function animateNum(el) {
+      const target = parseInt(el.dataset.target, 10);
+      if (target === 0) { el.textContent = '0'; return; }
+      const duration = 1400;
+      const start = performance.now();
+      function tick(now) {
+        const p = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
+        el.textContent = Math.round(target * eased).toLocaleString();
+        if (p < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }
+  })();
+</script>
 
 </body>
 </html>
