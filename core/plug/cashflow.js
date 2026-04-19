@@ -66,6 +66,11 @@ async function init() {
 
   const periods = DATA.map(r => r.period);
 
+  // Default chart view starts at 2020-Q1 (user can pan/zoom out to see earlier history).
+  const DEFAULT_START_PERIOD = '2020-Q1';
+  const defaultStartIdx = Math.max(0, periods.indexOf(DEFAULT_START_PERIOD));
+  const defaultXRange = [defaultStartIdx - 0.5, periods.length - 0.5];
+
   const SERIES_BAR = {
     cfo:   { name: 'CFO',        color: COLORS.cfo,   get data() { return DATA.map(r => r.cfo); } },
     cfi:   { name: 'CFI',        color: COLORS.cfi,   get data() { return DATA.map(r => r.cfi); } },
@@ -146,6 +151,8 @@ async function init() {
         tickangle: -45,
         automargin: true,
         tickfont: { size: 12 },
+        type: 'category',
+        range: defaultXRange.slice(),
       },
       yaxis: {
         title: { text: 'Cash flow ($M)', font: { size: 13 } },
@@ -233,9 +240,11 @@ async function init() {
     document.getElementById('detail').style.display = 'none';
   };
 
-  // Data table
+  // Data table — most-recent quarter first.
   const tbody = document.getElementById('tbody');
-  DATA.forEach((r, i) => {
+  const tableOrder = DATA.map((_, i) => i).reverse();
+  tableOrder.forEach(i => {
+    const r = DATA[i];
     const tr = document.createElement('tr');
     tr.dataset.idx = i;
     const cells = [r.period, r.months, r.cfo, r.cfi, r.cff, r.capex, r.fcf, r.net, r.cash_basic, r.cash_total];

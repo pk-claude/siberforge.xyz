@@ -21,8 +21,8 @@
   --cat-cfo:   #1d4ed8;   /* operating */
   --cat-cfi:   #c47f00;   /* investing */
   --cat-cff:   #7c3aed;   /* financing */
-  --cat-fcf:   #059669;   /* free cash flow */
-  --cat-capex: #dc2626;   /* capex */
+  --cat-fcf:   #dc2626;   /* free cash flow */
+  --cat-capex: #0f172a;   /* capex */
   --cat-net:   #475569;   /* net change */
   --cat-cash-total: #d97706;  /* cash incl restricted */
   --cat-cash-basic: #0891b2;  /* unrestricted */
