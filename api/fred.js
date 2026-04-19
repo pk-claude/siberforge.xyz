@@ -1,6 +1,12 @@
 // Vercel serverless function: proxies FRED API with server-side key.
 // Call as: /api/fred?series=CPIAUCSL,UNRATE,DFF&start=2015-01-01
 // Supports one or many comma-separated series IDs.
+//
+// Vintage queries (for drill-down revision ribbons):
+//   /api/fred?series=GDPC1&start=2010-01-01&realtime_end=2024-01-15
+// Returns the series as-known on the given realtime date. When both
+// realtime_start and realtime_end are the same day, you get that day's
+// vintage. Batch calls work the same as normal — realtime applies to all.
 
 const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
@@ -59,12 +65,14 @@ const CATALOG = {
   CSUSHPISA:             { label: 'Case-Shiller Home Prices',freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
 };
 
-async function fetchSeries(id, key, start) {
+async function fetchSeries(id, key, start, opts = {}) {
   const url = new URL(FRED_BASE);
   url.searchParams.set('series_id', id);
   url.searchParams.set('api_key', key);
   url.searchParams.set('file_type', 'json');
   if (start) url.searchParams.set('observation_start', start);
+  if (opts.realtimeStart) url.searchParams.set('realtime_start', opts.realtimeStart);
+  if (opts.realtimeEnd)   url.searchParams.set('realtime_end',   opts.realtimeEnd);
 
   const res = await fetch(url.toString());
   if (!res.ok) {
@@ -78,6 +86,12 @@ async function fetchSeries(id, key, start) {
     .map(o => ({ date: o.date, value: Number(o.value) }))
     .filter(o => Number.isFinite(o.value));
   return { id, meta: CATALOG[id] || null, observations };
+}
+
+// Light validation — FRED expects YYYY-MM-DD format, reject anything weird
+// rather than pass garbage upstream.
+function validDate(s) {
+  return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
 }
 
 export default async function handler(req, res) {
@@ -105,9 +119,26 @@ export default async function handler(req, res) {
 
   const start = req.query.start || '2010-01-01';
 
+  // Optional vintage params — apply to all requested series in this call.
+  const opts = {};
+  if (req.query.realtime_start) {
+    if (!validDate(req.query.realtime_start)) {
+      return res.status(400).json({ error: 'realtime_start must be YYYY-MM-DD' });
+    }
+    opts.realtimeStart = req.query.realtime_start;
+  }
+  if (req.query.realtime_end) {
+    if (!validDate(req.query.realtime_end)) {
+      return res.status(400).json({ error: 'realtime_end must be YYYY-MM-DD' });
+    }
+    opts.realtimeEnd = req.query.realtime_end;
+  }
+
   try {
-    const results = await Promise.all(ids.map(id => fetchSeries(id, key, start)));
+    const results = await Promise.all(ids.map(id => fetchSeries(id, key, start, opts)));
     // Cache hint: FRED releases on a fixed schedule; 6h edge cache is safe.
+    // Vintage queries are immutable (past as-of dates never change), so we
+    // could cache those longer — but 6h is fine for both.
     res.setHeader('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
     return res.status(200).json({ series: results });
   } catch (err) {

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Indicator — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<!--
+  Shared drill-down page for all Economic Dashboard indicators.
+  Loaded as ./indicator.html?id=<INDICATOR_ID>.
+
+  The controller (drilldown.js) reads the ?id param, resolves it against the
+  INDICATORS registry in indicators.js, then:
+    1. Fetches full history from /api/fred (or computes derived series)
+    2. For hasVintages series, batches realtime_end snapshots for revision ribbon
+    3. Renders uPlot line chart with range toggle (1Y / 5Y / Max)
+    4. Populates the metadata + methodology panels
+
+  uPlot is loaded from CDN — ~40KB, no dependencies, canvas-based.
+  Pinned to v1.6.31 so behavior doesn't drift on future library releases.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.iife.min.js"></script>
+</head>
+<body class="drill">
+
+<div class="top">
+  <div class="brand">
+    <a href="./index.html" class="home-link" title="Back to dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Economic Indicators</span>
+  </div>
+  <div class="status" id="status">
+    <span class="dot" id="status-dot"></span>
+    <span id="status-text">Loading…</span>
+  </div>
+</div>
+
+<main class="drill-main">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" id="breadcrumb">
+    <a href="./index.html">Dashboard</a>
+    <span class="sep">/</span>
+    <span id="crumb-category">…</span>
+    <span class="sep">/</span>
+    <span id="crumb-indicator">…</span>
+  </nav>
+
+  <!-- Header: label, current value, delta, category -->
+  <header class="drill-header">
+    <div class="drill-header-left">
+      <div class="drill-category" id="drill-category">
+        <span class="swatch" id="drill-swatch"></span>
+        <span id="drill-category-label">—</span>
+      </div>
+      <h1 class="drill-title" id="drill-title">Loading…</h1>
+      <p class="drill-context" id="drill-context"></p>
+    </div>
+    <div class="drill-header-right">
+      <div class="drill-value" id="drill-value">—</div>
+      <div class="drill-value-unit" id="drill-value-unit"></div>
+      <div class="drill-delta" id="drill-delta">—</div>
+      <div class="drill-as-of" id="drill-as-of"></div>
+    </div>
+  </header>
+
+  <!-- Chart controls -->
+  <section class="chart-section">
+    <div class="chart-controls">
+      <div class="range-toggle" id="range-toggle" role="tablist" aria-label="Time range">
+        <button class="range-btn" data-range="1Y" role="tab">1Y</button>
+        <button class="range-btn active" data-range="5Y" role="tab" aria-selected="true">5Y</button>
+        <button class="range-btn" data-range="MAX" role="tab">Max</button>
+      </div>
+      <div class="chart-extras" id="chart-extras">
+        <!-- Vintage toggle injected here for hasVintages series -->
+      </div>
+    </div>
+    <div class="chart-wrap" id="chart-wrap">
+      <div class="chart-placeholder" id="chart-placeholder">Loading chart…</div>
+    </div>
+    <div class="chart-legend" id="chart-legend"></div>
+  </section>
+
+  <!-- Metadata + methodology split -->
+  <section class="drill-info">
+    <div class="info-panel methodology-panel">
+      <h2>Methodology</h2>
+      <p id="methodology-text">—</p>
+    </div>
+    <div class="info-panel metadata-panel">
+      <h2>Details</h2>
+      <dl class="metadata-grid" id="metadata-grid">
+        <!-- Populated by drilldown.js -->
+      </dl>
+    </div>
+  </section>
+
+  <!-- Vintage table (hasVintages series only) -->
+  <section class="vintage-section" id="vintage-section" hidden>
+    <h2>Revision History</h2>
+    <p class="vintage-note">
+      Last 4 vintages — shows how the latest observations have been revised since first print.
+      Vertical axis is the indicator's current transform; horizontal axis is observation date.
+    </p>
+    <div class="vintage-table-wrap">
+      <table class="vintage-table" id="vintage-table">
+        <thead id="vintage-thead"></thead>
+        <tbody id="vintage-tbody"></tbody>
+      </table>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (St. Louis Fed)</a> ·
+  Chart: <a href="https://github.com/leeoniya/uPlot" target="_blank" rel="noopener">uPlot</a> ·
+  <a href="./index.html">Back to dashboard</a>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./drilldown.js"></script>
+
+</body>
+</html>

@@ -215,11 +215,22 @@ function buildSkeletonCards() {
         <div class="card-note">${ind.context}</div>
       `;
 
-      // Click-through to future drill-down (Phase 3)
+      // Click-through to drill-down page (Phase 3).
+      // The drill-down template reads ?id=... and looks up the indicator in
+      // the registry, so we can navigate purely by id.
       if (!ind.placeholder) {
-        card.addEventListener('click', () => {
-          // Phase 3 will implement ?id=ID drill-down page
-          console.log(`Drill-down (not yet wired): ${ind.id}`);
+        card.classList.add('clickable');
+        card.setAttribute('role', 'link');
+        card.setAttribute('tabindex', '0');
+        const nav = () => {
+          window.location.href = `./indicator.html?id=${encodeURIComponent(ind.id)}`;
+        };
+        card.addEventListener('click', nav);
+        card.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            nav();
+          }
         });
       }
 
