@@ -1,0 +1,22 @@
+# Normalize line endings for all text files — prevents CRLF noise on cross-platform edits.
+* text=auto eol=lf
+
+# Explicit text treatment for the file types we actually touch
+*.html     text eol=lf
+*.css      text eol=lf
+*.js       text eol=lf
+*.json     text eol=lf
+*.md       text eol=lf
+*.svg      text eol=lf
+*.sh       text eol=lf
+
+# Binary — never try to line-end-normalize
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.ico      binary
+*.webp     binary
+*.pdf      binary
+*.woff     binary
+*.woff2    binary
