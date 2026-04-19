@@ -1,7 +1,7 @@
 // Release calendar strip — horizontal chip row showing upcoming FRED releases.
 //
-// Clicks scroll the page to the matching indicator card (the first series_id
-// in the release's series_ids list) and pulse-highlight it.
+// Clicks scroll the page to the matching indicator card (the first ID
+// in the release's indicator_ids list) and pulse-highlight it.
 
 function formatDay(iso) {
   const d = new Date(iso + 'T00:00:00Z');
@@ -46,7 +46,9 @@ export async function renderReleaseStrip(container, opts = {}) {
     }
 
     const chips = releases.map(r => {
-      const target = r.series_ids && r.series_ids[0];
+      // indicator_ids maps release → dashboard indicator card IDs.
+      // See RELEASE_MAP in api/releases.js.
+      const target = r.indicator_ids && r.indicator_ids[0];
       const ci = r.days_until === 0 ? 'rs-today' : r.days_until <= 3 ? 'rs-soon' : '';
       return `
         <button class="rs-chip ${ci}" data-target="${target || ''}" title="${escapeAttr(r.name)} — ${formatDay(r.date)}">

@@ -12,24 +12,29 @@ const FRED_RELEASES_URL = 'https://api.stlouisfed.org/fred/releases/dates';
 //
 // All IDs below verified via FRED /fred/series/release?series_id=... lookups.
 // To add a release: hit /series/release for the series you care about and
-// paste the returned release_id + name. The `series_ids` array maps back to
-// indicator cards so the UI can scroll to them on click.
+// paste the returned release_id + name.
+//
+// `indicator_ids` maps back to dashboard indicator IDs (from core/econ/indicators.js
+// INDICATORS[].id) — the client uses these to locate the card via
+// document.querySelector('.card[data-id=<indicator_id>]') for scroll-to on click.
+// These are NOT raw FRED series IDs; some indicators have friendlier IDs
+// (e.g. indicator 'AHE' wraps FRED series 'CES0500000003').
 const RELEASE_MAP = {
-  10:  { short: 'CPI',              name: 'Consumer Price Index',                 series_ids: ['CPILFESL'] },
-  13:  { short: 'Ind. Production',  name: 'Industrial Production & Cap Util',     series_ids: ['INDPRO'] },
-  27:  { short: 'Housing Starts',   name: 'New Residential Construction',         series_ids: ['PERMIT', 'HOUST'] },
-  50:  { short: 'Employment',       name: 'Employment Situation',                 series_ids: ['UNRATE', 'PAYEMS', 'CES0500000003'] },
-  53:  { short: 'GDP',              name: 'Gross Domestic Product',               series_ids: ['GDPC1'] },
-  54:  { short: 'PCE',              name: 'Personal Income & Outlays',            series_ids: ['PCEPILFE'] },
-  92:  { short: 'Retail Sales',     name: 'Selected Real Retail Sales',           series_ids: ['RRSFS'] },
-  97:  { short: 'New Home Sales',   name: 'New Residential Sales',                series_ids: ['HSN1F'] },
-  180: { short: 'Jobless Claims',   name: 'Unemployment Insurance Weekly Claims', series_ids: ['IC4WSA'] },
-  190: { short: 'Mortgage Rates',   name: 'Primary Mortgage Market Survey',       series_ids: ['MORTGAGE30US'] },
-  199: { short: 'Case-Shiller',     name: 'S&P Cotality Case-Shiller HPI',        series_ids: ['CSUSHPISA'] },
-  231: { short: 'CC Delinquency',   name: 'Charge-Off & Delinquency Rates',       series_ids: ['DRCCLACBS'] },
-  291: { short: 'Existing Sales',   name: 'Existing Home Sales',                  series_ids: ['EXHOSLUSM495S'] },
-  313: { short: 'Sticky CPI',       name: 'Sticky Price CPI',                     series_ids: ['CORESTICKM159SFRBATL'] },
-  321: { short: 'Empire State',     name: 'Empire State Manufacturing Survey',    series_ids: ['GACDISA066MSFRBNY'] },
+  10:  { short: 'CPI',              name: 'Consumer Price Index',                 indicator_ids: ['CPILFESL'] },
+  13:  { short: 'Ind. Production',  name: 'Industrial Production & Cap Util',     indicator_ids: ['INDPRO'] },
+  27:  { short: 'Housing Starts',   name: 'New Residential Construction',         indicator_ids: ['PERMIT', 'HOUST'] },
+  50:  { short: 'Employment',       name: 'Employment Situation',                 indicator_ids: ['UNRATE', 'PAYEMS', 'AHE'] },
+  53:  { short: 'GDP',              name: 'Gross Domestic Product',               indicator_ids: ['GDPC1'] },
+  54:  { short: 'PCE',              name: 'Personal Income & Outlays',            indicator_ids: ['PCEPILFE'] },
+  92:  { short: 'Retail Sales',     name: 'Selected Real Retail Sales',           indicator_ids: ['RRSFS'] },
+  97:  { short: 'New Home Sales',   name: 'New Residential Sales',                indicator_ids: ['HSN1F'] },
+  180: { short: 'Jobless Claims',   name: 'Unemployment Insurance Weekly Claims', indicator_ids: ['IC4WSA'] },
+  190: { short: 'Mortgage Rates',   name: 'Primary Mortgage Market Survey',       indicator_ids: ['MORTGAGE30US'] },
+  199: { short: 'Case-Shiller',     name: 'S&P Cotality Case-Shiller HPI',        indicator_ids: ['CSUSHPISA'] },
+  231: { short: 'CC Delinquency',   name: 'Charge-Off & Delinquency Rates',       indicator_ids: ['DRCCLACBS'] },
+  291: { short: 'Existing Sales',   name: 'Existing Home Sales',                  indicator_ids: ['EXHOSLUS'] },
+  313: { short: 'Sticky CPI',       name: 'Sticky Price CPI',                     indicator_ids: ['STICKY'] },
+  321: { short: 'Empire State',     name: 'Empire State Manufacturing Survey',    indicator_ids: ['EMPIRE'] },
 };
 
 function todayUTC() {
@@ -88,7 +93,7 @@ export default async function handler(req, res) {
           days_until: daysBetween(today, r.date),
           short: meta.short,
           name: meta.name,
-          series_ids: meta.series_ids,
+          indicator_ids: meta.indicator_ids,
         };
       });
 

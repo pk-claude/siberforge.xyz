@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compare Indicators — Siberforge</title>
+<link rel="stylesheet" href="./styles.css" />
+<!--
+  Comparison view — pick two indicators and see them overlaid.
+  Loads as ./compare.html?a=<INDICATOR_ID>&b=<INDICATOR_ID>.
+  Both params are optional; if unset, sensible defaults (CPI + UNRATE) are used.
+
+  Supports two display modes:
+    - Levels: dual-axis chart, each series on its own Y axis (actual units preserved)
+    - Z-score: both series normalized to mean=0, sd=1, single shared Y axis
+
+  Below the overlay: rolling Pearson correlation strip (60-period) over the
+  aligned series. Alignment: for each date in the lower-frequency series,
+  forward-fill from the higher-frequency series.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.iife.min.js"></script>
+</head>
+<body class="compare">
+
+<div class="top">
+  <div class="brand">
+    <a href="./index.html" class="home-link" title="Back to dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Economic Indicators — Compare</span>
+  </div>
+  <div class="status" id="status">
+    <span class="dot" id="status-dot"></span>
+    <span id="status-text">Loading…</span>
+  </div>
+</div>
+
+<main class="compare-main">
+
+  <nav class="breadcrumb">
+    <a href="./index.html">Dashboard</a>
+    <span class="sep">/</span>
+    <span>Compare</span>
+  </nav>
+
+  <header class="compare-header">
+    <h1 class="compare-title">Compare Indicators</h1>
+    <p class="compare-sub">
+      Overlay any two indicators, switch between levels (dual-axis) and z-score normalized,
+      and see rolling 60-period correlation. Deep-linkable: append <code>?a=ID&amp;b=ID</code>.
+    </p>
+  </header>
+
+  <!-- Selectors -->
+  <section class="compare-picker">
+    <div class="picker-row">
+      <label class="picker">
+        <span class="picker-label picker-a">Indicator A</span>
+        <select id="select-a" aria-label="Indicator A"></select>
+      </label>
+      <span class="picker-vs">vs</span>
+      <label class="picker">
+        <span class="picker-label picker-b">Indicator B</span>
+        <select id="select-b" aria-label="Indicator B"></select>
+      </label>
+      <button class="picker-swap" id="swap-btn" title="Swap A and B">&#8646;</button>
+    </div>
+
+    <div class="picker-controls">
+      <div class="range-toggle" id="range-toggle" role="tablist" aria-label="Time range">
+        <button class="range-btn" data-range="1Y" role="tab">1Y</button>
+        <button class="range-btn active" data-range="5Y" role="tab" aria-selected="true">5Y</button>
+        <button class="range-btn" data-range="MAX" role="tab">Max</button>
+      </div>
+      <div class="mode-toggle" id="mode-toggle" role="tablist" aria-label="Display mode">
+        <button class="mode-btn active" data-mode="levels" role="tab" aria-selected="true">Levels</button>
+        <button class="mode-btn" data-mode="zscore" role="tab">Z-score</button>
+      </div>
+      <a class="share-link" id="share-link" href="#" title="Copy link">Copy link</a>
+    </div>
+  </section>
+
+  <!-- Overlay chart -->
+  <section class="chart-section compare-chart-section">
+    <div class="chart-wrap" id="overlay-chart">
+      <div class="chart-placeholder">Loading chart…</div>
+    </div>
+    <div class="chart-legend" id="overlay-legend"></div>
+  </section>
+
+  <!-- Rolling correlation strip -->
+  <section class="chart-section corr-section">
+    <div class="corr-header">
+      <h2>Rolling Correlation</h2>
+      <span class="corr-meta" id="corr-meta">—</span>
+    </div>
+    <div class="chart-wrap corr-wrap" id="corr-chart">
+      <div class="chart-placeholder">—</div>
+    </div>
+    <p class="corr-note">
+      60-observation rolling Pearson correlation on aligned pairs. Positive = move together,
+      negative = move opposite, near zero = decoupled. Frequency aligns to the lower-frequency series.
+    </p>
+  </section>
+
+  <!-- Side-by-side metadata -->
+  <section class="compare-meta">
+    <div class="info-panel meta-a">
+      <h2 id="meta-a-title">Indicator A</h2>
+      <dl class="metadata-grid" id="meta-a-grid"></dl>
+      <p class="meta-context" id="meta-a-context"></p>
+    </div>
+    <div class="info-panel meta-b">
+      <h2 id="meta-b-title">Indicator B</h2>
+      <dl class="metadata-grid" id="meta-b-grid"></dl>
+      <p class="meta-context" id="meta-b-context"></p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (St. Louis Fed)</a> ·
+  <a href="./index.html">Back to dashboard</a>
+</footer>
+
+<script type="module" src="./compare.js"></script>
+
+</body>
+</html>
