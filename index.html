@@ -6,28 +6,34 @@
 <title>Siberforge — Analyst-grade research, built from the source</title>
 <meta name="description" content="Interactive financial research reconstructed from SEC EDGAR filings and FRED series. Every line item traceable. No aggregators, no black-box transformations." />
 <style>
-  /* -------- Design tokens -------- */
+  /* -------- Design tokens (bold editorial palette) -------- */
   :root {
-    --bg:         #fafbfc;
-    --bg-2:       #f3f5f8;
-    --panel:      #ffffff;
-    --panel-2:    #f7f8fa;
-    --line:       #e2e6ec;
-    --line-soft:  #eef1f5;
-    --ink:        #0f172a;
-    --ink-2:      #1e293b;
-    --muted:      #64748b;
-    --muted-2:    #94a3b8;
-    --accent:     #c47f00;
-    --accent-2:   #b36f00;
-    --accent-bg:  #fff5dc;
-    --green:      #16a34a;
-    --max:        1200px;
-    --radius:     12px;
-    --shadow-sm:  0 1px 2px rgba(15,23,42,.04);
-    --shadow-md:  0 4px 16px rgba(15,23,42,.06);
-    --shadow-lg:  0 12px 32px rgba(15,23,42,.10);
-    --shadow-accent: 0 12px 28px rgba(196,127,0,.12);
+    --bg:          #faf8f3;   /* warm off-white, editorial paper */
+    --bg-2:        #f1ece0;   /* cream panel tint */
+    --panel:       #ffffff;
+    --panel-2:     #f6f2e9;
+    --line:        #d6cfbe;
+    --line-soft:   #ebe6d8;
+    --ink:         #0a0a0a;   /* near-black, sharper */
+    --ink-2:       #1f1f1f;
+    --muted:       #525252;
+    --muted-2:     #8a8578;
+    --accent:      #dc2626;   /* bold editorial red */
+    --accent-2:    #991b1b;
+    --accent-bg:   #fef2f2;
+    --teal:        #0d9488;
+    --teal-2:      #115e59;
+    --teal-bg:     #e6f7f4;
+    --amber:       #d97706;   /* supporting — reserved for 'elevated' tier */
+    --green:       #15803d;
+    --red:         #dc2626;
+    --blue:        #1d4ed8;
+    --max:         1200px;
+    --radius:      12px;
+    --shadow-sm:   0 1px 2px rgba(10,10,10,.05);
+    --shadow-md:   0 4px 16px rgba(10,10,10,.07);
+    --shadow-lg:   0 12px 32px rgba(10,10,10,.12);
+    --shadow-accent: 0 12px 28px rgba(220,38,38,.14);
   }
 
   * { box-sizing: border-box; }
@@ -113,25 +119,25 @@
   }
   .hero-wrap::before {
     width: 520px; height: 520px;
-    background: radial-gradient(circle, rgba(196,127,0,0.14), transparent 70%);
-    top: -120px; right: -120px;
+    background: radial-gradient(circle, rgba(220,38,38,0.14), transparent 70%);
+    top: -140px; right: -120px;
   }
   .hero-wrap::after {
-    width: 380px; height: 380px;
-    background: radial-gradient(circle, rgba(29,78,216,0.08), transparent 70%);
-    bottom: -160px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(13,148,136,0.12), transparent 70%);
+    bottom: -180px; left: -120px;
   }
   .hero {
     position: relative;
     z-index: 1;
     max-width: var(--max);
     margin: 0 auto;
-    padding: 72px 40px 108px;
+    padding: 56px 40px 68px;
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 1.05fr 1fr;
+    gap: 56px;
     align-items: center;
-    min-height: 78vh;
+    min-height: 0;
   }
   .hero-tag {
     display: inline-flex;
@@ -164,10 +170,10 @@
     100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
   }
   .hero h1 {
-    font-size: 60px;
-    line-height: 1.04;
+    font-size: 52px;
+    line-height: 1.05;
     font-weight: 700;
-    margin: 0 0 22px;
+    margin: 0 0 14px;
     letter-spacing: -0.025em;
     color: var(--ink);
   }
@@ -179,18 +185,19 @@
   .hero h1 .accent::after {
     content: "";
     position: absolute;
-    left: 0; right: 0; bottom: 4px;
+    left: 0; right: 0; bottom: 2px;
     height: 10px;
     background: var(--accent-bg);
     z-index: -1;
     border-radius: 2px;
   }
-  .hero .lead {
-    font-size: 19px;
-    line-height: 1.55;
+  .hero .tagline {
+    font-size: 16px;
+    line-height: 1.5;
     color: var(--muted);
-    margin: 0 0 36px;
-    max-width: 540px;
+    margin: 0 0 26px;
+    max-width: 480px;
+    font-weight: 500;
   }
   .cta-row {
     display: flex;
@@ -233,36 +240,87 @@
   }
   .cta-secondary:hover { color: var(--ink); background: var(--panel-2); }
 
-  /* -------- Hero visual -------- */
+  /* -------- Hero visual (4 live mini charts, 2x2) -------- */
   .hero-visual {
     position: relative;
     width: 100%;
     max-width: 520px;
-    aspect-ratio: 1 / 1;
     justify-self: end;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
     will-change: transform;
     transition: transform .4s cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  .hero-visual svg { width: 100%; height: 100%; display: block; }
-  .hv-draw {
-    stroke-dasharray: 2000;
-    stroke-dashoffset: 2000;
-    animation: draw 2.6s ease-out .4s forwards;
+  .mini-tile {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: transform .18s, border-color .18s, box-shadow .18s;
   }
-  @keyframes draw { to { stroke-dashoffset: 0; } }
-  .hv-pulse { animation: markerPulse 2s infinite 2.4s; transform-origin: center; transform-box: fill-box; }
-  @keyframes markerPulse {
-    0%, 100% { transform: scale(1); opacity: 1; }
-    50%      { transform: scale(1.5); opacity: 0.6; }
+  .mini-tile:hover {
+    transform: translateY(-2px);
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md);
   }
-  .hv-badge {
-    opacity: 0;
-    animation: fadeIn .6s ease-out forwards;
+  .mini-tile-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 6px;
   }
-  .hv-badge.b1 { animation-delay: 1.6s; }
-  .hv-badge.b2 { animation-delay: 2.0s; }
-  .hv-badge.b3 { animation-delay: 2.4s; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+  .mini-tile-label {
+    font-size: 11px;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .mini-tile-delta {
+    font-size: 11px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--muted-2);
+    letter-spacing: 0.2px;
+  }
+  .mini-tile-delta.up    { color: var(--green); }
+  .mini-tile-delta.down  { color: var(--accent); }
+  .mini-tile-delta.flat  { color: var(--muted); }
+  .mini-tile-value {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .mini-tile-unit {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-left: 2px;
+  }
+  .mini-tile-spark {
+    margin-top: auto;
+    padding-top: 4px;
+    min-height: 40px;
+    line-height: 0;
+  }
+  .mini-tile-spark svg { width: 100% !important; height: 40px !important; }
+  .mini-tile-asof {
+    font-size: 10px;
+    color: var(--muted-2);
+    letter-spacing: 0.3px;
+  }
+  .mini-tile.is-loading .mini-tile-value { color: var(--muted-2); }
+  .mini-tile.is-loading .mini-tile-delta { color: var(--muted-2); }
 
   /* -------- Recession composite strip -------- */
   .rec-strip {
@@ -308,8 +366,8 @@
   }
   .rec-strip.is-loading .rec-tag { background: var(--panel-2); color: var(--muted); }
   .rec-strip.is-loading .rec-tag .pulse { background: var(--muted-2); animation: none; }
-  .rec-strip.is-error   .rec-tag { background: rgba(239, 79, 90, 0.12); color: #d23b4a; }
-  .rec-strip.is-error   .rec-tag .pulse { background: #ef4f5a; animation: none; }
+  .rec-strip.is-error   .rec-tag { background: var(--accent-bg); color: var(--accent-2); }
+  .rec-strip.is-error   .rec-tag .pulse { background: var(--accent); animation: none; }
 
   .rec-eyebrow {
     color: var(--accent);
@@ -390,12 +448,12 @@
   }
   .rec-tier.tier-benign   { border-left-color: var(--green);  background: rgba(22, 163, 74, 0.06); }
   .rec-tier.tier-benign   .rec-tier-label { color: var(--green); }
-  .rec-tier.tier-low      { border-left-color: #5a9cff;       background: rgba(90, 156, 255, 0.08); }
-  .rec-tier.tier-low      .rec-tier-label { color: #3f7fd9; }
-  .rec-tier.tier-elevated { border-left-color: var(--accent); background: rgba(196, 127, 0, 0.08); }
-  .rec-tier.tier-elevated .rec-tier-label { color: var(--accent-2); }
-  .rec-tier.tier-high     { border-left-color: #ef4f5a;       background: rgba(239, 79, 90, 0.09); }
-  .rec-tier.tier-high     .rec-tier-label { color: #d23b4a; }
+  .rec-tier.tier-low      { border-left-color: var(--teal);   background: var(--teal-bg); }
+  .rec-tier.tier-low      .rec-tier-label { color: var(--teal-2); }
+  .rec-tier.tier-elevated { border-left-color: var(--amber);  background: rgba(217, 119, 6, 0.08); }
+  .rec-tier.tier-elevated .rec-tier-label { color: var(--amber); }
+  .rec-tier.tier-high     { border-left-color: var(--accent); background: var(--accent-bg); }
+  .rec-tier.tier-high     .rec-tier-label { color: var(--accent-2); }
 
   .rec-dots {
     display: grid;
@@ -422,8 +480,8 @@
     background: var(--muted-2);
   }
   .rec-dot-item.ok .rec-dot        { background: var(--green); }
-  .rec-dot-item.triggered .rec-dot { background: #ef4f5a; box-shadow: 0 0 0 3px rgba(239, 79, 90, 0.16); }
-  .rec-dot-item.triggered          { color: #d23b4a; font-weight: 600; }
+  .rec-dot-item.triggered .rec-dot { background: var(--accent); box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18); }
+  .rec-dot-item.triggered          { color: var(--accent-2); font-weight: 600; }
 
   .rec-cta-row {
     display: flex;
@@ -451,6 +509,186 @@
     transition: gap .18s, color .18s;
   }
   .rec-cta:hover { color: var(--accent-2); gap: 10px; }
+
+  /* -------- Indicator strip (Wage Growth, Existing Home Sales, Housing Starts) -------- */
+  .ind-strip {
+    position: relative;
+    z-index: 1;
+    padding: 52px 40px 60px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    background: var(--bg-2);
+  }
+  .ind-strip.bg-teal  { background: var(--teal-bg); border-color: #cfeae5; }
+  .ind-strip.bg-cream { background: var(--bg-2); }
+  .ind-strip.bg-pink  { background: var(--accent-bg); border-color: #f5d5d5; }
+  .ind-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(380px, 1.15fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .ind-head { display: flex; flex-direction: column; gap: 12px; }
+  .ind-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    width: max-content;
+    background: var(--panel);
+    color: var(--muted);
+    border: 1px solid var(--line);
+  }
+  .ind-tag .pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    animation: recPulse 2s infinite;
+  }
+  .ind-strip.is-loading .ind-tag { color: var(--muted); }
+  .ind-strip.is-loading .ind-tag .pulse { background: var(--muted-2); animation: none; }
+  .ind-strip.is-ready   .ind-tag { color: var(--green); }
+  .ind-strip.is-error   .ind-tag { color: var(--accent-2); }
+  .ind-strip.is-error   .ind-tag .pulse { background: var(--accent); animation: none; }
+
+  .ind-eyebrow {
+    color: var(--accent);
+    font-size: 11.5px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+  .ind-title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .ind-sub {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 460px;
+  }
+
+  .ind-readout {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    box-shadow: var(--shadow-md);
+    display: grid;
+    gap: 16px;
+  }
+  .ind-scoreline {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .ind-value-wrap { display: inline-flex; align-items: baseline; }
+  .ind-value {
+    font-size: 52px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .ind-unit {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-left: 4px;
+  }
+  .ind-delta {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 9px;
+    border-radius: 6px;
+    background: var(--panel-2);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.2px;
+  }
+  .ind-delta.up   { background: rgba(21, 128, 61, 0.1); color: var(--green); }
+  .ind-delta.down { background: var(--accent-bg);        color: var(--accent-2); }
+
+  .ind-tier {
+    margin-left: auto;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border-left: 4px solid var(--muted-2);
+    background: var(--panel-2);
+    min-width: 200px;
+  }
+  .ind-tier-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .ind-tier-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .ind-tier.t-healthy  { border-left-color: var(--green);  background: rgba(21, 128, 61, 0.06); }
+  .ind-tier.t-healthy  .ind-tier-label { color: var(--green); }
+  .ind-tier.t-trend    { border-left-color: var(--teal);   background: var(--teal-bg); }
+  .ind-tier.t-trend    .ind-tier-label { color: var(--teal-2); }
+  .ind-tier.t-cooling  { border-left-color: var(--amber);  background: rgba(217, 119, 6, 0.08); }
+  .ind-tier.t-cooling  .ind-tier-label { color: var(--amber); }
+  .ind-tier.t-weak     { border-left-color: var(--accent); background: var(--accent-bg); }
+  .ind-tier.t-weak     .ind-tier-label { color: var(--accent-2); }
+
+  .ind-spark {
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+    min-height: 56px;
+    line-height: 0;
+  }
+  .ind-spark svg { width: 100% !important; height: 56px !important; }
+
+  .ind-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .ind-asof {
+    font-size: 11.5px;
+    color: var(--muted-2);
+    letter-spacing: 0.4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .ind-cta {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap .18s, color .18s;
+  }
+  .ind-cta:hover { color: var(--accent-2); gap: 10px; }
 
   /* -------- Proof strip -------- */
   .proof {
@@ -743,9 +981,11 @@
       gap: 44px;
       min-height: 0;
     }
-    .hero h1 { font-size: 40px; }
-    .hero .lead { font-size: 17px; }
-    .hero-visual { max-width: 360px; justify-self: start; }
+    .hero h1 { font-size: 38px; }
+    .hero .tagline { font-size: 15px; }
+    .hero-visual { max-width: 100%; justify-self: stretch; gap: 10px; }
+    .mini-tile { padding: 12px 14px; }
+    .mini-tile-value { font-size: 22px; }
     .proof-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px; }
     .proof-num { font-size: 28px; }
     .rec-strip { padding: 40px 24px 44px; }
@@ -758,6 +998,14 @@
     .rec-dots { gap: 6px; }
     .rec-dot-item { font-size: 10px; }
     .rec-cta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .ind-strip { padding: 40px 24px 44px; }
+    .ind-inner { grid-template-columns: 1fr; gap: 28px; }
+    .ind-title { font-size: 26px; }
+    .ind-readout { padding: 18px 20px; }
+    .ind-value { font-size: 42px; }
+    .ind-tier { margin-left: 0; min-width: 0; width: 100%; }
+    .ind-scoreline { gap: 12px; }
+    .ind-cta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
     .dashboards { padding: 72px 24px 24px; }
     .section-hdr h2 { font-size: 30px; }
     .methodology { padding: 72px 24px; margin-top: 48px; }
@@ -791,10 +1039,10 @@
 <div class="hero-wrap">
   <section class="hero">
     <div class="hero-copy">
-      <span class="hero-tag"><span class="pulse-dot"></span> Live &middot; updated with each filing</span>
+      <span class="hero-tag"><span class="pulse-dot"></span> Live &middot; EDGAR + FRED</span>
       <h1>Read the <span class="accent">filing</span>.<br>Not the summary.</h1>
-      <p class="lead">
-        Interactive financial research reconstructed from SEC EDGAR and FRED. Every line item ties back to a filing or series &mdash; no third-party aggregators, no black-box transformations, no "as-reported" database abstractions.
+      <p class="tagline">
+        Analyst-grade research reconstructed from primary sources. Every line item ties back to a filing or series.
       </p>
       <div class="cta-row">
         <a href="#research" class="cta-primary">Open the research <span class="arrow">&rarr;</span></a>
@@ -802,12 +1050,50 @@
       </div>
     </div>
 
-    <div class="hero-visual" id="hero-visual" aria-hidden="true">
-      <svg viewBox="0 0 480 480" preserveAspectRatio="xMidYMid meet">
+    <div class="hero-visual" id="hero-visual">
+      <a class="mini-tile is-loading" data-tile="GDPC1" href="/core/econ/indicator.html?id=GDPC1">
+        <div class="mini-tile-head">
+          <span class="mini-tile-label">Real GDP</span>
+          <span class="mini-tile-delta">&middot;</span>
+        </div>
+        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+        <div class="mini-tile-spark"></div>
+        <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+      </a>
+      <a class="mini-tile is-loading" data-tile="CPILFESL" href="/core/econ/indicator.html?id=CPILFESL">
+        <div class="mini-tile-head">
+          <span class="mini-tile-label">Core CPI</span>
+          <span class="mini-tile-delta">&middot;</span>
+        </div>
+        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+        <div class="mini-tile-spark"></div>
+        <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+      </a>
+      <a class="mini-tile is-loading" data-tile="CSUSHPISA" href="/core/econ/indicator.html?id=CSUSHPISA">
+        <div class="mini-tile-head">
+          <span class="mini-tile-label">Case-Shiller HPI</span>
+          <span class="mini-tile-delta">&middot;</span>
+        </div>
+        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+        <div class="mini-tile-spark"></div>
+        <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+      </a>
+      <a class="mini-tile is-loading" data-tile="UNRATE" href="/core/econ/indicator.html?id=UNRATE">
+        <div class="mini-tile-head">
+          <span class="mini-tile-label">Unemployment</span>
+          <span class="mini-tile-delta">&middot;</span>
+        </div>
+        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+        <div class="mini-tile-spark"></div>
+        <div class="mini-tile-asof">Level &middot; &mdash;</div>
+      </a>
+    </div>
+    <!-- previous decorative SVG removed: hero now shows 4 live mini charts -->
+    <div style="display:none" aria-hidden="true"><svg>
         <defs>
           <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#c47f00" stop-opacity="0.22"/>
-            <stop offset="100%" stop-color="#c47f00" stop-opacity="0"/>
+            <stop offset="0%" stop-color="#dc2626" stop-opacity="0.22"/>
+            <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
           </linearGradient>
           <linearGradient id="stackA" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stop-color="#7ba4cf" stop-opacity="0.35"/>
@@ -885,10 +1171,10 @@
                  L 412 360 L 60 360 Z" fill="url(#areaGrad)"/>
         <polyline class="hv-draw"
                   points="60,340 92,332 124,322 156,302 188,270 220,310 252,230 284,170 316,120 348,180 380,195 412,190"
-                  fill="none" stroke="#c47f00" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
+                  fill="none" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
 
         <!-- Data points -->
-        <g fill="#c47f00">
+        <g fill="#dc2626">
           <circle cx="60"  cy="340" r="2.5"/>
           <circle cx="92"  cy="332" r="2.5"/>
           <circle cx="124" cy="322" r="2.5"/>
@@ -905,7 +1191,7 @@
 
         <!-- Peak annotation -->
         <g class="hv-badge b1">
-          <line x1="316" y1="95" x2="316" y2="116" stroke="#c47f00" stroke-width="1" stroke-dasharray="2,2"/>
+          <line x1="316" y1="95" x2="316" y2="116" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
           <rect x="270" y="70" width="92" height="24" rx="12" fill="#0f172a"/>
           <text x="316" y="86" font-family="Inter,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">$891M · FY2023</text>
         </g>
@@ -970,6 +1256,99 @@
   </div>
 </section>
 
+<!-- Wage growth strip -->
+<section class="ind-strip bg-teal is-loading" id="strip-AHE" data-ind-id="AHE" aria-label="Live wage growth indicator">
+  <div class="ind-inner">
+    <div class="ind-head">
+      <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
+      <span class="ind-eyebrow">Labor &middot; Consumer</span>
+      <h2 class="ind-title">Wage growth &mdash; are workers keeping up?</h2>
+      <p class="ind-sub">
+        Nominal average hourly earnings (all private employees), year-over-year. The market's first-look wage print from the BLS CES establishment survey, released Friday with payrolls.
+      </p>
+    </div>
+    <div class="ind-readout">
+      <div class="ind-scoreline">
+        <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">%</span></span>
+        <span class="ind-delta">&middot;</span>
+        <span class="ind-tier">
+          <span class="ind-tier-label">Loading&hellip;</span>
+          <span class="ind-tier-sub">Fetching FRED</span>
+        </span>
+      </div>
+      <div class="ind-spark"></div>
+      <div class="ind-cta-row">
+        <span class="ind-asof">&nbsp;</span>
+        <a href="/core/econ/indicator.html?id=AHE" class="ind-cta">
+          See full detail <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Existing home sales strip -->
+<section class="ind-strip bg-cream is-loading" id="strip-EXHOSLUS" data-ind-id="EXHOSLUS" aria-label="Live existing home sales indicator">
+  <div class="ind-inner">
+    <div class="ind-head">
+      <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
+      <span class="ind-eyebrow">Housing &middot; Demand</span>
+      <h2 class="ind-title">Existing home sales &mdash; is the market moving?</h2>
+      <p class="ind-sub">
+        National Association of Realtors sales volume, SAAR in millions of units. ~90% of total US home transactions &mdash; the cleanest read on resale demand.
+      </p>
+    </div>
+    <div class="ind-readout">
+      <div class="ind-scoreline">
+        <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">M</span></span>
+        <span class="ind-delta">&middot;</span>
+        <span class="ind-tier">
+          <span class="ind-tier-label">Loading&hellip;</span>
+          <span class="ind-tier-sub">Fetching FRED</span>
+        </span>
+      </div>
+      <div class="ind-spark"></div>
+      <div class="ind-cta-row">
+        <span class="ind-asof">&nbsp;</span>
+        <a href="/core/econ/indicator.html?id=EXHOSLUS" class="ind-cta">
+          See full detail <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Housing starts strip -->
+<section class="ind-strip bg-pink is-loading" id="strip-HOUST" data-ind-id="HOUST" aria-label="Live housing starts indicator">
+  <div class="ind-inner">
+    <div class="ind-head">
+      <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
+      <span class="ind-eyebrow">Housing &middot; Construction</span>
+      <h2 class="ind-title">Housing starts &mdash; what are builders doing?</h2>
+      <p class="ind-sub">
+        New privately-owned residential construction, Census Bureau. YoY shown; volatile month-to-month, trend component is single-family starts. Direct contributor to GDP via residential investment.
+      </p>
+    </div>
+    <div class="ind-readout">
+      <div class="ind-scoreline">
+        <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">%</span></span>
+        <span class="ind-delta">&middot;</span>
+        <span class="ind-tier">
+          <span class="ind-tier-label">Loading&hellip;</span>
+          <span class="ind-tier-sub">Fetching FRED</span>
+        </span>
+      </div>
+      <div class="ind-spark"></div>
+      <div class="ind-cta-row">
+        <span class="ind-asof">&nbsp;</span>
+        <a href="/core/econ/indicator.html?id=HOUST" class="ind-cta">
+          See full detail <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- Proof strip -->
 <section class="proof">
   <div class="proof-inner">
@@ -1020,7 +1399,7 @@
           </g>
           <g transform="translate(250,10)">
             <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,16 12,12 20,14 28,10 36,8 44,12 56,14" fill="none" stroke="#c47f00" stroke-width="1.3"/>
+            <polyline points="4,16 12,12 20,14 28,10 36,8 44,12 56,14" fill="none" stroke="#dc2626" stroke-width="1.3"/>
           </g>
           <g transform="translate(10,38)">
             <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
@@ -1044,7 +1423,7 @@
           </g>
           <g transform="translate(90,66)">
             <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,8 14,10 24,14 34,12 44,8 54,6 66,10" fill="none" stroke="#c47f00" stroke-width="1.3"/>
+            <polyline points="4,8 14,10 24,14 34,12 44,8 54,6 66,10" fill="none" stroke="#dc2626" stroke-width="1.3"/>
           </g>
           <g transform="translate(170,66)">
             <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
@@ -1082,7 +1461,7 @@
             <circle cx="108" cy="22" r="2" fill="#1d4ed8" opacity="0.7"/>
             <circle cx="118" cy="18" r="2" fill="#1d4ed8" opacity="0.7"/>
             <circle cx="126" cy="12" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <line x1="6" y1="70" x2="126" y2="14" stroke="#c47f00" stroke-width="1.4" stroke-dasharray="3,2"/>
+            <line x1="6" y1="70" x2="126" y2="14" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="3,2"/>
           </g>
           <line x1="160" y1="10" x2="160" y2="86" stroke="#e2e6ec" stroke-width="1" stroke-dasharray="2,2"/>
           <g transform="translate(175,12)">
@@ -1130,12 +1509,12 @@
           <rect x="54" y="56" width="10" height="22" fill="#1d4ed8" opacity="0.85"/>
           <rect x="66" y="56" width="10" height="18" fill="#1d4ed8" opacity="0.85"/>
           <rect x="78" y="56" width="10" height="14" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="98"  y="56" width="10" height="8"  fill="#c47f00" opacity="0.85"/>
-          <rect x="110" y="56" width="10" height="14" fill="#c47f00" opacity="0.85"/>
-          <rect x="122" y="56" width="10" height="20" fill="#c47f00" opacity="0.85"/>
-          <rect x="134" y="56" width="10" height="12" fill="#c47f00" opacity="0.85"/>
-          <rect x="146" y="56" width="10" height="16" fill="#c47f00" opacity="0.85"/>
-          <rect x="158" y="56" width="10" height="10" fill="#c47f00" opacity="0.85"/>
+          <rect x="98"  y="56" width="10" height="8"  fill="#dc2626" opacity="0.85"/>
+          <rect x="110" y="56" width="10" height="14" fill="#dc2626" opacity="0.85"/>
+          <rect x="122" y="56" width="10" height="20" fill="#dc2626" opacity="0.85"/>
+          <rect x="134" y="56" width="10" height="12" fill="#dc2626" opacity="0.85"/>
+          <rect x="146" y="56" width="10" height="16" fill="#dc2626" opacity="0.85"/>
+          <rect x="158" y="56" width="10" height="10" fill="#dc2626" opacity="0.85"/>
           <rect x="178" y="42" width="10" height="14" fill="#7c3aed" opacity="0.85"/>
           <rect x="190" y="30" width="10" height="26" fill="#7c3aed" opacity="0.85"/>
           <rect x="202" y="18" width="10" height="38" fill="#7c3aed" opacity="0.85"/>
@@ -1226,42 +1605,10 @@
     onScroll();
   })();
 
-  // Hero parallax — scroll + mouse
-  (function () {
-    const el = document.getElementById('hero-visual');
-    if (!el) return;
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
-
-    let scrollY = 0, mx = 0, my = 0, raf = null;
-    function apply() {
-      el.style.transform = `translate3d(${mx.toFixed(2)}px, ${(scrollY * 0.12 + my).toFixed(2)}px, 0)`;
-      raf = null;
-    }
-    function schedule() { if (!raf) raf = requestAnimationFrame(apply); }
-
-    window.addEventListener('scroll', () => {
-      if (window.innerWidth < 960) return;
-      scrollY = window.scrollY;
-      schedule();
-    }, { passive: true });
-
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      hero.addEventListener('mousemove', (e) => {
-        const r = hero.getBoundingClientRect();
-        const nx = ((e.clientX - r.left) / r.width) - 0.5;
-        const ny = ((e.clientY - r.top) / r.height) - 0.5;
-        mx = nx * 14;
-        my = ny * 10;
-        schedule();
-      });
-      hero.addEventListener('mouseleave', () => {
-        mx = 0; my = 0;
-        schedule();
-      });
-    }
-  })();
+  // Hero parallax — disabled since the visual is now a live chart grid, not a
+  // decorative SVG. Motion on the 4-tile grid made tooltips/hover-states feel
+  // unstable. Kept the outer IIFE slot for easy re-enable if we want it back.
+  (function () { /* no-op */ })();
 
   // Scroll reveal + count-up on proof numbers
   (function () {
@@ -1303,80 +1650,317 @@
   })();
 </script>
 
-<!-- Live recession composite: fetches 5 FRED series and renders the gauge.
-     Thresholds and compute logic live in /core/econ/recession-core.js so they
-     stay in sync with the detail view at /core/econ/recession.html. -->
+<!-- Live landing-page data: one fetch populates the recession composite, the 4
+     hero mini-charts (GDPC1, CPILFESL, CSUSHPISA, UNRATE), and the 3 indicator
+     strips (AHE, EXHOSLUS, HOUST). Transform logic is shared with the econ
+     dashboard (./core/lib/transforms.js) so values match the detail pages. -->
 <script type="module">
   import { fetchFred } from './core/lib/fred-client.js';
-  import { SERIES, HISTORY_START, tierOf, computeSignals } from './core/econ/recession-core.js';
+  import { applyTransform } from './core/lib/transforms.js';
+  import { renderSparkline } from './core/econ/sparklines.js';
+  import {
+    SERIES as REC_SERIES,
+    HISTORY_START as REC_HISTORY,
+    tierOf as recTierOf,
+    computeSignals,
+  } from './core/econ/recession-core.js';
 
+  // ---- Formatting helpers -------------------------------------------------
   const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   function fmtMonth(iso) {
     const m = /^(\d{4})-(\d{2})/.exec(String(iso || ''));
     if (!m) return '';
     return `${MONTH_NAMES[parseInt(m[2], 10) - 1]} ${m[1]}`;
   }
+  function fmtValue(v, d) {
+    if (!Number.isFinite(v)) return '—';
+    return v.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+  // 12-month delta on a transformed series. Uses wall-clock date matching so
+  // quarterly series (GDPC1) and monthly series both get a true 1yr lookback.
+  function delta12mo(obs) {
+    if (!obs || obs.length < 2) return NaN;
+    const last = obs[obs.length - 1];
+    const targetMs = new Date(last.date).getTime() - 365 * 86400000;
+    for (let i = obs.length - 2; i >= 0; i--) {
+      if (new Date(obs[i].date).getTime() <= targetMs) {
+        return last.value - obs[i].value;
+      }
+    }
+    return NaN;
+  }
+  function deltaKind(delta, direction) {
+    if (!Number.isFinite(delta) || Math.abs(delta) < 0.05) return 'flat';
+    if (direction === 'higher_better') return delta > 0 ? 'up' : 'down';
+    if (direction === 'lower_better')  return delta > 0 ? 'down' : 'up';
+    return delta > 0 ? 'up' : 'down';
+  }
+  function fmtDeltaText(delta, decimals, unit) {
+    if (!Number.isFinite(delta)) return '·';
+    const sign = delta > 0 ? '+' : delta < 0 ? '−' : '';
+    const abs = Math.abs(delta);
+    return `${sign}${abs.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })} ${unit}`;
+  }
+  // Palette for sparklines — tied to CSS tokens.
+  const COLOR_GREEN  = '#15803d';
+  const COLOR_RED    = '#dc2626';
+  const COLOR_TEAL   = '#0d9488';
+  const COLOR_MUTED  = '#8a8578';
+  function strokeForKind(kind) {
+    if (kind === 'up')   return COLOR_GREEN;
+    if (kind === 'down') return COLOR_RED;
+    return COLOR_MUTED;
+  }
 
-  async function renderRecessionStrip() {
-    const stripEl = document.getElementById('rec-strip');
+  // ---- Configuration ------------------------------------------------------
+  // Hero 2×2 mini tiles. transform comes from ./core/lib/transforms.js.
+  const HERO_TILES = [
+    { id: 'GDPC1',     transform: 'yoy',     unit: '%', decimals: 1, direction: 'higher_better', contextLabel: 'YoY' },
+    { id: 'CPILFESL',  transform: 'yoy',     unit: '%', decimals: 1, direction: 'lower_better',  contextLabel: 'YoY' },
+    { id: 'CSUSHPISA', transform: 'yoy',     unit: '%', decimals: 1, direction: 'higher_better', contextLabel: 'YoY' },
+    { id: 'UNRATE',    transform: 'level',   unit: '%', decimals: 1, direction: 'lower_better',  contextLabel: 'Level' },
+  ];
+
+  // 3 indicator strips. Each has a tier function that classifies the latest
+  // value into one of 4 buckets: healthy / trend / cooling / weak.
+  const STRIPS = [
+    {
+      stripId: 'AHE',
+      fredId:  'CES0500000003',
+      transform: 'yoy',
+      unit: '%',
+      decimals: 1,
+      direction: 'neutral',
+      tier(v) {
+        if (!Number.isFinite(v))  return { cls: '',          label: '—',        sub: '' };
+        if (v >= 4.0)             return { cls: 't-cooling', label: 'HOT',      sub: 'Above 4% is hot — historically feeds back into CPI.' };
+        if (v >= 3.0)             return { cls: 't-healthy', label: 'TREND',    sub: '3–4% is the pre-2020 trend band.' };
+        if (v >= 2.0)             return { cls: 't-cooling', label: 'COOLING',  sub: 'Decelerating — watch for real-wage compression.' };
+        return                         { cls: 't-weak',    label: 'WEAK',     sub: 'Wage growth below 2% is sub-trend.' };
+      },
+    },
+    {
+      stripId: 'EXHOSLUS',
+      fredId:  'EXHOSLUSM495S',
+      transform: 'level_m',
+      unit: 'M',
+      decimals: 2,
+      direction: 'higher_better',
+      tier(v) {
+        if (!Number.isFinite(v)) return { cls: '',          label: '—',        sub: '' };
+        if (v >= 5.0)            return { cls: 't-healthy', label: 'HEALTHY',  sub: 'SAAR above the 5M cyclical neutral.' };
+        if (v >= 4.0)            return { cls: 't-cooling', label: 'SOFT',     sub: 'Below long-run neutral, above trough.' };
+        return                        { cls: 't-weak',    label: 'WEAK',     sub: 'SAAR below 4M — near cycle lows.' };
+      },
+    },
+    {
+      stripId: 'HOUST',
+      fredId:  'HOUST',
+      transform: 'yoy',
+      unit: '%',
+      decimals: 1,
+      direction: 'higher_better',
+      tier(v) {
+        if (!Number.isFinite(v)) return { cls: '',          label: '—',           sub: '' };
+        if (v >=  5.0)           return { cls: 't-healthy', label: 'EXPANDING',   sub: 'Starts up year-on-year.' };
+        if (v >= -5.0)           return { cls: 't-trend',   label: 'FLAT',        sub: 'Within ±5% YoY — trend pace.' };
+        return                        { cls: 't-weak',    label: 'CONTRACTING', sub: 'YoY below −5% — builders pulling back.' };
+      },
+    },
+  ];
+
+  // ---- Renderers ----------------------------------------------------------
+  function renderHeroTile(cfg, map) {
+    const tileEl = document.querySelector(`.mini-tile[data-tile="${cfg.id}"]`);
+    if (!tileEl) return;
+    const rawObs = (map[cfg.id] && map[cfg.id].observations) || [];
+    const series = applyTransform(rawObs, cfg.transform);
+    if (!series.length) {
+      tileEl.querySelector('.mini-tile-value').textContent = '—';
+      return;
+    }
+    const last  = series[series.length - 1];
+    const delta = delta12mo(series);
+    const kind  = deltaKind(delta, cfg.direction);
+
+    // Value + unit
+    const valEl = tileEl.querySelector('.mini-tile-value');
+    valEl.innerHTML = `${fmtValue(last.value, cfg.decimals)}<span class="mini-tile-unit">${cfg.unit}</span>`;
+
+    // Delta badge
+    const delEl = tileEl.querySelector('.mini-tile-delta');
+    delEl.className = `mini-tile-delta ${kind}`;
+    delEl.textContent = Number.isFinite(delta)
+      ? `${kind === 'up' ? '▲' : kind === 'down' ? '▼' : '•'} ${fmtDeltaText(delta, cfg.decimals, 'pp').replace(' pp','pp')}`
+      : '·';
+
+    // Sparkline (last ~5 years for monthly, full span for quarterly GDPC1)
+    const sparkEl = tileEl.querySelector('.mini-tile-spark');
+    const sliceN  = cfg.transform === 'level' ? 60 : 60;
+    const tail = series.slice(-sliceN);
+    renderSparkline(sparkEl, tail, {
+      width: 220, height: 40, fill: true,
+      stroke: strokeForKind(kind),
+      zeroLine: cfg.transform === 'yoy',
+    });
+
+    // As-of
+    const asofEl = tileEl.querySelector('.mini-tile-asof');
+    asofEl.textContent = `${cfg.contextLabel} · ${fmtMonth(last.date)}`;
+
+    tileEl.classList.remove('is-loading');
+    tileEl.classList.add('is-ready');
+  }
+
+  function renderStrip(cfg, map) {
+    const stripEl = document.getElementById(`strip-${cfg.stripId}`);
     if (!stripEl) return;
+    const setTag = (text) => {
+      const t = stripEl.querySelector('.ind-status-text');
+      if (t) t.textContent = text;
+    };
 
-    const statusText = stripEl.querySelector('.rec-status-text');
-    const setTag = (text) => { if (statusText) statusText.textContent = text; };
-
-    try {
-      const map = await fetchFred(SERIES, { start: HISTORY_START });
-      const raw = {};
-      for (const id of SERIES) raw[id] = (map[id] && map[id].observations) || [];
-
-      const { signals } = computeSignals(raw);
-      const triggered = signals.filter((s) => s.triggered).length;
-      const tier = tierOf(triggered);
-
-      document.getElementById('rec-count').textContent = String(triggered);
-
-      const tierEl = document.getElementById('rec-tier');
-      tierEl.classList.remove('tier-benign', 'tier-low', 'tier-elevated', 'tier-high');
-      tierEl.classList.add(tier.cls);
-      document.getElementById('rec-tier-label').textContent = tier.label;
-      document.getElementById('rec-tier-sub').textContent   = tier.sub;
-
-      const dotsRoot = document.getElementById('rec-dots');
-      dotsRoot.innerHTML = signals.map((s) => {
-        const cls = s.triggered ? 'triggered' : 'ok';
-        const status = s.triggered ? 'TRIGGERED' : 'OK';
-        const short = (s.short || s.label)
-          .replace(/-/g, '\u2212')   // ASCII hyphen → minus for visual clarity
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;');
-        return `<div class="rec-dot-item ${cls}" title="${s.label}: ${status}">
-          <span class="rec-dot"></span><span>${short}</span>
-        </div>`;
-      }).join('');
-
-      // As-of = latest observation date across all five signals.
-      const latest = signals
-        .map((s) => s.currentDate)
-        .filter(Boolean)
-        .sort()
-        .pop();
-      const asofEl = document.getElementById('rec-asof');
-      if (asofEl) asofEl.textContent = latest ? `Data as of ${fmtMonth(latest)}` : '';
-
-      stripEl.classList.remove('is-loading');
-      stripEl.classList.add('is-ready');
-      setTag('Live');
-    } catch (err) {
-      console.error('Recession strip fetch failed', err);
+    const rawObs = (map[cfg.fredId] && map[cfg.fredId].observations) || [];
+    const series = applyTransform(rawObs, cfg.transform);
+    if (!series.length) {
+      setTag('No data');
       stripEl.classList.remove('is-loading');
       stripEl.classList.add('is-error');
-      setTag('Data error');
-      document.getElementById('rec-tier-label').textContent = '—';
-      document.getElementById('rec-tier-sub').textContent = 'Could not fetch FRED series';
+      return;
+    }
+    const last  = series[series.length - 1];
+    const delta = delta12mo(series);
+    const kind  = deltaKind(delta, cfg.direction);
+    const tier  = cfg.tier(last.value);
+
+    // Value
+    stripEl.querySelector('.ind-value').textContent = fmtValue(last.value, cfg.decimals);
+    stripEl.querySelector('.ind-unit').textContent  = cfg.unit;
+
+    // Delta
+    const delEl = stripEl.querySelector('.ind-delta');
+    delEl.className = `ind-delta ${kind}`;
+    delEl.textContent = Number.isFinite(delta)
+      ? `${kind === 'up' ? '▲' : kind === 'down' ? '▼' : '•'} ${fmtDeltaText(delta, cfg.decimals, cfg.transform === 'level_m' ? 'M' : 'pp').replace(' pp','pp').replace(' M','M')} 12mo`
+      : '·';
+
+    // Tier
+    const tierEl = stripEl.querySelector('.ind-tier');
+    tierEl.classList.remove('t-healthy', 't-trend', 't-cooling', 't-weak');
+    if (tier.cls) tierEl.classList.add(tier.cls);
+    tierEl.querySelector('.ind-tier-label').textContent = tier.label;
+    tierEl.querySelector('.ind-tier-sub').textContent   = tier.sub;
+
+    // Sparkline — last 10 years (120 monthly points)
+    const sparkEl = stripEl.querySelector('.ind-spark');
+    renderSparkline(sparkEl, series.slice(-120), {
+      width: 520, height: 56, fill: true,
+      stroke: tier.cls === 't-weak' ? COLOR_RED
+            : tier.cls === 't-healthy' ? COLOR_GREEN
+            : tier.cls === 't-cooling' ? '#d97706'
+            : COLOR_TEAL,
+      zeroLine: cfg.transform === 'yoy',
+    });
+
+    // As-of
+    stripEl.querySelector('.ind-asof').textContent = `Data as of ${fmtMonth(last.date)}`;
+
+    stripEl.classList.remove('is-loading');
+    stripEl.classList.add('is-ready');
+    setTag('Live');
+  }
+
+  function renderRecession(map) {
+    const stripEl = document.getElementById('rec-strip');
+    if (!stripEl) return;
+    const setTag = (text) => {
+      const t = stripEl.querySelector('.rec-status-text');
+      if (t) t.textContent = text;
+    };
+
+    const raw = {};
+    for (const id of REC_SERIES) raw[id] = (map[id] && map[id].observations) || [];
+    const { signals } = computeSignals(raw);
+    const triggered = signals.filter((s) => s.triggered).length;
+    const tier = recTierOf(triggered);
+
+    document.getElementById('rec-count').textContent = String(triggered);
+
+    const tierEl = document.getElementById('rec-tier');
+    tierEl.classList.remove('tier-benign', 'tier-low', 'tier-elevated', 'tier-high');
+    tierEl.classList.add(tier.cls);
+    document.getElementById('rec-tier-label').textContent = tier.label;
+    document.getElementById('rec-tier-sub').textContent   = tier.sub;
+
+    const dotsRoot = document.getElementById('rec-dots');
+    dotsRoot.innerHTML = signals.map((s) => {
+      const cls = s.triggered ? 'triggered' : 'ok';
+      const status = s.triggered ? 'TRIGGERED' : 'OK';
+      const short = (s.short || s.label)
+        .replace(/-/g, '\u2212')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;');
+      return `<div class="rec-dot-item ${cls}" title="${s.label}: ${status}">
+        <span class="rec-dot"></span><span>${short}</span>
+      </div>`;
+    }).join('');
+
+    const latest = signals.map((s) => s.currentDate).filter(Boolean).sort().pop();
+    const asofEl = document.getElementById('rec-asof');
+    if (asofEl) asofEl.textContent = latest ? `Data as of ${fmtMonth(latest)}` : '';
+
+    stripEl.classList.remove('is-loading');
+    stripEl.classList.add('is-ready');
+    setTag('Live');
+  }
+
+  function markAllErrors() {
+    document.querySelectorAll('.mini-tile').forEach((t) => {
+      t.classList.remove('is-loading');
+      t.classList.add('is-error');
+    });
+    ['AHE', 'EXHOSLUS', 'HOUST'].forEach((id) => {
+      const el = document.getElementById(`strip-${id}`);
+      if (!el) return;
+      el.classList.remove('is-loading');
+      el.classList.add('is-error');
+      const t = el.querySelector('.ind-status-text');
+      if (t) t.textContent = 'Data error';
+    });
+    const rec = document.getElementById('rec-strip');
+    if (rec) {
+      rec.classList.remove('is-loading');
+      rec.classList.add('is-error');
+      const t = rec.querySelector('.rec-status-text');
+      if (t) t.textContent = 'Data error';
+      const tl = document.getElementById('rec-tier-label');
+      const ts = document.getElementById('rec-tier-sub');
+      if (tl) tl.textContent = '—';
+      if (ts) ts.textContent = 'Could not fetch FRED series';
     }
   }
 
-  renderRecessionStrip();
+  async function main() {
+    // Dedupe all series IDs across recession / hero / strips.
+    const allSeries = new Set(REC_SERIES);
+    HERO_TILES.forEach((t) => allSeries.add(t.id));
+    STRIPS.forEach((s) => allSeries.add(s.fredId));
+
+    let map;
+    try {
+      map = await fetchFred([...allSeries], { start: REC_HISTORY });
+    } catch (err) {
+      console.error('FRED fetch failed', err);
+      markAllErrors();
+      return;
+    }
+
+    renderRecession(map);
+    HERO_TILES.forEach((cfg) => renderHeroTile(cfg, map));
+    STRIPS.forEach((cfg) => renderStrip(cfg, map));
+  }
+
+  main();
 </script>
 
 </body>
