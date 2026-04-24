@@ -264,6 +264,194 @@
   .hv-badge.b3 { animation-delay: 2.4s; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
+  /* -------- Recession composite strip -------- */
+  .rec-strip {
+    position: relative;
+    z-index: 1;
+    padding: 52px 40px 60px;
+    background: var(--bg-2);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .rec-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(260px, 1fr) minmax(380px, 1.15fr);
+    gap: 48px;
+    align-items: center;
+  }
+  .rec-head { display: flex; flex-direction: column; gap: 12px; }
+  .rec-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(22, 163, 74, 0.08);
+    color: var(--green);
+    padding: 5px 11px;
+    border-radius: 999px;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+    font-weight: 700;
+    width: max-content;
+  }
+  .rec-tag .pulse {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--green);
+    animation: recPulse 2s infinite;
+  }
+  @keyframes recPulse {
+    0%   { box-shadow: 0 0 0 0   rgba(22, 163, 74, 0.45); }
+    70%  { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+    100% { box-shadow: 0 0 0 0   rgba(22, 163, 74, 0); }
+  }
+  .rec-strip.is-loading .rec-tag { background: var(--panel-2); color: var(--muted); }
+  .rec-strip.is-loading .rec-tag .pulse { background: var(--muted-2); animation: none; }
+  .rec-strip.is-error   .rec-tag { background: rgba(239, 79, 90, 0.12); color: #d23b4a; }
+  .rec-strip.is-error   .rec-tag .pulse { background: #ef4f5a; animation: none; }
+
+  .rec-eyebrow {
+    color: var(--accent);
+    font-size: 11.5px;
+    letter-spacing: 2.4px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .rec-title {
+    margin: 0;
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    line-height: 1.15;
+  }
+  .rec-sub {
+    margin: 4px 0 0;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+    max-width: 460px;
+  }
+
+  .rec-readout {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px 26px;
+    box-shadow: var(--shadow-md);
+    display: grid;
+    gap: 18px;
+  }
+  .rec-scoreline {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+  .rec-count {
+    font-size: 64px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .rec-denom {
+    color: var(--muted);
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    line-height: 1.35;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .rec-tier {
+    margin-left: auto;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border-left: 4px solid var(--muted-2);
+    background: var(--panel-2);
+    min-width: 190px;
+  }
+  .rec-tier-label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.8px;
+    color: var(--muted);
+    text-transform: uppercase;
+  }
+  .rec-tier-sub {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .rec-tier.tier-benign   { border-left-color: var(--green);  background: rgba(22, 163, 74, 0.06); }
+  .rec-tier.tier-benign   .rec-tier-label { color: var(--green); }
+  .rec-tier.tier-low      { border-left-color: #5a9cff;       background: rgba(90, 156, 255, 0.08); }
+  .rec-tier.tier-low      .rec-tier-label { color: #3f7fd9; }
+  .rec-tier.tier-elevated { border-left-color: var(--accent); background: rgba(196, 127, 0, 0.08); }
+  .rec-tier.tier-elevated .rec-tier-label { color: var(--accent-2); }
+  .rec-tier.tier-high     { border-left-color: #ef4f5a;       background: rgba(239, 79, 90, 0.09); }
+  .rec-tier.tier-high     .rec-tier-label { color: #d23b4a; }
+
+  .rec-dots {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .rec-dot-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: var(--muted);
+    letter-spacing: 0.3px;
+    text-align: center;
+    font-weight: 500;
+  }
+  .rec-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--muted-2);
+  }
+  .rec-dot-item.ok .rec-dot        { background: var(--green); }
+  .rec-dot-item.triggered .rec-dot { background: #ef4f5a; box-shadow: 0 0 0 3px rgba(239, 79, 90, 0.16); }
+  .rec-dot-item.triggered          { color: #d23b4a; font-weight: 600; }
+
+  .rec-cta-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line-soft);
+  }
+  .rec-asof {
+    font-size: 11.5px;
+    color: var(--muted-2);
+    letter-spacing: 0.4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .rec-cta {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap .18s, color .18s;
+  }
+  .rec-cta:hover { color: var(--accent-2); gap: 10px; }
+
   /* -------- Proof strip -------- */
   .proof {
     position: relative;
@@ -560,6 +748,16 @@
     .hero-visual { max-width: 360px; justify-self: start; }
     .proof-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px; }
     .proof-num { font-size: 28px; }
+    .rec-strip { padding: 40px 24px 44px; }
+    .rec-inner { grid-template-columns: 1fr; gap: 28px; }
+    .rec-title { font-size: 26px; }
+    .rec-readout { padding: 18px 20px; }
+    .rec-count { font-size: 52px; }
+    .rec-tier { margin-left: 0; min-width: 0; width: 100%; }
+    .rec-scoreline { gap: 14px; }
+    .rec-dots { gap: 6px; }
+    .rec-dot-item { font-size: 10px; }
+    .rec-cta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
     .dashboards { padding: 72px 24px 24px; }
     .section-hdr h2 { font-size: 30px; }
     .methodology { padding: 72px 24px; margin-top: 48px; }
@@ -734,6 +932,43 @@
     </div>
   </section>
 </div>
+
+<!-- Recession composite (live FRED) -->
+<section class="rec-strip is-loading" id="rec-strip" aria-label="Live US recession-risk composite">
+  <div class="rec-inner">
+    <div class="rec-head">
+      <span class="rec-tag"><span class="pulse"></span><span class="rec-status-text">Loading&hellip;</span></span>
+      <span class="rec-eyebrow">Live composite</span>
+      <h2 class="rec-title">US recession risk, right now.</h2>
+      <p class="rec-sub">
+        Five widely-watched signals &mdash; Sahm, 10Y&ndash;3M curve, HY OAS, unemployment momentum, payroll trend &mdash; scored against professional-consensus triggers. The composite is the count. No weighting, no black box.
+      </p>
+    </div>
+    <div class="rec-readout">
+      <div class="rec-scoreline">
+        <span class="rec-count" id="rec-count">&mdash;</span>
+        <span class="rec-denom">of 5 signals<br>triggered</span>
+        <span class="rec-tier" id="rec-tier">
+          <span class="rec-tier-label" id="rec-tier-label">Loading&hellip;</span>
+          <span class="rec-tier-sub" id="rec-tier-sub">Fetching FRED series</span>
+        </span>
+      </div>
+      <div class="rec-dots" id="rec-dots">
+        <div class="rec-dot-item"><span class="rec-dot"></span><span>Sahm</span></div>
+        <div class="rec-dot-item"><span class="rec-dot"></span><span>10Y&minus;3M</span></div>
+        <div class="rec-dot-item"><span class="rec-dot"></span><span>HY OAS</span></div>
+        <div class="rec-dot-item"><span class="rec-dot"></span><span>UNRATE &Delta;6m</span></div>
+        <div class="rec-dot-item"><span class="rec-dot"></span><span>NFP 3mo</span></div>
+      </div>
+      <div class="rec-cta-row">
+        <span class="rec-asof" id="rec-asof">&nbsp;</span>
+        <a href="/core/econ/recession.html" class="rec-cta">
+          See each signal in detail <span class="arrow">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- Proof strip -->
 <section class="proof">
@@ -915,7 +1150,7 @@
       </span>
       <span class="tag">Live</span>
       <h3>Plug Power (PLUG)</h3>
-      <p>Quarterly cash flow 2015&ndash;2025 from EDGAR XBRL. Interactive CFO / CFI / CFF drivers, revenue by product line, balance-sheet health, liquidity dependencies, and US production footprint.</p>
+      <p>Quarterly cash flow 2015&ndash;2025 from EDGAR XBRL. Interactive CFO / CFI / CFF drivers, balance-sheet health, liquidity dependencies, US production footprint, and revenue by product line.</p>
       <span class="arrow">Open &rarr;</span>
     </a>
 
@@ -1066,6 +1301,82 @@
       requestAnimationFrame(tick);
     }
   })();
+</script>
+
+<!-- Live recession composite: fetches 5 FRED series and renders the gauge.
+     Thresholds and compute logic live in /core/econ/recession-core.js so they
+     stay in sync with the detail view at /core/econ/recession.html. -->
+<script type="module">
+  import { fetchFred } from './core/lib/fred-client.js';
+  import { SERIES, HISTORY_START, tierOf, computeSignals } from './core/econ/recession-core.js';
+
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtMonth(iso) {
+    const m = /^(\d{4})-(\d{2})/.exec(String(iso || ''));
+    if (!m) return '';
+    return `${MONTH_NAMES[parseInt(m[2], 10) - 1]} ${m[1]}`;
+  }
+
+  async function renderRecessionStrip() {
+    const stripEl = document.getElementById('rec-strip');
+    if (!stripEl) return;
+
+    const statusText = stripEl.querySelector('.rec-status-text');
+    const setTag = (text) => { if (statusText) statusText.textContent = text; };
+
+    try {
+      const map = await fetchFred(SERIES, { start: HISTORY_START });
+      const raw = {};
+      for (const id of SERIES) raw[id] = (map[id] && map[id].observations) || [];
+
+      const { signals } = computeSignals(raw);
+      const triggered = signals.filter((s) => s.triggered).length;
+      const tier = tierOf(triggered);
+
+      document.getElementById('rec-count').textContent = String(triggered);
+
+      const tierEl = document.getElementById('rec-tier');
+      tierEl.classList.remove('tier-benign', 'tier-low', 'tier-elevated', 'tier-high');
+      tierEl.classList.add(tier.cls);
+      document.getElementById('rec-tier-label').textContent = tier.label;
+      document.getElementById('rec-tier-sub').textContent   = tier.sub;
+
+      const dotsRoot = document.getElementById('rec-dots');
+      dotsRoot.innerHTML = signals.map((s) => {
+        const cls = s.triggered ? 'triggered' : 'ok';
+        const status = s.triggered ? 'TRIGGERED' : 'OK';
+        const short = (s.short || s.label)
+          .replace(/-/g, '\u2212')   // ASCII hyphen → minus for visual clarity
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;');
+        return `<div class="rec-dot-item ${cls}" title="${s.label}: ${status}">
+          <span class="rec-dot"></span><span>${short}</span>
+        </div>`;
+      }).join('');
+
+      // As-of = latest observation date across all five signals.
+      const latest = signals
+        .map((s) => s.currentDate)
+        .filter(Boolean)
+        .sort()
+        .pop();
+      const asofEl = document.getElementById('rec-asof');
+      if (asofEl) asofEl.textContent = latest ? `Data as of ${fmtMonth(latest)}` : '';
+
+      stripEl.classList.remove('is-loading');
+      stripEl.classList.add('is-ready');
+      setTag('Live');
+    } catch (err) {
+      console.error('Recession strip fetch failed', err);
+      stripEl.classList.remove('is-loading');
+      stripEl.classList.add('is-error');
+      setTag('Data error');
+      document.getElementById('rec-tier-label').textContent = '—';
+      document.getElementById('rec-tier-sub').textContent = 'Could not fetch FRED series';
+    }
+  }
+
+  renderRecessionStrip();
 </script>
 
 </body>
