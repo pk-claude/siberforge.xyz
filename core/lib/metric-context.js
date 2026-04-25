@@ -7,6 +7,11 @@
 // authoritative sources (FRED, BLS, NBER, NY Fed, FT, Bloomberg, Reuters).
 // "context" should be 1-3 sentences with concrete dates so the reader sees
 // the metric tied to actual market history.
+//
+// CATALOG_AS_OF: when the context blurbs were last reviewed. Bump this when
+// you do a content refresh so the footer line in the tooltip reflects it.
+
+export const CATALOG_AS_OF = '2025-Q2';
 
 export const METRIC_CONTEXT = {
 
@@ -342,6 +347,251 @@ export const METRIC_CONTEXT = {
     links: [
       { label: 'FRED · DRSFRMACBS',                                  url: 'https://fred.stlouisfed.org/series/DRSFRMACBS' },
       { label: 'FRB Senior Loan Officer Opinion Survey (SLOOS)',      url: 'https://www.federalreserve.gov/data/sloos.htm' },
+    ],
+  },
+  HOUST5F: {
+    label: 'Multi-Family Housing Starts (5+ units)',
+    unit: 'thousands SAAR · monthly · Census',
+    what: 'Annualized housing starts of buildings with 5 or more units (apartments and condos).',
+    why:  'MF cycle is driven by rents and cap rates rather than mortgage rates. Tracks distinctly from single-family — frequently moves opposite direction.',
+    context: 'Spiked to 600K+ in 2022 driven by post-Covid rent surge and institutional buying. Collapsed to ~330K by 2024 as rents rolled and cap rates compressed margins.',
+    thresholds: '< 350K weak · 350-500K normal · > 550K hot',
+    links: [
+      { label: 'FRED · HOUST5F',                                  url: 'https://fred.stlouisfed.org/series/HOUST5F' },
+    ],
+  },
+  COMPUTSA: {
+    label: 'Housing Completions',
+    unit: 'thousands SAAR · monthly · Census',
+    what: 'Annualized housing completions — units brought to market, ready for sale or occupancy.',
+    why:  'Lags starts by ~9 months. When completions rise while starts fall, the pipeline is unwinding — supply continues hitting the market even as new activity contracts. Pressures prices.',
+    context: '2024 ran above 1.5M annualized — the highest pace since the 1970s, due to multi-family deliveries from 2022 starts.',
+    thresholds: 'follows starts with 9-12mo lag',
+    links: [
+      { label: 'FRED · COMPUTSA',                                 url: 'https://fred.stlouisfed.org/series/COMPUTSA' },
+    ],
+  },
+  HSN1F: {
+    label: 'New Single-Family Home Sales',
+    unit: 'thousands SAAR · monthly · Census',
+    what: 'Sales of newly constructed single-family homes. Census reports both contracts and closings.',
+    why:  'Pure builder-demand signal — about 10% of total housing volume but the cleanest measure of marginal buyer appetite at current rates.',
+    context: '2022 peak ~1.0M, trough ~530K early 2023, recovering to ~700K range through 2024 as builders cut prices and bought down rates.',
+    thresholds: '< 550K weak · 550-750K normal · > 850K strong',
+    links: [
+      { label: 'FRED · HSN1F',                                    url: 'https://fred.stlouisfed.org/series/HSN1F' },
+      { label: 'Census · New Residential Sales release',          url: 'https://www.census.gov/construction/nrs/' },
+    ],
+  },
+  EXHOSLUSM495S: {
+    label: 'Existing Home Sales',
+    unit: 'millions SAAR · monthly · NAR',
+    what: 'Sales of previously occupied single-family homes, condos and co-ops. ~90% of total US housing volume.',
+    why:  'The dominant volume metric. "Rate-lock" effect — owners with sub-3% mortgages won\'t sell — has compressed inventory and held volumes near 30-year lows.',
+    context: 'Bottomed at 3.85M in October 2023 — the lowest pace since 1995. Drifted around 4.0-4.1M through 2024 — recession-territory levels even with a strong economy.',
+    thresholds: '< 4.5M stress · 4.5-5.5M normal · > 5.5M hot',
+    links: [
+      { label: 'FRED · EXHOSLUSM495S',                              url: 'https://fred.stlouisfed.org/series/EXHOSLUSM495S' },
+      { label: 'NAR · Existing Home Sales release',                 url: 'https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales' },
+    ],
+  },
+  MSPUS: {
+    label: 'Median Sales Price of Houses Sold',
+    unit: 'USD · quarterly · Census',
+    what: 'Median sales price of houses sold in the US (new home sales).',
+    why:  'Compositional measure — affected by mix of homes sold (more luxury vs starter). Use alongside Case-Shiller (repeat-sales) for cleaner reading.',
+    context: 'Peaked near $480K in Q4 2022; drifted to ~$420K range through 2024 as mix shifted to lower-priced inventory.',
+    thresholds: 'directional only (composition matters)',
+    links: [
+      { label: 'FRED · MSPUS',                                      url: 'https://fred.stlouisfed.org/series/MSPUS' },
+    ],
+  },
+  MORTGAGE15US: {
+    label: '15-Year Fixed Mortgage Rate',
+    unit: 'percent · weekly · Freddie Mac',
+    what: '15-year fixed-rate mortgage average. Refi target rate — typically ~75bp below the 30Y.',
+    why:  'When the 15Y drops materially below the prevailing 30Y at origination, refi waves activate. The 15Y-30Y spread proxies the steepness of the mortgage curve.',
+    context: 'Range 5.5-6.5% through 2024. Refi activity essentially dormant since 2022 because few existing mortgages are above 6%.',
+    thresholds: '< 4% expansionary · 4-5% normal · 5-6% restrictive · > 6% high',
+    links: [
+      { label: 'FRED · MORTGAGE15US',                                url: 'https://fred.stlouisfed.org/series/MORTGAGE15US' },
+    ],
+  },
+  CES2000000001: {
+    label: 'Construction Employment',
+    unit: 'thousands · monthly · BLS',
+    what: 'Total employees in the construction sector (residential + non-residential + heavy/civil).',
+    why:  'Late-stage labor signal — construction layoffs follow housing starts by ~6 months. When YoY growth turns negative, recession is typically already underway.',
+    context: 'Resilient through the rate-hike cycle — held above 8M jobs through 2024 despite collapsed starts. Suggests labor hoarding from the 2021-2022 shortage.',
+    thresholds: 'YoY > 2% expansion · 0-2% slowing · negative recessionary',
+    links: [
+      { label: 'FRED · CES2000000001',                               url: 'https://fred.stlouisfed.org/series/CES2000000001' },
+    ],
+  },
+  WPU081: {
+    label: 'PPI: Lumber & Wood Products',
+    unit: 'index · monthly · BLS',
+    what: 'Producer Price Index for the lumber and wood products subsector.',
+    why:  'Direct read on lumber input costs to homebuilding. Lumber-price spikes compress builder margins; collapses widen them. Watched closely by Home Depot, Lowes, and pure-play lumber distributors.',
+    context: 'Spiked in 2021 (post-Covid renovation boom + supply constraints), collapsed through 2022, range-bound 2023-2024. Less volatility than the daily lumber futures contract.',
+    thresholds: 'directional indicator',
+    links: [
+      { label: 'FRED · WPU081',                                       url: 'https://fred.stlouisfed.org/series/WPU081' },
+      { label: 'CME · Lumber futures',                                 url: 'https://www.cmegroup.com/markets/agriculture/lumber-and-pulp/random-length-lumber.html' },
+    ],
+  },
+
+  // =========================== CONSUMER / REAL-ECONOMY ===========================
+  PSAVERT: {
+    label: 'Personal Saving Rate',
+    unit: 'percent · monthly · BEA',
+    what: 'Personal saving as a percentage of disposable personal income. The buffer between income and spending.',
+    why:  'Below ~4% indicates households are running down savings to maintain spending — historically precedes consumer-spending slowdowns by 6-12 months.',
+    context: 'Spiked to 32% in April 2020 (Covid stimulus). Collapsed through 2022 as stimulus exhausted. Drifted around 4-5% through 2024 — historically low and declining.',
+    thresholds: '< 4% stretched · 4-7% normal · > 8% precautionary',
+    links: [
+      { label: 'FRED · PSAVERT',                                     url: 'https://fred.stlouisfed.org/series/PSAVERT' },
+      { label: 'BEA · Personal Income & Outlays release',             url: 'https://www.bea.gov/data/income-saving/personal-income' },
+    ],
+  },
+  TDSP: {
+    label: 'Household Debt Service Ratio',
+    unit: 'percent · quarterly · FRB',
+    what: 'Household required debt-service payments (mortgage + consumer debt) as a percentage of disposable personal income.',
+    why:  'Cleanest measure of household leverage burden. Low and declining is constructive; rising is consumer-stress in slow motion.',
+    context: 'Hit ~13.2% in 2007 pre-crisis; cycle low ~9.0% in 2021. Drifted up to ~9.8% by 2024 due to high mortgage rates on new originations + credit card debt.',
+    thresholds: '< 9% benign · 9-11% normal · > 12% stress · > 13% pre-crisis',
+    links: [
+      { label: 'FRED · TDSP',                                        url: 'https://fred.stlouisfed.org/series/TDSP' },
+      { label: 'FRB · Financial Obligations Ratio',                   url: 'https://www.federalreserve.gov/releases/housedebt/' },
+    ],
+  },
+  DSPI: {
+    label: 'Disposable Personal Income',
+    unit: 'percent YoY · monthly · BEA',
+    what: 'Personal income minus personal current taxes — the income available for spending or saving.',
+    why:  'The denominator behind every consumer-spending decision. YoY growth must outpace inflation for real spending power to rise.',
+    context: 'Real DSPI lagged inflation through 2022 (-0.5% real growth), turned positive in 2023 as inflation rolled, ran near +3% real in 2024.',
+    thresholds: 'real growth > 0 needed for real spending power',
+    links: [
+      { label: 'FRED · DSPI',                                        url: 'https://fred.stlouisfed.org/series/DSPI' },
+    ],
+  },
+  PCE: {
+    label: 'Personal Consumption Expenditures',
+    unit: 'percent YoY · monthly · BEA',
+    what: 'Total household spending on goods and services. ~70% of US GDP.',
+    why:  'The single largest component of GDP. When PCE growth slows materially, recession follows. Goods PCE leads services PCE in turning.',
+    context: 'Real PCE growth held above 2% through 2023-2024 — the consumer kept spending despite rate hikes, supported by full employment.',
+    thresholds: 'real growth > 1% expansion · 0-1% slowing · negative recession',
+    links: [
+      { label: 'FRED · PCE',                                         url: 'https://fred.stlouisfed.org/series/PCE' },
+    ],
+  },
+  DRCCLACBS: {
+    label: 'Credit Card Delinquency Rate',
+    unit: 'percent · quarterly · FRB',
+    what: 'Percentage of credit card loans 30+ days past due, all commercial banks.',
+    why:  'Leading indicator of consumer-balance-sheet stress. Credit cards are the first debt to fall delinquent when household budgets tighten.',
+    context: 'Bottomed at 1.5% in 2021 as stimulus paid down balances. Rose steadily through 2023-2024 to 3.2% — the highest since 2011. Strong post-Covid signal of consumer-budget stress.',
+    thresholds: '< 2% benign · 2-3% normal · > 3.5% stress · > 4.5% crisis',
+    links: [
+      { label: 'FRED · DRCCLACBS',                                   url: 'https://fred.stlouisfed.org/series/DRCCLACBS' },
+      { label: 'NY Fed · Quarterly Household Debt Report',            url: 'https://www.newyorkfed.org/microeconomics/hhdc' },
+    ],
+  },
+  UMCSENT: {
+    label: 'UMich Consumer Sentiment',
+    unit: 'index · monthly · U. Michigan',
+    what: 'Composite of consumer assessments of current conditions and future expectations from the U. Michigan Survey of Consumers.',
+    why:  'Volatile and politically biased post-2016 — consumers report sentiment based on which party holds the White House. But changes still correlate with discretionary spending.',
+    context: 'Hit a 70-year low of 50 in mid-2022 (worst recorded reading despite no recession). Recovered to 70-80 range through 2024. Often diverges from "hard data" labor market.',
+    thresholds: '< 60 stress · 60-80 normal · > 90 strong',
+    links: [
+      { label: 'FRED · UMCSENT',                                     url: 'https://fred.stlouisfed.org/series/UMCSENT' },
+      { label: 'U. Michigan · Survey of Consumers',                  url: 'http://www.sca.isr.umich.edu/' },
+    ],
+  },
+
+  // =========================== COMPOSITE-LEVEL (home page tiles) ===========================
+  // The 6 composite scores on /core/macro/. Each surfaces what the composite
+  // is, what regime it drives, and links to its deep-dive page.
+  CYCLE_COMPOSITE: {
+    label: 'Cycle Risk Composite',
+    unit: 'score 0-100 · monthly · Siberforge',
+    what: 'Weighted composite of 5 leading recession signals: NY Fed recession probability (25%), Sahm Rule (25%), 10Y-3M curve (15%), NFCI financial conditions (15%), HY OAS credit stress (20%). Higher = closer to or inside recession.',
+    why:  'Single-number answer to "how late are we in the cycle?" — the question every multi-asset positioning decision hinges on. Phase boundaries map to defined positioning tilts (early-cycle pro-risk → contraction defensive).',
+    context: 'A score crossing 45 historically precedes equity drawdowns by 6-9 months. Crossings into 65+ have aligned with recession start within 1-3 quarters in the past 50 years.',
+    thresholds: '0-25 Early/Mid Expansion · 25-45 Late Expansion · 45-65 Slowdown · 65-80 Contraction Risk · 80+ Contraction Underway',
+    links: [
+      { label: 'Cycle deep-dive',                          url: '/core/macro/cycle/' },
+      { label: 'NY Fed · Recession Probabilities',          url: 'https://www.newyorkfed.org/research/capital_markets/ycfaq.html' },
+      { label: 'NBER Recession Dating',                     url: 'https://www.nber.org/research/business-cycle-dating' },
+    ],
+  },
+  INFLATION_COMPOSITE: {
+    label: 'Inflation Persistence Composite',
+    unit: 'score 0-100 · monthly · Siberforge',
+    what: 'Weighted composite of inflation pressure: Sticky-Price Core CPI (30%), 5y5y forward breakeven (20%), Core CPI 6m annualized (20%), wage growth AHE YoY (15%), shelter CPI (15%). Higher = more persistent / structural inflation.',
+    why:  'Distinguishes "transitory" inflation (flexible-price, energy-driven) from "sticky" structural inflation that requires sustained restrictive policy. Maps directly to Fed reaction-function expectations.',
+    context: 'Peaked near 90 in mid-2022 — the highest in series history. Drifted to 35-45 range through 2024 as goods disinflation rolled through, but services inflation kept the score above the 25 "anchored" level.',
+    thresholds: '0-25 Disinflationary · 25-45 Normalizing · 45-65 Sticky · 65-80 Persistent · 80+ Accelerating',
+    links: [
+      { label: 'Inflation deep-dive',                      url: '/core/macro/inflation/' },
+      { label: 'Atlanta Fed · Sticky-Price CPI',            url: 'https://www.atlantafed.org/research/inflationproject/stickyprice' },
+      { label: 'Cleveland Fed · New Tenant Rent Index',     url: 'https://www.clevelandfed.org/indicators-and-data/new-tenant-repeat-rent-index' },
+    ],
+  },
+  HOUSING_COMPOSITE: {
+    label: 'Housing Cycle Composite',
+    unit: 'score 0-100 · monthly · Siberforge',
+    what: 'Weighted composite of housing pipeline + price + affordability + stress signals: months supply (30%), permits YoY, 30Y mortgage rate, SF starts YoY, HPI YoY, mortgage delinquency, construction employment.',
+    why:  'Housing is the largest household balance-sheet exposure and one of the most rate-sensitive sectors. Cycle position drives builder profitability, building-materials demand, and household consumption.',
+    context: '2024 score in the 60-65 range — late-cycle: high months supply, broken affordability, slowing prices, but no stress yet. The "soft landing" reading.',
+    thresholds: '0-25 Early-Cycle Recovery · 25-45 Mid-Cycle Expansion · 45-65 Late-Cycle · 65-80 Cooling · 80+ Contraction',
+    links: [
+      { label: 'Housing deep-dive',                                  url: '/core/macro/housing/' },
+      { label: 'NAHB · Housing Market Index',                         url: 'https://www.nahb.org/news-and-economics/housing-economics/indices/housing-market-index' },
+      { label: 'NY Fed · Quarterly Household Debt Report',            url: 'https://www.newyorkfed.org/microeconomics/hhdc' },
+    ],
+  },
+  CONSUMER_COMPOSITE: {
+    label: 'Consumer Stress Composite',
+    unit: 'score 0-100 · monthly · Siberforge',
+    what: 'Weighted composite of consumer balance-sheet stress: real wages (25%), saving rate (20%), credit card delinquency (20%), jobless claims (15%), UMich sentiment (10%), debt-service ratio (10%).',
+    why:  'The household ability and willingness to keep spending. When this composite turns up, discretionary categories (durables, restaurants, big-box retail) show stress within 2 quarters.',
+    context: 'Drifted from ~25 in 2021 to 40-45 by 2024 — saving rate falling, credit card delinquencies rising sharply. Real wages turning positive in 2023 prevented a cliff.',
+    thresholds: '0-25 Robust · 25-45 Healthy · 45-65 Mixed · 65-80 Stressed · 80+ Distressed',
+    links: [
+      { label: 'Consumer deep-dive',                                  url: '/core/macro/real-economy/' },
+      { label: 'NY Fed · Quarterly Household Debt Report',            url: 'https://www.newyorkfed.org/microeconomics/hhdc' },
+      { label: 'BEA · Personal Income & Outlays',                      url: 'https://www.bea.gov/data/income-saving/personal-income' },
+    ],
+  },
+  CREDIT_COMPOSITE: {
+    label: 'Credit & Liquidity Composite',
+    unit: 'score 0-100 · monthly · Siberforge',
+    what: 'Weighted composite of financial conditions: NFCI (25%), ANFCI (15%), HY OAS (20%), IG OAS (15%), 10Y-3M curve (15%), 10Y real yield (10%). Higher = tighter conditions / more credit stress.',
+    why:  'The bridge between Fed policy and the real economy. When this score jumps materially, the cycle ends — regardless of what other indicators say. Credit comes before equities in every cycle.',
+    context: 'Spiked above 65 during March 2023 SVB. Compressed to 25-35 range through late 2024 — credit complacency despite still-restrictive Fed policy.',
+    thresholds: '0-25 Very Accommodative · 25-45 Accommodative · 45-65 Neutral · 65-80 Tight · 80+ Stressed',
+    links: [
+      { label: 'Credit & Liquidity deep-dive',                       url: '/core/macro/credit/' },
+      { label: 'Chicago Fed · NFCI methodology',                      url: 'https://www.chicagofed.org/publications/nfci/index' },
+      { label: 'NY Fed · Recession Probabilities',                    url: 'https://www.newyorkfed.org/research/capital_markets/ycfaq.html' },
+    ],
+  },
+  LABOR_COMPOSITE: {
+    label: 'Labor Market Composite',
+    unit: 'score 0-100 · monthly · Siberforge',
+    what: 'Weighted composite of labor-market signals: unemployment rate (20%), Sahm Rule (20%), claims 4w MA (20%), payrolls 6m annualized (20%), wage growth AHE YoY (20%). Higher = labor weakening.',
+    why:  'Labor is the engine of consumption and the most reliable cycle-confirmation signal. The Sahm Rule embedded in this composite has flagged every post-1970 US recession in real time.',
+    context: 'Drifted from ~15 in 2022 (very tight) to ~40 by 2024 as unemployment normalized, Sahm Rule briefly triggered, and wage growth decelerated. "Cooling" range — pre-recessionary not recessionary.',
+    thresholds: '0-25 Very Tight · 25-45 Tight · 45-65 Cooling · 65-80 Weakening · 80+ Recessionary',
+    links: [
+      { label: 'Labor Market deep-dive',                              url: '/core/macro/labor/' },
+      { label: 'Sahm 2019 · methodology',                             url: 'https://www.hamiltonproject.org/papers/direct_stimulus_payments_to_individuals' },
+      { label: 'BLS · Employment Situation release',                  url: 'https://www.bls.gov/news.release/empsit.toc.htm' },
     ],
   },
 };

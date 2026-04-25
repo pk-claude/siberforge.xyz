@@ -96,33 +96,33 @@ function findOutliers() {
     const ma3 = recent3.reduce((s, o) => s + o.value, 0) / 3;
     const min12 = Math.min(...unrate.slice(-12).map(o => o.value));
     const sahm = ma3 - min12;
-    if (sahm >= 0.5) flags.push({ kind: 'warn', text: `Sahm Rule TRIGGERED (${sahm.toFixed(2)}pp)`, link: '/core/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
-    else if (sahm >= 0.4) flags.push({ kind: 'caution', text: `Sahm Rule near trigger (${sahm.toFixed(2)}pp; needs 0.50pp)`, link: '/core/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
+    if (sahm >= 0.5) flags.push({ metric: 'SAHM', kind: 'warn', text: `Sahm Rule TRIGGERED (${sahm.toFixed(2)}pp)`, link: '/core/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
+    else if (sahm >= 0.4) flags.push({ metric: 'SAHM', kind: 'caution', text: `Sahm Rule near trigger (${sahm.toFixed(2)}pp; needs 0.50pp)`, link: '/core/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
   }
   // HY OAS
   const hy = state.data.BAMLH0A0HYM2 || [];
   if (hy.length) {
     const last = hy[hy.length - 1].value * 100; // bps
-    if (last > 800) flags.push({ kind: 'warn', text: `HY OAS at ${last.toFixed(0)}bp — stress regime`, link: '/core/macro/cycle/#cycle-credit', linkLabel: 'see credit section' });
-    else if (last > 500) flags.push({ kind: 'caution', text: `HY OAS at ${last.toFixed(0)}bp — elevated`, link: '/core/macro/cycle/#cycle-credit', linkLabel: 'see credit section' });
+    if (last > 800) flags.push({ metric: 'HY_OAS', kind: 'warn', text: `HY OAS at ${last.toFixed(0)}bp — stress regime`, link: '/core/macro/cycle/#cycle-credit', linkLabel: 'see credit section' });
+    else if (last > 500) flags.push({ metric: 'HY_OAS', kind: 'caution', text: `HY OAS at ${last.toFixed(0)}bp — elevated`, link: '/core/macro/cycle/#cycle-credit', linkLabel: 'see credit section' });
   }
   // Mortgage delinquency
   const dr = state.data.DRSFRMACBS || [];
   if (dr.length) {
     const last = dr[dr.length - 1].value;
-    if (last > 4) flags.push({ kind: 'warn', text: `SF mortgage delinquency at ${last.toFixed(2)}% — elevated`, link: '/core/macro/housing/#section-stress', linkLabel: 'see housing stress' });
+    if (last > 4) flags.push({ metric: 'DRSFRMACBS', kind: 'warn', text: `SF mortgage delinquency at ${last.toFixed(2)}% — elevated`, link: '/core/macro/housing/#section-stress', linkLabel: 'see housing stress' });
   }
   // 10Y-3M curve inversion
   const c = state.data.T10Y3M || [];
   if (c.length) {
     const last = c[c.length - 1].value * 100;
-    if (last < 0) flags.push({ kind: 'caution', text: `10Y-3M curve inverted at ${last.toFixed(0)}bp`, link: '/core/macro/cycle/#cycle-curve', linkLabel: 'see yield curve' });
+    if (last < 0) flags.push({ metric: 'T10Y3M', kind: 'caution', text: `10Y-3M curve inverted at ${last.toFixed(0)}bp`, link: '/core/macro/cycle/#cycle-curve', linkLabel: 'see yield curve' });
   }
   // Months supply
   const ms = state.data.MSACSR || [];
   if (ms.length) {
     const last = ms[ms.length - 1].value;
-    if (last > 7) flags.push({ kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market`, link: '/core/macro/housing/#section-inventory', linkLabel: 'see housing inventory' });
+    if (last > 7) flags.push({ metric: 'MSACSR', kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market`, link: '/core/macro/housing/#section-inventory', linkLabel: 'see housing inventory' });
   }
   // Real wages
   const wages = (state.data.CES0500000003 || []);
@@ -131,32 +131,32 @@ function findOutliers() {
     const wageYoy = (wages[wages.length - 1].value / wages[wages.length - 13].value - 1) * 100;
     const coreYoy = (core[core.length - 1].value / core[core.length - 13].value - 1) * 100;
     const real = wageYoy - coreYoy;
-    if (real < 0) flags.push({ kind: 'warn', text: `Real wages negative (${real.toFixed(1)}%)`, link: '/core/macro/real-economy/#section-consumer', linkLabel: 'see consumer balance sheet' });
+    if (real < 0) flags.push({ metric: 'REAL_WAGES', kind: 'warn', text: `Real wages negative (${real.toFixed(1)}%)`, link: '/core/macro/real-economy/#section-consumer', linkLabel: 'see consumer balance sheet' });
   }
   // NFCI tightening
   const nfci = state.data.NFCI || [];
   if (nfci.length) {
     const last = nfci[nfci.length - 1].value;
-    if (last > 0.5) flags.push({ kind: 'warn', text: `NFCI at ${last.toFixed(2)} — financial conditions tight`, link: '/core/macro/cycle/#cycle-conditions', linkLabel: 'see conditions' });
+    if (last > 0.5) flags.push({ metric: 'NFCI', kind: 'warn', text: `NFCI at ${last.toFixed(2)} — financial conditions tight`, link: '/core/macro/cycle/#cycle-conditions', linkLabel: 'see conditions' });
   }
   // Sticky CPI elevated
   const sticky = state.data.CORESTICKM159SFRBATL || [];
   if (sticky.length) {
     const last = sticky[sticky.length - 1].value;
-    if (last > 4) flags.push({ kind: 'warn', text: `Sticky CPI at ${last.toFixed(1)}% — services inflation persistent`, link: '/core/macro/inflation/#section-sticky', linkLabel: 'see inflation persistence' });
-    else if (last > 3.5) flags.push({ kind: 'caution', text: `Sticky CPI at ${last.toFixed(1)}% — Fed-uncomfortable`, link: '/core/macro/inflation/#section-sticky', linkLabel: 'see inflation persistence' });
+    if (last > 4) flags.push({ metric: 'STICKY_CPI', kind: 'warn', text: `Sticky CPI at ${last.toFixed(1)}% — services inflation persistent`, link: '/core/macro/inflation/#section-sticky', linkLabel: 'see inflation persistence' });
+    else if (last > 3.5) flags.push({ metric: 'STICKY_CPI', kind: 'caution', text: `Sticky CPI at ${last.toFixed(1)}% — Fed-uncomfortable`, link: '/core/macro/inflation/#section-sticky', linkLabel: 'see inflation persistence' });
   }
   // Mortgage rate elevated
   const mort = state.data.MORTGAGE30US || [];
   if (mort.length) {
     const last = mort[mort.length - 1].value;
-    if (last > 7) flags.push({ kind: 'caution', text: `30Y mortgage at ${last.toFixed(2)}% — affordability constrained`, link: '/core/macro/housing/#section-affordability', linkLabel: 'see affordability' });
+    if (last > 7) flags.push({ metric: 'MORTGAGE30US', kind: 'caution', text: `30Y mortgage at ${last.toFixed(2)}% — affordability constrained`, link: '/core/macro/housing/#section-affordability', linkLabel: 'see affordability' });
   }
   // 5y5y forward expectations unanchored
   const fwd = state.data.T5YIFR || [];
   if (fwd.length) {
     const last = fwd[fwd.length - 1].value;
-    if (last > 2.7) flags.push({ kind: 'warn', text: `5y5y inflation breakeven at ${last.toFixed(2)}% — long-run expectations drifting up`, link: '/core/macro/inflation/#section-expectations', linkLabel: 'see expectations' });
+    if (last > 2.7) flags.push({ metric: 'T5YIFR', kind: 'warn', text: `5y5y inflation breakeven at ${last.toFixed(2)}% — long-run expectations drifting up`, link: '/core/macro/inflation/#section-expectations', linkLabel: 'see expectations' });
   }
   return flags;
 }
@@ -214,11 +214,24 @@ function renderScore(label, kind, scoreObj, oldScoreObj) {
   `;
 }
 
-// Compact horizontal-row variant. Used in the new side-by-side layout where
-// the 4 score cards stack vertically beside the rose chart.
+// Map composite kind → metric-context catalog id (composite-level entry).
+const COMPOSITE_METRIC_ID = {
+  cycle:     'CYCLE_COMPOSITE',
+  inflation: 'INFLATION_COMPOSITE',
+  housing:   'HOUSING_COMPOSITE',
+  consumer:  'CONSUMER_COMPOSITE',
+  credit:    'CREDIT_COMPOSITE',
+  labor:     'LABOR_COMPOSITE',
+};
+
+// Compact horizontal-row variant. Used in the side-by-side layout where the 6
+// score cards stack vertically beside the rose chart. Each card carries the
+// composite's metric-id so the global tile-tooltip surfaces context on hover.
 function renderScoreRow(label, kind, scoreObj, oldScoreObj) {
+  const metricId = COMPOSITE_METRIC_ID[kind] || '';
+  const metricAttr = metricId ? ` data-tile-metric="${metricId}"` : '';
   if (!scoreObj) {
-    return `<div class="tr-score-row tr-empty">
+    return `<div class="tr-score-row tr-empty"${metricAttr}>
       <div class="tr-score-row-label">${label}</div>
       <div class="tr-score-row-value">—</div>
     </div>`;
@@ -231,7 +244,7 @@ function renderScoreRow(label, kind, scoreObj, oldScoreObj) {
     ? `<span class="tr-score-row-delta ${dCls}">${dArrow} ${Math.abs(delta).toFixed(0)}pt</span>`
     : '';
   return `
-    <div class="tr-score-row">
+    <div class="tr-score-row"${metricAttr}>
       <div class="tr-score-row-left">
         <div class="tr-score-row-label">${label}</div>
         <div class="tr-score-row-phase" style="color:${phase.color}">${phase.label}</div>
@@ -276,8 +289,11 @@ function renderTrajRail(label, kind, s12, s3, s1, sNow) {
     { obj: sNow,ageLabel: 'now', alpha: 1.0,  r: 11, isNow: true },
   ].filter(p => p.obj && Number.isFinite(p.obj.score));
 
+  const metricId = COMPOSITE_METRIC_ID[kind] || '';
+  const metricAttr = metricId ? ` data-tile-metric="${metricId}"` : '';
+
   if (points.length === 0) {
-    return `<div class="tr-rail-row tr-rail-empty"><div class="tr-rail-label">${label}</div><div class="tr-rail-empty-msg">insufficient history</div></div>`;
+    return `<div class="tr-rail-row tr-rail-empty"${metricAttr}><div class="tr-rail-label">${label}</div><div class="tr-rail-empty-msg">insufficient history</div></div>`;
   }
 
   // Connecting line through the points in time order
@@ -300,7 +316,7 @@ function renderTrajRail(label, kind, s12, s3, s1, sNow) {
   const deltaTxt = delta1m != null ? `<span class="tr-rail-delta ${dCls}">${dArrow} ${Math.abs(delta1m).toFixed(0)}pt 1m</span>` : '';
 
   return `
-    <div class="tr-rail-row">
+    <div class="tr-rail-row"${metricAttr}>
       <div class="tr-rail-label">${label}</div>
       <div class="tr-rail-svg-wrap">
         <svg class="tr-rail-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${label} trajectory">
@@ -399,7 +415,9 @@ function renderRose(scoresNow, scores12m) {
     if (!sObj || !Number.isFinite(sObj.score)) return '';
     const ph = phaseFor(a.key, sObj.score);
     const [x, y] = rosePoint(sObj.score, a.angle, rPx);
-    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="${ph.color}" stroke="#13171c" stroke-width="2.2"><title>${a.label}: ${sObj.score.toFixed(0)}/100 — ${ph.label}</title></circle>`;
+    const metricId = COMPOSITE_METRIC_ID[a.key] || '';
+    const metricAttr = metricId ? ` data-tile-metric="${metricId}"` : '';
+    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="${ph.color}" stroke="#13171c" stroke-width="2.2" class="tr-rose-dot"${metricAttr}><title>${a.label}: ${sObj.score.toFixed(0)}/100 — ${ph.label}</title></circle>`;
   }).join('');
 
   const labelHtml = axes.map(a => {
@@ -546,10 +564,12 @@ export async function renderTodayRead() {
 
     ${outliers.length ? `<div class="tr-outliers">
       <div class="tr-outliers-label">⚠ OUTLIERS / WHAT TO WATCH &middot; click to investigate</div>
-      ${outliers.map(o => o.link
-        ? `<a class="tr-outlier tr-${o.kind} tr-outlier-link" href="${o.link}"><span class="tr-outlier-text">${o.text}</span><span class="tr-outlier-cta">${o.linkLabel || 'see detail'} &rarr;</span></a>`
-        : `<div class="tr-outlier tr-${o.kind}">${o.text}</div>`
-      ).join('')}
+      ${outliers.map(o => {
+        const metricAttr = o.metric ? ` data-tile-metric="${o.metric}"` : '';
+        return o.link
+          ? `<a class="tr-outlier tr-${o.kind} tr-outlier-link" href="${o.link}"${metricAttr}><span class="tr-outlier-text">${o.text}</span><span class="tr-outlier-cta">${o.linkLabel || 'see detail'} &rarr;</span></a>`
+          : `<div class="tr-outlier tr-${o.kind}"${metricAttr}>${o.text}</div>`;
+      }).join('')}
     </div>` : ''}
 
     <div class="tr-trajectory">

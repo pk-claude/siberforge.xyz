@@ -1383,6 +1383,51 @@ footer {
   color: #fff;
   padding-left: 4px;
 }
+.tile-tooltip.tt-pinned {
+  pointer-events: auto;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
+  border-left-width: 4px;
+}
+.tile-tooltip .tt-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 2px 6px;
+}
+.tile-tooltip .tt-close:hover { color: var(--text); }
+.tile-tooltip .tt-pin-hint {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dotted var(--line);
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+  text-align: right;
+}
+.tile-tooltip .tt-asof {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dotted var(--line);
+  font-size: 10px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
+}
+@media (max-width: 700px) {
+  .tile-tooltip {
+    width: calc(100vw - 24px);
+    max-width: 480px;
+    font-size: 12px;
+  }
+  .tile-tooltip .tt-title { font-size: 14px; }
+}
 
 /* ========================================================================= */
 /* Deep-dive nav strip — sits below the sticky header on every macro page.   */

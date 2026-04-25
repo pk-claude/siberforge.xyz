@@ -375,6 +375,7 @@ function renderHomeImprovement() {
       status: xhb1y != null ? (xhb1y > 5 ? 'ok' : xhb1y > -10 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'WPU081',
       label: 'Lumber PPI YoY',
       value: lumberYoy ? `${lumberYoy.value >= 0 ? '+' : ''}${fmt(lumberYoy.value, 1)}%` : '—',
       meta: 'producer price index, lumber & wood',
@@ -439,6 +440,7 @@ function renderConsumer() {
 
   const tiles = [
     {
+      metric: 'REAL_WAGES',
       label: 'Real wages',
       value: lrw ? `${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%` : '—',
       meta: 'AHE YoY − Core CPI YoY',
@@ -446,6 +448,7 @@ function renderConsumer() {
       status: lrw ? (lrw.value > 0.5 ? 'ok' : lrw.value > -0.5 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'PSAVERT',
       label: 'Personal saving rate',
       value: lsav ? `${fmt(lsav.value, 1)}%` : '—',
       meta: 'monthly saving / disposable income',
@@ -453,6 +456,7 @@ function renderConsumer() {
       status: lsav ? (lsav.value > 5 ? 'ok' : lsav.value > 3.5 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'TDSP',
       label: 'Debt service ratio',
       value: tdsp ? `${fmt(tdsp.value, 1)}%` : '—',
       meta: 'household debt service / DPI',
@@ -460,6 +464,7 @@ function renderConsumer() {
       status: tdsp ? (tdsp.value < 10 ? 'ok' : tdsp.value < 12 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'DRCCLACBS',
       label: 'CC delinquency rate',
       value: ldel ? `${fmt(ldel.value, 2)}%` : '—',
       meta: 'commercial banks, 30+ days past due',
@@ -467,6 +472,7 @@ function renderConsumer() {
       status: ldel ? (ldel.value < 2.5 ? 'ok' : ldel.value < 4 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'IC4WSA',
       label: 'Jobless claims (4wk MA)',
       value: lcla ? `${(lcla.value / 1000).toFixed(0)}K` : '—',
       meta: 'real-time labor demand',
@@ -474,6 +480,7 @@ function renderConsumer() {
       status: lcla ? (lcla.value < 240000 ? 'ok' : lcla.value < 300000 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'UMCSENT',
       label: 'UMich Consumer Sentiment',
       value: lsent ? `${fmt(lsent.value, 0)}` : '—',
       meta: '1985 Q1 = 100 baseline',
