@@ -114,6 +114,7 @@ function validDate(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.te
 // dumping ~250 explicit catalog entries per state * ~6 metrics each.
 const STATE_RE = /^([A-Z]{2})(UR|STHPI|POP|NA|NQGSP|UPOP|CONS|MFG|RETL|TRAD|GOVT)$/;
 const MSA_RE   = /^(ATNHPIUS\d{5}Q|LAUMT\d+|LAUMT.*A|MSACSR.*)$/;
+const CPI_RE   = /^CUU[RS]A?\d{3,4}SA[A-Z0-9]+$/;
 
 export default async function handler(req, res) {
   const key = process.env.FRED_API_KEY;
@@ -125,7 +126,7 @@ export default async function handler(req, res) {
   if (!seriesParam) return res.status(400).json({ error: 'missing ?series=ID1,ID2,...' });
 
   const ids = seriesParam.split(',').map(s => s.trim()).filter(Boolean);
-  const unknown = ids.filter(id => !CATALOG[id] && !STATE_RE.test(id) && !MSA_RE.test(id));
+  const unknown = ids.filter(id => !CATALOG[id] && !STATE_RE.test(id) && !MSA_RE.test(id) && !CPI_RE.test(id));
   if (unknown.length) return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
 
   const start = req.query.start || '2010-01-01';
