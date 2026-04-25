@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Net Domestic Migration</title>
+<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="../../cycle/cycle.css" />
+<link rel="stylesheet" href="../regional.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/regional/" class="home-link" title="Back to Regional">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Net Domestic Migration</span>
+  </div>
+  <div class="status">
+    <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link active">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
+</nav>
+
+
+<nav class="reg-sub-nav">
+  <span class="rsn-label">Regional pages</span>
+  <a href="/core/macro/geography/" class="rsn-link">Geography</a>
+  <a href="/core/macro/regional/regional-cpi/" class="rsn-link">Regional CPI</a>
+  <a href="/core/macro/regional/build-buy/" class="rsn-link">Build vs Buy</a>
+  <a href="/core/macro/regional/channel-mix/" class="rsn-link">Channel Mix</a>
+  <a href="/core/macro/regional/migration/" class="rsn-link active">Migration</a>
+  <a href="/core/macro/regional/demographics/" class="rsn-link">Demographics</a>
+  <a href="/core/macro/regional/affordability/" class="rsn-link">Affordability</a>
+  <a href="/core/macro/regional/climate-risk/" class="rsn-link">Climate Risk</a>
+  <a href="/core/macro/regional/" class="rsn-home" title="Regional umbrella">↑ Overview</a>
+</nav>
+<section class="cycle-intro">
+  <h1 class="cycle-title">Net domestic migration &mdash; where Americans are moving</h1>
+  <p class="cycle-subtitle">
+    Domestic migration (excluding international immigration) is the most direct future-housing-demand
+    signal available. People physically moving INTO a state will form households there within
+    1-3 years, driving HPI, rents, retail, and home-improvement demand. The Sun Belt vs.
+    high-tax-coastal divergence has been the dominant story for 15 years.
+  </p>
+</section>
+
+<div class="reg-snapshot-banner">
+  <strong>Snapshot data.</strong> Net migration figures below are most-recent IRS SOI county-to-county
+  migration data, expressed as % of state population. IRS releases annually with ~18-month lag.
+  Refresh this page's data when new vintage drops.
+</div>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Net domestic migration &mdash; latest year, % of state population</h2>
+    <p class="cycle-section-sub">
+      Positive = net inflow of US residents from other states; negative = net outflow.
+      International immigration excluded so this isolates pure domestic preference signal.
+    </p>
+  </div>
+  <div class="reg-chart-wrap" style="height:600px"><canvas id="chart-migration"></canvas></div>
+  <p class="cycle-note" id="note-migration"></p>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>County-level migration &mdash; pick a state</h2>
+    <p class="cycle-section-sub">
+      IRS SOI publishes county-to-county migration as raw counts, available for the most recent
+      filing year. Below shows the top 10 counties in the selected state by net domestic inflow
+      and outflow (% of county population). Available for select high-coverage states only;
+      drop a list if your state isn&rsquo;t there yet.
+    </p>
+  </div>
+  <div class="geo-controls">
+    <div class="control-group">
+      <span class="control-label">State</span>
+      <select id="state-select"></select>
+    </div>
+  </div>
+  <div id="county-table"></div>
+</section>
+
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>5-year cumulative migration &mdash; the secular winners and losers</h2>
+    <p class="cycle-section-sub">
+      Year-by-year noise drops out; the structural pattern is clear.
+    </p>
+  </div>
+  <div id="cumulative-table"></div>
+</section>
+
+<footer>
+  <span>Source: IRS Statistics of Income (SOI) county-to-county migration. Snapshot vintage refreshed quarterly.</span>
+</footer>
+
+<script type="module" src="./migration.js"></script>
+<script src="/core/lib/download-button.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+</body>
+</html>

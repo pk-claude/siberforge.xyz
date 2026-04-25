@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Housing Cycle</title>
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../cycle/cycle.css" />
+<link rel="stylesheet" href="./housing.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Housing Cycle</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+  <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
+  </div>
+</header>
+
+<!-- DEEP-DIVE NAV: prominent, top-of-page navigation -->
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub active">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
+</nav>
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">Housing Cycle &mdash; 20 metrics, one decision</h1>
+  <p class="cycle-subtitle">
+    Every housing-cycle indicator the public datasets give you, woven into a single
+    decision-relevant view. Permits lead starts; starts lead completions; completions
+    lead inventory; inventory determines pricing power; pricing &times; rates determines
+    affordability; affordability determines turnover; turnover feeds back into permits.
+    The composite score above synthesizes 20 series into one cycle-position read.
+  </p>
+</section>
+
+<!-- Composite Housing Cycle Score -->
+<section class="cycle-score-section" id="housing-score-section"></section>
+
+<!-- Synthesis — moved above detail sections so the takeaway reads first -->
+<section class="cycle-section cycle-section-synthesis" id="section-synthesis">
+  <div class="cycle-section-head">
+    <h2>Synthesis &mdash; what this means for housing-exposed P&amp;L</h2>
+    <p class="cycle-section-sub">The takeaway from all five signals below, distilled. Detail sections follow.</p>
+  </div>
+  <div id="housing-synthesis-content"></div>
+</section>
+
+<!-- Section 1: Activity Pipeline -->
+<section class="cycle-section" id="section-pipeline">
+  <div class="cycle-section-head">
+    <h2>1. Activity pipeline &mdash; permits &rarr; starts &rarr; completions &rarr; sales</h2>
+    <p class="cycle-section-sub">
+      The cycle flows from permits (intent) to starts (actual breaking-ground) to completions
+      (supply hitting the market) to sales (absorption). Permits lead starts by 1&ndash;2 months;
+      completions lag starts by 6&ndash;9 months. Single-family and multi-family run different
+      cycles &mdash; SF tracks owner-occupier demand and rates; MF tracks rent dynamics + cap rates.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-pipeline"></canvas></div>
+    <div class="cycle-tiles" id="tiles-pipeline"></div>
+  </div>
+  <p class="cycle-note" id="note-pipeline"></p>
+</section>
+
+<!-- Section 2: Inventory & Prices -->
+<section class="cycle-section" id="section-inventory">
+  <div class="cycle-section-head">
+    <h2>2. Inventory &amp; prices</h2>
+    <p class="cycle-section-sub">
+      Months Supply (MSACSR) is the single cleanest cycle-position read &mdash;
+      <strong>&lt; 4</strong> sellers&rsquo; market, 4&ndash;6 balanced,
+      <strong>&gt; 6</strong> buyers&rsquo;. Pricing follows inventory with a 6&ndash;9 month
+      lag. Rental vacancy rates separately measure the rental side &mdash; tight rentals
+      spill into apartment-rent inflation and OER.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-inventory"></canvas></div>
+    <div class="cycle-tiles" id="tiles-inventory"></div>
+  </div>
+  <p class="cycle-note" id="note-inventory"></p>
+</section>
+
+<!-- Section 3: Affordability -->
+<section class="cycle-section" id="section-affordability">
+  <div class="cycle-section-head">
+    <h2>3. Affordability &mdash; can people actually buy?</h2>
+    <p class="cycle-section-sub">
+      Affordability is a function of three things: median home price, mortgage rate, and
+      median family income. We compute a <strong>monthly-payment index</strong> &mdash; the
+      principal+interest payment on a 30Y fixed mortgage at the median home price &mdash; and
+      compare it to median family income. When the payment-to-income ratio breaks above
+      ~30%, marginal buyers exit the market and turnover collapses.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-affordability"></canvas></div>
+    <div class="cycle-tiles" id="tiles-affordability"></div>
+  </div>
+  <p class="cycle-note" id="note-affordability"></p>
+</section>
+
+<!-- Section 4: Stress + Construction + Materials -->
+<section class="cycle-section" id="section-stress">
+  <div class="cycle-section-head">
+    <h2>4. Stress, construction &amp; materials</h2>
+    <p class="cycle-section-sub">
+      Mortgage delinquency tells you whether existing owners are under water (lags 1&ndash;2Q
+      vs the price cycle). Construction employment is the labor-side cycle indicator &mdash;
+      builders shed workers fast when starts slow. Lumber PPI is the input-cost layer &mdash;
+      it leads home-improvement-retailer ticket sizes and lumber-distributor revenue.
+      Residential construction spending is the dollar-value activity proxy.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-stress"></canvas></div>
+    <div class="cycle-tiles" id="tiles-stress"></div>
+  </div>
+  <p class="cycle-note" id="note-stress"></p>
+</section>
+
+<!-- Section 5: Market-Implied (equities) -->
+<section class="cycle-section" id="section-equities">
+  <div class="cycle-section-head">
+    <h2>5. Market-implied read &mdash; what equities are pricing</h2>
+    <p class="cycle-section-sub">
+      Equities are forward-looking. XHB tracks homebuilders + supply-chain (broader);
+      ITB is purer builder concentration. WOOD is the lumber/forestry public-equity proxy.
+      HD/LOW/BLDR are the home-improvement and lumber-distributor names.
+      When XHB / ITB are leading SPY, the market is pricing housing-cycle strength
+      ahead of the fundamental data.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-equities"></canvas></div>
+    <div class="cycle-tiles" id="tiles-equities"></div>
+  </div>
+  <p class="cycle-note" id="note-equities"></p>
+</section>
+
+<footer>
+  <span>Data: FRED (20 housing series) + Yahoo (XHB, ITB, WOOD, HD, LOW, BLDR, SPY).</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./housing.js"></script>
+<script src="../../lib/ui.js"></script>
+<script src="/core/lib/download-button.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+<script type="module" src="/core/lib/tile-tooltip.js"></script>
+</body>
+</html>

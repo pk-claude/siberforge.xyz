@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Macro Research (Pair Explorer)</title>
+<link rel="stylesheet" href="./styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Macro Research &middot; Pair Explorer</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+  <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link active">Pair Explorer</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
+</nav>
+
+
+<section class="quotes" id="quotes-strip"></section>
+
+<p class="research-intro">
+  Pair-explorer view: pick any macro indicator and ETF, then look at their relationship across rolling
+  correlation, regime-colored scatter+regression, or normalized overlay. For the headline regime view
+  with sector returns, see the <a href="/core/macro/">main macro dashboard</a>.
+</p>
+
+<section class="controls">
+  <div class="control"><label>Indicator</label><select id="indicator-select"></select></div>
+  <div class="control"><label>Benchmark</label><select id="benchmark-select"></select></div>
+  <div class="control"><label>History</label>
+    <select id="years-select">
+      <option value="3">3y</option>
+      <option value="5" selected>5y</option>
+      <option value="10">10y</option>
+      <option value="15">15y</option>
+    </select>
+  </div>
+  <div class="control"><label>Rolling window</label>
+    <select id="window-select">
+      <option value="30">30d</option>
+      <option value="60">60d</option>
+      <option value="90" selected>90d</option>
+      <option value="180">180d</option>
+      <option value="252">252d (1y)</option>
+    </select>
+  </div>
+</section>
+
+<nav class="tabs">
+  <button class="tab active" data-tab="rolling">Rolling correlation</button>
+  <button class="tab" data-tab="regression">Regime-colored scatter + regression</button>
+  <button class="tab" data-tab="overlay">Time-series overlay</button>
+</nav>
+
+<section class="panel">
+  <div id="tab-rolling" class="tab-panel active">
+    <div class="chart-wrap"><canvas id="chart-rolling"></canvas></div>
+    <p class="note" id="rolling-note"></p>
+  </div>
+  <div id="tab-regression" class="tab-panel">
+    <div class="chart-wrap"><canvas id="chart-regression"></canvas></div>
+    <p class="note" id="regression-note"></p>
+  </div>
+  <div id="tab-overlay" class="tab-panel">
+    <div class="chart-wrap"><canvas id="chart-overlay"></canvas></div>
+    <p class="note" id="overlay-note"></p>
+  </div>
+</section>
+
+<footer>
+  <span>Data: FRED, Finnhub, Yahoo. Pink bands on rolling chart = NBER recessions.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./dashboard.js"></script>
+<script src="../lib/ui.js"></script>
+<script src="./ui.js"></script>
+<script src="/core/lib/download-button.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+</body>
+</html>

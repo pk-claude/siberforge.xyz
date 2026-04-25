@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Regional Macro</title>
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../cycle/cycle.css" />
+<link rel="stylesheet" href="./regional.css" />
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Regional Macro</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link active">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
+</nav>
+
+
+<nav class="reg-sub-nav">
+  <span class="rsn-label">Regional pages</span>
+  <a href="/core/macro/geography/" class="rsn-link">Geography</a>
+  <a href="/core/macro/regional/regional-cpi/" class="rsn-link">Regional CPI</a>
+  <a href="/core/macro/regional/build-buy/" class="rsn-link">Build vs Buy</a>
+  <a href="/core/macro/regional/channel-mix/" class="rsn-link">Channel Mix</a>
+  <a href="/core/macro/regional/migration/" class="rsn-link">Migration</a>
+  <a href="/core/macro/regional/demographics/" class="rsn-link">Demographics</a>
+  <a href="/core/macro/regional/affordability/" class="rsn-link">Affordability</a>
+  <a href="/core/macro/regional/climate-risk/" class="rsn-link">Climate Risk</a>
+  <a href="/core/macro/regional/" class="rsn-home" title="Regional umbrella">↑ Overview</a>
+</nav>
+<section class="cycle-intro">
+  <h1 class="cycle-title">Regional macro &mdash; the dispersion the national aggregate hides</h1>
+  <p class="cycle-subtitle">
+    The national housing cycle is a weighted average of 50 state cycles + 400+ MSAs that often run
+    years out of phase. Eight views below decompose the national average into regional, demographic,
+    and operational dimensions. Live FRED data where available; snapshot data (refresh quarterly) for
+    series that aren&rsquo;t on FRED &mdash; clearly labeled.
+  </p>
+</section>
+
+<section class="regional-grid">
+
+  <a class="regional-card" href="/core/macro/geography/">
+    <div class="regional-card-icon">📊</div>
+    <div class="regional-card-title">Geography &middot; State + MSA</div>
+    <div class="regional-card-stat">50 states · 25 MSAs · 4 metrics</div>
+    <div class="regional-card-desc">Pick a state or MSA, see its trajectory vs US. Ranked-states bar to find your position vs peers on unemployment, HPI, employment, population.</div>
+    <div class="regional-card-source">Source: FRED state &amp; MSA series</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/regional-cpi/">
+    <div class="regional-card-icon">📈</div>
+    <div class="regional-card-title">Regional CPI Dispersion</div>
+    <div class="regional-card-stat">4 census regions + key metros</div>
+    <div class="regional-card-desc">Inflation isn&rsquo;t uniform &mdash; Phoenix shelter inflation is structurally different from Boston. NE/MW/S/W comparison, plus 12 metro-specific CPI.</div>
+    <div class="regional-card-source">Source: BLS via FRED &middot; live</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/build-buy/">
+    <div class="regional-card-icon">🏗️</div>
+    <div class="regional-card-title">Build vs Buy Gap</div>
+    <div class="regional-card-stat">New home median vs existing</div>
+    <div class="regional-card-desc">When new construction is cheaper than existing inventory, builders win share &mdash; the relative-price signal that flips builders from underdog to share-gainer.</div>
+    <div class="regional-card-source">Source: FRED MSPNHSUS / MSPUS &middot; live</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/channel-mix/">
+    <div class="regional-card-icon">🔧</div>
+    <div class="regional-card-title">Channel Mix by State</div>
+    <div class="regional-card-stat">Pro-channel concentration proxy</div>
+    <div class="regional-card-desc">State construction employment as % of total nonfarm. High-share states (FL, TX, AZ) skew Pro; low-share states (NY, CT) skew DIY. Tells you mix exposure by region.</div>
+    <div class="regional-card-source">Source: BLS QCEW via FRED &middot; live</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/migration/">
+    <div class="regional-card-icon">🚚</div>
+    <div class="regional-card-title">Net Domestic Migration</div>
+    <div class="regional-card-stat">Net inflow / outflow by state</div>
+    <div class="regional-card-desc">Where Americans are physically moving. The 10-year secular story is Sun Belt vs. high-tax coastal. Predicts housing demand 2-3 years before it shows up in HPI.</div>
+    <div class="regional-card-source">Source: IRS SOI &middot; snapshot</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/demographics/">
+    <div class="regional-card-icon">👥</div>
+    <div class="regional-card-title">State Demographics</div>
+    <div class="regional-card-stat">Age, income, ownership</div>
+    <div class="regional-card-desc">The underlying demand. Household-formation cohort (25-44) vs downsizer cohort (65+). Median income, owner-occupancy rate, household formation pace.</div>
+    <div class="regional-card-source">Source: Census ACS &middot; snapshot</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/affordability/">
+    <div class="regional-card-icon">💰</div>
+    <div class="regional-card-title">Metro Affordability</div>
+    <div class="regional-card-stat">Price-to-income ratio rank</div>
+    <div class="regional-card-desc">Median home price ÷ median income for top 25 MSAs. ~3 = healthy, &gt;5 = stretched, &gt;8 = crisis (San Francisco, NYC). Shows where buyers can actually buy.</div>
+    <div class="regional-card-source">Source: Zillow ZHVI + Census ACS &middot; snapshot</div>
+  </a>
+
+  <a class="regional-card" href="/core/macro/regional/climate-risk/">
+    <div class="regional-card-icon">🌪️</div>
+    <div class="regional-card-title">Climate Risk + Insurance</div>
+    <div class="regional-card-stat">FEMA Risk Index + insurance CPI</div>
+    <div class="regional-card-desc">Insurance pricing now drives "where can people live affordably" as much as economics. Hurricane / wildfire / flood risk ranks by state, plus the homeowner-insurance CPI trend.</div>
+    <div class="regional-card-source">Source: FEMA NRI + BLS &middot; snapshot + live</div>
+  </a>
+
+</section>
+
+<footer>
+  <span>Eight regional dimensions of the US housing/consumer cycle. "Snapshot" pages refresh quarterly; "live" pages pull from FRED on each load.</span>
+</footer>
+<script src="/core/lib/theme-toggle.js"></script>
+</body>
+</html>
