@@ -36,6 +36,9 @@ const CATALOG = {
   WALCL:     { label: 'Fed Balance Sheet',       freq: 'weekly',    unit: 'mm_usd',  transform: 'level' },
   RRPONTSYD: { label: 'Reverse Repo (ON)',       freq: 'daily',     unit: 'bn_usd',  transform: 'level' },
   WTREGEN:   { label: 'Treasury General Account',freq: 'weekly',    unit: 'bn_usd',  transform: 'level' },
+  // NBER recession indicator — used as a background overlay on the rolling
+  // correlation chart. Allowlisted at the proxy layer so the front-end can pull it.
+  USREC:     { label: 'NBER Recession Indicator',freq: 'monthly',   unit: 'binary',  transform: 'level' },
 
   // ===================== ECON DASHBOARD (/core/econ/) =====================
   // Growth

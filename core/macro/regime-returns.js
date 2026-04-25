@@ -4,26 +4,10 @@
 // YYYY-MM) and per-symbol daily close arrays, and returns the average forward
 // total return per (regime × symbol × horizon).
 //
-// What this is replacing: the old indicator × sector correlation heatmap
-// (renderHeatmap) computed Pearson r between each indicator's daily forward-
-// filled value and each sector's daily log return — averaged across multiple
-// regimes, dominated by autocorrelation artifacts, and not actionable.
-//
-// What this gives you instead: for each historical month classified into one of
-// four growth/inflation regimes, the realized forward 1m / 3m / 6m total return
-// of every sector. The result table answers a directly tradeable question:
-// "given we're in regime X, what has historically happened to each sector over
-// the next N months?"
-//
-// Caveats:
-//   * Past performance ≠ future returns. The regimes don't recur identically;
-//     average forward returns are a base-rate estimate, not a forecast.
-//   * Sample sizes vary by regime and by symbol (XLRE began Oct 2015, XLC in
-//     June 2018). Cells with low n should be greyed out at the UI layer.
-//   * Returns are simple (not log) total return and assume month-end-to-
-//     month-end holding. Dividends are excluded since Yahoo's adjusted close
-//     would be needed; for sector ETFs over 6m horizons the dividend miss is
-//     small (~50–150bp annualized) but real.
+// We retain the full sample of forward returns per (regime × symbol × horizon)
+// so we can report the full distribution (min / Q1 / median / Q3 / max), not
+// just the mean. The Disinflation regime in particular is bimodal — soft-
+// landing rallies vs. recession bottoms — and the mean alone hides that.
 
 // Reduce a daily series to month-end. We pick the LAST observed close in each
 // calendar month rather than seeking a specific business day, which is robust
@@ -32,7 +16,6 @@
 // Returns Map<'YYYY-MM', { date, value }>.
 export function dailyToMonthEnd(closes) {
   if (!closes || !closes.length) return new Map();
-  // Closes from /api/stocks come pre-sorted ascending. Walk and keep last per ym.
   const m = new Map();
   for (const o of closes) {
     if (!o || !Number.isFinite(o.value)) continue;
@@ -42,21 +25,29 @@ export function dailyToMonthEnd(closes) {
   return m;
 }
 
+// Quantile of a sorted array via linear interpolation between observations.
+// q in [0, 1].
+function quantile(sorted, q) {
+  if (!sorted.length) return NaN;
+  if (q <= 0) return sorted[0];
+  if (q >= 1) return sorted[sorted.length - 1];
+  const pos = (sorted.length - 1) * q;
+  const lo = Math.floor(pos);
+  const hi = Math.ceil(pos);
+  if (lo === hi) return sorted[lo];
+  return sorted[lo] + (sorted[hi] - sorted[lo]) * (pos - lo);
+}
+
 // Aggregate forward returns by regime for one symbol. Returns:
-//   { goldilocks: { 1: {mean, n}, 3: {mean, n}, 6: {mean, n} }, ... }
-//
-// horizons is in months. For each in-sample month with a known regime AND a
-// future month-end value at that horizon, add the percent total return to the
-// regime's accumulator and increment n.
+//   { goldilocks: { 1: {mean, std, n, min, q1, median, q3, max}, 3: ..., 6: ... }, ... }
 export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3, 6]) {
-  const accum = {};
+  const samples = {};
   for (const r of ['goldilocks', 'reflation', 'stagflation', 'disinflation']) {
-    accum[r] = {};
-    for (const h of horizons) accum[r][h] = { sum: 0, sumSq: 0, n: 0 };
+    samples[r] = {};
+    for (const h of horizons) samples[r][h] = [];
   }
 
   const months = [...monthEndCloses.keys()].sort();
-  const ymToIdx = new Map(months.map((ym, i) => [ym, i]));
 
   for (let i = 0; i < months.length; i++) {
     const ym = months[i];
@@ -70,33 +61,42 @@ export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3
       if (futureIdx >= months.length) continue;
       const futureClose = monthEndCloses.get(months[futureIdx]);
       if (!futureClose || !Number.isFinite(futureClose.value) || futureClose.value <= 0) continue;
-      const ret = (futureClose.value / startVal - 1) * 100; // pct
-      const a = accum[info.regime][h];
-      a.sum += ret;
-      a.sumSq += ret * ret;
-      a.n += 1;
+      const ret = (futureClose.value / startVal - 1) * 100;
+      samples[info.regime][h].push(ret);
     }
   }
 
   const out = {};
-  for (const r of Object.keys(accum)) {
+  for (const r of Object.keys(samples)) {
     out[r] = {};
     for (const h of horizons) {
-      const a = accum[r][h];
-      if (a.n === 0) {
-        out[r][h] = { mean: NaN, std: NaN, n: 0 };
+      const arr = samples[r][h];
+      if (arr.length === 0) {
+        out[r][h] = { mean: NaN, std: NaN, n: 0, min: NaN, q1: NaN, median: NaN, q3: NaN, max: NaN };
       } else {
-        const mean = a.sum / a.n;
-        const variance = a.n > 1 ? (a.sumSq - a.sum * a.sum / a.n) / (a.n - 1) : 0;
-        out[r][h] = { mean, std: variance > 0 ? Math.sqrt(variance) : 0, n: a.n };
+        const n = arr.length;
+        let sum = 0, sumSq = 0;
+        for (const v of arr) { sum += v; sumSq += v * v; }
+        const mean = sum / n;
+        const variance = n > 1 ? (sumSq - sum * sum / n) / (n - 1) : 0;
+        const sorted = arr.slice().sort((a, b) => a - b);
+        out[r][h] = {
+          mean,
+          std: variance > 0 ? Math.sqrt(variance) : 0,
+          n,
+          min:    sorted[0],
+          q1:     quantile(sorted, 0.25),
+          median: quantile(sorted, 0.5),
+          q3:     quantile(sorted, 0.75),
+          max:    sorted[sorted.length - 1],
+        };
       }
     }
   }
   return out;
 }
 
-// Build the full table for a set of symbols. Input is { symbol: closes[] };
-// output is { symbol: regimeForwardReturns(...) }. Used by the dashboard.
+// Build the full table for a set of symbols.
 export function buildRegimeReturnsTable(stockHistoryMap, regimeMap, horizons = [1, 3, 6]) {
   const result = {};
   for (const [symbol, closes] of Object.entries(stockHistoryMap)) {

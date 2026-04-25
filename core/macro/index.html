@@ -23,82 +23,70 @@
 </header>
 
 <section class="quotes" id="quotes-strip">
-  <!-- Live SPY + sector ETF tiles injected here. -->
+  <!-- Live SPY + sector ETF tiles injected here. Click any tile for drill-down; hover for top contributors. -->
 </section>
 
-<section class="controls">
-  <div class="control">
-    <label>Indicator</label>
-    <select id="indicator-select"></select>
-  </div>
-  <div class="control">
-    <label>Benchmark</label>
-    <select id="benchmark-select"></select>
-  </div>
-  <div class="control">
-    <label>History</label>
-    <select id="years-select">
-      <option value="3">3y</option>
-      <option value="5" selected>5y</option>
-      <option value="10">10y</option>
-      <option value="15">15y</option>
-    </select>
-  </div>
-  <div class="control">
-    <label>Rolling window</label>
-    <select id="window-select">
-      <option value="30">30d</option>
-      <option value="60">60d</option>
-      <option value="90" selected>90d</option>
-      <option value="180">180d</option>
-      <option value="252">252d (1y)</option>
-    </select>
-  </div>
-</section>
-
-<nav class="tabs">
-  <button class="tab active" data-tab="rolling">Rolling correlation</button>
-  <button class="tab" data-tab="regression">Scatter + regression</button>
-  <button class="tab" data-tab="overlay">Time-series overlay</button>
-</nav>
-
-<section class="panel">
-  <div id="tab-rolling" class="tab-panel active">
-    <div class="chart-wrap"><canvas id="chart-rolling"></canvas></div>
-    <p class="note" id="rolling-note"></p>
-  </div>
-  <div id="tab-regression" class="tab-panel">
-    <div class="chart-wrap"><canvas id="chart-regression"></canvas></div>
-    <p class="note" id="regression-note"></p>
-  </div>
-  <div id="tab-overlay" class="tab-panel">
-    <div class="chart-wrap"><canvas id="chart-overlay"></canvas></div>
-    <p class="note" id="overlay-note"></p>
-  </div>
+<!-- Live macro strip: 6 indicators with current value, percentile, 1m delta -->
+<section class="macro-strip" id="macro-strip">
+  <!-- Populated by renderMacroStrip() -->
 </section>
 
 <section class="regime-section">
   <h2>Regime-Conditional Sector Returns</h2>
   <p class="sub">
     Each historical month is classified into one of four growth &times; inflation regimes. Cells show the average forward
-    total return for SPY and each sector ETF given that regime. <strong>Growth</strong> = composite z-score of INDPRO,
-    nonfarm payrolls, and real retail sales (each 6m annualized). <strong>Inflation</strong> = z-score of Core CPI 6m
+    total return for SPY and each sector ETF given that regime. <strong>Growth</strong> = composite z-score of <a class="meth-link" href="/core/econ/indicator.html?id=INDPRO" title="See indicator drill-down">INDPRO</a>,
+    nonfarm <a class="meth-link" href="/core/econ/indicator.html?id=PAYEMS" title="See indicator drill-down">payrolls</a>, and <a class="meth-link" href="/core/econ/indicator.html?id=RRSFS" title="See indicator drill-down">real retail sales</a> (each 6m annualized). <strong>Inflation</strong> = z-score of <a class="meth-link" href="/core/econ/indicator.html?id=CPILFESL" title="See indicator drill-down">Core CPI</a> 6m
     annualized. Both z-scores use a trailing 120-month window so the regime is &ldquo;vs recent history&rdquo; rather than
     against the inflationary 1970s.
   </p>
 
-  <div id="regime-current" class="regime-current"></div>
+  <div class="regime-hero">
+    <div class="regime-trajectory-wrap">
+      <div class="regime-trajectory-header">
+        <h3>Regime trajectory &middot; last 24 months</h3>
+        <p class="regime-trajectory-sub">Each dot is one month. Newest = brightest. Watch for boundary crossings — that&rsquo;s the actionable signal.</p>
+      </div>
+      <div class="regime-trajectory-chart">
+        <canvas id="regime-trajectory"></canvas>
+      </div>
+    </div>
+    <div id="regime-current" class="regime-current"></div>
+  </div>
 
-  <div class="horizon-tabs">
-    <span class="horizon-label">Forward horizon</span>
-    <button class="h-tab" data-h="1">+1m</button>
-    <button class="h-tab" data-h="3">+3m</button>
-    <button class="h-tab active" data-h="6">+6m</button>
+  <!-- T5.2: Regime transition matrix — historical 6m forward base rates -->
+  <section class="regime-transitions" id="regime-transitions"></section>
+
+  <div class="regime-controls">
+    <div class="control-group">
+      <span class="control-label">Forward horizon</span>
+      <div class="control-tabs">
+        <button class="h-tab" data-h="1">+1m</button>
+        <button class="h-tab" data-h="3">+3m</button>
+        <button class="h-tab active" data-h="6">+6m</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Returns</span>
+      <div class="control-tabs">
+        <button class="mode-tab active" data-mode="absolute">Absolute</button>
+        <button class="mode-tab" data-mode="excess">Excess vs SPY</button>
+      </div>
+    </div>
   </div>
 
   <div id="regime-table"></div>
 
   <p class="regime-note" id="regime-interpretation"></p>
+
+  <!-- T5.5: Positioning capstone — converts regime + historical returns into a tilt -->
+  <section class="regime-positioning" id="regime-positioning"></section>
+
+  <!-- Subtle link to the demoted pair-explorer research view -->
+  <p class="research-link-row">
+    Need to explore an arbitrary indicator vs. ETF pair?
+    <a href="/core/macro/research.html" class="research-link">Open the Pair Explorer &rarr;</a>
+  </p>
 </section>
 
 <footer>

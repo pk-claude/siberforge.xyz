@@ -198,3 +198,31 @@ export function regimeDistribution(regimeMap) {
   for (const v of regimeMap.values()) out[v.regime] = (out[v.regime] || 0) + 1;
   return out;
 }
+
+// Smooth the "current regime" reading via majority vote over the last `window`
+// months. Used ONLY for the live headline + table-row highlight — historical
+// aggregation always uses the raw monthly classification.
+//
+// Why: a single noisy CPI or payrolls print can flip the headline regime month
+// to month, which is whipsaw-y and unhelpful for a 6-24m positioning view. A
+// 3-month majority vote means it takes 2-of-3 consecutive contradicting months
+// to flip the call. Tie-break (rare with 3 votes) defers to the most recent.
+//
+// Returns { regime, ym, votes } where ym is the latest month covered.
+export function smoothCurrentRegime(regimeMap, window = 3) {
+  const months = [...regimeMap.keys()].sort();
+  if (!months.length) return null;
+  const tail = months.slice(-window);
+  const votes = { goldilocks: 0, reflation: 0, stagflation: 0, disinflation: 0 };
+  for (const ym of tail) {
+    const r = regimeMap.get(ym).regime;
+    votes[r] = (votes[r] || 0) + 1;
+  }
+  // Majority winner; tie-break on most recent observation.
+  let bestRegime = regimeMap.get(tail[tail.length - 1]).regime;
+  let bestCount = votes[bestRegime];
+  for (const r of Object.keys(votes)) {
+    if (votes[r] > bestCount) { bestRegime = r; bestCount = votes[r]; }
+  }
+  return { regime: bestRegime, ym: tail[tail.length - 1], votes, window };
+}
