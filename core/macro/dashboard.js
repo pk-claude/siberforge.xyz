@@ -16,6 +16,7 @@ import {
   REGIMES,
 } from './regimes.js';
 import { buildRegimeReturnsTable } from './regime-returns.js';
+import { SECTOR_PROFILES, REGIME_NARRATIVES } from './sector-profiles.js';
 
 // ---------- state ----------
 const state = {
@@ -403,12 +404,11 @@ function renderRegimeTable() {
   // Color saturates at ±2.5%/month equivalent — tightens with longer horizon.
   const colorScale = horizon * 2.5;
 
-  const symLabels = Object.fromEntries(state.tickers.map(t => [t.symbol, t.label]));
-
+  // Header row: column tooltips describe the sector itself (no regime context).
   const headerCells = sym.map(s => {
-    // Strip parentheticals from labels for compactness ("S&P 500 (SPY)" -> "SPY").
-    const lbl = (symLabels[s] || s).replace(/\s*\([^)]+\)/, '');
-    return `<th title="${lbl}">${s}</th>`;
+    const profile = SECTOR_PROFILES[s];
+    const lbl = profile?.label || s;
+    return `<th data-tooltip-kind="sector" data-tooltip-sym="${s}" title="${lbl}">${s}</th>`;
   }).join('');
   const header = `<tr><th class="regime-col-label">Regime</th>${headerCells}</tr>`;
 
@@ -416,8 +416,9 @@ function renderRegimeTable() {
   const body = regimeOrder.map(r => {
     const meta = REGIMES[r];
     const rowClass = state.currentRegime === r ? 'regime-row current' : 'regime-row';
+    // Row-label tooltip: the regime's macro narrative.
     const labelCell = `
-      <td class="regime-col-label">
+      <td class="regime-col-label" data-tooltip-kind="regime" data-tooltip-regime="${r}">
         <span class="regime-dot" style="background:${meta.color}"></span>
         <span class="regime-row-name">${meta.label}</span>
         <span class="regime-row-desc">${meta.short}</span>
@@ -425,7 +426,7 @@ function renderRegimeTable() {
     const cells = sym.map(s => {
       const cell = state.regimeTable[s]?.[r]?.[horizon];
       if (!cell || cell.n === 0) {
-        return `<td class="regime-cell empty">—</td>`;
+        return `<td class="regime-cell empty" data-tooltip-kind="cell" data-tooltip-sym="${s}" data-tooltip-regime="${r}">—</td>`;
       }
       const ret = cell.mean;
       // Diverging color: red (negative) -> neutral (0) -> green (positive).
@@ -436,7 +437,8 @@ function renderRegimeTable() {
       // Sample-size opacity: cells with n < 12 fade out.
       const opacity = cell.n >= 24 ? 1 : cell.n >= 12 ? 0.75 : 0.45;
       const sign = ret > 0 ? '+' : '';
-      return `<td class="regime-cell" style="background:${bg};opacity:${opacity}" title="n=${cell.n}, σ=${fmt(cell.std, 1)}%">
+      return `<td class="regime-cell" style="background:${bg};opacity:${opacity}"
+                  data-tooltip-kind="cell" data-tooltip-sym="${s}" data-tooltip-regime="${r}">
         <div class="regime-cell-ret">${sign}${fmt(ret, 1)}%</div>
         <div class="regime-cell-n">n=${cell.n}</div>
       </td>`;
@@ -445,6 +447,134 @@ function renderRegimeTable() {
   }).join('');
 
   tgt.innerHTML = `<table class="regime-returns-table">${header}${body}</table>`;
+  wireRegimeTooltip();
+}
+
+// Custom hover tooltip for the regime returns table.
+//
+// Three kinds of tooltip content (selected via data-tooltip-kind on the target):
+//   sector — column header on a ticker; explains what the sector IS.
+//   regime — row label; explains the regime's macro thesis.
+//   cell   — body cell; combines sector profile + regime-specific "so what" +
+//            numbers + delta vs SPY in the same cell.
+function wireRegimeTooltip() {
+  let tooltipEl = document.getElementById('regime-tooltip');
+  if (!tooltipEl) {
+    tooltipEl = document.createElement('div');
+    tooltipEl.id = 'regime-tooltip';
+    tooltipEl.className = 'regime-tooltip';
+    tooltipEl.style.display = 'none';
+    document.body.appendChild(tooltipEl);
+  }
+
+  const horizon = state.currentHorizon;
+  const horizonLabel = horizon === 1 ? '1m' : horizon === 3 ? '3m' : '6m';
+
+  // Build tooltip HTML based on what's being hovered.
+  function buildContent(target) {
+    const kind = target.dataset.tooltipKind;
+    if (kind === 'sector') {
+      const profile = SECTOR_PROFILES[target.dataset.tooltipSym];
+      if (!profile) return '';
+      return `
+        <div class="rt-title">${target.dataset.tooltipSym} &middot; ${profile.label}</div>
+        <div class="rt-body">${profile.description}</div>
+        <div class="rt-foot">Hover any cell in this column for the regime-specific implication.</div>
+      `;
+    }
+    if (kind === 'regime') {
+      const r = target.dataset.tooltipRegime;
+      const narr = REGIME_NARRATIVES[r];
+      const meta = REGIMES[r];
+      if (!narr) return '';
+      return `
+        <div class="rt-title" style="color:${meta.color}">${narr.title}</div>
+        <div class="rt-body">${narr.body}</div>
+      `;
+    }
+    if (kind === 'cell') {
+      const sym = target.dataset.tooltipSym;
+      const r = target.dataset.tooltipRegime;
+      const profile = SECTOR_PROFILES[sym];
+      const meta = REGIMES[r];
+      const cell = state.regimeTable?.[sym]?.[r]?.[horizon];
+      const spyCell = state.regimeTable?.SPY?.[r]?.[horizon];
+      if (!profile || !meta) return '';
+      const narrative = profile.byRegime[r] || '';
+
+      let numbers = '';
+      if (cell && cell.n > 0) {
+        const sign = cell.mean > 0 ? '+' : '';
+        let deltaTxt = '';
+        if (sym !== 'SPY' && spyCell && spyCell.n > 0) {
+          const delta = cell.mean - spyCell.mean;
+          const deltaSign = delta > 0 ? '+' : '';
+          const deltaClass = delta >= 0 ? 'rt-delta-pos' : 'rt-delta-neg';
+          deltaTxt = ` &middot; <span class="${deltaClass}">${deltaSign}${fmt(delta, 1)}pp vs SPY</span>`;
+        }
+        numbers = `
+          <div class="rt-stats">
+            <strong>${sign}${fmt(cell.mean, 1)}%</strong> avg forward ${horizonLabel}
+            ${deltaTxt}
+            <br>
+            <span class="rt-sub">σ=${fmt(cell.std, 1)}% &middot; n=${cell.n} historical months</span>
+          </div>`;
+      } else {
+        numbers = `<div class="rt-stats"><span class="rt-sub">No observations at this horizon (sector inception too recent or rare regime).</span></div>`;
+      }
+
+      return `
+        <div class="rt-title">${sym} &middot; <span style="color:${meta.color}">${meta.label}</span></div>
+        <div class="rt-body">${profile.description}</div>
+        <div class="rt-mech"><strong>Why this regime:</strong> ${narrative}</div>
+        ${numbers}
+      `;
+    }
+    return '';
+  }
+
+  function position(e) {
+    // Place near the cursor, but flip to left/above when near the viewport edge.
+    const PAD = 14;
+    const w = tooltipEl.offsetWidth;
+    const h = tooltipEl.offsetHeight;
+    let x = e.clientX + PAD;
+    let y = e.clientY + PAD;
+    if (x + w + 8 > window.innerWidth)  x = e.clientX - w - PAD;
+    if (y + h + 8 > window.innerHeight) y = e.clientY - h - PAD;
+    if (x < 8) x = 8;
+    if (y < 8) y = 8;
+    tooltipEl.style.left = x + 'px';
+    tooltipEl.style.top  = y + 'px';
+  }
+
+  // Use mouseover/mouseout (bubbling) on the table so we attach one listener.
+  const table = el('regime-table');
+  if (!table) return;
+  // Strip the lazy "title" attribute fallback so it doesn't double-render with our tooltip.
+  table.querySelectorAll('[title]').forEach(n => { n.dataset.lazyTitle = n.title; n.removeAttribute('title'); });
+
+  table.addEventListener('mouseover', (e) => {
+    const tgt = e.target.closest('[data-tooltip-kind]');
+    if (!tgt) return;
+    const html = buildContent(tgt);
+    if (!html) return;
+    tooltipEl.innerHTML = html;
+    tooltipEl.style.display = 'block';
+    position(e);
+  });
+  table.addEventListener('mousemove', (e) => {
+    if (tooltipEl.style.display !== 'block') return;
+    position(e);
+  });
+  table.addEventListener('mouseout', (e) => {
+    // Hide only when leaving the labeled element entirely (not entering a child).
+    const tgt = e.target.closest('[data-tooltip-kind]');
+    if (!tgt) return;
+    const next = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-tooltip-kind]');
+    if (next === tgt) return;
+    tooltipEl.style.display = 'none';
+  });
 }
 
 // One-sentence interpretation auto-generated from the current regime's row.
