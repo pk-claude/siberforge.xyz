@@ -10,8 +10,30 @@
 <style>
 /* Force Inter on the AI dashboard internals */
 body, table, .pick-card, .thesis-box, .kpi, .ratios-table, .nav-cat, .nav-tier2 button, .scenario-btn, .tab, .chip { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
-/* Hide AI dashboard's inline sticky header (siberforge top + deep-dive-nav take its place) */
-body > header:not(.top) { display: none !important; }
+/* AI dashboard inline header: keep its page-specific nav (tier-1/tier-2 on Top-5,
+   scenario+industry-tabs on Screen) but strip its redundant chrome (title/sub/cross-nav/own-theme-toggle)
+   so there's no double-sticky and no duplicated branding. */
+body > header:not(.top) {
+  position: static !important;
+  background: transparent !important;
+  border-bottom: 1px solid var(--line) !important;
+  padding: 8px 24px !important;
+  z-index: auto !important;
+  backdrop-filter: none !important;
+}
+body > header:not(.top) .hdr-title,
+body > header:not(.top) .hdr-row1 > .cross-nav,
+body > header:not(.top) #theme-toggle-v2,
+body > header:not(.top) #theme-toggle,
+body > header:not(.top) #theme-icon,
+body > header:not(.top) #theme-icon-v2,
+body > header:not(.top) #theme-label,
+body > header:not(.top) #theme-label-v2 { display: none !important; }
+/* Old single-tier `<a class="nav-btn">` row in Top-5 header was already hidden by an earlier rule;
+   keep it suppressed here too in case CSS specificity shifts. */
+body > header:not(.top) > nav:not(.nav-tier1):not(.nav-tier2) { display: none !important; }
+/* Tighten the hdr-row1 wrapper to collapse around the nav-tier1 only */
+body > header:not(.top) .hdr-row1 { min-height: 0 !important; gap: 8px !important; }
 /* Push siberforge nav above any AI tab nav and ensure correct z-stacking */
 .top { z-index: 100; }
 .deep-dive-nav { z-index: 99; }
