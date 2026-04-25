@@ -8,11 +8,15 @@
 <link rel="stylesheet" href="/core/macro/styles.css" />
 <link rel="stylesheet" href="/core/ai/ai.css" />
 <style>
-/* Force Inter on the AI dashboard internals */
-body, table, .pick-card, .thesis-box, .kpi, .ratios-table, .nav-cat, .nav-tier2 button, .scenario-btn, .tab, .chip { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
-/* AI dashboard inline header: keep its page-specific nav (tier-1/tier-2 on Top-5,
-   scenario+industry-tabs on Screen) but strip its redundant chrome (title/sub/cross-nav/own-theme-toggle)
-   so there's no double-sticky and no duplicated branding. */
+/* ====== Siberforge shell integration (single source of truth) ====== */
+body, table, .pick-card, .thesis-box, .kpi, .ratios-table, .nav-cat,
+.nav-tier2 button, .scenario-btn, .tab {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+/* AI dashboard's own inline header sits below siberforge's chrome and contributes only its
+   page-specific nav (tier-1/tier-2 on Top-5; scenario/industry-tabs on Screen).
+   Suppress its title/sub/cross-nav/own-theme-toggle since the siberforge top + deep-dive-nav
+   provide those globally. */
 body > header:not(.top) {
   position: static !important;
   background: transparent !important;
@@ -21,23 +25,10 @@ body > header:not(.top) {
   z-index: auto !important;
   backdrop-filter: none !important;
 }
-body > header:not(.top) .hdr-title,
-body > header:not(.top) .hdr-row1 > .cross-nav,
-body > header:not(.top) #theme-toggle-v2,
-body > header:not(.top) #theme-toggle,
-body > header:not(.top) #theme-icon,
-body > header:not(.top) #theme-icon-v2,
-body > header:not(.top) #theme-label,
-body > header:not(.top) #theme-label-v2 { display: none !important; }
-/* Old single-tier `<a class="nav-btn">` row in Top-5 header was already hidden by an earlier rule;
-   keep it suppressed here too in case CSS specificity shifts. */
-body > header:not(.top) > nav:not(.nav-tier1):not(.nav-tier2) { display: none !important; }
-/* Tighten the hdr-row1 wrapper to collapse around the nav-tier1 only */
+body > header:not(.top) .hdr-title { display: none !important; }
 body > header:not(.top) .hdr-row1 { min-height: 0 !important; gap: 8px !important; }
-/* Push siberforge nav above any AI tab nav and ensure correct z-stacking */
 .top { z-index: 100; }
 .deep-dive-nav { z-index: 99; }
-/* Tighten AI internals' top padding since siberforge chrome is now outside it */
 main { padding-top: 14px; }
 </style>
 <style>
@@ -126,16 +117,6 @@ tr:last-child td{border-bottom:none}
 .scenario-key{font-size:11px;color:var(--ink3);margin:8px 0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .scenario-key .swatch{display:inline-block;width:22px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
 /* Filter bar */
-.filter-bar{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin-top:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
-.filter-bar .filter-label{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px}
-.filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.chip{background:var(--panel2);border:1px solid var(--line);color:var(--ink2);padding:5px 11px;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;transition:.12s}
-.chip:hover{color:var(--ink);border-color:var(--accent)}
-.chip.active{background:rgba(90,166,255,.15);color:var(--accent);border-color:var(--accent)}
-.chip-link{background:transparent;border:none;color:var(--ink3);font-size:10px;cursor:pointer;padding:5px 4px;text-decoration:underline}
-.chip-link:hover{color:var(--accent)}
-.search-input{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:5px 10px;border-radius:4px;font-size:11px;width:200px}
-.search-input::placeholder{color:var(--ink3)}
 /* Period toggle (history/current/forecast) */
 .period-toggle{display:flex;gap:4px;margin:12px 0;background:var(--panel2);padding:4px;border-radius:6px;border:1px solid var(--line);width:fit-content}
 .period-btn{background:transparent;border:none;color:var(--ink2);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;transition:.15s}
@@ -204,21 +185,13 @@ tr:last-child td{border-bottom:none}
 [data-theme="light"] .exp-low{background:rgba(220,38,38,.18);color:#b91c1c}
 [data-theme="light"] .nav-btn:not(.active):hover{background:#e8eef7}
 /* Theme toggle button */
-.theme-btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;transition:.12s;display:inline-flex;align-items:center;gap:6px}
-.cross-nav{background:var(--panel2);border:1px solid var(--line);color:var(--ink2);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.12s}
-.cross-nav:hover{border-color:var(--accent);color:var(--accent)}
-.cross-nav .arrow{font-size:14px}
-.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
-.theme-icon{font-size:14px;line-height:1}
 /* ============ V2 LAYOUT IMPROVEMENTS ============ */
 header{padding:10px 24px!important}
 .hdr-row1{display:flex;align-items:center;gap:18px;min-height:38px}
 .hdr-title{display:flex;flex-direction:column;line-height:1.15;flex-shrink:0;min-width:140px}
 .title-main{font-size:15px;font-weight:700;color:var(--ink)}
 .title-sub{font-size:11px;color:var(--ink3)}
-.v2-badge{display:inline-block;background:rgba(63,209,122,.18);color:var(--good);font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;letter-spacing:.4px;margin-left:6px;vertical-align:middle}
-[data-theme="light"] .v2-badge{background:rgba(22,163,74,.16);color:#15803d}
-.nav-tier1{display:flex;gap:2px;flex:1;justify-content:center;flex-wrap:wrap;margin:0}
+[data-theme="light"] .nav-tier1{display:flex;gap:2px;flex:1;justify-content:center;flex-wrap:wrap;margin:0}
 .nav-cat{background:transparent;border:none;color:var(--ink2);padding:7px 16px;border-radius:5px;cursor:pointer;font-size:13px;font-weight:600;transition:.12s}
 .nav-cat:hover{color:var(--ink);background:var(--panel2)}
 .nav-cat.active{color:var(--accent);background:rgba(90,166,255,.12)}
@@ -229,8 +202,6 @@ header{padding:10px 24px!important}
 .nav-tier2 button.active{background:var(--accent);color:#06121f;border-color:var(--accent);font-weight:600}
 [data-theme="light"] .nav-tier2 button.active{color:#fff}
 .nav-tier2:empty{display:none}
-header > nav:not(.nav-tier1):not(.nav-tier2){display:none}
-header > .filter-bar{display:none}
 .footnote{font-size:12.5px!important;line-height:1.55!important;color:var(--ink2)}
 .yoy-foot{font-size:11.5px!important;color:var(--ink2)}
 .cap{font-size:12.5px!important;line-height:1.55}
@@ -334,7 +305,7 @@ header > .filter-bar{display:none}
 <header>
   <div class="hdr-row1">
     <div class="hdr-title">
-      <span class="title-main">AI Top-5 Deep Dive <span class="v2-badge">V3</span></span>
+      <span class="title-main">AI Top-5 Deep Dive</span>
       <span class="title-sub">Modest Scenario · Apr 25, 2026 · Bullets + Supporting Charts</span>
     </div>
     <nav class="nav-tier1" id="nav-tier1">
@@ -344,51 +315,9 @@ header > .filter-bar{display:none}
       <button class="nav-cat" data-cat="scenarios">Scenarios</button>
       <button class="nav-cat" data-cat="risks">Risks</button>
     </nav>
-    <a class="cross-nav" href="../" title="Back to industry screen">
-      <span class="arrow">&larr;</span><span>Industry Screen</span>
-    </a>
-    <button id="theme-toggle-v2" class="theme-btn" title="Switch theme">
-      <span class="theme-icon" id="theme-icon-v2">☀</span>
-      <span id="theme-label-v2">Light</span>
-    </button>
   </div>
   <nav class="nav-tier2" id="nav-tier2"></nav>
-  <nav>
-    <a href="#summary" class="nav-btn summary">Summary</a>
-    <a href="#meta" class="nav-btn" data-co-link="meta">META</a>
-    <a href="#cdns" class="nav-btn" data-co-link="cdns">CDNS</a>
-    <a href="#avgo" class="nav-btn" data-co-link="avgo">AVGO</a>
-    <a href="#snps" class="nav-btn" data-co-link="snps">SNPS</a>
-    <a href="#msft" class="nav-btn" data-co-link="msft">MSFT</a>
-    <a href="#ranking" class="nav-btn">Ranking</a>
-    <a href="#ratios" class="nav-btn">Ratios</a>
-    <a href="#strong" class="nav-btn">Strong Scenario</a>
-    <a href="#portfolio" class="nav-btn">Portfolio</a>
-    <a href="#shorts" class="nav-btn">Shorts</a>
-    <a href="#redflags" class="nav-btn">10-Q Red Flags</a>
-  </nav>
-  <div class="filter-bar">
-    <div class="filter-group">
-      <span class="filter-label">Filter Companies:</span>
-      <button class="chip active" data-co="meta">META</button>
-      <button class="chip active" data-co="cdns">CDNS</button>
-      <button class="chip active" data-co="avgo">AVGO</button>
-      <button class="chip active" data-co="snps">SNPS</button>
-      <button class="chip active" data-co="msft">MSFT</button>
-      <button class="chip-link" id="co-all">All</button>
-      <button class="chip-link" id="co-none">None</button>
-    </div>
-    <div class="filter-group">
-      <span class="filter-label">Search:</span>
-      <input class="search-input" id="global-search" placeholder="Search ratios, companies, text...">
-    </div>
-    <div class="filter-group" style="margin-left:auto">
-      <button id="theme-toggle" class="theme-btn" title="Switch theme">
-        <span class="theme-icon" id="theme-icon">☀</span>
-        <span id="theme-label">Light</span>
-      </button>
-    </div>
-  </div>
+
 </header>
 <main>
 
@@ -1615,14 +1544,13 @@ if (globalSearch) {
 }
 
 // ============================================================================
-// THEME TOGGLE (light / dark)
+// THEME TOGGLE — uses siberforge's storage key when wrapped in siberforge shell;
+// falls back to local key when viewed standalone. Keeps both states in sync.
 // ============================================================================
+const _SBF_KEY = 'siberforge-theme';
 function destroyAllCharts() {
   if (window.Chart && Chart.instances) {
-    try {
-      const list = Object.values(Chart.instances);
-      list.forEach(c => { try { c.destroy(); } catch(e) {} });
-    } catch(e) {}
+    try { Object.values(Chart.instances).forEach(c => { try { c.destroy(); } catch(e) {} }); } catch(e) {}
   }
 }
 function rerenderActiveCharts() {
@@ -1646,137 +1574,27 @@ function rerenderActiveCharts() {
   }
 }
 function setTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  try { localStorage.setItem('theme', theme); } catch(e) {}
-  const icon = document.getElementById('theme-icon');
-  const label = document.getElementById('theme-label');
-  if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀';
-  if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
+  if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  else document.documentElement.removeAttribute('data-theme');
+  try { localStorage.setItem(_SBF_KEY, theme); } catch(e) {}
   destroyAllCharts();
   rerenderActiveCharts();
   if (sectionRendered.has('ratios')) renderRatiosTable();
 }
-const themeToggle = document.getElementById('theme-toggle');
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-}
+// React to siberforge's theme-toggle.js writing to data-theme on <html>
+const _themeObs = new MutationObserver(() => {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  destroyAllCharts();
+  rerenderActiveCharts();
+  if (sectionRendered.has('ratios')) renderRatiosTable();
+});
+_themeObs.observe(document.documentElement, {attributes:true, attributeFilter:['data-theme']});
+// Apply initial theme from siberforge key (FOUC-safe: siberforge's lib runs first)
 (function initTheme() {
   let saved = null;
-  try { saved = localStorage.getItem('theme'); } catch(e) {}
-  const theme = saved || 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-  const icon = document.getElementById('theme-icon');
-  const label = document.getElementById('theme-label');
-  if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀';
-  if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
+  try { saved = localStorage.getItem(_SBF_KEY); } catch(e) {}
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
 })();
-
-showPage(window.location.hash.slice(1) || 'summary');
-</script>
-<script>
-// ============================================================================
-// V2 NAV: tier-1/tier-2, glossary tooltips, theme toggle mirror
-// ============================================================================
-const NAV_MAP = {
-  overview:   [{id:'summary',   label:'Executive Summary'}],
-  companies:  [
-    {id:'meta', label:'META'},
-    {id:'cdns', label:'CDNS'},
-    {id:'avgo', label:'AVGO'},
-    {id:'snps', label:'SNPS'},
-    {id:'msft', label:'MSFT'}
-  ],
-  comparison: [
-    {id:'ranking', label:'Risk-Adjusted Ranking'},
-    {id:'ratios',  label:'20 Financial Ratios'}
-  ],
-  scenarios:  [
-    {id:'strong',    label:'Strong Scenario'},
-    {id:'portfolio', label:'Max-Sharpe Portfolio'}
-  ],
-  risks:      [
-    {id:'shorts',   label:'Counter-Intuitive Shorts'},
-    {id:'redflags', label:'10-Q Working Capital'}
-  ]
-};
-function findCatForPage(pageId) {
-  for (const [cat, pages] of Object.entries(NAV_MAP)) {
-    if (pages.find(p => p.id === pageId)) return cat;
-  }
-  return 'overview';
-}
-function renderTier2(cat) {
-  const tier2 = document.getElementById('nav-tier2');
-  if (!tier2) return;
-  tier2.innerHTML = '';
-  if (!NAV_MAP[cat] || NAV_MAP[cat].length <= 1) return;
-  NAV_MAP[cat].forEach(page => {
-    const btn = document.createElement('button');
-    btn.textContent = page.label;
-    btn.dataset.page = page.id;
-    btn.addEventListener('click', () => {
-      window.location.hash = '#' + page.id;
-      showPage(page.id);
-    });
-    tier2.appendChild(btn);
-  });
-}
-function setTier1Active(cat) {
-  document.querySelectorAll('.nav-cat').forEach(b =>
-    b.classList.toggle('active', b.dataset.cat === cat)
-  );
-  renderTier2(cat);
-}
-function syncTier2ActivePage(pageId) {
-  document.querySelectorAll('#nav-tier2 button').forEach(b =>
-    b.classList.toggle('active', b.dataset.page === pageId)
-  );
-}
-function syncNavToPage(pageId) {
-  const cat = findCatForPage(pageId);
-  const currentCat = document.querySelector('.nav-cat.active')?.dataset.cat;
-  if (currentCat !== cat) setTier1Active(cat);
-  syncTier2ActivePage(pageId);
-}
-document.querySelectorAll('.nav-cat').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const cat = btn.dataset.cat;
-    setTier1Active(cat);
-    if (NAV_MAP[cat] && NAV_MAP[cat][0]) {
-      const first = NAV_MAP[cat][0].id;
-      window.location.hash = '#' + first;
-      showPage(first);
-    }
-  });
-});
-const _origShowPageV2 = showPage;
-window.showPage = function(target) {
-  _origShowPageV2(target);
-  syncNavToPage(target);
-};
-syncNavToPage(window.location.hash.slice(1) || 'summary');
-
-// V2 theme toggle (mirrors original)
-const v2Toggle = document.getElementById('theme-toggle-v2');
-const v2Icon = document.getElementById('theme-icon-v2');
-const v2Label = document.getElementById('theme-label-v2');
-function syncV2Theme() {
-  const t = document.documentElement.getAttribute('data-theme') || 'dark';
-  if (v2Icon) v2Icon.textContent = t === 'light' ? '🌙' : '☀';
-  if (v2Label) v2Label.textContent = t === 'light' ? 'Dark' : 'Light';
-}
-syncV2Theme();
-if (v2Toggle) {
-  v2Toggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
-    syncV2Theme();
-  });
-}
-
 // Glossary tooltips
 const RATIO_DEFS = {
   pe_ttm:    'P/E (TTM): Price div Earnings (trailing 12 months). How much investors pay per $1 of net income.',
@@ -2830,42 +2648,31 @@ if (__origSetTheme_kpi) {
 </footer>
 <script src="/core/lib/theme-toggle.js"></script>
 <script>
-// Cross-page scenario state via URL hash (#scenario=modest)
+// Cross-page scenario state via URL query string. Doesn't conflict with Top-5's hash-based in-page nav.
 (function(){
   function readScenario(){
-    const q = new URLSearchParams(window.location.search);
-    return q.get('scenario') || 'modest';
+    return new URLSearchParams(window.location.search).get('scenario') || 'modest';
   }
   function writeScenario(v){
     const q = new URLSearchParams(window.location.search);
     q.set('scenario', v);
-    const newSearch = '?' + q.toString();
-    // Preserve existing hash (Top-5 uses hash for in-page nav)
-    history.replaceState(null,'', newSearch + window.location.hash);
-    // Append to outbound /core/ai/* links so the choice travels
+    history.replaceState(null,'','?'+q.toString()+window.location.hash);
     document.querySelectorAll('a[href^="/core/ai/"]').forEach(a => {
       const u = new URL(a.href, window.location.origin);
       u.searchParams.set('scenario', v);
       a.href = u.toString();
     });
   }
-  // Apply initial scenario to the page's scenario buttons (if present) and the AI screen's filter
   const initial = readScenario();
-  // Run after a beat so the AI dashboard's own renderers have wired up
   setTimeout(() => {
-    // Industry Screen has .scenario-btn[data-scen]
     const screenBtn = document.querySelector('.scenario-btn[data-scen="' + initial + '"]');
     if (screenBtn && !screenBtn.classList.contains('active')) screenBtn.click();
-    // Top-5 has period buttons inside ratios but scenario isn't toggleable per-page in deep dive
-    // (the deep dive is modest-scenario-locked). We just record the active scenario in the status bar.
     const refresh = document.getElementById('refresh-text');
     if (refresh) refresh.textContent = 'Active: ' + initial.charAt(0).toUpperCase() + initial.slice(1) + ' scenario';
-    // Wire AI screen scenario buttons to update URL on click
     document.querySelectorAll('.scenario-btn[data-scen]').forEach(b => {
       b.addEventListener('click', () => writeScenario(b.dataset.scen));
     });
   }, 60);
-  // Append hash to outbound links on load
   writeScenario(initial);
 })();
 </script>

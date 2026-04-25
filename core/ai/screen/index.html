@@ -8,11 +8,15 @@
 <link rel="stylesheet" href="/core/macro/styles.css" />
 <link rel="stylesheet" href="/core/ai/ai.css" />
 <style>
-/* Force Inter on the AI dashboard internals */
-body, table, .pick-card, .thesis-box, .kpi, .ratios-table, .nav-cat, .nav-tier2 button, .scenario-btn, .tab, .chip { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important; }
-/* AI dashboard inline header: keep its page-specific nav (tier-1/tier-2 on Top-5,
-   scenario+industry-tabs on Screen) but strip its redundant chrome (title/sub/cross-nav/own-theme-toggle)
-   so there's no double-sticky and no duplicated branding. */
+/* ====== Siberforge shell integration (single source of truth) ====== */
+body, table, .pick-card, .thesis-box, .kpi, .ratios-table, .nav-cat,
+.nav-tier2 button, .scenario-btn, .tab {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+}
+/* AI dashboard's own inline header sits below siberforge's chrome and contributes only its
+   page-specific nav (tier-1/tier-2 on Top-5; scenario/industry-tabs on Screen).
+   Suppress its title/sub/cross-nav/own-theme-toggle since the siberforge top + deep-dive-nav
+   provide those globally. */
 body > header:not(.top) {
   position: static !important;
   background: transparent !important;
@@ -21,23 +25,10 @@ body > header:not(.top) {
   z-index: auto !important;
   backdrop-filter: none !important;
 }
-body > header:not(.top) .hdr-title,
-body > header:not(.top) .hdr-row1 > .cross-nav,
-body > header:not(.top) #theme-toggle-v2,
-body > header:not(.top) #theme-toggle,
-body > header:not(.top) #theme-icon,
-body > header:not(.top) #theme-icon-v2,
-body > header:not(.top) #theme-label,
-body > header:not(.top) #theme-label-v2 { display: none !important; }
-/* Old single-tier `<a class="nav-btn">` row in Top-5 header was already hidden by an earlier rule;
-   keep it suppressed here too in case CSS specificity shifts. */
-body > header:not(.top) > nav:not(.nav-tier1):not(.nav-tier2) { display: none !important; }
-/* Tighten the hdr-row1 wrapper to collapse around the nav-tier1 only */
+body > header:not(.top) .hdr-title { display: none !important; }
 body > header:not(.top) .hdr-row1 { min-height: 0 !important; gap: 8px !important; }
-/* Push siberforge nav above any AI tab nav and ensure correct z-stacking */
 .top { z-index: 100; }
 .deep-dive-nav { z-index: 99; }
-/* Tighten AI internals' top padding since siberforge chrome is now outside it */
 main { padding-top: 14px; }
 </style>
 <style>
@@ -186,13 +177,6 @@ tr.top-pick td:first-child::before{content:"★ ";color:var(--gold)}
       <span class="title-sub">8 industries &middot; 160 companies &middot; 4 scenarios</span>
     </div>
     <div class="hdr-actions">
-      <a class="cross-nav" href="./top-5/" title="Open the deep dive on the 5 modest-scenario picks">
-        <span>Top 5 Deep Dive</span><span class="arrow">&rarr;</span>
-      </a>
-      <button id="theme-toggle" class="theme-btn" title="Switch theme">
-        <span class="theme-icon" id="theme-icon">&#9728;</span>
-        <span id="theme-label">Light</span>
-      </button>
     </div>
   </div>
   <div class="controls">
@@ -1230,31 +1214,11 @@ document.getElementById('search').oninput = (e) => {
   });
 };
 
-// ============ Theme toggle (matches Top-5 deep dive) ============
-function setTheme(theme) {
-  document.documentElement.setAttribute('data-theme', theme);
-  try { localStorage.setItem('theme', theme); } catch(e) {}
-  const icon = document.getElementById('theme-icon');
-  const label = document.getElementById('theme-label');
-  if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀';
-  if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
-}
-const themeToggle = document.getElementById('theme-toggle');
-if (themeToggle) {
-  themeToggle.addEventListener('click', () => {
-    const current = document.documentElement.getAttribute('data-theme') || 'dark';
-    setTheme(current === 'dark' ? 'light' : 'dark');
-  });
-}
+// Sync with siberforge's theme key when wrapped in shell, OR set local default
 (function initTheme() {
   let saved = null;
-  try { saved = localStorage.getItem('theme'); } catch(e) {}
-  const theme = saved || 'dark';
-  document.documentElement.setAttribute('data-theme', theme);
-  const icon = document.getElementById('theme-icon');
-  const label = document.getElementById('theme-label');
-  if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀';
-  if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
+  try { saved = localStorage.getItem('siberforge-theme'); } catch(e) {}
+  if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
 })();
 </script>
 <footer>
@@ -1263,42 +1227,31 @@ if (themeToggle) {
 </footer>
 <script src="/core/lib/theme-toggle.js"></script>
 <script>
-// Cross-page scenario state via URL hash (#scenario=modest)
+// Cross-page scenario state via URL query string. Doesn't conflict with Top-5's hash-based in-page nav.
 (function(){
   function readScenario(){
-    const q = new URLSearchParams(window.location.search);
-    return q.get('scenario') || 'modest';
+    return new URLSearchParams(window.location.search).get('scenario') || 'modest';
   }
   function writeScenario(v){
     const q = new URLSearchParams(window.location.search);
     q.set('scenario', v);
-    const newSearch = '?' + q.toString();
-    // Preserve existing hash (Top-5 uses hash for in-page nav)
-    history.replaceState(null,'', newSearch + window.location.hash);
-    // Append to outbound /core/ai/* links so the choice travels
+    history.replaceState(null,'','?'+q.toString()+window.location.hash);
     document.querySelectorAll('a[href^="/core/ai/"]').forEach(a => {
       const u = new URL(a.href, window.location.origin);
       u.searchParams.set('scenario', v);
       a.href = u.toString();
     });
   }
-  // Apply initial scenario to the page's scenario buttons (if present) and the AI screen's filter
   const initial = readScenario();
-  // Run after a beat so the AI dashboard's own renderers have wired up
   setTimeout(() => {
-    // Industry Screen has .scenario-btn[data-scen]
     const screenBtn = document.querySelector('.scenario-btn[data-scen="' + initial + '"]');
     if (screenBtn && !screenBtn.classList.contains('active')) screenBtn.click();
-    // Top-5 has period buttons inside ratios but scenario isn't toggleable per-page in deep dive
-    // (the deep dive is modest-scenario-locked). We just record the active scenario in the status bar.
     const refresh = document.getElementById('refresh-text');
     if (refresh) refresh.textContent = 'Active: ' + initial.charAt(0).toUpperCase() + initial.slice(1) + ' scenario';
-    // Wire AI screen scenario buttons to update URL on click
     document.querySelectorAll('.scenario-btn[data-scen]').forEach(b => {
       b.addEventListener('click', () => writeScenario(b.dataset.scen));
     });
   }, 60);
-  // Append hash to outbound links on load
   writeScenario(initial);
 })();
 </script>
