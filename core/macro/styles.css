@@ -1620,3 +1620,72 @@ footer {
   border-color: rgba(247, 167, 0, 0.40);
   font-weight: 600;
 }
+
+/* ========================================================================= */
+/* Light theme — toggled via [data-theme="light"] on <html>                  */
+/* Same variable names; CSS variable cascade swaps the entire theme.         */
+/* ========================================================================= */
+:root[data-theme="light"] {
+  --bg: #f7f9fb;
+  --panel: #ffffff;
+  --panel-2: #f0f3f7;
+  --line: #d8dee5;
+  --text: #1a2028;
+  --muted: #5a6470;
+  --accent: #b56700;
+  --green: #1f8a55;
+  --red: #c4283c;
+  --blue: #1f5fc4;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.10);
+}
+
+/* Light-mode adjustments: backdrop blur + sticky-header background */
+:root[data-theme="light"] .top {
+  background: rgba(255, 255, 255, 0.85);
+}
+:root[data-theme="light"] .top.scrolled {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 1px 0 rgba(0,0,0,0.08), 0 4px 14px rgba(0,0,0,0.05);
+}
+
+/* Light-mode chart axis tweaks — Chart.js options use hardcoded gray colors
+   in some places that look harsh on white backgrounds. CSS can't reach them
+   directly, but most are subtle enough on light bg. */
+:root[data-theme="light"] .chart-wrap,
+:root[data-theme="light"] .reg-chart-wrap,
+:root[data-theme="light"] .cycle-chart-wrap,
+:root[data-theme="local"] .geo-chart-wrap {
+  border-color: var(--line);
+}
+
+/* Today's Read hero in light mode — reduce gradient intensity */
+:root[data-theme="light"] .today-read {
+  background: linear-gradient(180deg, #fff 0%, var(--bg) 100%);
+}
+
+/* Range-control buttons — adjust hover state for light mode */
+:root[data-theme="light"] .chart-range-controls .crc-btn.active {
+  background: rgba(181, 103, 0, 0.10);
+  border-color: rgba(181, 103, 0, 0.40);
+}
+
+/* Theme toggle button itself */
+.theme-toggle {
+  background: var(--panel-2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 4px 9px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-left: 8px;
+  transition: color .12s, border-color .12s, background-color .12s;
+  line-height: 1;
+}
+.theme-toggle:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
