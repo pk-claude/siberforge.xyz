@@ -85,6 +85,16 @@ const CATALOG = {
   // ===================== RECESSION DASHBOARD (/core/econ/recession.html) =====
   SAHMCURRENT:           { label: 'Sahm Rule Recession Indicator',  freq: 'monthly', unit: 'percent', transform: 'level', group: 'recession' },
   BAMLH0A0HYM2:          { label: 'High-Yield OAS',                 freq: 'daily',   unit: 'percent', transform: 'level', group: 'recession' },
+
+  // ============== TRANSMISSION NETWORK (/core/macro/network.html) =============
+  PPIACO:                { label: 'PPI: All Commodities',           freq: 'monthly', unit: 'index',   transform: 'yoy_pct', group: 'network' },
+  CUMFNS:                { label: 'Capacity Utilization (Mfg)',     freq: 'monthly', unit: 'percent', transform: 'level',   group: 'network' },
+  JTSJOL:                { label: 'JOLTS Job Openings',             freq: 'monthly', unit: 'count',   transform: 'yoy_pct', group: 'network' },
+  CIVPART:               { label: 'Labor Force Participation Rate', freq: 'monthly', unit: 'percent', transform: 'level',   group: 'network' },
+  SP500:                 { label: 'S&P 500 Index',                  freq: 'daily',   unit: 'index',   transform: 'yoy_pct', group: 'network' },
+  DTWEXBGS:              { label: 'USD Trade-Weighted Broad Index', freq: 'daily',   unit: 'index',   transform: 'yoy_pct', group: 'network' },
+  DCOILWTICO:            { label: 'WTI Crude Oil Spot Price',       freq: 'daily',   unit: 'usd',     transform: 'yoy_pct', group: 'network' },
+  VIXCLS:                { label: 'CBOE VIX',                       freq: 'daily',   unit: 'index',   transform: 'level',   group: 'network' },
 };
 
 // Sleep helper for retry backoff.
