@@ -1287,6 +1287,104 @@ footer {
 }
 
 /* ========================================================================= */
+/* Tile tooltip — hover popup that surfaces metric education + recent       */
+/* events + curated source links on every deep-dive page tile. See           */
+/* /core/lib/tile-tooltip.js + metric-context.js.                            */
+/* ========================================================================= */
+[data-tile-metric] {
+  cursor: help;
+  position: relative;
+}
+[data-tile-metric]:hover {
+  outline: 1px solid rgba(247, 167, 0, 0.45);
+  outline-offset: -1px;
+}
+.tile-tooltip {
+  position: fixed;
+  z-index: 1000;
+  width: 480px;
+  max-width: calc(100vw - 24px);
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  padding: 16px 18px;
+  color: var(--text);
+  font-size: 12.5px;
+  line-height: 1.55;
+  pointer-events: none; /* enabled briefly when popup itself is hovered */
+}
+.tile-tooltip .tt-title {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text);
+  margin-bottom: 2px;
+  letter-spacing: 0.3px;
+}
+.tile-tooltip .tt-unit {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.tile-tooltip .tt-section {
+  margin-bottom: 10px;
+  color: var(--muted);
+}
+.tile-tooltip .tt-context {
+  color: var(--text);
+  background: rgba(90, 156, 255, 0.06);
+  border-left: 2px solid #5a9cff;
+  padding: 8px 10px;
+  border-radius: 0 4px 4px 0;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.tile-tooltip .tt-thresholds {
+  font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace;
+  font-size: 11.5px;
+  color: var(--text);
+  background: var(--panel-2);
+  padding: 8px 10px;
+  border-radius: 4px;
+  margin-top: 4px;
+  margin-bottom: 12px;
+}
+.tile-tooltip .tt-key {
+  display: block;
+  color: var(--accent);
+  font-size: 9.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+.tile-tooltip .tt-links {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+.tile-tooltip .tt-link {
+  display: block;
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11.5px;
+  padding: 4px 0;
+  border-bottom: 1px dotted rgba(247, 167, 0, 0.18);
+  transition: color .15s, padding-left .15s;
+}
+.tile-tooltip .tt-link:last-child { border-bottom: none; }
+.tile-tooltip .tt-link:hover {
+  color: #fff;
+  padding-left: 4px;
+}
+
+/* ========================================================================= */
 /* Deep-dive nav strip — sits below the sticky header on every macro page.   */
 /* Solves the "users can't find related views unless they scroll" problem.   */
 /* ========================================================================= */

@@ -140,7 +140,7 @@ function timeSeriesChart(canvas, datasets, opts = {}) {
 function renderTiles(containerId, tiles) {
   const tgt = el(containerId);
   if (!tgt) return;
-  tgt.innerHTML = tiles.map(t => `<div class="cycle-tile ${t.status ? 'cycle-tile-' + t.status : ''}" title="${t.help || ''}">
+  tgt.innerHTML = tiles.map(t => `<div class="cycle-tile ${t.status ? 'cycle-tile-' + t.status : ''}"${t.metric ? ` data-tile-metric="${t.metric}"` : ''} title="${t.help || ''}">
     <div class="cycle-tile-label">${t.label}</div>
     <div class="cycle-tile-value">${t.value}</div>
     <div class="cycle-tile-meta">${t.meta || ''}</div>
@@ -227,10 +227,10 @@ function renderPipeline() {
   const les = latestValue(state.series._EXHOSLUSM495SYoy || []);
 
   const tiles = [
-    { label: 'Permits YoY', value: lp ? `${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%` : '—',
+    { metric: 'PERMIT', label: 'Permits YoY', value: lp ? `${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%` : '—',
       meta: 'leads starts by 1-2mo', threshold: 'falling permits = cycle rollover',
       status: lp ? (lp.value > 5 ? 'ok' : lp.value > -5 ? 'caution' : 'warn') : '' },
-    { label: 'SF Starts YoY', value: lh1 ? `${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%` : '—',
+    { metric: 'HOUST1F', label: 'SF Starts YoY', value: lh1 ? `${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%` : '—',
       meta: 'cleanest cyclical signal', threshold: 'tracks owner-occupier demand',
       status: lh1 ? (lh1.value > 0 ? 'ok' : lh1.value > -10 ? 'caution' : 'warn') : '' },
     { label: 'MF Starts YoY', value: lh5 ? `${lh5.value >= 0 ? '+' : ''}${fmt(lh5.value, 1)}%` : '—',
@@ -292,12 +292,12 @@ function renderInventory() {
   const supplyPct = percentile(supply, lms?.value);
 
   const tiles = [
-    { label: 'Months Supply', value: lms ? `${fmt(lms.value, 1)} mo` : '—',
+    { metric: 'MSACSR', label: 'Months Supply', value: lms ? `${fmt(lms.value, 1)} mo` : '—',
       meta: supplyPct != null ? `${supplyPct}th %ile` : '',
       threshold: '&lt; 4 sellers · 4–6 balanced · &gt; 6 buyers',
       status: lms ? (lms.value > 7 ? 'warn' : lms.value > 5 ? 'caution' : 'ok') : '',
       help: 'Inventory of new homes ÷ monthly sales rate.' },
-    { label: 'Case-Shiller HPI', value: lhpi ? `${lhpi.value >= 0 ? '+' : ''}${fmt(lhpi.value, 1)}%` : '—',
+    { metric: 'CSUSHPISA', label: 'Case-Shiller HPI', value: lhpi ? `${lhpi.value >= 0 ? '+' : ''}${fmt(lhpi.value, 1)}%` : '—',
       meta: 'YoY · lags 6mo · repeat-sales',
       threshold: 'sustainable: 0–6%; bubble territory: &gt; 8%',
       status: lhpi ? (lhpi.value > -1 && lhpi.value < 6 ? 'ok' : Math.abs(lhpi.value) < 9 ? 'caution' : 'warn') : '' },
@@ -407,7 +407,7 @@ function renderAffordability() {
   const lpr = latestValue(paymentRatio);
 
   const tiles = [
-    { label: '30Y Mortgage', value: l30 ? `${fmt(l30.value, 2)}%` : '—',
+    { metric: 'MORTGAGE30US', label: '30Y Mortgage', value: l30 ? `${fmt(l30.value, 2)}%` : '—',
       meta: 'Freddie Mac PMMS · weekly',
       threshold: 'each 100bp ≈ +$260/mo on $400K loan',
       status: l30 ? (l30.value < 5.5 ? 'ok' : l30.value < 7 ? 'caution' : 'warn') : '' },
@@ -477,7 +477,7 @@ function renderStress() {
   const lrc = latestValue(resCons);
 
   const tiles = [
-    { label: 'SF Mortgage Delinquency', value: ld ? `${fmt(ld.value, 2)}%` : '—',
+    { metric: 'DRSFRMACBS', label: 'SF Mortgage Delinquency', value: ld ? `${fmt(ld.value, 2)}%` : '—',
       meta: 'quarterly · 30+ days past due',
       threshold: '&lt; 2% benign · &gt; 5% recession-level',
       status: ld ? (ld.value < 2 ? 'ok' : ld.value < 4 ? 'caution' : 'warn') : '' },

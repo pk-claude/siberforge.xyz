@@ -160,7 +160,8 @@ function renderTiles(containerId, tiles) {
   if (!tgt) return;
   tgt.innerHTML = tiles.map(t => {
     const statusClass = t.status ? `cycle-tile-${t.status}` : '';
-    return `<div class="cycle-tile ${statusClass}" title="${t.help || ''}">
+    const metricAttr = t.metric ? ` data-tile-metric="${t.metric}"` : '';
+    return `<div class="cycle-tile ${statusClass}"${metricAttr} title="${t.help || ''}">
       <div class="cycle-tile-label">${t.label}</div>
       <div class="cycle-tile-value">${t.value}</div>
       <div class="cycle-tile-meta">${t.meta || ''}</div>
@@ -240,6 +241,7 @@ function renderHeadlineSection() {
       status: lh ? (Math.abs(lh.value - 2) < 0.5 ? 'ok' : Math.abs(lh.value - 2) < 1.5 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'CORE_CPI_YOY',
       label: 'Core CPI',
       value: lc ? `${fmt(lc.value, 1)}%` : '—',
       meta: lc ? `as of ${lc.date.slice(0, 7)}` : '',
@@ -305,6 +307,7 @@ function renderStickySection() {
 
   const tiles = [
     {
+      metric: 'STICKY_CPI',
       label: 'Sticky-Price Core CPI',
       value: ls ? `${fmt(ls.value, 1)}%` : '—',
       meta: pctSticky != null ? `${pctSticky}th %ile past 30y` : '',
@@ -320,6 +323,7 @@ function renderStickySection() {
       status: lf ? (Math.abs(lf.value - 2) < 1.5 ? 'ok' : Math.abs(lf.value - 2) < 3 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'SHELTER_CPI',
       label: 'Shelter CPI',
       value: lsh ? `${fmt(lsh.value, 1)}%` : '—',
       meta: '~35% of core basket · lags real rents by 6-12mo',
@@ -371,6 +375,7 @@ function renderExpectationsSection() {
 
   const tiles = [
     {
+      metric: 'T5YIE',
       label: '5Y Breakeven',
       value: l5 ? `${fmt(l5.value, 2)}%` : '—',
       meta: 'expected avg inflation, next 5yr',
@@ -378,6 +383,7 @@ function renderExpectationsSection() {
       status: l5 ? (Math.abs(l5.value - 2.3) < 0.3 ? 'ok' : Math.abs(l5.value - 2.3) < 0.6 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'T5YIFR',
       label: '5y5y Forward',
       value: lf ? `${fmt(lf.value, 2)}%` : '—',
       meta: 'years 5-10 — Fed-watched',
@@ -385,6 +391,7 @@ function renderExpectationsSection() {
       status: lf ? (Math.abs(lf.value - 2.3) < 0.3 ? 'ok' : Math.abs(lf.value - 2.3) < 0.6 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'MICH',
       label: 'UMich 1y Expectation',
       value: lm ? `${fmt(lm.value, 1)}%` : '—',
       meta: 'consumer survey · noisy',
@@ -430,6 +437,7 @@ function renderWagesSection() {
   const lw = latestValue(wage), lr = latestValue(real);
   const tiles = [
     {
+      metric: 'AHE_YOY',
       label: 'Nominal wage growth (AHE)',
       value: lw ? `${fmt(lw.value, 1)}%` : '—',
       meta: 'private sector YoY',
@@ -437,6 +445,7 @@ function renderWagesSection() {
       status: lw ? (lw.value < 3.5 ? 'ok' : lw.value < 4.5 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'REAL_WAGES',
       label: 'Real wages',
       value: lr ? `${lr.value >= 0 ? '+' : ''}${fmt(lr.value, 1)}%` : '—',
       meta: 'nominal AHE − Core CPI',

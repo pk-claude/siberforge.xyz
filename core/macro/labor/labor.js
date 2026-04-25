@@ -90,8 +90,8 @@ function renderUnrateChart() {
   });
   const cur = latest(u), s = latest(sahm);
   el('tiles-unrate').innerHTML = `
-    <div class="cycle-tile"><div class="cycle-tile-label">UNRATE</div><div class="cycle-tile-value">${cur ? cur.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">52-wk low ${u.length ? Math.min(...u.slice(-12).map(o => o.value)).toFixed(1) : '—'}%</div></div>
-    <div class="cycle-tile"><div class="cycle-tile-label">Sahm Rule</div><div class="cycle-tile-value" style="color:${s && s.value >= 0.5 ? '#ef4f5a' : s && s.value >= 0.4 ? '#f7a700' : '#3ecf8e'}">${s ? s.value.toFixed(2) + 'pp' : '—'}</div><div class="cycle-tile-sub">trigger 0.50pp</div></div>`;
+    <div class="cycle-tile" data-tile-metric="UNRATE"><div class="cycle-tile-label">UNRATE</div><div class="cycle-tile-value">${cur ? cur.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">52-wk low ${u.length ? Math.min(...u.slice(-12).map(o => o.value)).toFixed(1) : '—'}%</div></div>
+    <div class="cycle-tile" data-tile-metric="SAHM"><div class="cycle-tile-label">Sahm Rule</div><div class="cycle-tile-value" style="color:${s && s.value >= 0.5 ? '#ef4f5a' : s && s.value >= 0.4 ? '#f7a700' : '#3ecf8e'}">${s ? s.value.toFixed(2) + 'pp' : '—'}</div><div class="cycle-tile-sub">trigger 0.50pp</div></div>`;
   if (s) {
     let txt = '';
     if (s.value >= 0.5) txt = `Sahm Rule TRIGGERED at ${s.value.toFixed(2)}pp — recession indicator firing.`;
@@ -126,8 +126,8 @@ function renderClaimsChart() {
     const last52Min = c.length >= 52 ? Math.min(...c.slice(-52).map(o => o.value)) : null;
     const last52Max = c.length >= 52 ? Math.max(...c.slice(-52).map(o => o.value)) : null;
     el('tiles-claims').innerHTML = `
-      <div class="cycle-tile"><div class="cycle-tile-label">Claims (4wk MA)</div><div class="cycle-tile-value">${(k / 1000).toFixed(0)}K</div><div class="cycle-tile-sub">stress &gt; 350K</div></div>
-      <div class="cycle-tile"><div class="cycle-tile-label">52w range</div><div class="cycle-tile-value">${last52Min ? (last52Min / 1000).toFixed(0) : '—'}-${last52Max ? (last52Max / 1000).toFixed(0) : '—'}K</div><div class="cycle-tile-sub">expansion 200-300K</div></div>`;
+      <div class="cycle-tile" data-tile-metric="IC4WSA"><div class="cycle-tile-label">Claims (4wk MA)</div><div class="cycle-tile-value">${(k / 1000).toFixed(0)}K</div><div class="cycle-tile-sub">stress &gt; 350K</div></div>
+      <div class="cycle-tile" data-tile-metric="IC4WSA"><div class="cycle-tile-label">52w range</div><div class="cycle-tile-value">${last52Min ? (last52Min / 1000).toFixed(0) : '—'}-${last52Max ? (last52Max / 1000).toFixed(0) : '—'}K</div><div class="cycle-tile-sub">expansion 200-300K</div></div>`;
     let txt = '';
     if (k > 350000) txt = `Claims at ${(k / 1000).toFixed(0)}K — labor market weakening fast; sustained level confirms recessionary regime.`;
     else if (k > 280000) txt = `Claims at ${(k / 1000).toFixed(0)}K — elevated. Watch for a sustained climb above 350K.`;
@@ -176,9 +176,9 @@ function renderWagesChart() {
   });
   const lw = latest(wagesYoy), lr = latest(real), lp = latest(payAnn);
   el('tiles-wages').innerHTML = `
-    <div class="cycle-tile"><div class="cycle-tile-label">AHE YoY</div><div class="cycle-tile-value">${lw ? lw.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">tight &gt; 4.5%</div></div>
-    <div class="cycle-tile"><div class="cycle-tile-label">Real wages</div><div class="cycle-tile-value" style="color:${lr && lr.value < 0 ? '#ef4f5a' : '#3ecf8e'}">${lr ? (lr.value >= 0 ? '+' : '') + lr.value.toFixed(1) + 'pp' : '—'}</div><div class="cycle-tile-sub">vs core CPI</div></div>
-    <div class="cycle-tile"><div class="cycle-tile-label">Payrolls 6m ann.</div><div class="cycle-tile-value">${lp ? (lp.value >= 0 ? '+' : '') + lp.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">expansion &gt; 1.5%</div></div>`;
+    <div class="cycle-tile" data-tile-metric="AHE_YOY"><div class="cycle-tile-label">AHE YoY</div><div class="cycle-tile-value">${lw ? lw.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">tight &gt; 4.5%</div></div>
+    <div class="cycle-tile" data-tile-metric="REAL_WAGES"><div class="cycle-tile-label">Real wages</div><div class="cycle-tile-value" style="color:${lr && lr.value < 0 ? '#ef4f5a' : '#3ecf8e'}">${lr ? (lr.value >= 0 ? '+' : '') + lr.value.toFixed(1) + 'pp' : '—'}</div><div class="cycle-tile-sub">vs core CPI</div></div>
+    <div class="cycle-tile" data-tile-metric="PAYEMS_6M"><div class="cycle-tile-label">Payrolls 6m ann.</div><div class="cycle-tile-value">${lp ? (lp.value >= 0 ? '+' : '') + lp.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">expansion &gt; 1.5%</div></div>`;
   if (lw && lr) {
     let txt = `Wages running ${lw.value.toFixed(1)}% YoY; real wages ${lr.value >= 0 ? '+' : ''}${lr.value.toFixed(1)}pp vs Core CPI. `;
     if (lw.value > 4.5) txt += 'Tight labor market — bargaining power favors workers.';

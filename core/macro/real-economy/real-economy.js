@@ -149,7 +149,8 @@ function renderTiles(containerId, tiles) {
   if (!tgt) return;
   tgt.innerHTML = tiles.map(t => {
     const statusClass = t.status ? `cycle-tile-${t.status}` : '';
-    return `<div class="cycle-tile ${statusClass}" title="${t.help || ''}">
+    const metricAttr = t.metric ? ` data-tile-metric="${t.metric}"` : '';
+    return `<div class="cycle-tile ${statusClass}"${metricAttr} title="${t.help || ''}">
       <div class="cycle-tile-label">${t.label}</div>
       <div class="cycle-tile-value">${t.value}</div>
       <div class="cycle-tile-meta">${t.meta || ''}</div>
@@ -243,6 +244,7 @@ function renderHousing() {
 
   const tiles = [
     {
+      metric: 'MSACSR',
       label: 'Months Supply (new homes)',
       value: lms ? `${fmt(lms.value, 1)} mo` : '—',
       meta: supplyPct != null ? `${supplyPct}th %ile post-1990` : '',
@@ -251,6 +253,7 @@ function renderHousing() {
       help: 'Inventory of new homes for sale ÷ current monthly sales rate. The cleanest single read on housing-cycle position.',
     },
     {
+      metric: 'PERMIT',
       label: 'Building permits YoY',
       value: lp ? `${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%` : '—',
       meta: lp ? `as of ${lp.date.slice(0, 7)}` : '',
@@ -258,6 +261,7 @@ function renderHousing() {
       status: lp ? (lp.value > 5 ? 'ok' : lp.value > -5 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'MORTGAGE30US',
       label: '30Y Mortgage rate',
       value: lmt ? `${fmt(lmt.value, 2)}%` : '—',
       meta: 'Freddie Mac PMMS, weekly',
@@ -265,6 +269,7 @@ function renderHousing() {
       status: lmt ? (lmt.value < 5.5 ? 'ok' : lmt.value < 7 ? 'caution' : 'warn') : '',
     },
     {
+      metric: 'CSUSHPISA',
       label: 'Case-Shiller HPI YoY',
       value: lhp ? `${lhp.value >= 0 ? '+' : ''}${fmt(lhp.value, 1)}%` : '—',
       meta: 'lags actual price-discovery 6mo',

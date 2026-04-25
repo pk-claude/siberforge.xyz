@@ -100,7 +100,7 @@ function renderConditionsChart() {
     const cur = latest(arr); const m12 = valueAt(arr, 52); // weekly so 52
     if (!cur) return '';
     const dz = m12 ? (cur.value - m12.value) : null;
-    return `<div class="cycle-tile">
+    return `<div class="cycle-tile" data-tile-metric="${id}">
       <div class="cycle-tile-label">${id}</div>
       <div class="cycle-tile-value">${cur.value.toFixed(2)}</div>
       <div class="cycle-tile-sub">${dz != null ? `${dz >= 0 ? '+' : ''}${dz.toFixed(2)} vs 1y` : ''}</div>
@@ -147,9 +147,9 @@ function renderSpreadsChart() {
 
   const hyL = latest(hy), igL = latest(ig);
   const tilesHtml = `
-    <div class="cycle-tile"><div class="cycle-tile-label">HY OAS</div><div class="cycle-tile-value">${hyL ? (hyL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">stress &gt; 800bp</div></div>
-    <div class="cycle-tile"><div class="cycle-tile-label">IG OAS</div><div class="cycle-tile-value">${igL ? (igL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">stress &gt; 250bp</div></div>
-    <div class="cycle-tile"><div class="cycle-tile-label">HY-IG ratio</div><div class="cycle-tile-value">${hyL && igL ? (hyL.value / igL.value).toFixed(1) + 'x' : '—'}</div><div class="cycle-tile-sub">historical avg ≈ 4x</div></div>`;
+    <div class="cycle-tile" data-tile-metric="HY_OAS"><div class="cycle-tile-label">HY OAS</div><div class="cycle-tile-value">${hyL ? (hyL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">stress &gt; 800bp</div></div>
+    <div class="cycle-tile" data-tile-metric="IG_OAS"><div class="cycle-tile-label">IG OAS</div><div class="cycle-tile-value">${igL ? (igL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">stress &gt; 250bp</div></div>
+    <div class="cycle-tile" data-tile-metric="HY_IG_RATIO"><div class="cycle-tile-label">HY-IG ratio</div><div class="cycle-tile-value">${hyL && igL ? (hyL.value / igL.value).toFixed(1) + 'x' : '—'}</div><div class="cycle-tile-sub">historical avg ≈ 4x</div></div>`;
   el('tiles-spreads').innerHTML = tilesHtml;
 
   if (hyL && igL) {
@@ -191,8 +191,8 @@ function renderCurveChart() {
   const cv = latest(curve), rv = latest(ry);
   const cBps = cv ? cv.value * 100 : null;
   const tiles = `
-    <div class="cycle-tile"><div class="cycle-tile-label">10Y-3M</div><div class="cycle-tile-value">${cBps != null ? (cBps >= 0 ? '+' : '') + cBps.toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">${cBps != null && cBps < 0 ? 'inverted' : 'positive'}</div></div>
-    <div class="cycle-tile"><div class="cycle-tile-label">10Y real</div><div class="cycle-tile-value">${rv ? rv.value.toFixed(2) + '%' : '—'}</div><div class="cycle-tile-sub">restrictive &gt; 1.5%</div></div>`;
+    <div class="cycle-tile" data-tile-metric="T10Y3M"><div class="cycle-tile-label">10Y-3M</div><div class="cycle-tile-value">${cBps != null ? (cBps >= 0 ? '+' : '') + cBps.toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">${cBps != null && cBps < 0 ? 'inverted' : 'positive'}</div></div>
+    <div class="cycle-tile" data-tile-metric="DFII10"><div class="cycle-tile-label">10Y real</div><div class="cycle-tile-value">${rv ? rv.value.toFixed(2) + '%' : '—'}</div><div class="cycle-tile-sub">restrictive &gt; 1.5%</div></div>`;
   el('tiles-curve').innerHTML = tiles;
 
   if (cBps != null) {

@@ -201,7 +201,8 @@ function renderTiles(containerId, tiles) {
   if (!tgt) return;
   tgt.innerHTML = tiles.map(t => {
     const statusClass = t.status ? `cycle-tile-${t.status}` : '';
-    return `<div class="cycle-tile ${statusClass}" title="${t.help || ''}">
+    const metricAttr = t.metric ? ` data-tile-metric="${t.metric}"` : '';
+    return `<div class="cycle-tile ${statusClass}"${metricAttr} title="${t.help || ''}">
       <div class="cycle-tile-label">${t.label}</div>
       <div class="cycle-tile-value">${t.value}</div>
       <div class="cycle-tile-meta">${t.meta || ''}</div>
@@ -240,6 +241,7 @@ function renderRecessionSection() {
   const sahmTriggered = latestSahm && latestSahm.value >= 0.5;
   const tiles = [
     {
+      metric: 'RECPROB',
       label: 'NY Fed recession prob',
       value: latestProb ? `${latestProb.value.toFixed(1)}%` : '—',
       meta: latestProb ? `as of ${latestProb.date.slice(0, 7)}` : '',
@@ -248,6 +250,7 @@ function renderRecessionSection() {
       help: 'Derived from 10Y-3M spread via the Estrella-Mishkin model.',
     },
     {
+      metric: 'SAHM',
       label: 'Sahm Rule',
       value: sahmTriggered ? 'TRIGGERED' : 'Untriggered',
       meta: latestSahm ? `reading: ${latestSahm.value.toFixed(2)}pp (0.5pp = trigger)` : '',
@@ -322,6 +325,7 @@ function renderCurveSection() {
 
   const tiles = [
     {
+      metric: 'T10Y3M',
       label: '10Y-3M spread',
       value: latest3m ? `${latest3m.value >= 0 ? '+' : ''}${latest3m.value.toFixed(0)}bp` : '—',
       meta: pct3m != null ? `${pct3m}th %ile post-1980` : '',
@@ -329,6 +333,7 @@ function renderCurveSection() {
       status: latest3m ? (latest3m.value < 0 ? 'warn' : latest3m.value < 50 ? 'caution' : 'ok') : '',
     },
     {
+      metric: 'T10Y2Y',
       label: '10Y-2Y spread',
       value: latest2y ? `${latest2y.value >= 0 ? '+' : ''}${latest2y.value.toFixed(0)}bp` : '—',
       meta: 'steeper = healthier',
@@ -399,6 +404,7 @@ function renderConditionsSection() {
 
   const tiles = [
     {
+      metric: 'NFCI',
       label: 'NFCI',
       value: latestN ? `${latestN.value >= 0 ? '+' : ''}${latestN.value.toFixed(2)}` : '—',
       meta: pctN != null ? `${pctN}th %ile post-1980` : '',
@@ -407,6 +413,7 @@ function renderConditionsSection() {
       help: 'Composite of 105 risk, credit, and leverage measures.',
     },
     {
+      metric: 'ANFCI',
       label: 'ANFCI',
       value: latestA ? `${latestA.value >= 0 ? '+' : ''}${latestA.value.toFixed(2)}` : '—',
       meta: 'macro-explained component stripped out',
@@ -484,6 +491,7 @@ function renderCreditSection() {
 
   const tiles = [
     {
+      metric: 'HY_OAS',
       label: 'HY OAS',
       value: latestHy ? `${latestHy.value.toFixed(0)}bp` : '—',
       meta: pctHy != null ? `${pctHy}th %ile post-1996` : '',
@@ -491,6 +499,7 @@ function renderCreditSection() {
       status: latestHy ? (latestHy.value > 800 ? 'warn' : latestHy.value > 500 ? 'caution' : 'ok') : '',
     },
     {
+      metric: 'IG_OAS',
       label: 'IG OAS',
       value: latestIg ? `${latestIg.value.toFixed(0)}bp` : '—',
       meta: pctIg != null ? `${pctIg}th %ile post-1996` : '',
@@ -498,6 +507,7 @@ function renderCreditSection() {
       status: latestIg ? (latestIg.value > 200 ? 'warn' : latestIg.value > 150 ? 'caution' : 'ok') : '',
     },
     {
+      metric: 'HY_IG_RATIO',
       label: 'HY / IG ratio',
       value: hyIgRatio ? `${hyIgRatio.toFixed(1)}x` : '—',
       meta: 'asymmetric widening tell',
