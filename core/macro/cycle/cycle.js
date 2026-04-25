@@ -103,17 +103,26 @@ const nberShadingPlugin = {
 
 async function loadSeries() {
   const start = '1980-01-01';
-  const ids = [
-    'RECPROUSM156N', 'UNRATE',  // Section 1
-    'T10Y3M', 'T10Y2Y',         // Section 2
-    'NFCI', 'ANFCI', 'DFII2',   // Section 3
-    'BAMLH0A0HYM2', 'BAMLC0A0CM', // Section 4
+  // Split into small batches so that (a) a transient FRED error on one series
+  // doesn't blow up the whole page load, and (b) we stay well within Vercel
+  // serverless cold-start timeout budget per call.
+  const batches = [
+    ['RECPROUSM156N', 'UNRATE', 'T10Y3M', 'T10Y2Y'],  // Sections 1-2
+    ['NFCI', 'ANFCI', 'DFII2'],                        // Section 3
+    ['BAMLH0A0HYM2', 'BAMLC0A0CM'],                    // Section 4
   ];
-  const j = await fetchJSON(`/api/fred?series=${ids.join(',')}&start=${start}`);
-  for (const s of j.series) {
-    // Some older FRED series (DFII2, breakevens) only start in the 2000s — that's fine.
-    state.series[s.id] = s.observations;
+  const allErrors = [];
+  for (const batch of batches) {
+    try {
+      const j = await fetchJSON(`/api/fred?series=${batch.join(',')}&start=${start}`);
+      for (const s of j.series) state.series[s.id] = s.observations;
+      if (j.errors && j.errors.length) allErrors.push(...j.errors);
+    } catch (err) {
+      console.warn(`Batch ${batch.join(',')} failed entirely:`, err);
+      allErrors.push({ id: batch.join(','), error: String(err.message || err) });
+    }
   }
+  if (allErrors.length) console.warn('[cycle] partial data — missing series:', allErrors);
   // Derived: Sahm rule from UNRATE
   if (state.series.UNRATE) state.series.SAHM = computeSahm(state.series.UNRATE);
   // HY and IG OAS: FRED publishes these as %. Convert to bps for display.

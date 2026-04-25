@@ -1,0 +1,15 @@
+/* Inflation Persistence — page-specific tweaks layered over cycle.css.
+   The cycle page's chart/tile/synthesis patterns are the template; we just
+   add inflation-specific touches. */
+
+/* Slightly tighter line-height on the intro subtitle — the inflation page's
+   intro reads denser than the cycle page's. */
+.cycle-intro { padding-bottom: 14px; }
+
+/* If a specific metric is above Fed target, we want the tile to have a softer
+   red than the cycle page's warn state (inflation doesn't imply crisis the
+   way a recession signal does). Override the warn color slightly. */
+#section-sticky .cycle-tile-warn .cycle-tile-value,
+#section-headline .cycle-tile-warn .cycle-tile-value {
+  color: #ff8a92;
+}
