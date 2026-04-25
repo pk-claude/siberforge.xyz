@@ -194,17 +194,46 @@ function wireQuoteHovers() {
     document.body.appendChild(popup);
   }
 
-  document.querySelectorAll('.quote-tile').forEach(tile => {
-    let hideTimer = null;
+  // Shared state across all tile listeners. The previous version put `hideTimer`
+  // inside the forEach closure, so each tile had its own timer. When the user
+  // moved from tile A to tile B, A's hide timer kept running and fired 80ms
+  // later — hiding B's popup right after it loaded. Now there's one shared
+  // timer that any tile's mouseenter can cancel.
+  //
+  // `hoverToken` is a monotonically incrementing request id. Each fetch
+  // captures its token at start; if the token has been bumped by a newer
+  // mouseenter by the time the fetch returns, we ignore the result. Prevents
+  // a slow XLK fetch from over-writing a fresh XLF popup.
+  let hideTimer = null;
+  let hoverToken = 0;
+  let activeSym = null;
 
+  function cancelHide() {
+    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+  }
+  function scheduleHide() {
+    cancelHide();
+    hideTimer = setTimeout(() => {
+      popup.style.display = 'none';
+      activeSym = null;
+    }, 100);
+  }
+
+  document.querySelectorAll('.quote-tile').forEach(tile => {
     tile.addEventListener('mouseenter', async () => {
-      if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+      cancelHide();
       const sym = tile.dataset.sym;
       const def = ETF_HOLDINGS[sym];
       if (!def) {
         popup.style.display = 'none';
+        activeSym = null;
         return;
       }
+      // Bump the request token. Any in-flight fetch from a previous tile will
+      // notice this and abandon its DOM update.
+      const myToken = ++hoverToken;
+      activeSym = sym;
+
       // Show popup with loading state immediately, fill in once quotes arrive.
       popup.innerHTML = renderPopupContent(sym, def, null);
       popup.style.display = 'block';
@@ -224,16 +253,16 @@ function wireQuoteHovers() {
           quotes = {};
         }
       }
-      // Bail if user moved off the tile while we waited.
-      if (popup.dataset.activeSym && popup.dataset.activeSym !== sym) return;
+      // Bail if a newer hover started or popup is no longer for this symbol.
+      if (myToken !== hoverToken || activeSym !== sym) return;
       popup.innerHTML = renderPopupContent(sym, def, quotes);
-      popup.dataset.activeSym = sym;
       positionPopup(tile);
     });
 
     tile.addEventListener('mouseleave', () => {
-      // Slight delay so accidental flickers don't dismiss it.
-      hideTimer = setTimeout(() => { popup.style.display = 'none'; }, 80);
+      // Slight delay so flickers between adjacent tiles don't dismiss the
+      // popup just to bring it back; the next mouseenter cancels this.
+      scheduleHide();
     });
   });
 
@@ -241,7 +270,6 @@ function wireQuoteHovers() {
     const rect = tile.getBoundingClientRect();
     popup.style.left = `${rect.left}px`;
     popup.style.top  = `${rect.bottom + 6}px`;
-    // Flip to right edge if popup would clip viewport.
     setTimeout(() => {
       const w = popup.offsetWidth;
       if (rect.left + w > window.innerWidth - 8) {
