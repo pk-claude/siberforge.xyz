@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Regime Backtest</title>
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../cycle/cycle.css" />
+<link rel="stylesheet" href="./backtest.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Regime Backtest</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+  </div>
+</header>
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">Does this framework actually generate alpha?</h1>
+  <p class="cycle-subtitle">
+    A regime model that only shows you historical averages is a chart, not a strategy. This page
+    runs a <strong>walk-forward backtest</strong>: at each monthly rebalance, classify the regime
+    using only data available on that date, rank sectors by their prior-period forward returns in
+    that regime <em>as known at that date</em>, and hold the top-3 equal-weight for the next month.
+    No look-ahead; every decision uses only information a real allocator would have had.
+    Benchmarks: SPY buy-and-hold, and a 60/40 SPY+IEF monthly-rebalanced portfolio.
+    Related: <a href="/core/macro/">regime view</a>, <a href="/core/macro/cycle/">cycle position</a>,
+    <a href="/core/macro/inflation/">inflation persistence</a>.
+  </p>
+</section>
+
+<!-- Verdict hero: the headline metric -->
+<section class="bt-verdict-section" id="bt-verdict-section"></section>
+
+<!-- Equity curves -->
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>1. Growth of $100</h2>
+    <p class="cycle-section-sub">
+      Log scale. Each strategy starts at $100 on the backtest-start date.
+      <strong>Regime Rotation</strong> = 100% in the 3 sectors with the highest prior-period
+      forward-6m return in the current regime, equal-weighted, rebalanced monthly.
+      <strong>SPY</strong> = buy-and-hold.
+      <strong>60/40</strong> = 60% SPY + 40% IEF (7-10Y Treasury), rebalanced monthly.
+    </p>
+  </div>
+  <div class="bt-chart-wrap"><canvas id="chart-equity"></canvas></div>
+</section>
+
+<!-- Metrics table -->
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>2. Risk-adjusted performance</h2>
+    <p class="cycle-section-sub">
+      CAGR is compound annual growth. Annualized volatility and Sharpe use monthly returns
+      (Sharpe assumes 2% risk-free). Max drawdown is worst peak-to-trough decline on the equity
+      curve. Beta is regression slope vs SPY. Hit rate is % of months the strategy&rsquo;s monthly
+      return exceeded SPY&rsquo;s. Turnover is the average absolute weight change per rebalance,
+      annualized.
+    </p>
+  </div>
+  <div id="bt-metrics-table"></div>
+</section>
+
+<!-- Rolling excess return -->
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>3. Rolling 12-month excess return vs SPY</h2>
+    <p class="cycle-section-sub">
+      When is the regime tilt actually earning its keep vs. just owning the index? Each point is
+      the strategy&rsquo;s trailing-12m return minus SPY&rsquo;s over the same window. Above zero = the
+      tilt added value; below zero = the tilt cost you. Consistent small positive readings > big
+      positive spikes (which usually mean big negative spikes are coming).
+    </p>
+  </div>
+  <div class="bt-chart-wrap"><canvas id="chart-excess"></canvas></div>
+</section>
+
+<!-- By-regime breakdown -->
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>4. Where does the edge come from?</h2>
+    <p class="cycle-section-sub">
+      Realized annualized return of each strategy, decomposed by the regime it was operating in.
+      The regime tilt should materially outperform in regimes where sector dispersion is highest
+      (typically Reflation and Stagflation) and approximately match SPY in Goldilocks.
+    </p>
+  </div>
+  <div class="bt-chart-wrap"><canvas id="chart-regime-breakdown"></canvas></div>
+  <div id="bt-regime-table"></div>
+</section>
+
+<!-- Methodology / caveats -->
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>5. Methodology &amp; caveats</h2>
+  </div>
+  <div class="bt-caveats">
+    <p><strong>Walk-forward discipline.</strong> At rebalance month <em>t</em>, the sector ranking uses <em>only</em> historical months before <em>t</em> that share the current regime. No future information ever enters a decision. This is the minimum bar for an honest backtest.</p>
+    <p><strong>What's included.</strong> Adjusted close prices (Yahoo), dividends and splits reflected. Monthly rebalance (last business day). Regime classification identical to the <a href="/core/macro/">main dashboard</a>.</p>
+    <p><strong>What's excluded.</strong> Transaction costs (would dock ~10-30bp/yr at monthly turnover levels). Taxes. Sector-ETF expense ratios (~10-15bp). Slippage. Rebalance-timing effects (month-end is used; intra-month wouldn't change the picture materially but changes the numbers).</p>
+    <p><strong>Sample-size handling.</strong> If a regime has fewer than 6 historical observations at rebalance time, the strategy falls back to equal-weighting all sectors (a neutral stance) for that month. This prevents whipsaw on thin priors. At the start of the backtest roughly ~8-12% of months may use the fallback; by 2015 onward the prior is always well-populated.</p>
+    <p><strong>Known limitations.</strong> The regime classifier itself is rebuilt monthly using all available history through <em>t</em>, but the <em>methodology</em> (inflation gauge, growth composite, z-window) is fixed. Real-time regime identification is noisier than the smoothed historical view suggests.</p>
+    <p><strong>What this does and doesn't prove.</strong> A positive result shows the regime framework contained <em>some</em> signal over this sample period. It does not prove the signal persists. A negative result would be a reason to demote the framework. Read it as Bayesian evidence, not forecast.</p>
+  </div>
+</section>
+
+<footer>
+  <span>Data: Yahoo Finance (SPY, XLK-XLRE, IEF) + FRED (macro). Backtest is computed live in the browser from raw data.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./backtest.js"></script>
+<script src="../../lib/ui.js"></script>
+</body>
+</html>
