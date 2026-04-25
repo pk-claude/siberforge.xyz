@@ -210,6 +210,112 @@ function renderScore(label, kind, scoreObj, oldScoreObj) {
   `;
 }
 
+// Compact horizontal-row variant. Used in the new side-by-side layout where
+// the 4 score cards stack vertically beside the rose chart.
+function renderScoreRow(label, kind, scoreObj, oldScoreObj) {
+  if (!scoreObj) {
+    return `<div class="tr-score-row tr-empty">
+      <div class="tr-score-row-label">${label}</div>
+      <div class="tr-score-row-value">—</div>
+    </div>`;
+  }
+  const phase = phaseFor(kind, scoreObj.score);
+  const delta = oldScoreObj ? scoreObj.score - oldScoreObj.score : null;
+  const dArrow = delta == null ? '' : delta > 1 ? '▲' : delta < -1 ? '▼' : '→';
+  const dCls = delta == null ? '' : delta > 1 ? 'tr-up' : delta < -1 ? 'tr-down' : 'tr-flat';
+  const deltaTxt = delta != null
+    ? `<span class="tr-score-row-delta ${dCls}">${dArrow} ${Math.abs(delta).toFixed(0)}pt</span>`
+    : '';
+  return `
+    <div class="tr-score-row">
+      <div class="tr-score-row-left">
+        <div class="tr-score-row-label">${label}</div>
+        <div class="tr-score-row-phase" style="color:${phase.color}">${phase.label}</div>
+      </div>
+      <div class="tr-score-row-right">
+        <div class="tr-score-row-value" style="color:${phase.color}">${scoreObj.score.toFixed(0)}<span class="tr-score-row-scale">/100</span></div>
+        ${deltaTxt}
+      </div>
+    </div>
+  `;
+}
+
+// Visual trajectory rail — a horizontal 0-100 track with up to 4 dots
+// (12m, 3m, 1m, Now), each colored by its score's phase and sized/opacity
+// graded by recency. A connecting line shows direction of travel.
+function renderTrajRail(label, kind, s12, s3, s1, sNow) {
+  const W = 600;   // viewBox width in user units
+  const H = 36;
+  const trackY = H / 2;
+  const xFor = (s) => Math.max(0, Math.min(100, s)) / 100 * W;
+
+  // Quarter-tick marks for orientation
+  const ticks = [0, 25, 50, 75, 100].map(t => `<line x1="${xFor(t)}" y1="${trackY - 7}" x2="${xFor(t)}" y2="${trackY + 7}" stroke="rgba(138,148,163,0.20)" stroke-width="1"/>`).join('');
+
+  // Background track gradient: green-tinted at low end (low risk), red-tinted at high end.
+  const gradId = `tr-grad-${kind}`;
+  const gradient = `
+    <defs>
+      <linearGradient id="${gradId}" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%"  stop-color="rgba(62,207,142,0.18)"/>
+        <stop offset="50%" stop-color="rgba(247,167,0,0.12)"/>
+        <stop offset="100%" stop-color="rgba(239,79,90,0.20)"/>
+      </linearGradient>
+    </defs>`;
+
+  const trackBg = `<rect x="0" y="${trackY - 4}" width="${W}" height="8" rx="4" fill="url(#${gradId})" stroke="rgba(138,148,163,0.18)" stroke-width="0.7"/>`;
+
+  const points = [
+    { obj: s12, ageLabel: '12m', alpha: 0.32, r: 5.5 },
+    { obj: s3,  ageLabel: '3m',  alpha: 0.55, r: 6.5 },
+    { obj: s1,  ageLabel: '1m',  alpha: 0.78, r: 7.5 },
+    { obj: sNow,ageLabel: 'now', alpha: 1.0,  r: 11, isNow: true },
+  ].filter(p => p.obj && Number.isFinite(p.obj.score));
+
+  if (points.length === 0) {
+    return `<div class="tr-rail-row tr-rail-empty"><div class="tr-rail-label">${label}</div><div class="tr-rail-empty-msg">insufficient history</div></div>`;
+  }
+
+  // Connecting line through the points in time order
+  const linePath = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${xFor(p.obj.score).toFixed(1)} ${trackY}`).join(' ');
+  const lineEl = `<path d="${linePath}" fill="none" stroke="rgba(247,167,0,0.45)" stroke-width="2" stroke-linecap="round"/>`;
+
+  // Dots
+  const dotsHtml = points.map(p => {
+    const ph = phaseFor(kind, p.obj.score);
+    const stroke = p.isNow ? `stroke="#fff" stroke-width="2"` : '';
+    const tip = `${p.ageLabel}: ${p.obj.score.toFixed(0)}/100 — ${ph.label}`;
+    return `<circle cx="${xFor(p.obj.score).toFixed(1)}" cy="${trackY}" r="${p.r}" fill="${ph.color}" opacity="${p.alpha}" ${stroke}><title>${tip}</title></circle>`;
+  }).join('');
+
+  // The Now value + phase displayed to the right of the rail
+  const phNow = phaseFor(kind, sNow.score);
+  const delta1m = (s1 && Number.isFinite(s1.score)) ? sNow.score - s1.score : null;
+  const dArrow = delta1m == null ? '' : delta1m > 1 ? '▲' : delta1m < -1 ? '▼' : '→';
+  const dCls = delta1m == null ? '' : delta1m > 1 ? 'tr-up' : delta1m < -1 ? 'tr-down' : 'tr-flat';
+  const deltaTxt = delta1m != null ? `<span class="tr-rail-delta ${dCls}">${dArrow} ${Math.abs(delta1m).toFixed(0)}pt 1m</span>` : '';
+
+  return `
+    <div class="tr-rail-row">
+      <div class="tr-rail-label">${label}</div>
+      <div class="tr-rail-svg-wrap">
+        <svg class="tr-rail-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${label} trajectory">
+          ${gradient}
+          ${trackBg}
+          ${ticks}
+          ${lineEl}
+          ${dotsHtml}
+        </svg>
+      </div>
+      <div class="tr-rail-now">
+        <div class="tr-rail-now-value" style="color:${phNow.color}">${sNow.score.toFixed(0)}</div>
+        <div class="tr-rail-now-phase" style="color:${phNow.color}">${phNow.label}</div>
+        ${deltaTxt}
+      </div>
+    </div>
+  `;
+}
+
 // ---------- rose / radar plot ----------
 //
 // Four orthogonal axes — Cycle (top), Inflation (right), Housing (bottom),
@@ -227,12 +333,9 @@ function rosePoint(score, axisAngleRad, rPx) {
 
 // Returns an SVG markup string (no <svg> wrapper — caller wraps).
 function renderRose(scoresNow, scores12m) {
-  const VIEW = 360;
-  const rPx = 130; // max radius in px (the 100 ring)
+  const VIEW = 460;
+  const rPx = 165; // max radius — bigger so labels sit outside without crowding
 
-  // Axes: Cycle top, Inflation right, Housing bottom, Consumer left.
-  // Angles in standard math (0 = +x). SVG y is inverted, so for "top" we
-  // need angle = -PI/2 (which in SVG y points up).
   const axes = [
     { key: 'cycle',     label: 'CYCLE',     angle: -Math.PI / 2 },
     { key: 'inflation', label: 'INFLATION', angle: 0 },
@@ -242,16 +345,15 @@ function renderRose(scoresNow, scores12m) {
 
   const ringRadii = [25, 50, 75, 100].map(v => ({ v, r: rPx * v / 100 }));
   const ringHtml = ringRadii.map(({ v, r }) => `
-    <circle cx="0" cy="0" r="${r.toFixed(1)}" fill="none" stroke="rgba(138,148,163,${v === 100 ? 0.30 : 0.14})" stroke-width="${v === 100 ? 0.9 : 0.6}"/>
-    <text x="3" y="${(r - 2).toFixed(1)}" fill="rgba(138,148,163,0.45)" font-size="9">${v}</text>
+    <circle cx="0" cy="0" r="${r.toFixed(1)}" fill="none" stroke="rgba(138,148,163,${v === 100 ? 0.45 : 0.22})" stroke-width="${v === 100 ? 1.6 : 1.0}"/>
+    <text x="4" y="${(r - 3).toFixed(1)}" fill="rgba(138,148,163,0.65)" font-size="11" font-weight="600">${v}</text>
   `).join('');
 
   const axisLineHtml = axes.map(a => {
     const [x, y] = rosePoint(100, a.angle, rPx);
-    return `<line x1="0" y1="0" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(138,148,163,0.30)" stroke-width="0.7"/>`;
+    return `<line x1="0" y1="0" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(138,148,163,0.40)" stroke-width="1.2"/>`;
   }).join('');
 
-  // Polygon for a score map.
   function polyPoints(scores) {
     return axes.map(a => {
       const sc = scores[a.key]?.score;
@@ -264,40 +366,40 @@ function renderRose(scoresNow, scores12m) {
   const oldPolyD = polyPoints(scores12m);
   const ACCENT = '#f7a700';
 
-  // Score-marker dots on the "Now" polygon, colored by phase per axis.
+  // Score-marker dots on the "Now" polygon — large, phase-colored.
   const dotHtml = axes.map(a => {
     const sObj = scoresNow[a.key];
     if (!sObj || !Number.isFinite(sObj.score)) return '';
     const ph = phaseFor(a.key, sObj.score);
     const [x, y] = rosePoint(sObj.score, a.angle, rPx);
-    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5" fill="${ph.color}" stroke="#13171c" stroke-width="1.2"><title>${a.label}: ${sObj.score.toFixed(0)}/100 — ${ph.label}</title></circle>`;
+    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="${ph.color}" stroke="#13171c" stroke-width="2.2"><title>${a.label}: ${sObj.score.toFixed(0)}/100 — ${ph.label}</title></circle>`;
   }).join('');
 
-  // Axis labels — positioned just outside the 100-ring.
+  // Axis labels + value pairs — positioned just outside the 100-ring.
   const labelHtml = axes.map(a => {
-    const [lx, ly] = rosePoint(100, a.angle, rPx + 18);
+    const [lx, ly] = rosePoint(100, a.angle, rPx + 30);
     const sObj = scoresNow[a.key];
     const oldObj = scores12m[a.key];
     const sNow = sObj && Number.isFinite(sObj.score) ? sObj.score.toFixed(0) : '—';
     const sOld = oldObj && Number.isFinite(oldObj.score) ? oldObj.score.toFixed(0) : null;
     const anchor = a.key === 'inflation' ? 'start' : a.key === 'consumer' ? 'end' : 'middle';
-    const dy1 = a.key === 'cycle' ? -2 : a.key === 'housing' ? 12 : 4;
-    const dy2 = a.key === 'cycle' ? -14 : a.key === 'housing' ? 24 : 16;
+    const dy1 = a.key === 'cycle' ? -8 : a.key === 'housing' ? 16 : 0;
+    const dy2 = a.key === 'cycle' ? -28 : a.key === 'housing' ? 38 : 22;
     const valColor = sObj ? phaseFor(a.key, sObj.score).color : '#e5e9ee';
-    const compareTxt = sOld != null ? `<tspan fill="rgba(138,148,163,0.7)" font-size="9"> ← ${sOld}</tspan>` : '';
+    const compareTxt = sOld != null ? `<tspan fill="rgba(138,148,163,0.85)" font-size="13" font-weight="600"> ← ${sOld}</tspan>` : '';
     return `
-      <text x="${lx.toFixed(1)}" y="${(ly + dy1).toFixed(1)}" fill="var(--text, #e5e9ee)" font-size="11" font-weight="700" text-anchor="${anchor}">${a.label}</text>
-      <text x="${lx.toFixed(1)}" y="${(ly + dy2).toFixed(1)}" fill="${valColor}" font-size="11" font-weight="700" text-anchor="${anchor}">${sNow}${compareTxt}</text>
+      <text x="${lx.toFixed(1)}" y="${(ly + dy1).toFixed(1)}" fill="var(--text, #e5e9ee)" font-size="15" font-weight="800" text-anchor="${anchor}" letter-spacing="0.5">${a.label}</text>
+      <text x="${lx.toFixed(1)}" y="${(ly + dy2).toFixed(1)}" fill="${valColor}" font-size="22" font-weight="800" text-anchor="${anchor}">${sNow}${compareTxt}</text>
     `;
   }).join('');
 
   // Legend top-left.
   const legendHtml = `
-    <g transform="translate(${(-VIEW / 2 + 14).toFixed(1)},${(-VIEW / 2 + 14).toFixed(1)})">
-      <line x1="0" y1="0" x2="14" y2="0" stroke="${ACCENT}" stroke-width="2.4"/>
-      <text x="18" y="3" fill="var(--text, #e5e9ee)" font-size="9.5">Now</text>
-      <line x1="0" y1="14" x2="14" y2="14" stroke="${ACCENT}" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.55"/>
-      <text x="18" y="17" fill="rgba(138,148,163,0.85)" font-size="9.5">12m ago</text>
+    <g transform="translate(${(-VIEW / 2 + 16).toFixed(1)},${(-VIEW / 2 + 18).toFixed(1)})">
+      <line x1="0" y1="0" x2="20" y2="0" stroke="${ACCENT}" stroke-width="4"/>
+      <text x="26" y="5" fill="var(--text, #e5e9ee)" font-size="13" font-weight="700">Now</text>
+      <line x1="0" y1="20" x2="20" y2="20" stroke="${ACCENT}" stroke-width="2.5" stroke-dasharray="5,4" opacity="0.55"/>
+      <text x="26" y="25" fill="rgba(138,148,163,0.95)" font-size="13" font-weight="600">12m ago</text>
     </g>
   `;
 
@@ -305,8 +407,8 @@ function renderRose(scoresNow, scores12m) {
     <svg class="tr-rose-svg" viewBox="${-VIEW / 2} ${-VIEW / 2} ${VIEW} ${VIEW}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Composite scores radar">
       ${ringHtml}
       ${axisLineHtml}
-      <polygon points="${oldPolyD}" fill="rgba(247,167,0,0.08)" stroke="${ACCENT}" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.55"/>
-      <polygon points="${nowPolyD}" fill="rgba(247,167,0,0.18)" stroke="${ACCENT}" stroke-width="2.2"/>
+      <polygon points="${oldPolyD}" fill="rgba(247,167,0,0.10)" stroke="${ACCENT}" stroke-width="3" stroke-dasharray="6,5" opacity="0.65" stroke-linejoin="round"/>
+      <polygon points="${nowPolyD}" fill="rgba(247,167,0,0.22)" stroke="${ACCENT}" stroke-width="4.5" stroke-linejoin="round"/>
       ${dotHtml}
       ${labelHtml}
       ${legendHtml}
@@ -385,26 +487,27 @@ export async function renderTodayRead() {
     <div class="tr-eyebrow">TODAY'S READ &middot; ${monthName}</div>
     <div class="tr-narrative">${narrative}</div>
 
-    <div class="tr-rose-wrap">
-      <div class="tr-rose-header">
+    <div class="tr-hero-row">
+      <div class="tr-cards-col">
+        <div class="tr-regime-block" style="--tr-color:${regimeColor}">
+          <div class="tr-regime-label">REGIME &middot; 3-MONTH SMOOTHED</div>
+          <div class="tr-regime-row">
+            <div class="tr-regime-name" style="color:${regimeColor}">${regimeLabel}</div>
+            ${conviction ? `<div class="tr-conviction" style="color:${conviction.color}; border-color:${conviction.color}">CONVICTION: ${conviction.label}</div>` : ''}
+          </div>
+          ${conviction ? `<div class="tr-conviction-desc">${conviction.desc}</div>` : ''}
+          ${currentInfo ? `<div class="tr-regime-zs">Growth z: ${currentInfo.growthZ >= 0 ? '+' : ''}${fmt(currentInfo.growthZ, 2)} · Inflation z: ${currentInfo.inflationZ >= 0 ? '+' : ''}${fmt(currentInfo.inflationZ, 2)}</div>` : ''}
+        </div>
+        ${renderScoreRow('Cycle Risk',           'cycle',     scoresNow.cycle,     scores1m.cycle)}
+        ${renderScoreRow('Inflation Persistence','inflation', scoresNow.inflation, scores1m.inflation)}
+        ${renderScoreRow('Housing Cycle',        'housing',   scoresNow.housing,   scores1m.housing)}
+        ${renderScoreRow('Consumer Stress',      'consumer',  scoresNow.consumer,  scores1m.consumer)}
+      </div>
+      <div class="tr-rose-col">
         <div class="tr-rose-title">Composite scores &middot; today vs 12 months ago</div>
         <div class="tr-rose-sub">Polygon shape encodes regime balance: kite = imbalance, diamond = uniform tightening, small = all-clear.</div>
+        <div class="tr-rose-canvas">${renderRose(scoresNow, scores12m)}</div>
       </div>
-      <div class="tr-rose-canvas">${renderRose(scoresNow, scores12m)}</div>
-    </div>
-
-    <div class="tr-grid">
-      <div class="tr-regime-block" style="--tr-color:${regimeColor}">
-        <div class="tr-regime-label">REGIME &middot; 3-MONTH SMOOTHED</div>
-        <div class="tr-regime-name" style="color:${regimeColor}">${regimeLabel}</div>
-        ${conviction ? `<div class="tr-conviction" style="color:${conviction.color}; border-color:${conviction.color}">CONVICTION: ${conviction.label}</div>
-                         <div class="tr-conviction-desc">${conviction.desc}</div>` : ''}
-        ${currentInfo ? `<div class="tr-regime-zs">Growth z: ${currentInfo.growthZ >= 0 ? '+' : ''}${fmt(currentInfo.growthZ, 2)} · Inflation z: ${currentInfo.inflationZ >= 0 ? '+' : ''}${fmt(currentInfo.inflationZ, 2)}</div>` : ''}
-      </div>
-      ${renderScore('Cycle Risk',          'cycle',     scoresNow.cycle,     scores1m.cycle)}
-      ${renderScore('Inflation Persistence','inflation', scoresNow.inflation, scores1m.inflation)}
-      ${renderScore('Housing Cycle',       'housing',   scoresNow.housing,   scores1m.housing)}
-      ${renderScore('Consumer Stress',     'consumer',  scoresNow.consumer,  scores1m.consumer)}
     </div>
 
     ${outliers.length ? `<div class="tr-outliers">
@@ -415,27 +518,20 @@ export async function renderTodayRead() {
       ).join('')}
     </div>` : ''}
 
-    <div class="tr-deltas">
-      <div class="tr-deltas-label">SCORE TRAJECTORY (HIGHER = MORE RISK / TIGHTER REGIME)</div>
-      <table class="tr-delta-table">
-        <thead><tr><th>Composite</th><th>12m ago</th><th>3m ago</th><th>1m ago</th><th>Now</th></tr></thead>
-        <tbody>
-          ${[
-            ['Cycle Risk',           'cycle'],
-            ['Inflation Persistence','inflation'],
-            ['Housing Cycle',        'housing'],
-            ['Consumer Stress',      'consumer'],
-          ].map(([label, k]) => `
-            <tr>
-              <td>${label}</td>
-              <td>${scores12m[k]?.score != null ? scores12m[k].score.toFixed(0) : '—'}</td>
-              <td>${scores3m[k]?.score != null ? scores3m[k].score.toFixed(0) : '—'}</td>
-              <td>${scores1m[k]?.score != null ? scores1m[k].score.toFixed(0) : '—'}</td>
-              <td><strong>${scoresNow[k]?.score != null ? scoresNow[k].score.toFixed(0) : '—'}</strong></td>
-            </tr>
-          `).join('')}
-        </tbody>
-      </table>
+    <div class="tr-trajectory">
+      <div class="tr-trajectory-header">
+        <div class="tr-trajectory-title">SCORE TRAJECTORY &middot; 12 MONTHS &rarr; NOW</div>
+        <div class="tr-trajectory-sub">Each row is a 0-100 risk track. Faded dots = older snapshots; solid dot = today. Connecting line shows direction; phase color tracks the score.</div>
+      </div>
+      ${[
+        ['Cycle Risk',           'cycle'],
+        ['Inflation Persistence','inflation'],
+        ['Housing Cycle',        'housing'],
+        ['Consumer Stress',      'consumer'],
+      ].map(([label, k]) => renderTrajRail(label, k, scores12m[k], scores3m[k], scores1m[k], scoresNow[k])).join('')}
+      <div class="tr-trajectory-scale">
+        <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+      </div>
     </div>
 
     <div class="tr-quick-jump">
