@@ -58,3 +58,13 @@
 
 /* The AI internal main wrapper inherits siberforge background but keep AI internal CSS scoped */
 .ai-screen-host main, .ai-top5-host main { padding-top: 16px; }
+
+/* ===== Brand icon (eye-mark) in siberforge top bar ===== */
+.brand-icon {
+  width: 24px; height: 24px; display: inline-block;
+  vertical-align: middle; margin-right: 2px;
+  object-fit: contain;
+}
+@media (max-width: 640px) {
+  .brand-icon { width: 20px; height: 20px; }
+}

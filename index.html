@@ -4,6 +4,15 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Siberforge &mdash; Research Hub</title>
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/siberforge-mark.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Siberforge — Research from primary sources" />
+<meta property="og:description" content="Analyst-grade research reconstructed from SEC EDGAR filings and FRED series. Every line item ties back to a filing or a series." />
+<meta property="og:image" content="https://siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://siberforge.xyz/siberforge-og.png" />
 <meta name="description" content="Interactive financial research reconstructed from SEC EDGAR filings and FRED series. Every line item traceable. No aggregators, no black-box transformations." />
 <link rel="preconnect" href="https://rsms.me/" />
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
@@ -14,6 +23,8 @@
 
 <header class="top">
   <div class="brand">
+    
+    <img src="/siberforge-mark.png" class="brand-icon" alt="" />
     <span class="mark">SIBERFORGE</span>
     <span class="sub">Research hub</span>
   </div>
@@ -28,8 +39,11 @@
 
   <!-- TAGLINE -->
   <section class="lp-tagline">
-    <h1>Read the filing. Not the summary.</h1>
-    <p>Analyst-grade research reconstructed from primary sources. Every line ties back to a filing or a series.</p>
+    <div class="lp-tagline-text">
+      <h1>Read the filing. Not the summary.</h1>
+      <p>Analyst-grade research reconstructed from primary sources. Every line ties back to a filing or a series.</p>
+    </div>
+    <img src="/siberforge-husky-sm.png" class="lp-husky" alt="" loading="lazy" />
   </section>
 
   <!-- LIVE RIBBON: 4 hero mini-tiles (DOM hooks expected by live-data module) -->
@@ -66,7 +80,7 @@
       <section class="rec-strip is-loading" id="rec-strip" aria-label="Live US recession-risk composite">
         <div class="rec-card">
           <div class="rec-head">
-            <span class="rec-tag">Live Composite</span>
+            <span class="rec-tag"><span class="pulse"></span><span class="rec-status-text">Live Composite</span></span>
             <h2 class="rec-title">US recession risk, right now.</h2>
           </div>
           <div class="rec-summary">
@@ -84,17 +98,20 @@
       <section class="ind-strip bg-teal is-loading" id="strip-AHE" data-ind-id="AHE" aria-label="Live wage growth indicator">
         <div class="ind-card">
           <div class="ind-head">
-            <span class="ind-tag">Live</span>
+            <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
             <h2 class="ind-title">Wage growth &mdash; are workers keeping up?</h2>
           </div>
-          <div class="ind-summary">
-            <span class="ind-value" id="value-AHE">&mdash;<span class="ind-unit">%</span></span>
-            <span class="ind-delta" id="delta-AHE">&middot;</span>
-            <span class="ind-tier" id="tier-AHE" data-tier="trend"><span class="ind-tier-label" id="tier-label-AHE">&mdash;</span><span class="ind-tier-sub" id="tier-sub-AHE">&nbsp;</span></span>
+          <div class="ind-scoreline">
+            <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">%</span></span>
+            <span class="ind-delta">&middot;</span>
+            <span class="ind-tier">
+              <span class="ind-tier-label">Loading&hellip;</span>
+              <span class="ind-tier-sub">&nbsp;</span>
+            </span>
           </div>
-          <div class="ind-spark" id="spark-AHE" aria-hidden="true"></div>
+          <div class="ind-spark" aria-hidden="true"></div>
           <div class="ind-meta">
-            <span class="ind-asof" id="asof-AHE">&nbsp;</span>
+            <span class="ind-asof">&nbsp;</span>
             <a href="/core/econ/indicator.html?id=AHE" class="ind-cta">See full detail <span class="arrow">&rarr;</span></a>
           </div>
         </div>
@@ -211,9 +228,10 @@
         <div class="cat-head">
           <span class="cat-arrow">&#9660;</span>
           <h2>Single-Name Research</h2>
-          <span class="cat-count">1 view</span>
+          <span class="cat-count">2 views</span>
         </div>
         <div class="cat-body">
+          <a href="/core/single-name/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">All single-name deep dives</span></a>
           <a href="/core/plug/" class="leaf"><span class="leaf-name">Plug Power (PLUG)</span><span class="leaf-meta">Quarterly cash flow 2015-2025 from EDGAR XBRL &middot; CFO/CFI/CFF/Cash drivers</span></a>
         </div>
       </div>

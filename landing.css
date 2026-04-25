@@ -202,3 +202,28 @@ footer { padding: 16px 24px; }
 .mini-tile.is-loading .mini-tile-delta { color: var(--muted); }
 .mini-tile-spark svg { width: 100% !important; height: 28px !important; }
 
+
+/* ===== Brand icon (eye-mark) in siberforge top bar ===== */
+.brand-icon {
+  width: 24px; height: 24px; display: inline-block;
+  vertical-align: middle; margin-right: 2px;
+  object-fit: contain;
+}
+@media (max-width: 640px) {
+  .brand-icon { width: 20px; height: 20px; }
+}
+
+/* ===== Landing hero: husky on right ===== */
+.lp-tagline { display: flex; align-items: center; gap: 24px; }
+.lp-tagline-text { flex: 1; }
+.lp-husky {
+  width: 180px; height: auto; flex-shrink: 0;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.35));
+}
+@media (max-width: 720px) {
+  .lp-tagline { flex-direction: column-reverse; align-items: flex-start; gap: 14px; }
+  .lp-husky { width: 130px; }
+}
+:root[data-theme="light"] .lp-husky {
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.12));
+}

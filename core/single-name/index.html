@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Single-Name Research</title>
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/siberforge-mark.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Siberforge — Research from primary sources" />
+<meta property="og:description" content="Analyst-grade research reconstructed from SEC EDGAR filings and FRED series. Every line item ties back to a filing or a series." />
+<meta property="og:image" content="https://siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://siberforge.xyz/siberforge-og.png" />
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<link rel="stylesheet" href="/core/ai/ai.css" />
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Back to research hub">&larr;</a>
+    
+    <img src="/siberforge-mark.png" class="brand-icon" alt="" />
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Single-Name Research</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">EDGAR XBRL &middot; primary source</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Single-Name</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/single-name/" class="dd-link dd-master active">Section</a>
+    <span class="dd-tree">&rsaquo;</span>
+    <a href="/core/plug/" class="dd-link dd-sub">Plug Power</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/" class="dd-link">Macro &amp; Markets</a>
+    <a href="/core/ai/" class="dd-link">AI Beneficiaries</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+</nav>
+
+<main class="ai-overview">
+  <section class="overview-hero">
+    <h1>Single-Name Research</h1>
+    <p class="overview-lede">Deep dives on individual public companies, reconstructed from <strong>SEC EDGAR XBRL filings</strong> rather than vendor databases. Quarterly fundamentals rebuilt by differencing YTD 10-Q filings, restatements preserved, footnotes surfaced inline. Currently 1 name shipped; pipeline below.</p>
+  </section>
+
+  <section class="overview-cards">
+    <a class="ov-card" href="/core/plug/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">PLUG &middot; 44 quarters &middot; 2015-2025</span></div>
+      <h2>Plug Power (PLUG)</h2>
+      <p>Quarterly cash flow 2015-2025 from EDGAR XBRL: interactive CFO / CFI / CFF drivers, balance-sheet health, liquidity dependencies, US production footprint, and revenue by product line. Restatements (2021 Amazon/Walmart warrant reclass) preserved with both vintages selectable.</p>
+      <p class="ov-cta">Open the deep dive <span class="arrow">&rarr;</span></p>
+    </a>
+    <div class="ov-card" style="opacity:0.55;cursor:default">
+      <div class="ov-card-meta"><span class="tag" style="background:var(--panel-2);color:var(--muted)">Pipeline</span><span class="ov-count">Coming next</span></div>
+      <h2>More single-name deep dives</h2>
+      <p>The PLUG playbook (CFO/CFI/CFF reconstruction, restatement handling, footnote surfacing, dilution math) is reusable for any single-name. Likely next adds: a high-dilution growth story to stress-test the cash-runway tooling, a multi-segment industrial to test segment-level XBRL parsing.</p>
+      <p class="ov-cta" style="color:var(--muted)">Suggest a name &middot; pavkarab4@gmail.com</p>
+    </div>
+  </section>
+
+  <section class="meth-block">
+    <h3>Methodology</h3>
+    <ul>
+      <li><strong>Source:</strong> SEC EDGAR XBRL API. No Bloomberg, no consensus, no aggregators &mdash; the number on screen is the number in the filing.</li>
+      <li><strong>YTD &rarr; standalone:</strong> Quarterly cash flow series rebuilt by differencing YTD 10-Q filings, the same way an analyst would manually, automated across decades.</li>
+      <li><strong>Restatements preserved:</strong> Pre-restatement and post-restatement filings both kept; the chart knows which year came from which vintage.</li>
+      <li><strong>Footnotes surfaced inline:</strong> Dotted-underlined accounting terms show their definition on hover where they appear, not buried in a glossary.</li>
+    </ul>
+  </section>
+</main>
+
+<footer>
+  <span>Data: SEC EDGAR XBRL filings. Quarterly series rebuilt from YTD 10-Q differencing. Not investment advice.</span>
+  <span id="last-updated">2026</span>
+</footer>
+
+<script src="/core/lib/theme-toggle.js"></script>
+</body>
+</html>
