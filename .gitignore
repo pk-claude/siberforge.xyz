@@ -5,3 +5,6 @@ node_modules/
 .env.*.local
 .DS_Store
 *.log
+
+# FUSE filesystem shadow files (leaked by in-place edits over WSL/Windows mount)
+.fuse_hidden*
