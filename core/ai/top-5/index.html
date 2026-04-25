@@ -1715,6 +1715,95 @@ injectSectionBanners();
 </script>
 <script>
 // ============================================================================
+// V2 NAV: tier-1/tier-2 navigation (restored — was lost in earlier cleanup)
+// Wraps window.showPage so company-tab visibility, chart lazy-render, and
+// tier-1/tier-2 active-state stay in sync.
+// ============================================================================
+const NAV_MAP = {
+  overview:   [{id:'summary',   label:'Executive Summary'}],
+  companies:  [
+    {id:'meta', label:'META'},
+    {id:'cdns', label:'CDNS'},
+    {id:'avgo', label:'AVGO'},
+    {id:'snps', label:'SNPS'},
+    {id:'msft', label:'MSFT'}
+  ],
+  comparison: [
+    {id:'ranking', label:'Risk-Adjusted Ranking'},
+    {id:'ratios',  label:'20 Financial Ratios'}
+  ],
+  scenarios:  [
+    {id:'strong',    label:'Strong Scenario'},
+    {id:'portfolio', label:'Max-Sharpe Portfolio'}
+  ],
+  risks:      [
+    {id:'shorts',   label:'Counter-Intuitive Shorts'},
+    {id:'redflags', label:'10-Q Working Capital'}
+  ]
+};
+function findCatForPage(pageId) {
+  for (const [cat, pages] of Object.entries(NAV_MAP)) {
+    if (pages.find(p => p.id === pageId)) return cat;
+  }
+  return 'overview';
+}
+function renderTier2(cat) {
+  const tier2 = document.getElementById('nav-tier2');
+  if (!tier2) return;
+  tier2.innerHTML = '';
+  if (!NAV_MAP[cat] || NAV_MAP[cat].length <= 1) return;
+  NAV_MAP[cat].forEach(page => {
+    const btn = document.createElement('button');
+    btn.textContent = page.label;
+    btn.dataset.page = page.id;
+    btn.addEventListener('click', () => {
+      window.location.hash = '#' + page.id;
+      window.showPage(page.id);
+    });
+    tier2.appendChild(btn);
+  });
+}
+function setTier1Active(cat) {
+  document.querySelectorAll('.nav-cat').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === cat)
+  );
+  renderTier2(cat);
+}
+function syncTier2ActivePage(pageId) {
+  document.querySelectorAll('#nav-tier2 button').forEach(b =>
+    b.classList.toggle('active', b.dataset.page === pageId)
+  );
+}
+function syncNavToPage(pageId) {
+  const cat = findCatForPage(pageId);
+  const currentCat = document.querySelector('.nav-cat.active')?.dataset.cat;
+  if (currentCat !== cat) setTier1Active(cat);
+  syncTier2ActivePage(pageId);
+}
+document.querySelectorAll('.nav-cat').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    setTier1Active(cat);
+    if (NAV_MAP[cat] && NAV_MAP[cat][0]) {
+      const first = NAV_MAP[cat][0].id;
+      window.location.hash = '#' + first;
+      window.showPage(first);
+    }
+  });
+});
+// Wrap window.showPage to also keep tier-1/tier-2 active-state in sync
+(function(){
+  const _orig = window.showPage;
+  window.showPage = function(target) {
+    _orig(target);
+    syncNavToPage(target);
+  };
+})();
+// Initial sync (in case page loaded with a hash like #meta)
+syncNavToPage(window.location.hash.slice(1) || 'summary');
+</script>
+<script>
+// ============================================================================
 // V3 — Bullet-level supporting charts
 // Each bullet inside thesis-box gets 1-2 mini charts directly below it.
 // Hover any chart for cleanly separated detail rows (YoY, CAGR, vs Peers, etc.).
