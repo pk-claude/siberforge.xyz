@@ -87,6 +87,13 @@ const CATALOG = {
   BAMLH0A0HYM2:          { label: 'High-Yield OAS',                 freq: 'daily',   unit: 'percent', transform: 'level', group: 'recession' },
 };
 
+// Sleep helper for retry backoff.
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+// Fetch one FRED series with retry on transient 5xx upstream errors.
+// FRED occasionally returns 500 Internal Server Error for live requests; a
+// quick retry usually succeeds. We retry on 5xx + 429 only — never on 4xx
+// (bad series id, etc.).
 async function fetchSeries(id, key, start, opts = {}) {
   const url = new URL(FRED_BASE);
   url.searchParams.set('series_id', id);
@@ -95,17 +102,36 @@ async function fetchSeries(id, key, start, opts = {}) {
   if (start) url.searchParams.set('observation_start', start);
   if (opts.realtimeStart) url.searchParams.set('realtime_start', opts.realtimeStart);
   if (opts.realtimeEnd)   url.searchParams.set('realtime_end',   opts.realtimeEnd);
-  const res = await fetch(url.toString());
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`FRED ${id} ${res.status}: ${text.slice(0, 200)}`);
+
+  const RETRY_DELAYS = [250, 750, 1500]; // 3 retries before giving up
+  let lastErr = null;
+
+  for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt++) {
+    try {
+      const res = await fetch(url.toString());
+      if (res.ok) {
+        const json = await res.json();
+        const observations = (json.observations || [])
+          .filter(o => o.value !== '.' && o.value !== null && o.value !== undefined)
+          .map(o => ({ date: o.date, value: Number(o.value) }))
+          .filter(o => Number.isFinite(o.value));
+        return { id, meta: CATALOG[id] || null, observations };
+      }
+      // Non-OK response. Read body for debug; decide if we should retry.
+      const text = await res.text();
+      const transient = res.status >= 500 || res.status === 429;
+      lastErr = new Error(`FRED ${id} ${res.status}: ${text.slice(0, 200)}`);
+      if (!transient || attempt === RETRY_DELAYS.length) throw lastErr;
+      await sleep(RETRY_DELAYS[attempt]);
+    } catch (err) {
+      // Network/connection error — also transient; retry until we exhaust.
+      lastErr = err instanceof Error ? err : new Error(String(err));
+      if (attempt === RETRY_DELAYS.length) throw lastErr;
+      await sleep(RETRY_DELAYS[attempt]);
+    }
   }
-  const json = await res.json();
-  const observations = (json.observations || [])
-    .filter(o => o.value !== '.' && o.value !== null && o.value !== undefined)
-    .map(o => ({ date: o.date, value: Number(o.value) }))
-    .filter(o => Number.isFinite(o.value));
-  return { id, meta: CATALOG[id] || null, observations };
+  // Should be unreachable but guard anyway.
+  throw lastErr || new Error(`FRED ${id} unknown failure`);
 }
 
 function validDate(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s); }

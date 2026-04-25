@@ -68,7 +68,7 @@
         <p class="regime-trajectory-sub">Each dot is one month. Newest = brightest. Watch for boundary crossings — that&rsquo;s the actionable signal.</p>
       </div>
       <div class="regime-trajectory-chart">
-        <canvas id="regime-trajectory" data-no-range="true"></canvas>
+        <div id="regime-trajectory" class="regime-trajectory-svg" data-no-range="true"></div>
       </div>
     </div>
     <div id="regime-current" class="regime-current"></div>
@@ -93,9 +93,17 @@
         <button class="mode-tab" data-mode="excess">Excess vs SPY</button>
       </div>
     </div>
+    <div class="control-group">
+      <span class="control-label">View</span>
+      <div class="control-tabs">
+        <button class="view-tab active" data-view="table">Table</button>
+        <button class="view-tab" data-view="sunburst">Sunburst</button>
+      </div>
+    </div>
   </div>
 
   <div id="regime-table"></div>
+  <div id="regime-sunburst" class="regime-sunburst" style="display:none"></div>
 
   <p class="regime-note" id="regime-interpretation"></p>
 

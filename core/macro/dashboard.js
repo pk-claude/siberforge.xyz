@@ -47,9 +47,10 @@ const state = {
   currentRegimeRaw: null,   // unsmoothed most-recent month regime (for diagnostics)
   currentRegimeInfo: null,  // { regime, ym, votes, window } from smoothCurrentRegime
   returnMode: 'absolute',   // 'absolute' | 'excess' — toggle on the returns table
+  tableView: 'table',       // 'table' | 'sunburst' — view toggle for the regime returns
 };
 
-const charts = { rolling: null, regression: null, overlay: null, trajectory: null };
+const charts = { rolling: null, regression: null, overlay: null };
 
 // ---------- small helpers ----------
 function el(id) { return document.getElementById(id); }
@@ -618,158 +619,138 @@ async function renderRegimeReturns() {
   renderRegimeTrajectory(regimeMap);
   renderCurrentRegimeTile(currentYm, currentInfoRaw, regimeMap, smoothed);
   renderRegimeTable();
+  renderRegimeSunburst();
   renderRegimeInterpretation();
   renderRegimeTransitions(regimeMap);
   renderPositioning();
   wireHorizonTabs();
   wireReturnModeToggle();
+  wireViewToggle();
 
   if (charts.regression) await rerenderActive();
 
   setStatus('live', 'Live — prices refresh every 60s');
 }
 
-// ---------- regime trajectory chart ----------
+// ---------- regime trajectory chart (radial nautilus) ----------
+//
+// Polar layout: angle = direction in (growthZ, inflationZ) plane, radius =
+// magnitude of the (growth, inflation) vector i.e. regime conviction.
+// 24-month trajectory becomes a spiral; current month sits at the rim with
+// a brighter, larger dot. Quadrant labels follow the regime convention:
+//   right (positive growth) split top=Reflation / bottom=Goldilocks
+//   left  (negative growth) split top=Stagflation / bottom=Disinflation
+//
+// Inverted from raw Cartesian because SVG y grows downward; we flip
+// inflationZ when computing pixel y so positive inflation appears at top.
 
 function renderRegimeTrajectory(regimeMap) {
-  const canvas = el('regime-trajectory');
-  if (!canvas) return;
+  const host = el('regime-trajectory');
+  if (!host) return;
   const months = [...regimeMap.keys()].sort();
   const tail = months.slice(-24);
-  if (tail.length < 2) return;
+  if (tail.length < 2) {
+    host.innerHTML = '<div class="rt-empty">Insufficient history for trajectory.</div>';
+    return;
+  }
 
+  // Decide a single radius scale based on the largest magnitude in the tail
+  // (rounded up to next 0.5) so the spiral always fits with breathing room.
+  const mags = tail.map(ym => {
+    const i = regimeMap.get(ym);
+    return Math.sqrt(i.growthZ * i.growthZ + i.inflationZ * i.inflationZ);
+  });
+  const maxMag = Math.max(...mags, 1.0);
+  const rMaxData = Math.ceil(maxMag * 2) / 2; // step 0.5
+  const VIEW = 380;
+  const cx = 0, cy = 0;
+  const rPx = (VIEW / 2) - 28; // padding for labels
+  const scale = (z) => (z / rMaxData) * rPx;
+
+  // Each point in display-space (SVG y inverted so inflation+ is up).
   const points = tail.map((ym, idx) => {
     const info = regimeMap.get(ym);
-    const meta = REGIMES[info.regime];
     const recency = (idx + 1) / tail.length;
-    return {
-      x: info.growthZ,
-      y: info.inflationZ,
-      ym,
-      regime: info.regime,
-      label: meta.label,
-      backgroundColor: meta.color,
-      borderColor: meta.color,
-      pointRadius: 3.5 + recency * 5.5,
-    };
+    const meta = REGIMES[info.regime] || { color: '#8a94a3', label: 'Unclassified' };
+    const x = scale(info.growthZ);
+    const y = -scale(info.inflationZ); // SVG y inverted
+    const r = 2.0 + recency * 5.5;
+    const opacity = 0.30 + recency * 0.70;
+    return { x, y, r, opacity, meta, info, ym, idx, isLast: idx === tail.length - 1 };
   });
 
-  const lineSegment = tail.map(ym => {
-    const info = regimeMap.get(ym);
-    return { x: info.growthZ, y: info.inflationZ };
-  });
+  // Build the path that connects all dots in order.
+  const pathD = points.map((p, i) => `${i === 0 ? 'M' : 'L'} ${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
 
-  destroy('trajectory');
+  // Concentric "conviction" rings at z = 0.5, 1.0, 1.5, ... up to rMaxData.
+  const rings = [];
+  for (let z = 0.5; z <= rMaxData + 0.001; z += 0.5) {
+    const rPxRing = scale(z);
+    const isMain = Math.abs(z - rMaxData) < 0.001;
+    rings.push(`<circle cx="0" cy="0" r="${rPxRing.toFixed(1)}" fill="none" stroke="rgba(138,148,163,${isMain ? 0.30 : 0.12})" stroke-width="${isMain ? 0.9 : 0.6}" stroke-dasharray="${isMain ? '' : '3,4'}"/>`);
+    rings.push(`<text x="3" y="${(-rPxRing + 4).toFixed(1)}" fill="rgba(138,148,163,0.45)" font-size="9">${z.toFixed(1)}</text>`);
+  }
 
-  const quadrantPlugin = {
-    id: 'regimeQuadrants',
-    beforeDatasetsDraw(chart) {
-      const { ctx, chartArea: a, scales: s } = chart;
-      if (!a) return;
-      const x0 = s.x.getPixelForValue(0);
-      const y0 = s.y.getPixelForValue(0);
+  // Quadrant tints. SVG y inverted so positive-inflation = top-half.
+  // Top-right  (x>0, y<0): growth+ inflation+  => Reflation   (amber)
+  // Top-left   (x<0, y<0): growth- inflation+  => Stagflation (red)
+  // Bottom-left  (x<0, y>0): growth- inflation- => Disinflation (blue)
+  // Bottom-right (x>0, y>0): growth+ inflation- => Goldilocks  (green)
+  const R = rPx;
+  const quadrantFills = `
+    <path d="M0,0 L${R},0 A${R},${R} 0 0,0 0,-${R} Z" fill="rgba(247,167,0,0.06)"/>
+    <path d="M0,0 L0,-${R} A${R},${R} 0 0,0 -${R},0 Z" fill="rgba(239,79,90,0.06)"/>
+    <path d="M0,0 L-${R},0 A${R},${R} 0 0,0 0,${R} Z" fill="rgba(90,156,255,0.06)"/>
+    <path d="M0,0 L0,${R} A${R},${R} 0 0,0 ${R},0 Z" fill="rgba(62,207,142,0.06)"/>
+  `;
 
-      ctx.save();
-      ctx.fillStyle = 'rgba(62, 207, 142, 0.04)';
-      ctx.fillRect(x0, y0, a.right - x0, a.bottom - y0);
-      ctx.fillStyle = 'rgba(247, 167, 0, 0.04)';
-      ctx.fillRect(x0, a.top, a.right - x0, y0 - a.top);
-      ctx.fillStyle = 'rgba(239, 79, 90, 0.04)';
-      ctx.fillRect(a.left, a.top, x0 - a.left, y0 - a.top);
-      ctx.fillStyle = 'rgba(90, 156, 255, 0.04)';
-      ctx.fillRect(a.left, y0, x0 - a.left, a.bottom - y0);
+  // Quadrant labels — placed near 45° in each quadrant, just inside the rim.
+  const lblR = rPx * 0.78;
+  const labelHtml = `
+    <text x="${lblR * 0.7}"  y="${(-lblR * 0.7).toFixed(1)}" fill="rgba(247,167,0,0.75)" font-size="10" font-weight="700" text-anchor="middle">REFLATION</text>
+    <text x="${(-lblR * 0.7).toFixed(1)}" y="${(-lblR * 0.7).toFixed(1)}" fill="rgba(239,79,90,0.75)" font-size="10" font-weight="700" text-anchor="middle">STAGFLATION</text>
+    <text x="${(-lblR * 0.7).toFixed(1)}" y="${(lblR * 0.7).toFixed(1)}" fill="rgba(90,156,255,0.75)" font-size="10" font-weight="700" text-anchor="middle">DISINFLATION</text>
+    <text x="${(lblR * 0.7).toFixed(1)}" y="${(lblR * 0.7).toFixed(1)}" fill="rgba(62,207,142,0.75)" font-size="10" font-weight="700" text-anchor="middle">GOLDILOCKS</text>
+  `;
 
-      ctx.strokeStyle = 'rgba(138, 148, 163, 0.35)';
-      ctx.lineWidth = 1;
-      ctx.beginPath();
-      ctx.moveTo(a.left, y0); ctx.lineTo(a.right, y0);
-      ctx.moveTo(x0, a.top);  ctx.lineTo(x0, a.bottom);
-      ctx.stroke();
+  // Axis lines + axis tick labels.
+  const axes = `
+    <line x1="${-R}" y1="0" x2="${R}" y2="0" stroke="rgba(138,148,163,0.40)" stroke-width="0.8"/>
+    <line x1="0" y1="${-R}" x2="0" y2="${R}" stroke="rgba(138,148,163,0.40)" stroke-width="0.8"/>
+    <text x="${R - 2}" y="-4"  fill="rgba(138,148,163,0.65)" font-size="9" text-anchor="end">growth z+</text>
+    <text x="${-R + 4}" y="-4" fill="rgba(138,148,163,0.65)" font-size="9">growth z−</text>
+    <text x="3" y="${-R + 11}"  fill="rgba(138,148,163,0.65)" font-size="9">inflation z+</text>
+    <text x="3" y="${R - 4}"   fill="rgba(138,148,163,0.65)" font-size="9">inflation z−</text>
+  `;
 
-      ctx.font = '10px Inter, sans-serif';
-      ctx.textAlign = 'center';
-      const labels = [
-        { txt: 'GOLDILOCKS',   x: (x0 + a.right) / 2, y: (y0 + a.bottom) / 2, c: 'rgba(62, 207, 142, 0.55)' },
-        { txt: 'REFLATION',    x: (x0 + a.right) / 2, y: (a.top + y0) / 2,    c: 'rgba(247, 167, 0, 0.55)' },
-        { txt: 'STAGFLATION',  x: (a.left + x0) / 2,  y: (a.top + y0) / 2,    c: 'rgba(239, 79, 90, 0.55)' },
-        { txt: 'DISINFLATION', x: (a.left + x0) / 2,  y: (y0 + a.bottom) / 2, c: 'rgba(90, 156, 255, 0.55)' },
-      ];
-      for (const d of labels) { ctx.fillStyle = d.c; ctx.fillText(d.txt, d.x, d.y); }
-      ctx.restore();
-    },
-  };
+  // Dots — each as a circle, with title/data attributes for tooltip.
+  const dotsHtml = points.map((p, i) => {
+    const [y, m] = p.ym.split('-').map(Number);
+    const monthName = new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+    const tooltipText = `${monthName} — ${p.meta.label} | growth z: ${p.info.growthZ >= 0 ? '+' : ''}${p.info.growthZ.toFixed(2)}, inflation z: ${p.info.inflationZ >= 0 ? '+' : ''}${p.info.inflationZ.toFixed(2)}`;
+    if (p.isLast) {
+      return `
+        <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${(p.r + 4).toFixed(1)}" fill="${p.meta.color}" opacity="0.20"/>
+        <circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${(p.r + 1.5).toFixed(1)}" fill="${p.meta.color}" stroke="#fff" stroke-width="1.5">
+          <title>${tooltipText}</title>
+        </circle>
+        <text x="${(p.x + 11).toFixed(1)}" y="${(p.y - 6).toFixed(1)}" fill="${p.meta.color}" font-size="10" font-weight="700">CURRENT</text>
+      `;
+    }
+    return `<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="${p.r.toFixed(1)}" fill="${p.meta.color}" opacity="${p.opacity.toFixed(2)}"><title>${tooltipText}</title></circle>`;
+  }).join('');
 
-  const ctx = canvas.getContext('2d');
-  charts.trajectory = new Chart(ctx, {
-    type: 'scatter',
-    data: {
-      datasets: [
-        {
-          label: 'Trail',
-          type: 'line',
-          data: lineSegment,
-          borderColor: 'rgba(229, 233, 238, 0.20)',
-          borderWidth: 1,
-          pointRadius: 0,
-          tension: 0.0,
-          fill: false,
-          showLine: true,
-          order: 99,
-        },
-        {
-          label: 'Months',
-          type: 'scatter',
-          data: points,
-          backgroundColor: c => c.raw?.backgroundColor || '#fff',
-          borderColor:     c => c.raw?.borderColor || '#fff',
-          pointRadius:     c => c.raw?.pointRadius || 4,
-          pointBorderWidth: 1,
-          pointHoverRadius: 9,
-          parsing: false,
-          order: 1,
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          backgroundColor: '#13171c',
-          borderColor: '#232b35',
-          borderWidth: 1,
-          callbacks: {
-            label(c) {
-              const p = c.raw;
-              if (!p || !p.ym) return '';
-              const [y, m] = p.ym.split('-').map(Number);
-              const monthName = new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-              return [
-                `${monthName} — ${p.label}`,
-                `growth z: ${p.x >= 0 ? '+' : ''}${p.x.toFixed(2)}, inflation z: ${p.y >= 0 ? '+' : ''}${p.y.toFixed(2)}`,
-              ];
-            },
-          },
-        },
-      },
-      scales: {
-        x: {
-          type: 'linear',
-          title: { display: true, text: 'growth z-score (composite)', color: '#8a94a3', font: { size: 11 } },
-          grid:  { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: '#8a94a3', font: { size: 10 } },
-        },
-        y: {
-          type: 'linear',
-          title: { display: true, text: 'inflation z-score (Core CPI)', color: '#8a94a3', font: { size: 11 } },
-          grid:  { color: 'rgba(255,255,255,0.04)' },
-          ticks: { color: '#8a94a3', font: { size: 10 } },
-        },
-      },
-    },
-    plugins: [quadrantPlugin],
-  });
+  host.innerHTML = `
+    <svg class="regime-nautilus" viewBox="${-VIEW / 2} ${-VIEW / 2} ${VIEW} ${VIEW}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Regime trajectory — last 24 months as a polar spiral">
+      ${quadrantFills}
+      ${rings.join('\n')}
+      ${axes}
+      ${labelHtml}
+      <path d="${pathD}" fill="none" stroke="rgba(229,233,238,0.18)" stroke-width="1"/>
+      ${dotsHtml}
+      <circle cx="0" cy="0" r="2.5" fill="#fff"/>
+    </svg>
+  `;
 }
 
 // ---------- current regime tile ----------
@@ -1090,6 +1071,7 @@ function wireHorizonTabs() {
       document.querySelectorAll('.h-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderRegimeTable();
+      renderRegimeSunburst();
       renderRegimeInterpretation();
     });
   });
@@ -1104,9 +1086,167 @@ function wireReturnModeToggle() {
       document.querySelectorAll('.mode-tab').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       renderRegimeTable();
+      renderRegimeSunburst();
       renderRegimeInterpretation();
     });
   });
+}
+
+function wireViewToggle() {
+  document.querySelectorAll('.view-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const view = btn.dataset.view;
+      if (!view || view === state.tableView) return;
+      state.tableView = view;
+      document.querySelectorAll('.view-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const table   = el('regime-table');
+      const sunbst  = el('regime-sunburst');
+      if (view === 'table') {
+        if (table)  table.style.display = '';
+        if (sunbst) sunbst.style.display = 'none';
+      } else {
+        if (table)  table.style.display = 'none';
+        if (sunbst) sunbst.style.display = '';
+        renderRegimeSunburst();
+      }
+    });
+  });
+}
+
+// ---------- regime sunburst ----------
+//
+// 4 inner regime quadrants (90° each, fixed orientation matching the
+// nautilus trajectory) × N outer sector wedges per regime, sorted by
+// forward-return so the leaders sit closest to a fixed "leader edge"
+// of each quadrant. Color intensity encodes return magnitude using the
+// same diverging palette as the table.
+
+function renderRegimeSunburst() {
+  const host = el('regime-sunburst');
+  if (!host || !state.regimeTable) return;
+  if (state.tableView !== 'sunburst') {
+    host.style.display = 'none';
+    return;
+  }
+  host.style.display = '';
+
+  const horizon = state.currentHorizon;
+  const isExcess = state.returnMode === 'excess';
+  const colorScale = isExcess ? horizon * 1.0 : horizon * 2.5;
+  const unit = isExcess ? 'pp' : '%';
+  const horizonLabel = horizon === 1 ? '1m' : horizon === 3 ? '3m' : '6m';
+
+  const sectors = state.regimeSymbols.filter(s => s !== 'SPY');
+  if (sectors.length === 0) { host.innerHTML = ''; return; }
+
+  // Quadrant orientation: match nautilus + existing convention.
+  // Top-right    (Reflation)   : -90° to 0°
+  // Top-left     (Stagflation) : -180° to -90°
+  // Bottom-left  (Disinflation):  90° to 180° (= -180° to -90° flipped)
+  // Bottom-right (Goldilocks)  :  0° to 90°
+  // Define quadrants in clockwise order as drawn.
+  const quadrants = [
+    { key: 'reflation',    a0: -Math.PI / 2,    a1: 0 },
+    { key: 'goldilocks',   a0: 0,               a1:  Math.PI / 2 },
+    { key: 'disinflation', a0:  Math.PI / 2,    a1:  Math.PI },
+    { key: 'stagflation',  a0: -Math.PI,        a1: -Math.PI / 2 },
+  ];
+
+  const VIEW = 460;
+  const rInner = 70;
+  const rOuter = 200;
+
+  function pol(r, a) { return [r * Math.cos(a), r * Math.sin(a)]; }
+
+  function arcPath(r0, r1, a0, a1) {
+    const [x0a, y0a] = pol(r1, a0);
+    const [x1a, y1a] = pol(r1, a1);
+    const [x1b, y1b] = pol(r0, a1);
+    const [x0b, y0b] = pol(r0, a0);
+    const large = (a1 - a0) > Math.PI ? 1 : 0;
+    return `M ${x0a.toFixed(2)} ${y0a.toFixed(2)} A ${r1} ${r1} 0 ${large} 1 ${x1a.toFixed(2)} ${y1a.toFixed(2)} L ${x1b.toFixed(2)} ${y1b.toFixed(2)} A ${r0} ${r0} 0 ${large} 0 ${x0b.toFixed(2)} ${y0b.toFixed(2)} Z`;
+  }
+
+  function colorFor(ret) {
+    if (!Number.isFinite(ret)) return 'rgba(138,148,163,0.18)';
+    const t = Math.max(-1, Math.min(1, ret / colorScale));
+    if (t >= 0) return `rgba(62, 207, 142, ${0.18 + 0.62 * t})`;
+    return `rgba(239, 79, 90,  ${0.18 + 0.62 * -t})`;
+  }
+
+  let svgInner = '';
+  // Inner ring quadrants
+  for (const q of quadrants) {
+    const meta = REGIMES[q.key];
+    const path = arcPath(0, rInner, q.a0, q.a1);
+    const isCurrent = state.currentRegime === q.key ? 'stroke="#fff" stroke-width="1.2"' : 'stroke="#13171c" stroke-width="1"';
+    svgInner += `<path d="${path}" fill="${meta.color}" fill-opacity="0.22" ${isCurrent}/>`;
+    // Inner label
+    const ang = (q.a0 + q.a1) / 2;
+    const [lx, ly] = pol(rInner * 0.55, ang);
+    svgInner += `<text x="${lx.toFixed(1)}" y="${(ly + 4).toFixed(1)}" fill="${meta.color}" font-size="11" font-weight="700" text-anchor="middle">${meta.label.slice(0, 5).toUpperCase()}</text>`;
+  }
+
+  // Outer ring: per-quadrant, sectors sorted by forward return desc.
+  for (const q of quadrants) {
+    // Build per-sector returns for this regime, applying excess-vs-SPY when active.
+    const spyCell = state.regimeTable.SPY?.[q.key]?.[horizon];
+    const spyMean = spyCell?.mean;
+    const rows = sectors.map(s => {
+      const cell = state.regimeTable[s]?.[q.key]?.[horizon];
+      if (!cell || cell.n === 0) return { s, ret: null, n: 0 };
+      let ret = cell.mean;
+      if (isExcess) {
+        if (Number.isFinite(spyMean)) ret = cell.mean - spyMean;
+        else                          ret = null;
+      }
+      return { s, ret, n: cell.n };
+    });
+    const sortable = rows.filter(r => r.ret != null && r.n >= 12);
+    sortable.sort((a, b) => b.ret - a.ret);
+    const ordered = sortable.concat(rows.filter(r => r.ret == null || r.n < 12));
+
+    const N = ordered.length;
+    if (N === 0) continue;
+    const span = q.a1 - q.a0;
+    const step = span / N;
+    ordered.forEach((row, i) => {
+      const a0 = q.a0 + step * i;
+      const a1 = q.a0 + step * (i + 1);
+      const path = arcPath(rInner, rOuter, a0, a1);
+      const fill = colorFor(row.ret);
+      const opacity = row.n >= 24 ? 1 : row.n >= 12 ? 0.75 : 0.45;
+
+      // Sector ticker label, placed at mid-radius of the wedge.
+      const ang = (a0 + a1) / 2;
+      const [lx, ly] = pol((rInner + rOuter) / 2, ang);
+      const sign = row.ret != null && row.ret >= 0 ? '+' : '';
+      const retTxt = row.ret == null ? '—' : `${sign}${row.ret.toFixed(1)}${unit}`;
+
+      const tipText = row.ret == null
+        ? `${row.s} · ${REGIMES[q.key].label}: insufficient data`
+        : `${row.s} · ${REGIMES[q.key].label}: ${sign}${row.ret.toFixed(1)}${unit} avg fwd ${horizonLabel} (n=${row.n})`;
+
+      svgInner += `<path d="${path}" fill="${fill}" fill-opacity="${opacity}" stroke="#13171c" stroke-width="0.6"><title>${tipText}</title></path>`;
+      // Only draw labels if wedge is wide enough (>14° ≈ 0.244 rad).
+      if (step > 0.20) {
+        svgInner += `<text x="${lx.toFixed(1)}" y="${(ly - 1).toFixed(1)}" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">${row.s}</text>`;
+        svgInner += `<text x="${lx.toFixed(1)}" y="${(ly + 11).toFixed(1)}" fill="#fff" fill-opacity="0.85" font-size="9" text-anchor="middle">${retTxt}</text>`;
+      }
+    });
+  }
+
+  host.innerHTML = `
+    <div class="rs-header">
+      <div class="rs-title">Regime &times; sector returns &middot; sunburst</div>
+      <div class="rs-sub">Inner ring = regime; outer ring = sectors sorted leader → laggard within each regime. Color = avg ${horizonLabel} forward return (${isExcess ? 'excess vs SPY' : 'absolute'}). Hover any wedge for detail.</div>
+    </div>
+    <svg class="regime-sunburst-svg" viewBox="${-VIEW / 2} ${-VIEW / 2} ${VIEW} ${VIEW}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Regime by sector returns sunburst">
+      ${svgInner}
+      <circle cx="0" cy="0" r="3" fill="#fff"/>
+    </svg>
+  `;
 }
 
 // ---------- live macro strip (T5.1) ----------

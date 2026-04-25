@@ -210,6 +210,110 @@ function renderScore(label, kind, scoreObj, oldScoreObj) {
   `;
 }
 
+// ---------- rose / radar plot ----------
+//
+// Four orthogonal axes — Cycle (top), Inflation (right), Housing (bottom),
+// Consumer (left) — with two overlaid polygons:
+//   - "Now"     : bold accent-colored, filled
+//   - "12m ago" : faded dashed reference
+// Polygon shape encodes the regime balance at a glance: kite = imbalance,
+// diamond = uniform tightening/loosening, small square = all clear.
+
+function rosePoint(score, axisAngleRad, rPx) {
+  // score 0..100 -> 0..rPx; SVG coords (y inverted is handled per-axis).
+  const t = Math.max(0, Math.min(100, score)) / 100;
+  return [Math.cos(axisAngleRad) * rPx * t, Math.sin(axisAngleRad) * rPx * t];
+}
+
+// Returns an SVG markup string (no <svg> wrapper — caller wraps).
+function renderRose(scoresNow, scores12m) {
+  const VIEW = 360;
+  const rPx = 130; // max radius in px (the 100 ring)
+
+  // Axes: Cycle top, Inflation right, Housing bottom, Consumer left.
+  // Angles in standard math (0 = +x). SVG y is inverted, so for "top" we
+  // need angle = -PI/2 (which in SVG y points up).
+  const axes = [
+    { key: 'cycle',     label: 'CYCLE',     angle: -Math.PI / 2 },
+    { key: 'inflation', label: 'INFLATION', angle: 0 },
+    { key: 'housing',   label: 'HOUSING',   angle:  Math.PI / 2 },
+    { key: 'consumer',  label: 'CONSUMER',  angle:  Math.PI },
+  ];
+
+  const ringRadii = [25, 50, 75, 100].map(v => ({ v, r: rPx * v / 100 }));
+  const ringHtml = ringRadii.map(({ v, r }) => `
+    <circle cx="0" cy="0" r="${r.toFixed(1)}" fill="none" stroke="rgba(138,148,163,${v === 100 ? 0.30 : 0.14})" stroke-width="${v === 100 ? 0.9 : 0.6}"/>
+    <text x="3" y="${(r - 2).toFixed(1)}" fill="rgba(138,148,163,0.45)" font-size="9">${v}</text>
+  `).join('');
+
+  const axisLineHtml = axes.map(a => {
+    const [x, y] = rosePoint(100, a.angle, rPx);
+    return `<line x1="0" y1="0" x2="${x.toFixed(1)}" y2="${y.toFixed(1)}" stroke="rgba(138,148,163,0.30)" stroke-width="0.7"/>`;
+  }).join('');
+
+  // Polygon for a score map.
+  function polyPoints(scores) {
+    return axes.map(a => {
+      const sc = scores[a.key]?.score;
+      const s = Number.isFinite(sc) ? sc : 0;
+      const [x, y] = rosePoint(s, a.angle, rPx);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+  }
+  const nowPolyD = polyPoints(scoresNow);
+  const oldPolyD = polyPoints(scores12m);
+  const ACCENT = '#f7a700';
+
+  // Score-marker dots on the "Now" polygon, colored by phase per axis.
+  const dotHtml = axes.map(a => {
+    const sObj = scoresNow[a.key];
+    if (!sObj || !Number.isFinite(sObj.score)) return '';
+    const ph = phaseFor(a.key, sObj.score);
+    const [x, y] = rosePoint(sObj.score, a.angle, rPx);
+    return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="4.5" fill="${ph.color}" stroke="#13171c" stroke-width="1.2"><title>${a.label}: ${sObj.score.toFixed(0)}/100 — ${ph.label}</title></circle>`;
+  }).join('');
+
+  // Axis labels — positioned just outside the 100-ring.
+  const labelHtml = axes.map(a => {
+    const [lx, ly] = rosePoint(100, a.angle, rPx + 18);
+    const sObj = scoresNow[a.key];
+    const oldObj = scores12m[a.key];
+    const sNow = sObj && Number.isFinite(sObj.score) ? sObj.score.toFixed(0) : '—';
+    const sOld = oldObj && Number.isFinite(oldObj.score) ? oldObj.score.toFixed(0) : null;
+    const anchor = a.key === 'inflation' ? 'start' : a.key === 'consumer' ? 'end' : 'middle';
+    const dy1 = a.key === 'cycle' ? -2 : a.key === 'housing' ? 12 : 4;
+    const dy2 = a.key === 'cycle' ? -14 : a.key === 'housing' ? 24 : 16;
+    const valColor = sObj ? phaseFor(a.key, sObj.score).color : '#e5e9ee';
+    const compareTxt = sOld != null ? `<tspan fill="rgba(138,148,163,0.7)" font-size="9"> ← ${sOld}</tspan>` : '';
+    return `
+      <text x="${lx.toFixed(1)}" y="${(ly + dy1).toFixed(1)}" fill="var(--text, #e5e9ee)" font-size="11" font-weight="700" text-anchor="${anchor}">${a.label}</text>
+      <text x="${lx.toFixed(1)}" y="${(ly + dy2).toFixed(1)}" fill="${valColor}" font-size="11" font-weight="700" text-anchor="${anchor}">${sNow}${compareTxt}</text>
+    `;
+  }).join('');
+
+  // Legend top-left.
+  const legendHtml = `
+    <g transform="translate(${(-VIEW / 2 + 14).toFixed(1)},${(-VIEW / 2 + 14).toFixed(1)})">
+      <line x1="0" y1="0" x2="14" y2="0" stroke="${ACCENT}" stroke-width="2.4"/>
+      <text x="18" y="3" fill="var(--text, #e5e9ee)" font-size="9.5">Now</text>
+      <line x1="0" y1="14" x2="14" y2="14" stroke="${ACCENT}" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.55"/>
+      <text x="18" y="17" fill="rgba(138,148,163,0.85)" font-size="9.5">12m ago</text>
+    </g>
+  `;
+
+  return `
+    <svg class="tr-rose-svg" viewBox="${-VIEW / 2} ${-VIEW / 2} ${VIEW} ${VIEW}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Composite scores radar">
+      ${ringHtml}
+      ${axisLineHtml}
+      <polygon points="${oldPolyD}" fill="rgba(247,167,0,0.08)" stroke="${ACCENT}" stroke-width="1.5" stroke-dasharray="3,3" opacity="0.55"/>
+      <polygon points="${nowPolyD}" fill="rgba(247,167,0,0.18)" stroke="${ACCENT}" stroke-width="2.2"/>
+      ${dotHtml}
+      ${labelHtml}
+      ${legendHtml}
+    </svg>
+  `;
+}
+
 function regimeConviction(growthZ, inflationZ) {
   if (!Number.isFinite(growthZ) || !Number.isFinite(inflationZ)) return null;
   const dist = Math.sqrt(growthZ * growthZ + inflationZ * inflationZ);
@@ -280,6 +384,14 @@ export async function renderTodayRead() {
   tgt.innerHTML = `
     <div class="tr-eyebrow">TODAY'S READ &middot; ${monthName}</div>
     <div class="tr-narrative">${narrative}</div>
+
+    <div class="tr-rose-wrap">
+      <div class="tr-rose-header">
+        <div class="tr-rose-title">Composite scores &middot; today vs 12 months ago</div>
+        <div class="tr-rose-sub">Polygon shape encodes regime balance: kite = imbalance, diamond = uniform tightening, small = all-clear.</div>
+      </div>
+      <div class="tr-rose-canvas">${renderRose(scoresNow, scores12m)}</div>
+    </div>
 
     <div class="tr-grid">
       <div class="tr-regime-block" style="--tr-color:${regimeColor}">
