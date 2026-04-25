@@ -80,7 +80,9 @@ function cutoffForMonthsBack(monthsBack) {
   return `${ny}-${String(nm).padStart(2, '0')}-31`;
 }
 
-// Identify outliers — anything currently in 'warn' status.
+// Identify outliers — anything currently in 'warn' status. Each outlier
+// includes a `link` to the relevant deep-dive section so the user can jump
+// straight to the chart/context for that metric.
 function findOutliers() {
   const flags = [];
   // Sahm
@@ -90,33 +92,33 @@ function findOutliers() {
     const ma3 = recent3.reduce((s, o) => s + o.value, 0) / 3;
     const min12 = Math.min(...unrate.slice(-12).map(o => o.value));
     const sahm = ma3 - min12;
-    if (sahm >= 0.5) flags.push({ kind: 'warn', text: `Sahm Rule TRIGGERED (${sahm.toFixed(2)}pp)` });
-    else if (sahm >= 0.4) flags.push({ kind: 'caution', text: `Sahm Rule near trigger (${sahm.toFixed(2)}pp; needs 0.50pp)` });
+    if (sahm >= 0.5) flags.push({ kind: 'warn', text: `Sahm Rule TRIGGERED (${sahm.toFixed(2)}pp)`, link: '/core/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
+    else if (sahm >= 0.4) flags.push({ kind: 'caution', text: `Sahm Rule near trigger (${sahm.toFixed(2)}pp; needs 0.50pp)`, link: '/core/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
   }
   // HY OAS
   const hy = state.data.BAMLH0A0HYM2 || [];
   if (hy.length) {
     const last = hy[hy.length - 1].value * 100; // bps
-    if (last > 800) flags.push({ kind: 'warn', text: `HY OAS at ${last.toFixed(0)}bp — stress regime` });
-    else if (last > 500) flags.push({ kind: 'caution', text: `HY OAS at ${last.toFixed(0)}bp — elevated` });
+    if (last > 800) flags.push({ kind: 'warn', text: `HY OAS at ${last.toFixed(0)}bp — stress regime`, link: '/core/macro/cycle/#cycle-credit', linkLabel: 'see credit section' });
+    else if (last > 500) flags.push({ kind: 'caution', text: `HY OAS at ${last.toFixed(0)}bp — elevated`, link: '/core/macro/cycle/#cycle-credit', linkLabel: 'see credit section' });
   }
   // Mortgage delinquency
   const dr = state.data.DRSFRMACBS || [];
   if (dr.length) {
     const last = dr[dr.length - 1].value;
-    if (last > 4) flags.push({ kind: 'warn', text: `SF mortgage delinquency at ${last.toFixed(2)}% — elevated` });
+    if (last > 4) flags.push({ kind: 'warn', text: `SF mortgage delinquency at ${last.toFixed(2)}% — elevated`, link: '/core/macro/housing/#section-stress', linkLabel: 'see housing stress' });
   }
   // 10Y-3M curve inversion
   const c = state.data.T10Y3M || [];
   if (c.length) {
     const last = c[c.length - 1].value * 100;
-    if (last < 0) flags.push({ kind: 'caution', text: `10Y-3M curve inverted at ${last.toFixed(0)}bp` });
+    if (last < 0) flags.push({ kind: 'caution', text: `10Y-3M curve inverted at ${last.toFixed(0)}bp`, link: '/core/macro/cycle/#cycle-curve', linkLabel: 'see yield curve' });
   }
   // Months supply
   const ms = state.data.MSACSR || [];
   if (ms.length) {
     const last = ms[ms.length - 1].value;
-    if (last > 7) flags.push({ kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market` });
+    if (last > 7) flags.push({ kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market`, link: '/core/macro/housing/#section-inventory', linkLabel: 'see housing inventory' });
   }
   // Real wages
   const wages = (state.data.CES0500000003 || []);
@@ -125,7 +127,32 @@ function findOutliers() {
     const wageYoy = (wages[wages.length - 1].value / wages[wages.length - 13].value - 1) * 100;
     const coreYoy = (core[core.length - 1].value / core[core.length - 13].value - 1) * 100;
     const real = wageYoy - coreYoy;
-    if (real < 0) flags.push({ kind: 'warn', text: `Real wages negative (${real.toFixed(1)}%)` });
+    if (real < 0) flags.push({ kind: 'warn', text: `Real wages negative (${real.toFixed(1)}%)`, link: '/core/macro/real-economy/#section-consumer', linkLabel: 'see consumer balance sheet' });
+  }
+  // NFCI tightening
+  const nfci = state.data.NFCI || [];
+  if (nfci.length) {
+    const last = nfci[nfci.length - 1].value;
+    if (last > 0.5) flags.push({ kind: 'warn', text: `NFCI at ${last.toFixed(2)} — financial conditions tight`, link: '/core/macro/cycle/#cycle-conditions', linkLabel: 'see conditions' });
+  }
+  // Sticky CPI elevated
+  const sticky = state.data.CORESTICKM159SFRBATL || [];
+  if (sticky.length) {
+    const last = sticky[sticky.length - 1].value;
+    if (last > 4) flags.push({ kind: 'warn', text: `Sticky CPI at ${last.toFixed(1)}% — services inflation persistent`, link: '/core/macro/inflation/#section-sticky', linkLabel: 'see inflation persistence' });
+    else if (last > 3.5) flags.push({ kind: 'caution', text: `Sticky CPI at ${last.toFixed(1)}% — Fed-uncomfortable`, link: '/core/macro/inflation/#section-sticky', linkLabel: 'see inflation persistence' });
+  }
+  // Mortgage rate elevated
+  const mort = state.data.MORTGAGE30US || [];
+  if (mort.length) {
+    const last = mort[mort.length - 1].value;
+    if (last > 7) flags.push({ kind: 'caution', text: `30Y mortgage at ${last.toFixed(2)}% — affordability constrained`, link: '/core/macro/housing/#section-affordability', linkLabel: 'see affordability' });
+  }
+  // 5y5y forward expectations unanchored
+  const fwd = state.data.T5YIFR || [];
+  if (fwd.length) {
+    const last = fwd[fwd.length - 1].value;
+    if (last > 2.7) flags.push({ kind: 'warn', text: `5y5y inflation breakeven at ${last.toFixed(2)}% — long-run expectations drifting up`, link: '/core/macro/inflation/#section-expectations', linkLabel: 'see expectations' });
   }
   return flags;
 }
@@ -269,8 +296,11 @@ export async function renderTodayRead() {
     </div>
 
     ${outliers.length ? `<div class="tr-outliers">
-      <div class="tr-outliers-label">⚠ OUTLIERS / WHAT TO WATCH</div>
-      ${outliers.map(o => `<div class="tr-outlier tr-${o.kind}">${o.text}</div>`).join('')}
+      <div class="tr-outliers-label">⚠ OUTLIERS / WHAT TO WATCH &middot; click to investigate</div>
+      ${outliers.map(o => o.link
+        ? `<a class="tr-outlier tr-${o.kind} tr-outlier-link" href="${o.link}"><span class="tr-outlier-text">${o.text}</span><span class="tr-outlier-cta">${o.linkLabel || 'see detail'} &rarr;</span></a>`
+        : `<div class="tr-outlier tr-${o.kind}">${o.text}</div>`
+      ).join('')}
     </div>` : ''}
 
     <div class="tr-deltas">

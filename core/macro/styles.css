@@ -1561,3 +1561,32 @@ footer {
   margin: 0;
 }
 .sbc-note strong { color: var(--text); }
+
+/* Clickable outlier links */
+.tr-outlier-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  padding: 6px 10px;
+  margin: 2px -10px;
+  border-radius: 4px;
+  transition: background-color .12s, transform .12s;
+  cursor: pointer;
+}
+.tr-outlier-link:hover {
+  background: rgba(239, 79, 90, 0.10);
+  transform: translateX(2px);
+}
+.tr-outlier-link .tr-outlier-text { color: var(--text); }
+.tr-outlier-link .tr-outlier-cta {
+  color: var(--muted);
+  font-size: 10.5px;
+  font-style: italic;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  margin-left: 14px;
+  opacity: 0.85;
+}
+.tr-outlier-link:hover .tr-outlier-cta { color: var(--accent); }
