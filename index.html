@@ -3,1667 +3,295 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge — Analyst-grade research, built from the source</title>
+<title>Siberforge &mdash; Research Hub</title>
 <meta name="description" content="Interactive financial research reconstructed from SEC EDGAR filings and FRED series. Every line item traceable. No aggregators, no black-box transformations." />
-<style>
-  /* -------- Design tokens (bold editorial palette) -------- */
-  :root {
-    --bg:          #faf8f3;   /* warm off-white, editorial paper */
-    --bg-2:        #f1ece0;   /* cream panel tint */
-    --panel:       #ffffff;
-    --panel-2:     #f6f2e9;
-    --line:        #d6cfbe;
-    --line-soft:   #ebe6d8;
-    --ink:         #0a0a0a;   /* near-black, sharper */
-    --ink-2:       #1f1f1f;
-    --muted:       #525252;
-    --muted-2:     #8a8578;
-    --accent:      #166534;   /* dark editorial green — brand / text highlights */
-    --accent-2:    #14532d;
-    --accent-bg:   #dcfce7;   /* pale mint hover / underline fill */
-    --teal:        #0d9488;
-    --teal-2:      #115e59;
-    --teal-bg:     #e6f7f4;
-    --amber:       #d97706;   /* supporting — reserved for 'elevated' / 'cooling' tier */
-    --green:       #15803d;   /* positive-delta color (slightly lighter than accent) */
-    --red:         #dc2626;   /* danger / negative-delta / triggered states */
-    --red-2:       #991b1b;
-    --red-bg:      #fef2f2;
-    --blue:        #1d4ed8;
-    --max:         1200px;
-    --radius:      12px;
-    --shadow-sm:   0 1px 2px rgba(10,10,10,.05);
-    --shadow-md:   0 4px 16px rgba(10,10,10,.07);
-    --shadow-lg:   0 12px 32px rgba(10,10,10,.12);
-    --shadow-accent: 0 12px 28px rgba(22,101,52,.14);
-  }
-
-  * { box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  a { color: inherit; }
-  ::selection { background: var(--accent-bg); color: var(--accent-2); }
-
-  /* -------- Nav (glass, sticky) -------- */
-  .nav {
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    padding: 18px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: rgba(250, 251, 252, 0.78);
-    -webkit-backdrop-filter: blur(12px) saturate(1.2);
-    backdrop-filter: blur(12px) saturate(1.2);
-    border-bottom: 1px solid transparent;
-    transition: border-color .25s, background .25s, padding .25s;
-  }
-  .nav.scrolled {
-    border-bottom-color: var(--line);
-    padding-top: 14px;
-    padding-bottom: 14px;
-  }
-  .nav .mark {
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--accent);
-    font-size: 17px;
-    text-decoration: none;
-  }
-  .nav-links {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-  .nav-links a {
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 14px;
-    padding: 8px 14px;
-    border-radius: 6px;
-    transition: color .15s, background .15s;
-  }
-  .nav-links a:hover { color: var(--ink); background: var(--panel-2); }
-  .nav-cta {
-    background: var(--ink) !important;
-    color: #fff !important;
-    font-weight: 600;
-    padding: 9px 16px !important;
-    transition: background .15s, transform .15s !important;
-  }
-  .nav-cta:hover { background: var(--ink-2) !important; transform: translateY(-1px); }
-
-  /* -------- Hero -------- */
-  .hero-wrap {
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-wrap::before,
-  .hero-wrap::after {
-    content: "";
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(90px);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .hero-wrap::before {
-    width: 520px; height: 520px;
-    background: radial-gradient(circle, rgba(22,101,52,0.16), transparent 70%);
-    top: -140px; right: -120px;
-  }
-  .hero-wrap::after {
-    width: 400px; height: 400px;
-    background: radial-gradient(circle, rgba(13,148,136,0.12), transparent 70%);
-    bottom: -180px; left: -120px;
-  }
-  .hero {
-    position: relative;
-    z-index: 1;
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 56px 40px 68px;
-    display: grid;
-    grid-template-columns: 1.05fr 1fr;
-    gap: 56px;
-    align-items: center;
-    min-height: 0;
-  }
-  .hero-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11.5px;
-    color: var(--muted);
-    letter-spacing: 1.8px;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    font-weight: 700;
-    padding: 6px 12px 6px 10px;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 100px;
-    box-shadow: var(--shadow-sm);
-  }
-  .pulse-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--green);
-    box-shadow: 0 0 0 0 rgba(22,163,74,.55);
-    animation: pulse 2.2s infinite;
-    flex: none;
-  }
-  @keyframes pulse {
-    0%   { box-shadow: 0 0 0 0 rgba(22,163,74,.55); }
-    70%  { box-shadow: 0 0 0 12px rgba(22,163,74,0); }
-    100% { box-shadow: 0 0 0 0 rgba(22,163,74,0); }
-  }
-  .hero h1 {
-    font-size: 52px;
-    line-height: 1.05;
-    font-weight: 700;
-    margin: 0 0 14px;
-    letter-spacing: -0.025em;
-    color: var(--ink);
-  }
-  .hero h1 .accent {
-    color: var(--accent);
-    position: relative;
-    display: inline-block;
-  }
-  .hero h1 .accent::after {
-    content: "";
-    position: absolute;
-    left: 0; right: 0; bottom: 2px;
-    height: 10px;
-    background: var(--accent-bg);
-    z-index: -1;
-    border-radius: 2px;
-  }
-  .hero .tagline {
-    font-size: 16px;
-    line-height: 1.5;
-    color: var(--muted);
-    margin: 0 0 26px;
-    max-width: 480px;
-    font-weight: 500;
-  }
-  .cta-row {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  .cta-primary {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: var(--ink);
-    color: #fff;
-    text-decoration: none;
-    padding: 15px 26px;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 15px;
-    transition: background .18s, transform .18s, box-shadow .18s;
-    box-shadow: var(--shadow-md);
-  }
-  .cta-primary:hover {
-    background: var(--ink-2);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  .cta-primary .arrow { transition: transform .2s; display: inline-block; }
-  .cta-primary:hover .arrow { transform: translateX(4px); }
-  .cta-secondary {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    color: var(--muted);
-    text-decoration: none;
-    font-size: 14.5px;
-    font-weight: 500;
-    padding: 15px 18px;
-    border-radius: 8px;
-    transition: color .15s, background .15s;
-  }
-  .cta-secondary:hover { color: var(--ink); background: var(--panel-2); }
-
-  /* -------- Hero visual (4 live mini charts, 2x2) -------- */
-  .hero-visual {
-    position: relative;
-    width: 100%;
-    max-width: 520px;
-    justify-self: end;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    will-change: transform;
-    transition: transform .4s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .mini-tile {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: 10px;
-    padding: 14px 16px;
-    text-decoration: none;
-    color: inherit;
-    box-shadow: var(--shadow-sm);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    transition: transform .18s, border-color .18s, box-shadow .18s;
-  }
-  .mini-tile:hover {
-    transform: translateY(-2px);
-    border-color: var(--accent);
-    box-shadow: var(--shadow-md);
-  }
-  .mini-tile-head {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 6px;
-  }
-  .mini-tile-label {
-    font-size: 11px;
-    letter-spacing: 1.2px;
-    text-transform: uppercase;
-    color: var(--muted);
-    font-weight: 700;
-  }
-  .mini-tile-delta {
-    font-size: 11px;
-    font-weight: 700;
-    font-variant-numeric: tabular-nums;
-    color: var(--muted-2);
-    letter-spacing: 0.2px;
-  }
-  .mini-tile-delta.up    { color: var(--green); }
-  .mini-tile-delta.down  { color: var(--red); }
-  .mini-tile-delta.flat  { color: var(--muted); }
-  .mini-tile-value {
-    font-size: 24px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
-  }
-  .mini-tile-unit {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-left: 2px;
-  }
-  .mini-tile-spark {
-    margin-top: auto;
-    padding-top: 4px;
-    min-height: 40px;
-    line-height: 0;
-  }
-  .mini-tile-spark svg { width: 100% !important; height: 40px !important; }
-  .mini-tile-asof {
-    font-size: 10px;
-    color: var(--muted-2);
-    letter-spacing: 0.3px;
-  }
-  .mini-tile.is-loading .mini-tile-value { color: var(--muted-2); }
-  .mini-tile.is-loading .mini-tile-delta { color: var(--muted-2); }
-
-  /* -------- Recession composite strip -------- */
-  .rec-strip {
-    position: relative;
-    z-index: 1;
-    padding: 52px 40px 60px;
-    background: var(--bg-2);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .rec-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(260px, 1fr) minmax(380px, 1.15fr);
-    gap: 48px;
-    align-items: center;
-  }
-  .rec-head { display: flex; flex-direction: column; gap: 12px; }
-  .rec-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(22, 163, 74, 0.08);
-    color: var(--green);
-    padding: 5px 11px;
-    border-radius: 999px;
-    font-size: 11px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    font-weight: 700;
-    width: max-content;
-  }
-  .rec-tag .pulse {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--green);
-    animation: recPulse 2s infinite;
-  }
-  @keyframes recPulse {
-    0%   { box-shadow: 0 0 0 0   rgba(22, 163, 74, 0.45); }
-    70%  { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
-    100% { box-shadow: 0 0 0 0   rgba(22, 163, 74, 0); }
-  }
-  .rec-strip.is-loading .rec-tag { background: var(--panel-2); color: var(--muted); }
-  .rec-strip.is-loading .rec-tag .pulse { background: var(--muted-2); animation: none; }
-  .rec-strip.is-error   .rec-tag { background: var(--red-bg); color: var(--red-2); }
-  .rec-strip.is-error   .rec-tag .pulse { background: var(--red); animation: none; }
-
-  .rec-eyebrow {
-    color: var(--accent);
-    font-size: 11.5px;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  .rec-title {
-    margin: 0;
-    font-size: 32px;
-    font-weight: 600;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    line-height: 1.15;
-  }
-  .rec-sub {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.55;
-    max-width: 460px;
-  }
-
-  .rec-readout {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    box-shadow: var(--shadow-md);
-    display: grid;
-    gap: 18px;
-  }
-  .rec-scoreline {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    flex-wrap: wrap;
-  }
-  .rec-count {
-    font-size: 64px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .rec-denom {
-    color: var(--muted);
-    font-size: 13px;
-    letter-spacing: 0.3px;
-    line-height: 1.35;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-  .rec-tier {
-    margin-left: auto;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border-left: 4px solid var(--muted-2);
-    background: var(--panel-2);
-    min-width: 190px;
-  }
-  .rec-tier-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-  .rec-tier-sub {
-    display: block;
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-  .rec-tier.tier-benign   { border-left-color: var(--green);  background: rgba(22, 163, 74, 0.06); }
-  .rec-tier.tier-benign   .rec-tier-label { color: var(--green); }
-  .rec-tier.tier-low      { border-left-color: var(--teal);   background: var(--teal-bg); }
-  .rec-tier.tier-low      .rec-tier-label { color: var(--teal-2); }
-  .rec-tier.tier-elevated { border-left-color: var(--amber);  background: rgba(217, 119, 6, 0.08); }
-  .rec-tier.tier-elevated .rec-tier-label { color: var(--amber); }
-  .rec-tier.tier-high     { border-left-color: var(--red);    background: var(--red-bg); }
-  .rec-tier.tier-high     .rec-tier-label { color: var(--red-2); }
-
-  .rec-dots {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 10px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line-soft);
-  }
-  .rec-dot-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    font-size: 11px;
-    color: var(--muted);
-    letter-spacing: 0.3px;
-    text-align: center;
-    font-weight: 500;
-  }
-  .rec-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--muted-2);
-  }
-  .rec-dot-item.ok .rec-dot        { background: var(--green); }
-  .rec-dot-item.triggered .rec-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.18); }
-  .rec-dot-item.triggered          { color: var(--red-2); font-weight: 600; }
-
-  .rec-cta-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 14px;
-    border-top: 1px solid var(--line-soft);
-  }
-  .rec-asof {
-    font-size: 11.5px;
-    color: var(--muted-2);
-    letter-spacing: 0.4px;
-    font-variant-numeric: tabular-nums;
-  }
-  .rec-cta {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: gap .18s, color .18s;
-  }
-  .rec-cta:hover { color: var(--accent-2); gap: 10px; }
-
-  /* -------- Indicator strip (Wage Growth, Existing Home Sales, Housing Starts) -------- */
-  .ind-strip {
-    position: relative;
-    z-index: 1;
-    padding: 52px 40px 60px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--bg-2);
-  }
-  .ind-strip.bg-teal  { background: var(--teal-bg); border-color: #cfeae5; }
-  .ind-strip.bg-cream { background: var(--bg-2); }
-  .ind-strip.bg-pink  { background: var(--red-bg);    border-color: #f5d5d5; }
-  .ind-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(260px, 1fr) minmax(380px, 1.15fr);
-    gap: 48px;
-    align-items: center;
-  }
-  .ind-head { display: flex; flex-direction: column; gap: 12px; }
-  .ind-tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 5px 11px;
-    border-radius: 999px;
-    font-size: 11px;
-    letter-spacing: 1.4px;
-    text-transform: uppercase;
-    font-weight: 700;
-    width: max-content;
-    background: var(--panel);
-    color: var(--muted);
-    border: 1px solid var(--line);
-  }
-  .ind-tag .pulse {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--green);
-    animation: recPulse 2s infinite;
-  }
-  .ind-strip.is-loading .ind-tag { color: var(--muted); }
-  .ind-strip.is-loading .ind-tag .pulse { background: var(--muted-2); animation: none; }
-  .ind-strip.is-ready   .ind-tag { color: var(--green); }
-  .ind-strip.is-error   .ind-tag { color: var(--red-2); }
-  .ind-strip.is-error   .ind-tag .pulse { background: var(--red); animation: none; }
-
-  .ind-eyebrow {
-    color: var(--accent);
-    font-size: 11.5px;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    font-weight: 700;
-  }
-  .ind-title {
-    margin: 0;
-    font-size: 32px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-    line-height: 1.15;
-  }
-  .ind-sub {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.55;
-    max-width: 460px;
-  }
-
-  .ind-readout {
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 26px;
-    box-shadow: var(--shadow-md);
-    display: grid;
-    gap: 16px;
-  }
-  .ind-scoreline {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-  }
-  .ind-value-wrap { display: inline-flex; align-items: baseline; }
-  .ind-value {
-    font-size: 52px;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.03em;
-    line-height: 1;
-    font-variant-numeric: tabular-nums;
-  }
-  .ind-unit {
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--muted);
-    margin-left: 4px;
-  }
-  .ind-delta {
-    font-size: 13px;
-    font-weight: 700;
-    padding: 5px 9px;
-    border-radius: 6px;
-    background: var(--panel-2);
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.2px;
-  }
-  .ind-delta.up   { background: rgba(21, 128, 61, 0.1); color: var(--green); }
-  .ind-delta.down { background: var(--red-bg);           color: var(--red-2); }
-
-  .ind-tier {
-    margin-left: auto;
-    padding: 10px 14px;
-    border-radius: 8px;
-    border-left: 4px solid var(--muted-2);
-    background: var(--panel-2);
-    min-width: 200px;
-  }
-  .ind-tier-label {
-    display: block;
-    font-size: 13px;
-    font-weight: 700;
-    letter-spacing: 1.8px;
-    color: var(--muted);
-    text-transform: uppercase;
-  }
-  .ind-tier-sub {
-    display: block;
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--muted);
-    line-height: 1.4;
-  }
-  .ind-tier.t-healthy  { border-left-color: var(--green);  background: rgba(21, 128, 61, 0.06); }
-  .ind-tier.t-healthy  .ind-tier-label { color: var(--green); }
-  .ind-tier.t-trend    { border-left-color: var(--teal);   background: var(--teal-bg); }
-  .ind-tier.t-trend    .ind-tier-label { color: var(--teal-2); }
-  .ind-tier.t-cooling  { border-left-color: var(--amber);  background: rgba(217, 119, 6, 0.08); }
-  .ind-tier.t-cooling  .ind-tier-label { color: var(--amber); }
-  .ind-tier.t-weak     { border-left-color: var(--red);    background: var(--red-bg); }
-  .ind-tier.t-weak     .ind-tier-label { color: var(--red-2); }
-
-  .ind-spark {
-    padding-top: 12px;
-    border-top: 1px solid var(--line-soft);
-    min-height: 56px;
-    line-height: 0;
-  }
-  .ind-spark svg { width: 100% !important; height: 56px !important; }
-
-  .ind-cta-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding-top: 12px;
-    border-top: 1px solid var(--line-soft);
-  }
-  .ind-asof {
-    font-size: 11.5px;
-    color: var(--muted-2);
-    letter-spacing: 0.4px;
-    font-variant-numeric: tabular-nums;
-  }
-  .ind-cta {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 700;
-    font-size: 14px;
-    letter-spacing: 0.2px;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: gap .18s, color .18s;
-  }
-  .ind-cta:hover { color: var(--accent-2); gap: 10px; }
-
-  /* -------- Proof strip -------- */
-  .proof {
-    position: relative;
-    z-index: 1;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--panel);
-  }
-  .proof-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 34px 40px;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
-  }
-  .proof-item {
-    border-left: 2px solid var(--accent);
-    padding: 6px 18px;
-  }
-  .proof-num {
-    font-size: 34px;
-    font-weight: 700;
-    color: var(--ink);
-    font-variant-numeric: tabular-nums;
-    line-height: 1;
-    margin-bottom: 8px;
-    letter-spacing: -0.02em;
-  }
-  .proof-num .suffix {
-    font-size: 22px;
-    color: var(--accent);
-    font-weight: 600;
-    margin-left: 2px;
-  }
-  .proof-lbl {
-    font-size: 11.5px;
-    color: var(--muted);
-    letter-spacing: 0.6px;
-    line-height: 1.45;
-    text-transform: uppercase;
-    font-weight: 600;
-  }
-
-  /* -------- Dashboards -------- */
-  .dashboards {
-    max-width: var(--max);
-    margin: 0 auto;
-    padding: 110px 40px 40px;
-  }
-  .section-hdr { margin-bottom: 56px; max-width: 720px; }
-  .eyebrow {
-    color: var(--accent);
-    font-size: 11.5px;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin-bottom: 14px;
-    display: inline-block;
-  }
-  .section-hdr h2 {
-    font-size: 40px;
-    line-height: 1.1;
-    font-weight: 700;
-    margin: 0 0 16px;
-    letter-spacing: -0.015em;
-  }
-  .section-hdr p {
-    font-size: 17.5px;
-    color: var(--muted);
-    line-height: 1.55;
-    margin: 0;
-  }
-  .subsection-label {
-    color: var(--muted-2);
-    font-size: 11px;
-    letter-spacing: 2.4px;
-    text-transform: uppercase;
-    font-weight: 700;
-    margin: 44px 0 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-  .subsection-label:first-of-type { margin-top: 0; }
-  .subsection-label::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--line);
-  }
-
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-  }
-  .card {
-    display: block;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    padding: 22px 24px 22px;
-    text-decoration: none;
-    color: inherit;
-    transition: border-color .25s, transform .25s, box-shadow .25s;
-    position: relative;
-    overflow: hidden;
-  }
-  .card::before {
-    content: "";
-    position: absolute;
-    top: 0; left: -120%;
-    width: 80%; height: 2px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
-    transition: left .7s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .card:hover {
-    border-color: var(--accent);
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-accent);
-  }
-  .card:hover::before { left: 120%; }
-  .card .tag {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--accent);
-    font-size: 10.5px;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-    font-weight: 700;
-  }
-  .card .tag::before {
-    content: "";
-    width: 6px; height: 6px; border-radius: 50%;
-    background: var(--green);
-    flex: none;
-  }
-  .card h3 {
-    margin: 0 0 8px;
-    font-size: 17.5px;
-    color: var(--ink);
-    font-weight: 600;
-    letter-spacing: -0.005em;
-  }
-  .card p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.6;
-  }
-  .card .arrow {
-    display: inline-block;
-    margin-top: 16px;
-    color: var(--muted);
-    font-size: 12.5px;
-    letter-spacing: 1.5px;
-    font-weight: 600;
-    text-transform: uppercase;
-    transition: color .15s, transform .2s;
-  }
-  .card:hover .arrow { color: var(--accent); transform: translateX(3px); }
-  .card.placeholder {
-    border-style: dashed;
-    opacity: 0.6;
-    cursor: default;
-  }
-  .card.placeholder .tag::before { background: var(--muted-2); }
-  .card.placeholder:hover {
-    border-color: var(--line);
-    background: var(--panel);
-    transform: none;
-    box-shadow: none;
-  }
-  .card.placeholder:hover::before { left: -120%; }
-  .card.placeholder .arrow { display: none; }
-  .card-illust {
-    width: 100%;
-    height: 96px;
-    margin: -4px 0 16px;
-    display: block;
-    border-radius: 6px;
-    overflow: hidden;
-    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
-    border: 1px solid transparent;
-    transition: border-color .2s, background .2s;
-  }
-  .card:hover .card-illust {
-    border-color: var(--line);
-    background: linear-gradient(180deg, #fffaf0 0%, #ffffff 100%);
-  }
-  .card.placeholder .card-illust { opacity: 0.5; }
-
-  /* -------- Methodology -------- */
-  .methodology {
-    background: linear-gradient(180deg, var(--panel) 0%, var(--bg-2) 100%);
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    padding: 96px 40px;
-    margin-top: 80px;
-  }
-  .meth-inner {
-    max-width: var(--max);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1.4fr;
-    gap: 64px;
-  }
-  .meth-left h3 {
-    font-size: 32px;
-    font-weight: 700;
-    margin: 0 0 14px;
-    line-height: 1.1;
-    letter-spacing: -0.015em;
-  }
-  .meth-left p {
-    font-size: 15.5px;
-    color: var(--muted);
-    line-height: 1.6;
-    margin: 0;
-  }
-  .meth-points {
-    display: grid;
-    gap: 28px;
-  }
-  .meth-pt {
-    padding-left: 22px;
-    border-left: 2px solid var(--accent);
-    transition: border-color .2s, transform .2s;
-  }
-  .meth-pt:hover {
-    border-left-color: var(--ink);
-    transform: translateX(3px);
-  }
-  .meth-pt strong {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 6px;
-    color: var(--ink);
-    font-size: 15.5px;
-  }
-  .meth-pt p {
-    margin: 0;
-    color: var(--muted);
-    font-size: 14.5px;
-    line-height: 1.6;
-  }
-
-  /* -------- Footer -------- */
-  footer {
-    padding: 44px 40px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-    border-top: 1px solid var(--line);
-    background: var(--panel);
-  }
-  footer .mark {
-    font-weight: 700;
-    letter-spacing: 3px;
-    color: var(--accent);
-    font-size: 14px;
-    display: block;
-    margin-bottom: 10px;
-  }
-  footer .meta { font-size: 12.5px; }
-  footer .meta span { margin: 0 8px; color: var(--muted-2); }
-
-  /* -------- Scroll reveal -------- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(22px);
-    transition: opacity .8s cubic-bezier(0.2, 0.8, 0.2, 1), transform .8s cubic-bezier(0.2, 0.8, 0.2, 1);
-  }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-  .reveal[data-delay="1"] { transition-delay: .08s; }
-  .reveal[data-delay="2"] { transition-delay: .16s; }
-  .reveal[data-delay="3"] { transition-delay: .24s; }
-  .reveal[data-delay="4"] { transition-delay: .32s; }
-
-  /* -------- Responsive -------- */
-  @media (max-width: 960px) {
-    .nav { padding: 14px 24px; }
-    .hero {
-      grid-template-columns: 1fr;
-      padding: 48px 24px 72px;
-      gap: 44px;
-      min-height: 0;
-    }
-    .hero h1 { font-size: 38px; }
-    .hero .tagline { font-size: 15px; }
-    .hero-visual { max-width: 100%; justify-self: stretch; gap: 10px; }
-    .mini-tile { padding: 12px 14px; }
-    .mini-tile-value { font-size: 22px; }
-    .proof-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 24px; }
-    .proof-num { font-size: 28px; }
-    .rec-strip { padding: 40px 24px 44px; }
-    .rec-inner { grid-template-columns: 1fr; gap: 28px; }
-    .rec-title { font-size: 26px; }
-    .rec-readout { padding: 18px 20px; }
-    .rec-count { font-size: 52px; }
-    .rec-tier { margin-left: 0; min-width: 0; width: 100%; }
-    .rec-scoreline { gap: 14px; }
-    .rec-dots { gap: 6px; }
-    .rec-dot-item { font-size: 10px; }
-    .rec-cta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .ind-strip { padding: 40px 24px 44px; }
-    .ind-inner { grid-template-columns: 1fr; gap: 28px; }
-    .ind-title { font-size: 26px; }
-    .ind-readout { padding: 18px 20px; }
-    .ind-value { font-size: 42px; }
-    .ind-tier { margin-left: 0; min-width: 0; width: 100%; }
-    .ind-scoreline { gap: 12px; }
-    .ind-cta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
-    .dashboards { padding: 72px 24px 24px; }
-    .section-hdr h2 { font-size: 30px; }
-    .methodology { padding: 72px 24px; margin-top: 48px; }
-    .meth-inner { grid-template-columns: 1fr; gap: 28px; }
-    .meth-left h3 { font-size: 26px; }
-  }
-
-  /* -------- Reduced motion -------- */
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
-    .reveal { opacity: 1; transform: none; }
-    .hv-draw { stroke-dashoffset: 0; }
-  }
-</style>
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<link rel="stylesheet" href="./landing.css" />
 </head>
-<body>
+<body class="landing-page">
 
-<nav class="nav" id="nav">
-  <a href="/" class="mark">SIBERFORGE</a>
-  <div class="nav-links">
-    <a href="#research">Research</a>
-    <a href="#methodology">Methodology</a>
-    <a href="#research" class="nav-cta">Open dashboards</a>
+<header class="top">
+  <div class="brand">
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Research hub</span>
   </div>
-</nav>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Live &middot; FRED + EDGAR</span>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+</header>
 
-<div class="hero-wrap">
-  <section class="hero">
-    <div class="hero-copy">
-      <span class="hero-tag"><span class="pulse-dot"></span> Live &middot; EDGAR + FRED</span>
-      <h1>Read the <span class="accent">filing</span>.<br>Not the summary.</h1>
-      <p class="tagline">
-        Analyst-grade research reconstructed from primary sources. Every line item ties back to a filing or series.
-      </p>
-      <div class="cta-row">
-        <a href="#research" class="cta-primary">Open the research <span class="arrow">&rarr;</span></a>
-        <a href="#methodology" class="cta-secondary">How it's built &rarr;</a>
-      </div>
-    </div>
+<main class="landing-main">
 
-    <div class="hero-visual" id="hero-visual">
-      <a class="mini-tile is-loading" data-tile="GDPC1" href="/core/econ/indicator.html?id=GDPC1">
-        <div class="mini-tile-head">
-          <span class="mini-tile-label">Real GDP</span>
-          <span class="mini-tile-delta">&middot;</span>
+  <!-- TAGLINE -->
+  <section class="lp-tagline">
+    <h1>Read the filing. Not the summary.</h1>
+    <p>Analyst-grade research reconstructed from primary sources. Every line ties back to a filing or a series.</p>
+  </section>
+
+  <!-- LIVE RIBBON: 4 hero mini-tiles (DOM hooks expected by live-data module) -->
+  <section class="lp-ribbon" id="hero-visual" aria-label="Live macro ribbon">
+    <a class="mini-tile is-loading" data-tile="GDPC1" href="/core/econ/indicator.html?id=GDPC1">
+      <div class="mini-tile-head"><span class="mini-tile-label">Real GDP</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+    </a>
+    <a class="mini-tile is-loading" data-tile="CPILFESL" href="/core/econ/indicator.html?id=CPILFESL">
+      <div class="mini-tile-head"><span class="mini-tile-label">Core CPI</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+    </a>
+    <a class="mini-tile is-loading" data-tile="CSUSHPISA" href="/core/econ/indicator.html?id=CSUSHPISA">
+      <div class="mini-tile-head"><span class="mini-tile-label">Case-Shiller HPI</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+    </a>
+    <a class="mini-tile is-loading" data-tile="UNRATE" href="/core/econ/indicator.html?id=UNRATE">
+      <div class="mini-tile-head"><span class="mini-tile-label">Unemployment</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">Level &middot; &mdash;</div>
+    </a>
+  </section>
+
+  <!-- TODAY'S READ: live recession strip + wage strip (preserved DOM hooks) -->
+  <section class="lp-todays-read">
+    <div class="lp-tr-grid">
+      <section class="rec-strip is-loading" id="rec-strip" aria-label="Live US recession-risk composite">
+        <div class="rec-card">
+          <div class="rec-head">
+            <span class="rec-tag">Live Composite</span>
+            <h2 class="rec-title">US recession risk, right now.</h2>
+          </div>
+          <div class="rec-summary">
+            <span class="rec-count" id="rec-count"><span class="rec-count-num">&mdash;</span><span class="rec-count-of">of 5 signals triggered</span></span>
+            <span class="rec-pill" id="rec-pill" data-tier="benign"><span class="rec-pill-label" id="rec-pill-label">&mdash;</span><span class="rec-pill-sub" id="rec-pill-sub">No signals triggered.</span></span>
+          </div>
+          <div class="rec-rail" id="rec-rail" aria-hidden="true"></div>
+          <div class="rec-meta">
+            <span class="rec-asof" id="rec-asof">&nbsp;</span>
+            <a href="/core/econ/recession.html" class="rec-cta">Open full composite <span class="arrow">&rarr;</span></a>
+          </div>
         </div>
-        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
-        <div class="mini-tile-spark"></div>
-        <div class="mini-tile-asof">YoY &middot; &mdash;</div>
-      </a>
-      <a class="mini-tile is-loading" data-tile="CPILFESL" href="/core/econ/indicator.html?id=CPILFESL">
-        <div class="mini-tile-head">
-          <span class="mini-tile-label">Core CPI</span>
-          <span class="mini-tile-delta">&middot;</span>
+      </section>
+
+      <section class="ind-strip bg-teal is-loading" id="strip-AHE" data-ind-id="AHE" aria-label="Live wage growth indicator">
+        <div class="ind-card">
+          <div class="ind-head">
+            <span class="ind-tag">Live</span>
+            <h2 class="ind-title">Wage growth &mdash; are workers keeping up?</h2>
+          </div>
+          <div class="ind-summary">
+            <span class="ind-value" id="value-AHE">&mdash;<span class="ind-unit">%</span></span>
+            <span class="ind-delta" id="delta-AHE">&middot;</span>
+            <span class="ind-pill" id="pill-AHE" data-tier="trend"><span class="ind-pill-label" id="pill-label-AHE">&mdash;</span><span class="ind-pill-sub" id="pill-sub-AHE">&nbsp;</span></span>
+          </div>
+          <div class="ind-spark" id="spark-AHE" aria-hidden="true"></div>
+          <div class="ind-meta">
+            <span class="ind-asof" id="asof-AHE">&nbsp;</span>
+            <a href="/core/econ/indicator.html?id=AHE" class="ind-cta">See full detail <span class="arrow">&rarr;</span></a>
+          </div>
         </div>
-        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
-        <div class="mini-tile-spark"></div>
-        <div class="mini-tile-asof">YoY &middot; &mdash;</div>
-      </a>
-      <a class="mini-tile is-loading" data-tile="CSUSHPISA" href="/core/econ/indicator.html?id=CSUSHPISA">
-        <div class="mini-tile-head">
-          <span class="mini-tile-label">Case-Shiller HPI</span>
-          <span class="mini-tile-delta">&middot;</span>
-        </div>
-        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
-        <div class="mini-tile-spark"></div>
-        <div class="mini-tile-asof">YoY &middot; &mdash;</div>
-      </a>
-      <a class="mini-tile is-loading" data-tile="UNRATE" href="/core/econ/indicator.html?id=UNRATE">
-        <div class="mini-tile-head">
-          <span class="mini-tile-label">Unemployment</span>
-          <span class="mini-tile-delta">&middot;</span>
-        </div>
-        <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
-        <div class="mini-tile-spark"></div>
-        <div class="mini-tile-asof">Level &middot; &mdash;</div>
-      </a>
-    </div>
-    <!-- previous decorative SVG removed: hero now shows 4 live mini charts -->
-    <div style="display:none" aria-hidden="true"><svg>
-        <defs>
-          <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#dc2626" stop-opacity="0.22"/>
-            <stop offset="100%" stop-color="#dc2626" stop-opacity="0"/>
-          </linearGradient>
-          <linearGradient id="stackA" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#7ba4cf" stop-opacity="0.35"/>
-            <stop offset="100%" stop-color="#7ba4cf" stop-opacity="0.08"/>
-          </linearGradient>
-          <linearGradient id="stackB" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#8cbfc7" stop-opacity="0.3"/>
-            <stop offset="100%" stop-color="#8cbfc7" stop-opacity="0.05"/>
-          </linearGradient>
-          <linearGradient id="stackC" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#b39ddb" stop-opacity="0.25"/>
-            <stop offset="100%" stop-color="#b39ddb" stop-opacity="0.04"/>
-          </linearGradient>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-            <feGaussianBlur stdDeviation="0.4"/>
-          </filter>
-        </defs>
-
-        <!-- Panel background -->
-        <rect x="30" y="50" width="420" height="380" rx="12" fill="#ffffff" stroke="#e2e6ec" stroke-width="1"/>
-
-        <!-- Grid lines -->
-        <g stroke="#eef1f5" stroke-width="1">
-          <line x1="60" y1="120" x2="420" y2="120"/>
-          <line x1="60" y1="180" x2="420" y2="180"/>
-          <line x1="60" y1="240" x2="420" y2="240"/>
-          <line x1="60" y1="300" x2="420" y2="300"/>
-          <line x1="60" y1="360" x2="420" y2="360"/>
-        </g>
-
-        <!-- Y-axis labels -->
-        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="end">
-          <text x="54" y="124">$800M</text>
-          <text x="54" y="184">$600M</text>
-          <text x="54" y="244">$400M</text>
-          <text x="54" y="304">$200M</text>
-          <text x="54" y="364">$0</text>
-        </g>
-
-        <!-- X-axis labels -->
-        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8" text-anchor="middle">
-          <text x="75"  y="385">'15</text>
-          <text x="110" y="385">'17</text>
-          <text x="145" y="385">'19</text>
-          <text x="180" y="385">'21</text>
-          <text x="215" y="385">'23</text>
-          <text x="250" y="385">'25</text>
-        </g>
-
-        <!-- Stacked area layer A (equipment-like) -->
-        <path d="M 60 340
-                 L 92 332 L 124 322 L 156 302 L 188 270
-                 L 220 310 L 252 230 L 284 170 L 316 120
-                 L 348 180 L 380 195 L 412 190
-                 L 412 360 L 60 360 Z" fill="url(#stackA)"/>
-
-        <!-- Stacked area layer B (services-like) -->
-        <path d="M 60 350
-                 L 92 344 L 124 340 L 156 332 L 188 320
-                 L 220 340 L 252 310 L 284 288 L 316 260
-                 L 348 270 L 380 265 L 412 255
-                 L 412 360 L 60 360 Z" fill="url(#stackB)"/>
-
-        <!-- Stacked area layer C (fuel-like) -->
-        <path d="M 60 356
-                 L 92 352 L 124 350 L 156 346 L 188 340
-                 L 220 352 L 252 332 L 284 318 L 316 304
-                 L 348 310 L 380 308 L 412 300
-                 L 412 360 L 60 360 Z" fill="url(#stackC)"/>
-
-        <!-- Foreground line: total with area fill -->
-        <path d="M 60 340 L 92 332 L 124 322 L 156 302 L 188 270
-                 L 220 310 L 252 230 L 284 170 L 316 120
-                 L 348 180 L 380 195 L 412 190
-                 L 412 360 L 60 360 Z" fill="url(#areaGrad)"/>
-        <polyline class="hv-draw"
-                  points="60,340 92,332 124,322 156,302 188,270 220,310 252,230 284,170 316,120 348,180 380,195 412,190"
-                  fill="none" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round"/>
-
-        <!-- Data points -->
-        <g fill="#dc2626">
-          <circle cx="60"  cy="340" r="2.5"/>
-          <circle cx="92"  cy="332" r="2.5"/>
-          <circle cx="124" cy="322" r="2.5"/>
-          <circle cx="156" cy="302" r="2.5"/>
-          <circle cx="188" cy="270" r="2.5"/>
-          <circle cx="220" cy="310" r="2.5"/>
-          <circle cx="252" cy="230" r="2.5"/>
-          <circle cx="284" cy="170" r="2.5"/>
-          <circle cx="316" cy="120" r="3.5" class="hv-pulse"/>
-          <circle cx="348" cy="180" r="2.5"/>
-          <circle cx="380" cy="195" r="2.5"/>
-          <circle cx="412" cy="190" r="2.5"/>
-        </g>
-
-        <!-- Peak annotation -->
-        <g class="hv-badge b1">
-          <line x1="316" y1="95" x2="316" y2="116" stroke="#dc2626" stroke-width="1" stroke-dasharray="2,2"/>
-          <rect x="270" y="70" width="92" height="24" rx="12" fill="#0f172a"/>
-          <text x="316" y="86" font-family="Inter,sans-serif" font-size="11" fill="#ffffff" text-anchor="middle" font-weight="600">$891M · FY2023</text>
-        </g>
-
-        <!-- Source pills (top-left) -->
-        <g class="hv-badge b2" transform="translate(50, 60)">
-          <rect x="0" y="0" width="78" height="22" rx="11" fill="#ffffff" stroke="#e2e6ec" stroke-width="1"/>
-          <circle cx="11" cy="11" r="3" fill="#16a34a"/>
-          <text x="20" y="15" font-family="Inter,sans-serif" font-size="10" fill="#0f172a" font-weight="600">SEC EDGAR</text>
-        </g>
-
-        <g class="hv-badge b3" transform="translate(134, 60)">
-          <rect x="0" y="0" width="58" height="22" rx="11" fill="#ffffff" stroke="#e2e6ec" stroke-width="1"/>
-          <circle cx="11" cy="11" r="3" fill="#1d4ed8"/>
-          <text x="20" y="15" font-family="Inter,sans-serif" font-size="10" fill="#0f172a" font-weight="600">XBRL</text>
-        </g>
-
-        <!-- Caption bottom -->
-        <g font-family="Inter,sans-serif" font-size="10" fill="#94a3b8">
-          <text x="60" y="412" font-weight="600" fill="#64748b">PLUG · Net revenue, FY2015–FY2025</text>
-          <text x="60" y="426">Reconstructed from 5 filing vintages · restatements preserved</text>
-        </g>
-      </svg>
+      </section>
     </div>
   </section>
-</div>
 
-<!-- Recession composite (live FRED) -->
-<section class="rec-strip is-loading" id="rec-strip" aria-label="Live US recession-risk composite">
-  <div class="rec-inner">
-    <div class="rec-head">
-      <span class="rec-tag"><span class="pulse"></span><span class="rec-status-text">Loading&hellip;</span></span>
-      <span class="rec-eyebrow">Live composite</span>
-      <h2 class="rec-title">US recession risk, right now.</h2>
-      <p class="rec-sub">
-        Five widely-watched signals &mdash; Sahm, 10Y&ndash;3M curve, HY OAS, unemployment momentum, payroll trend &mdash; scored against professional-consensus triggers. The composite is the count. No weighting, no black box.
-      </p>
-    </div>
-    <div class="rec-readout">
-      <div class="rec-scoreline">
-        <span class="rec-count" id="rec-count">&mdash;</span>
-        <span class="rec-denom">of 5 signals<br>triggered</span>
-        <span class="rec-tier" id="rec-tier">
-          <span class="rec-tier-label" id="rec-tier-label">Loading&hellip;</span>
-          <span class="rec-tier-sub" id="rec-tier-sub">Fetching FRED series</span>
-        </span>
-      </div>
-      <div class="rec-dots" id="rec-dots">
-        <div class="rec-dot-item"><span class="rec-dot"></span><span>Sahm</span></div>
-        <div class="rec-dot-item"><span class="rec-dot"></span><span>10Y&minus;3M</span></div>
-        <div class="rec-dot-item"><span class="rec-dot"></span><span>HY OAS</span></div>
-        <div class="rec-dot-item"><span class="rec-dot"></span><span>UNRATE &Delta;6m</span></div>
-        <div class="rec-dot-item"><span class="rec-dot"></span><span>NFP 3mo</span></div>
-      </div>
-      <div class="rec-cta-row">
-        <span class="rec-asof" id="rec-asof">&nbsp;</span>
-        <a href="/core/econ/recession.html" class="rec-cta">
-          See each signal in detail <span class="arrow">&rarr;</span>
-        </a>
+  <!-- HUB: collapsible tree of every dashboard -->
+  <section class="lp-hub">
+    <div class="hub-controls">
+      <input class="hub-search" id="hub-search" placeholder="Search 40+ dashboards..." />
+      <div class="hub-actions">
+        <button id="hub-expand">Expand all</button>
+        <button id="hub-collapse">Collapse all</button>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- Wage growth strip -->
-<section class="ind-strip bg-teal is-loading" id="strip-AHE" data-ind-id="AHE" aria-label="Live wage growth indicator">
-  <div class="ind-inner">
-    <div class="ind-head">
-      <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
-      <span class="ind-eyebrow">Labor &middot; Consumer</span>
-      <h2 class="ind-title">Wage growth &mdash; are workers keeping up?</h2>
-      <p class="ind-sub">
-        Nominal average hourly earnings (all private employees), year-over-year. The market's first-look wage print from the BLS CES establishment survey, released Friday with payrolls.
-      </p>
-    </div>
-    <div class="ind-readout">
-      <div class="ind-scoreline">
-        <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">%</span></span>
-        <span class="ind-delta">&middot;</span>
-        <span class="ind-tier">
-          <span class="ind-tier-label">Loading&hellip;</span>
-          <span class="ind-tier-sub">Fetching FRED</span>
-        </span>
+    <div class="cat-grid">
+
+      <!-- ========== MACRO & MARKETS ========== -->
+      <div class="cat" data-cat="macro">
+        <div class="cat-head">
+          <span class="cat-arrow">&#9660;</span>
+          <h2>Macro &amp; Markets</h2>
+          <span class="cat-count">11 views</span>
+          <span class="cat-tag">Live</span>
+        </div>
+        <div class="cat-body">
+          <a href="/core/macro/" class="leaf"><span class="leaf-name">Regime overview</span><span class="leaf-meta">Composite + sector regime returns</span></a>
+          <a href="/core/macro/cycle/" class="leaf"><span class="leaf-name">Cycle Position</span><span class="leaf-meta">Recession risk, NFCI, yield spreads</span></a>
+          <a href="/core/macro/inflation/" class="leaf"><span class="leaf-name">Inflation</span><span class="leaf-meta">CPI breakdown, services vs goods, sticky vs flexible</span></a>
+          <a href="/core/macro/housing/" class="leaf"><span class="leaf-name">Housing</span><span class="leaf-meta">20 housing metrics</span></a>
+          <a href="/core/macro/real-economy/" class="leaf"><span class="leaf-name">Consumer</span><span class="leaf-meta">Spending, savings, credit health</span></a>
+          <a href="/core/macro/credit/" class="leaf"><span class="leaf-name">Credit</span><span class="leaf-meta">Spreads, default rates, loan growth</span></a>
+          <a href="/core/macro/labor/" class="leaf"><span class="leaf-name">Labor</span><span class="leaf-meta">Payrolls, wages, participation</span></a>
+          <div class="branch">
+            <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Regional Dispersion</span><span class="leaf-meta">7 sub-views</span></button>
+            <div class="branch-body">
+              <a href="/core/macro/regional/" class="leaf sub"><span class="leaf-name">All regional</span></a>
+              <a href="/core/macro/regional/?view=cpi" class="leaf sub"><span class="leaf-name">CPI dispersion</span></a>
+              <a href="/core/macro/regional/?view=build-buy" class="leaf sub"><span class="leaf-name">Build vs Buy</span></a>
+              <a href="/core/macro/regional/?view=channel-mix" class="leaf sub"><span class="leaf-name">Channel mix</span></a>
+              <a href="/core/macro/regional/?view=migration" class="leaf sub"><span class="leaf-name">Migration</span></a>
+              <a href="/core/macro/regional/?view=demographics" class="leaf sub"><span class="leaf-name">Demographics</span></a>
+              <a href="/core/macro/regional/?view=affordability" class="leaf sub"><span class="leaf-name">Affordability</span></a>
+              <a href="/core/macro/regional/?view=climate" class="leaf sub"><span class="leaf-name">Climate risk</span></a>
+            </div>
+          </div>
+          <a href="/core/macro/geography/" class="leaf"><span class="leaf-name">Geography</span><span class="leaf-meta">State + MSA selectors, ranked bars</span></a>
+          <a href="/core/macro/backtest/" class="leaf"><span class="leaf-name">Backtest</span><span class="leaf-meta">Walk-forward regime rotation vs SPY + 60/40</span></a>
+          <a href="/core/macro/research.html" class="leaf"><span class="leaf-name">Pair Explorer</span><span class="leaf-meta">Correlation + regression any two series</span></a>
+        </div>
       </div>
-      <div class="ind-spark"></div>
-      <div class="ind-cta-row">
-        <span class="ind-asof">&nbsp;</span>
-        <a href="/core/econ/indicator.html?id=AHE" class="ind-cta">
-          See full detail <span class="arrow">&rarr;</span>
-        </a>
+
+      <!-- ========== AI BENEFICIARIES ========== -->
+      <div class="cat" data-cat="ai">
+        <div class="cat-head">
+          <span class="cat-arrow">&#9660;</span>
+          <h2>AI Beneficiaries</h2>
+          <span class="cat-count">3 views</span>
+          <span class="cat-tag">New</span>
+        </div>
+        <div class="cat-body">
+          <a href="/core/ai/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">Both views with cross-page scenario picker</span></a>
+          <a href="/core/ai/screen/" class="leaf"><span class="leaf-name">Industry Screen</span><span class="leaf-meta">160 companies &middot; 8 industries &middot; 4 scenarios</span></a>
+          <a href="/core/ai/top-5/" class="leaf"><span class="leaf-name">Top-5 Deep Dive</span><span class="leaf-meta">Modest-scenario picks: META &middot; CDNS &middot; AVGO &middot; SNPS &middot; MSFT</span></a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- Existing home sales strip -->
-<section class="ind-strip bg-cream is-loading" id="strip-EXHOSLUS" data-ind-id="EXHOSLUS" aria-label="Live existing home sales indicator">
-  <div class="ind-inner">
-    <div class="ind-head">
-      <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
-      <span class="ind-eyebrow">Housing &middot; Demand</span>
-      <h2 class="ind-title">Existing home sales &mdash; is the market moving?</h2>
-      <p class="ind-sub">
-        National Association of Realtors sales volume, SAAR in millions of units. ~90% of total US home transactions &mdash; the cleanest read on resale demand.
-      </p>
-    </div>
-    <div class="ind-readout">
-      <div class="ind-scoreline">
-        <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">M</span></span>
-        <span class="ind-delta">&middot;</span>
-        <span class="ind-tier">
-          <span class="ind-tier-label">Loading&hellip;</span>
-          <span class="ind-tier-sub">Fetching FRED</span>
-        </span>
+      <!-- ========== ECONOMIC INDICATORS ========== -->
+      <div class="cat" data-cat="econ">
+        <div class="cat-head">
+          <span class="cat-arrow">&#9660;</span>
+          <h2>Economic Indicators</h2>
+          <span class="cat-count">25 views</span>
+          <span class="cat-tag">Live</span>
+        </div>
+        <div class="cat-body">
+          <a href="/core/econ/" class="leaf"><span class="leaf-name">22-indicator overview</span><span class="leaf-meta">Latest, YoY, percentile, sparkline per card</span></a>
+          <a href="/core/econ/recession.html" class="leaf"><span class="leaf-name">Recession composite</span><span class="leaf-meta">5-signal model: Sahm, 10Y-3M, HY OAS, UNRATE, NFP</span></a>
+          <a href="/core/econ/compare.html" class="leaf"><span class="leaf-name">Comparison tool</span><span class="leaf-meta">Compare any two indicators side-by-side</span></a>
+          <div class="branch">
+            <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Individual indicator drill-downs</span><span class="leaf-meta">22 series</span></button>
+            <div class="branch-body">
+              <a href="/core/econ/indicator.html?id=GDPC1" class="leaf sub"><span class="leaf-name">Real GDP</span><span class="leaf-meta">GDPC1</span></a>
+              <a href="/core/econ/indicator.html?id=CPILFESL" class="leaf sub"><span class="leaf-name">Core CPI</span><span class="leaf-meta">CPILFESL</span></a>
+              <a href="/core/econ/indicator.html?id=CSUSHPISA" class="leaf sub"><span class="leaf-name">Case-Shiller HPI</span><span class="leaf-meta">CSUSHPISA</span></a>
+              <a href="/core/econ/indicator.html?id=UNRATE" class="leaf sub"><span class="leaf-name">Unemployment</span><span class="leaf-meta">UNRATE</span></a>
+              <a href="/core/econ/indicator.html?id=PAYEMS" class="leaf sub"><span class="leaf-name">Nonfarm payrolls</span><span class="leaf-meta">PAYEMS</span></a>
+              <a href="/core/econ/indicator.html?id=AHE" class="leaf sub"><span class="leaf-name">Average hourly earnings</span><span class="leaf-meta">AHE</span></a>
+              <a href="/core/econ/indicator.html?id=INDPRO" class="leaf sub"><span class="leaf-name">Industrial Production</span><span class="leaf-meta">INDPRO</span></a>
+              <a href="/core/econ/indicator.html?id=RRSFS" class="leaf sub"><span class="leaf-name">Real Retail Sales</span><span class="leaf-meta">RRSFS</span></a>
+              <a href="/core/econ/indicator.html?id=PCE" class="leaf sub"><span class="leaf-name">PCE</span><span class="leaf-meta">PCE</span></a>
+              <a href="/core/econ/indicator.html?id=PSAVERT" class="leaf sub"><span class="leaf-name">Personal savings rate</span><span class="leaf-meta">PSAVERT</span></a>
+              <a href="/core/econ/indicator.html?id=HOUST" class="leaf sub"><span class="leaf-name">Housing starts</span><span class="leaf-meta">HOUST</span></a>
+              <a href="/core/econ/indicator.html?id=EXHOSLUS" class="leaf sub"><span class="leaf-name">Existing home sales</span><span class="leaf-meta">EXHOSLUS</span></a>
+              <a href="/core/econ/indicator.html?id=NFCI" class="leaf sub"><span class="leaf-name">National Financial Conditions Index</span><span class="leaf-meta">NFCI</span></a>
+              <a href="/core/econ/indicator.html?id=ANFCI" class="leaf sub"><span class="leaf-name">Adjusted NFCI</span><span class="leaf-meta">ANFCI</span></a>
+              <a href="/core/econ/indicator.html?id=BAMLH0A0HYM2" class="leaf sub"><span class="leaf-name">HY OAS</span><span class="leaf-meta">BAMLH0A0HYM2</span></a>
+              <a href="/core/econ/indicator.html?id=T10Y3M" class="leaf sub"><span class="leaf-name">10Y-3M yield spread</span><span class="leaf-meta">T10Y3M</span></a>
+              <a href="/core/econ/indicator.html?id=DGS10" class="leaf sub"><span class="leaf-name">10Y Treasury</span><span class="leaf-meta">DGS10</span></a>
+              <a href="/core/econ/indicator.html?id=DFF" class="leaf sub"><span class="leaf-name">Fed Funds Rate</span><span class="leaf-meta">DFF</span></a>
+              <a href="/core/econ/indicator.html?id=ICSA" class="leaf sub"><span class="leaf-name">Initial jobless claims</span><span class="leaf-meta">ICSA</span></a>
+              <a href="/core/econ/indicator.html?id=PERMIT" class="leaf sub"><span class="leaf-name">Building permits</span><span class="leaf-meta">PERMIT</span></a>
+              <a href="/core/econ/indicator.html?id=RECPROUSM156N" class="leaf sub"><span class="leaf-name">Recession probability</span><span class="leaf-meta">RECPROUSM156N</span></a>
+              <a href="/core/econ/indicator.html?id=DRBLACBS" class="leaf sub"><span class="leaf-name">Delinquency rate</span><span class="leaf-meta">DRBLACBS</span></a>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="ind-spark"></div>
-      <div class="ind-cta-row">
-        <span class="ind-asof">&nbsp;</span>
-        <a href="/core/econ/indicator.html?id=EXHOSLUS" class="ind-cta">
-          See full detail <span class="arrow">&rarr;</span>
-        </a>
+
+      <!-- ========== SINGLE-NAME RESEARCH ========== -->
+      <div class="cat" data-cat="single">
+        <div class="cat-head">
+          <span class="cat-arrow">&#9660;</span>
+          <h2>Single-Name Research</h2>
+          <span class="cat-count">1 view</span>
+        </div>
+        <div class="cat-body">
+          <a href="/core/plug/" class="leaf"><span class="leaf-name">Plug Power (PLUG)</span><span class="leaf-meta">Quarterly cash flow 2015-2025 from EDGAR XBRL &middot; CFO/CFI/CFF/Cash drivers</span></a>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- Housing starts strip -->
-<section class="ind-strip bg-pink is-loading" id="strip-HOUST" data-ind-id="HOUST" aria-label="Live housing starts indicator">
-  <div class="ind-inner">
-    <div class="ind-head">
-      <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
-      <span class="ind-eyebrow">Housing &middot; Construction</span>
-      <h2 class="ind-title">Housing starts &mdash; what are builders doing?</h2>
-      <p class="ind-sub">
-        New privately-owned residential construction, Census Bureau. YoY shown; volatile month-to-month, trend component is single-family starts. Direct contributor to GDP via residential investment.
-      </p>
-    </div>
-    <div class="ind-readout">
-      <div class="ind-scoreline">
-        <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">%</span></span>
-        <span class="ind-delta">&middot;</span>
-        <span class="ind-tier">
-          <span class="ind-tier-label">Loading&hellip;</span>
-          <span class="ind-tier-sub">Fetching FRED</span>
-        </span>
+      <!-- ========== DATA CATALOG ========== -->
+      <div class="cat" data-cat="data">
+        <div class="cat-head">
+          <span class="cat-arrow">&#9660;</span>
+          <h2>Data Catalog</h2>
+          <span class="cat-count">All series</span>
+        </div>
+        <div class="cat-body">
+          <a href="/core/data/" class="leaf"><span class="leaf-name">All series with metadata</span><span class="leaf-meta">FRED IDs, transforms, refresh cadence, lookback windows</span></a>
+        </div>
       </div>
-      <div class="ind-spark"></div>
-      <div class="ind-cta-row">
-        <span class="ind-asof">&nbsp;</span>
-        <a href="/core/econ/indicator.html?id=HOUST" class="ind-cta">
-          See full detail <span class="arrow">&rarr;</span>
-        </a>
-      </div>
+
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Proof strip -->
-<section class="proof">
-  <div class="proof-inner">
-    <div class="proof-item reveal" data-delay="1">
-      <div class="proof-num" data-target="44">0</div>
-      <div class="proof-lbl">Quarters of cash flow, reconstructed from YTD 10-Q / 10-K filings</div>
-    </div>
-    <div class="proof-item reveal" data-delay="2">
-      <div class="proof-num" data-target="22">0</div>
-      <div class="proof-lbl">FRED macro series with latest print, YoY, and 5-year percentile</div>
-    </div>
-    <div class="proof-item reveal" data-delay="3">
-      <div class="proof-num" data-target="11">0</div>
-      <div class="proof-lbl">Years of revenue-by-product-line detail, FY2015 &ndash; FY2025</div>
-    </div>
-    <div class="proof-item reveal" data-delay="4">
-      <div class="proof-num" data-target="0">0</div>
-      <div class="proof-lbl">Third-party data aggregators in the pipeline</div>
-    </div>
-  </div>
-</section>
-
-<!-- Dashboards -->
-<section class="dashboards" id="research">
-  <div class="section-hdr reveal">
-    <span class="eyebrow">The research</span>
-    <h2>Four dashboards. Every figure traceable.</h2>
-    <p>Each view starts with a primary-source filing or series, pulls structured data, and exposes the accounting machinery that the summary metric buries.</p>
-  </div>
-
-  <p class="subsection-label reveal">Macro</p>
-  <div class="grid">
-
-    <a class="card reveal" data-delay="1" href="/core/econ/">
-      <span class="card-illust" aria-hidden="true">
-        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
-          <g transform="translate(10,10)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,14 14,10 24,12 34,8 44,6 54,9 66,4" fill="none" stroke="#16a34a" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(90,10)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,4 14,6 24,5 34,10 44,14 54,16 66,14" fill="none" stroke="#dc2626" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(170,10)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,12 14,14 24,10 34,8 44,10 54,6 66,8" fill="none" stroke="#1d4ed8" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(250,10)">
-            <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,16 12,12 20,14 28,10 36,8 44,12 56,14" fill="none" stroke="#dc2626" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(10,38)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,10 14,8 24,12 34,14 44,10 54,6 66,8" fill="none" stroke="#7c3aed" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(90,38)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,14 14,12 24,10 34,8 44,6 54,4 66,2" fill="none" stroke="#16a34a" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(170,38)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,6 14,8 24,4 34,10 44,14 54,12 66,16" fill="none" stroke="#dc2626" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(250,38)">
-            <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,8 12,10 20,6 28,12 36,8 44,14 56,10" fill="none" stroke="#0891b2" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(10,66)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,16 14,14 24,10 34,12 44,8 54,10 66,6" fill="none" stroke="#1d4ed8" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(90,66)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,8 14,10 24,14 34,12 44,8 54,6 66,10" fill="none" stroke="#dc2626" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(170,66)">
-            <rect x="0" y="0" width="70" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,12 14,14 24,10 34,6 44,4 54,8 66,10" fill="none" stroke="#16a34a" stroke-width="1.3"/>
-          </g>
-          <g transform="translate(250,66)">
-            <rect x="0" y="0" width="62" height="20" fill="none" stroke="#e2e6ec" stroke-width="1" rx="2"/>
-            <polyline points="4,14 12,10 20,12 28,8 36,10 44,6 56,8" fill="none" stroke="#7c3aed" stroke-width="1.3"/>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">Live</span>
-      <h3>Economic Indicators</h3>
-      <p>Growth, inflation, consumer health, housing. 22 FRED series with latest print, YoY, 5-year spark, and historical-percentile context.</p>
-      <span class="arrow">Open &rarr;</span>
-    </a>
-
-    <a class="card reveal" data-delay="2" href="/core/macro/">
-      <span class="card-illust" aria-hidden="true">
-        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
-          <g transform="translate(10,10)">
-            <line x1="0" y1="76" x2="130" y2="76" stroke="#cbd5e1" stroke-width="1"/>
-            <line x1="0" y1="0" x2="0" y2="76" stroke="#cbd5e1" stroke-width="1"/>
-            <circle cx="12" cy="68" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="22" cy="62" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="30" cy="64" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="38" cy="56" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="46" cy="50" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="54" cy="52" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="62" cy="44" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="72" cy="42" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="82" cy="36" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="92" cy="32" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="100" cy="28" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="108" cy="22" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="118" cy="18" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <circle cx="126" cy="12" r="2" fill="#1d4ed8" opacity="0.7"/>
-            <line x1="6" y1="70" x2="126" y2="14" stroke="#dc2626" stroke-width="1.4" stroke-dasharray="3,2"/>
-          </g>
-          <line x1="160" y1="10" x2="160" y2="86" stroke="#e2e6ec" stroke-width="1" stroke-dasharray="2,2"/>
-          <g transform="translate(175,12)">
-            <rect x="0"   y="0"  width="32" height="16" fill="#16a34a" opacity="0.85"/>
-            <rect x="34"  y="0"  width="32" height="16" fill="#16a34a" opacity="0.5"/>
-            <rect x="68"  y="0"  width="32" height="16" fill="#dc2626" opacity="0.4"/>
-            <rect x="102" y="0"  width="32" height="16" fill="#16a34a" opacity="0.3"/>
-            <rect x="0"   y="18" width="32" height="16" fill="#16a34a" opacity="0.5"/>
-            <rect x="34"  y="18" width="32" height="16" fill="#16a34a" opacity="0.85"/>
-            <rect x="68"  y="18" width="32" height="16" fill="#dc2626" opacity="0.6"/>
-            <rect x="102" y="18" width="32" height="16" fill="#16a34a" opacity="0.45"/>
-            <rect x="0"   y="36" width="32" height="16" fill="#dc2626" opacity="0.4"/>
-            <rect x="34"  y="36" width="32" height="16" fill="#dc2626" opacity="0.6"/>
-            <rect x="68"  y="36" width="32" height="16" fill="#16a34a" opacity="0.85"/>
-            <rect x="102" y="36" width="32" height="16" fill="#dc2626" opacity="0.3"/>
-            <rect x="0"   y="54" width="32" height="16" fill="#16a34a" opacity="0.3"/>
-            <rect x="34"  y="54" width="32" height="16" fill="#16a34a" opacity="0.45"/>
-            <rect x="68"  y="54" width="32" height="16" fill="#dc2626" opacity="0.3"/>
-            <rect x="102" y="54" width="32" height="16" fill="#16a34a" opacity="0.85"/>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">Live</span>
-      <h3>Macro &amp; Markets Dashboard</h3>
-      <p>Economic indicators paired with S&amp;P 500 and sector-ETF correlation. Rolling correlations, regression, sector heatmap.</p>
-      <span class="arrow">Open &rarr;</span>
-    </a>
-
-  </div>
-
-  <p class="subsection-label reveal">Equities</p>
-  <div class="grid">
-
-    <a class="card reveal" data-delay="1" href="/core/plug/">
-      <span class="card-illust" aria-hidden="true">
-        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
-          <line x1="10" y1="56" x2="310" y2="56" stroke="#cbd5e1" stroke-width="1" stroke-dasharray="2,3"/>
-          <text x="50"  y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CFO</text>
-          <text x="130" y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CFI</text>
-          <text x="210" y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CFF</text>
-          <text x="285" y="92" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing="1">CASH</text>
-          <rect x="18" y="56" width="10" height="10" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="30" y="56" width="10" height="16" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="42" y="56" width="10" height="12" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="54" y="56" width="10" height="22" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="66" y="56" width="10" height="18" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="78" y="56" width="10" height="14" fill="#1d4ed8" opacity="0.85"/>
-          <rect x="98"  y="56" width="10" height="8"  fill="#dc2626" opacity="0.85"/>
-          <rect x="110" y="56" width="10" height="14" fill="#dc2626" opacity="0.85"/>
-          <rect x="122" y="56" width="10" height="20" fill="#dc2626" opacity="0.85"/>
-          <rect x="134" y="56" width="10" height="12" fill="#dc2626" opacity="0.85"/>
-          <rect x="146" y="56" width="10" height="16" fill="#dc2626" opacity="0.85"/>
-          <rect x="158" y="56" width="10" height="10" fill="#dc2626" opacity="0.85"/>
-          <rect x="178" y="42" width="10" height="14" fill="#7c3aed" opacity="0.85"/>
-          <rect x="190" y="30" width="10" height="26" fill="#7c3aed" opacity="0.85"/>
-          <rect x="202" y="18" width="10" height="38" fill="#7c3aed" opacity="0.85"/>
-          <rect x="214" y="36" width="10" height="20" fill="#7c3aed" opacity="0.85"/>
-          <rect x="226" y="22" width="10" height="34" fill="#7c3aed" opacity="0.85"/>
-          <rect x="238" y="44" width="10" height="12" fill="#7c3aed" opacity="0.85"/>
-          <polyline points="258,52 268,40 278,28 288,22 298,34 308,44"
-                    fill="none" stroke="#0891b2" stroke-width="1.8"/>
-          <circle cx="258" cy="52" r="2"   fill="#0891b2"/>
-          <circle cx="308" cy="44" r="2.5" fill="#0891b2"/>
-        </svg>
-      </span>
-      <span class="tag">Live</span>
-      <h3>Plug Power (PLUG)</h3>
-      <p>Quarterly cash flow 2015&ndash;2025 from EDGAR XBRL. Interactive CFO / CFI / CFF drivers, balance-sheet health, liquidity dependencies, US production footprint, and revenue by product line.</p>
-      <span class="arrow">Open &rarr;</span>
-    </a>
-
-    <a class="card reveal" data-delay="2" href="/core/ai/">
-      <span class="card-illust" aria-hidden="true">
-        <svg viewBox="0 0 320 96" preserveAspectRatio="none" style="width:100%;height:100%;display:block;">
-          <g transform="translate(20,12)">
-            <rect x="0"   y="48" width="40" height="20" fill="#64748b" opacity="0.85"/>
-            <text x="20"  y="82" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing=".5">META</text>
-            <rect x="50"  y="36" width="40" height="32" fill="#64748b" opacity="0.85"/>
-            <text x="70"  y="82" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing=".5">CDNS</text>
-            <rect x="100" y="20" width="40" height="48" fill="#64748b" opacity="0.85"/>
-            <text x="120" y="82" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing=".5">AVGO</text>
-            <rect x="150" y="40" width="40" height="28" fill="#64748b" opacity="0.85"/>
-            <text x="170" y="82" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing=".5">SNPS</text>
-            <rect x="200" y="28" width="40" height="40" fill="#64748b" opacity="0.85"/>
-            <text x="220" y="82" text-anchor="middle" font-size="7" fill="#94a3b8" font-family="Inter,sans-serif" letter-spacing=".5">MSFT</text>
-            <line x1="-5" y1="68" x2="245" y2="68" stroke="#cbd5e1" stroke-width="0.8"/>
-          </g>
-          <g transform="translate(265,18)">
-            <rect x="0" y="0" width="42" height="20" rx="3" fill="none" stroke="#16a34a" stroke-width="1"/>
-            <text x="21" y="14" text-anchor="middle" font-size="9" fill="#16a34a" font-family="Inter,sans-serif" font-weight="700" letter-spacing=".4">AI x5</text>
-          </g>
-        </svg>
-      </span>
-      <span class="tag">Live</span>
-      <h3>AI Beneficiaries &mdash; Industry Screen</h3>
-      <p>8 industries &middot; 160 publicly traded companies &middot; 4 AI-impact scenarios. Per-company directional return + confidence + thesis. One click into the Top-5 modest-scenario deep dive: bull/bear bullets with supporting charts, 20-ratio matrix, max-Sharpe portfolio, 10-Q working-capital scan.</p>
-      <span class="arrow">Open &rarr;</span>
-    </a>
-
-  </div>
-</section>
-
-<!-- Methodology -->
-<section class="methodology" id="methodology">
-  <div class="meth-inner">
-    <div class="meth-left reveal">
-      <span class="eyebrow">Methodology</span>
-      <h3>Primary sources. No shortcuts.</h3>
-      <p>Every dashboard is built from the actual filing or time series &mdash; not a vendor's pre-cleaned database. The arithmetic is the arithmetic an analyst would do manually, automated across decades.</p>
-    </div>
-    <div class="meth-points">
-      <div class="meth-pt reveal" data-delay="1">
-        <strong>SEC EDGAR XBRL, direct.</strong>
-        <p>Structured financials pulled from the SEC's XBRL API. No Bloomberg, no consensus estimates, no "as-reported" database abstractions. The number on screen is the number in the filing.</p>
-      </div>
-      <div class="meth-pt reveal" data-delay="2">
-        <strong>Restatements preserved.</strong>
-        <p>When a company restates (Plug's 2021 Amazon/Walmart warrant reclass, for example), both vintages are kept. The chart knows which year came from which filing &mdash; pre-restatement and post, side by side.</p>
-      </div>
-      <div class="meth-pt reveal" data-delay="3">
-        <strong>YTD &rarr; standalone, automated.</strong>
-        <p>Quarterly cash flow series are reconstructed by differencing YTD 10-Q filings. 44 quarters of CFO / CFI / CFF, rebuilt the same way a human analyst would &mdash; but across every vintage, every ticker.</p>
-      </div>
-      <div class="meth-pt reveal" data-delay="4">
-        <strong>Footnotes surfaced inline.</strong>
-        <p>Any dotted-underlined term shows the accounting definition on hover. Warrant contra-revenue, loss-contract provisions, DOE loan mechanics, ATM/SEPA dilution math &mdash; explained where they appear, not buried in a glossary.</p>
-      </div>
-    </div>
-  </div>
-</section>
+</main>
 
 <footer>
-  <span class="mark">SIBERFORGE</span>
-  <div class="meta">
-    &copy; 2026 &middot; Research from primary sources
-    <span>&middot;</span>
-    Data: SEC EDGAR XBRL, FRED
-    <span>&middot;</span>
-    Not investment advice
-  </div>
+  <span>SIBERFORGE &middot; Research from primary sources &middot; SEC EDGAR XBRL + FRED &middot; Not investment advice</span>
+  <span>&copy; 2026</span>
 </footer>
 
+<script src="/core/lib/theme-toggle.js"></script>
+
 <script>
-  // Nav border + compression on scroll
-  (function () {
-    const nav = document.getElementById('nav');
-    const onScroll = () => { nav.classList.toggle('scrolled', window.scrollY > 24); };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  })();
-
-  // Hero parallax — disabled since the visual is now a live chart grid, not a
-  // decorative SVG. Motion on the 4-tile grid made tooltips/hover-states feel
-  // unstable. Kept the outer IIFE slot for easy re-enable if we want it back.
-  (function () { /* no-op */ })();
-
-  // Scroll reveal + count-up on proof numbers
-  (function () {
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        entry.target.classList.add('in');
-        const num = entry.target.classList.contains('proof-num')
-          ? entry.target
-          : entry.target.querySelector('.proof-num[data-target]');
-        if (num && !num.dataset.animated) {
-          num.dataset.animated = '1';
-          if (prefersReduced) {
-            num.textContent = num.dataset.target;
-          } else {
-            animateNum(num);
-          }
-        }
-        io.unobserve(entry.target);
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
-
-    function animateNum(el) {
-      const target = parseInt(el.dataset.target, 10);
-      if (target === 0) { el.textContent = '0'; return; }
-      const duration = 1400;
-      const start = performance.now();
-      function tick(now) {
-        const p = Math.min(1, (now - start) / duration);
-        const eased = 1 - Math.pow(1 - p, 3); // easeOutCubic
-        el.textContent = Math.round(target * eased).toLocaleString();
-        if (p < 1) requestAnimationFrame(tick);
-      }
-      requestAnimationFrame(tick);
+// ===== Hub: collapse/expand + search =====
+(function(){
+  const cats = document.querySelectorAll('.cat');
+  // Default: collapsed except first two
+  cats.forEach((c, i) => { if (i >= 2) c.classList.add('collapsed'); });
+  document.querySelectorAll('.cat-head').forEach(head => {
+    head.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      head.parentElement.classList.toggle('collapsed');
+    });
+  });
+  document.querySelectorAll('.branch-head').forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('expanded'));
+  });
+  document.getElementById('hub-expand').addEventListener('click', () => {
+    cats.forEach(c => c.classList.remove('collapsed'));
+    document.querySelectorAll('.branch').forEach(b => b.classList.add('expanded'));
+  });
+  document.getElementById('hub-collapse').addEventListener('click', () => {
+    cats.forEach(c => c.classList.add('collapsed'));
+    document.querySelectorAll('.branch').forEach(b => b.classList.remove('expanded'));
+  });
+  const search = document.getElementById('hub-search');
+  search.addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) {
+      cats.forEach(c => { c.style.display = ''; c.querySelectorAll('.leaf, .branch').forEach(el => el.style.display = ''); });
+      return;
     }
-  })();
+    // Show all results expanded
+    cats.forEach(c => {
+      c.classList.remove('collapsed');
+      let hasMatch = false;
+      c.querySelectorAll('.leaf').forEach(leaf => {
+        const m = leaf.textContent.toLowerCase().includes(q);
+        leaf.style.display = m ? '' : 'none';
+        if (m) hasMatch = true;
+      });
+      c.querySelectorAll('.branch').forEach(br => {
+        const visibleSubs = [...br.querySelectorAll('.leaf')].filter(l => l.style.display !== 'none').length;
+        br.style.display = visibleSubs ? '' : 'none';
+        if (visibleSubs) br.classList.add('expanded');
+      });
+      c.style.display = hasMatch ? '' : 'none';
+    });
+  });
+})();
 </script>
 
-<!-- Live landing-page data: one fetch populates the recession composite, the 4
-     hero mini-charts (GDPC1, CPILFESL, CSUSHPISA, UNRATE), and the 3 indicator
-     strips (AHE, EXHOSLUS, HOUST). Transform logic is shared with the econ
-     dashboard (./core/lib/transforms.js) so values match the detail pages. -->
 <script type="module">
   import { fetchFred } from './core/lib/fred-client.js';
   import { applyTransform } from './core/lib/transforms.js';
