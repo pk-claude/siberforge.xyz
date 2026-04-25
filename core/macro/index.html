@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Siberforge &mdash; Macro &amp; Markets</title>
 <link rel="stylesheet" href="./styles.css" />
-<!-- Chart.js via CDN. date-fns adapter for time axes. -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
 </head>
@@ -22,8 +21,20 @@
   </div>
 </header>
 
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <a href="/core/macro/" class="dd-link active">Regime</a>
+  <a href="/core/macro/cycle/" class="dd-link">Cycle</a>
+  <a href="/core/macro/inflation/" class="dd-link">Inflation</a>
+  <a href="/core/macro/real-economy/" class="dd-link">Consumer</a>
+  <a href="/core/macro/housing/" class="dd-link">Housing</a>
+  <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+  <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+</nav>
+
 <section class="quotes" id="quotes-strip">
-  <!-- Live SPY + sector ETF tiles injected here. Click any tile for drill-down; hover for top contributors. -->
+  <!-- Live SPY + sector ETF tiles. Click any tile for drill-down; hover for top contributors. -->
 </section>
 
 <!-- Live macro strip: 6 indicators with current value, percentile, 1m delta -->
@@ -54,7 +65,7 @@
     <div id="regime-current" class="regime-current"></div>
   </div>
 
-  <!-- T5.2: Regime transition matrix — historical 6m forward base rates -->
+  <!-- Regime transition matrix — historical 6m forward base rates -->
   <section class="regime-transitions" id="regime-transitions"></section>
 
   <div class="regime-controls">
@@ -79,18 +90,8 @@
 
   <p class="regime-note" id="regime-interpretation"></p>
 
-  <!-- T5.5: Positioning capstone — converts regime + historical returns into a tilt -->
+  <!-- Positioning capstone — converts regime + historical returns into a tilt -->
   <section class="regime-positioning" id="regime-positioning"></section>
-
-  <!-- Links to deep-dive views -->
-  <p class="research-link-row">
-    Deep-dives:
-    <a href="/core/macro/cycle/" class="research-link">Cycle Position &rarr;</a>
-    <a href="/core/macro/inflation/" class="research-link">Inflation Persistence &rarr;</a>
-    <a href="/core/macro/real-economy/" class="research-link">Consumer &amp; Housing &rarr;</a>
-    <a href="/core/macro/backtest/" class="research-link">Regime Backtest &rarr;</a>
-    <a href="/core/macro/research.html" class="research-link">Pair Explorer &rarr;</a>
-  </p>
 </section>
 
 <footer>

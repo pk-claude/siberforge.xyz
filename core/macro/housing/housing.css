@@ -1,0 +1,14 @@
+/* Housing dashboard — page-specific tweaks layered on cycle.css. */
+
+.cycle-intro { padding-bottom: 14px; }
+
+@media (min-width: 1200px) {
+  #section-pipeline .cycle-tiles,
+  #section-affordability .cycle-tiles,
+  #section-stress .cycle-tiles,
+  #section-equities .cycle-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}

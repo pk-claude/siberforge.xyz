@@ -1,15 +1,5 @@
 // Vercel serverless function: proxies FRED API with server-side key.
-// Call as: /api/fred?series=CPIAUCSL,UNRATE,DFF&start=2015-01-01
-// Supports one or many comma-separated series IDs.
-//
-// Vintage queries (for drill-down revision ribbons):
-//   /api/fred?series=GDPC1&start=2010-01-01&realtime_end=2024-01-15
-// Returns the series as-known on the given realtime date. When both
-// realtime_start and realtime_end are the same day, you get that day's
-// vintage. Batch calls work the same as normal — realtime applies to all.
-//
-// Partial-failure tolerance: uses Promise.allSettled so a single FRED hiccup
-// on one series doesn't 502 the whole batch. Returns { series: [...], errors: [...] }.
+// Returns { series: [...], errors: [...] } with allSettled partial-failure tolerance.
 
 const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
@@ -47,15 +37,25 @@ const CATALOG = {
   MICH:                    { label: 'UMich 1Y Inflation Expectations', freq: 'monthly', unit: 'percent', transform: 'level',   group: 'inflation' },
 
   // ================= REAL ECONOMY (/core/macro/real-economy/) =================
-  // Consumer balance sheet
   PCE:           { label: 'Personal Consumption Expenditures',          freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
   DSPI:          { label: 'Disposable Personal Income',                 freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
   PSAVERT:       { label: 'Personal Saving Rate',                       freq: 'monthly',   unit: 'percent', transform: 'level',   group: 'real-economy' },
   TDSP:          { label: 'Household Debt Service Ratio',               freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'real-economy' },
-  // Housing cycle
   MSACSR:        { label: 'Monthly Supply of New Houses',               freq: 'monthly',   unit: 'months',  transform: 'level',   group: 'real-economy' },
-  // Building materials
   WPU081:        { label: 'PPI: Lumber & Wood Products',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'real-economy' },
+
+  // ================= HOUSING DASHBOARD (/core/macro/housing/) =================
+  HOUST1F:       { label: 'Housing Starts: Single-Family',  freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
+  HOUST5F:       { label: 'Housing Starts: 5+ Units (MF)',  freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
+  COMPUTSA:      { label: 'Housing Completions',            freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
+  MSPUS:         { label: 'Median Sales Price of Houses',   freq: 'quarterly', unit: 'usd',     transform: 'level',   group: 'housing' },
+  DRSFRMACBS:    { label: 'SF Mortgage Delinquency Rate',   freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'housing' },
+  CUUR0000SEHA:  { label: 'CPI: Rent of Primary Residence', freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'housing' },
+  MEHOINUSA672N: { label: 'Real Median Family Income',      freq: 'annual',    unit: 'usd',     transform: 'level',   group: 'housing' },
+  MORTGAGE15US:  { label: '15Y Fixed Mortgage Rate',        freq: 'weekly',    unit: 'percent', transform: 'level',   group: 'housing' },
+  PRRESCONS:     { label: 'Private Residential Construction Spending', freq: 'monthly', unit: 'mm_usd', transform: 'yoy_pct', group: 'housing' },
+  CES2000000001: { label: 'Construction Employment',        freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
+  RHVRUSQ156N:   { label: 'Rental Vacancy Rate',            freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'housing' },
 
   // ===================== ECON DASHBOARD (/core/econ/) =====================
   T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
@@ -92,7 +92,6 @@ async function fetchSeries(id, key, start, opts = {}) {
   if (start) url.searchParams.set('observation_start', start);
   if (opts.realtimeStart) url.searchParams.set('realtime_start', opts.realtimeStart);
   if (opts.realtimeEnd)   url.searchParams.set('realtime_end',   opts.realtimeEnd);
-
   const res = await fetch(url.toString());
   if (!res.ok) {
     const text = await res.text();
@@ -106,50 +105,33 @@ async function fetchSeries(id, key, start, opts = {}) {
   return { id, meta: CATALOG[id] || null, observations };
 }
 
-function validDate(s) {
-  return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s);
-}
+function validDate(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s); }
 
 export default async function handler(req, res) {
   const key = process.env.FRED_API_KEY;
-  if (!key) {
-    return res.status(500).json({ error: 'FRED_API_KEY not configured on server' });
-  }
+  if (!key) return res.status(500).json({ error: 'FRED_API_KEY not configured on server' });
 
-  if (req.query.catalog) {
-    return res.status(200).json({ catalog: CATALOG });
-  }
+  if (req.query.catalog) return res.status(200).json({ catalog: CATALOG });
 
   const seriesParam = (req.query.series || '').trim();
-  if (!seriesParam) {
-    return res.status(400).json({ error: 'missing ?series=ID1,ID2,...' });
-  }
+  if (!seriesParam) return res.status(400).json({ error: 'missing ?series=ID1,ID2,...' });
 
   const ids = seriesParam.split(',').map(s => s.trim()).filter(Boolean);
   const unknown = ids.filter(id => !CATALOG[id]);
-  if (unknown.length) {
-    return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
-  }
+  if (unknown.length) return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
 
   const start = req.query.start || '2010-01-01';
-
   const opts = {};
   if (req.query.realtime_start) {
-    if (!validDate(req.query.realtime_start)) {
-      return res.status(400).json({ error: 'realtime_start must be YYYY-MM-DD' });
-    }
+    if (!validDate(req.query.realtime_start)) return res.status(400).json({ error: 'realtime_start must be YYYY-MM-DD' });
     opts.realtimeStart = req.query.realtime_start;
   }
   if (req.query.realtime_end) {
-    if (!validDate(req.query.realtime_end)) {
-      return res.status(400).json({ error: 'realtime_end must be YYYY-MM-DD' });
-    }
+    if (!validDate(req.query.realtime_end)) return res.status(400).json({ error: 'realtime_end must be YYYY-MM-DD' });
     opts.realtimeEnd = req.query.realtime_end;
   }
 
   try {
-    // Promise.allSettled: a single FRED error on one series doesn't blow up
-    // the whole batch. Return { series, errors } so clients handle partials.
     const settled = await Promise.allSettled(ids.map(id => fetchSeries(id, key, start, opts)));
     const series = [];
     const errors = [];
