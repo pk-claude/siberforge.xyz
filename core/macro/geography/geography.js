@@ -1,3 +1,5 @@
+import { METRIC_CATALOG, CATEGORIES } from './metric-catalog.js';
+
 // Geography page controller.
 //
 // State-level: pick from 50+DC; pull unemployment, FHFA HPI, employment,
@@ -518,4 +520,103 @@ async function main() {
   }
 }
 
+
+// ---------- Metric Library (T13.2) ----------
+//
+// Renders 25 catalog entries grouped by category as cards with structured
+// hover tooltips (what / why / drivers / so-what). Tooltip follows the cursor.
+
+function renderMetricLibrary() {
+  const tgt = document.getElementById('metric-library-grid');
+  if (!tgt) return;
+
+  // Group by category preserving CATEGORIES order
+  const byCat = {};
+  for (const c of CATEGORIES) byCat[c] = [];
+  for (const m of METRIC_CATALOG) {
+    if (!byCat[m.category]) byCat[m.category] = [];
+    byCat[m.category].push(m);
+  }
+
+  const html = CATEGORIES.map(cat => {
+    const entries = byCat[cat] || [];
+    if (!entries.length) return '';
+    const cards = entries.map(m => `
+      <div class="ml-card" data-metric-id="${m.id}">
+        <div class="ml-card-label">${m.label}</div>
+        <div class="ml-card-source">${m.source}</div>
+        <div class="ml-card-sample">${m.sample || ''}</div>
+        <div class="ml-card-hint">hover for so-what</div>
+      </div>
+    `).join('');
+    return `
+      <div class="ml-cat-block">
+        <div class="ml-cat-title">${cat}</div>
+        <div class="ml-cat-grid">${cards}</div>
+      </div>
+    `;
+  }).join('');
+
+  tgt.innerHTML = html;
+  wireMetricTooltip();
+}
+
+function wireMetricTooltip() {
+  const lookup = Object.fromEntries(METRIC_CATALOG.map(m => [m.id, m]));
+  let popup = document.getElementById('metric-tooltip');
+  if (!popup) {
+    popup = document.createElement('div');
+    popup.id = 'metric-tooltip';
+    popup.className = 'metric-tooltip';
+    popup.style.display = 'none';
+    document.body.appendChild(popup);
+  }
+  const grid = document.getElementById('metric-library-grid');
+  if (!grid) return;
+
+  function position(e) {
+    const PAD = 14;
+    const w = popup.offsetWidth, h = popup.offsetHeight;
+    let x = e.clientX + PAD, y = e.clientY + PAD;
+    if (x + w + 8 > window.innerWidth)  x = e.clientX - w - PAD;
+    if (y + h + 8 > window.innerHeight) y = e.clientY - h - PAD;
+    if (x < 8) x = 8;
+    if (y < 8) y = 8;
+    popup.style.left = x + 'px';
+    popup.style.top  = y + 'px';
+  }
+
+  grid.addEventListener('mouseover', (e) => {
+    const card = e.target.closest('[data-metric-id]');
+    if (!card) return;
+    const m = lookup[card.dataset.metricId];
+    if (!m) return;
+    popup.innerHTML = `
+      <div class="mt-title">${m.label}</div>
+      <div class="mt-source">${m.source}</div>
+      <div class="mt-section"><span class="mt-key">What</span> ${m.what}</div>
+      <div class="mt-section"><span class="mt-key">Why it matters</span> ${m.why}</div>
+      <div class="mt-section"><span class="mt-key">Drivers</span> ${m.drivers}</div>
+      <div class="mt-section mt-sowhat"><span class="mt-key">So what</span> ${m.soWhat}</div>
+    `;
+    popup.style.display = 'block';
+    position(e);
+  });
+  grid.addEventListener('mousemove', (e) => {
+    if (popup.style.display !== 'block') return;
+    position(e);
+  });
+  grid.addEventListener('mouseout', (e) => {
+    const card = e.target.closest('[data-metric-id]');
+    if (!card) return;
+    const next = e.relatedTarget && e.relatedTarget.closest && e.relatedTarget.closest('[data-metric-id]');
+    if (next === card) return;
+    popup.style.display = 'none';
+  });
+}
+
+// Attach renderMetricLibrary call to main() if not already present.
+
 main();
+renderMetricLibrary();
+

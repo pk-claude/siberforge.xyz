@@ -61,12 +61,12 @@ const CATALOG = {
   CUSR0000SEHE:  { label: "CPI: Tenants' & Household Insurance", freq: 'monthly', unit: 'index', transform: 'yoy_pct', group: 'housing' },
 
   // ===================== ECON DASHBOARD (/core/econ/) =====================
-  T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  T10Y3M:                { label: '10Y-3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   GACDISA066MSFRBNY:     { label: 'Empire State Mfg Index',  freq: 'monthly',   unit: 'index',   transform: 'level',   group: 'econ' },
   GDPNOW:                { label: 'Atlanta Fed GDPNow',      freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   DGS2:                  { label: '2Y Treasury Yield',       freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   DGS5:                  { label: '5Y Treasury Yield',       freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
-  T10Y2Y:                { label: '10Y–2Y Spread (2s10s)',   freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
+  T10Y2Y:                { label: '10Y-2Y Spread (2s10s)',   freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   PCEPILFE:              { label: 'Core PCE Price Index',    freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
   CPILFESL:              { label: 'Core CPI',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
   CORESTICKM159SFRBATL:  { label: 'Sticky-Price Core CPI',   freq: 'monthly',   unit: 'percent', transform: 'level',   group: 'econ' },
@@ -110,6 +110,11 @@ async function fetchSeries(id, key, start, opts = {}) {
 
 function validDate(s) { return typeof s === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(s); }
 
+// State-level + MSA-level allowlist patterns. Allowing these by regex avoids
+// dumping ~250 explicit catalog entries per state * ~6 metrics each.
+const STATE_RE = /^([A-Z]{2})(UR|STHPI|POP|NA|NQGSP|UPOP|CONS|MFG|RETL|TRAD|GOVT)$/;
+const MSA_RE   = /^(ATNHPIUS\d{5}Q|LAUMT\d+|LAUMT.*A|MSACSR.*)$/;
+
 export default async function handler(req, res) {
   const key = process.env.FRED_API_KEY;
   if (!key) return res.status(500).json({ error: 'FRED_API_KEY not configured on server' });
@@ -120,11 +125,6 @@ export default async function handler(req, res) {
   if (!seriesParam) return res.status(400).json({ error: 'missing ?series=ID1,ID2,...' });
 
   const ids = seriesParam.split(',').map(s => s.trim()).filter(Boolean);
-  // Series allowed if explicitly in CATALOG OR matches a known geographic pattern.
-  // State-level: 2-letter code + (UR / STHPI / POP / NA / NQGSP).
-  // MSA-level: FHFA quarterly HPI (ATNHPIUS#####Q) and BLS MSA unemployment (LAUMT##########).
-  const STATE_RE = /^([A-Z]{2})(UR|STHPI|POP|NA|NQGSP|UPOP|CONS|MFG|RETL|TRAD|GOVT)$/;
-  const MSA_RE   = /^(ATNHPIUS\d{5}Q|LAUMT\d+|LAUMT.*A|MSACSR.*)$/;
   const unknown = ids.filter(id => !CATALOG[id] && !STATE_RE.test(id) && !MSA_RE.test(id));
   if (unknown.length) return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
 
@@ -145,4 +145,14 @@ export default async function handler(req, res) {
     const errors = [];
     settled.forEach((r, i) => {
       if (r.status === 'fulfilled') series.push(r.value);
-      else errors.push({ id: ids[i], error: String
+      else errors.push({ id: ids[i], error: String(r.reason?.message || r.reason) });
+    });
+    if (series.length === 0 && errors.length > 0) {
+      return res.status(502).json({ error: 'all series failed', errors });
+    }
+    res.setHeader('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
+    return res.status(200).json({ series, errors });
+  } catch (err) {
+    return res.status(502).json({ error: String(err.message || err) });
+  }
+}

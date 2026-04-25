@@ -142,3 +142,129 @@
   .geo-controls select { min-width: 180px; }
   .geo-hero-tiles { grid-template-columns: 1fr; }
 }
+
+/* ============ Metric Library (T13.2) ============ */
+#metric-library-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.ml-cat-block {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.ml-cat-title {
+  color: var(--accent);
+  font-size: 11px;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.ml-cat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+}
+.ml-card {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 10px 12px;
+  cursor: help;
+  transition: border-color .15s, transform .15s;
+}
+.ml-card:hover {
+  border-color: rgba(247, 167, 0, 0.45);
+  transform: translateY(-1px);
+}
+.ml-card-label {
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.ml-card-source {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+.ml-card-sample {
+  color: var(--accent);
+  font-size: 10.5px;
+  font-variant-numeric: tabular-nums;
+  margin-bottom: 4px;
+}
+.ml-card-hint {
+  color: var(--muted);
+  font-size: 9.5px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* The hover tooltip itself */
+.metric-tooltip {
+  position: fixed;
+  z-index: 1000;
+  max-width: 420px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  box-shadow: var(--shadow-md);
+  padding: 14px 16px;
+  color: var(--text);
+  font-size: 12px;
+  line-height: 1.55;
+  pointer-events: none;
+  animation: mt-fade-in 0.12s var(--ease-out);
+}
+@keyframes mt-fade-in {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.metric-tooltip .mt-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+  letter-spacing: 0.3px;
+}
+.metric-tooltip .mt-source {
+  color: var(--accent);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.metric-tooltip .mt-section {
+  color: var(--muted);
+  margin-bottom: 8px;
+  line-height: 1.55;
+}
+.metric-tooltip .mt-section.mt-sowhat {
+  background: rgba(247, 167, 0, 0.05);
+  border-left: 2px solid var(--accent);
+  padding: 7px 10px;
+  border-radius: 0 4px 4px 0;
+  margin-top: 10px;
+  margin-bottom: 0;
+  color: var(--text);
+}
+.metric-tooltip .mt-key {
+  display: block;
+  color: var(--accent);
+  font-size: 9.5px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
