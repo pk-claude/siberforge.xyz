@@ -77,10 +77,28 @@
   </div>
 </section>
 
-<section class="heatmap-section">
-  <h2>Indicator &times; Sector correlation matrix</h2>
-  <p class="sub">Pearson correlation between each indicator (YoY or level) and each sector ETF (daily log returns aligned to macro release cadence). Green = positive, red = negative.</p>
-  <div id="heatmap"></div>
+<section class="regime-section">
+  <h2>Regime-Conditional Sector Returns</h2>
+  <p class="sub">
+    Each historical month is classified into one of four growth &times; inflation regimes. Cells show the average forward
+    total return for SPY and each sector ETF given that regime. <strong>Growth</strong> = composite z-score of INDPRO,
+    nonfarm payrolls, and real retail sales (each 6m annualized). <strong>Inflation</strong> = z-score of Core CPI 6m
+    annualized. Both z-scores use a trailing 120-month window so the regime is &ldquo;vs recent history&rdquo; rather than
+    against the inflationary 1970s.
+  </p>
+
+  <div id="regime-current" class="regime-current"></div>
+
+  <div class="horizon-tabs">
+    <span class="horizon-label">Forward horizon</span>
+    <button class="h-tab" data-h="1">+1m</button>
+    <button class="h-tab" data-h="3">+3m</button>
+    <button class="h-tab active" data-h="6">+6m</button>
+  </div>
+
+  <div id="regime-table"></div>
+
+  <p class="regime-note" id="regime-interpretation"></p>
 </section>
 
 <footer>

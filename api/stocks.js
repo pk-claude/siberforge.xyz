@@ -46,6 +46,15 @@ async function finnhubQuote(symbol, key) {
 }
 
 // ---- Yahoo Finance (historical closes, keyless) ----
+//
+// We prefer adjusted close (`adjclose`) over raw close (`close`) so that all
+// downstream return calculations include dividends and split adjustments.
+// For sector ETFs over multi-year horizons, the dividend share of total return
+// is material (1–4%/yr); using raw close would understate cumulative returns
+// and bias every regime-conditional return downward by that amount.
+//
+// Fallback: if Yahoo doesn't return an adjclose array (rare — happens for
+// some non-equity symbols), drop back to raw close so we don't return empty.
 async function yahooHistory(symbol, years) {
   const now = Math.floor(Date.now() / 1000);
   const from = now - years * 365 * 86400;
@@ -55,12 +64,15 @@ async function yahooHistory(symbol, years) {
   if (!res.ok) throw new Error(`Yahoo ${symbol} ${res.status}`);
   const j = await res.json();
   const r = j?.chart?.result?.[0];
-  if (!r || !r.timestamp || !r.indicators?.quote?.[0]?.close) return { symbol, closes: [] };
+  if (!r || !r.timestamp) return { symbol, closes: [] };
   const ts = r.timestamp;
-  const closes = r.indicators.quote[0].close;
+  const adj = r.indicators?.adjclose?.[0]?.adjclose;
+  const raw = r.indicators?.quote?.[0]?.close;
+  const series = (adj && adj.length === ts.length) ? adj : raw;
+  if (!series) return { symbol, closes: [] };
   const out = [];
   for (let i = 0; i < ts.length; i++) {
-    const c = closes[i];
+    const c = series[i];
     if (c == null) continue; // Yahoo returns null for non-trading days occasionally
     out.push({ date: new Date(ts[i] * 1000).toISOString().slice(0, 10), value: c });
   }
@@ -89,7 +101,9 @@ export default async function handler(req, res) {
     }
 
     if (mode === 'history') {
-      const years = Math.max(1, Math.min(20, Number(req.query.years) || 10));
+      // Bumped 20 -> 30 so the regime-returns analysis can reach back to the
+      // sector-ETF inception window (XLK/XLF/etc. launched Dec 1998).
+      const years = Math.max(1, Math.min(30, Number(req.query.years) || 10));
       // Yahoo handles parallel fine; run all symbols concurrently.
       const series = await Promise.all(symbols.map(s => yahooHistory(s, years)));
       res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=172800');

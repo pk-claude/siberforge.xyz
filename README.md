@@ -70,7 +70,7 @@ Caveats: ISM/PMI is **not** on FRED (license pulled 2021) — `INDPRO` is substi
 
 **Finnhub** — free tier = 60 req/min. Used for **live quotes only** (`/quote`). SPY proxies the S&P 500 because `^GSPC` isn't on the free tier. Sector universe: XLK, XLF, XLE, XLV, XLI, XLY, XLP, XLU, XLB, XLRE, XLC.
 
-**Yahoo Finance v8 chart endpoint** — used for **historical daily closes**. Keyless, unofficial, but stable for years. Reason: Finnhub moved `/stock/candle` behind a ~$49/mo paywall in 2024, so the free tier has no history. If Yahoo ever breaks, swap to Stooq (also keyless) or Alpha Vantage (25 req/day free, which is enough given 24h edge caching).
+**Yahoo Finance v8 chart endpoint** — used for **historical daily closes** (adjusted close, so dividends + splits are included in returns). Keyless, unofficial, but stable for years. Reason: Finnhub moved `/stock/candle` behind a ~$49/mo paywall in 2024, so the free tier has no history. If Yahoo ever breaks, swap to Stooq (also keyless) or Alpha Vantage (25 req/day free, which is enough given 24h edge caching). Yahoo also exposes `^VIX`, `^VIX3M`, `DX-Y.NYB`, etc. keyless via the same endpoint — useful for the planned conditions/internals expansions.
 
 ## Local setup
 
@@ -119,8 +119,8 @@ Caveats: ISM/PMI is **not** on FRED (license pulled 2021) — `INDPRO` is substi
 ## Refresh behavior
 
 - **Quotes (SPY + sector ETFs):** client polls `/api/stocks?mode=quote` every 60s. Vercel caches for 60s so real upstream calls are ~1/min regardless of traffic.
-- **Daily history:** fetched once per session; CDN caches for 24h.
-- **FRED series:** fetched on selection change; CDN caches for 6h. FRED releases are monthly/quarterly anyway — more frequent polling buys nothing.
+- **Daily history:** fetched once per session; CDN caches for 24h. The regime-returns section pulls 30y of history (max), the rolling/scatter tabs pull whatever the user-selected window asks for (default 5y).
+- **FRED series:** fetched on selection change; CDN caches for 6h. FRED releases are monthly/quarterly anyway — more frequent polling buys nothing. The regime classifier fetches 40y of CPILFESL/INDPRO/PAYEMS/RRSFS once at page load.
 
 ## What the tabs do
 
@@ -128,13 +128,14 @@ Caveats: ISM/PMI is **not** on FRED (license pulled 2021) — `INDPRO` is substi
 2. **Scatter + regression** — Indicator values on x, daily return (%) on y, with OLS fit line. Reports β, α, R², n. R² will be low — that's expected for daily-frequency macro factor models.
 3. **Time-series overlay** — Both series standardized (z-score) and plotted together. Divergences = macro and price telling different stories.
 
-Below the tabs: an **indicator × sector** correlation heatmap (14 × 12) computed over 10 years of daily data. Green = positive, red = negative. Clamped at ±0.5 for color scaling.
+Below the tabs: a **regime-conditional sector returns** table. Each historical month is classified into one of four growth × inflation regimes (Goldilocks / Reflation / Stagflation / Disinflation), and the table shows the average forward total return for SPY and each sector ETF given that regime, at +1m / +3m / +6m horizons. The current regime is read off the most recent month and highlighted. Cells dim by sample size (n<24 fade, n<12 grey out). Methodology lives in `core/macro/regimes.js` (composite growth z = INDPRO + payrolls + real retail sales, all 6m annualized; inflation z = Core CPI 6m annualized; trailing 120-month z-window).
 
 ## Not wired (could add later)
 
-- VIX overlay (would need a data source — Finnhub free doesn't include it)
 - Lead/lag analysis (shift indicators forward N days to find predictive windows)
-- Regime-dependent correlation (split history by Fed hiking/cutting/holding)
+- Regime-dependent correlation on the rolling/scatter tabs (color points by the same 4-regime classification used below)
+- Financial conditions panel (NFCI, ANFCI, HY OAS) as a leading-indicator layer between regime and returns
+- Equity Risk Premium time series (earnings yield − 10Y real)
 - CSV export per chart
 - Authentication (the dashboard is public by default; add Vercel password protection if you don't want it indexed)
 

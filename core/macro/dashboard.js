@@ -10,6 +10,12 @@ import {
   zscore,
   logReturns,
 } from '/core/lib/analytics.js';
+import {
+  buildRegimeMap,
+  regimeDistribution,
+  REGIMES,
+} from './regimes.js';
+import { buildRegimeReturnsTable } from './regime-returns.js';
 
 // ---------- state ----------
 const state = {
@@ -23,6 +29,13 @@ const state = {
   stockHistory: {},         // symbol -> closes [{date,value}]
   quotes: [],
   quotesFetchedAt: 0,
+  // Regime-returns state (populated by renderRegimeReturns)
+  regimeRawSeries: {},      // id -> raw observations (long history) for regime calc
+  regimeMap: null,          // Map<YYYY-MM, {regime, growthZ, inflationZ}>
+  regimeTable: null,        // { symbol: { regime: { 1: {mean,n}, 3: ..., 6: ... } } }
+  regimeSymbols: [],        // ordered list of symbols (SPY first, then sectors)
+  currentHorizon: 6,        // selected horizon in months (default 6m)
+  currentRegime: null,      // string label for the most recent classified month
 };
 
 const charts = { rolling: null, regression: null, overlay: null };
@@ -269,49 +282,223 @@ function legendPlugin() {
   };
 }
 
-// ---------- heatmap (indicator x sector) ----------
-async function renderHeatmap() {
-  // Filter out entries that belong to the econ dashboard — they share the
-  // same CATALOG allowlist in /api/fred but are not meant to appear here.
-  const indicators = Object.keys(state.catalog).filter(id => state.catalog[id].group !== 'econ');
+// ---------- regime-conditional sector returns ----------
+//
+// Replaces the old indicator-x-sector correlation heatmap. The classifier and
+// aggregator live in regimes.js / regime-returns.js (pure modules); this
+// section is the thin orchestration + DOM layer.
+
+// Pull raw FRED observations with a custom start. Bypasses the macro-page
+// transform pipeline; we want LEVELS so the regime classifier can compute its
+// own 6-month annualized rates of change.
+async function fetchRawSeries(id, start) {
+  const cacheKey = `${id}|${start}`;
+  if (state.regimeRawSeries[cacheKey]) return state.regimeRawSeries[cacheKey];
+  const j = await fetchJSON(`/api/fred?series=${id}&start=${start}`);
+  const obs = j.series[0]?.observations || [];
+  state.regimeRawSeries[cacheKey] = obs;
+  return obs;
+}
+
+async function renderRegimeReturns() {
+  setStatus('stale', 'Loading regime data…');
+
+  // 40y of macro: gives the trailing 120m z-score window full warmup before
+  // the earliest sector ETF inception (~1998-12). FRED handles this trivially.
+  const REGIME_START = `${new Date().getFullYear() - 40}-01-01`;
+  const [cpi, indpro, payems, rrsfs] = await Promise.all([
+    fetchRawSeries('CPILFESL', REGIME_START),
+    fetchRawSeries('INDPRO',   REGIME_START),
+    fetchRawSeries('PAYEMS',   REGIME_START),
+    fetchRawSeries('RRSFS',    REGIME_START),
+  ]);
+
+  // 30y of equity history (max we allow at the API). Sector ETFs back to 1998.
   const sectors = state.tickers.filter(t => t.group === 'sector').map(t => t.symbol);
   const sym = ['SPY', ...sectors];
-  const history = await loadStockHistory(sym, 10);
+  const history = await loadStockHistory(sym, 30);
 
-  // Pre-compute returns for every symbol once.
-  const rets = {};
-  for (const s of sym) rets[s] = logReturns(history[s] || []);
+  // Build the regime map (Map<YYYY-MM, {regime, growthZ, inflationZ}>)
+  const regimeMap = buildRegimeMap({ cpi, indpro, payems, rrsfs });
+  state.regimeMap = regimeMap;
+  state.regimeSymbols = sym;
 
-  // Load every indicator once.
-  await Promise.all(indicators.map(id => loadIndicator(id)));
+  // Console diagnostic: distribution should be roughly balanced if the trailing
+  // z-window is doing its job. Wildly skewed (e.g., 80% in one quadrant)
+  // suggests the window or the composite needs adjusting.
+  const dist = regimeDistribution(regimeMap);
+  console.log('[regime] classified months:', regimeMap.size, dist);
 
-  const rows = [];
-  for (const id of indicators) {
-    const macro = state.macroSeries[id].transformed;
-    const row = { id, label: state.catalog[id].label, cells: [] };
-    for (const s of sym) {
-      const aligned = alignForward(macro, rets[s]);
-      const r = pearson(aligned.x, aligned.y);
-      row.cells.push({ symbol: s, r, n: aligned.x.length });
-    }
-    rows.push(row);
+  // Aggregate forward returns by regime per symbol.
+  state.regimeTable = buildRegimeReturnsTable(history, regimeMap, [1, 3, 6]);
+
+  // Identify the current (most recent) regime.
+  const months = [...regimeMap.keys()].sort();
+  const currentYm = months[months.length - 1];
+  const currentInfo = currentYm ? regimeMap.get(currentYm) : null;
+  state.currentRegime = currentInfo?.regime || null;
+
+  renderCurrentRegimeTile(currentYm, currentInfo, regimeMap);
+  renderRegimeTable();
+  renderRegimeInterpretation();
+  wireHorizonTabs();
+
+  setStatus('live', 'Live — prices refresh every 60s');
+}
+
+// Top tile: current regime badge + growth/inflation z-scores + persistence.
+function renderCurrentRegimeTile(currentYm, info, regimeMap) {
+  const tile = el('regime-current');
+  if (!tile) return;
+  if (!info) {
+    tile.innerHTML = '<div class="regime-current-empty">Insufficient history to classify current regime.</div>';
+    return;
+  }
+  const meta = REGIMES[info.regime];
+
+  // Count how many of the most recent consecutive months share the current regime.
+  const months = [...regimeMap.keys()].sort();
+  let streak = 0;
+  for (let i = months.length - 1; i >= 0; i--) {
+    if (regimeMap.get(months[i]).regime === info.regime) streak++;
+    else break;
   }
 
-  const tgt = el('heatmap');
-  const header = `<tr><th class="label">Indicator</th>${sym.map(s => `<th>${s}</th>`).join('')}</tr>`;
-  const body = rows.map(r => {
-    const cells = r.cells.map(c => {
-      const r2 = Number.isFinite(c.r) ? c.r : 0;
-      // Linear gradient: red (-0.5) -> neutral (0) -> green (+0.5). Clamp outside.
-      const t = Math.max(-0.5, Math.min(0.5, r2)) / 0.5; // -1..1
-      let bg;
-      if (t >= 0) bg = `rgba(62, 207, 142, ${0.1 + 0.55 * t})`;
-      else bg = `rgba(239, 79, 90, ${0.1 + 0.55 * -t})`;
-      return `<td style="background:${bg}">${fmt(c.r, 2)}</td>`;
-    }).join('');
-    return `<tr><td class="label">${r.label}</td>${cells}</tr>`;
+  // Pretty date: "April 2026" rather than "2026-04"
+  const [y, m] = currentYm.split('-').map(Number);
+  const monthName = new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+  tile.innerHTML = `
+    <div class="regime-badge" style="--regime-color: ${meta.color}">
+      <div class="regime-badge-label">CURRENT REGIME</div>
+      <div class="regime-badge-name">${meta.label}</div>
+      <div class="regime-badge-desc">${meta.desc}</div>
+    </div>
+    <div class="regime-stats">
+      <div class="regime-stat">
+        <div class="regime-stat-label">Growth z-score</div>
+        <div class="regime-stat-value ${info.growthZ >= 0 ? 'pos' : 'neg'}">${info.growthZ >= 0 ? '+' : ''}${fmt(info.growthZ, 2)}</div>
+        <div class="regime-stat-sub">composite: INDPRO + payrolls + real retail</div>
+      </div>
+      <div class="regime-stat">
+        <div class="regime-stat-label">Inflation z-score</div>
+        <div class="regime-stat-value ${info.inflationZ >= 0 ? 'pos' : 'neg'}">${info.inflationZ >= 0 ? '+' : ''}${fmt(info.inflationZ, 2)}</div>
+        <div class="regime-stat-sub">Core CPI 6m annualized</div>
+      </div>
+      <div class="regime-stat">
+        <div class="regime-stat-label">As of</div>
+        <div class="regime-stat-value">${monthName}</div>
+        <div class="regime-stat-sub">${streak} consecutive month${streak === 1 ? '' : 's'} in this regime</div>
+      </div>
+    </div>
+  `;
+}
+
+// Render the regime × symbol returns table for the currently selected horizon.
+function renderRegimeTable() {
+  const tgt = el('regime-table');
+  if (!tgt || !state.regimeTable) return;
+  const sym = state.regimeSymbols;
+  const horizon = state.currentHorizon;
+  // Color saturates at ±2.5%/month equivalent — tightens with longer horizon.
+  const colorScale = horizon * 2.5;
+
+  const symLabels = Object.fromEntries(state.tickers.map(t => [t.symbol, t.label]));
+
+  const headerCells = sym.map(s => {
+    // Strip parentheticals from labels for compactness ("S&P 500 (SPY)" -> "SPY").
+    const lbl = (symLabels[s] || s).replace(/\s*\([^)]+\)/, '');
+    return `<th title="${lbl}">${s}</th>`;
   }).join('');
-  tgt.innerHTML = `<table>${header}${body}</table>`;
+  const header = `<tr><th class="regime-col-label">Regime</th>${headerCells}</tr>`;
+
+  const regimeOrder = ['goldilocks', 'reflation', 'stagflation', 'disinflation'];
+  const body = regimeOrder.map(r => {
+    const meta = REGIMES[r];
+    const rowClass = state.currentRegime === r ? 'regime-row current' : 'regime-row';
+    const labelCell = `
+      <td class="regime-col-label">
+        <span class="regime-dot" style="background:${meta.color}"></span>
+        <span class="regime-row-name">${meta.label}</span>
+        <span class="regime-row-desc">${meta.short}</span>
+      </td>`;
+    const cells = sym.map(s => {
+      const cell = state.regimeTable[s]?.[r]?.[horizon];
+      if (!cell || cell.n === 0) {
+        return `<td class="regime-cell empty">—</td>`;
+      }
+      const ret = cell.mean;
+      // Diverging color: red (negative) -> neutral (0) -> green (positive).
+      const t = Math.max(-1, Math.min(1, ret / colorScale));
+      let bg;
+      if (t >= 0) bg = `rgba(62, 207, 142, ${0.10 + 0.55 * t})`;
+      else        bg = `rgba(239, 79, 90,  ${0.10 + 0.55 * -t})`;
+      // Sample-size opacity: cells with n < 12 fade out.
+      const opacity = cell.n >= 24 ? 1 : cell.n >= 12 ? 0.75 : 0.45;
+      const sign = ret > 0 ? '+' : '';
+      return `<td class="regime-cell" style="background:${bg};opacity:${opacity}" title="n=${cell.n}, σ=${fmt(cell.std, 1)}%">
+        <div class="regime-cell-ret">${sign}${fmt(ret, 1)}%</div>
+        <div class="regime-cell-n">n=${cell.n}</div>
+      </td>`;
+    }).join('');
+    return `<tr class="${rowClass}">${labelCell}${cells}</tr>`;
+  }).join('');
+
+  tgt.innerHTML = `<table class="regime-returns-table">${header}${body}</table>`;
+}
+
+// One-sentence interpretation auto-generated from the current regime's row.
+function renderRegimeInterpretation() {
+  const note = el('regime-interpretation');
+  if (!note || !state.currentRegime || !state.regimeTable) return;
+  const horizon = state.currentHorizon;
+  const sym = state.regimeSymbols.filter(s => s !== 'SPY');
+  // Find best/worst sectors at the current horizon for the current regime.
+  const cells = sym
+    .map(s => ({ s, c: state.regimeTable[s]?.[state.currentRegime]?.[horizon] }))
+    .filter(o => o.c && o.c.n >= 12);
+  if (!cells.length) {
+    note.textContent = '';
+    return;
+  }
+  cells.sort((a, b) => b.c.mean - a.c.mean);
+  const best = cells[0];
+  const worst = cells[cells.length - 1];
+  const spy = state.regimeTable['SPY']?.[state.currentRegime]?.[horizon];
+
+  const meta = REGIMES[state.currentRegime];
+  const horizonLabel = horizon === 1 ? '1-month' : horizon === 3 ? '3-month' : '6-month';
+  const tickerLabels = Object.fromEntries(state.tickers.map(t => [t.symbol, t.label]));
+  const lbl = s => (tickerLabels[s] || s).replace(/\s*\([^)]+\)/, '');
+
+  const spyTxt = spy && spy.n
+    ? `SPY averaged ${spy.mean >= 0 ? '+' : ''}${fmt(spy.mean, 1)}% (n=${spy.n}). `
+    : '';
+  note.innerHTML = `
+    <strong>How to read this</strong> — in <span style="color:${meta.color}">${meta.label}</span>
+    regimes since the data starts, the average forward ${horizonLabel} total return for
+    ${spyTxt}
+    Best sector: <strong>${best.s}</strong> (${lbl(best.s)}) at
+    ${best.c.mean >= 0 ? '+' : ''}${fmt(best.c.mean, 1)}% (n=${best.c.n}, σ=${fmt(best.c.std, 1)}%).
+    Worst: <strong>${worst.s}</strong> (${lbl(worst.s)}) at
+    ${worst.c.mean >= 0 ? '+' : ''}${fmt(worst.c.mean, 1)}% (n=${worst.c.n}).
+    Cells faded for n&lt;24; greyed for n&lt;12. Past base rates, not forecasts.
+  `;
+}
+
+// Horizon tab clicks swap the displayed return horizon without re-fetching.
+function wireHorizonTabs() {
+  document.querySelectorAll('.h-tab').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const h = Number(btn.dataset.h);
+      if (!Number.isFinite(h) || h === state.currentHorizon) return;
+      state.currentHorizon = h;
+      document.querySelectorAll('.h-tab').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderRegimeTable();
+      renderRegimeInterpretation();
+    });
+  });
 }
 
 // ---------- orchestration ----------
@@ -381,7 +568,7 @@ async function main() {
     wireControls();
     await loadQuotes();
     await rerenderActive();
-    await renderHeatmap();
+    await renderRegimeReturns();
 
     // Refresh quotes every 60s. Macro/history are cached heavily upstream.
     setInterval(() => {

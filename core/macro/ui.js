@@ -3,7 +3,7 @@
   "use strict";
   if (!window.SiberUI) return;
   window.SiberUI.init({
-    reveal: ".chart-wrap, .heatmap-section, #heatmap",
+    reveal: ".chart-wrap, .regime-section, #regime-table, .regime-current",
     threshold: 0.06,
   });
 })();
