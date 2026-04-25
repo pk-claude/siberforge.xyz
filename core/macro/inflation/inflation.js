@@ -601,3 +601,22 @@ async function main() {
 }
 
 main();
+
+
+// ---------- per-page export hook (T16.6) ----------
+// Wires window.__downloadPageData so the universal "Download data" button can
+// export THIS page's in-memory series as a wide-format CSV.
+import('/core/lib/csv-export.js').then(({ seriesToCSV }) => {
+  window.__downloadPageData = (btn) => {
+    if (btn) { btn.disabled = true; const orig = btn.textContent; btn.textContent = 'Exporting…'; setTimeout(() => { btn.textContent = orig; btn.disabled = false; }, 1500); }
+    const series = [];
+    for (const [id, obs] of Object.entries(state.series || {})) {
+      if (id.startsWith('_')) continue;
+      if (Array.isArray(obs) && obs.length) {
+        series.push({ id, label: id, observations: obs });
+      }
+    }
+    if (!series.length) { alert('No data loaded yet — wait for the page to finish loading.'); return; }
+    seriesToCSV('siberforge-inflation.csv', series);
+  };
+}).catch(err => console.warn('export hook load failed:', err));

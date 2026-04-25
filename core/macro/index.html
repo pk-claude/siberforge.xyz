@@ -36,6 +36,11 @@
   <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
 </nav>
 
+<!-- Today's Read hero — the conclusions layer. Pulls all 4 composite scores + regime + outliers. -->
+<section class="today-read" id="today-read">
+  <div class="tr-loading">Loading Today's Read…</div>
+</section>
+
 <section class="quotes" id="quotes-strip">
   <!-- Live SPY + sector ETF tiles. Click any tile for drill-down; hover for top contributors. -->
 </section>
@@ -95,6 +100,19 @@
 
   <!-- Positioning capstone — converts regime + historical returns into a tilt -->
   <section class="regime-positioning" id="regime-positioning"></section>
+
+  <!-- Stock-bond correlation regime — the cross-asset signal for 60/40 portfolios -->
+  <section class="sbc-section">
+    <h3>Stock-bond correlation regime</h3>
+    <p class="sbc-sub">
+      The single most decision-relevant cross-asset signal for any 60/40-style portfolio.
+      Below zero = bonds hedge equity drawdowns (the post-2000 default); above zero = bonds amplify
+      equity drawdowns (the 1970s and 2022 regime). The flip determines whether duration is a
+      diversifier or a correlated risk.
+    </p>
+    <div class="sbc-chart-wrap"><canvas id="sbc-chart"></canvas></div>
+    <p class="sbc-note" id="sbc-note"></p>
+  </section>
 </section>
 
 <footer>
@@ -103,6 +121,15 @@
 </footer>
 
 <script type="module" src="./dashboard.js"></script>
+<script type="module">
+  import { renderTodayRead } from '/core/macro/today-read.js';
+  import { renderStockBondCorrelation } from '/core/macro/stock-bond-corr.js';
+  renderTodayRead().catch(err => {
+    console.error('Today\'s Read failed:', err);
+    document.getElementById('today-read').innerHTML = '<div class="tr-loading">Today\'s Read unavailable. <a href="/core/macro/cycle/" style="color:var(--accent)">Open Cycle dashboard →</a></div>';
+  });
+  renderStockBondCorrelation('sbc-chart').catch(err => console.warn('SBC failed:', err));
+</script>
 <script src="../lib/ui.js"></script>
 <script src="./ui.js"></script>
 <script src="/core/lib/download-button.js"></script>
