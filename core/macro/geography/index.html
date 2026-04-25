@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Geography</title>
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../cycle/cycle.css" />
+<link rel="stylesheet" href="./geography.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Geography &middot; State &amp; MSA</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <a href="/core/macro/" class="dd-link">Regime</a>
+  <a href="/core/macro/cycle/" class="dd-link">Cycle</a>
+  <a href="/core/macro/inflation/" class="dd-link">Inflation</a>
+  <a href="/core/macro/real-economy/" class="dd-link">Consumer</a>
+  <a href="/core/macro/housing/" class="dd-link">Housing</a>
+  <a href="/core/macro/geography/" class="dd-link active">Geography</a>
+  <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+  <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+</nav>
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">Geographic dispersion &mdash; not all markets are the same cycle</h1>
+  <p class="cycle-subtitle">
+    The national housing cycle averages over 50 state cycles + 400+ MSAs. Sun Belt vs. Northeast vs.
+    California are running separate stories at any given time. Pick a state to see its trajectory
+    against the US, or pick an MSA for the metro-level housing-price view. The ranked-states bar
+    below shows where any single state sits versus all peers.
+  </p>
+</section>
+
+<!-- Selectors -->
+<section class="geo-controls">
+  <div class="control-group">
+    <span class="control-label">State / Region</span>
+    <select id="state-select"></select>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Metro Area (HPI)</span>
+    <select id="msa-select"></select>
+  </div>
+  <div class="control-group">
+    <span class="control-label">Ranked-states metric</span>
+    <select id="rank-metric">
+      <option value="unemployment">Unemployment rate (lower=better)</option>
+      <option value="hpi" selected>HPI YoY (higher=hotter)</option>
+      <option value="employment">Employment YoY</option>
+      <option value="population">Population YoY</option>
+    </select>
+  </div>
+</section>
+
+<!-- State scorecard tile + ranked-bars -->
+<section class="geo-hero" id="geo-hero"></section>
+
+<!-- 4 state-level charts -->
+<section class="cycle-section" id="section-state-charts">
+  <div class="cycle-section-head">
+    <h2>State trajectory vs. US</h2>
+    <p class="cycle-section-sub">
+      Selected state in <strong>amber</strong>, US benchmark in <strong>blue dashed</strong>. NBER recessions shaded pink.
+      Diverging lines = state-specific cycle dynamics worth understanding.
+    </p>
+  </div>
+  <div class="geo-charts-grid">
+    <div>
+      <div class="geo-chart-title">Unemployment rate</div>
+      <div class="geo-chart-wrap"><canvas id="chart-state-ur"></canvas></div>
+    </div>
+    <div>
+      <div class="geo-chart-title">FHFA HPI (YoY %)</div>
+      <div class="geo-chart-wrap"><canvas id="chart-state-hpi"></canvas></div>
+    </div>
+    <div>
+      <div class="geo-chart-title">Total nonfarm employment (YoY %)</div>
+      <div class="geo-chart-wrap"><canvas id="chart-state-emp"></canvas></div>
+    </div>
+    <div>
+      <div class="geo-chart-title">Population (YoY %)</div>
+      <div class="geo-chart-wrap"><canvas id="chart-state-pop"></canvas></div>
+    </div>
+  </div>
+  <p class="cycle-note" id="note-state"></p>
+</section>
+
+<!-- MSA section -->
+<section class="cycle-section" id="section-msa">
+  <div class="cycle-section-head">
+    <h2>Metro housing prices &mdash; FHFA quarterly HPI</h2>
+    <p class="cycle-section-sub">
+      Selected metro vs US national. The FHFA index uses repeat-sales of conforming mortgages — narrower
+      coverage than Case-Shiller but available at MSA-level. Major coastal metros (NY/SF/LA/Boston) and
+      Sun Belt metros (Phoenix/Atlanta/Tampa/Dallas) often run materially out of phase.
+    </p>
+  </div>
+  <div class="geo-chart-wrap"><canvas id="chart-msa-hpi"></canvas></div>
+  <p class="cycle-note" id="note-msa"></p>
+</section>
+
+<!-- Synthesis -->
+<section class="cycle-section">
+  <div class="cycle-section-head"><h2>Synthesis</h2></div>
+  <div id="geo-synthesis-content"></div>
+</section>
+
+<footer>
+  <span>Data: FRED state-level (UR / STHPI / NA / POP) + FHFA MSA-level quarterly HPI. Pink bands = NBER recessions.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./geography.js"></script>
+<script src="../../lib/ui.js"></script>
+</body>
+</html>

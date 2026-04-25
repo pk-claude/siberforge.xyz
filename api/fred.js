@@ -117,7 +117,12 @@ export default async function handler(req, res) {
   if (!seriesParam) return res.status(400).json({ error: 'missing ?series=ID1,ID2,...' });
 
   const ids = seriesParam.split(',').map(s => s.trim()).filter(Boolean);
-  const unknown = ids.filter(id => !CATALOG[id]);
+  // Series allowed if explicitly in CATALOG OR matches a known geographic pattern.
+  // State-level: 2-letter code + (UR / STHPI / POP / NA / NQGSP).
+  // MSA-level: FHFA quarterly HPI (ATNHPIUS#####Q) and BLS MSA unemployment (LAUMT##########).
+  const STATE_RE = /^([A-Z]{2})(UR|STHPI|POP|NA|NQGSP|UPOP)$/;
+  const MSA_RE   = /^(ATNHPIUS\d{5}Q|LAUMT\d+|LAUMT.*A|MSACSR.*)$/;
+  const unknown = ids.filter(id => !CATALOG[id] && !STATE_RE.test(id) && !MSA_RE.test(id));
   if (unknown.length) return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
 
   const start = req.query.start || '2010-01-01';
