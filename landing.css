@@ -139,3 +139,66 @@ body.landing-page main.landing-main { max-width: 1280px; margin: 0 auto; padding
 .branch.expanded .branch-body { max-height: 9999px; }
 
 footer { padding: 16px 24px; }
+
+/* ============ Recession composite: 5-signal dot grid ============ */
+.rec-dots {
+  display: grid; grid-template-columns: repeat(5, 1fr);
+  gap: 10px; padding-top: 12px; border-top: 1px solid var(--line);
+}
+.rec-dot-item {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  font-size: 10.5px; color: var(--muted); letter-spacing: 0.3px;
+  text-align: center; font-weight: 500;
+}
+.rec-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: rgba(138, 148, 163, 0.45);
+}
+.rec-dot-item.ok .rec-dot        { background: var(--green); }
+.rec-dot-item.triggered          { color: var(--red); font-weight: 600; }
+.rec-dot-item.triggered .rec-dot { background: var(--red); box-shadow: 0 0 0 3px rgba(239, 79, 90, 0.20); }
+
+/* ============ Indicator tier badge (colored by t-* class) ============ */
+.ind-tier {
+  display: inline-flex; flex-direction: column;
+  padding: 8px 12px; border-radius: 5px;
+  border-left: 3px solid rgba(138, 148, 163, 0.5);
+  background: var(--panel-2); min-width: 160px;
+}
+.ind-tier-label {
+  font-size: 11px; font-weight: 700; letter-spacing: 1.0px;
+  color: var(--muted); text-transform: uppercase;
+}
+.ind-tier-sub {
+  margin-top: 2px; font-size: 11px; color: var(--muted); line-height: 1.4;
+}
+.ind-tier.t-healthy { border-left-color: var(--green); background: rgba(62, 207, 142, 0.08); }
+.ind-tier.t-healthy .ind-tier-label { color: var(--green); }
+.ind-tier.t-trend   { border-left-color: var(--blue);  background: rgba(90, 156, 255, 0.10); }
+.ind-tier.t-trend   .ind-tier-label { color: var(--blue); }
+.ind-tier.t-cooling { border-left-color: var(--accent); background: rgba(247, 167, 0, 0.10); }
+.ind-tier.t-cooling .ind-tier-label { color: var(--accent); }
+.ind-tier.t-weak    { border-left-color: var(--red);   background: rgba(239, 79, 90, 0.10); }
+.ind-tier.t-weak    .ind-tier-label { color: var(--red); }
+:root[data-theme="light"] .ind-tier.t-healthy { background: rgba(31, 138, 85, 0.10); }
+:root[data-theme="light"] .ind-tier.t-trend   { background: rgba(31, 95, 196, 0.10); }
+:root[data-theme="light"] .ind-tier.t-cooling { background: rgba(181, 103, 0, 0.10); }
+:root[data-theme="light"] .ind-tier.t-weak    { background: rgba(196, 40, 60, 0.10); }
+
+/* ============ Indicator delta + sparkline ============ */
+.ind-delta { font-size: 11.5px; color: var(--muted); padding: 2px 7px;
+  border-radius: 3px; background: var(--panel-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ind-delta.up    { color: var(--green); background: rgba(62, 207, 142, 0.10); }
+.ind-delta.down  { color: var(--red);   background: rgba(239, 79, 90, 0.10); }
+.ind-delta.flat  { color: var(--muted); }
+.ind-spark { padding-top: 10px; border-top: 1px solid var(--line); min-height: 48px; line-height: 0; }
+.ind-spark svg { width: 100% !important; height: 48px !important; }
+
+/* Recession status text + count */
+.rec-status-text, .ind-status-text { font-size: 11px; color: var(--muted); }
+
+/* Mini-tile delta badges and sparkline (already present, ensure consistency) */
+.mini-tile.is-loading .mini-tile-value,
+.mini-tile.is-loading .mini-tile-delta { color: var(--muted); }
+.mini-tile-spark svg { width: 100% !important; height: 28px !important; }
+
