@@ -113,6 +113,97 @@ function renderTable() {
 async function main() {
   await loadMortgageRate();
   renderChart();
+  if (window.__renderChartChained) window.__renderChartChained();
   renderTable();
 }
 main();
+
+
+// =================================================================
+// Metro detail snapshot (for click-to-expand panel).
+// Population YoY, employment YoY, demographics, migration tag.
+// IRS SOI / Census ACS / BLS LAUS most-recent vintage.
+// =================================================================
+
+const METRO_DETAIL = {
+  'New York-Newark-Jersey City':           { popYoy: -0.8, jobYoy: +0.7, medAge: 39.4, ownerOcc: 51.8, migrationTag: 'Net outflow', notes: 'Largest US metro; high-tax exodus tempered by immigration. SF rent index falling.' },
+  'Los Angeles-Long Beach-Anaheim':        { popYoy: -0.4, jobYoy: +0.3, medAge: 38.0, ownerOcc: 49.2, migrationTag: 'Net outflow', notes: 'Affordability + climate-risk-driven outmigration. Second-highest unaffordable major metro.' },
+  'Chicago-Naperville-Elgin':              { popYoy: -0.5, jobYoy: +0.5, medAge: 38.5, ownerOcc: 65.3, migrationTag: 'Net outflow', notes: 'Net domestic migration negative for 10+ years; corporate HQ relocations to FL/TX.' },
+  'Dallas-Fort Worth-Arlington':           { popYoy: +1.6, jobYoy: +2.2, medAge: 35.4, ownerOcc: 60.0, migrationTag: 'Net inflow',  notes: 'Major job-growth magnet. Suburbs (Collin, Denton) growing fastest.' },
+  'Houston-The Woodlands-Sugar Land':      { popYoy: +1.3, jobYoy: +1.8, medAge: 35.0, ownerOcc: 59.8, migrationTag: 'Net inflow',  notes: 'Energy + healthcare anchor. Diverse industry base; less rate-sensitive than coastal metros.' },
+  'Washington-Arlington-Alexandria':       { popYoy: +0.4, jobYoy: +0.6, medAge: 38.5, ownerOcc: 62.5, migrationTag: 'Stable',      notes: 'Federal-spending-anchored. Inner-suburb (Loudoun, Fairfax) more growth than DC core.' },
+  'Philadelphia-Camden-Wilmington':        { popYoy: -0.2, jobYoy: +0.4, medAge: 39.2, ownerOcc: 67.1, migrationTag: 'Slight outflow', notes: 'Healthcare + bio anchor. Inner-suburb growth (Bucks, Chester) offsets city losses.' },
+  'Miami-Fort Lauderdale-West Palm Beach': { popYoy: +1.0, jobYoy: +1.5, medAge: 41.0, ownerOcc: 60.5, migrationTag: 'Net inflow',  notes: 'High-end inflow from NY/NJ/CA. Inventory rising; price growth moderating from peak.' },
+  'Atlanta-Sandy Springs-Roswell':         { popYoy: +1.4, jobYoy: +1.7, medAge: 36.5, ownerOcc: 61.2, migrationTag: 'Net inflow',  notes: 'Forsyth/Cherokee suburbs lead. Diverse anchor industries (Coke, Delta, fintech).' },
+  'Boston-Cambridge-Newton':               { popYoy: +0.1, jobYoy: +0.8, medAge: 39.0, ownerOcc: 60.1, migrationTag: 'Stable',      notes: 'Bio + university anchor. Core stable; outer NH suburbs growing.' },
+  'Phoenix-Mesa-Scottsdale':               { popYoy: +1.7, jobYoy: +2.0, medAge: 37.2, ownerOcc: 64.7, migrationTag: 'Net inflow',  notes: 'Sunbelt champion. Pinal County fastest-growing in metro. Climate risk: heat + wildfire.' },
+  'San Francisco-Oakland-Hayward':         { popYoy: -0.6, jobYoy: -0.2, medAge: 39.0, ownerOcc: 53.7, migrationTag: 'Net outflow', notes: 'Tech-layoff + remote-work outmigration. PTI ratio worst in the country.' },
+  'Riverside-San Bernardino-Ontario':      { popYoy: +0.8, jobYoy: +1.0, medAge: 35.8, ownerOcc: 64.5, migrationTag: 'Net inflow',  notes: 'CA Inland Empire — affordability-driven flight from coastal CA. Logistics employment heavy.' },
+  'Detroit-Warren-Dearborn':               { popYoy: -0.5, jobYoy: +0.2, medAge: 40.1, ownerOcc: 70.5, migrationTag: 'Net outflow', notes: 'Auto-anchored economy. Suburban (Oakland, Macomb) stable; Detroit core stabilizing.' },
+  'Seattle-Tacoma-Bellevue':               { popYoy: +0.5, jobYoy: +1.0, medAge: 37.8, ownerOcc: 60.2, migrationTag: 'Slowing',     notes: 'Tech-anchored. King County losing some, Pierce + Snohomish absorbing.' },
+  'Minneapolis-St. Paul-Bloomington':      { popYoy: +0.3, jobYoy: +0.7, medAge: 38.0, ownerOcc: 70.0, migrationTag: 'Stable',      notes: 'Diverse Fortune-500 anchor. Stable, moderate-growth metro.' },
+  'San Diego-Carlsbad':                    { popYoy: -0.2, jobYoy: +0.3, medAge: 36.5, ownerOcc: 53.6, migrationTag: 'Slight outflow', notes: 'Defense + biotech anchor. Affordability stretched; net domestic outflow but military rotation supports demand.' },
+  'Tampa-St. Petersburg-Clearwater':       { popYoy: +1.5, jobYoy: +1.8, medAge: 42.0, ownerOcc: 67.5, migrationTag: 'Net inflow',  notes: 'Sun Belt retiree + remote-worker magnet. Hurricane risk + insurance pricing emerging headwind.' },
+  'Denver-Aurora-Lakewood':                { popYoy: +0.4, jobYoy: +0.8, medAge: 36.7, ownerOcc: 64.8, migrationTag: 'Slowing',     notes: 'Energy + tech anchor. Growth slowing from 2010s pace as affordability stretches.' },
+  'Baltimore-Columbia-Towson':             { popYoy: -0.1, jobYoy: +0.4, medAge: 39.0, ownerOcc: 65.5, migrationTag: 'Slight outflow', notes: 'Healthcare + government anchor. Stable but slow.' },
+  'St. Louis':                             { popYoy: -0.4, jobYoy: +0.3, medAge: 39.0, ownerOcc: 68.7, migrationTag: 'Slight outflow', notes: 'Healthcare + finance anchor. Most affordable major metro on this list.' },
+  'Charlotte-Concord-Gastonia':            { popYoy: +1.5, jobYoy: +1.7, medAge: 36.6, ownerOcc: 64.5, migrationTag: 'Net inflow',  notes: 'Banking + fintech anchor. Among fastest-growing East Coast metros.' },
+  'Orlando-Kissimmee-Sanford':             { popYoy: +1.6, jobYoy: +1.8, medAge: 37.5, ownerOcc: 65.0, migrationTag: 'Net inflow',  notes: 'Tourism + healthcare. New starts heavy; price growth normalizing.' },
+  'Portland-Vancouver-Hillsboro':          { popYoy: -0.3, jobYoy: +0.3, medAge: 39.5, ownerOcc: 62.5, migrationTag: 'Slight outflow', notes: 'Tech + outdoor industry. Affordability + city-policy concerns driving suburban shifts.' },
+  'Austin-Round Rock-Georgetown':          { popYoy: +1.3, jobYoy: +1.6, medAge: 35.5, ownerOcc: 60.8, migrationTag: 'Net inflow (slowing)', notes: 'Most-talked-about Sun Belt metro. Inventory built fastest; price growth flat-to-down 2024.' },
+};
+
+function renderMetroDetail(metroName) {
+  const tgt = document.getElementById('metro-detail-panel');
+  if (!tgt) return;
+  const d = METRO_DETAIL[metroName];
+  const meta = METROS[metroName];
+  if (!d || !meta) {
+    tgt.style.display = 'none';
+    return;
+  }
+  const pti = meta.homeValue / meta.hhIncome;
+  const ptiClass = pti > 6 ? 'neg' : pti < 4 ? 'pos' : '';
+  const popClass = d.popYoy >= 0 ? 'pos' : 'neg';
+  const jobClass = d.jobYoy >= 0 ? 'pos' : 'neg';
+  const migClass = d.migrationTag.includes('inflow') ? 'pos' : d.migrationTag.includes('outflow') ? 'neg' : '';
+
+  tgt.innerHTML = `
+    <div class="md-header">
+      <div class="md-title">${metroName}</div>
+      <button class="md-close" id="md-close" title="Close">&times;</button>
+    </div>
+    <div class="md-grid">
+      <div class="md-tile"><div class="md-label">Median home value</div><div class="md-value">$${(meta.homeValue / 1000).toFixed(0)}K</div></div>
+      <div class="md-tile"><div class="md-label">Median HH income</div><div class="md-value">$${(meta.hhIncome / 1000).toFixed(1)}K</div></div>
+      <div class="md-tile"><div class="md-label">Price-to-income</div><div class="md-value ${ptiClass}">${pti.toFixed(1)}x</div></div>
+      <div class="md-tile"><div class="md-label">Population YoY</div><div class="md-value ${popClass}">${d.popYoy >= 0 ? '+' : ''}${d.popYoy.toFixed(1)}%</div></div>
+      <div class="md-tile"><div class="md-label">Employment YoY</div><div class="md-value ${jobClass}">${d.jobYoy >= 0 ? '+' : ''}${d.jobYoy.toFixed(1)}%</div></div>
+      <div class="md-tile"><div class="md-label">Median age</div><div class="md-value">${d.medAge.toFixed(1)}</div></div>
+      <div class="md-tile"><div class="md-label">Owner-occupied</div><div class="md-value">${d.ownerOcc.toFixed(1)}%</div></div>
+      <div class="md-tile"><div class="md-label">Migration</div><div class="md-value ${migClass}" style="font-size:13px">${d.migrationTag}</div></div>
+    </div>
+    <div class="md-notes"><strong>Context:</strong> ${d.notes}</div>
+  `;
+  tgt.style.display = 'block';
+  document.getElementById('md-close').addEventListener('click', () => { tgt.style.display = 'none'; });
+}
+
+// Patch renderChart to wire click handler. We do this by overriding after definition.
+const _origRenderChart = renderChart;
+window.__renderChartChained = function() {
+  _origRenderChart();
+  const canvas = document.getElementById('chart-pti');
+  if (!canvas) return;
+  canvas.addEventListener('click', (evt) => {
+    const ch = Chart.getChart(canvas);
+    if (!ch) return;
+    const points = ch.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+    if (!points.length) return;
+    const idx = points[0].index;
+    const metroName = ch.data.labels[idx];
+    renderMetroDetail(metroName);
+    document.getElementById('metro-detail-panel')?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  canvas.style.cursor = 'pointer';
+};

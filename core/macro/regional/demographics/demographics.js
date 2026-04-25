@@ -62,21 +62,89 @@ const DEMO = {
 function el(id) { return document.getElementById(id); }
 function fmt(n, d = 1) { return Number.isFinite(n) ? n.toFixed(d) : '—'; }
 
+let _sortBy = 'medIncome', _sortDir = 'desc';
+
 function renderTable() {
-  const rows = Object.entries(DEMO).sort((a, b) => b[1].medIncome - a[1].medIncome).map(([_, v]) => `
-    <tr>
+  const cmp = (a, b) => {
+    let av = a[1][_sortBy], bv = b[1][_sortBy];
+    if (_sortBy === 'name') { av = a[1].name; bv = b[1].name; }
+    if (av < bv) return _sortDir === 'asc' ? -1 : 1;
+    if (av > bv) return _sortDir === 'asc' ? 1 : -1;
+    return 0;
+  };
+  const sorted = Object.entries(DEMO).sort(cmp);
+  const rows = sorted.map(([code, v]) => `
+    <tr data-state="${code}">
       <td>${v.name}</td>
       <td>${fmt(v.medAge, 1)}</td>
       <td>$${(v.medIncome / 1000).toFixed(1)}K</td>
       <td>${fmt(v.ownerOcc, 1)}%</td>
       <td>${fmt(v.pct25_54, 1)}%</td>
       <td>${fmt(v.pct65, 1)}%</td>
+      <td>${(v.pct25_54 / v.pct65).toFixed(2)}x</td>
     </tr>
   `).join('');
-  el('demographics-table').innerHTML = `<table class="reg-table">
-    <thead><tr><th>State</th><th>Median age</th><th>Median HH income</th><th>Owner-occupied</th><th>% 25-54</th><th>% 65+</th></tr></thead>
+  function arrow(col) { return _sortBy === col ? (_sortDir === 'desc' ? ' ▼' : ' ▲') : ''; }
+  el('demographics-table').innerHTML = `<table class="reg-table demo-sortable">
+    <thead><tr>
+      <th data-col="name">State${arrow('name')}</th>
+      <th data-col="medAge">Median age${arrow('medAge')}</th>
+      <th data-col="medIncome">Median HH income${arrow('medIncome')}</th>
+      <th data-col="ownerOcc">Owner-occupied${arrow('ownerOcc')}</th>
+      <th data-col="pct25_54">% 25-54${arrow('pct25_54')}</th>
+      <th data-col="pct65">% 65+${arrow('pct65')}</th>
+      <th data-col="cohort">Formers/Seniors${arrow('cohort')}</th>
+    </tr></thead>
     <tbody>${rows}</tbody>
   </table>`;
+  wireTableInteractions();
+}
+
+function wireTableInteractions() {
+  const table = el('demographics-table');
+  if (!table) return;
+  // Click headers to sort
+  table.querySelectorAll('th[data-col]').forEach(th => {
+    th.style.cursor = 'pointer';
+    th.addEventListener('click', () => {
+      const col = th.dataset.col;
+      // Map "cohort" virtual column to a real key by computing on the fly
+      if (col === _sortBy) _sortDir = _sortDir === 'desc' ? 'asc' : 'desc';
+      else { _sortBy = col; _sortDir = 'desc'; }
+      // For "cohort" we sort by computed ratio
+      if (_sortBy === 'cohort') {
+        const sorted = Object.entries(DEMO).sort((a, b) => {
+          const r = (a[1].pct25_54 / a[1].pct65) - (b[1].pct25_54 / b[1].pct65);
+          return _sortDir === 'asc' ? r : -r;
+        });
+        const rows = sorted.map(([code, v]) => `
+          <tr data-state="${code}">
+            <td>${v.name}</td>
+            <td>${fmt(v.medAge, 1)}</td>
+            <td>$${(v.medIncome / 1000).toFixed(1)}K</td>
+            <td>${fmt(v.ownerOcc, 1)}%</td>
+            <td>${fmt(v.pct25_54, 1)}%</td>
+            <td>${fmt(v.pct65, 1)}%</td>
+            <td>${(v.pct25_54 / v.pct65).toFixed(2)}x</td>
+          </tr>
+        `).join('');
+        table.querySelector('tbody').innerHTML = rows;
+        // Re-render headers with arrow indicator
+        table.querySelectorAll('th[data-col]').forEach(h => {
+          const arrow = h.dataset.col === _sortBy ? (_sortDir === 'desc' ? ' ▼' : ' ▲') : '';
+          h.textContent = h.textContent.replace(/[▼▲]/g, '').trim() + arrow;
+        });
+        wireTableInteractions();  // rebind
+        return;
+      }
+      renderTable();
+    });
+  });
+  // Hover row → highlight (background)
+  table.querySelectorAll('tbody tr').forEach(tr => {
+    tr.addEventListener('mouseenter', () => tr.style.background = 'rgba(247, 167, 0, 0.08)');
+    tr.addEventListener('mouseleave', () => tr.style.background = '');
+  });
 }
 
 function renderCohortChart() {

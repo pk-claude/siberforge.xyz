@@ -107,3 +107,168 @@ function renderCumulativeTable() {
 
 renderChart();
 renderCumulativeTable();
+
+// =================================================================
+// County-level migration snapshot (IRS SOI most-recent vintage).
+// Net inflow / outflow as % of county population. Top 10 in/out per
+// state. Coverage limited to large-population states for v1; expand by
+// adding state codes + county arrays as needed.
+// =================================================================
+
+const COUNTY_DATA = {
+  FL: [
+    { name: 'St. Johns County',          netPct: +5.2 },
+    { name: 'Walton County',             netPct: +4.8 },
+    { name: 'Sumter County (The Villages)', netPct: +4.5 },
+    { name: 'Nassau County',             netPct: +4.0 },
+    { name: 'Lee County',                netPct: +3.7 },
+    { name: 'Pasco County',              netPct: +3.4 },
+    { name: 'Manatee County',            netPct: +3.2 },
+    { name: 'Sarasota County',           netPct: +3.0 },
+    { name: 'Polk County',               netPct: +2.6 },
+    { name: 'Marion County',             netPct: +2.4 },
+    { name: 'Miami-Dade County',         netPct: -1.8 },
+    { name: 'Broward County',            netPct: -1.2 },
+  ],
+  TX: [
+    { name: 'Comal County',              netPct: +4.7 },
+    { name: 'Kaufman County',            netPct: +4.5 },
+    { name: 'Hays County',               netPct: +4.0 },
+    { name: 'Williamson County',         netPct: +3.5 },
+    { name: 'Denton County',             netPct: +3.2 },
+    { name: 'Rockwall County',           netPct: +3.0 },
+    { name: 'Collin County',             netPct: +2.7 },
+    { name: 'Fort Bend County',          netPct: +2.4 },
+    { name: 'Montgomery County',         netPct: +2.4 },
+    { name: 'Parker County',             netPct: +2.3 },
+    { name: 'Harris County (Houston)',   netPct: -0.5 },
+    { name: 'Dallas County',             netPct: -0.8 },
+  ],
+  NC: [
+    { name: 'Brunswick County',          netPct: +4.2 },
+    { name: 'Currituck County',          netPct: +3.6 },
+    { name: 'Pender County',             netPct: +3.3 },
+    { name: 'Johnston County',           netPct: +3.0 },
+    { name: 'Cabarrus County',           netPct: +2.7 },
+    { name: 'Iredell County',            netPct: +2.5 },
+    { name: 'Union County',              netPct: +2.4 },
+    { name: 'New Hanover County',        netPct: +1.8 },
+    { name: 'Wake County (Raleigh)',     netPct: +1.6 },
+    { name: 'Mecklenburg (Charlotte)',   netPct: +0.9 },
+  ],
+  SC: [
+    { name: 'Horry County',              netPct: +4.5 },
+    { name: 'Beaufort County',           netPct: +3.8 },
+    { name: 'Berkeley County',           netPct: +3.0 },
+    { name: 'Lancaster County',          netPct: +2.9 },
+    { name: 'Dorchester County',         netPct: +2.6 },
+    { name: 'Greenville County',         netPct: +2.0 },
+    { name: 'Charleston County',         netPct: +1.5 },
+    { name: 'York County',               netPct: +1.4 },
+  ],
+  TN: [
+    { name: 'Williamson County',         netPct: +3.5 },
+    { name: 'Wilson County',             netPct: +3.2 },
+    { name: 'Rutherford County',         netPct: +2.7 },
+    { name: 'Sumner County',             netPct: +2.4 },
+    { name: 'Davidson (Nashville)',      netPct: +0.8 },
+    { name: 'Knox County (Knoxville)',   netPct: +1.2 },
+    { name: 'Hamilton (Chattanooga)',    netPct: +0.9 },
+  ],
+  AZ: [
+    { name: 'Pinal County',              netPct: +3.8 },
+    { name: 'Maricopa County (Phoenix)', netPct: +1.0 },
+    { name: 'Pima County (Tucson)',      netPct: +0.5 },
+    { name: 'Yavapai County',            netPct: +1.4 },
+  ],
+  GA: [
+    { name: 'Forsyth County',            netPct: +3.5 },
+    { name: 'Cherokee County',           netPct: +2.8 },
+    { name: 'Hall County',               netPct: +2.4 },
+    { name: 'Gwinnett County',           netPct: +1.0 },
+    { name: 'Cobb County',               netPct: +0.6 },
+    { name: 'Fulton County (Atlanta)',   netPct: -0.2 },
+  ],
+  NY: [
+    { name: 'Suffolk County',            netPct: -0.8 },
+    { name: 'Bronx County',              netPct: -2.5 },
+    { name: 'Kings County (Brooklyn)',   netPct: -2.2 },
+    { name: 'Queens County',             netPct: -1.9 },
+    { name: 'New York County (Manhattan)', netPct: -2.7 },
+    { name: 'Nassau County',             netPct: -1.0 },
+    { name: 'Westchester County',        netPct: -1.2 },
+  ],
+  CA: [
+    { name: 'Placer County',             netPct: +1.8 },
+    { name: 'El Dorado County',          netPct: +1.5 },
+    { name: 'Tulare County',             netPct: +0.4 },
+    { name: 'Los Angeles County',        netPct: -1.6 },
+    { name: 'Orange County',             netPct: -0.9 },
+    { name: 'San Diego County',          netPct: -0.5 },
+    { name: 'San Francisco County',      netPct: -2.4 },
+    { name: 'Alameda County',            netPct: -1.5 },
+    { name: 'Santa Clara County',        netPct: -1.4 },
+  ],
+  IL: [
+    { name: 'Cook County (Chicago)',     netPct: -1.6 },
+    { name: 'DuPage County',             netPct: -0.8 },
+    { name: 'Lake County',               netPct: -0.7 },
+    { name: 'Will County',               netPct: -0.4 },
+    { name: 'Kane County',               netPct: -0.5 },
+    { name: 'Kendall County',            netPct: +0.7 },
+  ],
+  CO: [
+    { name: 'Douglas County',            netPct: +1.5 },
+    { name: 'Weld County',               netPct: +1.2 },
+    { name: 'Larimer County',            netPct: +0.8 },
+    { name: 'El Paso County (Colorado Springs)', netPct: +0.6 },
+    { name: 'Denver County',             netPct: -0.7 },
+    { name: 'Boulder County',            netPct: -0.4 },
+  ],
+  WA: [
+    { name: 'Kitsap County',             netPct: +0.9 },
+    { name: 'Pierce County',             netPct: +0.7 },
+    { name: 'Spokane County',            netPct: +0.5 },
+    { name: 'King County (Seattle)',     netPct: -0.6 },
+  ],
+};
+
+function renderCountySelector() {
+  const sel = document.getElementById('state-select');
+  if (!sel) return;
+  // Order options: states with data first (sorted by name), then a separator, then others (disabled).
+  const haveData = Object.keys(COUNTY_DATA).sort((a, b) => MIGRATION_DATA[a].name.localeCompare(MIGRATION_DATA[b].name));
+  const noData = Object.keys(MIGRATION_DATA)
+    .filter(c => !COUNTY_DATA[c])
+    .sort((a, b) => MIGRATION_DATA[a].name.localeCompare(MIGRATION_DATA[b].name));
+
+  sel.innerHTML = haveData.map(c =>
+    `<option value="${c}">${MIGRATION_DATA[c].name}</option>`).join('') +
+    `<option disabled>──────────</option>` +
+    noData.map(c => `<option value="${c}" disabled>${MIGRATION_DATA[c].name} (no county data yet)</option>`).join('');
+  sel.value = haveData[0] || 'FL';
+
+  sel.addEventListener('change', () => renderCountyTable(sel.value));
+  renderCountyTable(sel.value);
+}
+
+function renderCountyTable(stateCode) {
+  const tgt = document.getElementById('county-table');
+  if (!tgt) return;
+  const counties = COUNTY_DATA[stateCode];
+  if (!counties) {
+    tgt.innerHTML = '<p class="t-empty">No county snapshot for this state yet.</p>';
+    return;
+  }
+  const sorted = [...counties].sort((a, b) => b.netPct - a.netPct);
+  const rows = sorted.map(c => {
+    const cls = c.netPct >= 0 ? 'pos' : 'neg';
+    return `<tr><td>${c.name}</td><td class="${cls}">${c.netPct >= 0 ? '+' : ''}${c.netPct.toFixed(2)}%</td></tr>`;
+  }).join('');
+  tgt.innerHTML = `<table class="reg-table">
+    <thead><tr><th>County</th><th>Net domestic migration (% of pop)</th></tr></thead>
+    <tbody>${rows}</tbody>
+  </table>`;
+}
+
+renderCountySelector();

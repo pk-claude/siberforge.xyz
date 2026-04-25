@@ -29,9 +29,11 @@ async function fetchJSON(url) {
 function latestValue(s) { return s && s.length ? s[s.length - 1] : null; }
 
 async function loadAll() {
-  setStatus('stale', 'Loading state construction employment…');
+  setStatus('stale', `Loading 0/${STATES.length} states…`);
   // Fetch construction (CONS) + nonfarm (NA) for each state, in batches.
   // Using batches of 8 states × 2 series = 16 series per call.
+  let loaded = 0;
+  const errors = [];
   for (let i = 0; i < STATES.length; i += 8) {
     const batch = STATES.slice(i, i + 8);
     const ids = [];
@@ -44,11 +46,18 @@ async function loadAll() {
         const na = latestValue(byId[`${s}NA`]);
         if (cons && na && na.value > 0) {
           state.share[s] = (cons.value / na.value) * 100;
+          loaded++;
         }
       }
-      if (j.errors?.length) console.warn('batch errors:', j.errors);
-    } catch (e) { console.warn(`batch fail ${batch.join(',')}:`, e); }
+      if (j.errors?.length) errors.push(...j.errors);
+    } catch (e) {
+      console.warn(`batch fail ${batch.join(',')}:`, e);
+      errors.push({ id: batch.join(','), error: String(e.message || e) });
+    }
+    setStatus('stale', `Loading ${loaded}/${STATES.length} states…`);
   }
+  if (errors.length) console.warn('[channel-mix] errors:', errors);
+  return { loaded, errorCount: errors.length };
 }
 
 function renderChart() {
@@ -88,10 +97,17 @@ function renderChart() {
 
 async function main() {
   try {
-    await loadAll();
+    const { loaded, errorCount } = await loadAll();
+    if (loaded === 0) {
+      setStatus('error', `No state data loaded (errors: ${errorCount}). Check console.`);
+      const note = el('note-rank');
+      if (note) note.innerHTML = '<strong>No data.</strong> All state-level FRED series failed to load. The most likely cause is that FRED uses a different series naming convention than the [STATE]CONS/[STATE]NA pattern this page assumes for state construction employment. Open devtools console for which specific series IDs failed.';
+      return;
+    }
     renderChart();
     el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
-    setStatus('live', 'Live');
+    const partial = loaded < STATES.length;
+    setStatus(partial ? 'stale' : 'live', partial ? `Partial: ${loaded}/${STATES.length}` : 'Live');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);
