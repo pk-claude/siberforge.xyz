@@ -137,6 +137,37 @@
 .cycle-section-head {
   margin-bottom: 12px;
 }
+
+/* Synthesis section — visual emphasis since it's the takeaway / conclusion
+   pulled above detail sections. Accent border + subtle tint so the eye
+   stops here first. */
+.cycle-section-synthesis {
+  background: rgba(247, 167, 0, 0.04);
+  border: 1px solid rgba(247, 167, 0, 0.22);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 16px 20px 20px;
+  margin: 0 24px 24px;
+}
+.cycle-section-synthesis .cycle-section-head h2 {
+  font-size: 17px;
+  letter-spacing: 0.4px;
+}
+.cycle-section-synthesis .cycle-section-head h2::before {
+  content: '\25C6  ';
+  color: var(--accent);
+  margin-right: 4px;
+  font-size: 13px;
+}
+.cycle-section-synthesis #synthesis-content,
+.cycle-section-synthesis #inflation-synthesis-content,
+.cycle-section-synthesis #housing-synthesis-content,
+.cycle-section-synthesis #re-synthesis-content {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--text);
+  max-width: 1100px;
+}
 .cycle-section-head h2 {
   font-size: 15px;
   margin: 0 0 4px;
