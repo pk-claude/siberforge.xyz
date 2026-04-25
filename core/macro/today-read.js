@@ -20,10 +20,12 @@ import {
   computeInflationScore,
   computeHousingScore,
   computeConsumerScore,
+  computeCreditScore,
+  computeLaborScore,
   phaseFor,
 } from '/core/lib/composite-scores.js';
 
-// Series needed for all four composites + the regime classifier.
+// Series needed for all six composites + the regime classifier.
 const ALL_SERIES = [
   // Regime
   'CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS',
@@ -35,6 +37,8 @@ const ALL_SERIES = [
   'MSACSR', 'PERMIT', 'MORTGAGE30US', 'HOUST1F', 'CSUSHPISA', 'DRSFRMACBS', 'CES2000000001',
   // Consumer
   'PSAVERT', 'DRCCLACBS', 'IC4WSA', 'UMCSENT', 'TDSP',
+  // Credit & Liquidity (additions; UNRATE/NFCI/HY OAS/T10Y3M/CES/PAYEMS/IC4WSA already above)
+  'ANFCI', 'BAMLC0A0CM', 'DFII10',
 ];
 
 const state = { data: {}, errors: [] };
@@ -332,16 +336,40 @@ function rosePoint(score, axisAngleRad, rPx) {
 }
 
 // Returns an SVG markup string (no <svg> wrapper — caller wraps).
+// Hexagonal rose — 6 composites in 6-fold rotational symmetry. Cycle (top) →
+// Inflation (UR) → Housing (LR) → Consumer (bottom) → Labor (LL) →
+// Credit (UL). Going clockwise from 12 o'clock at 60° intervals.
 function renderRose(scoresNow, scores12m) {
-  const VIEW = 460;
-  const rPx = 165; // max radius — bigger so labels sit outside without crowding
+  const VIEW = 540; // bumped from 460 so 'CONSUMER' / 'INFLATION' labels stay inside
+  const rPx = 175;  // 100-ring radius
 
-  const axes = [
-    { key: 'cycle',     label: 'CYCLE',     angle: -Math.PI / 2 },
-    { key: 'inflation', label: 'INFLATION', angle: 0 },
-    { key: 'housing',   label: 'HOUSING',   angle:  Math.PI / 2 },
-    { key: 'consumer',  label: 'CONSUMER',  angle:  Math.PI },
+  // 6 axes evenly spaced; angles computed from index.
+  const labels = [
+    { key: 'cycle',     label: 'CYCLE'     },
+    { key: 'inflation', label: 'INFLATION' },
+    { key: 'housing',   label: 'HOUSING'   },
+    { key: 'consumer',  label: 'CONSUMER'  },
+    { key: 'labor',     label: 'LABOR'     },
+    { key: 'credit',    label: 'CREDIT'    },
   ];
+  const N = labels.length;
+  const axes = labels.map((a, i) => ({
+    ...a,
+    angle: -Math.PI / 2 + (i / N) * 2 * Math.PI,
+  }));
+
+  // Anchor + dy for axis labels — derived from angle so it generalizes to N axes.
+  function anchorFor(angle) {
+    const cx = Math.cos(angle);
+    if (Math.abs(cx) < 0.18) return 'middle';
+    return cx > 0 ? 'start' : 'end';
+  }
+  function dyFor(angle) {
+    const sy = Math.sin(angle); // SVG y inverted: positive sy = below
+    if (sy < -0.7) return -10;  // top
+    if (sy > 0.7) return 18;    // bottom
+    return 4;                    // sides
+  }
 
   const ringRadii = [25, 50, 75, 100].map(v => ({ v, r: rPx * v / 100 }));
   const ringHtml = ringRadii.map(({ v, r }) => `
@@ -366,7 +394,6 @@ function renderRose(scoresNow, scores12m) {
   const oldPolyD = polyPoints(scores12m);
   const ACCENT = '#f7a700';
 
-  // Score-marker dots on the "Now" polygon — large, phase-colored.
   const dotHtml = axes.map(a => {
     const sObj = scoresNow[a.key];
     if (!sObj || !Number.isFinite(sObj.score)) return '';
@@ -375,25 +402,22 @@ function renderRose(scoresNow, scores12m) {
     return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="9" fill="${ph.color}" stroke="#13171c" stroke-width="2.2"><title>${a.label}: ${sObj.score.toFixed(0)}/100 — ${ph.label}</title></circle>`;
   }).join('');
 
-  // Axis labels + value pairs — positioned just outside the 100-ring.
   const labelHtml = axes.map(a => {
-    const [lx, ly] = rosePoint(100, a.angle, rPx + 30);
+    const [lx, ly] = rosePoint(100, a.angle, rPx + 28);
     const sObj = scoresNow[a.key];
     const oldObj = scores12m[a.key];
     const sNow = sObj && Number.isFinite(sObj.score) ? sObj.score.toFixed(0) : '—';
     const sOld = oldObj && Number.isFinite(oldObj.score) ? oldObj.score.toFixed(0) : null;
-    const anchor = a.key === 'inflation' ? 'start' : a.key === 'consumer' ? 'end' : 'middle';
-    const dy1 = a.key === 'cycle' ? -8 : a.key === 'housing' ? 16 : 0;
-    const dy2 = a.key === 'cycle' ? -28 : a.key === 'housing' ? 38 : 22;
+    const anchor = anchorFor(a.angle);
+    const dy = dyFor(a.angle);
     const valColor = sObj ? phaseFor(a.key, sObj.score).color : '#e5e9ee';
     const compareTxt = sOld != null ? `<tspan fill="rgba(138,148,163,0.85)" font-size="13" font-weight="600"> ← ${sOld}</tspan>` : '';
     return `
-      <text x="${lx.toFixed(1)}" y="${(ly + dy1).toFixed(1)}" fill="var(--text, #e5e9ee)" font-size="15" font-weight="800" text-anchor="${anchor}" letter-spacing="0.5">${a.label}</text>
-      <text x="${lx.toFixed(1)}" y="${(ly + dy2).toFixed(1)}" fill="${valColor}" font-size="22" font-weight="800" text-anchor="${anchor}">${sNow}${compareTxt}</text>
+      <text x="${lx.toFixed(1)}" y="${(ly + dy - 12).toFixed(1)}" fill="var(--text, #e5e9ee)" font-size="14" font-weight="800" text-anchor="${anchor}" letter-spacing="0.5">${a.label}</text>
+      <text x="${lx.toFixed(1)}" y="${(ly + dy + 10).toFixed(1)}" fill="${valColor}" font-size="20" font-weight="800" text-anchor="${anchor}">${sNow}${compareTxt}</text>
     `;
   }).join('');
 
-  // Legend top-left.
   const legendHtml = `
     <g transform="translate(${(-VIEW / 2 + 16).toFixed(1)},${(-VIEW / 2 + 18).toFixed(1)})">
       <line x1="0" y1="0" x2="20" y2="0" stroke="${ACCENT}" stroke-width="4"/>
@@ -447,12 +471,14 @@ export async function renderTodayRead() {
   const regimeColor = smoothed ? REGIMES[smoothed.regime].color : '#8a94a3';
   const conviction = currentInfo ? regimeConviction(currentInfo.growthZ, currentInfo.inflationZ) : null;
 
-  // Composite scores: now + 1m ago + 3m ago + 12m ago
+  // Composite scores: now + 1m ago + 3m ago + 12m ago. Six composites.
   const scoresNow = {
     cycle:     computeCycleScore(state.data),
     inflation: computeInflationScore(state.data),
     housing:   computeHousingScore(state.data),
     consumer:  computeConsumerScore(state.data),
+    credit:    computeCreditScore(state.data),
+    labor:     computeLaborScore(state.data),
   };
   const cutoff1m  = cutoffForMonthsBack(1);
   const cutoff3m  = cutoffForMonthsBack(3);
@@ -462,18 +488,24 @@ export async function renderTodayRead() {
     inflation: computeInflationScore(state.data, cutoff1m),
     housing:   computeHousingScore(state.data, cutoff1m),
     consumer:  computeConsumerScore(state.data, cutoff1m),
+    credit:    computeCreditScore(state.data, cutoff1m),
+    labor:     computeLaborScore(state.data, cutoff1m),
   };
   const scores3m = {
     cycle:     computeCycleScore(state.data, cutoff3m),
     inflation: computeInflationScore(state.data, cutoff3m),
     housing:   computeHousingScore(state.data, cutoff3m),
     consumer:  computeConsumerScore(state.data, cutoff3m),
+    credit:    computeCreditScore(state.data, cutoff3m),
+    labor:     computeLaborScore(state.data, cutoff3m),
   };
   const scores12m = {
     cycle:     computeCycleScore(state.data, cutoff12m),
     inflation: computeInflationScore(state.data, cutoff12m),
     housing:   computeHousingScore(state.data, cutoff12m),
     consumer:  computeConsumerScore(state.data, cutoff12m),
+    credit:    computeCreditScore(state.data, cutoff12m),
+    labor:     computeLaborScore(state.data, cutoff12m),
   };
 
   const outliers = findOutliers();
@@ -502,6 +534,8 @@ export async function renderTodayRead() {
         ${renderScoreRow('Inflation Persistence','inflation', scoresNow.inflation, scores1m.inflation)}
         ${renderScoreRow('Housing Cycle',        'housing',   scoresNow.housing,   scores1m.housing)}
         ${renderScoreRow('Consumer Stress',      'consumer',  scoresNow.consumer,  scores1m.consumer)}
+        ${renderScoreRow('Credit & Liquidity',   'credit',    scoresNow.credit,    scores1m.credit)}
+        ${renderScoreRow('Labor Market',         'labor',     scoresNow.labor,     scores1m.labor)}
       </div>
       <div class="tr-rose-col">
         <div class="tr-rose-title">Composite scores &middot; today vs 12 months ago</div>
@@ -528,6 +562,8 @@ export async function renderTodayRead() {
         ['Inflation Persistence','inflation'],
         ['Housing Cycle',        'housing'],
         ['Consumer Stress',      'consumer'],
+        ['Credit & Liquidity',   'credit'],
+        ['Labor Market',         'labor'],
       ].map(([label, k]) => renderTrajRail(label, k, scores12m[k], scores3m[k], scores1m[k], scoresNow[k])).join('')}
       <div class="tr-trajectory-scale">
         <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>

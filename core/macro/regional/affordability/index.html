@@ -23,17 +23,28 @@
 
 <nav class="deep-dive-nav">
   <span class="dd-label">Macro views</span>
-  <a href="/core/macro/" class="dd-link">Regime</a>
-  <a href="/core/macro/cycle/" class="dd-link">Cycle</a>
-  <a href="/core/macro/inflation/" class="dd-link">Inflation</a>
-  <a href="/core/macro/real-economy/" class="dd-link">Consumer</a>
-  <a href="/core/macro/housing/" class="dd-link">Housing</a>
-  <a href="/core/macro/regional/" class="dd-link active">Regional</a>
-  <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
-  <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
-  <a href="/core/data/" class="dd-link">Data</a>
-  <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
-  <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link active">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
 </nav>
 
 

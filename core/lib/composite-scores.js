@@ -208,6 +208,100 @@ export function computeConsumerScore(data, cutoff = null) {
   return { score: weighted, signals, cutoff };
 }
 
+// Credit & liquidity composite. Higher score = tighter financial conditions /
+// more credit stress. Components: NFCI, ANFCI, HY OAS, IG OAS, curve, real
+// yield. Used in Today's Read on /core/macro/ and stand-alone on /core/macro/credit/.
+export function computeCreditScore(data, cutoff = null) {
+  const signals = [];
+  const nfci  = filterToCutoff(data.NFCI, cutoff);
+  const anfci = filterToCutoff(data.ANFCI, cutoff);
+  const hyoas = filterToCutoff(data.BAMLH0A0HYM2, cutoff);
+  const igoas = filterToCutoff(data.BAMLC0A0CM, cutoff);
+  const curve = filterToCutoff(data.T10Y3M, cutoff);
+  const ry    = filterToCutoff(data.DFII10, cutoff);
+
+  // NFCI: -1 (very loose) to +1.5 (stressed). Map to 0-100 around 0.
+  const n = latestValue(nfci);
+  if (n) signals.push({ name: 'Chicago Fed NFCI', score: Math.min(100, Math.max(0, 50 + n.value * 33)), weight: 0.25, raw: n.value.toFixed(2) });
+
+  const an = latestValue(anfci);
+  if (an) signals.push({ name: 'Adjusted NFCI', score: Math.min(100, Math.max(0, 50 + an.value * 33)), weight: 0.15, raw: an.value.toFixed(2) });
+
+  // HY OAS: 250bp = baseline, 1000bp = stressed
+  const h = latestValue(hyoas);
+  if (h) {
+    const bps = h.value * 100;
+    signals.push({ name: 'HY OAS', score: Math.min(100, Math.max(0, ((bps - 250) / 750) * 100)), weight: 0.20, raw: `${bps.toFixed(0)}bp` });
+  }
+
+  // IG OAS: 80bp = baseline, 300bp = stress
+  const ig = latestValue(igoas);
+  if (ig) {
+    const bps = ig.value * 100;
+    signals.push({ name: 'IG OAS', score: Math.min(100, Math.max(0, ((bps - 80) / 220) * 100)), weight: 0.15, raw: `${bps.toFixed(0)}bp` });
+  }
+
+  // Curve inversion adds stress; +200bp = score 0; -100bp = score 100
+  const c = latestValue(curve);
+  if (c) {
+    const bps = c.value * 100;
+    signals.push({ name: '10Y-3M curve', score: Math.min(100, Math.max(0, 50 - bps / 4)), weight: 0.15, raw: `${bps >= 0 ? '+' : ''}${bps.toFixed(0)}bp` });
+  }
+
+  // 10Y real yield: 0% loose, 2.5%+ restrictive
+  const r = latestValue(ry);
+  if (r) signals.push({ name: '10Y real yield', score: Math.min(100, Math.max(0, (r.value / 2.5) * 100)), weight: 0.10, raw: `${r.value.toFixed(2)}%` });
+
+  if (!signals.length) return null;
+  const totalW = signals.reduce((sum, x) => sum + x.weight, 0);
+  const weighted = signals.reduce((sum, x) => sum + x.score * x.weight, 0) / totalW;
+  return { score: weighted, signals, cutoff };
+}
+
+// Labor market composite. Higher score = labor market weakening.
+// Components: unemployment level, Sahm Rule trigger distance, claims,
+// payroll growth, wage growth.
+export function computeLaborScore(data, cutoff = null) {
+  const signals = [];
+  const unrate = filterToCutoff(data.UNRATE || [], cutoff);
+  const claims = filterToCutoff(data.IC4WSA, cutoff);
+  const payems = filterToCutoff(data.PAYEMS || [], cutoff);
+  const wages  = filterToCutoff(data.CES0500000003, cutoff);
+
+  // Unemployment rate: 3.5% baseline, 7%+ stress
+  const u = latestValue(unrate);
+  if (u) signals.push({ name: 'Unemployment rate', score: Math.min(100, Math.max(0, ((u.value - 3.5) / 3.5) * 100)), weight: 0.20, raw: `${u.value.toFixed(1)}%` });
+
+  // Sahm Rule
+  const sahm = computeSahm(unrate);
+  const s = latestValue(sahm);
+  if (s) signals.push({ name: 'Sahm Rule', score: Math.min(100, Math.max(0, (s.value / 0.5) * 100)), weight: 0.20, raw: `${s.value.toFixed(2)}pp` });
+
+  // Initial claims 4w MA: 200K healthy, 400K+ stress
+  const cl = latestValue(claims);
+  if (cl) signals.push({ name: 'Initial claims (4wk MA)', score: Math.min(100, Math.max(0, ((cl.value - 200000) / 200000) * 100)), weight: 0.20, raw: `${(cl.value / 1000).toFixed(0)}K` });
+
+  // Payrolls 6m annualized growth: 2%+ strong, 0%- weak
+  if (payems.length >= 7) {
+    const cur = payems[payems.length - 1].value;
+    const prev = payems[payems.length - 7].value;
+    if (Number.isFinite(cur) && Number.isFinite(prev) && prev > 0) {
+      const annRate = (Math.pow(cur / prev, 2) - 1) * 100;
+      signals.push({ name: 'Payrolls 6m ann.', score: Math.min(100, Math.max(0, 50 - annRate * 25)), weight: 0.20, raw: `${annRate >= 0 ? '+' : ''}${annRate.toFixed(1)}%` });
+    }
+  }
+
+  // Wage growth (AHE YoY): 4.5%+ strong; <2.5% indicates labor slack
+  const wYoy = yoyPct(wages);
+  const lw = latestValue(wYoy);
+  if (lw) signals.push({ name: 'Wage growth (AHE YoY)', score: Math.min(100, Math.max(0, ((4.5 - lw.value) / 2) * 100)), weight: 0.20, raw: `${lw.value >= 0 ? '+' : ''}${lw.value.toFixed(1)}%` });
+
+  if (!signals.length) return null;
+  const totalW = signals.reduce((sum, x) => sum + x.weight, 0);
+  const weighted = signals.reduce((sum, x) => sum + x.score * x.weight, 0) / totalW;
+  return { score: weighted, signals, cutoff };
+}
+
 // Phase labels per score range. Different bucketing per composite type.
 export function phaseFor(kind, score) {
   if (score == null) return { label: '—', color: '#8a94a3' };
@@ -238,6 +332,20 @@ export function phaseFor(kind, score) {
     if (score < 65) return { label: 'Mixed',      color: '#f7a700' };
     if (score < 80) return { label: 'Stressed',   color: '#ef4f5a' };
     return                  { label: 'Distressed', color: '#ef4f5a' };
+  }
+  if (kind === 'credit') {
+    if (score < 25) return { label: 'Very Accommodative', color: '#3ecf8e' };
+    if (score < 45) return { label: 'Accommodative',      color: '#5a9cff' };
+    if (score < 65) return { label: 'Neutral',            color: '#f7a700' };
+    if (score < 80) return { label: 'Tight',              color: '#ef4f5a' };
+    return                  { label: 'Stressed',          color: '#ef4f5a' };
+  }
+  if (kind === 'labor') {
+    if (score < 25) return { label: 'Very Tight',   color: '#3ecf8e' };
+    if (score < 45) return { label: 'Tight',        color: '#5a9cff' };
+    if (score < 65) return { label: 'Cooling',      color: '#f7a700' };
+    if (score < 80) return { label: 'Weakening',    color: '#ef4f5a' };
+    return                  { label: 'Recessionary',color: '#ef4f5a' };
   }
   return { label: '—', color: '#8a94a3' };
 }
