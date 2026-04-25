@@ -1,0 +1,15 @@
+/* Real Economy — page-specific tweaks layered on cycle.css. */
+
+.cycle-intro { padding-bottom: 14px; }
+
+/* The 6-tile rows in this page benefit from a 2-column layout on wider
+   screens (vs the 1-column stack used elsewhere). */
+@media (min-width: 1200px) {
+  #section-housing .cycle-tiles,
+  #section-home-improvement .cycle-tiles,
+  #section-consumer .cycle-tiles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+}

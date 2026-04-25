@@ -46,6 +46,17 @@ const CATALOG = {
   CPIHOSSL:                { label: 'CPI Shelter',                     freq: 'monthly', unit: 'index',   transform: 'yoy_pct', group: 'inflation' },
   MICH:                    { label: 'UMich 1Y Inflation Expectations', freq: 'monthly', unit: 'percent', transform: 'level',   group: 'inflation' },
 
+  // ================= REAL ECONOMY (/core/macro/real-economy/) =================
+  // Consumer balance sheet
+  PCE:           { label: 'Personal Consumption Expenditures',          freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
+  DSPI:          { label: 'Disposable Personal Income',                 freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
+  PSAVERT:       { label: 'Personal Saving Rate',                       freq: 'monthly',   unit: 'percent', transform: 'level',   group: 'real-economy' },
+  TDSP:          { label: 'Household Debt Service Ratio',               freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'real-economy' },
+  // Housing cycle
+  MSACSR:        { label: 'Monthly Supply of New Houses',               freq: 'monthly',   unit: 'months',  transform: 'level',   group: 'real-economy' },
+  // Building materials
+  WPU081:        { label: 'PPI: Lumber & Wood Products',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'real-economy' },
+
   // ===================== ECON DASHBOARD (/core/econ/) =====================
   T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   GACDISA066MSFRBNY:     { label: 'Empire State Mfg Index',  freq: 'monthly',   unit: 'index',   transform: 'level',   group: 'econ' },
