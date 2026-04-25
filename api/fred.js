@@ -40,6 +40,15 @@ const CATALOG = {
   // correlation chart. Allowlisted at the proxy layer so the front-end can pull it.
   USREC:     { label: 'NBER Recession Indicator',freq: 'monthly',   unit: 'binary',  transform: 'level' },
 
+  // ================= CYCLE DASHBOARD (/core/macro/cycle/) =================
+  // Leading / conditions / credit indicators used on the cycle page.
+  NFCI:          { label: 'Chicago Fed NFCI',            freq: 'weekly',  unit: 'index',   transform: 'level', group: 'cycle' },
+  ANFCI:         { label: 'Adjusted NFCI',               freq: 'weekly',  unit: 'index',   transform: 'level', group: 'cycle' },
+  BAMLC0A0CM:    { label: 'IG Credit Spread (OAS)',      freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
+  DFII2:         { label: '2Y TIPS Real Yield',          freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
+  DFII10:        { label: '10Y TIPS Real Yield',         freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
+  RECPROUSM156N: { label: 'NY Fed Recession Probability',freq: 'monthly', unit: 'percent', transform: 'level', group: 'cycle' },
+
   // ===================== ECON DASHBOARD (/core/econ/) =====================
   // Growth
   T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },

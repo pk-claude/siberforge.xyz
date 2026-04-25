@@ -1,0 +1,274 @@
+/* Cycle Position page — layered on top of ../styles.css (which provides the
+   dark theme, top bar, footer, dots, quote tiles, etc.) */
+
+/* Intro */
+.cycle-intro {
+  padding: 24px 24px 12px;
+}
+.cycle-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0 0 10px;
+  color: var(--text);
+  letter-spacing: 0.3px;
+}
+.cycle-subtitle {
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.6;
+  max-width: 900px;
+  margin: 0;
+}
+.cycle-subtitle a { color: var(--accent); text-decoration: none; }
+.cycle-subtitle a:hover { text-decoration: underline; }
+
+/* ========================================================================= */
+/* Composite cycle-risk score                                                */
+/* ========================================================================= */
+.cycle-score-section {
+  padding: 0 24px 18px;
+}
+.cs-score-card {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(0, 2fr);
+  gap: 20px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 24px;
+}
+
+.cs-score-dial {
+  border-left: 4px solid var(--cs-color, var(--accent));
+  padding-left: 20px;
+}
+.cs-score-label {
+  color: var(--muted);
+  font-size: 10.5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+.cs-score-value {
+  font-size: 56px;
+  font-weight: 800;
+  color: var(--cs-color, var(--text));
+  line-height: 0.95;
+  font-variant-numeric: tabular-nums;
+}
+.cs-score-scale {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-left: 4px;
+}
+.cs-score-phase {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+.cs-score-desc {
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+  margin-top: 8px;
+}
+
+.cs-signals {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cs-signals-title {
+  color: var(--muted);
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.cs-signal {
+  display: grid;
+  grid-template-columns: 140px 1fr 80px;
+  gap: 12px;
+  align-items: center;
+  padding: 4px 0;
+}
+.cs-signal-name {
+  color: var(--text);
+  font-size: 11.5px;
+  font-weight: 500;
+}
+.cs-signal-bar {
+  height: 6px;
+  background: var(--panel-2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.cs-signal-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width .4s var(--ease-out);
+}
+.cs-signal-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+.cs-weights-note {
+  color: var(--muted);
+  font-size: 10.5px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed var(--line);
+}
+
+/* ========================================================================= */
+/* Section layout (4 analytical sections share this pattern)                 */
+/* ========================================================================= */
+.cycle-section {
+  padding: 0 24px 24px;
+}
+.cycle-section-head {
+  margin-bottom: 12px;
+}
+.cycle-section-head h2 {
+  font-size: 15px;
+  margin: 0 0 4px;
+  letter-spacing: 0.5px;
+  color: var(--text);
+}
+.cycle-section-sub {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+  max-width: 1000px;
+  margin: 0;
+}
+.cycle-section-sub strong { color: var(--text); }
+
+.cycle-chart-row {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 16px;
+}
+
+.cycle-chart-wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px;
+  height: 360px;
+  position: relative;
+}
+
+.cycle-tiles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cycle-tile {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--muted);
+  border-radius: 6px;
+  padding: 12px 14px;
+  transition: background-color .15s;
+}
+.cycle-tile:hover { background: var(--panel-2); }
+.cycle-tile-ok      { border-left-color: var(--green); }
+.cycle-tile-caution { border-left-color: var(--accent); }
+.cycle-tile-warn    { border-left-color: var(--red); }
+
+.cycle-tile-label {
+  color: var(--muted);
+  font-size: 10.5px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.cycle-tile-value {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  margin: 4px 0 2px;
+  line-height: 1.1;
+}
+.cycle-tile-ok      .cycle-tile-value { color: var(--green); }
+.cycle-tile-caution .cycle-tile-value { color: var(--accent); }
+.cycle-tile-warn    .cycle-tile-value { color: var(--red); }
+.cycle-tile-meta {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 4px;
+}
+.cycle-tile-threshold {
+  color: var(--muted);
+  font-size: 10.5px;
+  font-style: italic;
+  padding-top: 6px;
+  border-top: 1px dashed var(--line);
+}
+
+.cycle-note {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 10px 0 0;
+  padding: 10px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  max-width: 1100px;
+}
+.cycle-note strong { color: var(--text); }
+.cycle-note em { color: var(--accent); font-style: normal; }
+
+.cycle-note-ok      { border-left: 3px solid var(--green); }
+.cycle-note-caution { border-left: 3px solid var(--accent); }
+.cycle-note-warn    { border-left: 3px solid var(--red); }
+
+/* Synthesis */
+.cycle-synthesis-para {
+  color: var(--text);
+  font-size: 13.5px;
+  line-height: 1.65;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 4px;
+  padding: 16px 18px;
+  margin: 0 0 12px;
+  max-width: 1100px;
+}
+.cycle-synthesis-para strong { color: var(--text); font-weight: 700; }
+.cycle-synthesis-para em { color: var(--accent); font-style: normal; font-weight: 600; }
+.cycle-synthesis-para a { color: var(--accent); text-decoration: none; font-weight: 600; }
+.cycle-synthesis-para a:hover { text-decoration: underline; }
+
+.cycle-synthesis-links {
+  color: var(--muted);
+  font-size: 12px;
+  padding-top: 6px;
+}
+.cycle-synthesis-links a {
+  color: var(--accent);
+  text-decoration: none;
+  margin-left: 12px;
+}
+.cycle-synthesis-links a:hover { text-decoration: underline; }
+
+/* ========================================================================= */
+/* Responsive                                                                */
+/* ========================================================================= */
+@media (max-width: 1100px) {
+  .cs-score-card { grid-template-columns: 1fr; }
+  .cycle-chart-row { grid-template-columns: 1fr; }
+}
