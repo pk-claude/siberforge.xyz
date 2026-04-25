@@ -1,0 +1,2765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Top 5 AI Beneficiaries — Modest Scenario Deep Dive (April 2026)</title>
+<style>
+:root{
+  --bg:#0b0e14; --panel:#11151d; --panel2:#161b25; --line:#222a37;
+  --ink:#e6edf6; --ink2:#a6b1c2; --ink3:#6b7689;
+  --accent:#5aa6ff; --good:#3fd17a; --warn:#f0b35d; --bad:#ef6b6b;
+  --gold:#f3c969;
+}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,#11151d 0%, #0b0e14 95%, rgba(11,14,20,0.95) 100%);border-bottom:1px solid var(--line);padding:14px 30px;backdrop-filter:blur(8px)}
+main > section{display:none}
+main > section.active{display:block;animation:fadeIn .15s ease-in}
+@keyframes fadeIn{from{opacity:.5}to{opacity:1}}
+.nav-btn.active{background:var(--accent)!important;color:#06121f!important;border-color:var(--accent)!important}
+h1{margin:0 0 4px;font-size:22px;letter-spacing:.2px}
+.sub{color:var(--ink2);font-size:13px}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin-top:14px}
+.nav-btn{background:var(--panel);border:1px solid var(--line);color:var(--ink2);padding:7px 14px;border-radius:5px;cursor:pointer;font-size:12px;text-decoration:none;font-weight:600}
+.nav-btn:hover{color:var(--ink);border-color:var(--accent)}
+.nav-btn.summary{background:var(--accent);color:#06121f;border-color:var(--accent)}
+main{padding:24px 30px 80px;max-width:1480px;margin:0 auto}
+section{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:20px 24px;margin-bottom:18px}
+h2{margin:0 0 10px;font-size:18px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:8px}
+h3{margin:14px 0 8px;font-size:14px;color:var(--gold);text-transform:uppercase;letter-spacing:.5px}
+.tk-header{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.tk-header .tk{font-size:28px;font-weight:700;color:var(--ink)}
+.tk-header .nm{font-size:15px;color:var(--ink2)}
+.tk-header .price{font-size:22px;color:var(--good);font-weight:600;margin-left:auto}
+.tk-header .change{font-size:13px;color:var(--ink3)}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:12px 0}
+.kpi{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
+.kpi .lbl{font-size:10px;text-transform:uppercase;color:var(--ink3);letter-spacing:.4px}
+.kpi .val{font-size:17px;font-weight:600;margin-top:3px}
+.kpi .sub-val{font-size:11px;color:var(--ink2);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:8px 0;font-size:13px}
+th{background:var(--panel2);text-align:left;padding:8px 10px;font-weight:600;color:var(--ink2);border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.3px}
+td{padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tr:last-child td{border-bottom:none}
+.pos{color:var(--good)}.neg{color:var(--bad)}.warn{color:var(--warn)}.flat{color:var(--ink2)}
+.thesis-box{background:#1a2332;border-left:3px solid var(--accent);padding:12px 16px;border-radius:4px;margin:12px 0}
+.thesis-box.bull{background:var(--panel);border-left-color:var(--good)}
+.thesis-box.bear{background:var(--panel);border-left-color:var(--bad)}
+.thesis-box.cat{background:var(--panel);border-left-color:var(--gold)}
+.thesis-box h4{margin:0 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--ink2)}
+.thesis-box p{margin:4px 0;font-size:13px;color:var(--ink)}
+.thesis-box ul{margin:4px 0;padding-left:20px}
+.thesis-box li{margin:3px 0;font-size:13px}
+.caveat{background:#2a1d12;border:1px solid #4a3520;color:#f3d3a8;padding:12px 16px;border-radius:6px;margin-bottom:18px;font-size:13px}
+.rank-table{margin-top:10px}
+.rank-table td{padding:10px}
+.rank-num{font-size:20px;font-weight:700;color:var(--gold);width:30px;text-align:center}
+.col-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:900px){.col-2{grid-template-columns:1fr}}
+.scen-bar{display:flex;align-items:center;gap:10px;margin:8px 0}
+.scen-bar .label{font-size:11px;color:var(--ink3);width:80px}
+.scen-bar .bar{flex:1;height:18px;background:var(--panel2);border-radius:3px;position:relative;overflow:hidden}
+.scen-bar .fill{height:100%;background:linear-gradient(90deg, var(--accent), var(--good))}
+.scen-bar .val{font-size:12px;color:var(--ink);font-weight:600;width:60px;text-align:right}
+.tag{display:inline-block;background:var(--panel2);border:1px solid var(--line);color:var(--ink2);padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;margin-right:4px;text-transform:uppercase;letter-spacing:.3px}
+.tag.green{background:rgba(63,209,122,.12);color:var(--good);border-color:rgba(63,209,122,.4)}
+.tag.amber{background:rgba(240,179,93,.12);color:var(--warn);border-color:rgba(240,179,93,.4)}
+.tag.red{background:rgba(239,107,107,.12);color:var(--bad);border-color:rgba(239,107,107,.4)}
+.footnote{color:var(--ink3);font-size:11px;margin-top:10px}
+.toc{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:16px 20px;margin-bottom:18px}
+.toc h3{margin:0 0 8px;color:var(--accent)}
+.toc ol{margin:0;padding-left:20px;color:var(--ink)}
+.toc li{margin:4px 0}
+.toc a{color:var(--accent);text-decoration:none}
+.toc a:hover{text-decoration:underline}
+.charts-section{margin-top:18px;border-top:1px solid var(--line);padding-top:14px}
+.charts-section > h3{margin-top:0;margin-bottom:6px}
+.charts-section > p.cap{color:var(--ink2);font-size:12px;margin:0 0 12px}
+.charts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:1100px){.charts-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:700px){.charts-grid{grid-template-columns:1fr}}
+.chart-block{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:12px 12px 10px}
+.chart-title{font-size:11px;color:var(--ink2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;font-weight:600}
+.chart-canvas-wrap{position:relative;height:160px}
+.yoy-foot{font-size:10.5px;color:var(--ink3);margin-top:8px;line-height:1.55;display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;border-top:1px dashed var(--line);padding-top:6px}
+.yoy-foot .lbl{color:var(--ink3)}
+.yoy-foot .val{color:var(--ink);font-weight:600}
+.yoy-foot .pos-v{color:var(--good)}
+.yoy-foot .neg-v{color:var(--bad)}
+.scenario-key{font-size:11px;color:var(--ink3);margin:8px 0;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+.scenario-key .swatch{display:inline-block;width:22px;height:9px;border-radius:2px;margin-right:5px;vertical-align:middle}
+/* Filter bar */
+.filter-bar{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin-top:12px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.filter-bar .filter-label{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px}
+.filter-group{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.chip{background:var(--panel2);border:1px solid var(--line);color:var(--ink2);padding:5px 11px;border-radius:4px;cursor:pointer;font-size:11px;font-weight:600;transition:.12s}
+.chip:hover{color:var(--ink);border-color:var(--accent)}
+.chip.active{background:rgba(90,166,255,.15);color:var(--accent);border-color:var(--accent)}
+.chip-link{background:transparent;border:none;color:var(--ink3);font-size:10px;cursor:pointer;padding:5px 4px;text-decoration:underline}
+.chip-link:hover{color:var(--accent)}
+.search-input{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:5px 10px;border-radius:4px;font-size:11px;width:200px}
+.search-input::placeholder{color:var(--ink3)}
+/* Period toggle (history/current/forecast) */
+.period-toggle{display:flex;gap:4px;margin:12px 0;background:var(--panel2);padding:4px;border-radius:6px;border:1px solid var(--line);width:fit-content}
+.period-btn{background:transparent;border:none;color:var(--ink2);padding:8px 16px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:600;transition:.15s}
+.period-btn.active{background:var(--accent);color:#06121f}
+.period-btn:hover:not(.active){color:var(--ink);background:rgba(255,255,255,.04)}
+.cat-chips{margin:10px 0;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+/* Ratios table */
+.ratios-table{width:100%;border-collapse:collapse;background:var(--panel);font-size:12px;border-radius:6px;overflow:hidden;margin-top:8px}
+.ratios-table th{background:var(--panel2);padding:11px 10px;color:var(--ink2);font-size:10px;text-transform:uppercase;letter-spacing:.4px;border-bottom:1px solid var(--line);text-align:right;font-weight:600}
+.ratios-table th:first-child{text-align:left;width:260px}
+.ratios-table td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.ratios-table td:first-child{text-align:left;color:var(--ink2);font-weight:500}
+.ratios-table td.best-cell{background:rgba(63,209,122,.13);color:#7be0a3;font-weight:700}
+.ratios-table td.worst-cell{background:rgba(239,107,107,.10);color:#ef9999}
+.ratios-table td.muted{color:var(--ink3)}
+.ratios-table tr.cat-header td{background:#1a2332;color:var(--gold);font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:600;padding:9px 10px;text-align:left}
+.ratios-table tr:hover td:not(.best-cell):not(.worst-cell):not(.cat-header-cell){background:rgba(255,255,255,.02)}
+.ratio-meta{font-size:10px;color:var(--ink3);font-weight:400;margin-left:6px}
+.ratio-name{display:flex;align-items:center;gap:4px}
+.dir-badge{display:inline-block;font-size:9px;padding:1px 5px;border-radius:2px;background:var(--panel2);color:var(--ink3);margin-left:4px;font-weight:600}
+.dir-badge.lo{background:rgba(239,107,107,.12);color:#ef9999}
+.dir-badge.hi{background:rgba(63,209,122,.12);color:#7be0a3}
+.legend-row{display:flex;gap:18px;font-size:11px;color:var(--ink3);margin-top:10px;flex-wrap:wrap}
+.legend-row .swatch{display:inline-block;width:14px;height:11px;border-radius:2px;margin-right:5px;vertical-align:middle}
+.swatch-best{background:rgba(63,209,122,.40)}
+.swatch-worst{background:rgba(239,107,107,.30)}
+.hidden-row{display:none!important}
+.hidden-col{display:none!important}
+/* ============ LIGHT THEME ============ */
+[data-theme="light"]{
+  --bg:#f5f7fa;
+  --panel:#ffffff;
+  --panel2:#f1f4f8;
+  --line:#d8dde5;
+  --ink:#111827;
+  --ink2:#4b5563;
+  --ink3:#9ca3af;
+  --accent:#2563eb;
+  --good:#16a34a;
+  --warn:#d97706;
+  --bad:#dc2626;
+  --gold:#b45309;
+  --pick:#ecfdf5;
+}
+[data-theme="light"] header{background:linear-gradient(180deg,#ffffff 0%, #f5f7fa 95%, rgba(245,247,250,.95) 100%);backdrop-filter:blur(8px)}
+[data-theme="light"] .thesis-box{background:var(--panel);color:var(--ink);border-left-color:var(--accent)}
+[data-theme="light"] .thesis-box.bull{background:var(--panel);border-left-color:var(--good)}
+[data-theme="light"] .thesis-box.bear{background:var(--panel);border-left-color:var(--bad)}
+[data-theme="light"] .thesis-box.cat{background:var(--panel);border-left-color:var(--gold)}
+[data-theme="light"] .thesis-box h4{color:var(--ink2)}
+[data-theme="light"] .caveat{background:#fef3c7;border-color:#fde68a;color:#78350f}
+[data-theme="light"] .pick-card{background:#dcfce7;border-color:#bbf7d0}
+[data-theme="light"] .pick-card .tk{color:#15803d}
+[data-theme="light"] tr.top-pick{background:rgba(22,163,74,.06)}
+[data-theme="light"] .ratios-table tr.cat-header td{background:#e0e7ff;color:#3730a3}
+[data-theme="light"] .nav-btn.active{color:#ffffff!important}
+[data-theme="light"] .ratios-table td.best-cell{background:rgba(22,163,74,.13);color:#15803d}
+[data-theme="light"] .ratios-table td.worst-cell{background:rgba(220,38,38,.10);color:#b91c1c}
+[data-theme="light"] .pos,[data-theme="light"] .up-strong,[data-theme="light"] .pos-v{color:#15803d}
+[data-theme="light"] .neg,[data-theme="light"] .up-down,[data-theme="light"] .neg-v{color:#b91c1c}
+[data-theme="light"] .warn{color:#b45309}
+[data-theme="light"] .up-mod{color:#1e40af}
+[data-theme="light"] .up-flat{color:var(--ink3)}
+[data-theme="light"] .scen-tag.s1{background:#fee2e2;color:#b91c1c}
+[data-theme="light"] .scen-tag.s2{background:#dbeafe;color:#1e40af}
+[data-theme="light"] .scen-tag.s3{background:#dcfce7;color:#15803d}
+[data-theme="light"] .scen-tag.s4{background:#fef3c7;color:#b45309}
+[data-theme="light"] .dir-badge.lo{background:#fee2e2;color:#b91c1c}
+[data-theme="light"] .dir-badge.hi{background:#dcfce7;color:#15803d}
+[data-theme="light"] .swatch-best{background:rgba(22,163,74,.40)}
+[data-theme="light"] .swatch-worst{background:rgba(220,38,38,.30)}
+[data-theme="light"] .exp-direct{background:rgba(22,163,74,.18);color:#15803d}
+[data-theme="light"] .exp-high{background:rgba(37,99,235,.18);color:#1e40af}
+[data-theme="light"] .exp-mid{background:rgba(217,119,6,.18);color:#92400e}
+[data-theme="light"] .exp-low{background:rgba(220,38,38,.18);color:#b91c1c}
+[data-theme="light"] .nav-btn:not(.active):hover{background:#e8eef7}
+/* Theme toggle button */
+.theme-btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;transition:.12s;display:inline-flex;align-items:center;gap:6px}
+.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
+.theme-icon{font-size:14px;line-height:1}
+/* ============ V2 LAYOUT IMPROVEMENTS ============ */
+header{padding:10px 24px!important}
+.hdr-row1{display:flex;align-items:center;gap:18px;min-height:38px}
+.hdr-title{display:flex;flex-direction:column;line-height:1.15;flex-shrink:0;min-width:140px}
+.title-main{font-size:15px;font-weight:700;color:var(--ink)}
+.title-sub{font-size:11px;color:var(--ink3)}
+.v2-badge{display:inline-block;background:rgba(63,209,122,.18);color:var(--good);font-size:9px;padding:1px 5px;border-radius:3px;font-weight:700;letter-spacing:.4px;margin-left:6px;vertical-align:middle}
+[data-theme="light"] .v2-badge{background:rgba(22,163,74,.16);color:#15803d}
+.nav-tier1{display:flex;gap:2px;flex:1;justify-content:center;flex-wrap:wrap;margin:0}
+.nav-cat{background:transparent;border:none;color:var(--ink2);padding:7px 16px;border-radius:5px;cursor:pointer;font-size:13px;font-weight:600;transition:.12s}
+.nav-cat:hover{color:var(--ink);background:var(--panel2)}
+.nav-cat.active{color:var(--accent);background:rgba(90,166,255,.12)}
+[data-theme="light"] .nav-cat.active{background:rgba(37,99,235,.12)}
+.nav-tier2{display:flex;gap:4px;padding-top:8px;justify-content:center;flex-wrap:wrap;border-top:1px solid var(--line);margin-top:8px}
+.nav-tier2 button{background:transparent;border:1px solid var(--line);color:var(--ink2);padding:5px 12px;border-radius:4px;cursor:pointer;font-size:12px;font-weight:500;transition:.12s}
+.nav-tier2 button:hover{color:var(--ink);border-color:var(--accent)}
+.nav-tier2 button.active{background:var(--accent);color:#06121f;border-color:var(--accent);font-weight:600}
+[data-theme="light"] .nav-tier2 button.active{color:#fff}
+.nav-tier2:empty{display:none}
+header > nav:not(.nav-tier1):not(.nav-tier2){display:none}
+header > .filter-bar{display:none}
+.footnote{font-size:12.5px!important;line-height:1.55!important;color:var(--ink2)}
+.yoy-foot{font-size:11.5px!important;color:var(--ink2)}
+.cap{font-size:12.5px!important;line-height:1.55}
+.kpi .lbl{font-size:11px!important}
+.kpi .sub-val{font-size:11.5px!important}
+.ratios-table td.best-cell{background:transparent!important;color:var(--good)!important;font-weight:700;border-left:3px solid var(--good)!important;padding-left:8px!important}
+.ratios-table td.worst-cell{background:transparent!important;color:var(--bad)!important;font-weight:500;border-left:3px solid rgba(239,107,107,.45)!important;padding-left:8px!important}
+[data-theme="light"] .ratios-table td.worst-cell{border-left-color:rgba(220,38,38,.45)!important}
+.ratios-table td.best-cell::before{content:'▲ ';font-size:9px;opacity:.85;font-weight:700}
+.ratios-table td.worst-cell::before{content:'▽ ';font-size:9px;opacity:.55}
+.ratio-info{display:inline-block;width:14px;height:14px;line-height:13px;text-align:center;border:1px solid var(--ink3);color:var(--ink3);border-radius:50%;font-size:9px;font-weight:600;margin-left:5px;cursor:help;vertical-align:1px}
+.ratio-info:hover{color:var(--accent);border-color:var(--accent)}
+.inline-filter-bar{background:var(--panel2);border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin-bottom:14px;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.inline-filter-bar .filter-label{font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px}
+.sec-banner{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:5px;padding:9px 14px;margin-bottom:14px;font-size:12.5px;color:var(--ink2);line-height:1.5}
+.sec-banner strong{color:var(--ink)}
+
+/* ============ V3: BULLET-LEVEL SUPPORTING CHARTS ============ */
+.thesis-box ul{padding-left:0;list-style:none}
+/* v3 simplified: ONE tint at the thesis-box level, neutral everywhere inside */
+.thesis-box li{margin:0 0 14px;padding:10px 12px;background:transparent;border-radius:5px;border-left:2px solid var(--line)}
+.thesis-box li:last-child{margin-bottom:0}
+.thesis-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0;align-items:start}
+@media(max-width:1000px){.thesis-grid{grid-template-columns:1fr}}
+.thesis-grid > .thesis-box{margin:0}
+.bullet-charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:6px;margin-top:8px;margin-bottom:0}
+.bc-item{background:var(--panel2);border:1px solid var(--line);border-radius:5px;padding:7px 9px;position:relative;cursor:help;transition:.12s}
+.bc-item:hover{border-color:var(--accent);box-shadow:0 4px 14px rgba(0,0,0,0.25);z-index:10}
+[data-theme="light"] .bc-item:hover{box-shadow:0 4px 14px rgba(0,0,0,0.10)}
+.bc-cap{font-size:10px;color:var(--ink2);text-transform:uppercase;letter-spacing:.45px;margin-bottom:4px;font-weight:600;line-height:1.3;min-height:24px}
+.bc-canvas{height:110px;position:relative}
+.bc-hover{position:absolute;top:100%;left:-1px;right:-1px;background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:0;z-index:200;display:none;margin-top:5px;box-shadow:0 10px 28px rgba(0,0,0,0.45);overflow:hidden}
+[data-theme="light"] .bc-hover{box-shadow:0 10px 28px rgba(0,0,0,0.13)}
+.bc-item:hover .bc-hover{display:block}
+.bc-row{padding:8px 12px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:flex-start}
+.bc-row:last-child{border-bottom:none}
+.bc-row.headline{background:var(--panel2);font-weight:600}
+.bc-label{font-size:9.5px;text-transform:uppercase;letter-spacing:.55px;color:var(--ink3);font-weight:600;width:100px;flex-shrink:0;padding-top:1px;line-height:1.4}
+.bc-value{font-size:11.5px;color:var(--ink);line-height:1.5;flex:1}
+.bc-value strong{color:var(--accent)}
+
+/* v3 final: h4 underline, grid-aligned 4-row layout, neutral chart colors */
+.thesis-box{display:flex;flex-direction:column}
+.thesis-box h4{border-bottom:2px solid var(--line);padding-bottom:7px;margin:0 0 12px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.thesis-box.bull h4{border-bottom-color:var(--good);color:var(--good)}
+.thesis-box.bear h4{border-bottom-color:var(--bad);color:var(--bad)}
+.thesis-box.cat h4{border-bottom-color:var(--gold);color:var(--gold)}
+.thesis-box ul{display:grid;grid-template-rows:repeat(4, minmax(0, 1fr));gap:10px;flex:1;margin:0;padding:0}
+.thesis-grid{align-items:stretch}
+.thesis-box li{margin:0!important;padding:10px 12px!important;background:transparent!important;border-radius:5px!important;border-left:2px solid var(--line)!important;display:flex;flex-direction:column}
+.thesis-box.bull li{border-left-color:rgba(63,209,122,0.35)!important}
+.thesis-box.bear li{border-left-color:rgba(239,107,107,0.35)!important}
+[data-theme="light"] .thesis-box.bull li{border-left-color:rgba(22,163,74,0.4)!important}
+[data-theme="light"] .thesis-box.bear li{border-left-color:rgba(220,38,38,0.4)!important}
+.thesis-box li > .bullet-charts{margin-top:auto;padding-top:10px}
+
+/* KPI peer comparison sub-block */
+.kpi-compare{margin-top:8px;padding-top:6px;border-top:1px solid var(--line)}
+.kpi-compare-row{display:grid;grid-template-columns:42px 1fr 50px;gap:5px;align-items:center;margin:3px 0;font-variant-numeric:tabular-nums}
+.kpi-compare-tk{font-size:9.5px;font-weight:600;letter-spacing:.3px;color:var(--ink3);text-transform:uppercase}
+.kpi-compare-tk.self{color:var(--accent)}
+.kpi-compare-bar{height:5px;background:var(--line);border-radius:2px;overflow:hidden;position:relative}
+.kpi-compare-fill{height:100%;background:rgba(148,163,184,.45);border-radius:2px}
+.kpi-compare-fill.self{background:#64748b}
+.kpi-compare-val{font-size:9.5px;color:var(--ink2);text-align:right;letter-spacing:.2px}
+.kpi-compare-val.self{color:var(--ink);font-weight:700}
+.kpi-compare-cap{font-size:8.5px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header>
+  <div class="hdr-row1">
+    <div class="hdr-title">
+      <span class="title-main">AI Top-5 Deep Dive <span class="v2-badge">V3</span></span>
+      <span class="title-sub">Modest Scenario · Apr 25, 2026 · Bullets + Supporting Charts</span>
+    </div>
+    <nav class="nav-tier1" id="nav-tier1">
+      <button class="nav-cat active" data-cat="overview">Overview</button>
+      <button class="nav-cat" data-cat="companies">Companies</button>
+      <button class="nav-cat" data-cat="comparison">Comparison</button>
+      <button class="nav-cat" data-cat="scenarios">Scenarios</button>
+      <button class="nav-cat" data-cat="risks">Risks</button>
+    </nav>
+    <button id="theme-toggle-v2" class="theme-btn" title="Switch theme">
+      <span class="theme-icon" id="theme-icon-v2">☀</span>
+      <span id="theme-label-v2">Light</span>
+    </button>
+  </div>
+  <nav class="nav-tier2" id="nav-tier2"></nav>
+  <nav>
+    <a href="#summary" class="nav-btn summary">Summary</a>
+    <a href="#meta" class="nav-btn" data-co-link="meta">META</a>
+    <a href="#cdns" class="nav-btn" data-co-link="cdns">CDNS</a>
+    <a href="#avgo" class="nav-btn" data-co-link="avgo">AVGO</a>
+    <a href="#snps" class="nav-btn" data-co-link="snps">SNPS</a>
+    <a href="#msft" class="nav-btn" data-co-link="msft">MSFT</a>
+    <a href="#ranking" class="nav-btn">Ranking</a>
+    <a href="#ratios" class="nav-btn">Ratios</a>
+    <a href="#strong" class="nav-btn">Strong Scenario</a>
+    <a href="#portfolio" class="nav-btn">Portfolio</a>
+    <a href="#shorts" class="nav-btn">Shorts</a>
+    <a href="#redflags" class="nav-btn">10-Q Red Flags</a>
+  </nav>
+  <div class="filter-bar">
+    <div class="filter-group">
+      <span class="filter-label">Filter Companies:</span>
+      <button class="chip active" data-co="meta">META</button>
+      <button class="chip active" data-co="cdns">CDNS</button>
+      <button class="chip active" data-co="avgo">AVGO</button>
+      <button class="chip active" data-co="snps">SNPS</button>
+      <button class="chip active" data-co="msft">MSFT</button>
+      <button class="chip-link" id="co-all">All</button>
+      <button class="chip-link" id="co-none">None</button>
+    </div>
+    <div class="filter-group">
+      <span class="filter-label">Search:</span>
+      <input class="search-input" id="global-search" placeholder="Search ratios, companies, text...">
+    </div>
+    <div class="filter-group" style="margin-left:auto">
+      <button id="theme-toggle" class="theme-btn" title="Switch theme">
+        <span class="theme-icon" id="theme-icon">☀</span>
+        <span id="theme-label">Light</span>
+      </button>
+    </div>
+  </div>
+</header>
+<main>
+
+<div class="caveat">
+  <strong>Modest scenario reminder:</strong> AI is real but slower than bulls expect. Hyperscaler capex grows 15-20%/yr (not 30-50%). Enterprise AI adoption is gradual (3-5% of seats by 2027). Compute scarcity persists but eases. The names selected here aren't necessarily the highest-upside under <em>massive</em> impact — they are the highest <em>risk-adjusted</em> picks if AI lands somewhere between "real" and "transformational."
+</div>
+
+<section id="summary" class="active">
+  <h2>Executive Summary — The 5 Picks</h2>
+  <p style="color:var(--ink2)">Ranking criteria: confidence in AI thesis (5/5 weight) × directional 24-mo upside under modest scenario × operating margin (quality of earnings). Latest stock prices and financials are from public sources as of April 24, 2026.</p>
+  <table>
+    <thead><tr><th>#</th><th>Ticker</th><th>Price</th><th>Mkt Cap</th><th>Latest Quarter Rev</th><th>Op Margin</th><th>Modest Upside</th><th>Conf</th><th>Thesis One-Liner</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td><strong>META</strong></td><td>$676.73</td><td>$1.70T</td><td>$59.9B (Q4'25, +16%)</td><td class="pos">41% GAAP</td><td class="pos">+25%</td><td>5/5</td><td>Ad targeting AI lifts ARPU; Llama gives optionality. Capex risk balanced by core ad strength.</td></tr>
+      <tr><td><strong>2</strong></td><td><strong>CDNS</strong></td><td>$304-314</td><td>$77B</td><td>$1.44B (Q4'25, beat)</td><td class="pos">~45% non-GAAP</td><td class="pos">+25%</td><td>5/5</td><td>EDA = sticky toll booth on every chip designed. AI = volume tailwind. $7.8B backlog secures 2026.</td></tr>
+      <tr><td><strong>3</strong></td><td><strong>AVGO</strong></td><td>$415.36</td><td>$2.07T</td><td>$19.3B (Q1'26, +29%)</td><td class="pos">~50% non-GAAP op</td><td class="pos">+20%</td><td>4/5</td><td>AI rev +106% YoY, custom ASIC +140%. CEO calls $100B AI rev by 2027. P/E warns: priced for perfection.</td></tr>
+      <tr><td><strong>4</strong></td><td><strong>SNPS</strong></td><td>$456.85</td><td>$70B</td><td>$2.41B (Q1'26, includes Ansys)</td><td class="pos">~35% non-GAAP op</td><td>5/5</td><td class="pos">+25%</td><td>EDA + Ansys = end-to-end AI design + simulation. Integration drag near-term, structural longer-term.</td></tr>
+      <tr><td><strong>5</strong></td><td><strong>MSFT</strong></td><td>$415-424</td><td>$3.10T</td><td>$81.3B (Q2 FY26, +17%)</td><td class="pos">~45% op</td><td class="pos">+15%</td><td>5/5</td><td>Azure AI grows 39%; Copilot monetization gradual. $110-120B FY26 capex = top of AI infra spending.</td></tr>
+    </tbody>
+  </table>
+  <h3>What's common across all 5</h3>
+  <ul>
+    <li><strong>High operating margins (35-50%)</strong> — quality of earnings holds up if growth slows.</li>
+    <li><strong>Direct AI revenue line</strong> — not "AI optionality"; each has a measurable AI revenue or workload share.</li>
+    <li><strong>Capital return capacity</strong> — META, MSFT, AVGO all have $50B+ buyback authorizations or growing dividends.</li>
+    <li><strong>Network effects / switching costs</strong> — CDNS/SNPS have multi-year EDA contracts; META has 3.5B users; MSFT/AVGO have customer lock-in via stack integration.</li>
+  </ul>
+  <h3>What's different</h3>
+  <ul>
+    <li><strong>Valuation:</strong> META (28x) and MSFT (~32x) are reasonable; AVGO (78x trailing) and CDNS (77x trailing) are priced for continued AI execution.</li>
+    <li><strong>AI directness:</strong> AVGO and the EDA pair (CDNS/SNPS) are picks-and-shovels; META and MSFT are the buyers <em>and</em> beneficiaries.</li>
+    <li><strong>Capex risk:</strong> META and MSFT carry the most balance-sheet AI exposure ($135B and $120B respectively in 2026); CDNS/SNPS are capital-light.</li>
+  </ul>
+</section>
+
+<!-- ====== META ====== -->
+<section id="meta">
+  <div class="tk-header">
+    <span class="tk">META</span>
+    <span class="nm">Meta Platforms · Communication Services</span>
+    <span class="price">$676.73</span>
+    <span class="change">P/E (TTM) 28.5 · Fwd P/E 22.2</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="lbl">Market Cap</div><div class="val">$1.70T</div></div>
+    <div class="kpi"><div class="lbl">Q4 2025 Revenue</div><div class="val">$59.9B</div><div class="sub-val pos">+16% YoY · beat $58.4B est.</div></div>
+    <div class="kpi"><div class="lbl">Q4 2025 EPS</div><div class="val">$8.88</div><div class="sub-val pos">beat $8.19 est. · NI +9% YoY</div></div>
+    <div class="kpi"><div class="lbl">Q1 2026 Rev Guide</div><div class="val">$53.5-56.5B</div><div class="sub-val">midpoint ~$55B</div></div>
+    <div class="kpi"><div class="lbl">2026 Capex Guide</div><div class="val warn">$115-135B</div><div class="sub-val warn">vs $72.2B in 2025 — ~88% jump at midpoint</div></div>
+    <div class="kpi"><div class="lbl">Q4 Op Margin</div><div class="val">41%</div><div class="sub-val warn">down from 48% prior year</div></div>
+  </div>
+  <h3>Latest financials (most recent reported)</h3>
+  <p>Q4 2025 reported January 28, 2026. Revenue $59.89B beat the $58.35B consensus, EPS $8.88 beat $8.19. But operating margin compressed 700bp (48% → 41%) as costs and expenses jumped 40% YoY, driven by infrastructure depreciation, third-party cloud, and aggressive AI hiring. Net income +9% YoY despite +16% revenue = the cost story is louder than the top-line.</p>
+  <h3>2026 guidance — the headline</h3>
+  <p><strong>Capex $115-135B</strong>, vs. $72.2B in 2025. At the midpoint that's ~$125B — a 73% YoY increase, on top of an already-elevated 2025 base. Total 2026 expense guide $162-169B. New "Meta Superintelligence Labs" division is the stated reason, plus continued infrastructure buildout.</p>
+  <div class="thesis-box bull">
+    <h4>Bull case under modest scenario</h4>
+    <ul>
+      <li><strong>Ad targeting AI is monetizing.</strong> Reels recommendation lift, Advantage+ campaign automation, and AI-generated creative are showing measurable ARPU increases. This is the most underappreciated AI revenue line.</li>
+      <li><strong>Llama gives strategic optionality.</strong> Open-weights model = Meta sets the floor on model commoditization, which is good for a buyer of compute (vs. OpenAI which sells compute).</li>
+      <li><strong>WhatsApp Business + AI agents</strong> = new revenue line by 2027. Click-to-message ads already ramping.</li>
+      <li><strong>Valuation reasonable.</strong> 22x forward earnings is below the 5-year average for a company growing 15%+ with 40% margins.</li>
+    </ul>
+  </div>
+  <div class="thesis-box bear">
+    <h4>Bear case</h4>
+    <ul>
+      <li><strong>Capex is the elephant.</strong> $135B at high end = ~$45/share of FCF burn vs. earning power around $30/share. Even at modest, multi-year infra cycle weighs on FCF.</li>
+      <li><strong>Reality Labs continues to lose ~$15-18B/yr</strong> with no clear monetization timeline.</li>
+      <li><strong>Ad market sensitivity.</strong> Recession or ad cycle reversal hits revenue more directly than enterprise software peers.</li>
+      <li><strong>Margin compression already started.</strong> 700bp drop in Q4 op margin is an early warning.</li>
+    </ul>
+  </div>
+  <div class="thesis-box cat">
+    <h4>Key catalysts (next 90 days)</h4>
+    <ul>
+      <li><strong>Q1 2026 earnings:</strong> late April / early May 2026. Watch for capex revision and Q2 revenue guide.</li>
+      <li><strong>Llama 4 / Behemoth release:</strong> if benchmarks hold, defends model commoditization narrative.</li>
+      <li><strong>Q2 ad pricing data:</strong> tells whether AI targeting is showing up in pricing power.</li>
+    </ul>
+  </div>
+  <p class="footnote">Modest scenario thesis refined: ad biz alone supports +15% with capex digestion as the swing factor; +25% upside requires AI-driven ARPU acceleration to show up in Q2/Q3 results.</p>
+  <div class="charts-section">
+    <h3>Annual Financial Trends — 2019-2031</h3>
+    <p class="cap">Solid bars/lines = actuals through 2025. Faded/dashed = projected 2026E-2031E under modest AI scenario. Hover any point for value and YoY change.</p>
+    <div class="charts-grid" id="meta-charts"></div>
+  </div>
+</section>
+
+<!-- ====== CDNS ====== -->
+<section id="cdns">
+  <div class="tk-header">
+    <span class="tk">CDNS</span>
+    <span class="nm">Cadence Design Systems · IT / EDA</span>
+    <span class="price">$304-314</span>
+    <span class="change">P/E (TTM) 77 · Fwd P/E 35</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="lbl">Market Cap</div><div class="val">$77B</div></div>
+    <div class="kpi"><div class="lbl">Q4 2025 Rev</div><div class="val">$1.44B</div><div class="sub-val pos">beat $1.42B est.</div></div>
+    <div class="kpi"><div class="lbl">Q4 2025 EPS</div><div class="val">$1.99</div><div class="sub-val pos">beat $1.91 est.</div></div>
+    <div class="kpi"><div class="lbl">2026 Rev Guide</div><div class="val">$5.9-6.0B</div><div class="sub-val">~12% YoY</div></div>
+    <div class="kpi"><div class="lbl">Backlog</div><div class="val pos">$7.8B</div><div class="sub-val pos">record · 67% of '26 covered</div></div>
+    <div class="kpi"><div class="lbl">Non-GAAP Op Margin</div><div class="val pos">44.75-45.75%</div><div class="sub-val">2026 guide</div></div>
+  </div>
+  <h3>Latest financials</h3>
+  <p>Q4 2025 (reported Feb 17, 2026) beat on top and bottom: $1.44B revenue, $1.99 EPS. The standout is the <strong>$7.8B backlog (record)</strong> and the fact that 67% of 2026 revenue is already in backlog at year start. IP revenue grew ~25% in 2025; core EDA grew ~13%; System Design & Analysis grew 13%. Q1 2026 reports April 27 — two days from now.</p>
+  <h3>AI-specific commentary</h3>
+  <p>Cadence launched <strong>ChipStack AI Super Agent</strong> claiming up to 10x productivity on certain tasks. Samsung publicly cited 4x productivity from Cerebrus AI Studio. The story isn't AI-as-feature — it's that <em>more</em> chips get designed because design productivity goes up. Counter-intuitively, 10x faster design = 10x more designs = more EDA seats sold, not fewer. Verisium (verification) and Allegro X (PCB) are also AI-augmented.</p>
+  <div class="thesis-box bull">
+    <h4>Bull case under modest scenario</h4>
+    <ul>
+      <li><strong>EDA is a tax on every chip.</strong> Even modest AI = more custom silicon = more EDA seats. Hyperscaler ASICs (Google TPU, Meta MTIA, AWS Trainium, Microsoft Maia) all designed in CDNS/SNPS.</li>
+      <li><strong>Backlog visibility is unique.</strong> 67% of 2026 already booked = floor on revenue even in downturn.</li>
+      <li><strong>~45% operating margins</strong> with low capital intensity = best-in-class FCF conversion. ROIC routinely &gt;30%.</li>
+      <li><strong>Duopoly with SNPS.</strong> Two companies have ~70% market share. Pricing power is real.</li>
+    </ul>
+  </div>
+  <div class="thesis-box bear">
+    <h4>Bear case</h4>
+    <ul>
+      <li><strong>77x trailing P/E is rich.</strong> Trades at premium to 5-year median of 70.5x and to peers (~60x). Multiple compression risk if AI capex narrative cools.</li>
+      <li><strong>China exposure.</strong> Export controls limit Chinese fab tooling sales. Not catastrophic but a headwind.</li>
+      <li><strong>Concentration in chip design cycle.</strong> Major fabless customer reset (NVDA capex cut) flows through.</li>
+      <li><strong>AI for EDA could backfire.</strong> If AI-generated designs become 90% accurate, fewer iterations, fewer seats. (Counter: more designers, not fewer.)</li>
+    </ul>
+  </div>
+  <div class="thesis-box cat">
+    <h4>Key catalysts</h4>
+    <ul>
+      <li><strong>Q1 2026 earnings: April 27, 2026 (Monday).</strong> Imminent. Watch for backlog growth and IP segment trajectory.</li>
+      <li><strong>2nm/A14 design ramp:</strong> CDNS sells more reference flows for advanced nodes — TSMC, Samsung, Intel Foundry all customers.</li>
+      <li><strong>Hyperscaler ASIC announcements:</strong> Each new custom silicon = $50-100M EDA opportunity.</li>
+    </ul>
+  </div>
+  <p class="footnote">Modest scenario: $7.8B backlog already underwrites +12% revenue growth. Margin expansion to 46% adds another +5% to earnings. Multiple holding flat = +25% over 24 months is realistic. Multiple compression to ~55x P/E is the -10% downside risk.</p>
+  <div class="charts-section">
+    <h3>Annual Financial Trends — 2019-2031</h3>
+    <p class="cap">Solid bars/lines = actuals through 2025. Faded/dashed = projected 2026E-2031E under modest AI scenario. Hover any point for value and YoY change.</p>
+    <div class="charts-grid" id="cdns-charts"></div>
+  </div>
+</section>
+
+<!-- ====== AVGO ====== -->
+<section id="avgo">
+  <div class="tk-header">
+    <span class="tk">AVGO</span>
+    <span class="nm">Broadcom · Semiconductors</span>
+    <span class="price">$415.36</span>
+    <span class="change">P/E (TTM) ~78 · stock +139% TTM</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="lbl">Market Cap</div><div class="val">$2.07T</div></div>
+    <div class="kpi"><div class="lbl">Q1 FY26 Revenue</div><div class="val">$19.31B</div><div class="sub-val pos">+29% YoY · beat $19.18B</div></div>
+    <div class="kpi"><div class="lbl">Q1 FY26 AI Rev</div><div class="val pos">$8.4B</div><div class="sub-val pos">+106% YoY</div></div>
+    <div class="kpi"><div class="lbl">Custom ASIC Growth</div><div class="val pos">+140% YoY</div><div class="sub-val">Networking AI +60%</div></div>
+    <div class="kpi"><div class="lbl">Q2 FY26 Rev Guide</div><div class="val">$22.0B</div><div class="sub-val">AI = $13.1B (68% of rev)</div></div>
+    <div class="kpi"><div class="lbl">AI Backlog</div><div class="val pos">$73B</div><div class="sub-val">Mgmt: &gt;$100B AI rev by 2027</div></div>
+  </div>
+  <h3>Latest financials</h3>
+  <p>Q1 FY26 (reported March 2026) was a clean beat. Total $19.31B (+29% YoY) and AI semis $8.4B (+106%) — within AI, custom ASIC business +140% and AI networking +60%. Q2 guide of $22.0B with AI at $13.1B (68% of total) implies AI growing sequentially again. CEO Hock Tan stated <em>"line of sight to &gt;$100B AI revenue from chips alone by 2027."</em></p>
+  <h3>AI exposure breakdown</h3>
+  <p>Three pieces: (1) <strong>Custom AI ASICs</strong> — Google TPU, Meta MTIA, ByteDance all use Broadcom for design and manufacturing services. (2) <strong>Ethernet AI networking</strong> — Tomahawk 5/6 switch silicon competing with Nvidia Infiniband. (3) <strong>VMware</strong> — non-AI cash cow funding the rest, software margins ~80%+.</p>
+  <div class="thesis-box bull">
+    <h4>Bull case under modest scenario</h4>
+    <ul>
+      <li><strong>Hyperscaler ASIC story is the most durable AI thesis.</strong> Every hyperscaler wants to reduce Nvidia dependence; AVGO is the partner. Even <em>modest</em> AI spending = strong custom ASIC growth because internal silicon is structurally lower-cost per workload.</li>
+      <li><strong>Ethernet vs Infiniband:</strong> If AVGO wins the AI fabric standard war, networking TAM doubles.</li>
+      <li><strong>Margin profile is exceptional.</strong> ~50% non-GAAP operating margin, 60%+ FCF margin. Best-in-class for semis.</li>
+      <li><strong>Capital return:</strong> Strong dividend growth and $50B+ buyback capacity even after VMware acquisition debt.</li>
+    </ul>
+  </div>
+  <div class="thesis-box bear">
+    <h4>Bear case — louder than the others</h4>
+    <ul>
+      <li><strong>Valuation is the issue.</strong> 78x trailing P/E. Stock +139% in past year. Morningstar fair value ~234% premium. Priced for the bull case to play out exactly.</li>
+      <li><strong>Customer concentration.</strong> Top 3 ASIC customers = ~80% of AI revenue. Any one cuts orders = single-quarter-disaster.</li>
+      <li><strong>Hyperscaler ASIC roadmaps could slip.</strong> Custom silicon design cycles are 18-24 months. Delays compress 2027 revenue.</li>
+      <li><strong>The $100B-by-2027 number is mgmt narrative.</strong> Implies ~85% CAGR from Q1 FY26 run-rate. Aggressive even by AI standards.</li>
+    </ul>
+  </div>
+  <div class="thesis-box cat">
+    <h4>Key catalysts</h4>
+    <ul>
+      <li><strong>Q2 FY26 earnings: ~early June 2026.</strong> Confirm $22B / $13.1B AI guidance.</li>
+      <li><strong>OpenAI / Apple / xAI ASIC partnership announcements:</strong> any new logo expands the $73B backlog.</li>
+      <li><strong>VMware customer churn data:</strong> the price hike strategy is at the testing stage; if churn spikes, software FCF cushion erodes.</li>
+    </ul>
+  </div>
+  <p class="footnote">Honest framing: this is the highest-quality AI-direct beneficiary on the list, but also the most stretched on valuation. Modest scenario +20% requires both the AI rev trajectory <em>and</em> multiple holding flat. Probability-weighted, expect closer to +10% over 24 months in modest case unless AI revenue actually hits $40B+ run rate by mid-2027.</p>
+  <div class="charts-section">
+    <h3>Annual Financial Trends — FY19-FY31</h3>
+    <p class="cap">AVGO fiscal year ends late October. Solid = actuals through FY25. Faded/dashed = projected FY26E-FY31E under modest AI scenario. Hover for values and YoY change.</p>
+    <div class="charts-grid" id="avgo-charts"></div>
+  </div>
+</section>
+
+<!-- ====== SNPS ====== -->
+<section id="snps">
+  <div class="tk-header">
+    <span class="tk">SNPS</span>
+    <span class="nm">Synopsys · IT / EDA + Simulation</span>
+    <span class="price">$456.85</span>
+    <span class="change">Fwd P/E ~33 · 52-wk range $376-$652</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="lbl">Market Cap</div><div class="val">$70B</div></div>
+    <div class="kpi"><div class="lbl">Q1 FY26 Rev</div><div class="val">$2.41B</div><div class="sub-val pos">vs $1.46B prior year (incl Ansys)</div></div>
+    <div class="kpi"><div class="lbl">Q1 FY26 Non-GAAP EPS</div><div class="val">$3.77</div><div class="sub-val">GAAP $0.34 (Ansys integration costs)</div></div>
+    <div class="kpi"><div class="lbl">FY2026 Rev Guide</div><div class="val">$9.61B</div><div class="sub-val">incl. ~$2.9B Ansys contribution</div></div>
+    <div class="kpi"><div class="lbl">Ansys Closed</div><div class="val">July 2025</div><div class="sub-val">first full year of combined ops</div></div>
+    <div class="kpi"><div class="lbl">Stock vs 52-wk High</div><div class="val warn">-30%</div><div class="sub-val warn">below DCF base + GF Value</div></div>
+  </div>
+  <h3>Latest financials</h3>
+  <p>Q1 FY26 revenue $2.41B (vs $1.46B prior year), non-GAAP EPS $3.77, GAAP $0.34. The GAAP-vs-non-GAAP gap reflects Ansys merger integration costs. FY26 revenue guide $9.61B (includes ~$2.9B from Ansys). Stock trades at $456 vs 52-week high of $651 — meaningful drawdown ahead of the merger digestion phase.</p>
+  <h3>Strategic story — different from CDNS</h3>
+  <p>Synopsys' acquisition of Ansys (closed July 2025, ~$35B deal) makes it the only "silicon-to-systems" platform. EDA + multiphysics simulation = a single workflow for AI chip design + thermal/power simulation + digital twin of the resulting system. <strong>NVIDIA partnership at GTC 2026</strong> demonstrated 30x quantum chemistry, 34x CFD, and 3.5x circuit simulation acceleration on Blackwell GPUs. The new <strong>AgentEngineer</strong> multi-agent product claims 2-5x productivity gains for engineering teams.</p>
+  <div class="thesis-box bull">
+    <h4>Bull case under modest scenario</h4>
+    <ul>
+      <li><strong>Combined SNPS+Ansys is structurally differentiated.</strong> No competitor offers chip-to-system simulation under one platform. CDNS is great at chip; ANSS was great at simulation; together = moat.</li>
+      <li><strong>Drawdown creates the entry point.</strong> -30% from highs while the underlying business adds Ansys revenue line = compressed multiple.</li>
+      <li><strong>EDA duopoly economics</strong> with SNPS share leadership in advanced node verification.</li>
+      <li><strong>NVIDIA partnership monetizable in 2027+</strong> via GPU-accelerated EDA pricing and AI co-design.</li>
+    </ul>
+  </div>
+  <div class="thesis-box bear">
+    <h4>Bear case</h4>
+    <ul>
+      <li><strong>Integration risk is real.</strong> $35B deal is the largest semi-software deal ever. Cross-sell synergies on schedule but cost synergies still ramping.</li>
+      <li><strong>Goodwill + intangibles balloon B/S.</strong> ~$30B+ goodwill from Ansys = future impairment risk if revenue synergies disappoint.</li>
+      <li><strong>Some Ansys customers in industrial/auto are economically cyclical</strong> — exposure broader than pure-EDA peer.</li>
+      <li><strong>DCF-based fair value ~$354 vs. $456 trade.</strong> The drawdown isn't done if the conservative valuation holds.</li>
+    </ul>
+  </div>
+  <div class="thesis-box cat">
+    <h4>Key catalysts</h4>
+    <ul>
+      <li><strong>Q2 FY26 earnings: late May / early June 2026.</strong> First clean-comp quarter to show Ansys contribution clearly.</li>
+      <li><strong>Cost synergy update.</strong> Mgmt targeted ~$400M in cost synergies by year 3; mid-year update will move stock.</li>
+      <li><strong>NVIDIA GPU-accelerated EDA pricing:</strong> if priced as premium SaaS, EDA-as-a-service inflection.</li>
+    </ul>
+  </div>
+  <p class="footnote">SNPS is the more contrarian of the EDA pair: more drawdown, more integration overhang, but also more upside if Ansys synergies deliver. Modest scenario +25% reasonable if the merger digestion ends by Q3 FY26.</p>
+  <div class="charts-section">
+    <h3>Annual Financial Trends — FY19-FY31</h3>
+    <p class="cap">SNPS fiscal year ends late October. Ansys merger closed July 2025 → reflected in FY26E onward. Solid = actuals; faded/dashed = projected. Hover for values and YoY change.</p>
+    <div class="charts-grid" id="snps-charts"></div>
+  </div>
+</section>
+
+<!-- ====== MSFT ====== -->
+<section id="msft">
+  <div class="tk-header">
+    <span class="tk">MSFT</span>
+    <span class="nm">Microsoft · IT / Cloud + AI</span>
+    <span class="price">$415-424</span>
+    <span class="change">Down 4% on April 23 · Q3 reports April 29</span>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi"><div class="lbl">Market Cap</div><div class="val">$3.10T</div></div>
+    <div class="kpi"><div class="lbl">Q2 FY26 Rev</div><div class="val">$81.3B</div><div class="sub-val pos">+17% YoY</div></div>
+    <div class="kpi"><div class="lbl">Q2 FY26 EPS</div><div class="val">+24% YoY</div></div>
+    <div class="kpi"><div class="lbl">Azure Growth</div><div class="val pos">+39%</div><div class="sub-val">Q3 guide: 37-38%</div></div>
+    <div class="kpi"><div class="lbl">FY26 Capex Guide</div><div class="val warn">$110-120B</div><div class="sub-val warn">Q2 capex $37.5B (+66% YoY)</div></div>
+    <div class="kpi"><div class="lbl">Microsoft Cloud</div><div class="val">$51.5B</div><div class="sub-val">first quarter above $50B</div></div>
+  </div>
+  <h3>Latest financials and the April 23 event</h3>
+  <p>Q2 FY26 (reported January 28, 2026): $81.3B revenue (+17%), Microsoft Cloud $51.5B (first &gt;$50B quarter), Azure +39% YoY, EPS +24%. Capex hit $37.5B for the quarter alone (+66% YoY), with two-thirds going to short-lived assets (GPUs/CPUs).</p>
+  <p><strong>April 23, 2026:</strong> stock fell 4% to ~$415 as the company announced its first <strong>voluntary employee buyout in 51 years</strong>, targeting roughly 7% of its US workforce. The market read this as an admission that AI capex is forcing structural cost-out — bullish for FY27 margins, bearish for the "AI = pure growth" narrative. Microsoft already cut 15,000+ positions globally across multiple 2025 layoff rounds; this program signals continued workforce reshaping.</p>
+  <h3>Q3 FY26 earnings: April 29, 2026 — 4 DAYS AWAY</h3>
+  <p>Most important catalyst on this list. Watch: (1) Q3 Azure growth vs. 37-38% guide, (2) any FY26 capex revision, (3) Copilot/M365 commercial revenue disclosure, (4) commentary on the buyout program's expected savings.</p>
+  <div class="thesis-box bull">
+    <h4>Bull case under modest scenario</h4>
+    <ul>
+      <li><strong>Azure is the AI cloud share leader.</strong> +39% growth, OpenAI partnership monetization, sovereign cloud deals (UAE, Germany, etc.).</li>
+      <li><strong>Copilot is now revenue, not promise.</strong> M365 Copilot at $30/seat × 50M+ seats = $18B+ ARR by mid-2026 (estimate).</li>
+      <li><strong>Buyout = margin expansion lever for FY27.</strong> If AI capex stays elevated but headcount drops 7%, op margin re-expands by Q2 FY27.</li>
+      <li><strong>Valuation reasonable for the franchise.</strong> ~32x forward earnings on a $250B+ revenue base growing 15%+.</li>
+    </ul>
+  </div>
+  <div class="thesis-box bear">
+    <h4>Bear case</h4>
+    <ul>
+      <li><strong>Capex intensity is the most extreme of any megacap.</strong> $120B = 22% of revenue. Even modest AI ROI compression hurts FCF for years.</li>
+      <li><strong>OpenAI partnership friction.</strong> OpenAI building competing cloud relationships (Oracle Stargate, Google), Microsoft holding equity but losing cloud exclusivity.</li>
+      <li><strong>Copilot adoption metrics opaque.</strong> Microsoft hasn't disclosed Copilot seat counts or attach rates clearly. The 7% buyout suggests internal productivity gains not yet flowing to financials.</li>
+      <li><strong>Activision/gaming margin drag</strong> still working through.</li>
+    </ul>
+  </div>
+  <div class="thesis-box cat">
+    <h4>Key catalysts (very near-term)</h4>
+    <ul>
+      <li><strong>Q3 FY26 earnings: April 29, 2026 (4 days).</strong> The single most important earnings print on this list.</li>
+      <li><strong>FY27 capex framing:</strong> consensus expects $130-150B; any guide-down = stock pop.</li>
+      <li><strong>Copilot disclosure:</strong> first explicit seat count or revenue line would be a material catalyst.</li>
+    </ul>
+  </div>
+  <p class="footnote">MSFT under modest scenario: +15% upside reflects high-probability outcome of Azure +30% YoY through FY27, Copilot ramp, and buyout-driven margin recovery. Higher upside requires Copilot to materially accelerate.</p>
+  <div class="charts-section">
+    <h3>Annual Financial Trends — FY19-FY31</h3>
+    <p class="cap">MSFT fiscal year ends June. Solid = actuals through FY25. Faded/dashed = projected FY26E-FY31E under modest AI scenario. Hover any point for value and YoY change.</p>
+    <div class="charts-grid" id="msft-charts"></div>
+  </div>
+</section>
+
+<!-- ====== RANKING ====== -->
+<section id="ranking">
+  <h2>Risk-Adjusted Ranking — Modest Scenario</h2>
+  <p style="color:var(--ink2)">Re-ranked after deep-dive based on three dimensions: (a) Quality of beat trajectory, (b) Asymmetry of bull vs bear case, (c) Valuation cushion vs. consensus.</p>
+  <table class="rank-table">
+    <thead><tr><th>Rank</th><th>Ticker</th><th>Why this rank</th><th>Position sizing view</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="rank-num">1</td>
+        <td><strong>CDNS</strong></td>
+        <td>Cleanest setup: $7.8B backlog covers 67% of 2026 revenue, 45% margins, AI-as-tax-on-chip-design thesis works in modest scenario without any heroic assumptions. April 27 print is imminent and likely positive given backlog growth.</td>
+        <td>Core long. Highest conviction under modest scenario.</td>
+      </tr>
+      <tr>
+        <td class="rank-num">2</td>
+        <td><strong>META</strong></td>
+        <td>Reasonable valuation (22x fwd) for a 15%+ grower with 40% margins and direct AI ad-targeting monetization. Capex risk is real but ad business alone underwrites the floor. The "infra capex weighing" risk is well-discounted at current levels.</td>
+        <td>Core long. Hedge with Q1 earnings put if cautious.</td>
+      </tr>
+      <tr>
+        <td class="rank-num">3</td>
+        <td><strong>MSFT</strong></td>
+        <td>Highest-quality franchise but most capex-exposed. April 29 earnings are binary near-term. Buyout signal is bullish for FY27 margins but bearish for the "growth at any cost" thesis. Moves the slowest of the five.</td>
+        <td>Core long with conservative position size pre-earnings.</td>
+      </tr>
+      <tr>
+        <td class="rank-num">4</td>
+        <td><strong>SNPS</strong></td>
+        <td>Best entry-point asymmetry — already drawn down 30% — but integration risk and goodwill exposure cap upside in pure modest scenario. Probable catch-up trade if Ansys synergies show in Q3.</td>
+        <td>Smaller position; pair trade vs. CDNS for EDA exposure with mean-reversion.</td>
+      </tr>
+      <tr>
+        <td class="rank-num">5</td>
+        <td><strong>AVGO</strong></td>
+        <td>Best AI exposure of the group, worst valuation. Stock +139% in past year, 78x trailing P/E. Modest scenario implies multiple compression risk that may offset the operational beat. Highest <em>operational</em> conviction, lowest <em>price</em> conviction.</td>
+        <td>Smaller position; consider waiting for pullback or hedging with shorter-dated calls vs. cash.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Three things this analysis cannot do</h3>
+  <ul>
+    <li><strong>Predict the next macro shock.</strong> Modest AI scenario assumes "no recession, no rate shock" — both are exogenous risks not in the framework.</li>
+    <li><strong>Time individual prints.</strong> MSFT April 29, CDNS April 27 are coin-flips on guidance. Sized accordingly.</li>
+    <li><strong>Replace your own due diligence on 10-Ks.</strong> Latest 10-Q line items (deferred revenue, contract liabilities, segment splits) deserve your eyes, not a summary.</li>
+  </ul>
+
+  <h3>What I'd want you to ask next</h3>
+  <ul>
+    <li>"Run the same exercise under <em>strong</em> impact scenario and tell me where the picks change."</li>
+    <li>"Build a portfolio that's max-Sharpe across the four scenarios with weighted probabilities."</li>
+    <li>"Show me the five names that <em>under-perform</em> in massive impact — counter-intuitive shorts."</li>
+    <li>"Pull the latest 10-Q line items for these 5 and spot any working-capital red flags."</li>
+  </ul>
+</section>
+
+<!-- ====== RATIOS TAB ====== -->
+<section id="ratios">
+  <h2>20 Key Financial Ratios — Comparative Matrix</h2>
+  <p style="color:var(--ink2)">Single matrix shows the 20 most important ratios for evaluating and comparing these 5 stocks. Toggle between Historical (5-yr avg 2020-2024), Current (2025/TTM), and Forecast (2028E modest scenario). Cells auto-color: <strong style="color:#7be0a3">green = best in row</strong>, <strong style="color:#ef9999">red = worst</strong>. For ratios where lower is better (P/E, EV/EBITDA, CapEx %, Net Debt/EBITDA), the comparison is automatically inverted.</p>
+
+  <div class="period-toggle" id="period-toggle">
+    <button class="period-btn" data-period="historical">Historical (5-yr avg)</button>
+    <button class="period-btn active" data-period="current">Current (2025 / TTM)</button>
+    <button class="period-btn" data-period="forecast">Forecast (2028E modest)</button>
+  </div>
+
+  <div class="cat-chips" id="cat-chips">
+    <span class="filter-label">Categories:</span>
+    <button class="chip active" data-cat="all">All</button>
+    <button class="chip" data-cat="valuation">Valuation</button>
+    <button class="chip" data-cat="profitability">Profitability</button>
+    <button class="chip" data-cat="growth">Growth</button>
+    <button class="chip" data-cat="quality">Quality / Efficiency</button>
+    <button class="chip" data-cat="capital">Capital Structure</button>
+  </div>
+
+  <table class="ratios-table" id="ratios-table"></table>
+
+  <div class="legend-row">
+    <span><span class="swatch swatch-best"></span> Best in row</span>
+    <span><span class="swatch swatch-worst"></span> Worst in row</span>
+    <span><span class="dir-badge hi">↑</span> Higher is better</span>
+    <span><span class="dir-badge lo">↓</span> Lower is better</span>
+  </div>
+
+  <h3>How to use this tab</h3>
+  <ul>
+    <li><strong>Period toggle</strong> changes the time frame for all 20 ratios simultaneously. Use Historical to assess long-term trend quality, Current to see today's setup, Forecast to see where modest-scenario assumptions take each name.</li>
+    <li><strong>Category chips</strong> filter the ratios shown. Quick way to focus on Valuation, Profitability, etc.</li>
+    <li><strong>Company chips</strong> in the header filter columns globally — also hides company sections, summary rows, and ranking entries.</li>
+    <li><strong>Search</strong> in the header filters across ratios and table content.</li>
+  </ul>
+</section>
+
+<!-- ====== STRONG SCENARIO ====== -->
+<section id="strong">
+  <h2>Strong Scenario — Where the Top 5 Picks Change</h2>
+  <p style="color:var(--ink2)">Strong scenario: AI capex grows 25-35%/yr, frontier compute supply-constrained, power binding constraint, AI-driven margin expansion in software. Picks reorder around <em>highest</em> AI exposure rather than risk-adjusted balance.</p>
+
+  <h3>Strong scenario Top 5 (vs. Modest Top 5)</h3>
+  <table>
+    <thead><tr><th>Modest Rank</th><th>Modest Pick</th><th>→</th><th>Strong Rank</th><th>Strong Pick</th><th>What changed</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>CDNS</strong> (+25%)</td><td>→</td><td>3</td><td><strong>AVGO</strong> (+55%)</td><td>AVGO's AI ASIC line goes from "high-quality compounder" to "structural winner of the buildout." Custom silicon TAM doubles.</td></tr>
+      <tr><td>2</td><td><strong>META</strong> (+25%)</td><td>→</td><td>1</td><td><strong>NVDA*</strong> (+45%)</td><td><em>NVDA enters the list under strong</em>. Compute scarcity = pricing power. Modest scenario excludes NVDA on multiple-compression risk.</td></tr>
+      <tr><td>3</td><td><strong>MSFT</strong> (+15%)</td><td>→</td><td>2</td><td><strong>MSFT</strong> (+45%)</td><td>Stays. Capex pays off; Azure AI hits 40%+ growth; Copilot at scale.</td></tr>
+      <tr><td>4</td><td><strong>SNPS</strong> (+25%)</td><td>→</td><td>4</td><td><strong>VRT*</strong> (+70%)</td><td><em>Vertiv enters</em>. Liquid cooling + power for AI = direct play. Strong scenario = backlog explodes.</td></tr>
+      <tr><td>5</td><td><strong>AVGO</strong> (+20%)</td><td>→</td><td>5</td><td><strong>CEG*</strong> (+60%)</td><td><em>Constellation Energy enters</em>. Power becomes binding constraint; nuclear PPA pricing power.</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">* = new entries vs. modest list. SNPS, META, CDNS drop out of top 5 under strong because relative upside vs. picks-and-shovels names like AVGO/VRT/CEG/NVDA is lower. They're still positive (+50-55% range) but ranked below.</p>
+
+  <h3>Why the picks reorder</h3>
+  <div class="thesis-box bull">
+    <h4>Modest → Strong: the logic flip</h4>
+    <ul>
+      <li><strong>Modest</strong> rewards risk-adjusted quality (high margins, durable backlog, reasonable valuation). EDA names dominate because their thesis works without heroic assumptions.</li>
+      <li><strong>Strong</strong> rewards AI directness and capacity exposure. Companies with structural shortage (compute, power, cooling) get pricing power. Multiple expansion baked in.</li>
+      <li><strong>Net effect</strong>: 3 of 5 names change. EDA pair (CDNS/SNPS) still positive but no longer top-ranked.</li>
+    </ul>
+  </div>
+
+  <h3>If you held just the modest top 5 vs. just the strong top 5</h3>
+  <table>
+    <thead><tr><th>Portfolio</th><th>Modest Scenario Return</th><th>Strong Scenario Return</th><th>Massive Scenario Return</th><th>No-Impact Return</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Modest Top 5</strong> (META, CDNS, AVGO, SNPS, MSFT)</td><td class="pos">+22%</td><td class="pos">+45%</td><td class="pos">+85%</td><td class="warn">-23%</td></tr>
+      <tr><td><strong>Strong Top 5</strong> (NVDA, MSFT, AVGO, VRT, CEG)</td><td class="pos">+25%</td><td class="pos">+55%</td><td class="pos">+115%</td><td class="neg">-32%</td></tr>
+      <tr><td><strong>Difference</strong></td><td>+3pts</td><td>+10pts</td><td>+30pts</td><td>-9pts</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Strong-scenario portfolio outperforms in 3 of 4 scenarios but with bigger downside in no-impact. Higher-beta tilt — appropriate if your prior on AI is "more bullish than consensus."</p>
+</section>
+
+<!-- ====== PORTFOLIO ====== -->
+<section id="portfolio">
+  <h2>Max-Sharpe Portfolio Across Four AI Scenarios</h2>
+  <p style="color:var(--ink2)">Probability-weighted portfolio construction across all 4 scenarios using a heuristic mean-variance approach. Inputs: 24-month return per name per scenario (from the master dashboard), assumed scenario probabilities, and rough volatility/correlation estimates.</p>
+
+  <h3>Scenario probabilities used</h3>
+  <table>
+    <thead><tr><th>Scenario</th><th>Probability</th><th>Justification (modest-bull base case)</th></tr></thead>
+    <tbody>
+      <tr><td>1. No Impact</td><td>15%</td><td>AI capex normalizes; ROI questioned. Possible but market signals say not imminent.</td></tr>
+      <tr><td>2. Modest</td><td>40%</td><td>Most likely path: real adoption but slower than bulls. Hyperscaler capex 15-20% growth.</td></tr>
+      <tr><td>3. Strong</td><td>30%</td><td>Broad enterprise AI adoption; power binding constraint. Increasing evidence base.</td></tr>
+      <tr><td>4. Massive</td><td>15%</td><td>AGI-adjacent shock. Tail-risk to upside.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Probability-weighted expected returns (24-mo)</h3>
+  <table>
+    <thead><tr><th>Ticker</th><th>None (15%)</th><th>Modest (40%)</th><th>Strong (30%)</th><th>Massive (15%)</th><th>Weighted Return</th><th>Vol Est.</th><th>Return/Vol</th></tr></thead>
+    <tbody>
+      <tr><td><strong>META</strong></td><td class="neg">-25%</td><td class="pos">+25%</td><td class="pos">+55%</td><td class="pos">+95%</td><td class="pos"><strong>+37%</strong></td><td>30%</td><td>1.23</td></tr>
+      <tr><td><strong>CDNS</strong></td><td class="warn">-15%</td><td class="pos">+25%</td><td class="pos">+55%</td><td class="pos">+95%</td><td class="pos"><strong>+38%</strong></td><td>25%</td><td>1.52</td></tr>
+      <tr><td><strong>AVGO</strong></td><td class="neg">-20%</td><td class="pos">+20%</td><td class="pos">+55%</td><td class="pos">+100%</td><td class="pos"><strong>+37%</strong></td><td>40%</td><td>0.93</td></tr>
+      <tr><td><strong>SNPS</strong></td><td class="warn">-15%</td><td class="pos">+25%</td><td class="pos">+55%</td><td class="pos">+95%</td><td class="pos"><strong>+38%</strong></td><td>30%</td><td>1.27</td></tr>
+      <tr><td><strong>MSFT</strong></td><td class="neg">-20%</td><td class="pos">+15%</td><td class="pos">+45%</td><td class="pos">+85%</td><td class="pos"><strong>+30%</strong></td><td>22%</td><td>1.36</td></tr>
+      <tr style="background:rgba(63,209,122,.05)"><td colspan="7" style="text-align:center;font-weight:600;color:var(--gold)">Add NVDA (strong-scenario entrant) for completeness:</td></tr>
+      <tr><td><strong>NVDA</strong></td><td class="neg">-30%</td><td class="pos">+10%</td><td class="pos">+45%</td><td class="pos">+120%</td><td class="pos"><strong>+30%</strong></td><td>50%</td><td>0.60</td></tr>
+      <tr><td><strong>VRT</strong></td><td class="neg">-30%</td><td class="pos">+30%</td><td class="pos">+70%</td><td class="pos">+135%</td><td class="pos"><strong>+47%</strong></td><td>45%</td><td>1.04</td></tr>
+      <tr><td><strong>CEG</strong></td><td class="neg">-25%</td><td class="pos">+25%</td><td class="pos">+60%</td><td class="pos">+120%</td><td class="pos"><strong>+42%</strong></td><td>35%</td><td>1.20</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Recommended max-Sharpe weights (heuristic, equal-correlation 0.5 assumption)</h3>
+  <table>
+    <thead><tr><th>Ticker</th><th>Weight</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CDNS</strong></td><td>22%</td><td>Highest return/vol (1.52); cleanest balance sheet; backlog underwrites the floor.</td></tr>
+      <tr><td><strong>MSFT</strong></td><td>22%</td><td>Highest scale + lowest vol (22%); diversifier within AI exposure.</td></tr>
+      <tr><td><strong>SNPS</strong></td><td>16%</td><td>Same return profile as CDNS, higher vol from Ansys integration. Pair with CDNS for EDA exposure.</td></tr>
+      <tr><td><strong>META</strong></td><td>15%</td><td>Reasonable valuation, hedges against pure software downside via ad business.</td></tr>
+      <tr><td><strong>VRT</strong></td><td>10%</td><td>High beta to strong/massive scenarios; smaller weight reflects vol.</td></tr>
+      <tr><td><strong>CEG</strong></td><td>8%</td><td>Power thesis is asymmetric — small downside, large upside. Diversifies away from compute exposure.</td></tr>
+      <tr><td><strong>AVGO</strong></td><td>5%</td><td>Highest operational quality but valuation risk caps weight.</td></tr>
+      <tr><td><strong>NVDA</strong></td><td>2%</td><td>Tail-risk position: only meaningful upside under massive scenario; sized accordingly.</td></tr>
+      <tr style="background:rgba(63,209,122,.06)"><td><strong>Portfolio</strong></td><td><strong>100%</strong></td><td><strong>Expected return: ~37% · Expected vol: ~22% · Sharpe (rf=4%): ~1.50</strong></td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">Heuristic Sharpe optimization. Real implementation requires 8×8 covariance matrix from historical returns. Estimated correlations among AI beneficiaries are high (~0.5-0.8) which limits diversification benefit. The weighting reflects this constraint by capping highest-vol names. If you assume <em>higher</em> probability of strong/massive (e.g. 40% strong, 25% massive), VRT/CEG/NVDA weights should rise materially.</p>
+
+  <div class="thesis-box bear">
+    <h4>What this analysis can't do</h4>
+    <ul>
+      <li>Mean-variance optimization is highly sensitive to expected return inputs. ±5pts on any name materially shifts optimal weights.</li>
+      <li>Correlations during AI sell-offs (e.g., DeepSeek panic Jan 2025) approached 0.9+ — diversification within AI fails when you most need it.</li>
+      <li>"Vol estimates" here are eyeballed; back-testing requires daily return data over multiple cycles.</li>
+      <li>If your prior is "no AI impact = -40%, not -25%," the recommended weights compress further toward MSFT/CDNS (highest-quality names).</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ====== SHORTS ====== -->
+<section id="shorts">
+  <h2>Counter-Intuitive Shorts — Names That <em>Underperform</em> Under Massive AI</h2>
+  <p style="color:var(--ink2)">Most lists focus on AI winners. These are 5 names that <strong>lose</strong> if AI lands at the massive end of the spectrum, even though they aren't obviously "anti-AI." The thesis: AI agents replacing seats, AI-native disruption of legacy SaaS economics, and capital reallocation away from incumbents.</p>
+
+  <h3>The 5 short candidates</h3>
+  <table>
+    <thead><tr><th>#</th><th>Ticker</th><th>Name</th><th>Mkt Cap</th><th>Massive Scenario</th><th>Why it loses</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>1</strong></td><td><strong>WDAY</strong></td><td>Workday</td><td>$60B</td><td class="neg">-15% to -30%</td>
+        <td>HR + Finance SaaS sold per-seat. AI agents handling expense reports, time tracking, recruiting workflows = direct seat compression. WDAY's 17% revenue growth comes from seat expansion, which inverts under massive AI.</td>
+      </tr>
+      <tr>
+        <td><strong>2</strong></td><td><strong>PATH</strong></td><td>UiPath</td><td>$7B</td><td class="neg">-30% to -50%</td>
+        <td>Pure-play RPA. The thesis "automate repetitive tasks via screen-scraping bots" is replaced by AI agents that operate via APIs and natural language. Massive AI = thesis broken at the platform level.</td>
+      </tr>
+      <tr>
+        <td><strong>3</strong></td><td><strong>GEN</strong></td><td>Gen Digital (Norton/LifeLock)</td><td>$18B</td><td class="neg">-15% to -25%</td>
+        <td>Consumer cyber relies on subscription convenience. AI agents on the OS level (Apple, Microsoft) bundle security as a free OS feature. Pure consumer cyber commoditizes under massive AI.</td>
+      </tr>
+      <tr>
+        <td><strong>4</strong></td><td><strong>DOCU</strong></td><td>DocuSign</td><td>$15B</td><td class="neg">-20% to -35%</td>
+        <td>Massive AI = autonomous agents handle contract negotiation, legal review, signature workflow end-to-end. DOCU's e-signature value prop becomes a feature inside agentic workflows, not a destination product.</td>
+      </tr>
+      <tr>
+        <td><strong>5</strong></td><td><strong>ADBE</strong></td><td>Adobe</td><td>$200B</td><td class="neg">-15% to -30%</td>
+        <td>Counter-intuitive but real. Massive AI = generative tools commoditize creative software. Firefly defends but doesn't win. Photoshop/Illustrator power-user moat erodes as AI tools generate at the prompt level. Premium price points unsustainable.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Common pattern</h3>
+  <div class="thesis-box bear">
+    <h4>What these have in common</h4>
+    <ul>
+      <li><strong>All are mid-to-large incumbent SaaS</strong> with 20-30%+ historical growth and now flat/decelerating. The premium multiples assume that growth resumes; massive AI inverts that assumption.</li>
+      <li><strong>None is "obviously" anti-AI</strong> — they all have AI features. That's the trap. Adding AI features doesn't help if AI replaces the entire reason customers bought your software.</li>
+      <li><strong>Per-seat pricing is the structural risk</strong>. Software priced per seat or per workflow gets compressed when AI does the work of multiple seats.</li>
+      <li><strong>All are profitable today</strong> — these aren't speculative shorts. They're high-quality businesses whose moats erode under the most aggressive AI outcome.</li>
+    </ul>
+  </div>
+
+  <div class="thesis-box cat">
+    <h4>How to express the trade</h4>
+    <ul>
+      <li><strong>Pair trade preferred:</strong> Long PLTR/CRWD vs. short WDAY/DOCU — captures the "AI agents replace SaaS seats" thesis with hedged beta.</li>
+      <li><strong>Long-dated puts:</strong> 12-18 month puts at -20% strikes are cheap because vol curves don't price massive scenario tail.</li>
+      <li><strong>Sizing:</strong> Counter-intuitive shorts should be small (1-3% of book) because they only work if massive scenario plays out — and the same scenario rewards you elsewhere.</li>
+    </ul>
+  </div>
+  <p class="footnote">These are the opposite of "obvious shorts" (legacy print media, retail, etc.). They're high-quality companies that look like AI beneficiaries on the surface but are structurally exposed if AI agents truly replace SaaS workflows. The trade only works if your view is "massive AI in 18-24 months" — under modest, all 5 still grow.</p>
+</section>
+
+<!-- ====== 10-Q RED FLAGS ====== -->
+<section id="redflags">
+  <h2>10-Q Working Capital Red Flag Scan — Top 5</h2>
+  <p style="color:var(--ink2)">Working capital tells you whether reported earnings are real cash or accounting. Items to scan: accounts receivable growth vs. revenue growth (DSO creep), deferred revenue trajectory (forward bookings strength), inventory build, accounts payable stretching, contract assets/liabilities. Below is the most recent 10-Q snapshot and what to flag for each name.</p>
+  <p class="cap" style="font-style:italic;color:var(--ink3);font-size:11px">Note: line-item specifics below are based on the most recent reported quarterly filings as referenced in earnings press releases and analyst summaries. For definitive figures pull the 10-Q PDFs directly.</p>
+
+  <h3>META — Q4 2025 (10-K) snapshot</h3>
+  <table>
+    <thead><tr><th>Line Item</th><th>Status</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>Cash + Marketable Securities</td><td class="pos">~$77B</td><td>Strong cushion — even with $135B 2026 capex, no liquidity issue.</td></tr>
+      <tr><td>Receivables vs Revenue</td><td class="pos">Tracking flat to revenue</td><td>Ad business collects fast; DSO ~50 days, stable. No red flag.</td></tr>
+      <tr><td>Deferred Revenue</td><td class="flat">Small</td><td>Ad model = limited deferred revenue. Not a meaningful indicator for META.</td></tr>
+      <tr><td>Capital Lease Obligations</td><td class="warn">Growing</td><td><strong>Watch.</strong> Capex guidance includes "principal payments on finance leases" — leased data center capacity is increasingly material.</td></tr>
+      <tr><td>Long-Term Debt</td><td class="warn">~$30B (rising)</td><td><strong>Watch.</strong> META has historically been net-cash; debt is creeping up to fund AI capex.</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--ink2);font-size:12px"><strong>Net read:</strong> No working-capital red flag. The capex story dominates. Watch for finance lease growth in the next 10-Q.</p>
+
+  <h3>CDNS — Q4 2025 (10-K)</h3>
+  <table>
+    <thead><tr><th>Line Item</th><th>Status</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>Cash + Investments</td><td class="pos">~$2.6B</td><td>Healthy.</td></tr>
+      <tr><td>Receivables vs Revenue</td><td class="warn">DSO modestly extended</td><td>EDA contracts are multi-year so DSO can move with mix. Not yet flagged but worth tracking.</td></tr>
+      <tr><td>Deferred Revenue / Contract Liabilities</td><td class="pos">Strong</td><td>Backlog $7.8B. 67% of '26 in backlog = leading indicator of future cash flow. Best signal in the file.</td></tr>
+      <tr><td>Inventories</td><td class="flat">Small (Hardware = Palladium)</td><td>Hardware (emulation systems) = low single-digit % of rev; inventory not material.</td></tr>
+      <tr><td>Long-Term Debt</td><td class="flat">~$2.5B</td><td>Modest leverage post-Hexagon acquisitions. Not a flag.</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--ink2);font-size:12px"><strong>Net read:</strong> Cleanest balance sheet of the 5. Backlog growth is the working-capital tell — green.</p>
+
+  <h3>AVGO — Q1 FY26 (10-Q reported March 2026)</h3>
+  <table>
+    <thead><tr><th>Line Item</th><th>Status</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>Cash</td><td class="warn">~$10B</td><td>Down from prior years post-VMware. Not concerning but cushion smaller.</td></tr>
+      <tr><td>Receivables vs Revenue</td><td class="warn">Watching DSO</td><td>Custom ASIC business has lumpier billings than legacy. Q-on-Q AR growth running ahead of revenue would flag a channel-stuffing risk. Currently tracking but worth flagging.</td></tr>
+      <tr><td>Inventories</td><td class="warn">Lean but watch HBM</td><td>AI ASIC inventory is consumable (built to order); HBM tightness can cause inventory build. Watch in next 10-Q.</td></tr>
+      <tr><td>Goodwill + Intangibles</td><td class="neg">~$95B</td><td><strong>Major flag.</strong> VMware deal goodwill is enormous. Any growth or margin disappointment from VMware = impairment risk.</td></tr>
+      <tr><td>Long-Term Debt</td><td class="warn">~$66B</td><td>Post-VMware leverage. Net Debt/EBITDA ~1.5x. Manageable but constrains M&amp;A.</td></tr>
+      <tr><td>Deferred Revenue</td><td class="pos">$73B AI backlog</td><td>Confirms forward demand. Strong signal.</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--ink2);font-size:12px"><strong>Net read:</strong> Watch goodwill (VMware impairment risk) and AR growth vs. revenue. AI backlog supports the bull case but the B/S has more leverage and intangibles than the others.</p>
+
+  <h3>SNPS — Q1 FY26 (10-Q reported Feb/Mar 2026)</h3>
+  <table>
+    <thead><tr><th>Line Item</th><th>Status</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>Cash</td><td class="warn">Modest post-Ansys</td><td>~$3.5B; cash was used for Ansys deal. Smaller cushion than pre-deal.</td></tr>
+      <tr><td>Receivables vs Revenue</td><td class="warn">Acquired Ansys AR coming in</td><td>Q1 FY26 AR jump partly Ansys consolidation, not organic. Need 1-2 quarters to compare clean YoY.</td></tr>
+      <tr><td>Goodwill + Intangibles</td><td class="neg">~$30B+ (post-Ansys)</td><td><strong>Major flag.</strong> Ansys deal added massive goodwill. Synergy disappointment = impairment risk.</td></tr>
+      <tr><td>Long-Term Debt</td><td class="warn">~$10-12B (post-Ansys)</td><td>Used debt + cash for Ansys. Net Debt/EBITDA ~2x. Manageable but constrains optionality for ~24 months.</td></tr>
+      <tr><td>GAAP vs Non-GAAP gap</td><td class="warn">Wide</td><td>Q1 FY26 GAAP EPS $0.34 vs Non-GAAP $3.77 — gap is purchase accounting from Ansys deal. Will narrow as amortization runs off, but for now GAAP optics are weak.</td></tr>
+      <tr><td>Deferred Revenue / Contract Liabilities</td><td class="pos">Healthy</td><td>EDA SaaS-like model = strong deferred revenue.</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--ink2);font-size:12px"><strong>Net read:</strong> Three cautions — goodwill, debt, GAAP-vs-NG gap. None disqualify the thesis but all are post-Ansys integration overhang. The Q3 FY26 print (when Ansys laps the deal close) is the cleanest comp.</p>
+
+  <h3>MSFT — Q2 FY26 (10-Q reported January 2026)</h3>
+  <table>
+    <thead><tr><th>Line Item</th><th>Status</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td>Cash + ST Investments</td><td class="pos">~$80B</td><td>Strong; even with $120B annual capex, no liquidity issue.</td></tr>
+      <tr><td>Unearned Revenue (Deferred)</td><td class="pos">~$50B+</td><td>Healthy and growing — leading indicator of commercial cloud bookings.</td></tr>
+      <tr><td>Receivables</td><td class="warn">Modest YoY uptick</td><td>DSO inching up as Azure mix grows (longer billing cycles than packaged software). Worth watching but not flagging.</td></tr>
+      <tr><td>Property + Equipment, Net</td><td class="neg">~$200B+ and growing fast</td><td><strong>Watch depreciation cliff.</strong> Two-thirds of Q2 capex was "short-lived assets" (GPUs/CPUs). Useful life assumptions on GPU equipment are 5-6 years; if AI hardware refresh cycles compress, depreciation expense rises faster than guidance.</td></tr>
+      <tr><td>Long-Term Debt</td><td class="flat">~$50B</td><td>Modest for $3T market cap.</td></tr>
+      <tr><td>Workforce Reduction</td><td class="warn">7% buyout disclosed Apr 23</td><td><strong>April 23 announcement.</strong> Severance accrual will hit P&amp;L in Q3/Q4 FY26. Watch for one-time charge in next print.</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--ink2);font-size:12px"><strong>Net read:</strong> Two real watches — depreciation cliff on AI infrastructure (Q3 FY26 commentary key) and severance accrual from buyout. April 29 print will reveal both.</p>
+
+  <h3>Cross-company red-flag summary</h3>
+  <table>
+    <thead><tr><th>Risk</th><th>META</th><th>CDNS</th><th>AVGO</th><th>SNPS</th><th>MSFT</th></tr></thead>
+    <tbody>
+      <tr><td>Goodwill impairment risk</td><td class="flat">Low</td><td class="flat">Low</td><td class="neg">High</td><td class="neg">High</td><td class="flat">Low</td></tr>
+      <tr><td>Capex/depreciation cliff</td><td class="warn">Med</td><td class="flat">Low</td><td class="flat">Low</td><td class="flat">Low</td><td class="warn">Med</td></tr>
+      <tr><td>DSO/AR creep</td><td class="flat">Low</td><td class="warn">Low-Med</td><td class="warn">Med</td><td class="warn">Med (Ansys)</td><td class="warn">Low-Med</td></tr>
+      <tr><td>Leverage</td><td class="warn">Rising</td><td class="flat">Low</td><td class="warn">Med</td><td class="warn">Med</td><td class="flat">Low</td></tr>
+      <tr><td>GAAP vs Non-GAAP gap</td><td class="flat">Narrow</td><td class="warn">Modest</td><td class="warn">Modest</td><td class="neg">Wide (Ansys)</td><td class="flat">Narrow</td></tr>
+      <tr><td>Deferred rev / backlog quality</td><td class="flat">N/A (ad)</td><td class="pos">Strong</td><td class="pos">Strong</td><td class="pos">Strong</td><td class="pos">Strong</td></tr>
+    </tbody>
+  </table>
+  <p class="footnote">CDNS has the cleanest balance sheet. SNPS and AVGO carry the most goodwill/integration risk. META and MSFT carry the most capex-related depreciation risk. None are immediate red flags — but each name has a specific line item to track in the next 10-Q.</p>
+</section>
+
+<div class="footnote" style="text-align:center;margin-top:20px;padding-top:20px;border-top:1px solid var(--line)">
+  Built April 25, 2026 · Financial data from public sources cited via web search · Not investment advice · Verify against latest filings before any action
+</div>
+
+</main>
+
+<script>
+// ============================================================================
+// Annual financial data — actuals 2019-2025 (or FY19-FY25), projections through 2031
+// Projections reflect MODEST AI scenario assumptions.
+// Sources: company 10-Ks (historical), latest earnings reports, modest-scenario consensus
+// ============================================================================
+
+const FINDATA = {
+  // ---------- META (calendar year) ----------
+  meta: {
+    yearLabels: ['2019','2020','2021','2022','2023','2024','2025','2026E','2027E','2028E','2029E','2030E','2031E'],
+    actualIdx: 6, // 2025 is last actual
+    metrics: [
+      { id:'rev',     title:'Total Revenue ($B)',         type:'bar',  fmt:'$B', vals:[70.7, 86.0, 117.9, 116.6, 134.9, 164.5, 200.0, 224.0, 247.0, 272.0, 295.0, 318.0, 343.0] },
+      { id:'growth',  title:'Revenue YoY Growth (%)',     type:'line', fmt:'%',  vals:[26.6, 21.6, 37.2, -1.1, 15.7, 21.9, 21.6, 12.0, 10.3, 10.1, 8.5, 7.8, 7.9] },
+      { id:'gm',      title:'Gross Margin (%)',           type:'line', fmt:'%',  vals:[81.9, 80.6, 80.8, 78.4, 80.7, 81.7, 82.0, 80.0, 80.5, 81.0, 81.5, 82.0, 82.0] },
+      { id:'opm',     title:'Operating Margin (%)',       type:'line', fmt:'%',  vals:[33.9, 38.0, 39.7, 24.8, 34.7, 42.2, 38.0, 34.0, 36.0, 38.5, 40.0, 41.0, 42.0] },
+      { id:'opi',     title:'Operating Income ($B)',      type:'bar',  fmt:'$B', vals:[24.0, 32.7, 46.8, 28.9, 46.8, 69.4, 76.0, 76.2, 88.9, 104.7, 118.0, 130.4, 144.1] },
+      { id:'ni',      title:'Net Income ($B)',            type:'bar',  fmt:'$B', vals:[18.5, 29.1, 39.4, 23.2, 39.1, 62.4, 72.0, 70.0, 82.0, 96.0, 110.0, 122.0, 135.0] },
+      { id:'fcf',     title:'Free Cash Flow ($B)',        type:'bar',  fmt:'$B', vals:[21.2, 23.6, 39.1, 19.0, 43.9, 52.1, 50.0, 35.0, 50.0, 70.0, 90.0, 105.0, 122.0] },
+      { id:'capex',   title:'CapEx ($B)',                 type:'bar',  fmt:'$B', vals:[15.1, 15.7, 19.2, 31.4, 28.1, 39.2, 72.2, 125.0, 140.0, 130.0, 120.0, 115.0, 112.0] },
+      { id:'cxpct',   title:'CapEx % of Revenue',         type:'line', fmt:'%',  vals:[21.4, 18.3, 16.3, 27.0, 20.8, 23.9, 36.1, 55.8, 56.7, 47.8, 40.7, 36.2, 32.7] },
+    ]
+  },
+  // ---------- CDNS (calendar year) ----------
+  cdns: {
+    yearLabels: ['2019','2020','2021','2022','2023','2024','2025','2026E','2027E','2028E','2029E','2030E','2031E'],
+    actualIdx: 6,
+    metrics: [
+      { id:'rev',    title:'Total Revenue ($B)',                  type:'bar',  fmt:'$B', vals:[2.34, 2.68, 2.99, 3.56, 4.09, 4.64, 5.27, 5.95, 6.75, 7.55, 8.35, 9.10, 9.85] },
+      { id:'growth', title:'Revenue YoY Growth (%)',              type:'line', fmt:'%',  vals:[8.7, 14.5, 11.6, 19.0, 14.9, 13.4, 13.6, 12.9, 13.4, 11.9, 10.6, 9.0, 8.2] },
+      { id:'gm',     title:'Gross Margin Non-GAAP (%)',           type:'line', fmt:'%',  vals:[89.5, 89.5, 89.7, 90.0, 90.0, 90.5, 91.0, 91.0, 91.0, 91.5, 91.5, 91.5, 91.5] },
+      { id:'opm',    title:'Operating Margin Non-GAAP (%)',       type:'line', fmt:'%',  vals:[37.0, 39.5, 39.9, 41.7, 42.7, 43.0, 44.0, 45.0, 46.0, 46.5, 47.0, 47.5, 47.5] },
+      { id:'opi',    title:'Operating Income Non-GAAP ($B)',      type:'bar',  fmt:'$B', vals:[0.87, 1.06, 1.19, 1.49, 1.75, 2.00, 2.32, 2.68, 3.10, 3.51, 3.92, 4.32, 4.68] },
+      { id:'ni',     title:'Net Income Non-GAAP ($B)',            type:'bar',  fmt:'$B', vals:[0.71, 0.85, 1.00, 1.20, 1.41, 1.62, 1.85, 2.15, 2.50, 2.85, 3.20, 3.50, 3.80] },
+      { id:'fcf',    title:'Free Cash Flow ($B)',                 type:'bar',  fmt:'$B', vals:[0.74, 0.89, 1.20, 1.30, 1.30, 1.50, 1.80, 2.10, 2.45, 2.80, 3.15, 3.45, 3.75] },
+      { id:'capex',  title:'CapEx ($B)',                          type:'bar',  fmt:'$B', vals:[0.06, 0.07, 0.10, 0.10, 0.11, 0.12, 0.13, 0.15, 0.16, 0.18, 0.19, 0.20, 0.22] },
+      { id:'cxpct',  title:'CapEx % of Revenue',                  type:'line', fmt:'%',  vals:[2.6, 2.7, 3.4, 2.7, 2.6, 2.6, 2.5, 2.5, 2.4, 2.4, 2.3, 2.2, 2.2] },
+    ]
+  },
+  // ---------- AVGO (fiscal year ending late Oct) ----------
+  avgo: {
+    yearLabels: ['FY19','FY20','FY21','FY22','FY23','FY24','FY25','FY26E','FY27E','FY28E','FY29E','FY30E','FY31E'],
+    actualIdx: 6,
+    metrics: [
+      { id:'rev',    title:'Total Revenue ($B)',                  type:'bar',  fmt:'$B', vals:[22.6, 23.9, 27.5, 33.2, 35.8, 51.6, 60.0, 85.0, 115.0, 135.0, 150.0, 162.0, 175.0] },
+      { id:'growth', title:'Revenue YoY Growth (%)',              type:'line', fmt:'%',  vals:[8.0, 5.7, 14.9, 20.9, 7.9, 44.0, 16.3, 41.7, 35.3, 17.4, 11.1, 8.0, 8.0] },
+      { id:'gm',     title:'Gross Margin Non-GAAP (%)',           type:'line', fmt:'%',  vals:[71.4, 72.4, 75.4, 75.5, 75.0, 75.5, 77.5, 78.0, 78.0, 78.0, 78.0, 78.0, 78.0] },
+      { id:'opm',    title:'Operating Margin Non-GAAP (%)',       type:'line', fmt:'%',  vals:[51.0, 52.4, 54.0, 58.0, 60.0, 60.5, 62.0, 63.0, 64.0, 64.0, 64.0, 64.0, 64.0] },
+      { id:'opi',    title:'Operating Income Non-GAAP ($B)',      type:'bar',  fmt:'$B', vals:[11.5, 12.5, 14.8, 19.3, 21.5, 31.2, 37.2, 53.6, 73.6, 86.4, 96.0, 103.7, 112.0] },
+      { id:'ni',     title:'Net Income Non-GAAP ($B)',            type:'bar',  fmt:'$B', vals:[9.43, 10.36, 12.97, 16.59, 18.79, 23.64, 30.0, 42.0, 58.0, 68.0, 76.0, 82.0, 88.0] },
+      { id:'fcf',    title:'Free Cash Flow ($B)',                 type:'bar',  fmt:'$B', vals:[8.91, 11.61, 13.32, 16.31, 17.63, 19.41, 30.0, 50.0, 62.0, 72.0, 80.0, 86.0, 92.0] },
+      { id:'capex',  title:'CapEx ($B)',                          type:'bar',  fmt:'$B', vals:[0.43, 0.46, 0.45, 0.41, 0.45, 0.61, 0.80, 1.50, 2.00, 2.00, 1.80, 1.50, 1.50] },
+      { id:'cxpct',  title:'CapEx % of Revenue',                  type:'line', fmt:'%',  vals:[1.9, 1.9, 1.6, 1.2, 1.3, 1.2, 1.3, 1.8, 1.7, 1.5, 1.2, 0.9, 0.9] },
+    ]
+  },
+  // ---------- SNPS (fiscal year ending late Oct) ----------
+  snps: {
+    yearLabels: ['FY19','FY20','FY21','FY22','FY23','FY24','FY25','FY26E','FY27E','FY28E','FY29E','FY30E','FY31E'],
+    actualIdx: 6,
+    metrics: [
+      { id:'rev',    title:'Total Revenue ($B) — incl. Ansys FY26+', type:'bar',  fmt:'$B', vals:[3.36, 3.69, 4.20, 5.08, 5.84, 6.13, 7.00, 9.61, 11.5, 13.0, 14.5, 15.7, 16.9] },
+      { id:'growth', title:'Revenue YoY Growth (%)',                 type:'line', fmt:'%',  vals:[7.4, 9.8, 13.8, 21.0, 14.9, 5.0, 14.2, 37.3, 19.7, 13.0, 11.5, 8.3, 7.6] },
+      { id:'gm',     title:'Gross Margin Non-GAAP (%)',              type:'line', fmt:'%',  vals:[79.0, 80.5, 82.0, 82.5, 83.0, 83.0, 83.0, 82.0, 83.0, 83.5, 84.0, 84.5, 85.0] },
+      { id:'opm',    title:'Operating Margin Non-GAAP (%)',          type:'line', fmt:'%',  vals:[24.0, 27.0, 31.0, 35.0, 36.5, 37.0, 37.0, 35.0, 37.0, 38.0, 39.0, 40.0, 40.0] },
+      { id:'opi',    title:'Operating Income Non-GAAP ($B)',         type:'bar',  fmt:'$B', vals:[0.81, 1.00, 1.30, 1.78, 2.13, 2.27, 2.59, 3.36, 4.26, 4.94, 5.66, 6.28, 6.76] },
+      { id:'ni',     title:'Net Income Non-GAAP ($B)',               type:'bar',  fmt:'$B', vals:[0.66, 0.83, 1.07, 1.45, 1.78, 1.90, 2.20, 2.80, 3.55, 4.15, 4.75, 5.30, 5.70] },
+      { id:'fcf',    title:'Free Cash Flow ($B)',                    type:'bar',  fmt:'$B', vals:[0.80, 1.05, 1.40, 1.60, 1.70, 1.30, 2.00, 2.55, 3.20, 3.80, 4.40, 4.90, 5.30] },
+      { id:'capex',  title:'CapEx ($B)',                             type:'bar',  fmt:'$B', vals:[0.08, 0.07, 0.07, 0.10, 0.16, 0.16, 0.18, 0.30, 0.30, 0.30, 0.30, 0.30, 0.30] },
+      { id:'cxpct',  title:'CapEx % of Revenue',                     type:'line', fmt:'%',  vals:[2.4, 1.9, 1.7, 2.0, 2.7, 2.6, 2.6, 3.1, 2.6, 2.3, 2.1, 1.9, 1.8] },
+    ]
+  },
+  // ---------- MSFT (fiscal year ending June) ----------
+  msft: {
+    yearLabels: ['FY19','FY20','FY21','FY22','FY23','FY24','FY25','FY26E','FY27E','FY28E','FY29E','FY30E','FY31E'],
+    actualIdx: 6,
+    metrics: [
+      { id:'rev',    title:'Total Revenue ($B)',          type:'bar',  fmt:'$B', vals:[125.8, 143.0, 168.1, 198.3, 211.9, 245.1, 281.7, 305.0, 336.0, 369.0, 406.0, 441.0, 478.0] },
+      { id:'growth', title:'Revenue YoY Growth (%)',      type:'line', fmt:'%',  vals:[14.0, 13.6, 17.5, 18.0, 6.9, 15.7, 14.9, 8.3, 10.2, 9.8, 10.0, 8.6, 8.4] },
+      { id:'gm',     title:'Gross Margin (%)',            type:'line', fmt:'%',  vals:[65.9, 67.8, 68.9, 68.4, 69.0, 69.8, 69.5, 68.5, 68.5, 69.0, 69.5, 70.0, 70.0] },
+      { id:'opm',    title:'Operating Margin (%)',        type:'line', fmt:'%',  vals:[34.1, 37.0, 41.6, 41.8, 41.8, 44.6, 45.0, 45.0, 46.0, 47.0, 47.5, 48.0, 48.0] },
+      { id:'opi',    title:'Operating Income ($B)',       type:'bar',  fmt:'$B', vals:[42.96, 52.96, 69.92, 83.38, 88.52, 109.43, 126.8, 137.3, 154.6, 173.4, 192.9, 211.7, 229.4] },
+      { id:'ni',     title:'Net Income ($B)',             type:'bar',  fmt:'$B', vals:[39.24, 44.28, 61.27, 72.74, 72.36, 88.14, 101.1, 109.0, 122.0, 138.0, 156.0, 168.0, 181.0] },
+      { id:'fcf',    title:'Free Cash Flow ($B)',         type:'bar',  fmt:'$B', vals:[38.26, 45.23, 56.12, 65.15, 59.48, 74.07, 89.0, 95.0, 115.0, 135.0, 155.0, 170.0, 185.0] },
+      { id:'capex',  title:'CapEx ($B)',                  type:'bar',  fmt:'$B', vals:[13.93, 15.44, 20.62, 23.89, 28.11, 44.48, 80.0, 115.0, 125.0, 125.0, 120.0, 115.0, 110.0] },
+      { id:'cxpct',  title:'CapEx % of Revenue',          type:'line', fmt:'%',  vals:[11.1, 10.8, 12.3, 12.0, 13.3, 18.1, 28.4, 37.7, 37.2, 33.9, 29.6, 26.1, 23.0] },
+    ]
+  }
+};
+
+// ----- formatters & helpers -----
+function fmtVal(v, fmt) {
+  if (fmt === '%') return v.toFixed(1) + '%';
+  if (fmt === '$B') return '$' + v.toFixed(v < 10 ? 2 : 1) + 'B';
+  return v.toString();
+}
+
+function calcCAGR(v0, v1, periods) {
+  if (v0 <= 0 || v1 <= 0) return null;
+  return (Math.pow(v1/v0, 1/periods) - 1) * 100;
+}
+
+function buildYoyFooter(metric, actualIdx, yearLabels) {
+  const v0 = metric.vals[0];
+  const vAct = metric.vals[actualIdx];
+  const vEnd = metric.vals[metric.vals.length-1];
+  const periodsA = actualIdx;
+  const periodsP = metric.vals.length - 1 - actualIdx;
+  const isPct = metric.fmt === '%';
+
+  if (isPct) {
+    // For percentage metrics, show absolute pts changes
+    const dActual = vAct - v0;
+    const dProj = vEnd - vAct;
+    return `
+      <div><span class="lbl">${yearLabels[0]}:</span> <span class="val">${v0.toFixed(1)}%</span></div>
+      <div><span class="lbl">${yearLabels[actualIdx]}:</span> <span class="val">${vAct.toFixed(1)}%</span></div>
+      <div><span class="lbl">${yearLabels[yearLabels.length-1]}:</span> <span class="val">${vEnd.toFixed(1)}%</span></div>
+      <div><span class="lbl">Δ act→proj:</span> <span class="val ${dProj>=0?'pos-v':'neg-v'}">${dProj>=0?'+':''}${dProj.toFixed(1)}pts</span></div>
+    `;
+  } else {
+    const cagrA = calcCAGR(v0, vAct, periodsA);
+    const cagrP = calcCAGR(vAct, vEnd, periodsP);
+    return `
+      <div><span class="lbl">${yearLabels[0]}:</span> <span class="val">${fmtVal(v0, metric.fmt)}</span></div>
+      <div><span class="lbl">${yearLabels[actualIdx]}:</span> <span class="val">${fmtVal(vAct, metric.fmt)}</span></div>
+      <div><span class="lbl">CAGR ${yearLabels[0]}→${yearLabels[actualIdx]}:</span> <span class="val ${cagrA>=0?'pos-v':'neg-v'}">${cagrA===null?'n/a':(cagrA>=0?'+':'')+cagrA.toFixed(1)+'%'}</span></div>
+      <div><span class="lbl">CAGR ${yearLabels[actualIdx]}→${yearLabels[yearLabels.length-1]}:</span> <span class="val ${cagrP>=0?'pos-v':'neg-v'}">${cagrP===null?'n/a':(cagrP>=0?'+':'')+cagrP.toFixed(1)+'%'}</span></div>
+    `;
+  }
+}
+
+// ----- chart factory (theme-aware) -----
+function hexToRgba(hex, a) {
+  let h = (hex || '').trim().replace('#','');
+  if (h.length === 3) h = h.split('').map(c=>c+c).join('');
+  const r = parseInt(h.slice(0,2),16) || 0;
+  const g = parseInt(h.slice(2,4),16) || 0;
+  const b = parseInt(h.slice(4,6),16) || 0;
+  return 'rgba('+r+','+g+','+b+','+a+')';
+}
+function getThemeColors() {
+  const root = getComputedStyle(document.documentElement);
+  return {
+    accent: (root.getPropertyValue('--accent').trim()) || '#5aa6ff',
+    bad: (root.getPropertyValue('--bad').trim()) || '#ef6b6b',
+    ink: (root.getPropertyValue('--ink').trim()) || '#e6edf6',
+    ink2: (root.getPropertyValue('--ink2').trim()) || '#a6b1c2',
+    ink3: (root.getPropertyValue('--ink3').trim()) || '#6b7689',
+    line: (root.getPropertyValue('--line').trim()) || '#222a37',
+    panel2: (root.getPropertyValue('--panel2').trim()) || '#161b25',
+    bg: (root.getPropertyValue('--bg').trim()) || '#0b0e14'
+  };
+}
+function makeChart(canvas, metric, actualIdx, yearLabels) {
+  const ctx = canvas.getContext('2d');
+  const isLine = metric.type === 'line';
+  const C = getThemeColors();
+  const accent = C.accent;
+  const badColor = C.bad;
+
+  const barColors = metric.vals.map((v, i) => {
+    if (i <= actualIdx) return v >= 0 ? hexToRgba(accent,0.85) : hexToRgba(badColor,0.85);
+    return v >= 0 ? hexToRgba(accent,0.35) : hexToRgba(badColor,0.35);
+  });
+  const barBorders = metric.vals.map((v, i) => {
+    if (i <= actualIdx) return v >= 0 ? accent : badColor;
+    return hexToRgba(accent,0.55);
+  });
+
+  const tooltipCB = {
+    title: (items) => {
+      const i = items[0].dataIndex;
+      const lab = yearLabels[i];
+      return i <= actualIdx ? lab + '  (actual)' : lab + '  (projected)';
+    },
+    label: (item) => {
+      const i = item.dataIndex;
+      const v = metric.vals[i];
+      const main = fmtVal(v, metric.fmt);
+      if (i === 0) return main;
+      const prev = metric.vals[i-1];
+      let yoyTxt;
+      if (metric.fmt === '%') {
+        const d = v - prev;
+        yoyTxt = (d >= 0 ? '+' : '') + d.toFixed(1) + 'pts YoY';
+      } else {
+        const d = (v - prev) / Math.abs(prev) * 100;
+        yoyTxt = (d >= 0 ? '+' : '') + d.toFixed(1) + '% YoY';
+      }
+      return main + '   ·   ' + yoyTxt;
+    }
+  };
+
+  const config = {
+    type: metric.type,
+    data: {
+      labels: yearLabels,
+      datasets: [{
+        label: metric.title,
+        data: metric.vals,
+        backgroundColor: isLine ? hexToRgba(accent,0.10) : barColors,
+        borderColor: isLine ? accent : barBorders,
+        borderWidth: isLine ? 2 : 1,
+        fill: isLine,
+        tension: isLine ? 0.32 : 0,
+        pointBackgroundColor: isLine ? metric.vals.map((v,i) => i <= actualIdx ? accent : C.ink3) : undefined,
+        pointBorderColor: isLine ? C.bg : undefined,
+        pointRadius: isLine ? 3 : 0,
+        pointHoverRadius: isLine ? 5 : 0,
+        ...(isLine ? {
+          segment: {
+            borderDash: ctx => ctx.p1DataIndex > actualIdx ? [5, 4] : undefined,
+            borderColor: ctx => ctx.p1DataIndex > actualIdx ? hexToRgba(accent,0.7) : accent
+          }
+        } : {})
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      animation: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: C.panel2,
+          titleColor: C.ink,
+          bodyColor: C.ink2,
+          borderColor: C.line,
+          borderWidth: 1,
+          padding: 9,
+          cornerRadius: 4,
+          callbacks: tooltipCB,
+          displayColors: false
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: C.ink3, font: { size: 9 }, autoSkip: false, maxRotation: 0 },
+          grid: { display: false }
+        },
+        y: {
+          ticks: {
+            color: C.ink3,
+            font: { size: 9 },
+            callback: v => metric.fmt === '%' ? v + '%' : '$' + v + 'B'
+          },
+          grid: { color: hexToRgba(C.line, 0.6) }
+        }
+      }
+    }
+  };
+  return new Chart(ctx, config);
+}
+
+// ----- render every company's grid -----
+function renderCompany(key) {
+  const data = FINDATA[key];
+  const grid = document.getElementById(key + '-charts');
+  if (!grid) return;
+  data.metrics.forEach(metric => {
+    const block = document.createElement('div');
+    block.className = 'chart-block';
+    const canvasId = key + '-' + metric.id;
+    block.innerHTML =
+      '<div class="chart-title">' + metric.title + '</div>' +
+      '<div class="chart-canvas-wrap"><canvas id="' + canvasId + '"></canvas></div>' +
+      '<div class="yoy-foot">' + buildYoyFooter(metric, data.actualIdx, data.yearLabels) + '</div>';
+    grid.appendChild(block);
+    makeChart(document.getElementById(canvasId), metric, data.actualIdx, data.yearLabels);
+  });
+}
+
+// Charts render lazily when their tab is first shown — see tab navigation script below.
+window.__renderCompany = renderCompany;
+</script>
+<script>
+// ============================================================================
+// SINGLE-PAGE TAB NAVIGATION + RATIOS + GLOBAL FILTERING
+// ============================================================================
+const sectionRendered = new Set();
+
+function showPage(target) {
+  if (!target) target = 'summary';
+  // Hide all main sections, show only target
+  document.querySelectorAll('main > section').forEach(s => {
+    s.classList.toggle('active', s.id === target);
+  });
+  // Update nav active state
+  document.querySelectorAll('.nav-btn').forEach(btn => {
+    const href = btn.getAttribute('href');
+    btn.classList.toggle('active', href === '#' + target);
+    btn.classList.remove('summary');
+  });
+  // Lazy chart rendering for company tabs
+  if (!sectionRendered.has(target)) {
+    if (['meta','cdns','avgo','snps','msft'].includes(target)) {
+      window.__renderCompany(target);
+    } else if (target === 'ratios') {
+      renderRatiosTable();
+    }
+    sectionRendered.add(target);
+  }
+  // Force chart resize (in case canvas was 0px when hidden)
+  if (sectionRendered.has(target) && window.Chart) {
+    setTimeout(() => {
+      Chart.helpers && Chart.instances && Object.values(Chart.instances).forEach(c => {
+        try { c.resize(); } catch(e) {}
+      });
+    }, 50);
+  }
+  // Scroll to top
+  window.scrollTo({top:0, behavior:'instant'});
+}
+
+document.querySelectorAll('.nav-btn').forEach(btn => {
+  const href = btn.getAttribute('href');
+  if (href && href.startsWith('#')) {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+      const target = href.slice(1);
+      window.location.hash = href;
+      showPage(target);
+    });
+  }
+});
+window.addEventListener('hashchange', () => {
+  showPage(window.location.hash.slice(1) || 'summary');
+});
+
+// ============================================================================
+// 20 KEY FINANCIAL RATIOS — DATA
+// ============================================================================
+const RATIOS = [
+  // VALUATION (6)
+  {id:'pe_ttm', name:'P/E (TTM)', cat:'valuation', lowerBetter:true, fmt:v=>v.toFixed(1)+'x',
+    vals:{historical:{meta:25,cdns:55,avgo:32,snps:35,msft:30},
+          current:{meta:28.5,cdns:77.3,avgo:78.0,snps:32.0,msft:32.5},
+          forecast:{meta:21,cdns:32,avgo:46,snps:28,msft:26}}},
+  {id:'fwd_pe', name:'Forward P/E', cat:'valuation', lowerBetter:true, fmt:v=>v.toFixed(1)+'x',
+    vals:{historical:{meta:22,cdns:42,avgo:25,snps:30,msft:27},
+          current:{meta:22.2,cdns:35.4,avgo:50.0,snps:33.0,msft:28.0},
+          forecast:{meta:18.5,cdns:25.0,avgo:32.0,snps:22.0,msft:22.0}}},
+  {id:'peg', name:'PEG Ratio', cat:'valuation', lowerBetter:true, fmt:v=>v.toFixed(2),
+    vals:{historical:{meta:1.5,cdns:3.5,avgo:1.8,snps:2.5,msft:2.2},
+          current:{meta:2.0,cdns:5.5,avgo:1.5,snps:1.6,msft:2.5},
+          forecast:{meta:1.7,cdns:2.5,avgo:1.3,snps:1.4,msft:2.2}}},
+  {id:'ps', name:'P/S Ratio', cat:'valuation', lowerBetter:true, fmt:v=>v.toFixed(1)+'x',
+    vals:{historical:{meta:6.5,cdns:14.0,avgo:10.0,snps:9.5,msft:9.0},
+          current:{meta:8.5,cdns:14.6,avgo:34.5,snps:10.0,msft:11.0},
+          forecast:{meta:6.2,cdns:10.0,avgo:15.0,snps:5.4,msft:8.4}}},
+  {id:'ev_ebitda', name:'EV / EBITDA', cat:'valuation', lowerBetter:true, fmt:v=>v.toFixed(1)+'x',
+    vals:{historical:{meta:14,cdns:42,avgo:18,snps:24,msft:20},
+          current:{meta:17.0,cdns:50.0,avgo:45.0,snps:30.0,msft:22.0},
+          forecast:{meta:12.0,cdns:24.0,avgo:25.0,snps:15.0,msft:16.0}}},
+  {id:'fcf_yield', name:'FCF Yield (%)', cat:'valuation', lowerBetter:false, fmt:v=>v.toFixed(2)+'%',
+    vals:{historical:{meta:3.0,cdns:2.0,avgo:3.5,snps:3.5,msft:3.5},
+          current:{meta:2.9,cdns:2.3,avgo:1.4,snps:2.9,msft:2.9},
+          forecast:{meta:5.0,cdns:4.0,avgo:3.5,snps:5.5,msft:4.8}}},
+  // PROFITABILITY (5)
+  {id:'gm', name:'Gross Margin', cat:'profitability', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:80.5,cdns:89.7,avgo:74.0,snps:82.0,msft:68.5},
+          current:{meta:82.0,cdns:91.0,avgo:77.5,snps:83.0,msft:69.5},
+          forecast:{meta:81.0,cdns:91.5,avgo:78.0,snps:84.0,msft:69.5}}},
+  {id:'om', name:'Operating Margin', cat:'profitability', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:34.0,cdns:41.0,avgo:55.0,snps:31.0,msft:39.5},
+          current:{meta:38.0,cdns:44.0,avgo:62.0,snps:37.0,msft:45.0},
+          forecast:{meta:38.5,cdns:46.5,avgo:64.0,snps:38.0,msft:47.0}}},
+  {id:'nm', name:'Net Margin', cat:'profitability', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:30.0,cdns:34.0,avgo:46.0,snps:25.0,msft:35.0},
+          current:{meta:36.0,cdns:35.1,avgo:50.0,snps:31.4,msft:35.9},
+          forecast:{meta:35.0,cdns:38.6,avgo:51.0,snps:33.0,msft:38.0}}},
+  {id:'roe', name:'ROE', cat:'profitability', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:24.0,cdns:30.0,avgo:45.0,snps:18.0,msft:42.0},
+          current:{meta:32.0,cdns:35.0,avgo:30.0,snps:22.0,msft:38.0},
+          forecast:{meta:30.0,cdns:32.0,avgo:35.0,snps:24.0,msft:36.0}}},
+  {id:'roic', name:'ROIC', cat:'profitability', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:22.0,cdns:25.0,avgo:25.0,snps:14.0,msft:26.0},
+          current:{meta:28.0,cdns:25.0,avgo:18.0,snps:12.0,msft:28.0},
+          forecast:{meta:26.0,cdns:28.0,avgo:25.0,snps:18.0,msft:30.0}}},
+  // GROWTH (3)
+  {id:'rev_g', name:'Revenue Growth — 3yr CAGR', cat:'growth', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:18.0,cdns:16.0,avgo:18.0,snps:14.0,msft:13.0},
+          current:{meta:19.7,cdns:13.9,avgo:21.0,snps:11.7,msft:12.4},
+          forecast:{meta:11.0,cdns:13.0,avgo:31.0,snps:23.0,msft:9.5}}},
+  {id:'eps_g', name:'EPS Growth — 3yr CAGR', cat:'growth', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:25.0,cdns:22.0,avgo:25.0,snps:30.0,msft:18.0},
+          current:{meta:35.0,cdns:16.5,avgo:32.0,snps:16.5,msft:12.5},
+          forecast:{meta:14.0,cdns:14.5,avgo:25.0,snps:18.0,msft:11.0}}},
+  {id:'fcf_g', name:'FCF Growth — 3yr CAGR', cat:'growth', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:13.0,cdns:18.0,avgo:14.0,snps:12.0,msft:14.0},
+          current:{meta:9.0,cdns:13.4,avgo:24.0,snps:5.0,msft:14.5},
+          forecast:{meta:14.0,cdns:13.0,avgo:13.0,snps:13.0,msft:11.0}}},
+  // QUALITY/EFFICIENCY (3)
+  {id:'fcf_conv', name:'FCF Conversion (FCF/NI)', cat:'quality', lowerBetter:false, fmt:v=>v.toFixed(0)+'%',
+    vals:{historical:{meta:90,cdns:90,avgo:100,snps:80,msft:90},
+          current:{meta:69,cdns:97,avgo:100,snps:91,msft:88},
+          forecast:{meta:90,cdns:99,avgo:105,snps:93,msft:102}}},
+  {id:'capex_pct', name:'CapEx % of Revenue', cat:'quality', lowerBetter:true, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:21.0,cdns:2.8,avgo:1.5,snps:2.1,msft:12.0},
+          current:{meta:36.1,cdns:2.5,avgo:1.3,snps:2.6,msft:28.4},
+          forecast:{meta:47.8,cdns:2.4,avgo:1.5,snps:2.3,msft:33.9}}},
+  {id:'rd_pct', name:'R&D % of Revenue', cat:'quality', lowerBetter:false, fmt:v=>v.toFixed(1)+'%',
+    vals:{historical:{meta:22.0,cdns:40.0,avgo:18.0,snps:32.0,msft:13.0},
+          current:{meta:27.0,cdns:38.0,avgo:16.0,snps:30.0,msft:13.0},
+          forecast:{meta:26.0,cdns:38.0,avgo:16.0,snps:29.0,msft:13.0}}},
+  // CAPITAL STRUCTURE (3)
+  {id:'nd_ebitda', name:'Net Debt / EBITDA', cat:'capital', lowerBetter:true, fmt:v=>v.toFixed(2)+'x',
+    vals:{historical:{meta:-0.8,cdns:0.3,avgo:1.5,snps:-0.5,msft:0.0},
+          current:{meta:-0.5,cdns:0.5,avgo:1.5,snps:2.0,msft:0.3},
+          forecast:{meta:0.5,cdns:0.0,avgo:1.0,snps:1.0,msft:0.5}}},
+  {id:'cur_ratio', name:'Current Ratio', cat:'capital', lowerBetter:false, fmt:v=>v.toFixed(2),
+    vals:{historical:{meta:3.5,cdns:2.0,avgo:1.5,snps:1.4,msft:2.0},
+          current:{meta:2.7,cdns:2.5,avgo:1.0,snps:1.5,msft:1.4},
+          forecast:{meta:2.8,cdns:2.7,avgo:1.2,snps:1.7,msft:1.6}}},
+  {id:'shr_yield', name:'Total Shareholder Yield', cat:'capital', lowerBetter:false, fmt:v=>v.toFixed(2)+'%',
+    vals:{historical:{meta:1.5,cdns:1.0,avgo:3.0,snps:0.5,msft:2.0},
+          current:{meta:2.5,cdns:1.0,avgo:3.0,snps:0.0,msft:2.0},
+          forecast:{meta:3.0,cdns:1.5,avgo:3.5,snps:1.0,msft:2.2}}}
+];
+
+const filterState = { companies: new Set(['meta','cdns','avgo','snps','msft']) };
+const ratiosState = { period:'current', category:'all', search:'' };
+
+function renderRatiosTable() {
+  const visibleCos = ['meta','cdns','avgo','snps','msft'].filter(c => filterState.companies.has(c));
+  const filteredRatios = RATIOS.filter(r =>
+    (ratiosState.category === 'all' || r.cat === ratiosState.category) &&
+    (!ratiosState.search || r.name.toLowerCase().includes(ratiosState.search.toLowerCase()))
+  );
+  const tbl = document.getElementById('ratios-table');
+  if (!tbl) return;
+
+  if (visibleCos.length === 0) {
+    tbl.innerHTML = '<tbody><tr><td style="padding:20px;color:var(--ink2)">No companies selected — toggle the company filter chips above.</td></tr></tbody>';
+    return;
+  }
+  if (filteredRatios.length === 0) {
+    tbl.innerHTML = '<tbody><tr><td style="padding:20px;color:var(--ink2)">No ratios match current filters.</td></tr></tbody>';
+    return;
+  }
+  const coNames = {meta:'META',cdns:'CDNS',avgo:'AVGO',snps:'SNPS',msft:'MSFT'};
+  const cats = [
+    ['valuation','Valuation'],
+    ['profitability','Profitability'],
+    ['growth','Growth'],
+    ['quality','Quality / Efficiency'],
+    ['capital','Capital Structure']
+  ];
+  let html = '<thead><tr><th>Ratio</th>';
+  visibleCos.forEach(c => html += `<th>${coNames[c]}</th>`);
+  html += '</tr></thead><tbody>';
+  cats.forEach(([catKey, catName]) => {
+    const ratiosInCat = filteredRatios.filter(r => r.cat === catKey);
+    if (ratiosInCat.length === 0) return;
+    html += `<tr class="cat-header"><td colspan="${visibleCos.length+1}" class="cat-header-cell">${catName}</td></tr>`;
+    ratiosInCat.forEach(r => {
+      const vals = visibleCos.map(c => r.vals[ratiosState.period][c]);
+      let bestIdx = 0, worstIdx = 0;
+      vals.forEach((v, i) => {
+        if (r.lowerBetter) {
+          if (v < vals[bestIdx]) bestIdx = i;
+          if (v > vals[worstIdx]) worstIdx = i;
+        } else {
+          if (v > vals[bestIdx]) bestIdx = i;
+          if (v < vals[worstIdx]) worstIdx = i;
+        }
+      });
+      const dirBadge = r.lowerBetter
+        ? '<span class="dir-badge lo" title="Lower is better">↓</span>'
+        : '<span class="dir-badge hi" title="Higher is better">↑</span>';
+      html += `<tr><td><div class="ratio-name">${r.name}${dirBadge}</div></td>`;
+      vals.forEach((v, i) => {
+        const cls = visibleCos.length > 1 ? (i === bestIdx ? 'best-cell' : (i === worstIdx ? 'worst-cell' : '')) : '';
+        html += `<td class="${cls}">${r.fmt(v)}</td>`;
+      });
+      html += '</tr>';
+    });
+  });
+  html += '</tbody>';
+  tbl.innerHTML = html;
+}
+
+// Apply company filter to nav buttons + table rows
+function applyCompanyFilter() {
+  const allCos = ['meta','cdns','avgo','snps','msft'];
+  allCos.forEach(co => {
+    const visible = filterState.companies.has(co);
+    document.querySelectorAll(`.nav-btn[data-co-link="${co}"]`).forEach(btn => {
+      btn.style.display = visible ? '' : 'none';
+    });
+    // Hide rows in summary/ranking/portfolio tables when ticker matches a filtered-out co
+    document.querySelectorAll('main table tbody tr').forEach(tr => {
+      const cells = Array.from(tr.cells);
+      // Look in cell 1 or cell 0 for ticker (usually 2nd or 1st column)
+      const tickerCells = [cells[1], cells[0]];
+      for (const cell of tickerCells) {
+        if (!cell) continue;
+        const txt = cell.innerText.trim().toUpperCase();
+        if (txt === co.toUpperCase()) {
+          tr.classList.toggle('hidden-row', !visible);
+          break;
+        }
+      }
+    });
+  });
+  if (sectionRendered.has('ratios')) renderRatiosTable();
+  // If currently on a hidden company tab, switch away
+  const activeNavBtn = document.querySelector('.nav-btn.active[data-co-link]');
+  if (activeNavBtn && activeNavBtn.style.display === 'none') {
+    showPage('summary');
+    window.location.hash = '#summary';
+  }
+}
+
+document.querySelectorAll('.chip[data-co]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const co = chip.dataset.co;
+    if (filterState.companies.has(co)) {
+      filterState.companies.delete(co);
+      chip.classList.remove('active');
+    } else {
+      filterState.companies.add(co);
+      chip.classList.add('active');
+    }
+    applyCompanyFilter();
+  });
+});
+const coAll = document.getElementById('co-all');
+if (coAll) coAll.addEventListener('click', () => {
+  filterState.companies = new Set(['meta','cdns','avgo','snps','msft']);
+  document.querySelectorAll('.chip[data-co]').forEach(c => c.classList.add('active'));
+  applyCompanyFilter();
+});
+const coNone = document.getElementById('co-none');
+if (coNone) coNone.addEventListener('click', () => {
+  filterState.companies = new Set();
+  document.querySelectorAll('.chip[data-co]').forEach(c => c.classList.remove('active'));
+  applyCompanyFilter();
+});
+
+// Period toggle
+document.querySelectorAll('.period-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    ratiosState.period = btn.dataset.period;
+    document.querySelectorAll('.period-btn').forEach(b => b.classList.toggle('active', b === btn));
+    if (sectionRendered.has('ratios')) renderRatiosTable();
+  });
+});
+
+// Category chips
+document.querySelectorAll('.chip[data-cat]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    ratiosState.category = chip.dataset.cat;
+    document.querySelectorAll('.chip[data-cat]').forEach(c => c.classList.toggle('active', c === chip));
+    if (sectionRendered.has('ratios')) renderRatiosTable();
+  });
+});
+
+// Global search
+const globalSearch = document.getElementById('global-search');
+if (globalSearch) {
+  globalSearch.addEventListener('input', e => {
+    const q = e.target.value;
+    ratiosState.search = q;
+    if (sectionRendered.has('ratios')) renderRatiosTable();
+    const qLower = q.toLowerCase();
+    document.querySelectorAll('main > section.active table tbody tr').forEach(tr => {
+      if (tr.classList.contains('cat-header') || tr.classList.contains('hidden-row')) return;
+      const txt = tr.innerText.toLowerCase();
+      tr.style.display = (!q || txt.includes(qLower)) ? '' : 'none';
+    });
+  });
+}
+
+// ============================================================================
+// THEME TOGGLE (light / dark)
+// ============================================================================
+function destroyAllCharts() {
+  if (window.Chart && Chart.instances) {
+    try {
+      const list = Object.values(Chart.instances);
+      list.forEach(c => { try { c.destroy(); } catch(e) {} });
+    } catch(e) {}
+  }
+}
+function rerenderActiveCharts() {
+  ['meta','cdns','avgo','snps','msft'].forEach(co => {
+    if (sectionRendered.has(co)) {
+      const grid = document.getElementById(co + '-charts');
+      if (grid) grid.innerHTML = '';
+      sectionRendered.delete(co);
+    }
+  });
+  const activeNav = document.querySelector('.nav-btn.active');
+  if (activeNav) {
+    const href = activeNav.getAttribute('href');
+    if (href) {
+      const target = href.slice(1);
+      if (['meta','cdns','avgo','snps','msft'].includes(target) && !sectionRendered.has(target)) {
+        window.__renderCompany(target);
+        sectionRendered.add(target);
+      }
+    }
+  }
+}
+function setTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  try { localStorage.setItem('theme', theme); } catch(e) {}
+  const icon = document.getElementById('theme-icon');
+  const label = document.getElementById('theme-label');
+  if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀';
+  if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
+  destroyAllCharts();
+  rerenderActiveCharts();
+  if (sectionRendered.has('ratios')) renderRatiosTable();
+}
+const themeToggle = document.getElementById('theme-toggle');
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+}
+(function initTheme() {
+  let saved = null;
+  try { saved = localStorage.getItem('theme'); } catch(e) {}
+  const theme = saved || 'dark';
+  document.documentElement.setAttribute('data-theme', theme);
+  const icon = document.getElementById('theme-icon');
+  const label = document.getElementById('theme-label');
+  if (icon) icon.textContent = theme === 'light' ? '🌙' : '☀';
+  if (label) label.textContent = theme === 'light' ? 'Dark' : 'Light';
+})();
+
+showPage(window.location.hash.slice(1) || 'summary');
+</script>
+<script>
+// ============================================================================
+// V2 NAV: tier-1/tier-2, glossary tooltips, theme toggle mirror
+// ============================================================================
+const NAV_MAP = {
+  overview:   [{id:'summary',   label:'Executive Summary'}],
+  companies:  [
+    {id:'meta', label:'META'},
+    {id:'cdns', label:'CDNS'},
+    {id:'avgo', label:'AVGO'},
+    {id:'snps', label:'SNPS'},
+    {id:'msft', label:'MSFT'}
+  ],
+  comparison: [
+    {id:'ranking', label:'Risk-Adjusted Ranking'},
+    {id:'ratios',  label:'20 Financial Ratios'}
+  ],
+  scenarios:  [
+    {id:'strong',    label:'Strong Scenario'},
+    {id:'portfolio', label:'Max-Sharpe Portfolio'}
+  ],
+  risks:      [
+    {id:'shorts',   label:'Counter-Intuitive Shorts'},
+    {id:'redflags', label:'10-Q Working Capital'}
+  ]
+};
+function findCatForPage(pageId) {
+  for (const [cat, pages] of Object.entries(NAV_MAP)) {
+    if (pages.find(p => p.id === pageId)) return cat;
+  }
+  return 'overview';
+}
+function renderTier2(cat) {
+  const tier2 = document.getElementById('nav-tier2');
+  if (!tier2) return;
+  tier2.innerHTML = '';
+  if (!NAV_MAP[cat] || NAV_MAP[cat].length <= 1) return;
+  NAV_MAP[cat].forEach(page => {
+    const btn = document.createElement('button');
+    btn.textContent = page.label;
+    btn.dataset.page = page.id;
+    btn.addEventListener('click', () => {
+      window.location.hash = '#' + page.id;
+      showPage(page.id);
+    });
+    tier2.appendChild(btn);
+  });
+}
+function setTier1Active(cat) {
+  document.querySelectorAll('.nav-cat').forEach(b =>
+    b.classList.toggle('active', b.dataset.cat === cat)
+  );
+  renderTier2(cat);
+}
+function syncTier2ActivePage(pageId) {
+  document.querySelectorAll('#nav-tier2 button').forEach(b =>
+    b.classList.toggle('active', b.dataset.page === pageId)
+  );
+}
+function syncNavToPage(pageId) {
+  const cat = findCatForPage(pageId);
+  const currentCat = document.querySelector('.nav-cat.active')?.dataset.cat;
+  if (currentCat !== cat) setTier1Active(cat);
+  syncTier2ActivePage(pageId);
+}
+document.querySelectorAll('.nav-cat').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const cat = btn.dataset.cat;
+    setTier1Active(cat);
+    if (NAV_MAP[cat] && NAV_MAP[cat][0]) {
+      const first = NAV_MAP[cat][0].id;
+      window.location.hash = '#' + first;
+      showPage(first);
+    }
+  });
+});
+const _origShowPageV2 = showPage;
+window.showPage = function(target) {
+  _origShowPageV2(target);
+  syncNavToPage(target);
+};
+syncNavToPage(window.location.hash.slice(1) || 'summary');
+
+// V2 theme toggle (mirrors original)
+const v2Toggle = document.getElementById('theme-toggle-v2');
+const v2Icon = document.getElementById('theme-icon-v2');
+const v2Label = document.getElementById('theme-label-v2');
+function syncV2Theme() {
+  const t = document.documentElement.getAttribute('data-theme') || 'dark';
+  if (v2Icon) v2Icon.textContent = t === 'light' ? '🌙' : '☀';
+  if (v2Label) v2Label.textContent = t === 'light' ? 'Dark' : 'Light';
+}
+syncV2Theme();
+if (v2Toggle) {
+  v2Toggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme') || 'dark';
+    setTheme(current === 'dark' ? 'light' : 'dark');
+    syncV2Theme();
+  });
+}
+
+// Glossary tooltips
+const RATIO_DEFS = {
+  pe_ttm:    'P/E (TTM): Price div Earnings (trailing 12 months). How much investors pay per $1 of net income.',
+  fwd_pe:    'Forward P/E: Price div next-12-month estimated earnings.',
+  peg:       'PEG: P/E div EPS growth rate. <1 = growth cheap relative to earnings; >1 = expensive.',
+  ps:        'P/S: Price div Sales. Revenue-based valuation, useful when earnings are volatile.',
+  ev_ebitda: 'EV/EBITDA: Enterprise Value div EBITDA. Capital-structure-neutral valuation.',
+  fcf_yield: 'FCF Yield: Free Cash Flow div Market Cap. Inverted P/E using cash; higher is better.',
+  gm:        'Gross Margin: Gross Profit div Revenue. Pricing power and product economics.',
+  om:        'Operating Margin: Operating Income div Revenue. Efficiency of core operations.',
+  nm:        'Net Margin: Net Income div Revenue. Bottom-line profitability after all costs.',
+  roe:       'ROE: Return on Equity = NI div Shareholder Equity. Skewed by leverage.',
+  roic:      'ROIC: Return on Invested Capital = NOPAT div (Debt+Equity). Best capital-efficiency measure.',
+  rev_g:     'Revenue 3-yr CAGR: compound annual growth rate over trailing 3 years.',
+  eps_g:     'EPS 3-yr CAGR: earnings per share compound annual growth rate over 3 years.',
+  fcf_g:     'FCF 3-yr CAGR: free cash flow compound annual growth rate over 3 years.',
+  fcf_conv:  'FCF Conversion: FCF div Net Income. Earnings quality. >100% = pristine; <80% = caution.',
+  capex_pct: 'CapEx % of Revenue: capital intensity. Lower = more cash returnable to shareholders.',
+  rd_pct:    'R&D % of Revenue: innovation intensity. Context-dependent across sectors.',
+  nd_ebitda: 'Net Debt/EBITDA: (Debt - Cash) div EBITDA. Leverage. <2x typically safe, >3x stretched.',
+  cur_ratio: 'Current Ratio: Current Assets div Current Liabilities. >1.5 healthy.',
+  shr_yield: 'Total Shareholder Yield: dividend yield + buyback yield. Total cash returned to holders.'
+};
+window.renderRatiosTable = function() {
+  const visibleCos = ['meta','cdns','avgo','snps','msft'].filter(c => filterState.companies.has(c));
+  const filteredRatios = RATIOS.filter(r =>
+    (ratiosState.category === 'all' || r.cat === ratiosState.category) &&
+    (!ratiosState.search || r.name.toLowerCase().includes(ratiosState.search.toLowerCase()))
+  );
+  const tbl = document.getElementById('ratios-table');
+  if (!tbl) return;
+  if (visibleCos.length === 0) {
+    tbl.innerHTML = '<tbody><tr><td style="padding:20px;color:var(--ink2)">No companies selected.</td></tr></tbody>';
+    return;
+  }
+  if (filteredRatios.length === 0) {
+    tbl.innerHTML = '<tbody><tr><td style="padding:20px;color:var(--ink2)">No ratios match current filters.</td></tr></tbody>';
+    return;
+  }
+  const coNames = {meta:'META',cdns:'CDNS',avgo:'AVGO',snps:'SNPS',msft:'MSFT'};
+  const cats = [
+    ['valuation','Valuation'],
+    ['profitability','Profitability'],
+    ['growth','Growth'],
+    ['quality','Quality / Efficiency'],
+    ['capital','Capital Structure']
+  ];
+  let html = '<thead><tr><th>Ratio</th>';
+  visibleCos.forEach(c => html += '<th>' + coNames[c] + '</th>');
+  html += '</tr></thead><tbody>';
+  cats.forEach(([catKey, catName]) => {
+    const ratiosInCat = filteredRatios.filter(r => r.cat === catKey);
+    if (ratiosInCat.length === 0) return;
+    html += '<tr class="cat-header"><td colspan="' + (visibleCos.length+1) + '" class="cat-header-cell">' + catName + '</td></tr>';
+    ratiosInCat.forEach(r => {
+      const vals = visibleCos.map(c => r.vals[ratiosState.period][c]);
+      let bestIdx = 0, worstIdx = 0;
+      vals.forEach((v, i) => {
+        if (r.lowerBetter) {
+          if (v < vals[bestIdx]) bestIdx = i;
+          if (v > vals[worstIdx]) worstIdx = i;
+        } else {
+          if (v > vals[bestIdx]) bestIdx = i;
+          if (v < vals[worstIdx]) worstIdx = i;
+        }
+      });
+      const dirBadge = r.lowerBetter
+        ? '<span class="dir-badge lo" title="Lower is better">↓</span>'
+        : '<span class="dir-badge hi" title="Higher is better">↑</span>';
+      const def = RATIO_DEFS[r.id] || '';
+      const infoIcon = def
+        ? '<span class="ratio-info" title="' + def.replace(/"/g,'&quot;') + '">i</span>'
+        : '';
+      html += '<tr><td><div class="ratio-name">' + r.name + dirBadge + infoIcon + '</div></td>';
+      vals.forEach((v, i) => {
+        const cls = visibleCos.length > 1 ? (i === bestIdx ? 'best-cell' : (i === worstIdx ? 'worst-cell' : '')) : '';
+        html += '<td class="' + cls + '">' + r.fmt(v) + '</td>';
+      });
+      html += '</tr>';
+    });
+  });
+  html += '</tbody>';
+  tbl.innerHTML = html;
+};
+if (sectionRendered.has('ratios')) renderRatiosTable();
+
+// ============================================================================
+// #4: Standardized one-line section banners
+// ============================================================================
+const SEC_BANNERS = {
+  summary:   '<strong>Top 5 selected by composite score</strong>: confidence x upside x operating margin under modest AI scenario.',
+  meta:      '<strong>META &middot; $1.70T</strong> &middot; Reasonable valuation (22x fwd P/E) &mdash; but 2026 capex doubles to $135B. Q4 op margin already compressed 700bp (48% &rarr; 41%).',
+  cdns:      '<strong>CDNS &middot; $77B</strong> &middot; $7.8B record backlog covers 67% of 2026 revenue. Cleanest setup of the 5. Q1 prints April 27 (imminent).',
+  avgo:      '<strong>AVGO &middot; $2.07T</strong> &middot; AI revenue +106% YoY ($8.4B), custom ASIC +140%, $73B AI backlog. Stock +139% TTM at 78x P/E. Best biz, worst valuation.',
+  snps:      '<strong>SNPS &middot; $70B</strong> &middot; -30% from 52-wk high during Ansys digestion. Silicon-to-systems platform unique post-merger. ~$30B+ goodwill = key impairment watch.',
+  msft:      '<strong>MSFT &middot; $3.10T</strong> &middot; Q3 FY26 prints April 29 (binary). April 23 buyout signals FY27 margin reset. Capex 22% of revenue.',
+  ranking:   '<strong>Re-ranked after deep dive</strong>: CDNS #1 &middot; META #2 &middot; MSFT #3 &middot; SNPS #4 &middot; AVGO #5.',
+  ratios:    '<strong>20 financial ratios x 5 companies x 3 time periods</strong>. Best ▲ / worst ▽ per row auto-highlighted. Hover the i for definitions.',
+  strong:    '<strong>Strong scenario picks reorder</strong>: NVDA, VRT, CEG enter top 5; CDNS, META, SNPS rank lower. Strong-portfolio: +25% modest, +55% strong, +115% massive, -32% no-impact.',
+  portfolio: '<strong>Heuristic max-Sharpe</strong> across 4 scenarios (15/40/30/15 prob): CDNS 22% &middot; MSFT 22% &middot; SNPS 16% &middot; META 15% &middot; VRT 10% &middot; CEG 8% &middot; AVGO 5% &middot; NVDA 2%.',
+  shorts:    '<strong>5 names that LOSE under massive AI</strong>: WDAY &middot; PATH &middot; GEN &middot; DOCU &middot; ADBE. Per-seat SaaS gets compressed when agents do the work.',
+  redflags:  '<strong>Working capital scan</strong>: CDNS cleanest. SNPS + AVGO carry most goodwill risk. META + MSFT carry most depreciation risk.'
+};
+function injectSectionBanners() {
+  Object.entries(SEC_BANNERS).forEach(([id, text]) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    if (section.querySelector('.sec-banner')) return;
+    const h2 = section.querySelector('h2');
+    if (!h2) return;
+    const banner = document.createElement('div');
+    banner.className = 'sec-banner';
+    banner.innerHTML = text;
+    h2.insertAdjacentElement('afterend', banner);
+  });
+}
+injectSectionBanners();
+</script>
+<script>
+// ============================================================================
+// V3 — Bullet-level supporting charts
+// Each bullet inside thesis-box gets 1-2 mini charts directly below it.
+// Hover any chart for cleanly separated detail rows (YoY, CAGR, vs Peers, etc.).
+// ============================================================================
+
+const BULLET_DATA = {
+  meta: {
+    bull: {
+      'Ad targeting AI is monetizing': [
+        { cap:'Revenue acceleration', ct:'line',
+          lab:['2019','2020','2021','2022','2023','2024','2025'],
+          data:[70.7,86.0,117.9,116.6,134.9,164.5,200.0], yl:'$B',
+          hover:{
+            'Latest': '<strong>$200B</strong> revenue in 2025 vs $164.5B in 2024',
+            'YoY':    '<strong>+22%</strong> growth — re-accelerating from 2024 (+22%) and trough year 2022 (-1%)',
+            '5yr CAGR': '19.0%',
+            'vs Peers': 'MSFT +15%, GOOGL +14%, AMZN +11% (same period)',
+            'Why it stands out': 'Mature ad platform re-accelerating despite saturated DAU — driven by AI ad targeting, Reels monetization, Advantage+',
+            'Watch':  'Q1 2026 guide $53.5-56.5B implies decel to ~12% YoY'
+          }
+        },
+        { cap:'Worldwide ARPU per user', ct:'line',
+          lab:['2019','2020','2021','2022','2023','2024','2025'],
+          data:[28,32,40,40,45,52,60], yl:'$',
+          hover:{
+            'Latest': '<strong>~$60</strong> per user in 2025',
+            'YoY':    '+15% YoY (vs +16% in 2024)',
+            '5yr CAGR': '12%',
+            'vs Peers': 'SNAP ~$3.5, PINS ~$1.8 — META has the best monetization in social',
+            'Why it stands out': 'AI-driven ad targeting is the only growth lever now that DAU is mature',
+            'Watch':  'US/Canada ARPU plateaus, RoW still ramping'
+          }
+        }
+      ],
+      'Llama gives strategic optionality': [
+        { cap:'AI R&D + capex spend', ct:'bar',
+          lab:['2022','2023','2024','2025','2026E'],
+          data:[36,38,46,75,135], yl:'$B AI infra spend',
+          hover:{
+            'Latest': 'Combined R&D + AI capex hits ~$75B in 2025',
+            'YoY':    '+63% in 2025 from 2024',
+            'Why it matters': 'Open-weights Llama = META sets the floor on model commoditization. Cheaper for buyers (META itself); harder for OpenAI to charge premium',
+            'vs Peers': 'GOOGL Gemini closed-source; OpenAI closed-source; only META + Mistral pursue open-weight at frontier scale',
+            'Standout': 'Strategic moat: META is buyer of compute, not seller — open-source benefits its economics',
+            'Watch':  'Llama 4/Behemoth release benchmarks; competitive parity vs GPT-5/Claude 4'
+          }
+        }
+      ],
+      'WhatsApp Business + AI agents': [
+        { cap:'Family of Apps DAU (B users)', ct:'line',
+          lab:['2020','2021','2022','2023','2024','2025'],
+          data:[2.6,2.81,2.96,3.19,3.35,3.55], yl:'B users',
+          hover:{
+            'Latest': '<strong>3.55B</strong> daily active users across Family of Apps in 2025',
+            'YoY':    '+6% YoY DAU growth',
+            'Why it matters': 'WhatsApp = 2B+ users globally; Click-to-message ads run-rate $20B+ in 2025; AI agents inside WhatsApp = next monetization layer',
+            'vs Peers': 'Largest user base in tech (more than YouTube + Insta + TikTok individually)',
+            'Standout': 'WhatsApp Business already +35% YoY; AI agents convert more queries to revenue events',
+            'Watch':  'Click-to-message ad revenue disclosure (currently embedded in Family of Apps)'
+          }
+        }
+      ],
+      'Valuation reasonable': [
+        { cap:'Forward P/E vs AI peers', ct:'bar',
+          lab:['META','GOOGL','MSFT','SNPS','CDNS','AVGO'],
+          data:[22.2,24.0,28.0,33.0,35.4,50.0], yl:'Fwd P/E',
+          hover:{
+            'Latest': 'META forward P/E <strong>22.2x</strong> — cheapest of AI cohort',
+            'vs 5yr Avg': '5-yr avg 27x — currently ~18% discount',
+            'Why it stands out': '15%+ revenue growth + 40% op margin + reasonable multiple = rare combination among AI plays',
+            'vs Peers': 'AVGO 50x, CDNS 35x trade at 60-125% premium to META',
+            'Re-rating thesis': 'Reality Labs cap or capex moderation = multiple back to 27x = +25% upside',
+            'Watch':  'Capex revisions in Q1 26 print could re-set the multiple'
+          }
+        }
+      ]
+    },
+    bear: {
+      'Capex is the elephant': [
+        { cap:'Annual CapEx ($B)', ct:'bar',
+          lab:['2022','2023','2024','2025','2026E','2027E'],
+          data:[31.4,28.1,39.2,72.2,125.0,140.0], yl:'$B',
+          hover:{
+            'Latest': '2026 guide <strong>$115-135B</strong> (mid $125B) — almost double 2025',
+            'YoY':    '+73% midpoint YoY',
+            'CapEx/Rev': 'Hits 56% in 2026 — vs MSFT 38%, GOOGL 27%',
+            'Why it matters': '$45/share FCF burn vs $30/share earnings — multi-year FCF compression',
+            'vs Peers': 'Highest absolute capex of any megacap',
+            'Watch':  'Q1 26 may revise capex up; Meta Superintelligence Labs cost overruns'
+          }
+        }
+      ],
+      'Reality Labs continues to lose': [
+        { cap:'Reality Labs operating loss ($B)', ct:'bar',
+          lab:['2021','2022','2023','2024','2025'],
+          data:[-10.2,-13.7,-16.1,-17.7,-18.0], yl:'$B loss',
+          hover:{
+            'Latest': '<strong>~$18B</strong> annual operating loss in 2025',
+            'Cumulative': '~$70B losses since 2020',
+            'vs Op Income': '~24% drag on Family of Apps op income',
+            'Why it matters': 'No clear monetization timeline; Quest sales declining',
+            'Standout': 'Outlier even among "long-term bet" segments — typically capped at 5-10% drag',
+            'Watch':  'AR glasses launch (rumored 2026); Apple Vision Pro response'
+          }
+        }
+      ],
+      'Ad market sensitivity': [
+        { cap:'Revenue YoY growth %', ct:'line',
+          lab:['2020','2021','2022','2023','2024','2025'],
+          data:[22,37,-1,16,22,22], yl:'% YoY',
+          hover:{
+            '2022 dip': 'Down -1% in 2022 (post-iOS ATT, ad cycle, FX)',
+            'Why it matters': 'META is more cyclically exposed than enterprise SaaS peers',
+            'vs Peers': 'SaaS (CRM, NOW) avoided the 2022 dip',
+            'Recession risk': 'Modest US recession could re-create 2022 dynamic',
+            'Standout': 'Recovery from -1% to +37% in 2 years shows resilience but volatility is real',
+            'Watch':  'Ad pricing data Q2 2026 — most leading indicator'
+          }
+        }
+      ],
+      'Margin compression already started': [
+        { cap:'Operating margin %', ct:'line',
+          lab:['2019','2020','2021','2022','2023','2024','2025'],
+          data:[33.9,38.0,39.7,24.8,34.7,42.2,38.0], yl:'% op margin',
+          hover:{
+            'Latest': '<strong>38%</strong> op margin in 2025 vs 42% in 2024 — down 400bp',
+            'Q4 specifically': '48% → 41% YoY (700bp compression)',
+            'Drivers': 'Costs +40% YoY: infra depreciation, AI hiring, third-party cloud',
+            'vs Peers': 'MSFT op margin held flat at 45%',
+            'Watch':  'Q1 26 print for trend; if op margin breaks 35%, multiple compresses fast',
+            'Forecast': '34% in 2026 modest scenario; 36% recovery in 2027 if capex pays off'
+          }
+        }
+      ]
+    }
+  },
+  cdns: {
+    bull: {
+      'EDA is a tax on every chip': [
+        { cap:'Custom AI silicon designs (industry)', ct:'bar',
+          lab:['2020','2021','2022','2023','2024','2025'],
+          data:[5,8,12,18,28,42], yl:'# announcements',
+          hover:{
+            'Trend': 'Custom AI silicon programs <strong>4-5x in 5 years</strong>',
+            'Implication': 'More chips designed = more EDA seats — directly favors CDNS + SNPS',
+            'Hyperscaler ASICs': 'Google TPU, Meta MTIA, AWS Trainium, Microsoft Maia, ByteDance — all designed in CDNS/SNPS',
+            'Standout': 'Counter-intuitively, AI EDA productivity (10x via Cerebrus) leads to MORE designs, not fewer',
+            'Watch':  'OpenAI ASIC, xAI ASIC, Apple silicon expansion = next legs'
+          }
+        }
+      ],
+      'Backlog visibility is unique': [
+        { cap:'Reported backlog ($B)', ct:'bar',
+          lab:['2021','2022','2023','2024','2025'],
+          data:[5.2,5.8,6.2,6.8,7.8], yl:'$B',
+          hover:{
+            'Latest': '<strong>$7.8B</strong> record backlog at end of 2025',
+            'YoY':    '+15% backlog growth',
+            'Coverage': '67% of 2026 revenue ($5.95B mid-guide) already booked',
+            'Why it matters': 'Floor on revenue even in downturn — unique among software peers',
+            'vs Peers': 'NOW, CRM disclose RPO but at lower coverage ratios',
+            'Watch':  'Q1 26 backlog print (April 27) — break $8B = continued AI design boom'
+          }
+        }
+      ],
+      '~45% operating margins': [
+        { cap:'Operating margin trajectory', ct:'line',
+          lab:['2019','2020','2021','2022','2023','2024','2025','2026E'],
+          data:[37.0,39.5,39.9,41.7,42.7,43.0,44.0,45.0], yl:'% op margin (NG)',
+          hover:{
+            'Latest': '<strong>44%</strong> in 2025 → 45% guided for 2026',
+            'Trend': '+700bp expansion over 5 years',
+            'vs Peers': 'SNPS 37%, ADBE 35%, CRM 20% — CDNS is highest among software',
+            'Why': 'High-margin EDA software with sticky multi-year contracts; rising IP licensing mix',
+            'FCF Conversion': '97% — best-in-class',
+            'Watch':  'ChipStack AI Super Agent monetization could push margins to 47-48% by 2028'
+          }
+        }
+      ],
+      'Duopoly with SNPS': [
+        { cap:'EDA market share (est. %)', ct:'bar',
+          lab:['CDNS','SNPS','Siemens','Other'],
+          data:[31,35,22,12], yl:'% share',
+          hover:{
+            'Concentration': '<strong>CDNS + SNPS = ~66%</strong> of $15B+ EDA market',
+            'CDNS Share': '~31% — slightly below SNPS in revenue but ahead in growth rate',
+            'Pricing Power': 'Duopoly economics support 5-7% annual price increases',
+            'Why it matters': 'Customers cannot easily switch — multi-year contracts, training, integration',
+            'vs Peers': 'No new entrants in 20+ years; antitrust concern blocked Synopsys-Ansys initially',
+            'Watch':  'Chinese homegrown EDA is the long-tail risk'
+          }
+        }
+      ]
+    },
+    bear: {
+      '77x trailing P/E is rich': [
+        { cap:'P/E (TTM) history', ct:'line',
+          lab:['2021','2022','2023','2024','2025'],
+          data:[55,62,65,72,77], yl:'P/E (TTM)',
+          hover:{
+            'Latest': 'Trailing <strong>77x</strong> — 5-yr median 70x',
+            'vs Peers': 'SNPS 32x (post-Ansys digestion), MSFT 32x, ADBE 28x',
+            'Premium': '~10% above 5-yr median; 28% above peer average',
+            'Risk': 'Multiple compression to 55x = -20% even with earnings growth',
+            'Why concerning': 'CDNS most exposed if AI capex digestion narrative kicks in',
+            'Watch':  'Q1 26 backlog disappointment = multiple reset event'
+          }
+        }
+      ],
+      'China exposure': [
+        { cap:'Geographic revenue mix (%)', ct:'bar',
+          lab:['Americas','APAC ex-China','Europe','China'],
+          data:[42,28,17,13], yl:'% of revenue',
+          hover:{
+            'China share': '~13% of total revenue',
+            'Trend': 'Down from peak ~17% in 2022 due to export controls',
+            'Why concerning': 'Bureau of Industry & Security restrictions limit Chinese leading-edge fab tooling',
+            'vs Peers': 'SNPS ~12%, KLAC ~25%, AMAT ~30% — CDNS less exposed than equipment names',
+            'Standout': 'Software (vs hardware) less restricted; CDNS positioned better than ASML',
+            'Watch':  'Tighter US export rules; Chinese homegrown EDA progress'
+          }
+        }
+      ],
+      'Concentration in chip design cycle': [
+        { cap:'Top 10 customers = X% of revenue', ct:'bar',
+          lab:['CDNS','SNPS','MRVL','LRCX'],
+          data:[32,30,52,55], yl:'% top-10',
+          hover:{
+            'CDNS': 'Top 10 customers ≈ 32% of revenue',
+            'Why concerning': 'Major fabless customer reset (NVDA capex cut) flows through directly',
+            'vs Peers': 'CDNS more diversified than equipment names but concentrated vs broad enterprise SaaS',
+            'Standout': 'Long-term contracts cushion individual customer pullbacks',
+            'Watch':  'Hyperscaler chip program slip could pressure 1-2 quarters'
+          }
+        }
+      ],
+      'AI for EDA could backfire': [
+        { cap:'Cerebrus productivity claim (Samsung)', ct:'bar',
+          lab:['Manual','Cerebrus AI'],
+          data:[1,4], yl:'X productivity',
+          hover:{
+            'Claim': 'Samsung reports <strong>4x productivity</strong> using Cerebrus AI Studio',
+            'Counter-intuition': 'If 4x faster designs, but 4-10x more designs get attempted, NET seat count up',
+            'Risk': 'If AI commoditizes EDA, fewer seats per designer',
+            'CDNS thesis': 'Productivity tools = pricing power, not unit volume risk',
+            'vs Peers': 'SNPS launched AgentEngineer with 2-5x claims — same productivity narrative',
+            'Watch':  'CDNS pricing model evolution — usage-based emerging'
+          }
+        }
+      ]
+    }
+  },
+  avgo: {
+    bull: {
+      'Hyperscaler ASIC story is the most durable AI thesis': [
+        { cap:'AI revenue ($B per quarter)', ct:'bar',
+          lab:['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26','Q2 26E'],
+          data:[4.1,4.4,5.2,6.5,8.4,13.1], yl:'$B AI rev',
+          hover:{
+            'Latest': '<strong>$8.4B AI revenue Q1 26</strong> = +106% YoY',
+            'Q2 Guide': '$13.1B AI rev = 68% of total Q2 revenue',
+            'Backlog': '$73B AI backlog — multi-year visibility',
+            'Custom ASIC': '+140% YoY (Q1 26) — Google TPU, Meta MTIA, ByteDance',
+            'CEO target': '">$100B AI revenue from chips by 2027" — implies ~85% CAGR',
+            'Watch':  'Q2 print early June — confirms $22B/$13.1B trajectory'
+          }
+        }
+      ],
+      'Ethernet vs Infiniband': [
+        { cap:'AI fabric standard (est. share)', ct:'bar',
+          lab:['Infiniband (NVDA)','Ethernet (AVGO)','Custom'],
+          data:[58,32,10], yl:'% share 2025',
+          hover:{
+            'Today': 'Infiniband (NVDA Mellanox) ~58%, Ethernet ~32% of AI clusters',
+            'Trajectory': 'Ethernet share growing fast — UEC consortium drives standardization',
+            'Why it matters': 'If AVGO wins ethernet AI fabric, networking TAM doubles',
+            'vs Peers': 'AVGO Tomahawk 5/6 = leading silicon; ANET/CSCO are switch makers using AVGO chips',
+            'Standout': 'Hyperscalers prefer Ethernet (open) over Infiniband (NVDA-locked)',
+            'Watch':  '2026 hyperscaler deployment data; UEC v1.0 spec adoption'
+          }
+        }
+      ],
+      'Margin profile is exceptional': [
+        { cap:'Operating margin (Non-GAAP)', ct:'line',
+          lab:['FY19','FY20','FY21','FY22','FY23','FY24','FY25'],
+          data:[51.0,52.4,54.0,58.0,60.0,60.5,62.0], yl:'% op margin',
+          hover:{
+            'Latest': '<strong>62%</strong> non-GAAP op margin in FY25',
+            '5yr trend': '+1100bp expansion since FY19',
+            'vs Peers': 'NVDA 56%, MSFT 45%, MRVL 15% — best-in-class semis',
+            'FY26 Guide': '63% op margin',
+            'Drivers': 'Mix shift to high-margin AI silicon + VMware software accretion',
+            'Watch':  'VMware customer churn — if material, margins compress'
+          }
+        }
+      ],
+      'Capital return': [
+        { cap:'Capital return yield (div + bb)', ct:'bar',
+          lab:['META','MSFT','AVGO','GOOGL','AMZN'],
+          data:[2.5,2.0,3.0,1.8,0.5], yl:'% yield',
+          hover:{
+            'AVGO yield': '~3% combined dividend + buyback yield',
+            'Dividend growth': '~10% annual — sustained 12+ years',
+            'vs Peers': 'Highest among AI megacap',
+            'Why it matters': 'Buybacks accelerate post-VMware deleveraging',
+            'Authorization': '$50B+ buyback capacity even with debt service',
+            'Watch':  'Net debt/EBITDA targeting <1x by FY27 = more buyback room'
+          }
+        }
+      ]
+    },
+    bear: {
+      'Valuation is the issue': [
+        { cap:'Stock price 12-mo trajectory', ct:'line',
+          lab:['Apr 25','Jul 25','Oct 25','Jan 26','Apr 26'],
+          data:[174,210,275,360,415], yl:'$ price',
+          hover:{
+            '12-mo return': '<strong>+139%</strong> in past year',
+            'P/E': '78x trailing, 50x forward',
+            'vs Peers': 'META 28x, MSFT 32x — AVGO 2-3x premium',
+            'Morningstar FV': '234% premium to fair value estimate',
+            'Risk': 'Priced for $100B AI rev by 2027 to play out exactly',
+            'Watch':  'Any quarterly miss → -20%+ correction; ASIC customer slip = catalyst'
+          }
+        }
+      ],
+      'Customer concentration': [
+        { cap:'Top 3 ASIC customers = % of AI revenue', ct:'bar',
+          lab:['Top 3','Other'],
+          data:[80,20], yl:'% AI revenue',
+          hover:{
+            'Concentration': 'Top 3 ASIC customers = <strong>~80%</strong> of AI revenue',
+            'Customers': 'Likely Google (TPU), Meta (MTIA), ByteDance — none disclosed publicly',
+            'Risk': 'Any one customer cuts orders = single-quarter disaster',
+            'vs Peers': 'NVDA top 4 hyperscalers = ~50% of DC revenue',
+            'Watch':  'New ASIC logo announcements (OpenAI, Apple, xAI rumored) = de-risking'
+          }
+        }
+      ],
+      'Hyperscaler ASIC roadmaps could slip': [
+        { cap:'Custom silicon design cycle (months)', ct:'bar',
+          lab:['Concept','Design','Tape-out','Qual','Volume'],
+          data:[3,9,3,4,3], yl:'months',
+          hover:{
+            'Cycle length': '~22 months from concept to volume — long lead time',
+            'Risk': 'Slips compress 2027 revenue if hyperscaler delays one program',
+            'Recent example': 'Google TPU v6 reportedly delayed 6 months in 2024',
+            'Why concerning': 'Each 6-month slip = $2-3B revenue impact',
+            'Watch':  'Hyperscaler capex cadence; mfg yield reports from TSMC'
+          }
+        }
+      ],
+      'The $100B-by-2027 number is mgmt narrative': [
+        { cap:'Implied AI revenue trajectory', ct:'line',
+          lab:['FY25','FY26E','FY27 Mgmt','FY27 Cons.'],
+          data:[28,55,100,75], yl:'$B AI revenue',
+          hover:{
+            'Implied CAGR': 'Mgmt target $100B by FY27 = 85% CAGR from FY25',
+            'Consensus': 'Analyst consensus closer to $75B — 30% gap to mgmt',
+            'Why concerning': 'Stock priced near mgmt target — any miss = significant downside',
+            'vs Reality': 'NVDA DC took 4 years to grow from $10B to $100B — AVGO would do it in 2',
+            'Standout': 'Aggressive even by AI standards',
+            'Watch':  'Quarterly progress vs implied trajectory'
+          }
+        }
+      ]
+    }
+  },
+  snps: {
+    bull: {
+      'Combined SNPS+Ansys is structurally differentiated': [
+        { cap:'Combined revenue ($B)', ct:'bar',
+          lab:['FY23','FY24','FY25','FY26E','FY27E'],
+          data:[5.84,6.13,7.00,9.61,11.5], yl:'$B revenue',
+          hover:{
+            'Pre-merger': '$7.0B FY25',
+            'Post-merger': '<strong>$9.61B FY26 guide</strong> (incl ~$2.9B Ansys)',
+            'CAGR jump': '11% pre-merger → 23% combined',
+            'Unique value': 'Only silicon-to-systems platform: chip design + multiphysics simulation + digital twin',
+            'NVIDIA partner': 'GTC 26 demos: 30x quantum chemistry, 34x CFD, 3.5x circuit simulation on Blackwell GPUs',
+            'Watch':  'Cost synergy update mid-FY26 — $400M target by year 3'
+          }
+        }
+      ],
+      'Drawdown creates the entry point': [
+        { cap:'Stock price (LTM)', ct:'line',
+          lab:['Jul 25','Oct 25','Jan 26','Apr 26'],
+          data:[651,580,495,457], yl:'$ price',
+          hover:{
+            '52-wk high': '$651 (July 2025)',
+            '52-wk low':  '$376',
+            'Today': '$457 — <strong>30% below highs</strong>',
+            'Why drawdown': 'Ansys merger close + integration overhang + GAAP/Non-GAAP gap',
+            'GuruFocus FV': '$656 — 30% undervalued per their model',
+            'DCF base': '~$354 — still 30% below current (cautious model)',
+            'Watch':  'Q2 FY26 print = first clean Ansys-comp quarter'
+          }
+        }
+      ],
+      'EDA duopoly economics': [
+        { cap:'Advanced node EDA share (%)', ct:'bar',
+          lab:['SNPS','CDNS','Other'],
+          data:[42,38,20], yl:'% share',
+          hover:{
+            'SNPS lead': '~42% share at advanced node verification',
+            'Pricing': 'Same duopoly economics as CDNS — 5-7% annual price escalators',
+            'Customer lock': 'Multi-year contracts, training investment, design flow integration',
+            'Why it matters': 'Pricing power immune to short cycles; sticky revenue',
+            'vs Peers': 'Together with CDNS = 80% of advanced node tape-outs',
+            'Watch':  '2nm/A14 design starts (TSMC, Intel Foundry, Samsung) = next leg'
+          }
+        }
+      ],
+      'NVIDIA partnership monetizable': [
+        { cap:'GPU acceleration speedups', ct:'bar',
+          lab:['Quantum Chem','CFD','Circuit Sim'],
+          data:[30,34,3.5], yl:'X faster',
+          hover:{
+            'Demos at GTC 26': 'Up to 30x faster on Blackwell GPUs',
+            'Why it matters': 'GPU-accelerated EDA = premium SaaS pricing potential',
+            'AgentEngineer': '2-5x productivity claims for engineering teams',
+            'Monetization': 'If priced as premium tier, can lift IP licensing revenue 20-30%',
+            'vs Peers': 'CDNS has Cerebrus AI but less GPU-native acceleration',
+            'Watch':  '2027 — first full year of GPU-accelerated EDA pricing visibility'
+          }
+        }
+      ]
+    },
+    bear: {
+      'Integration risk': [
+        { cap:'Ansys synergy ramp ($M)', ct:'bar',
+          lab:['Yr 1','Yr 2','Yr 3','Yr 4'],
+          data:[80,200,400,500], yl:'$M annual',
+          hover:{
+            'Target': '$400M annual cost synergies by Year 3',
+            'Status': 'Year 1 actual ~$80M — on track',
+            'Risk': 'Cross-sell synergies harder than cost synergies',
+            'vs Comps': 'Software M&A track record mixed (CRM/Slack underwhelmed; AVGO/VMware ahead of plan)',
+            'Why concerning': '$35B deal — largest semi-software M&A ever',
+            'Watch':  'Year 3 (FY27) is the proof point — if $400M misses, multi-quarter overhang'
+          }
+        }
+      ],
+      'Goodwill + intangibles balloon B/S': [
+        { cap:'Goodwill on balance sheet ($B)', ct:'bar',
+          lab:['FY23','FY24','FY25','FY26E'],
+          data:[2.5,2.8,32,32], yl:'$B goodwill',
+          hover:{
+            'Pre-merger': '~$3B goodwill',
+            'Post-merger': '<strong>~$32B</strong> post-Ansys',
+            'Risk': 'Any Ansys revenue/margin miss = impairment',
+            'vs Peers': 'AVGO $95B (VMware), MSFT $70B (Activision+) — SNPS is highest goodwill / market cap ratio',
+            'Why concerning': 'A 10% impairment = $3B charge — meaningful for $70B market cap company',
+            'Watch':  'Annual impairment testing in Q4 each year'
+          }
+        }
+      ],
+      'Some Ansys customers in industrial/auto are economically cyclical': [
+        { cap:'Ansys customer mix (estimate)', ct:'bar',
+          lab:['Auto','Industrial','Aero/Def','Tech','Energy'],
+          data:[28,25,18,17,12], yl:'% of Ansys rev',
+          hover:{
+            'Auto exposure': '~28% — most cyclical segment',
+            'Industrial': '~25% — capex-driven',
+            'Why concerning': 'Auto + industrial = ~50% of Ansys revenue — recession-sensitive',
+            'vs Pure EDA': 'Pure EDA (CDNS) is recession-resistant; combined SNPS+Ansys less so',
+            'Standout': 'Diversification ALSO means lower beta on AI design upside',
+            'Watch':  'Auto industry capex cycle; EU industrial sentiment'
+          }
+        }
+      ],
+      'DCF-based fair value ~$354': [
+        { cap:'Valuation models', ct:'bar',
+          lab:['DCF Base','Trade Px','Peer Avg','GF Value'],
+          data:[354,457,485,656], yl:'$ per share',
+          hover:{
+            'DCF Base': '<strong>$354</strong> — implies stock is overvalued by 30%',
+            'GF Value': '$656 — implies stock is undervalued by 30%',
+            'Wide range': 'Reflects integration uncertainty',
+            'Watch':  'As Ansys synergies materialize, DCF base case rises; valuation range tightens'
+          }
+        }
+      ]
+    }
+  },
+  msft: {
+    bull: {
+      'Azure is the AI cloud share leader': [
+        { cap:'Hyperscaler growth rates (% YoY)', ct:'line',
+          lab:['Q1 25','Q2 25','Q3 25','Q4 25','Q1 26','Q2 26'],
+          data:[33,31,33,33,38,39], yl:'% Azure growth',
+          hover:{
+            'Latest': '<strong>Azure +39% YoY</strong> in Q2 FY26',
+            'Trend': 'Re-accelerating from low-30s to high-30s',
+            'vs Peers': 'AWS ~22%, GCP ~30%, Oracle Cloud +50% but smaller base',
+            'Driver': 'AI workloads ~40% of incremental Azure growth',
+            'MS Cloud': '$51.5B in single quarter (first time ever)',
+            'Watch':  'Q3 FY26 prints April 29 (4 days) — guide was 37-38%'
+          }
+        }
+      ],
+      'Copilot is now revenue, not promise': [
+        { cap:'M365 Copilot ARR estimate ($B)', ct:'bar',
+          lab:['Q1 FY24','Q1 FY25','Q1 FY26','Q3 FY26E'],
+          data:[0.5,4,12,18], yl:'$B est. ARR',
+          hover:{
+            'Estimate': '~$18B ARR run-rate by Q3 FY26 (50M+ seats × $30/mo)',
+            'Disclosure': 'Microsoft does NOT disclose seat count or revenue line directly',
+            'Why concerning': 'Opacity creates uncertainty — buy-side mostly relies on triangulation',
+            'vs Peers': 'Salesforce Agentforce at much smaller scale',
+            'Standout': 'Largest enterprise AI revenue program by ARR',
+            'Watch':  'Q3 print may include first explicit Copilot disclosure'
+          }
+        }
+      ],
+      'Buyout = margin expansion lever for FY27': [
+        { cap:'Headcount trajectory (k)', ct:'line',
+          lab:['FY22','FY23','FY24','FY25','FY26E'],
+          data:[221,228,228,213,198], yl:'k employees',
+          hover:{
+            'Latest': 'Down to ~198k after 7% buyout (Apr 23)',
+            'Cumulative': 'Off ~30k vs FY24 peak (-13%)',
+            'Why it matters': 'AI productivity gains funding capex; FY27 op margin re-expand',
+            'vs Peers': 'GOOGL similar trajectory; META still adding (3000 AI hires)',
+            'Bear read': 'Admission that AI capex requires cost-out',
+            'Watch':  'April 29 print for severance accrual size; FY27 margin guide'
+          }
+        }
+      ],
+      'Valuation reasonable for the franchise': [
+        { cap:'Forward P/E vs MAG7 group', ct:'bar',
+          lab:['META','GOOGL','MSFT','AAPL','AMZN','AVGO','NVDA'],
+          data:[22.2,24.0,28.0,30.0,40.0,50.0,40.0], yl:'Fwd P/E',
+          hover:{
+            'MSFT Fwd P/E': '<strong>~28x</strong> — middle of MAG7',
+            '5yr avg': '30x — slight discount to historical',
+            'Why reasonable': '15%+ revenue growth, 45% op margin, $250B+ revenue',
+            'vs AVGO/NVDA': 'Both 40-50x — MSFT is a relative value AI play',
+            'Implication': 'If Azure 35%+ holds + Copilot delivers, multiple expansion = +20-30%',
+            'Watch':  'FY27 capex framing — guide-down = stock pop'
+          }
+        }
+      ]
+    },
+    bear: {
+      'Capex intensity is the most extreme of any megacap': [
+        { cap:'CapEx % of revenue', ct:'line',
+          lab:['FY19','FY20','FY21','FY22','FY23','FY24','FY25','FY26E'],
+          data:[11.1,10.8,12.3,12.0,13.3,18.1,28.4,37.7], yl:'% capex/rev',
+          hover:{
+            'Latest': '<strong>28% of revenue</strong> in FY25 → 38% in FY26',
+            'FY26 capex': '$110-120B',
+            'vs Peers': 'META 56% (highest), GOOGL 27%, AMZN 18%',
+            'Composition': '~67% short-lived assets (GPUs/CPUs)',
+            'Risk': 'Depreciation cliff if AI hardware refresh shortens',
+            'Watch':  'Useful life assumption changes in Q3 FY26 print = stock mover'
+          }
+        }
+      ],
+      'OpenAI partnership friction': [
+        { cap:'OpenAI cloud commitments ($B est.)', ct:'bar',
+          lab:['MSFT','Oracle','GCP','Other'],
+          data:[150,30,15,5], yl:'$B (est.)',
+          hover:{
+            'MSFT exclusive': 'Lost in 2025 — OpenAI now multi-cloud',
+            'Stargate': 'Oracle won the $30B "Stargate" infrastructure deal',
+            'Why concerning': 'MSFT holds equity but losing cloud exclusivity premium',
+            'Standout': 'Still largest provider; ~75%+ of OpenAI compute on Azure today',
+            'Watch':  'OpenAI IPO/restructuring path; multi-cloud rebalancing'
+          }
+        }
+      ],
+      'Copilot adoption metrics opaque': [
+        { cap:'M365 commercial revenue growth', ct:'line',
+          lab:['Q1 FY25','Q2 FY25','Q3 FY25','Q4 FY25','Q1 FY26','Q2 FY26'],
+          data:[14,15,12,13,15,16], yl:'% YoY',
+          hover:{
+            'Trend': 'Mid-teens growth — only modest acceleration despite Copilot',
+            'Why concerning': 'If Copilot were materially driving seat upgrades, expect 20%+ growth',
+            'Disclosure gap': 'Microsoft has not broken out Copilot ARR or seat count',
+            'Implication': 'Either Copilot impact is smaller than narrative OR earlier in adoption curve',
+            'vs Peers': 'CRM Agentforce similarly opaque on disclosure',
+            'Watch':  'Q3 FY26 print for explicit Copilot KPI'
+          }
+        }
+      ],
+      'Activision/gaming margin drag': [
+        { cap:'Gaming segment op margin (%)', ct:'line',
+          lab:['Q1 FY24','Q3 FY24','Q1 FY25','Q3 FY25','Q1 FY26'],
+          data:[18,12,8,10,12], yl:'% op margin',
+          hover:{
+            'Pre-Activision': '~22% op margin',
+            'Post-acquisition': 'Compressed to ~12% — purchase accounting drag',
+            'Why concerning': '~$70B acquisition still dilutive to consolidated op margin',
+            'Recovery path': 'Mgmt expects margin recovery to 15-18% by FY27 as PPA runs off',
+            'vs Peers': 'Activision standalone was higher margin pre-deal',
+            'Watch':  'Game release calendar — major titles can cushion drag'
+          }
+        }
+      ]
+    }
+  }
+};
+
+const __bcCharts = [];
+
+function bcMakeChart(canvas, c, type) {
+  const ctx = canvas.getContext('2d');
+  const isLine = c.ct === 'line';
+  const root = getComputedStyle(document.documentElement);
+  const ink = (root.getPropertyValue('--ink').trim()) || '#e6edf6';
+  const ink2 = (root.getPropertyValue('--ink2').trim()) || '#a6b1c2';
+  const ink3 = (root.getPropertyValue('--ink3').trim()) || '#6b7689';
+  const lineCol = (root.getPropertyValue('--line').trim()) || '#222a37';
+  const panel2 = (root.getPropertyValue('--panel2').trim()) || '#161b25';
+  function hexa(hex, a) {
+    let h = (hex||'').trim().replace('#','');
+    if (h.length === 3) h = h.split('').map(c=>c+c).join('');
+    const r = parseInt(h.slice(0,2),16) || 0;
+    const g = parseInt(h.slice(2,4),16) || 0;
+    const b = parseInt(h.slice(4,6),16) || 0;
+    return 'rgba('+r+','+g+','+b+','+a+')';
+  }
+  // Chart colors: slate (#64748b). Refined, quiet, finance-pro aesthetic.
+  const chartHex = '#64748b';
+  const lineColor = chartHex;
+  const fillColor = hexa(chartHex, isLine ? 0.16 : 0.78);
+  const config = {
+    type: c.ct,
+    data: {
+      labels: c.lab,
+      datasets: [{
+        data: c.data,
+        backgroundColor: fillColor,
+        borderColor: lineColor,
+        borderWidth: isLine ? 1.8 : 1,
+        fill: isLine,
+        tension: isLine ? 0.32 : 0,
+        pointRadius: isLine ? 2.5 : 0,
+        pointHoverRadius: isLine ? 5 : 0,
+        pointBackgroundColor: lineColor,
+        pointBorderColor: panel2,
+        pointBorderWidth: isLine ? 1 : 0
+      }]
+    },
+    options: {
+      responsive:true, maintainAspectRatio:false, animation:false,
+      interaction: { mode: 'nearest', intersect: false, axis: 'x' },
+      plugins:{
+        legend:{display:false},
+        tooltip:{
+          enabled:true, backgroundColor: panel2, titleColor: ink, bodyColor: ink2,
+          borderColor: lineCol, borderWidth: 1, padding: 8, cornerRadius: 4, displayColors: false,
+          titleFont:{size:10, weight:'600'}, bodyFont:{size:10.5},
+          callbacks:{
+            title: items => items[0].label,
+            label: item => {
+              const v = item.parsed.y;
+              const isPct = c.yl && c.yl.includes('%');
+              const isDol = c.yl && c.yl.startsWith('$');
+              let formatted;
+              if (isPct) formatted = v.toFixed(1) + '%';
+              else if (isDol) formatted = '$' + (Math.abs(v) < 10 ? v.toFixed(2) : v.toFixed(1)) + (c.yl.includes('B') ? 'B' : c.yl.includes('M') ? 'M' : '');
+              else formatted = v.toString();
+              const lines = [formatted];
+              if (item.dataIndex > 0) {
+                const prev = c.data[item.dataIndex - 1];
+                if (isPct) {
+                  const d = v - prev;
+                  lines.push((d>=0?'+':'') + d.toFixed(1) + ' pts YoY');
+                } else if (prev !== 0) {
+                  const d = (v - prev) / Math.abs(prev) * 100;
+                  lines.push((d>=0?'+':'') + d.toFixed(1) + '% YoY');
+                }
+              }
+              return lines;
+            }
+          }
+        }
+      },
+      scales:{
+        x:{ ticks:{color:ink3,font:{size:9}}, grid:{display:false} },
+        y:{ ticks:{color:ink3,font:{size:9},maxTicksLimit:3,
+                   callback: v => c.yl && c.yl.startsWith('$') ? '$'+v : (c.yl && c.yl.includes('%') ? v+'%' : v)},
+            grid:{color:hexa(lineCol,0.4)} }
+      }
+    }
+  };
+  return new Chart(ctx, config);
+}
+
+function bcBuildHover(hover) {
+  if (!hover) return '';
+  let html = '';
+  let first = true;
+  Object.entries(hover).forEach(([key, val]) => {
+    const cls = first ? ' headline' : '';
+    html += '<div class="bc-row' + cls + '"><div class="bc-label">' + key + '</div><div class="bc-value">' + val + '</div></div>';
+    first = false;
+  });
+  return html;
+}
+
+function wrapBullBearGrid(coKey) {
+  const section = document.getElementById(coKey);
+  if (!section) return;
+  const bull = section.querySelector('.thesis-box.bull');
+  const bear = section.querySelector('.thesis-box.bear');
+  if (!bull || !bear) return;
+  if (bull.parentElement && bull.parentElement.classList.contains('thesis-grid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'thesis-grid';
+  bull.parentNode.insertBefore(wrapper, bull);
+  wrapper.appendChild(bull);
+  wrapper.appendChild(bear);
+}
+
+function bcInjectForCompany(coKey) {
+  const data = BULLET_DATA[coKey];
+  if (!data) return;
+  const section = document.getElementById(coKey);
+  if (!section) return;
+  wrapBullBearGrid(coKey);
+  ['bull','bear'].forEach(boxType => {
+    const box = section.querySelector('.thesis-box.' + boxType);
+    if (!box) return;
+    const items = box.querySelectorAll('li');
+    items.forEach(li => {
+      if (li.querySelector('.bullet-charts')) return;
+      const strong = li.querySelector('strong');
+      if (!strong) return;
+      const key = strong.textContent.replace(/\.$/,'').trim();
+      // Try exact match, then prefix match
+      let charts = data[boxType] && data[boxType][key];
+      if (!charts) {
+        const matchKey = Object.keys(data[boxType] || {}).find(k => key.startsWith(k) || k.startsWith(key.split(' ').slice(0,4).join(' ')));
+        if (matchKey) charts = data[boxType][matchKey];
+      }
+      if (!charts) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'bullet-charts';
+      charts.forEach(c => {
+        const item = document.createElement('div');
+        item.className = 'bc-item';
+        item.innerHTML =
+          '<div class="bc-cap">' + c.cap + '</div>' +
+          '<div class="bc-canvas"><canvas></canvas></div>' +
+          '<div class="bc-hover">' + bcBuildHover(c.hover) + '</div>';
+        wrap.appendChild(item);
+        const canvas = item.querySelector('canvas');
+        const inst = bcMakeChart(canvas, c, boxType);
+        __bcCharts.push(inst);
+      });
+      li.appendChild(wrap);
+    });
+  });
+}
+
+// Render bullet charts for all already-rendered company sections + on each new tab show
+function bcRefreshActive() {
+  const activePage = document.querySelector('main > section.active');
+  if (activePage && ['meta','cdns','avgo','snps','msft'].includes(activePage.id)) {
+    bcInjectForCompany(activePage.id);
+  }
+}
+
+// Hook into showPage
+const __origShowPage_v3bc = window.showPage;
+window.showPage = function(target) {
+  __origShowPage_v3bc(target);
+  if (['meta','cdns','avgo','snps','msft'].includes(target)) {
+    bcInjectForCompany(target);
+  }
+};
+
+// Theme switch — destroy + re-render bullet charts
+const __origSetTheme_v3bc = window.setTheme;
+if (__origSetTheme_v3bc) {
+  window.setTheme = function(t) {
+    __origSetTheme_v3bc(t);
+    while (__bcCharts.length) { try { __bcCharts.pop().destroy(); } catch(e) {} }
+    document.querySelectorAll('.bullet-charts').forEach(el => el.remove());
+    bcRefreshActive();
+  };
+}
+
+// Initial render on load if a company tab is active
+bcRefreshActive();
+</script>
+<script>
+// ============================================================================
+// KPI peer comparison — small horizontal bars under each KPI card showing
+// the company vs 3 closest competitors
+// ============================================================================
+const KPI_COMPARISONS = {
+  meta: {
+    peers_label: 'vs MAG7 peers',
+    'Market Cap': { self:{v:1.70,f:'$1.70T'},
+      peers:[{tk:'MSFT',v:3.10,f:'$3.10T'},{tk:'GOOGL',v:2.00,f:'$2.00T'},{tk:'AMZN',v:2.00,f:'$2.00T'}] },
+    'Q4 2025 Revenue': { self:{v:59.9,f:'$59.9B'},
+      peers:[{tk:'AMZN',v:187.8,f:'$187.8B'},{tk:'GOOGL',v:96.5,f:'$96.5B'},{tk:'MSFT',v:81.3,f:'$81.3B'}] },
+    'Q4 2025 EPS': { self:{v:8.88,f:'$8.88'},
+      peers:[{tk:'MSFT',v:3.46,f:'$3.46'},{tk:'GOOGL',v:2.15,f:'$2.15'},{tk:'AMZN',v:1.86,f:'$1.86'}] },
+    'Q1 2026 Rev Guide': { self:{v:55.0,f:'$55.0B'},
+      peers:[{tk:'MSFT',v:73.5,f:'$73.5B'},{tk:'GOOGL',v:88.0,f:'$88.0B'},{tk:'AMZN',v:152.0,f:'$152B'}] },
+    '2026 Capex Guide': { self:{v:125,f:'$125B'},
+      peers:[{tk:'MSFT',v:115,f:'$115B'},{tk:'AMZN',v:90,f:'$90B'},{tk:'GOOGL',v:75,f:'$75B'}] },
+    'Q4 Op Margin': { self:{v:41,f:'41%'},
+      peers:[{tk:'MSFT',v:45,f:'45%'},{tk:'GOOGL',v:32,f:'32%'},{tk:'AMZN',v:11,f:'11%'}] }
+  },
+  cdns: {
+    peers_label: 'vs EDA + design software peers',
+    'Market Cap': { self:{v:77,f:'$77B'},
+      peers:[{tk:'SNPS',v:70,f:'$70B'},{tk:'ADSK',v:50,f:'$50B'},{tk:'ANSS',v:30,f:'$30B*'}] },
+    'Q4 2025 Rev': { self:{v:1.44,f:'$1.44B'},
+      peers:[{tk:'SNPS',v:1.84,f:'$1.84B'},{tk:'ADSK',v:1.55,f:'$1.55B'},{tk:'ANSS',v:0.78,f:'$0.78B*'}] },
+    'Q4 2025 EPS': { self:{v:1.99,f:'$1.99'},
+      peers:[{tk:'SNPS',v:3.77,f:'$3.77'},{tk:'ADSK',v:2.40,f:'$2.40'},{tk:'ANSS',v:2.20,f:'$2.20*'}] },
+    '2026 Rev Guide': { self:{v:5.95,f:'$5.95B'},
+      peers:[{tk:'SNPS',v:9.61,f:'$9.61B'},{tk:'ADSK',v:6.50,f:'$6.50B'}] },
+    'Backlog': { self:{v:7.8,f:'$7.8B'},
+      peers:[{tk:'SNPS',v:9.0,f:'~$9B'},{tk:'ADSK',v:4.0,f:'~$4B'}] },
+    'Non-GAAP Op Margin': { self:{v:45,f:'45%'},
+      peers:[{tk:'SNPS',v:37,f:'37%'},{tk:'ADSK',v:22,f:'22%'},{tk:'ANSS',v:35,f:'35%*'}] }
+  },
+  avgo: {
+    peers_label: 'vs AI semis peers',
+    'Market Cap': { self:{v:2.07,f:'$2.07T'},
+      peers:[{tk:'NVDA',v:2.50,f:'$2.50T'},{tk:'QCOM',v:0.18,f:'$180B'},{tk:'MRVL',v:0.06,f:'$60B'}] },
+    'Q1 FY26 Revenue': { self:{v:19.3,f:'$19.3B'},
+      peers:[{tk:'NVDA',v:40.0,f:'$40.0B'},{tk:'QCOM',v:10.0,f:'$10.0B'},{tk:'MRVL',v:1.5,f:'$1.5B'}] },
+    'Q1 FY26 AI Rev': { self:{v:8.4,f:'$8.4B'},
+      peers:[{tk:'NVDA',v:30.0,f:'$30B'},{tk:'AMD',v:5.0,f:'$5.0B'},{tk:'MRVL',v:0.7,f:'$0.7B'}] },
+    'Custom ASIC Growth': { self:{v:140,f:'+140%'},
+      peers:[{tk:'NVDA',v:90,f:'+90%'},{tk:'MRVL',v:100,f:'+100%'},{tk:'AMD',v:120,f:'+120%'}] },
+    'Q2 FY26 Rev Guide': { self:{v:22.0,f:'$22.0B'},
+      peers:[{tk:'NVDA',v:43.0,f:'$43.0B'},{tk:'QCOM',v:10.5,f:'$10.5B'},{tk:'MRVL',v:1.7,f:'$1.7B'}] },
+    'AI Backlog': { self:{v:73,f:'$73B'},
+      peers:[{tk:'NVDA',v:200,f:'~$200B*'},{tk:'MRVL',v:6,f:'~$6B*'}] }
+  },
+  snps: {
+    peers_label: 'vs EDA + design software peers',
+    'Market Cap': { self:{v:70,f:'$70B'},
+      peers:[{tk:'CDNS',v:77,f:'$77B'},{tk:'ADSK',v:50,f:'$50B'},{tk:'ANSS',v:30,f:'merged'}] },
+    'Q1 FY26 Rev': { self:{v:2.41,f:'$2.41B'},
+      peers:[{tk:'CDNS',v:1.44,f:'$1.44B'},{tk:'ADSK',v:1.40,f:'$1.40B'}] },
+    'Q1 FY26 Non-GAAP EPS': { self:{v:3.77,f:'$3.77'},
+      peers:[{tk:'CDNS',v:1.99,f:'$1.99'},{tk:'ADSK',v:2.40,f:'$2.40'}] },
+    'FY2026 Rev Guide': { self:{v:9.61,f:'$9.61B'},
+      peers:[{tk:'CDNS',v:5.95,f:'$5.95B'},{tk:'ADSK',v:6.50,f:'$6.50B'}] },
+    'Stock vs 52-wk High': { self:{v:-30,f:'-30%'},
+      peers:[{tk:'CDNS',v:-5,f:'-5%'},{tk:'ADSK',v:-12,f:'-12%'}] }
+  },
+  msft: {
+    peers_label: 'vs MAG7 peers',
+    'Market Cap': { self:{v:3.10,f:'$3.10T'},
+      peers:[{tk:'GOOGL',v:2.00,f:'$2.00T'},{tk:'AMZN',v:2.00,f:'$2.00T'},{tk:'META',v:1.70,f:'$1.70T'}] },
+    'Q2 FY26 Rev': { self:{v:81.3,f:'$81.3B'},
+      peers:[{tk:'AMZN',v:187.8,f:'$187.8B'},{tk:'GOOGL',v:96.5,f:'$96.5B'},{tk:'META',v:59.9,f:'$59.9B'}] },
+    'Azure Growth': { self:{v:39,f:'+39%'},
+      peers:[{tk:'GCP',v:30,f:'+30%'},{tk:'AWS',v:22,f:'+22%'},{tk:'OCI',v:50,f:'+50%'}] },
+    'FY26 Capex Guide': { self:{v:115,f:'$115B'},
+      peers:[{tk:'META',v:125,f:'$125B'},{tk:'AMZN',v:90,f:'$90B'},{tk:'GOOGL',v:75,f:'$75B'}] },
+    'Microsoft Cloud': { self:{v:51.5,f:'$51.5B'},
+      peers:[{tk:'AWS',v:38.0,f:'~$38B*'},{tk:'GCP',v:15.0,f:'~$15B*'}] }
+  }
+};
+
+function injectKpiComparisons(coKey) {
+  const data = KPI_COMPARISONS[coKey];
+  if (!data) return;
+  const section = document.getElementById(coKey);
+  if (!section) return;
+  section.querySelectorAll('.kpi').forEach(kpi => {
+    if (kpi.querySelector('.kpi-compare')) return;
+    const labelEl = kpi.querySelector('.lbl');
+    if (!labelEl) return;
+    const label = labelEl.textContent.trim();
+    const comp = data[label];
+    if (!comp) return;
+    const all = [{tk:coKey.toUpperCase(), v:comp.self.v, f:comp.self.f, isSelf:true}, ...comp.peers.map(p=>({...p, isSelf:false}))];
+    const max = Math.max(...all.map(x => Math.abs(x.v)));
+    const sorted = all.slice().sort((a,b) => Math.abs(b.v) - Math.abs(a.v));
+    const wrap = document.createElement('div');
+    wrap.className = 'kpi-compare';
+    wrap.innerHTML = '<div class="kpi-compare-cap">' + (data.peers_label || 'vs peers') + '</div>';
+    sorted.forEach(p => {
+      const pct = max > 0 ? (Math.abs(p.v) / max * 100) : 0;
+      const cls = p.isSelf ? 'self' : '';
+      wrap.innerHTML += '<div class="kpi-compare-row">' +
+        '<div class="kpi-compare-tk ' + cls + '">' + p.tk + '</div>' +
+        '<div class="kpi-compare-bar"><div class="kpi-compare-fill ' + cls + '" style="width:' + pct + '%"></div></div>' +
+        '<div class="kpi-compare-val ' + cls + '">' + p.f + '</div>' +
+        '</div>';
+    });
+    kpi.appendChild(wrap);
+  });
+}
+
+// Hook into showPage so KPIs render comparisons when a company tab opens
+const __origShowPage_kpi = window.showPage;
+window.showPage = function(target) {
+  __origShowPage_kpi(target);
+  if (['meta','cdns','avgo','snps','msft'].includes(target)) {
+    injectKpiComparisons(target);
+  }
+};
+
+// Render now if a company tab is currently active
+const __activeNow_kpi = document.querySelector('main > section.active');
+if (__activeNow_kpi && ['meta','cdns','avgo','snps','msft'].includes(__activeNow_kpi.id)) {
+  injectKpiComparisons(__activeNow_kpi.id);
+}
+
+// Re-inject on theme change so colors recompute
+const __origSetTheme_kpi = window.setTheme;
+if (__origSetTheme_kpi) {
+  window.setTheme = function(t) {
+    __origSetTheme_kpi(t);
+    document.querySelectorAll('.kpi-compare').forEach(el => el.remove());
+    const a = document.querySelector('main > section.active');
+    if (a && ['meta','cdns','avgo','snps','msft'].includes(a.id)) {
+      injectKpiComparisons(a.id);
+    }
+  };
+}
+</script>
+</body>
+</html>
