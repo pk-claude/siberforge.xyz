@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Net Domestic Migration</title>
+<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="../../cycle/cycle.css" />
+<link rel="stylesheet" href="../regional.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/regional/" class="home-link" title="Back to Regional">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Net Domestic Migration</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <a href="/core/macro/" class="dd-link">Regime</a>
+  <a href="/core/macro/cycle/" class="dd-link">Cycle</a>
+  <a href="/core/macro/inflation/" class="dd-link">Inflation</a>
+  <a href="/core/macro/real-economy/" class="dd-link">Consumer</a>
+  <a href="/core/macro/housing/" class="dd-link">Housing</a>
+  <a href="/core/macro/regional/" class="dd-link active">Regional</a>
+  <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+  <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+</nav>
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">Net domestic migration &mdash; where Americans are moving</h1>
+  <p class="cycle-subtitle">
+    Domestic migration (excluding international immigration) is the most direct future-housing-demand
+    signal available. People physically moving INTO a state will form households there within
+    1-3 years, driving HPI, rents, retail, and home-improvement demand. The Sun Belt vs.
+    high-tax-coastal divergence has been the dominant story for 15 years.
+  </p>
+</section>
+
+<div class="reg-snapshot-banner">
+  <strong>Snapshot data.</strong> Net migration figures below are most-recent IRS SOI county-to-county
+  migration data, expressed as % of state population. IRS releases annually with ~18-month lag.
+  Refresh this page's data when new vintage drops.
+</div>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Net domestic migration &mdash; latest year, % of state population</h2>
+    <p class="cycle-section-sub">
+      Positive = net inflow of US residents from other states; negative = net outflow.
+      International immigration excluded so this isolates pure domestic preference signal.
+    </p>
+  </div>
+  <div class="reg-chart-wrap" style="height:600px"><canvas id="chart-migration"></canvas></div>
+  <p class="cycle-note" id="note-migration"></p>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>5-year cumulative migration &mdash; the secular winners and losers</h2>
+    <p class="cycle-section-sub">
+      Year-by-year noise drops out; the structural pattern is clear.
+    </p>
+  </div>
+  <div id="cumulative-table"></div>
+</section>
+
+<footer>
+  <span>Source: IRS Statistics of Income (SOI) county-to-county migration. Snapshot vintage refreshed quarterly.</span>
+</footer>
+
+<script type="module" src="./migration.js"></script>
+</body>
+</html>

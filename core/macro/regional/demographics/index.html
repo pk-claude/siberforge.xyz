@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; State Demographics</title>
+<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="../../cycle/cycle.css" />
+<link rel="stylesheet" href="../regional.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/regional/" class="home-link">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">State Demographics</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <a href="/core/macro/" class="dd-link">Regime</a>
+  <a href="/core/macro/cycle/" class="dd-link">Cycle</a>
+  <a href="/core/macro/inflation/" class="dd-link">Inflation</a>
+  <a href="/core/macro/real-economy/" class="dd-link">Consumer</a>
+  <a href="/core/macro/housing/" class="dd-link">Housing</a>
+  <a href="/core/macro/regional/" class="dd-link active">Regional</a>
+  <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+  <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+  <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+</nav>
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">State demographics &mdash; the underlying demand signal</h1>
+  <p class="cycle-subtitle">
+    Population alone misses the cohort story. Household-formation cohort (25-44) drives new
+    housing demand and pro-channel renovation; downsizer cohort (65+) drives turnover and DIY
+    repair. Median income sets ticket-size capacity; owner-occupancy rate determines who&rsquo;s
+    actually deciding on home-improvement spend.
+  </p>
+</section>
+
+<div class="reg-snapshot-banner">
+  <strong>Snapshot data</strong> (Census ACS 5-year estimates). Demographics drift slowly &mdash; refresh
+  annually when new ACS vintage releases (December each year).
+</div>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Median age, household income, and owner-occupancy &mdash; ranked</h2>
+    <p class="cycle-section-sub">
+      Three columns capture the structural demand picture. Younger states form households;
+      higher-income states have ticket-size capacity; higher-ownership states have decision-makers
+      for renovation spend.
+    </p>
+  </div>
+  <div id="demographics-table"></div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Cohort balance &mdash; household formers vs downsizers</h2>
+    <p class="cycle-section-sub">
+      Ratio of working-age (25-54) to senior (65+) population. Higher ratio = structural demand
+      tailwind from household formation. Lower ratio = downsizer-driven turnover dominates.
+    </p>
+  </div>
+  <div class="reg-chart-wrap" style="height:600px"><canvas id="chart-cohort"></canvas></div>
+  <p class="cycle-note" id="note-cohort"></p>
+</section>
+
+<footer>
+  <span>Source: US Census Bureau American Community Survey (ACS) 5-year estimates. Snapshot vintage refreshed annually.</span>
+</footer>
+
+<script type="module" src="./demographics.js"></script>
+</body>
+</html>

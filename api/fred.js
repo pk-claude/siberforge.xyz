@@ -56,6 +56,9 @@ const CATALOG = {
   PRRESCONS:     { label: 'Private Residential Construction Spending', freq: 'monthly', unit: 'mm_usd', transform: 'yoy_pct', group: 'housing' },
   CES2000000001: { label: 'Construction Employment',        freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
   RHVRUSQ156N:   { label: 'Rental Vacancy Rate',            freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'housing' },
+  MSPNHSUS:      { label: 'Median Sales Price of New Houses', freq: 'quarterly', unit: 'usd',     transform: 'level',   group: 'housing' },
+  ASPNHSUS:      { label: 'Avg Sales Price of New Houses',   freq: 'quarterly', unit: 'usd',     transform: 'level',   group: 'housing' },
+  CUSR0000SEHE:  { label: "CPI: Tenants' & Household Insurance", freq: 'monthly', unit: 'index', transform: 'yoy_pct', group: 'housing' },
 
   // ===================== ECON DASHBOARD (/core/econ/) =====================
   T10Y3M:                { label: '10Y–3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
@@ -120,7 +123,7 @@ export default async function handler(req, res) {
   // Series allowed if explicitly in CATALOG OR matches a known geographic pattern.
   // State-level: 2-letter code + (UR / STHPI / POP / NA / NQGSP).
   // MSA-level: FHFA quarterly HPI (ATNHPIUS#####Q) and BLS MSA unemployment (LAUMT##########).
-  const STATE_RE = /^([A-Z]{2})(UR|STHPI|POP|NA|NQGSP|UPOP)$/;
+  const STATE_RE = /^([A-Z]{2})(UR|STHPI|POP|NA|NQGSP|UPOP|CONS|MFG|RETL|TRAD|GOVT)$/;
   const MSA_RE   = /^(ATNHPIUS\d{5}Q|LAUMT\d+|LAUMT.*A|MSACSR.*)$/;
   const unknown = ids.filter(id => !CATALOG[id] && !STATE_RE.test(id) && !MSA_RE.test(id));
   if (unknown.length) return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
@@ -142,14 +145,4 @@ export default async function handler(req, res) {
     const errors = [];
     settled.forEach((r, i) => {
       if (r.status === 'fulfilled') series.push(r.value);
-      else errors.push({ id: ids[i], error: String(r.reason?.message || r.reason) });
-    });
-    if (series.length === 0 && errors.length > 0) {
-      return res.status(502).json({ error: 'all series failed', errors });
-    }
-    res.setHeader('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
-    return res.status(200).json({ series, errors });
-  } catch (err) {
-    return res.status(502).json({ error: String(err.message || err) });
-  }
-}
+      else errors.push({ id: ids[i], error: String

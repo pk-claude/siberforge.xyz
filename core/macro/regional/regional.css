@@ -1,0 +1,138 @@
+/* Shared styles for the /core/macro/regional/ umbrella + sub-pages.
+   Layered on top of ../styles.css and ../cycle/cycle.css. */
+
+.cycle-intro { padding-bottom: 14px; }
+
+/* Umbrella card grid */
+.regional-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 14px;
+  padding: 0 24px 24px;
+}
+.regional-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px 20px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color .15s, transform .15s, box-shadow .15s;
+}
+.regional-card:hover {
+  border-color: rgba(247, 167, 0, 0.45);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+.regional-card-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+.regional-card-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: 0.3px;
+}
+.regional-card-stat {
+  font-size: 13px;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+.regional-card-desc {
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.5;
+}
+.regional-card-source {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-top: auto;
+}
+
+/* Two-column hero pattern reused across sub-pages */
+.reg-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 14px;
+  padding: 0 24px 18px;
+}
+.reg-hero-card,
+.reg-rank-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 18px;
+}
+.reg-rank-chart { height: 540px; position: relative; }
+
+@media (max-width: 1100px) {
+  .reg-hero { grid-template-columns: 1fr; }
+  .reg-rank-chart { height: 420px; }
+}
+
+/* Generic chart wrap used in sub-pages */
+.reg-chart-wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px;
+  height: 360px;
+  position: relative;
+}
+.reg-chart-title {
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+/* Tables */
+.reg-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  font-variant-numeric: tabular-nums;
+  font-size: 12px;
+}
+.reg-table th, .reg-table td {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+}
+.reg-table th {
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.reg-table th:first-child, .reg-table td:first-child { text-align: left; color: var(--text); }
+.reg-table tbody tr:last-child td { border-bottom: none; }
+.reg-table tbody tr:hover { background: var(--panel-2); }
+.reg-table .pos { color: var(--green); font-weight: 600; }
+.reg-table .neg { color: var(--red); font-weight: 600; }
+
+.reg-snapshot-banner {
+  background: rgba(247, 167, 0, 0.06);
+  border: 1px solid rgba(247, 167, 0, 0.22);
+  border-radius: 4px;
+  color: var(--text);
+  font-size: 11.5px;
+  padding: 8px 14px;
+  margin: 0 24px 14px;
+  line-height: 1.5;
+}
+.reg-snapshot-banner strong { color: var(--accent); }
