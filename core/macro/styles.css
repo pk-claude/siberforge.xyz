@@ -1590,3 +1590,33 @@ footer {
   opacity: 0.85;
 }
 .tr-outlier-link:hover .tr-outlier-cta { color: var(--accent); }
+
+/* Universal chart-range controls (T18) — auto-injected above time-axis canvases */
+.chart-range-controls {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 6px;
+  align-items: center;
+}
+.chart-range-controls .crc-btn {
+  background: var(--panel-2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 3px 9px;
+  font-size: 10.5px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: color .12s, background-color .12s, border-color .12s;
+}
+.chart-range-controls .crc-btn:hover {
+  color: var(--text);
+  border-color: var(--muted);
+}
+.chart-range-controls .crc-btn.active {
+  color: var(--accent);
+  background: rgba(247, 167, 0, 0.10);
+  border-color: rgba(247, 167, 0, 0.40);
+  font-weight: 600;
+}

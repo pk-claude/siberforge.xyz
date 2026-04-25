@@ -18,7 +18,7 @@
   <div class="status">
     <span id="refresh-indicator" class="dot"></span>
     <span id="refresh-text">Initializing&hellip;</span>
-  <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
+    <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
   </div>
 </header>
 
@@ -67,7 +67,7 @@
         <p class="regime-trajectory-sub">Each dot is one month. Newest = brightest. Watch for boundary crossings — that&rsquo;s the actionable signal.</p>
       </div>
       <div class="regime-trajectory-chart">
-        <canvas id="regime-trajectory"></canvas>
+        <canvas id="regime-trajectory" data-no-range="true"></canvas>
       </div>
     </div>
     <div id="regime-current" class="regime-current"></div>
@@ -133,5 +133,6 @@
 <script src="../lib/ui.js"></script>
 <script src="./ui.js"></script>
 <script src="/core/lib/download-button.js"></script>
+<script src="/core/lib/chart-range.js"></script>
 </body>
 </html>
