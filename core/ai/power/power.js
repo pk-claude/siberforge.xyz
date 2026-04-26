@@ -115,7 +115,7 @@ async function renderGenerationChart() {
   }
   
   new Chart(ctx.getContext('2d'), {
-    type: 'area',
+    type: 'line',
     data: {
       labels: genData.months.map((m, i) => i % 6 === 0 ? m : ''),
       datasets: [
