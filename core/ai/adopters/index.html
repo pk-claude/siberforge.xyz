@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Adopters &amp; second derivatives — Siberforge AI Beneficiaries</title>
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">AI Beneficiaries</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Ready</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">AI views</span>
+    <a href="/core/ai/" class="dd-link">Hub</a>
+    <a href="/core/ai/compute/" class="dd-link">Compute</a>
+    <a href="/core/ai/hyperscalers/" class="dd-link">Hyperscalers</a>
+    <a href="/core/ai/power/" class="dd-link">Power</a>
+    <a href="/core/ai/adopters/" class="dd-link active">Adopters</a>
+    <a href="/core/ai/screen/" class="dd-link">Screen</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5</a>
+  </div>
+</nav>
+
+<section class="ai-pillar">
+  <div class="ai-pillar-banner">
+    <h1>Adopters &amp; second derivatives</h1>
+    <p class="ai-pillar-sub">Where AI productivity actually shows up — software, services, industrial automation. The names that monetize AI without paying for the picks-and-shovels.</p>
+  </div>
+
+  <div class="ai-takeaway">
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">Software basket revenue growth has stabilized around +12-15% YoY across CRM/NOW/ADBE/PANW. AI-attributable revenue disclosures remain inconsistent; CRM and ADBE provide the clearest splits.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Adopters are still in the 'land and expand' phase. The capex cycle hasn't fully translated to enterprise productivity yet — output-per-hour data shows modest acceleration but nothing like the 1990s tech-led boom.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">If AI doesn't show up in productivity within 2-3 years, the entire capex justification weakens. This pillar is where the ROIC of the cycle becomes visible.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">Selectively long CRM (Einstein), NOW (industrial workflow AI), ADBE (creative cloud); avoid laggards still pricing legacy SaaS without AI angle. Watch enterprise software DBNRR for the leading signal — when it reaccelerates, AI is monetizing.</span></div>
+  </div>
+
+  <div class="ai-section-head"><h2>Software basket revenue YoY</h2></div>
+  <div class="ai-chart-wrap"><canvas id="anchor-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Convergence around +12-15% suggests AI tailwind is broadly priced in but not yet differentiating. Watch divergence: a name pulling above the basket means AI is monetizing for them specifically.</span></div>
+
+  <div class="ai-section-head"><h2>Output per hour vs software capex</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-1-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Productivity inflection has lagged the capex inflection. The gap is the open question: does productivity catch up, or is the capex cycle a bubble?</span></div>
+
+  <div class="ai-section-head"><h2>Margin expansion in adopter basket</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-2-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Margin expansion is the bull case — software adopters are deploying AI to compress costs faster than they raise prices. Names below zero (ACN, ROK) are warning signs.</span></div>
+
+  <div class="ai-section-head"><h2>Names in this pillar</h2><span class="ai-section-head-sub">Click any tile to drill down.</span></div>
+  <div class="ai-basket-grid" id="basket-grid"></div>
+
+  <div class="ai-section-head"><h2>Watch items</h2></div>
+  <ul class="ai-watch">
+    <li>Quarterly AI-attributable revenue disclosures (CRM Einstein, ADBE Firefly)</li>
+    <li>Enterprise software DBNRR (target: reacceleration above 115%)</li>
+    <li>ROK and EMR backlog growth (industrial automation lagging signal)</li>
+    <li>Productivity prints (BLS quarterly nonfarm productivity)</li>
+  </ul>
+
+  <p class="ai-methodology">Data: Finnhub financials_reported (basket revenue), FRED OPHNFB (productivity), Yahoo daily closes (basket sparklines). Software capex is an aggregate hardcoded estimate; will be sourced from /api/edgar.js in v2.</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Siberforge. Economic data sourced from FRED, EIA, Census. Equities data from Finnhub, Yahoo. Always assume stale data.</p>
+</footer>
+
+<script type="module" src="./adopters.js"></script>
+</body>
+</html>

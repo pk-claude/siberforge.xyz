@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Power &amp; grid — Siberforge AI Beneficiaries</title>
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">AI Beneficiaries</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Ready</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">AI views</span>
+    <a href="/core/ai/" class="dd-link">Hub</a>
+    <a href="/core/ai/compute/" class="dd-link">Compute</a>
+    <a href="/core/ai/hyperscalers/" class="dd-link">Hyperscalers</a>
+    <a href="/core/ai/power/" class="dd-link active">Power</a>
+    <a href="/core/ai/adopters/" class="dd-link">Adopters</a>
+    <a href="/core/ai/screen/" class="dd-link">Screen</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5</a>
+  </div>
+</nav>
+
+<section class="ai-pillar">
+  <div class="ai-pillar-banner">
+    <h1>Power &amp; grid</h1>
+    <p class="ai-pillar-sub">The constraint nobody priced in. Data center power demand is colliding with a flat grid. Track generation mix, nuclear restarts, and the names that capture the build-out.</p>
+  </div>
+
+  <div class="ai-takeaway">
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">US generation mix is shifting: nuclear stable around 18-19% of total, gas growing to ~42%, renewables to ~22%. AI data center load is forecast to add 60-100 TWh annually by 2027 — meaningful vs total US generation of ~4,200 TWh.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">The marginal generator added for AI loads is gas in the near term and nuclear over 2027+. Restarts (Three Mile Island, Palisades) plus new SMR projects are the supply-side response.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Power is the binding constraint on AI capex. Hyperscalers are signing 20-year PPAs at premium prices to secure supply. The names with deliverable, low-carbon baseload have pricing power.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">Overweight CEG (nuclear, restart optionality), VST (gas + nuclear blend), GEV (gas turbines, the only short-cycle option). Avoid pure utilities without AI exposure. Watch FERC rulings on co-located behind-the-meter loads.</span></div>
+  </div>
+
+  <div class="ai-section-head"><h2>US generation by source</h2></div>
+  <div class="ai-chart-wrap"><canvas id="anchor-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Coal continues secular decline; gas and renewables absorb the gap; nuclear flat (constraint until restarts kick in 2026-27).</span></div>
+
+  <div class="ai-section-head"><h2>Nuclear vs renewables YoY growth</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-1-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Nuclear growth has been roughly zero since 2021 — the binding constraint. Watch for inflection in 2026 as Three Mile Island restart comes online.</span></div>
+
+  <div class="ai-section-head"><h2>Industrial vs residential electricity prices</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-2-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Industrial price spreads tighter when grid is constrained; data centers paying industrial rate. The gap is a forward indicator of grid stress.</span></div>
+
+  <div class="ai-section-head"><h2>Names in this pillar</h2><span class="ai-section-head-sub">Click any tile to drill down.</span></div>
+  <div class="ai-basket-grid" id="basket-grid"></div>
+
+  <div class="ai-section-head"><h2>Watch items</h2></div>
+  <ul class="ai-watch">
+    <li>Three Mile Island restart timeline (Constellation/Microsoft deal)</li>
+    <li>Palisades restart approval (Holtec)</li>
+    <li>GEV gas turbine backlog (book-to-bill)</li>
+    <li>FERC rulings on hyperscaler co-located loads (the Talen/Amazon precedent)</li>
+    <li>New SMR project announcements (NuScale, X-Energy, TerraPower)</li>
+  </ul>
+
+  <p class="ai-methodology">Data: EIA Open Data API v2 via /api/eia.js (generation, prices); Yahoo daily closes (basket sparklines). Power demand projections are paywalled (LBNL, IEA) — references in the Watch items only, not chart data.</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Siberforge. Economic data sourced from FRED, EIA, Census. Equities data from Finnhub, Yahoo. Always assume stale data.</p>
+</footer>
+
+<script type="module" src="./power.js"></script>
+</body>
+</html>

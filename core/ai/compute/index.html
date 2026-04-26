@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Compute &amp; semis — Siberforge AI Beneficiaries</title>
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">AI Beneficiaries</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Ready</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">AI views</span>
+    <a href="/core/ai/" class="dd-link">Hub</a>
+    <a href="/core/ai/compute/" class="dd-link active">Compute</a>
+    <a href="/core/ai/hyperscalers/" class="dd-link">Hyperscalers</a>
+    <a href="/core/ai/power/" class="dd-link">Power</a>
+    <a href="/core/ai/adopters/" class="dd-link">Adopters</a>
+    <a href="/core/ai/screen/" class="dd-link">Screen</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5</a>
+  </div>
+</nav>
+
+<section class="ai-pillar">
+  <div class="ai-pillar-banner">
+    <h1>Compute &amp; semis</h1>
+    <p class="ai-pillar-sub">Picks and shovels of the AI capex cycle. Revenue, book-to-bill, and the gap between hyperscaler capex commitments and supplier output.</p>
+  </div>
+
+  <div class="ai-takeaway">
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">AI compute revenue across the basket grew approximately +47% YoY in Q3'25, fourth consecutive quarter above +30%. Book-to-bill stays above 1.0 across NVDA, AMD, AVGO.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Capex cycle still feeding through. NVDA data-center revenue is the cleanest read; AVGO custom-silicon ramp is the second derivative.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Largest single-purpose capex print in history is flowing through these names. Slowing here is the first leading signal that hyperscaler capex is decelerating.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">Stay overweight NVDA, AVGO, TSM. Watch ASML lithography orders for 2026 capacity signal. Trim if NVDA data-center growth prints below +25% YoY for two quarters.</span></div>
+  </div>
+
+  <div class="ai-section-head"><h2>Compute basket revenue vs hyperscaler capex</h2></div>
+  <div class="ai-chart-wrap"><canvas id="anchor-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">Both lines accelerating in lockstep. Stay long; the cycle is intact. Reverse the call when the gap inverts.</span></div>
+
+  <div class="ai-section-head"><h2>Book-to-bill ratio</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-1-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">All names except ASML above 1.0. Watch ASML; book-to-bill is the leading edge of the basket.</span></div>
+
+  <div class="ai-section-head"><h2>NVDA data-center revenue share</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-2-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">DC concentration is the bull case AND the risk: a single customer category is now ~88% of NVDA revenue. A hyperscaler capex pause goes straight through.</span></div>
+
+  <div class="ai-section-head"><h2>Names in this pillar</h2><span class="ai-section-head-sub">Click any tile to drill down.</span></div>
+  <div class="ai-basket-grid" id="basket-grid"></div>
+
+  <div class="ai-section-head"><h2>Watch items</h2></div>
+  <ul class="ai-watch">
+    <li>ASML lithography orders (lead indicator for 2026 capacity)</li>
+    <li>NVDA Q4 data-center growth — threshold: below +25% YoY for two quarters = trim signal</li>
+    <li>Hyperscaler capex guide changes at quarterly earnings</li>
+    <li>US-China export-control updates (HBM, advanced lithography, EDA)</li>
+  </ul>
+
+  <p class="ai-methodology">Data: Finnhub financials_reported (revenue), Yahoo daily closes (basket sparklines), aggregated capex from /api/edgar.js (hyperscaler companyfacts XBRL). Action notes are heuristic, not formal forecasts.</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Siberforge. Economic data sourced from FRED, EIA, Census. Equities data from Finnhub, Yahoo. Always assume stale data.</p>
+</footer>
+
+<script type="module" src="./compute.js"></script>
+</body>
+</html>

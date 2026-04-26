@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hyperscaler capex — Siberforge AI Beneficiaries</title>
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.0"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">AI Beneficiaries</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Ready</span>
+  </div>
+</header>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">AI views</span>
+    <a href="/core/ai/" class="dd-link">Hub</a>
+    <a href="/core/ai/compute/" class="dd-link">Compute</a>
+    <a href="/core/ai/hyperscalers/" class="dd-link active">Hyperscalers</a>
+    <a href="/core/ai/power/" class="dd-link">Power</a>
+    <a href="/core/ai/adopters/" class="dd-link">Adopters</a>
+    <a href="/core/ai/screen/" class="dd-link">Screen</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5</a>
+  </div>
+</nav>
+
+<section class="ai-pillar">
+  <div class="ai-pillar-banner">
+    <h1>Hyperscaler capex</h1>
+    <p class="ai-pillar-sub">MSFT, GOOGL, META, AMZN — the customers paying for it all. Quarterly capex prints, intensity, and the AI-attributable share.</p>
+  </div>
+
+  <div class="ai-takeaway">
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">Aggregate hyperscaler capex hit a record approximately $99B in Q3'25, +56% YoY. AMZN leads the pack at $27.5B; META rose to fourth at $19.0B but capex intensity is highest in the group.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">All four are committed for at least the next 4 quarters. AI-attributable share has crossed 50% across the group; this is now the dominant driver of capital allocation.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Hyperscaler capex feeds directly into the Compute pillar via component orders, and into the Power pillar via data-center construction and PPA contracts. Slowing here cascades immediately.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">Stay long the customers (this is where the spending discipline shows up); watch AMZN guide changes most carefully — they are the marginal capex setter at the high end. Reduce conviction if any two of the four guide capex flat or down.</span></div>
+  </div>
+
+  <div class="ai-section-head"><h2>Capex rank by quarter</h2></div>
+  <div class="ai-chart-wrap"><canvas id="anchor-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">AMZN consistently #1; GOOGL has surged from #4 to #2 over 4 quarters as their TPU + Gemini buildout kicked in. META's late surge to #4 reflects Reality Labs + Llama capacity push. Watch for any reordering.</span></div>
+
+  <div class="ai-section-head"><h2>Capex intensity heatmap</h2></div>
+  <div class="ai-chart-wrap ai-heatmap-wrap" id="heatmap-container"></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">META has the highest intensity at 35-40%; the bull case is high IRR on AI infra, the bear is over-spending without revenue follow-through. AMZN's intensity is lower because AWS revenue base is enormous.</span></div>
+
+  <div class="ai-section-head"><h2>AI-attributable capex share over time</h2></div>
+  <div class="ai-chart-wrap"><canvas id="support-2-chart"></canvas></div>
+  <div class="ai-chart-action"><span class="ai-chart-action-label">Action</span><span class="ai-chart-action-text">AI share crossed 50% in Q1'25 and is on track for ~60% by year-end. The fade vs structural-share question is now the dominant valuation debate for these names.</span></div>
+
+  <div class="ai-section-head"><h2>Names in this pillar</h2><span class="ai-section-head-sub">Click any tile to drill down.</span></div>
+  <div class="ai-basket-grid" id="basket-grid"></div>
+
+  <div class="ai-section-head"><h2>Watch items</h2></div>
+  <ul class="ai-watch">
+    <li>Quarterly capex guides at earnings — flat or down guide = pillar-wide reduce</li>
+    <li>AI-attributable revenue disclosures (Azure AI growth, GCP AI growth, Reality Labs AI revenue)</li>
+    <li>New OpenAI / Anthropic / xAI deals announcing capacity commits</li>
+    <li>Cloud-segment growth rates (deceleration alongside flat capex = ROIC concern)</li>
+  </ul>
+
+  <p class="ai-methodology">Data: Finnhub financials_reported (revenue), Yahoo daily closes (basket sparklines), aggregated capex from /api/edgar.js (hyperscaler companyfacts XBRL). Pre-disclosure values for any quarter not yet filed are hardcoded estimates.</p>
+</section>
+
+<footer>
+  <p>&copy; 2026 Siberforge. Economic data sourced from FRED, EIA, Census. Equities data from Finnhub, Yahoo. Always assume stale data.</p>
+</footer>
+
+<script type="module" src="./hyperscalers.js"></script>
+</body>
+</html>
