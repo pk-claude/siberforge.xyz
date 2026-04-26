@@ -146,6 +146,9 @@ const nberShadingPlugin = {
 };
 
 async function loadQuotes() {
+  // Page may not have a #quotes-strip (Regime page no longer renders one — banner moved to /core/macro/markets.html).
+  // Skip the Finnhub fetch entirely on those pages.
+  if (!el('quotes-strip')) return;
   const j = await fetchJSON('/api/stocks?mode=quote');
   state.quotes = j.quotes;
   state.quotesFetchedAt = j.ts;
@@ -159,6 +162,7 @@ async function loadQuotes() {
 // contribution to the ETF return today.
 function renderQuotes() {
   const strip = el('quotes-strip');
+  if (!strip) return;
   const byLabel = Object.fromEntries(state.tickers.map(t => [t.symbol, t]));
   strip.innerHTML = '';
   for (const q of state.quotes) {
