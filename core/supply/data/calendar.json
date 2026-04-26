@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-26T02:55:57.822Z",
+  "generatedAt": "2026-04-26T03:18:29.362Z",
   "windowDays": 14,
   "windows": {
     "next14": [
@@ -11,11 +11,11 @@
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": null,
-        "lastDate": null,
+        "lastValue": 5.403,
+        "lastDate": "2026-04-20",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "no prior data on file"
+        "context": "Last: 5.403 on 2026-04-20"
       },
       {
         "date": "2026-04-27",
@@ -24,11 +24,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": null,
-        "lastDate": null,
+        "lastValue": 4.044,
+        "lastDate": "2026-04-20",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "no prior data on file"
+        "context": "Last: 4.044 on 2026-04-20"
       },
       {
         "date": "2026-04-27",
@@ -271,11 +271,11 @@
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": null,
-        "lastDate": null,
+        "lastValue": 5.403,
+        "lastDate": "2026-04-20",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "no prior data on file"
+        "context": "Last: 5.403 on 2026-04-20"
       },
       {
         "date": "2026-05-04",
@@ -284,11 +284,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": null,
-        "lastDate": null,
+        "lastValue": 4.044,
+        "lastDate": "2026-04-20",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "no prior data on file"
+        "context": "Last: 4.044 on 2026-04-20"
       },
       {
         "date": "2026-05-04",
@@ -365,11 +365,11 @@
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": null,
-          "lastDate": null,
+          "lastValue": 5.403,
+          "lastDate": "2026-04-20",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "no prior data on file"
+          "context": "Last: 5.403 on 2026-04-20"
         },
         {
           "date": "2026-04-27",
@@ -378,11 +378,11 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": null,
-          "lastDate": null,
+          "lastValue": 4.044,
+          "lastDate": "2026-04-20",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "no prior data on file"
+          "context": "Last: 4.044 on 2026-04-20"
         },
         {
           "date": "2026-05-01",
@@ -417,11 +417,11 @@
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": null,
-          "lastDate": null,
+          "lastValue": 5.403,
+          "lastDate": "2026-04-20",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "no prior data on file"
+          "context": "Last: 5.403 on 2026-04-20"
         },
         {
           "date": "2026-05-04",
@@ -430,11 +430,11 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": null,
-          "lastDate": null,
+          "lastValue": 4.044,
+          "lastDate": "2026-04-20",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "no prior data on file"
+          "context": "Last: 4.044 on 2026-04-20"
         }
       ],
       "last-mile": [
