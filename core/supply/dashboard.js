@@ -157,7 +157,15 @@ function showTooltip(target, ind, deltas) {
 }
 
 function fmtLatest(v, dec, unit) { return Number.isFinite(v) ? fmt(v, dec ?? 1, unit || '') : '—'; }
-function fmtZ(z) { if (z == null || !Number.isFinite(z)) return '—'; return (z >= 0 ? '+' : '') + z.toFixed(2) + 'σ'; }
+function fmtZ(z) {
+  // Render percentile rank from a z-score (standard normal CDF). Avoids σ language.
+  if (z == null || !Number.isFinite(z)) return '—';
+  const t = 1 / (1 + 0.2316419 * Math.abs(z));
+  const d = 0.3989422804014327 * Math.exp(-z * z / 2);
+  const tail = d * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+  const p = (z >= 0 ? 1 - tail : tail) * 100;
+  return p.toFixed(0) + '%';
+}
 function fmtVariancePct(p) { if (p == null || !Number.isFinite(p)) return '—'; return (p >= 0 ? '+' : '') + p.toFixed(1) + '%'; }
 function cls(v) { if (!Number.isFinite(v)) return ''; return v > 0 ? 'pos' : v < 0 ? 'neg' : ''; }
 function escape(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
@@ -244,7 +252,7 @@ function renderOverview() {
       const v = data.lastValue;
       const regime = v < -1 ? 'Loose' : v < 1 ? 'Normal' : v < 2 ? 'Tight' : 'Severe';
       composite.innerHTML = `
-        <div><div class="label">SC Pressure</div><div class="value">${fmtSigned(v, 2, 'σ')}</div><div class="regime ${regime.toLowerCase()}">${regime} · ${data.lastDate}</div></div>
+        <div><div class="label">SC Pressure</div><div class="value">${fmtZ(v)}</div><div class="regime ${regime.toLowerCase()}">${regime} · ${data.lastDate}</div></div>
         <div id="composite-spark"></div>
         <div class="why">${escape(ind.whyMatters)}</div>`;
       renderSpark(document.getElementById('composite-spark'), data.history, { stroke: '#f7a700', width: 360, height: 80 });

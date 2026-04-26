@@ -75,9 +75,27 @@ export async function buildInsights({ snapshot, indicators, dryRun = false }) {
   const compositeScpValue = scpSeries?.lastValue ?? null;
   const compositeScpRegime = scpRegime(compositeScpValue);
 
+  // Empirical percentile of the latest reading within the full SCP history,
+  // plus the first year of the series — so the UI can say "tighter than X%
+  // of months since YYYY" without assuming a normal distribution.
+  const scpHistory = (scpSeries?.history || []).filter(r => Array.isArray(r) && Number.isFinite(r[1]));
+  let compositeScpPercentile = null;
+  let compositeScpStartYear = null;
+  if (scpHistory.length > 0 && Number.isFinite(compositeScpValue)) {
+    const values = scpHistory.map(r => r[1]).sort((a, b) => a - b);
+    // Rank: count of historical values strictly less than current, plus
+    // half of those equal to current (mid-rank to avoid bias on ties).
+    const lt = values.filter(v => v < compositeScpValue).length;
+    const eq = values.filter(v => v === compositeScpValue).length;
+    compositeScpPercentile = Math.round(100 * (lt + eq * 0.5) / values.length);
+    compositeScpStartYear = String(scpHistory[0][0]).slice(0, 4);
+  }
+
   const summary = {
     compositeScpValue,
     compositeScpRegime,
+    compositeScpPercentile,
+    compositeScpStartYear,
     risks, opportunities, watches,
     topAction: topRisk ? { id: topRisk.id, label: topRisk.label, headline: topRisk.headline, score: topRisk.score, rightNow: topRisk.rightNow } : null,
     topOpportunity: topOppty ? { id: topOppty.id, label: topOppty.label, headline: topOppty.headline, score: topOppty.score, rightNow: topOppty.rightNow } : null,

@@ -121,9 +121,20 @@ export function renderEnvironmentSummary(host) {
   const regime = s.compositeScpRegime || 'unknown';
   const regimeCls = regime.toLowerCase();
   const scpVal = s.compositeScpValue;
-  const scpStr = scpVal != null
-    ? `${scpVal >= 0 ? '+' : ''}${scpVal.toFixed(2)}σ ${regime.toUpperCase()}`
-    : 'awaiting first data';
+  // Empirical percentile within the SCP history; falls back to the normal-CDF
+  // approximation if the series isn't available yet.
+  const empPct = (s.compositeScpPercentile != null && Number.isFinite(s.compositeScpPercentile))
+    ? s.compositeScpPercentile
+    : (scpVal != null ? Math.round(normCdf(scpVal) * 100) : null);
+  const startYear = s.compositeScpStartYear || '—';
+  const regimeUC = regime.toUpperCase();
+  const scpStr = (scpVal == null || empPct == null)
+    ? 'awaiting first data'
+    : (regimeUC.includes('TIGHT')
+        ? `Tighter than ${empPct}% of months since ${startYear}`
+        : regimeUC.includes('LOOSE')
+          ? `Looser than ${100 - empPct}% of months since ${startYear}`
+          : `Near long-run average since ${startYear}`);
 
   // When SCP composite is unavailable, show top-3 movers as fallback signal.
   const fallback = (scpVal == null && Array.isArray(INSIGHTS.all))
@@ -260,16 +271,33 @@ function formatVariance(f) {
     return (f.vsMeanPct >= 0 ? '+' : '') + f.vsMeanPct.toFixed(1) + '%';
   }
   if (f.z != null && Number.isFinite(f.z)) {
-    return (f.z >= 0 ? '+' : '') + f.z.toFixed(2) + 'σ';
+    return pctileFromZ(f.z);
   }
   return '—';
 }
 
 function formatZ(z) {
+  return pctileFromZ(z);
+}
+
+// Convert a z-score to a percentile rank string under a standard-normal
+// distribution. Used as a fallback when the empirical percentile from the
+// historical SCP series isn't available yet.
+function pctileFromZ(z) {
   if (z == null || !Number.isFinite(z)) return '—';
-  return (z >= 0 ? '+' : '') + z.toFixed(2) + 'σ';
+  const p = normCdf(z) * 100;
+  return p.toFixed(0) + '%';
+}
+
+function normCdf(z) {
+  // Abramowitz & Stegun 26.2.17. Accurate to ~7.5e-8 over the full real line.
+  const t = 1 / (1 + 0.2316419 * Math.abs(z));
+  const d = 0.3989422804014327 * Math.exp(-z * z / 2);
+  const tail = d * t * (0.319381530 + t * (-0.356563782 + t * (1.781477937 + t * (-1.821255978 + t * 1.330274429))));
+  return z >= 0 ? 1 - tail : tail;
 }
 
 function escape(s) {
   return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
 }
+
