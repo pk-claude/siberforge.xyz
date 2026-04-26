@@ -93,13 +93,19 @@ async function fetchRevenueData() {
       if (!res.ok) throw new Error(`EDGAR ${company} ${res.status}`);
       const json = await res.json();
       
-      // Try each concept in fallback order
+      // Pick the concept with the MOST RECENT observation. Microsoft etc. file under
+      // 'Revenues' pre-2018 and 'RevenueFromContractWithCustomerExcludingAssessedTax' from
+      // ASC-606 adoption onward. A naive fallback picks the older, stale series.
       let foundRevenue = null;
-      for (const concept of revenueConcepts) {
-        const series = json.series?.find(s => s.concept === concept);
-        if (series && series.observations && series.observations.length > 0) {
+      let latestEnd = '0000-00-00';
+      for (const series of (json.series || [])) {
+        const obs = series.observations || [];
+        if (obs.length === 0) continue;
+        // Find the most recent end date in this concept's observations
+        const lastEnd = obs.reduce((max, o) => o.end > max ? o.end : max, '0000-00-00');
+        if (lastEnd > latestEnd) {
+          latestEnd = lastEnd;
           foundRevenue = series;
-          break;
         }
       }
       
