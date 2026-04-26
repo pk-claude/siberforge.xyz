@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body data-page="overview">
-
   <header class="top">
     <div class="brand">
       <a class="home-link" href="/">⌂</a>
@@ -19,9 +18,9 @@
     </div>
     <div style="font-size:11px;color:var(--muted);">refreshes weekly · <a href="./data.html" style="color:var(--accent);">data &amp; downloads</a></div>
   </header>
-
   <nav class="deep-dive-nav">
     <a class="active" href="./">Overview</a>
+    <a href="./insights/">Insights</a>
     <a href="./dc/">Distribution Center</a>
     <a href="./dc/industrial-re.html">Industrial Real Estate</a>
     <a href="./middle-mile/">Middle Mile</a>
@@ -29,9 +28,9 @@
     <a href="./international/">International</a>
     <a href="./data.html">Downloads</a>
   </nav>
-
-  <div class="composite-strip" id="composite-strip"></div>
-
+  <div id="calendar-strip-host"></div>
+  <div id="watch-band-host"></div>
+  <div id="environment-summary-host" class="env-summary"></div>
   <div class="quadrants">
     <div class="quadrant">
       <h2><span class="accent" style="background:#3b82f6;"></span>Distribution Center</h2>
@@ -54,7 +53,6 @@
       <a class="open-link" href="./international/">Open deep dive →</a>
     </div>
   </div>
-
   <script type="module" src="./dashboard.js"></script>
 </body>
 </html>

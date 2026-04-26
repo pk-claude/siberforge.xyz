@@ -143,6 +143,12 @@ const CATALOG = {
   BOPGIMP:          { label: 'US Imports of Goods (BoP)',         freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
   BOPGEXP:          { label: 'US Exports of Goods (BoP)',         freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
   CES4348100001:    { label: 'Air Transportation Employment',     freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+
+  // V2 additions: Mfg PMI delivery times (regional Fed surveys) + pulp PPI
+  DTCDISA066MSFRBNY: { label: 'Empire State Mfg Delivery Time',   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  DTCDFSA066MSFRBPHI:{ label: 'Philly Fed Mfg Delivery Time',     freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  DTMSAMFRBDAL:      { label: 'Dallas Fed Mfg Delivery Time',     freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  WPU0911:           { label: 'PPI: Wood Pulp',                   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
 };
 
 // Sleep helper for retry backoff.

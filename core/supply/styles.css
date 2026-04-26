@@ -247,3 +247,173 @@ a:hover { color: var(--accent); }
   .quadrants { grid-template-columns: 1fr; }
   .composite-strip { grid-template-columns: 1fr; gap: 14px; }
 }
+
+/* ============================================================================
+   v2 — Calendar Strip, Watch Band, Environment Summary, Insights Page
+   ============================================================================ */
+
+/* ---- Calendar strip ---- */
+.cal-strip {
+  margin: 16px 24px 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid #6b7280;
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+.cal-strip-head { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.cal-strip-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+.cal-strip-count { font-size: 11px; color: var(--muted-2); }
+.cal-strip-cards { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; }
+.cal-card {
+  flex: 0 0 130px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 6px 8px;
+  cursor: pointer;
+  transition: border-color .15s;
+}
+.cal-card:hover { border-color: var(--accent); }
+.cal-card .cal-date { font-size: 10px; color: var(--accent); font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+.cal-card .cal-label { font-size: 12px; font-weight: 500; margin: 2px 0; }
+.cal-card .cal-cadence { font-size: 9px; color: var(--muted-2); }
+.cal-card .cal-context { font-size: 10px; color: var(--muted); margin-top: 3px; line-height: 1.3; }
+
+/* ---- Watch band ---- */
+.watch-band {
+  margin: 12px 24px 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 10px 14px;
+}
+.watch-band-head { display: flex; margin-bottom: 8px; }
+.watch-band-title { font-size: 11px; font-weight: 600; letter-spacing: 1px; color: var(--accent); text-transform: uppercase; }
+.watch-band-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 6px; }
+.watch-card {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 8px 10px;
+  cursor: pointer;
+  position: relative;
+  transition: border-color .15s, transform .15s;
+}
+.watch-card:hover { transform: translateY(-1px); }
+.watch-card.watch-risk { border-left: 2px solid var(--red); }
+.watch-card.watch-opportunity { border-left: 2px solid var(--green); }
+.watch-card.watch-watch { border-left: 2px solid var(--accent); }
+.watch-card .watch-score { float: right; font-size: 11px; font-weight: 700; color: var(--text); background: var(--bg); border-radius: 3px; padding: 1px 5px; }
+.watch-card .watch-icon { font-size: 13px; margin-right: 4px; }
+.watch-card.watch-risk .watch-icon { color: var(--red); }
+.watch-card.watch-opportunity .watch-icon { color: var(--green); }
+.watch-card.watch-watch .watch-icon { color: var(--accent); }
+.watch-card .watch-label { font-size: 12px; font-weight: 600; }
+.watch-card .watch-z { font-size: 10px; color: var(--muted); margin-top: 2px; }
+.watch-card .watch-headline { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.3; }
+
+/* ---- Environment Summary ---- */
+.env-summary {
+  margin: 16px 24px 0;
+  background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 18px 22px;
+}
+.env-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 12px; }
+.env-title { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+.env-meta { display: flex; gap: 10px; }
+.env-pill { font-size: 11px; padding: 3px 9px; border-radius: 12px; border: 1px solid var(--line); }
+.env-pill.env-risk { color: var(--red); border-color: rgba(239, 79, 90, 0.4); }
+.env-pill.env-oppty { color: var(--green); border-color: rgba(62, 207, 142, 0.4); }
+.env-pill.env-watch { color: var(--accent); border-color: rgba(247, 167, 0, 0.4); }
+.env-scp { display: flex; flex-direction: column; align-items: flex-start; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+.env-scp-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+.env-scp-value { font-size: 36px; font-weight: 600; margin-top: 4px; color: var(--accent); }
+.env-regime-loose .env-scp-value { color: var(--blue); }
+.env-regime-normal .env-scp-value { color: var(--green); }
+.env-regime-tight .env-scp-value { color: var(--accent); }
+.env-regime-severe .env-scp-value { color: var(--red); }
+.env-action {
+  background: var(--bg);
+  border-radius: 4px;
+  padding: 10px 14px;
+  margin-top: 8px;
+  border-left: 2px solid var(--red);
+}
+.env-action-oppty { border-left-color: var(--green); }
+.env-action-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; }
+.env-action-oppty .env-action-label { color: var(--green); }
+.env-action-headline { font-size: 14px; font-weight: 600; margin: 3px 0; }
+.env-action-rightnow { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.env-action-drill { display: inline-block; margin-top: 6px; font-size: 11px; color: var(--accent); }
+.env-action-drill:hover { text-decoration: underline; }
+
+/* ---- Tooltip enhancements ---- */
+.tooltip .rightnow { background: rgba(247, 167, 0, 0.06); border-left: 2px solid var(--accent); padding: 6px 10px; border-radius: 3px; font-size: 11.5px; }
+
+/* ---- Insight dot on tile ---- */
+.kpi-insight-dot { position: absolute; top: 6px; left: 6px; width: 6px; height: 6px; border-radius: 50%; }
+.kpi-insight-risk { background: var(--red); }
+.kpi-insight-opportunity { background: var(--green); }
+.kpi-insight-watch { background: var(--accent); }
+
+/* ---- Insights page ---- */
+.insights-page { padding: 24px; max-width: 1200px; margin: 0 auto; }
+.insights-page h2 { font-size: 16px; margin: 24px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.insight-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 8px; }
+.insight-card {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 14px;
+}
+.insight-card.insight-risk { border-left: 3px solid var(--red); }
+.insight-card.insight-opportunity { border-left: 3px solid var(--green); }
+.insight-card.insight-watch { border-left: 3px solid var(--accent); }
+.ic-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+.ic-score { font-weight: 700; background: var(--panel-2); padding: 2px 8px; border-radius: 3px; font-size: 11px; }
+.ic-icon { font-size: 14px; }
+.insight-card.insight-risk .ic-icon { color: var(--red); }
+.insight-card.insight-opportunity .ic-icon { color: var(--green); }
+.insight-card.insight-watch .ic-icon { color: var(--accent); }
+.ic-label { color: var(--text); font-size: 13px; }
+.ic-label:hover { color: var(--accent); }
+.ic-headline { font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+.ic-rightnow { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+.insights-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 14px; }
+.insights-table th, .insights-table td { text-align: left; padding: 6px 10px; border-bottom: 1px solid var(--line); }
+.insights-table th { color: var(--muted); font-weight: 500; text-transform: uppercase; font-size: 10px; letter-spacing: 0.6px; }
+.insights-table .t-score { font-weight: 700; }
+.insights-table .t-rightnow { color: var(--muted); font-size: 11px; max-width: 360px; }
+.insight-row.insight-risk .t-score { color: var(--red); }
+.insight-row.insight-opportunity .t-score { color: var(--green); }
+.insight-row.insight-watch .t-score { color: var(--accent); }
+
+/* ---- drill-page insight inset ---- */
+.drill-insight {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+}
+.drill-insight.insight-risk { border-left: 3px solid var(--red); }
+.drill-insight.insight-opportunity { border-left: 3px solid var(--green); }
+.drill-insight.insight-watch { border-left: 3px solid var(--accent); }
+
+/* ---- Industrial-RE ticker grid ---- */
+.ticker-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  margin: 0 24px 24px;
+}
+.section-head .label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+@media (max-width: 900px) {
+  .watch-band-cards { grid-template-columns: 1fr 1fr; }
+}
