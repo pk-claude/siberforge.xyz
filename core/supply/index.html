@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Supply Chain Dashboard · Siberforge</title>
+  <meta name="description" content="Distribution-center, middle-mile, last-mile and international supply-chain indicators with deep-dive views.">
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="overview">
+
+  <header class="top">
+    <div class="brand">
+      <a class="home-link" href="/">⌂</a>
+      <span class="mark">SIBERFORGE</span>
+      <span class="sub">Supply Chain Dashboard</span>
+    </div>
+    <div style="font-size:11px;color:var(--muted);">refreshes weekly · <a href="./data.html" style="color:var(--accent);">data &amp; downloads</a></div>
+  </header>
+
+  <nav class="deep-dive-nav">
+    <a class="active" href="./">Overview</a>
+    <a href="./dc/">Distribution Center</a>
+    <a href="./dc/industrial-re.html">Industrial Real Estate</a>
+    <a href="./middle-mile/">Middle Mile</a>
+    <a href="./last-mile/">Last Mile</a>
+    <a href="./international/">International</a>
+    <a href="./data.html">Downloads</a>
+  </nav>
+
+  <div class="composite-strip" id="composite-strip"></div>
+
+  <div class="quadrants">
+    <div class="quadrant">
+      <h2><span class="accent" style="background:#3b82f6;"></span>Distribution Center</h2>
+      <div class="kpi-grid" id="grid-dc"></div>
+      <a class="open-link" href="./dc/">Open deep dive →</a>
+    </div>
+    <div class="quadrant">
+      <h2><span class="accent" style="background:#10b981;"></span>Middle Mile</h2>
+      <div class="kpi-grid" id="grid-middle-mile"></div>
+      <a class="open-link" href="./middle-mile/">Open deep dive →</a>
+    </div>
+    <div class="quadrant">
+      <h2><span class="accent" style="background:#f59e0b;"></span>Last Mile</h2>
+      <div class="kpi-grid" id="grid-last-mile"></div>
+      <a class="open-link" href="./last-mile/">Open deep dive →</a>
+    </div>
+    <div class="quadrant">
+      <h2><span class="accent" style="background:#ef4444;"></span>International / Sourcing</h2>
+      <div class="kpi-grid" id="grid-international"></div>
+      <a class="open-link" href="./international/">Open deep dive →</a>
+    </div>
+  </div>
+
+  <script type="module" src="./dashboard.js"></script>
+</body>
+</html>

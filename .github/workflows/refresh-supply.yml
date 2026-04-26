@@ -1,0 +1,45 @@
+name: refresh-supply
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps
+        run: npm install --no-audit --no-fund
+
+      - name: Refresh supply-chain data
+        env:
+          FRED_API_KEY:   ${{ secrets.FRED_API_KEY }}
+          EIA_API_KEY:    ${{ secrets.EIA_API_KEY }}
+          BLS_API_KEY:    ${{ secrets.BLS_API_KEY }}
+          CENSUS_API_KEY: ${{ secrets.CENSUS_API_KEY }}
+        run: node scripts/refresh-supply.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "siberforge-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add core/supply/data
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "data: weekly supply-chain refresh $(date -u +%F)"
+            git push
+          fi

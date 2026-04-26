@@ -95,6 +95,54 @@ const CATALOG = {
   DTWEXBGS:              { label: 'USD Trade-Weighted Broad Index', freq: 'daily',   unit: 'index',   transform: 'yoy_pct', group: 'network' },
   DCOILWTICO:            { label: 'WTI Crude Oil Spot Price',       freq: 'daily',   unit: 'usd',     transform: 'yoy_pct', group: 'network' },
   VIXCLS:                { label: 'CBOE VIX',                       freq: 'daily',   unit: 'index',   transform: 'level',   group: 'network' },
+
+  // ===================== SUPPLY CHAIN DASHBOARD (/core/supply/) =====================
+  // Distribution Center
+  CES4300000008:    { label: 'TTU Avg Hourly Earnings',           freq: 'monthly', unit: 'usd',     transform: 'level',   group: 'supply' },
+  CES4349300001:    { label: 'Warehousing & Storage Employment',  freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  JTU480099JOL:     { label: 'JOLTS: TWU Job Openings',           freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  JTU480099QUR:     { label: 'JOLTS: TWU Quits Rate',             freq: 'monthly', unit: 'percent', transform: 'level',   group: 'supply' },
+  JTU480099LDR:     { label: 'JOLTS: TWU Layoffs Rate',           freq: 'monthly', unit: 'percent', transform: 'level',   group: 'supply' },
+  WPU091503:        { label: 'PPI: Corrugated Paperboard',        freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  WPU0841:          { label: 'PPI: Wood Pallets',                 freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  WPU114:           { label: 'PPI: Material Handling Equipment',  freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  PCU493493:        { label: 'PPI: Warehousing & Storage Svcs',   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  ISRATIO:          { label: 'Inventories-to-Sales Ratio',        freq: 'monthly', unit: 'ratio',   transform: 'level',   group: 'supply' },
+  MNFCTRIMSA:       { label: 'Manufacturing Inventories',         freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
+  RETAILIMSA:       { label: 'Retail Inventories',                freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
+  WHLSLRIMSA:       { label: 'Wholesale Inventories',             freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
+
+  // Industrial Real Estate
+  TLPRVCONS:        { label: 'Total Private Construction Spending', freq: 'monthly', unit: 'mm_usd', transform: 'level',  group: 'supply' },
+  TLMFGCONS:        { label: 'Manufacturing Construction Spending', freq: 'monthly', unit: 'mm_usd', transform: 'level',  group: 'supply' },
+  DRCRELEXFACBS:    { label: 'CRE Loan Delinquency Rate (ex Farmland)', freq: 'quarterly', unit: 'percent', transform: 'level', group: 'supply' },
+  COMREPUSQ159N:    { label: 'Commercial Real Estate Prices',     freq: 'quarterly', unit: 'index',   transform: 'level',   group: 'supply' },
+  MCUMFN:           { label: 'Capacity Utilization: Mfg (NAICS)', freq: 'monthly', unit: 'percent', transform: 'level',   group: 'supply' },
+
+  // Middle Mile
+  TRUCKD11:         { label: 'ATA Truck Tonnage Index',           freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  CES4348400001:    { label: 'Truck Transportation Employment',   freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  TSIFRGHT:         { label: 'Transportation Services: Freight',  freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  HTRUCKSSAAR:      { label: 'Heavy Truck Sales SAAR',            freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  PCU484121484121:  { label: 'PPI: Long-Distance General Freight TL', freq: 'monthly', unit: 'index', transform: 'level', group: 'supply' },
+  RAILFRTINTERMODAL:{ label: 'Rail Freight Intermodal Traffic',   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  RAILFRTCARLOADS:  { label: 'Rail Freight Carloads',             freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+
+  // Last Mile
+  CES4349200001:    { label: 'Couriers & Messengers Employment',  freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  CES4348800001:    { label: 'Support Activities for Transp Emp', freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  ECOMPCTSA:        { label: 'E-commerce % of Retail Sales',      freq: 'quarterly', unit: 'percent', transform: 'level', group: 'supply' },
+  ECOMSA:           { label: 'E-commerce Retail Sales',           freq: 'quarterly', unit: 'mm_usd',  transform: 'level', group: 'supply' },
+  CEU4200000001:    { label: 'Retail Trade Employment',           freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  LTRUCKSA:         { label: 'Light Trucks SAAR',                 freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
+  GASREGW:          { label: 'Retail Gasoline Price',             freq: 'weekly',  unit: 'usd',     transform: 'level',   group: 'supply' },
+  PCU492492:        { label: 'PPI: Couriers & Messengers',        freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  PCU484110484110:  { label: 'PPI: General Freight Trucking, Local', freq: 'monthly', unit: 'index', transform: 'level',  group: 'supply' },
+
+  // International / Sourcing
+  BOPGIMP:          { label: 'US Imports of Goods (BoP)',         freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
+  BOPGEXP:          { label: 'US Exports of Goods (BoP)',         freq: 'monthly', unit: 'mm_usd',  transform: 'level',   group: 'supply' },
+  CES4348100001:    { label: 'Air Transportation Employment',     freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
 };
 
 // Sleep helper for retry backoff.

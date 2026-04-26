@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Data &amp; Downloads · Siberforge Supply Chain</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="download">
+  <header class="top">
+    <div class="brand">
+      <a class="home-link" href="/">⌂</a>
+      <span class="mark">SIBERFORGE</span>
+      <span class="sub">Supply Chain · Data &amp; Downloads</span>
+    </div>
+    <div style="font-size:11px;color:var(--muted);"><a href="./" style="color:var(--accent);">← overview</a></div>
+  </header>
+  <nav class="deep-dive-nav">
+    <a href="./">Overview</a>
+    <a href="./dc/">Distribution Center</a>
+    <a href="./dc/industrial-re.html">Industrial Real Estate</a>
+    <a href="./middle-mile/">Middle Mile</a>
+    <a href="./last-mile/">Last Mile</a>
+    <a href="./international/">International</a>
+    <a class="active" href="./data.html">Downloads</a>
+  </nav>
+  <div class="download-zone">
+    <h1>Data &amp; Downloads</h1>
+    <p style="color:var(--muted);">Every series in the dashboard, available as CSV. The full bundle includes all per-series CSVs plus snapshot.json and manifest.json. Refresh runs every Monday 06:00 UTC.</p>
+    <div class="hero">
+      <div>
+        <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;">Last refresh</div>
+        <div id="refresh-time" style="font-size:18px;font-weight:600;">pending</div>
+      </div>
+      <a class="bundle-btn" href="./data/bundle.zip">Download all (.zip)</a>
+    </div>
+    <table id="download-table">
+      <thead>
+        <tr>
+          <th>ID</th><th>Label</th><th>Category</th><th>Source</th><th>Last Date</th><th>Frequency</th><th>Download</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script type="module" src="./dashboard.js"></script>
+</body>
+</html>

@@ -2,12 +2,20 @@
   "name": "siberforge-macro-dashboard",
   "version": "0.1.0",
   "private": true,
-  "description": "Economic indicators tracker with S&P 500 / sector ETF correlation",
+  "description": "Economic indicators tracker with S&P 500 / sector ETF correlation, plus Supply Chain Dashboard",
+  "type": "module",
   "scripts": {
     "dev": "vercel dev",
-    "deploy": "vercel --prod"
+    "deploy": "vercel --prod",
+    "refresh-supply": "node scripts/refresh-supply.mjs",
+    "refresh-supply-dry": "node scripts/refresh-supply.mjs --dry-run"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=20"
+  },
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "archiver": "^7.0.1",
+    "pdfjs-dist": "^4.7.76"
   }
 }

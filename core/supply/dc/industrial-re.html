@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Industrial Real Estate · Siberforge Supply Chain</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body data-page="industrial-re">
+  <header class="top">
+    <div class="brand">
+      <a class="home-link" href="/">⌂</a>
+      <span class="mark">SIBERFORGE</span>
+      <span class="sub">Supply Chain · Industrial Real Estate</span>
+    </div>
+    <div style="font-size:11px;color:var(--muted);"><a href="../" style="color:var(--accent);">← overview</a></div>
+  </header>
+  <nav class="deep-dive-nav">
+    <a href="../">Overview</a>
+    <a href="./">Distribution Center</a>
+    <a class="active" href="./industrial-re.html">Industrial Real Estate</a>
+    <a href="../middle-mile/">Middle Mile</a>
+    <a href="../last-mile/">Last Mile</a>
+    <a href="../international/">International</a>
+    <a href="../data.html">Downloads</a>
+  </nav>
+  <div class="section-head">
+    <h2>Industrial Real Estate</h2>
+    <div class="sub">Construction pipeline · Pricing &amp; cap-rate · REIT basket · Operator economics</div>
+  </div>
+  <div class="dense-grid" id="dense-grid"></div>
+  <div style="padding:16px 24px;color:var(--muted);font-size:12px;max-width:900px;">
+    <p>Industrial-RE depth in v1 uses national series and a public-market REIT basket as the price/cap-rate proxy. Metro-level vacancy and rent (broker quarterly reports — CBRE, JLL, Cushman, Colliers, Newmark) are out of scope for v1; if added later, they would scrape quarterly PDFs into this same registry.</p>
+  </div>
+  <script type="module" src="../dashboard.js"></script>
+</body>
+</html>
