@@ -237,6 +237,18 @@ const COMPOSITE_METRIC_ID = {
   labor:     'LABOR_COMPOSITE',
 };
 
+// Map composite kind → deep-dive page URL. Used to make Score Trajectory
+// rail labels clickable so the redundant tr-quick-jump button row at the
+// bottom of Today's Read can be removed.
+const COMPOSITE_DEEP_DIVE_URL = {
+  cycle:     '/core/macro/cycle/',
+  inflation: '/core/macro/inflation/',
+  housing:   '/core/macro/housing/',
+  consumer:  '/core/macro/real-economy/',
+  credit:    '/core/macro/credit/',
+  labor:     '/core/macro/labor/',
+};
+
 // Compact horizontal-row variant. Used in the side-by-side layout where the 6
 // score cards stack vertically beside the rose chart. Each card carries the
 // composite's metric-id so the global tile-tooltip surfaces context on hover.
@@ -306,7 +318,11 @@ function renderTrajRail(label, kind, s12, s3, s1, sNow) {
   const metricAttr = metricId ? ` data-tile-metric="${metricId}"` : '';
 
   if (points.length === 0) {
-    return `<div class="tr-rail-row tr-rail-empty"${metricAttr}><div class="tr-rail-label">${label}</div><div class="tr-rail-empty-msg">insufficient history</div></div>`;
+    const dlUrlEmpty = COMPOSITE_DEEP_DIVE_URL[kind];
+    const labelHtmlEmpty = dlUrlEmpty
+      ? `<a class="tr-rail-label tr-rail-label-link" href="${dlUrlEmpty}">${label} <span class="tr-rail-arrow">&rarr;</span></a>`
+      : `<div class="tr-rail-label">${label}</div>`;
+    return `<div class="tr-rail-row tr-rail-empty"${metricAttr}>${labelHtmlEmpty}<div class="tr-rail-empty-msg">insufficient history</div></div>`;
   }
 
   // Connecting line through the points in time order
@@ -330,7 +346,9 @@ function renderTrajRail(label, kind, s12, s3, s1, sNow) {
 
   return `
     <div class="tr-rail-row"${metricAttr}>
-      <div class="tr-rail-label">${label}</div>
+      ${COMPOSITE_DEEP_DIVE_URL[kind]
+        ? `<a class="tr-rail-label tr-rail-label-link" href="${COMPOSITE_DEEP_DIVE_URL[kind]}">${label} <span class="tr-rail-arrow">&rarr;</span></a>`
+        : `<div class="tr-rail-label">${label}</div>`}
       <div class="tr-rail-svg-wrap">
         <svg class="tr-rail-svg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" role="img" aria-label="${label} trajectory">
           ${gradient}
@@ -604,12 +622,5 @@ export async function renderTodayRead() {
       }).join('')}
     </div>` : ''}
 
-        <div class="tr-quick-jump">
-      <a href="/core/macro/cycle/">Cycle &rarr;</a>
-      <a href="/core/macro/inflation/">Inflation &rarr;</a>
-      <a href="/core/macro/housing/">Housing &rarr;</a>
-      <a href="/core/macro/real-economy/">Consumer &rarr;</a>
-      <a href="/core/macro/regional/">Regional &rarr;</a>
-    </div>
   `;
 }

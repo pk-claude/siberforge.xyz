@@ -2464,3 +2464,32 @@ footer {
   margin: 0; font-size: 10.5px; color: var(--muted);
   font-style: italic;
 }
+
+/* ========================================================================= */
+/* Score Trajectory rail labels become deep-dive links (replaces the         */
+/* redundant tr-quick-jump button row at the bottom of Today's Read).         */
+/* ========================================================================= */
+.tr-rail-label-link {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px dashed transparent;
+  transition: color .15s, border-color .15s;
+}
+.tr-rail-label-link:hover,
+.tr-rail-label-link:focus {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  outline: none;
+}
+.tr-rail-arrow {
+  color: var(--muted);
+  font-size: 0.85em;
+  transition: color .15s, transform .15s;
+}
+.tr-rail-label-link:hover .tr-rail-arrow {
+  color: var(--accent);
+  transform: translateX(2px);
+}
