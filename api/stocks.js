@@ -173,8 +173,18 @@ export default async function handler(req, res) {
     if (mode === 'financials') {
       const key = process.env.FINNHUB_API_KEY;
       if (!key) return res.status(500).json({ error: 'FINNHUB_API_KEY not configured on server' });
-      const financials = await Promise.all(symbols.map(s => finnhubFinancials(s, key)));
-      res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+      // Serialize calls with 200ms delay between symbols to stay under Finnhub free-tier
+      // 60/min rate limit. Combined with 24h edge cache below, only ONE cold-start request
+      // per day pays this cost; everyone else gets the cached response instantly.
+      const financials = [];
+      for (let i = 0; i < symbols.length; i++) {
+        if (i > 0) await new Promise(r => setTimeout(r, 200));
+        financials.push(await finnhubFinancials(symbols[i], key));
+      }
+      // 24h s-maxage with 48h stale-while-revalidate: quarterly financials only update
+      // every ~13 weeks, so a daily refresh is conservative. SWR means the cache serves
+      // stale immediately while revalidating in the background — no user waits.
+      res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=172800');
       return res.status(200).json({ financials, ts: Date.now() });
     }
 
