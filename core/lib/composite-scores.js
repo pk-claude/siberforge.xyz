@@ -132,7 +132,7 @@ export function computeInflationScore(data, cutoff = null) {
 
 export function computeHousingScore(data, cutoff = null) {
   const signals = [];
-  const supply = filterToCutoff(data.MSACSR, cutoff);
+  const supply = filterToCutoff(data.HOSSUPUSM673N, cutoff);
   const permitYoy = yoyPct(filterToCutoff(data.PERMIT || [], cutoff));
   const mortgage = filterToCutoff(data.MORTGAGE30US, cutoff);
   const sfStartsYoy = yoyPct(filterToCutoff(data.HOUST1F || [], cutoff));

@@ -157,7 +157,7 @@ async function loadAllData() {
   const batches = [
     ['HOUST', 'HOUST1F', 'HOUST5F', 'PERMIT'],          // pipeline 1
     ['COMPUTSA', 'HSN1F', 'EXHOSLUSM495S'],              // pipeline 2
-    ['MSACSR', 'CSUSHPISA', 'MSPUS', 'RHVRUSQ156N'],    // inventory + prices
+    ['HOSSUPUSM673N', 'CSUSHPISA', 'MSPUS', 'RHVRUSQ156N'],    // inventory + prices
     ['MORTGAGE30US', 'MORTGAGE15US', 'MEHOINUSA672N'],  // affordability
     ['DRSFRMACBS', 'CES2000000001', 'WPU081', 'CUUR0000SEHA', 'PRRESCONS'],  // stress + construction + materials
   ];
@@ -265,7 +265,7 @@ function renderPipeline() {
 // ---------- Section 2: Inventory & Prices ----------
 
 function renderInventory() {
-  const supply = state.series.MSACSR || [];
+  const supply = state.series.HOSSUPUSM673N || [];
   const hpi = state.series._CSUSHPISAYoy || [];
   const vacancy = state.series.RHVRUSQ156N || [];
 
@@ -292,7 +292,7 @@ function renderInventory() {
   const supplyPct = percentile(supply, lms?.value);
 
   const tiles = [
-    { metric: 'MSACSR', label: 'Months Supply', value: lms ? `${fmt(lms.value, 1)} mo` : '—',
+    { metric: 'HOSSUPUSM673N', label: 'Months Supply (existing)', value: lms ? `${fmt(lms.value, 1)} mo` : '—',
       meta: supplyPct != null ? `${supplyPct}th %ile` : '',
       threshold: '&lt; 4 sellers · 4–6 balanced · &gt; 6 buyers',
       status: lms ? (lms.value > 7 ? 'warn' : lms.value > 5 ? 'caution' : 'ok') : '',
@@ -608,7 +608,7 @@ function computeHousingScore() {
   const signals = [];
 
   // Months supply (30%) — primary cycle indicator
-  const lms = latestValue(state.series.MSACSR || []);
+  const lms = latestValue(state.series.HOSSUPUSM673N || []);
   if (lms) {
     // 3 = 0 (tight/early-cycle), 5.5 = 50, 8 = 100 (oversupplied/late-cycle)
     const score = Math.min(100, Math.max(0, ((lms.value - 3) / 5) * 100));
@@ -707,7 +707,7 @@ function renderSynthesis() {
   const tgt = el('housing-synthesis-content');
   if (!tgt || !result) return;
   const score = result.score;
-  const lms = latestValue(state.series.MSACSR || []);
+  const lms = latestValue(state.series.HOSSUPUSM673N || []);
   const lmt = latestValue(state.series.MORTGAGE30US || []);
 
   let para = '';

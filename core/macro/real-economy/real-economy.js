@@ -165,7 +165,7 @@ async function loadAllData() {
   const startMacro = '1990-01-01';
   // Batched FRED fetches — partial-failure tolerant.
   const fredBatches = [
-    ['HOUST', 'PERMIT', 'HSN1F', 'EXHOSLUSM495S', 'MSACSR'],
+    ['HOUST', 'PERMIT', 'HSN1F', 'EXHOSLUSM495S', 'HOSSUPUSM673N'],
     ['MORTGAGE30US', 'CSUSHPISA', 'WPU081'],
     ['PCE', 'DSPI', 'PSAVERT', 'TDSP'],
     ['CES0500000003', 'CPILFESL', 'IC4WSA', 'DRCCLACBS', 'UMCSENT'],
@@ -216,7 +216,7 @@ function renderHousing() {
   const permit = state.series._permitYoy || [];
   const houst  = state.series._houstYoy  || [];
   const sales  = state.series._hsn1fYoy  || [];
-  const supply = state.series.MSACSR     || [];
+  const supply = state.series.HOSSUPUSM673N     || [];
   const mort   = state.series.MORTGAGE30US || [];
   const hpi    = state.series._hpiYoy    || [];
 
@@ -244,7 +244,7 @@ function renderHousing() {
 
   const tiles = [
     {
-      metric: 'MSACSR',
+      metric: 'HOSSUPUSM673N',
       label: 'Months Supply (new homes)',
       value: lms ? `${fmt(lms.value, 1)} mo` : '—',
       meta: supplyPct != null ? `${supplyPct}th %ile post-1990` : '',
@@ -597,7 +597,7 @@ function renderSynthesis() {
   const score = result.score;
 
   // Pull a few key reads for the paragraph
-  const lms = latestValue(state.series.MSACSR || []);
+  const lms = latestValue(state.series.HOSSUPUSM673N || []);
   const lmt = latestValue(state.series.MORTGAGE30US || []);
   const lumberYoy = latestValue(state.series._lumberYoy || []);
 

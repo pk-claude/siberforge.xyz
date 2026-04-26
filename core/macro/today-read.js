@@ -34,7 +34,7 @@ const ALL_SERIES = [
   // Inflation
   'CORESTICKM159SFRBATL', 'T5YIFR', 'CES0500000003', 'CPIHOSSL',
   // Housing
-  'MSACSR', 'PERMIT', 'MORTGAGE30US', 'HOUST1F', 'CSUSHPISA', 'DRSFRMACBS', 'CES2000000001',
+  'HOSSUPUSM673N', 'PERMIT', 'MORTGAGE30US', 'HOUST1F', 'CSUSHPISA', 'DRSFRMACBS', 'CES2000000001',
   // Consumer
   'PSAVERT', 'DRCCLACBS', 'IC4WSA', 'UMCSENT', 'TDSP',
   // Credit & Liquidity (additions; UNRATE/NFCI/HY OAS/T10Y3M/CES/PAYEMS/IC4WSA already above)
@@ -119,10 +119,10 @@ function findOutliers() {
     if (last < 0) flags.push({ metric: 'T10Y3M', kind: 'caution', text: `10Y-3M curve inverted at ${last.toFixed(0)}bp`, link: '/core/macro/cycle/#cycle-curve', linkLabel: 'see yield curve' });
   }
   // Months supply
-  const ms = state.data.MSACSR || [];
+  const ms = state.data.HOSSUPUSM673N || [];
   if (ms.length) {
     const last = ms[ms.length - 1].value;
-    if (last > 7) flags.push({ metric: 'MSACSR', kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market`, link: '/core/macro/housing/#section-inventory', linkLabel: 'see housing inventory' });
+    if (last > 7) flags.push({ metric: 'HOSSUPUSM673N', kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market`, link: '/core/macro/housing/#section-inventory', linkLabel: 'see housing inventory' });
   }
   // Real wages
   const wages = (state.data.CES0500000003 || []);

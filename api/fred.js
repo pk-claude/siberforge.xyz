@@ -42,6 +42,7 @@ const CATALOG = {
   PSAVERT:       { label: 'Personal Saving Rate',                       freq: 'monthly',   unit: 'percent', transform: 'level',   group: 'real-economy' },
   TDSP:          { label: 'Household Debt Service Ratio',               freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'real-economy' },
   MSACSR:        { label: 'Monthly Supply of New Houses',               freq: 'monthly',   unit: 'months',  transform: 'level',   group: 'real-economy' },
+  HOSSUPUSM673N: { label: 'Months Supply of Existing Homes',            freq: 'monthly',   unit: 'months',  transform: 'level',   group: 'real-economy' },
   WPU081:        { label: 'PPI: Lumber & Wood Products',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'real-economy' },
 
   // ================= HOUSING DASHBOARD (/core/macro/housing/) =================

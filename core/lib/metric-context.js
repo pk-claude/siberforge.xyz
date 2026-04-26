@@ -277,16 +277,16 @@ export const METRIC_CONTEXT = {
   },
 
   // =========================== HOUSING ===========================
-  MSACSR: {
-    label: 'Months Supply of New Houses',
-    unit: 'months · monthly · Census',
-    what: 'Months it would take to sell current new-home inventory at the current sales pace.',
-    why:  'Cleanest single measure of housing-market balance. Above 7 months = buyers\' market, below 4 months = sellers\' market. The threshold for builder margin compression.',
-    context: 'Spiked to 10.9 in July 2022 as mortgage rates surged. Drifted to ~8 in 2024 — buyers\' market, builders cutting prices and offering rate buy-downs.',
+  HOSSUPUSM673N: {
+    label: 'Months Supply of Existing Homes',
+    unit: 'months · monthly · NAR',
+    what: 'Months it would take to sell current existing-home inventory at the current sales pace. NAR (resale) market — the dominant ~85% of US housing transactions.',
+    why:  'Cleanest single measure of resale-market balance. Existing-home turnover is what most households actually transact in; new-home supply (MSACSR) is the smaller builder-side complement. Below 4 months = sellers\' market, above 6 = balanced-to-soft, above 7 = buyers\' market.',
+    context: 'Compressed to ~2 months during the 2021 demand surge (extreme sellers\' market). Drifted to 4–5 months by 2024 as rate-locked owners stayed put and inventory crept back.',
     thresholds: '< 4 months sellers\' · 4–6 months balanced · 6–7 months soft · > 7 months buyers\' · > 9 months distressed',
     links: [
-      { label: 'FRED · MSACSR',                                       url: 'https://fred.stlouisfed.org/series/MSACSR' },
-      { label: 'Census · New Residential Sales release',              url: 'https://www.census.gov/construction/nrs/' },
+      { label: 'FRED · HOSSUPUSM673N',                                url: 'https://fred.stlouisfed.org/series/HOSSUPUSM673N' },
+      { label: 'NAR · Existing Home Sales release',                   url: 'https://www.nar.realtor/research-and-statistics/housing-statistics/existing-home-sales' },
     ],
   },
   MORTGAGE30US: {
