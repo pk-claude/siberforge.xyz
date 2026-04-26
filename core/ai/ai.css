@@ -247,3 +247,61 @@ tr.top-pick td:first-child::before { content: "★ "; color: #f3c969; }
 @media (max-width: 640px) {
   .brand-icon { width: 20px; height: 20px; }
 }
+
+
+/* ============ Restored Phase 0 functionality ============ */
+/* Section navigation control (Top-5/Screen pages) */
+main > section { display: none; }
+main > section.active { display: block; animation: fadeIn .15s ease-in; }
+@keyframes fadeIn { from { opacity: .5; } to { opacity: 1; } }
+
+/* Section styling for macro pages */
+main > section { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 20px 24px; margin-bottom: 18px; }
+main > section > h2 { margin: 0 0 10px; font-size: 18px; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+main > section > h3 { margin: 14px 0 8px; font-size: 14px; color: var(--accent); text-transform: uppercase; letter-spacing: .5px; }
+
+/* Navigation button states */
+.nav-btn { background: var(--panel); border: 1px solid var(--line); color: var(--muted); padding: 7px 14px; border-radius: 5px; cursor: pointer; font-size: 12px; text-decoration: none; font-weight: 600; }
+.nav-btn:hover { color: var(--text); border-color: var(--accent); }
+.nav-btn.active { background: var(--accent) !important; color: #06121f !important; border-color: var(--accent) !important; }
+.nav-btn.summary { background: var(--accent); color: #06121f; border-color: var(--accent); }
+.period-btn { background: transparent; border: none; color: var(--muted); padding: 8px 16px; border-radius: 4px; cursor: pointer; font-size: 12px; font-weight: 600; transition: .15s; }
+.period-btn:hover:not(.active) { color: var(--text); background: rgba(255, 255, 255, .04); }
+.period-btn.active { background: var(--accent); color: var(--bg); border-color: var(--accent); }
+
+/* Light theme nav button overrides */
+[data-theme="light"] .nav-btn.active { color: #ffffff !important; }
+[data-theme="light"] .nav-btn.summary { color: #ffffff; }
+[data-theme="light"] .period-btn.active { color: #ffffff; }
+
+/* Ticker header layout (Top-5 page) */
+.tk-header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; padding-bottom: 10px; border-bottom: 1px solid var(--line); margin-bottom: 12px; }
+.tk-header .tk { font-size: 28px; font-weight: 700; color: var(--text); }
+.tk-header .nm { font-size: 15px; color: var(--muted); }
+.tk-header .price { font-size: 22px; color: var(--green, #3fd17a); font-weight: 600; margin-left: auto; }
+.tk-header .change { font-size: 13px; color: var(--muted); }
+
+/* Thesis box semantic variants (bull/bear/cat) */
+.thesis-box.bull { border-left: 3px solid var(--green, #3fd17a); padding-left: 12px; }
+.thesis-box.bear { border-left: 3px solid var(--red, #ef4f5a); padding-left: 12px; }
+.thesis-box.cat { border-left: 3px solid var(--accent); padding-left: 12px; }
+
+/* Status tags (semantic coloring) */
+.tag { display: inline-block; padding: 2px 8px; border-radius: 3px; font-size: 11px; font-weight: 500; letter-spacing: 0.5px; }
+.tag.green { background: rgba(63, 209, 122, 0.15); color: var(--green, #3fd17a); }
+.tag.amber { background: rgba(247, 167, 0, 0.15); color: var(--accent); }
+.tag.red { background: rgba(239, 79, 90, 0.15); color: var(--red, #ef4f5a); }
+
+[data-theme="light"] .tag.green { background: rgba(31, 138, 85, 0.18); color: #1f8a55; }
+[data-theme="light"] .tag.amber { background: rgba(181, 103, 0, 0.18); color: #b56700; }
+[data-theme="light"] .tag.red { background: rgba(196, 40, 60, 0.18); color: #c4283c; }
+
+/* Period toggle control */
+.period-toggle { display: flex; gap: 4px; margin: 12px 0; background: var(--panel-2); padding: 4px; border-radius: 6px; border: 1px solid var(--line); width: fit-content; }
+
+/* Category chips */
+.cat-chips { margin: 10px 0; display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+
+/* Hidden row/column utilities */
+.hidden-row { display: none !important; }
+.hidden-col { display: none !important; }
