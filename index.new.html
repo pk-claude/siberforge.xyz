@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Pulls hard. Sheds insight.</title>
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" href="/siberforge-mark.png" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Siberforge — Pulls hard. Sheds insight." />
+<meta property="og:description" content="Financial analysis with a personality. Live macro signals reconstructed from SEC EDGAR + FRED. Every line traceable." />
+<meta property="og:image" content="https://siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="https://siberforge.xyz/siberforge-og.png" />
+<meta name="description" content="Financial analysis with a personality. Live macro signals + 45 dashboards reconstructed from SEC EDGAR filings and FRED series. Every line traceable." />
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<link rel="stylesheet" href="./landing.css" />
+<link rel="stylesheet" href="./landing.new.css" />
+</head>
+<body class="landing-page editorial">
+
+<!-- ==================== NAV ==================== -->
+<header class="ed-nav">
+  <a href="#top" class="ed-brand">
+    <svg class="ed-eyes-mini" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/>
+      <circle cx="100" cy="70" r="22" fill="#0a0a0a"/>
+      <circle cx="108" cy="62" r="6" fill="#ffffff"/>
+      <ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/>
+      <circle cx="220" cy="70" r="22" fill="#0a0a0a"/>
+      <circle cx="228" cy="62" r="6" fill="#ffffff"/>
+    </svg>
+    <span class="ed-brand-text"><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
+  </a>
+  <div class="ed-nav-right">
+    <a href="#live" class="ed-nav-link">Live</a>
+    <a href="#themes" class="ed-nav-link">Themes</a>
+    <a href="#hub" class="ed-nav-link">Dashboards</a>
+    <a href="#about" class="ed-nav-link">About</a>
+    <a href="#subscribe" class="ed-nav-cta">Subscribe</a>
+    <span class="ed-status">
+      <span id="refresh-indicator" class="dot"></span>
+      <span id="refresh-text">Live &middot; FRED + EDGAR</span>
+    </span>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+</header>
+
+<main class="landing-main">
+
+<!-- ==================== HERO ==================== -->
+<section class="ed-hero" id="top">
+  <svg class="ed-hero-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-label="Siberforge mark">
+    <ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/>
+    <circle cx="100" cy="70" r="22" fill="#0a0a0a"/>
+    <circle cx="108" cy="62" r="6" fill="#ffffff"/>
+    <ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/>
+    <circle cx="220" cy="70" r="22" fill="#0a0a0a"/>
+    <circle cx="228" cy="62" r="6" fill="#ffffff"/>
+  </svg>
+  <div>
+    <h1>Pulls hard.<br><span class="red">Sheds insight.</span></h1>
+    <p class="ed-sub">Financial analysis with a personality. Reconstructed from SEC EDGAR filings and FRED series &mdash; every line traceable.</p>
+  </div>
+  <div class="ed-scroll-hint">Scroll &mdash; live data below</div>
+</section>
+
+<!-- ==================== LIVE TODAY ==================== -->
+<section class="ed-block ed-live" id="live">
+  <div class="ed-section-head">
+    <div class="ed-eyebrow">Live &middot; today</div>
+    <h2>Where the cycle stands, right now.</h2>
+  </div>
+
+  <!-- 4 hero mini-tiles (DOM hooks expected by live-data module) -->
+  <div class="ed-ribbon" id="hero-visual" aria-label="Live macro ribbon">
+    <a class="mini-tile is-loading" data-tile="GDPC1" href="/core/econ/indicator.html?id=GDPC1">
+      <div class="mini-tile-head"><span class="mini-tile-label">Real GDP</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+    </a>
+    <a class="mini-tile is-loading" data-tile="CPILFESL" href="/core/econ/indicator.html?id=CPILFESL">
+      <div class="mini-tile-head"><span class="mini-tile-label">Core CPI</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+    </a>
+    <a class="mini-tile is-loading" data-tile="CSUSHPISA" href="/core/econ/indicator.html?id=CSUSHPISA">
+      <div class="mini-tile-head"><span class="mini-tile-label">Case-Shiller HPI</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">YoY &middot; &mdash;</div>
+    </a>
+    <a class="mini-tile is-loading" data-tile="UNRATE" href="/core/econ/indicator.html?id=UNRATE">
+      <div class="mini-tile-head"><span class="mini-tile-label">Unemployment</span><span class="mini-tile-delta">&middot;</span></div>
+      <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
+      <div class="mini-tile-spark"></div>
+      <div class="mini-tile-asof">Level &middot; &mdash;</div>
+    </a>
+  </div>
+
+  <!-- Recession composite + wage growth strips -->
+  <div class="ed-tr-grid">
+    <section class="rec-strip is-loading" id="rec-strip" aria-label="Live US recession-risk composite">
+      <div class="rec-card">
+        <div class="rec-head">
+          <span class="rec-tag"><span class="pulse"></span><span class="rec-status-text">Live composite</span></span>
+          <h2 class="rec-title">US recession risk, right now.</h2>
+        </div>
+        <div class="rec-summary">
+          <span class="rec-count" id="rec-count"><span class="rec-count-num">&mdash;</span><span class="rec-count-of">of 5 signals triggered</span></span>
+          <span class="rec-tier" id="rec-tier" data-tier="benign"><span class="rec-tier-label" id="rec-tier-label">&mdash;</span><span class="rec-tier-sub" id="rec-tier-sub">No signals triggered.</span></span>
+        </div>
+        <div class="rec-dots" id="rec-dots" aria-hidden="true"></div>
+        <div class="rec-meta">
+          <span class="rec-asof" id="rec-asof">&nbsp;</span>
+          <a href="/core/econ/recession.html" class="rec-cta">Open full composite <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ind-strip bg-teal is-loading" id="strip-AHE" data-ind-id="AHE" aria-label="Live wage growth indicator">
+      <div class="ind-card">
+        <div class="ind-head">
+          <span class="ind-tag"><span class="pulse"></span><span class="ind-status-text">Loading&hellip;</span></span>
+          <h2 class="ind-title">Wage growth &mdash; are workers keeping up?</h2>
+        </div>
+        <div class="ind-scoreline">
+          <span class="ind-value-wrap"><span class="ind-value">&mdash;</span><span class="ind-unit">%</span></span>
+          <span class="ind-delta">&middot;</span>
+          <span class="ind-tier">
+            <span class="ind-tier-label">Loading&hellip;</span>
+            <span class="ind-tier-sub">&nbsp;</span>
+          </span>
+        </div>
+        <div class="ind-spark" aria-hidden="true"></div>
+        <div class="ind-meta">
+          <span class="ind-asof">&nbsp;</span>
+          <a href="/core/econ/indicator.html?id=AHE" class="ind-cta">See full detail <span class="arrow">&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+  </div>
+</section>
+
+<!-- ==================== THEMES ==================== -->
+<section class="ed-block ed-themes" id="themes">
+  <div class="ed-section-head">
+    <div class="ed-eyebrow">Themes</div>
+    <h2>What we&rsquo;re tracking.</h2>
+  </div>
+  <div class="ed-theme-grid">
+    <a href="/core/macro/" class="ed-theme">
+      <div class="ed-num">01</div>
+      <div class="ed-name">Macro &amp; markets</div>
+      <div class="ed-desc">Composite + sector regimes, cycle, inflation, housing, credit, labor, regional dispersion. 12 views.</div>
+    </a>
+    <a href="/core/ai/" class="ed-theme">
+      <div class="ed-num">02</div>
+      <div class="ed-name">AI beneficiaries</div>
+      <div class="ed-desc">160 companies &times; 8 industries &times; 4 scenarios. Top-5 deep dive on the modest-scenario picks.</div>
+    </a>
+    <a href="/core/econ/" class="ed-theme">
+      <div class="ed-num">03</div>
+      <div class="ed-name">Economic indicators</div>
+      <div class="ed-desc">22 indicators with YoY, percentile, sparkline. Recession composite. Side-by-side compare.</div>
+    </a>
+    <a href="/core/single-name/" class="ed-theme">
+      <div class="ed-num">04</div>
+      <div class="ed-name">Single-name research</div>
+      <div class="ed-desc">Quarterly cash flow rebuilt from EDGAR XBRL. Plug Power live; more names in the queue.</div>
+    </a>
+    <a href="/core/supply/" class="ed-theme">
+      <div class="ed-num">05</div>
+      <div class="ed-name">Supply chain</div>
+      <div class="ed-desc">SC Pressure composite + ~50 metrics across DC, middle-mile, last-mile, international.</div>
+    </a>
+    <a href="/core/data/" class="ed-theme">
+      <div class="ed-num">06</div>
+      <div class="ed-name">Data catalog</div>
+      <div class="ed-desc">Every series with FRED ID, transform, refresh cadence, lookback window.</div>
+    </a>
+  </div>
+</section>
+
+<!-- ==================== HUB (full collapsible tree) ==================== -->
+<section class="ed-block ed-hub" id="hub">
+  <div class="ed-section-head">
+    <div class="ed-eyebrow">Dashboards</div>
+    <h2>Every view.</h2>
+  </div>
+
+  <div class="hub-controls">
+    <input class="hub-search" id="hub-search" placeholder="Search 45+ dashboards..." />
+    <div class="hub-actions">
+      <button id="hub-expand">Expand all</button>
+      <button id="hub-collapse">Collapse all</button>
+    </div>
+  </div>
+
+  <div class="cat-grid">
+
+    <!-- ========== MACRO & MARKETS ========== -->
+    <div class="cat" data-cat="macro">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>Macro &amp; Markets</h2>
+        <span class="cat-count">12 views</span>
+        <span class="cat-tag">Live</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/macro/" class="leaf"><span class="leaf-name">Regime overview</span><span class="leaf-meta">Composite + sector regime returns</span></a>
+        <a href="/core/macro/cycle/" class="leaf"><span class="leaf-name">Cycle Position</span><span class="leaf-meta">Recession risk, NFCI, yield spreads</span></a>
+        <a href="/core/macro/inflation/" class="leaf"><span class="leaf-name">Inflation</span><span class="leaf-meta">CPI breakdown, services vs goods, sticky vs flexible</span></a>
+        <a href="/core/macro/housing/" class="leaf"><span class="leaf-name">Housing</span><span class="leaf-meta">20 housing metrics</span></a>
+        <a href="/core/macro/real-economy/" class="leaf"><span class="leaf-name">Consumer</span><span class="leaf-meta">Spending, savings, credit health</span></a>
+        <a href="/core/macro/credit/" class="leaf"><span class="leaf-name">Credit</span><span class="leaf-meta">Spreads, default rates, loan growth</span></a>
+        <a href="/core/macro/labor/" class="leaf"><span class="leaf-name">Labor</span><span class="leaf-meta">Payrolls, wages, participation</span></a>
+        <div class="branch">
+          <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Regional Dispersion</span><span class="leaf-meta">7 sub-views</span></button>
+          <div class="branch-body">
+            <a href="/core/macro/regional/" class="leaf sub"><span class="leaf-name">All regional</span></a>
+            <a href="/core/macro/regional/?view=cpi" class="leaf sub"><span class="leaf-name">CPI dispersion</span></a>
+            <a href="/core/macro/regional/?view=build-buy" class="leaf sub"><span class="leaf-name">Build vs Buy</span></a>
+            <a href="/core/macro/regional/?view=channel-mix" class="leaf sub"><span class="leaf-name">Channel mix</span></a>
+            <a href="/core/macro/regional/?view=migration" class="leaf sub"><span class="leaf-name">Migration</span></a>
+            <a href="/core/macro/regional/?view=demographics" class="leaf sub"><span class="leaf-name">Demographics</span></a>
+            <a href="/core/macro/regional/?view=affordability" class="leaf sub"><span class="leaf-name">Affordability</span></a>
+            <a href="/core/macro/regional/?view=climate" class="leaf sub"><span class="leaf-name">Climate risk</span></a>
+          </div>
+        </div>
+        <a href="/core/macro/geography/" class="leaf"><span class="leaf-name">Geography</span><span class="leaf-meta">State + MSA selectors, ranked bars</span></a>
+        <a href="/core/macro/backtest/" class="leaf"><span class="leaf-name">Backtest</span><span class="leaf-meta">Walk-forward regime rotation vs SPY + 60/40</span></a>
+        <a href="/core/macro/research.html" class="leaf"><span class="leaf-name">Pair Explorer</span><span class="leaf-meta">Correlation + regression any two series</span></a>
+        <a href="/core/macro/network.html" class="leaf"><span class="leaf-name">Transmission Network</span><span class="leaf-meta">All-pairs correlation map &middot; 60m window &middot; lead-lag arrows</span></a>
+      </div>
+    </div>
+
+    <!-- ========== AI BENEFICIARIES ========== -->
+    <div class="cat" data-cat="ai">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>AI Beneficiaries</h2>
+        <span class="cat-count">3 views</span>
+        <span class="cat-tag">New</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/ai/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">Both views with cross-page scenario picker</span></a>
+        <a href="/core/ai/screen/" class="leaf"><span class="leaf-name">Industry Screen</span><span class="leaf-meta">160 companies &middot; 8 industries &middot; 4 scenarios</span></a>
+        <a href="/core/ai/top-5/" class="leaf"><span class="leaf-name">Top-5 Deep Dive</span><span class="leaf-meta">Modest-scenario picks: META &middot; CDNS &middot; AVGO &middot; SNPS &middot; MSFT</span></a>
+      </div>
+    </div>
+
+    <!-- ========== ECONOMIC INDICATORS ========== -->
+    <div class="cat" data-cat="econ">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>Economic Indicators</h2>
+        <span class="cat-count">25 views</span>
+        <span class="cat-tag">Live</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/econ/" class="leaf"><span class="leaf-name">22-indicator overview</span><span class="leaf-meta">Latest, YoY, percentile, sparkline per card</span></a>
+        <a href="/core/econ/recession.html" class="leaf"><span class="leaf-name">Recession composite</span><span class="leaf-meta">5-signal model: Sahm, 10Y-3M, HY OAS, UNRATE, NFP</span></a>
+        <a href="/core/econ/compare.html" class="leaf"><span class="leaf-name">Comparison tool</span><span class="leaf-meta">Compare any two indicators side-by-side</span></a>
+        <div class="branch">
+          <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Individual indicator drill-downs</span><span class="leaf-meta">22 series</span></button>
+          <div class="branch-body">
+            <a href="/core/econ/indicator.html?id=GDPC1" class="leaf sub"><span class="leaf-name">Real GDP</span><span class="leaf-meta">GDPC1</span></a>
+            <a href="/core/econ/indicator.html?id=CPILFESL" class="leaf sub"><span class="leaf-name">Core CPI</span><span class="leaf-meta">CPILFESL</span></a>
+            <a href="/core/econ/indicator.html?id=CSUSHPISA" class="leaf sub"><span class="leaf-name">Case-Shiller HPI</span><span class="leaf-meta">CSUSHPISA</span></a>
+            <a href="/core/econ/indicator.html?id=UNRATE" class="leaf sub"><span class="leaf-name">Unemployment</span><span class="leaf-meta">UNRATE</span></a>
+            <a href="/core/econ/indicator.html?id=PAYEMS" class="leaf sub"><span class="leaf-name">Nonfarm payrolls</span><span class="leaf-meta">PAYEMS</span></a>
+            <a href="/core/econ/indicator.html?id=AHE" class="leaf sub"><span class="leaf-name">Average hourly earnings</span><span class="leaf-meta">AHE</span></a>
+            <a href="/core/econ/indicator.html?id=INDPRO" class="leaf sub"><span class="leaf-name">Industrial Production</span><span class="leaf-meta">INDPRO</span></a>
+            <a href="/core/econ/indicator.html?id=RRSFS" class="leaf sub"><span class="leaf-name">Real Retail Sales</span><span class="leaf-meta">RRSFS</span></a>
+            <a href="/core/econ/indicator.html?id=PCE" class="leaf sub"><span class="leaf-name">PCE</span><span class="leaf-meta">PCE</span></a>
+            <a href="/core/econ/indicator.html?id=PSAVERT" class="leaf sub"><span class="leaf-name">Personal savings rate</span><span class="leaf-meta">PSAVERT</span></a>
+            <a href="/core/econ/indicator.html?id=HOUST" class="leaf sub"><span class="leaf-name">Housing starts</span><span class="leaf-meta">HOUST</span></a>
+            <a href="/core/econ/indicator.html?id=EXHOSLUS" class="leaf sub"><span class="leaf-name">Existing home sales</span><span class="leaf-meta">EXHOSLUS</span></a>
+            <a href="/core/econ/indicator.html?id=NFCI" class="leaf sub"><span class="leaf-name">National Financial Conditions Index</span><span class="leaf-meta">NFCI</span></a>
+            <a href="/core/econ/indicator.html?id=ANFCI" class="leaf sub"><span class="leaf-name">Adjusted NFCI</span><span class="leaf-meta">ANFCI</span></a>
+            <a href="/core/econ/indicator.html?id=BAMLH0A0HYM2" class="leaf sub"><span class="leaf-name">HY OAS</span><span class="leaf-meta">BAMLH0A0HYM2</span></a>
+            <a href="/core/econ/indicator.html?id=T10Y3M" class="leaf sub"><span class="leaf-name">10Y-3M yield spread</span><span class="leaf-meta">T10Y3M</span></a>
+            <a href="/core/econ/indicator.html?id=DGS10" class="leaf sub"><span class="leaf-name">10Y Treasury</span><span class="leaf-meta">DGS10</span></a>
+            <a href="/core/econ/indicator.html?id=DFF" class="leaf sub"><span class="leaf-name">Fed Funds Rate</span><span class="leaf-meta">DFF</span></a>
+            <a href="/core/econ/indicator.html?id=ICSA" class="leaf sub"><span class="leaf-name">Initial jobless claims</span><span class="leaf-meta">ICSA</span></a>
+            <a href="/core/econ/indicator.html?id=PERMIT" class="leaf sub"><span class="leaf-name">Building permits</span><span class="leaf-meta">PERMIT</span></a>
+            <a href="/core/econ/indicator.html?id=RECPROUSM156N" class="leaf sub"><span class="leaf-name">Recession probability</span><span class="leaf-meta">RECPROUSM156N</span></a>
+            <a href="/core/econ/indicator.html?id=DRBLACBS" class="leaf sub"><span class="leaf-name">Delinquency rate</span><span class="leaf-meta">DRBLACBS</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SINGLE-NAME RESEARCH ========== -->
+    <div class="cat" data-cat="single">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>Single-Name Research</h2>
+        <span class="cat-count">2 views</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/single-name/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">All single-name deep dives</span></a>
+        <a href="/core/plug/" class="leaf"><span class="leaf-name">Plug Power (PLUG)</span><span class="leaf-meta">Quarterly cash flow 2015-2025 from EDGAR XBRL &middot; CFO/CFI/CFF/Cash drivers</span></a>
+      </div>
+    </div>
+
+    <!-- ========== SUPPLY CHAIN ========== -->
+    <div class="cat" data-cat="supply">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>Supply Chain</h2>
+        <span class="cat-count">~50 metrics</span>
+        <span class="cat-tag">Weekly</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/supply/" class="leaf"><span class="leaf-name">Overview &amp; SC Pressure composite</span><span class="leaf-meta">4-quadrant headline &middot; z-score blend</span></a>
+        <a href="/core/supply/dc/" class="leaf"><span class="leaf-name">Distribution Center</span><span class="leaf-meta">Wages, packaging, equipment, inventories</span></a>
+        <a href="/core/supply/dc/industrial-re.html" class="leaf"><span class="leaf-name">Industrial Real Estate</span><span class="leaf-meta">Construction, REIT basket, cap-rate spread</span></a>
+        <a href="/core/supply/middle-mile/" class="leaf"><span class="leaf-name">Middle Mile</span><span class="leaf-meta">Diesel, Cass, ATA tonnage, intermodal, DAT spot</span></a>
+        <a href="/core/supply/last-mile/" class="leaf"><span class="leaf-name">Last Mile</span><span class="leaf-meta">Couriers, USPS volume, e-commerce share</span></a>
+        <a href="/core/supply/international/" class="leaf"><span class="leaf-name">International / Sourcing</span><span class="leaf-meta">GSCPI, WCI, SCFI, FBX, BDI, ports, bunker</span></a>
+        <a href="/core/supply/data.html" class="leaf"><span class="leaf-name">Downloads (CSV + bundle.zip)</span><span class="leaf-meta">All series, full history</span></a>
+      </div>
+    </div>
+
+    <!-- ========== DATA CATALOG ========== -->
+    <div class="cat" data-cat="data">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>Data Catalog</h2>
+        <span class="cat-count">All series</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/data/" class="leaf"><span class="leaf-name">All series with metadata</span><span class="leaf-meta">FRED IDs, transforms, refresh cadence, lookback windows</span></a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==================== ABOUT ==================== -->
+<section class="ed-block ed-about" id="about">
+  <div class="ed-about-inner">
+    <div class="ed-copy">
+      <div class="ed-eyebrow">The forge</div>
+      <h2>Built by a husky &mdash; and the human who serves him.</h2>
+      <p>Siberforge is independent macro and financial analysis: written with conviction, debated with rigor, and named after a Siberian Husky who was beautiful, serious, and an absolute clown.</p>
+      <p>Sixteen years across finance, with a stubborn preference for symmetry, falsifiable claims, and the leading edge of a print.</p>
+      <div class="ed-stat-row">
+        <div class="ed-stat">
+          <div class="ed-big">16y</div>
+          <div class="ed-stat-label">In finance</div>
+        </div>
+        <div class="ed-stat">
+          <div class="ed-big">2026</div>
+          <div class="ed-stat-label">Year forged</div>
+        </div>
+        <div class="ed-stat">
+          <div class="ed-big">1</div>
+          <div class="ed-stat-label">Husky in spirit</div>
+        </div>
+      </div>
+    </div>
+    <div class="ed-about-mark">
+      <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M 28 95 L 58 12 L 100 100 Z" fill="#3a3a3e"/>
+        <path d="M 212 95 L 182 12 L 140 100 Z" fill="#3a3a3e"/>
+        <path d="M 52 88 L 65 35 L 88 95 Z" fill="#d4a8a0"/>
+        <path d="M 188 88 L 175 35 L 152 95 Z" fill="#d4a8a0"/>
+        <ellipse cx="120" cy="170" rx="92" ry="100" fill="#3a3a3e"/>
+        <path d="M 120 95 Q 75 135 62 205 Q 75 258 120 268 Q 165 258 178 205 Q 165 135 120 95 Z" fill="#f0e8d8"/>
+        <path d="M 95 100 Q 108 145 102 175 Q 88 150 88 110 Z" fill="#3a3a3e"/>
+        <path d="M 145 100 Q 132 145 138 175 Q 152 150 152 110 Z" fill="#3a3a3e"/>
+        <ellipse cx="92" cy="165" rx="15" ry="11" fill="#3EB8E0"/>
+        <circle cx="92" cy="165" r="6" fill="#0a0a0a"/>
+        <circle cx="95" cy="162" r="2.5" fill="#fff"/>
+        <ellipse cx="148" cy="165" rx="15" ry="11" fill="#E09A3E"/>
+        <circle cx="148" cy="165" r="6" fill="#0a0a0a"/>
+        <circle cx="151" cy="162" r="2.5" fill="#fff"/>
+        <ellipse cx="120" cy="220" rx="24" ry="20" fill="#f0e8d8"/>
+        <ellipse cx="120" cy="212" rx="13" ry="9" fill="#0a0a0a"/>
+        <path d="M 120 222 L 120 242" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 120 242 Q 105 252 94 242" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M 120 242 Q 135 252 146 242" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SUBSCRIBE (FUTURE FEATURE) ==================== -->
+<section class="ed-block ed-subscribe" id="subscribe">
+  <div class="ed-future-tag">Coming later &middot; not the focus right now</div>
+  <h2>One note a week.<br><span class="red">No filler.</span></h2>
+  <p>The week&rsquo;s macro signal, when the models update, and the occasional husky photo. <em>Not live yet &mdash; building first, mailing second.</em></p>
+  <form class="ed-sub-form" onsubmit="event.preventDefault();this.querySelector('button').textContent='Will let you know';">
+    <input type="email" placeholder="you@yourdomain.com" required>
+    <button type="submit">Notify me</button>
+  </form>
+  <div class="ed-future-note">Email collection is not wired yet. Form is a placeholder for the eventual Buttondown / ConvertKit hookup.</div>
+</section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="ed-footer">
+  <div class="ed-brand-mini"><span class="siber">SIBER</span><span class="red">FORGE</span></div>
+  <div class="ed-links">
+    <span>Research from primary sources</span>
+    <span>&middot;</span>
+    <span>SEC EDGAR XBRL + FRED</span>
+    <span>&middot;</span>
+    <span>Not investment advice</span>
+  </div>
+  <div class="ed-copyright">&copy; 2026 Siberforge</div>
+</footer>
+
+<script src="/core/lib/theme-toggle.js"></script>
+
+<script>
+// ===== Hub: collapse/expand + search =====
+(function(){
+  const cats = document.querySelectorAll('.cat');
+  // Default: collapsed except first two
+  cats.forEach((c, i) => { if (i >= 2) c.classList.add('collapsed'); });
+  document.querySelectorAll('.cat-head').forEach(head => {
+    head.addEventListener('click', e => {
+      if (e.target.closest('a')) return;
+      head.parentElement.classList.toggle('collapsed');
+    });
+  });
+  document.querySelectorAll('.branch-head').forEach(head => {
+    head.addEventListener('click', () => head.parentElement.classList.toggle('expanded'));
+  });
+  document.getElementById('hub-expand').addEventListener('click', () => {
+    cats.forEach(c => c.classList.remove('collapsed'));
+    document.querySelectorAll('.branch').forEach(b => b.classList.add('expanded'));
+  });
+  document.getElementById('hub-collapse').addEventListener('click', () => {
+    cats.forEach(c => c.classList.add('collapsed'));
+    document.querySelectorAll('.branch').forEach(b => b.classList.remove('expanded'));
+  });
+  const search = document.getElementById('hub-search');
+  search.addEventListener('input', e => {
+    const q = e.target.value.trim().toLowerCase();
+    if (!q) {
+      cats.forEach(c => { c.style.display = ''; c.querySelectorAll('.leaf, .branch').forEach(el => el.style.display = ''); });
+      return;
+    }
+    // Show all results expanded
+    cats.forEach(c => {
+      c.classList.remove('collapsed');
+      let hasMatch = false;
+      c.querySelectorAll('.leaf').forEach(leaf => {
+        const m = leaf.textContent.toLowerCase().includes(q);
+        leaf.style.display = m ? '' : 'none';
+        if (m) hasMatch = true;
+      });
+      c.querySelectorAll('.branch').forEach(br => {
+        const visibleSubs = [...br.querySelectorAll('.leaf')].filter(l => l.style.display !== 'none').length;
+        br.style.display = visibleSubs ? '' : 'none';
+        if (visibleSubs) br.classList.add('expanded');
+      });
+      c.style.display = hasMatch ? '' : 'none';
+    });
+  });
+})();
+</script>
+
+<script type="module">
+  import { fetchFred } from './core/lib/fred-client.js';
+  import { applyTransform } from './core/lib/transforms.js';
+  import { renderSparkline } from './core/econ/sparklines.js';
+  import {
+    SERIES as REC_SERIES,
+    HISTORY_START as REC_HISTORY,
+    tierOf as recTierOf,
+    computeSignals,
+  } from './core/econ/recession-core.js';
+
+  // ---- Formatting helpers -------------------------------------------------
+  const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtMonth(iso) {
+    const m = /^(\d{4})-(\d{2})/.exec(String(iso || ''));
+    if (!m) return '';
+    return `${MONTH_NAMES[parseInt(m[2], 10) - 1]} ${m[1]}`;
+  }
+  function fmtValue(v, d) {
+    if (!Number.isFinite(v)) return '—';
+    return v.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
+  }
+  // 12-month delta on a transformed series. Uses wall-clock date matching so
+  // quarterly series (GDPC1) and monthly series both get a true 1yr lookback.
+  function delta12mo(obs) {
+    if (!obs || obs.length < 2) return NaN;
+    const last = obs[obs.length - 1];
+    const targetMs = new Date(last.date).getTime() - 365 * 86400000;
+    for (let i = obs.length - 2; i >= 0; i--) {
+      if (new Date(obs[i].date).getTime() <= targetMs) {
+        return last.value - obs[i].value;
+      }
+    }
+    return NaN;
+  }
+  function deltaKind(delta, direction) {
+    if (!Number.isFinite(delta) || Math.abs(delta) < 0.05) return 'flat';
+    if (direction === 'higher_better') return delta > 0 ? 'up' : 'down';
+    if (direction === 'lower_better')  return delta > 0 ? 'down' : 'up';
+    return delta > 0 ? 'up' : 'down';
+  }
+  function fmtDeltaText(delta, decimals, unit) {
+    if (!Number.isFinite(delta)) return '·';
+    const sign = delta > 0 ? '+' : delta < 0 ? '−' : '';
+    const abs = Math.abs(delta);
+    return `${sign}${abs.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })} ${unit}`;
+  }
+  // Palette for sparklines. Matches editorial accent set on dark + retains
+  // semantic green/red for healthy/weak.
+  const COLOR_GREEN  = '#3ECF8E';
+  const COLOR_RED    = '#E63946';
+  const COLOR_TEAL   = '#3EB8E0';
+  const COLOR_AMBER  = '#E09A3E';
+  const COLOR_MUTED  = '#8a8578';
+  function strokeForKind(kind) {
+    if (kind === 'up')   return COLOR_GREEN;
+    if (kind === 'down') return COLOR_RED;
+    return COLOR_MUTED;
+  }
+
+  // ---- Configuration ------------------------------------------------------
+  const HERO_TILES = [
+    { id: 'GDPC1',     transform: 'yoy',     unit: '%', decimals: 1, direction: 'higher_better', contextLabel: 'YoY' },
+    { id: 'CPILFESL',  transform: 'yoy',     unit: '%', decimals: 1, direction: 'lower_better',  contextLabel: 'YoY' },
+    { id: 'CSUSHPISA', transform: 'yoy',     unit: '%', decimals: 1, direction: 'higher_better', contextLabel: 'YoY' },
+    { id: 'UNRATE',    transform: 'level',   unit: '%', decimals: 1, direction: 'lower_better',  contextLabel: 'Level' },
+  ];
+
+  // 3 indicator strips. Only AHE has a DOM target on this page; the other
+  // two are kept for parity with the original config (renderStrip no-ops if
+  // the element is missing). Restoring the full list trivially supports
+  // future strips without code changes.
+  const STRIPS = [
+    {
+      stripId: 'AHE',
+      fredId:  'CES0500000003',
+      transform: 'yoy',
+      unit: '%',
+      decimals: 1,
+      direction: 'neutral',
+      tier(v) {
+        if (!Number.isFinite(v))  return { cls: '',          label: '—',        sub: '' };
+        if (v >= 4.0)             return { cls: 't-cooling', label: 'HOT',      sub: 'Above 4% is hot — historically feeds back into CPI.' };
+        if (v >= 3.0)             return { cls: 't-healthy', label: 'TREND',    sub: '3–4% is the pre-2020 trend band.' };
+        if (v >= 2.0)             return { cls: 't-cooling', label: 'COOLING',  sub: 'Decelerating — watch for real-wage compression.' };
+        return                         { cls: 't-weak',    label: 'WEAK',     sub: 'Wage growth below 2% is sub-trend.' };
+      },
+    },
+    {
+      stripId: 'EXHOSLUS',
+      fredId:  'EXHOSLUSM495S',
+      transform: 'level_m',
+      unit: 'M',
+      decimals: 2,
+      direction: 'higher_better',
+      tier(v) {
+        if (!Number.isFinite(v)) return { cls: '',          label: '—',        sub: '' };
+        if (v >= 5.0)            return { cls: 't-healthy', label: 'HEALTHY',  sub: 'SAAR above the 5M cyclical neutral.' };
+        if (v >= 4.0)            return { cls: 't-cooling', label: 'SOFT',     sub: 'Below long-run neutral, above trough.' };
+        return                        { cls: 't-weak',    label: 'WEAK',     sub: 'SAAR below 4M — near cycle lows.' };
+      },
+    },
+    {
+      stripId: 'HOUST',
+      fredId:  'HOUST',
+      transform: 'yoy',
+      unit: '%',
+      decimals: 1,
+      direction: 'higher_better',
+      tier(v) {
+        if (!Number.isFinite(v)) return { cls: '',          label: '—',           sub: '' };
+        if (v >=  5.0)           return { cls: 't-healthy', label: 'EXPANDING',   sub: 'Starts up year-on-year.' };
+        if (v >= -5.0)           return { cls: 't-trend',   label: 'FLAT',        sub: 'Within ±5% YoY — trend pace.' };
+        return                        { cls: 't-weak',    label: 'CONTRACTING', sub: 'YoY below −5% — builders pulling back.' };
+      },
+    },
+  ];
+
+  // ---- Renderers ----------------------------------------------------------
+  function renderHeroTile(cfg, map) {
+    const tileEl = document.querySelector(`.mini-tile[data-tile="${cfg.id}"]`);
+    if (!tileEl) return;
+    const rawObs = (map[cfg.id] && map[cfg.id].observations) || [];
+    const series = applyTransform(rawObs, cfg.transform);
+    if (!series.length) {
+      tileEl.querySelector('.mini-tile-value').textContent = '—';
+      return;
+    }
+    const last  = series[series.length - 1];
+    const delta = delta12mo(series);
+    const kind  = deltaKind(delta, cfg.direction);
+
+    const valEl = tileEl.querySelector('.mini-tile-value');
+    valEl.innerHTML = `${fmtValue(last.value, cfg.decimals)}<span class="mini-tile-unit">${cfg.unit}</span>`;
+
+    const delEl = tileEl.querySelector('.mini-tile-delta');
+    delEl.className = `mini-tile-delta ${kind}`;
+    delEl.textContent = Number.isFinite(delta)
+      ? `${kind === 'up' ? '▲' : kind === 'down' ? '▼' : '•'} ${fmtDeltaText(delta, cfg.decimals, 'pp').replace(' pp','pp')}`
+      : '·';
+
+    const sparkEl = tileEl.querySelector('.mini-tile-spark');
+    const sliceN  = cfg.transform === 'level' ? 60 : 60;
+    const tail = series.slice(-sliceN);
+    renderSparkline(sparkEl, tail, {
+      width: 220, height: 36, fill: true,
+      stroke: strokeForKind(kind),
+      zeroLine: cfg.transform === 'yoy',
+    });
+
+    const asofEl = tileEl.querySelector('.mini-tile-asof');
+    asofEl.textContent = `${cfg.contextLabel} · ${fmtMonth(last.date)}`;
+
+    tileEl.classList.remove('is-loading');
+    tileEl.classList.add('is-ready');
+  }
+
+  function renderStrip(cfg, map) {
+    const stripEl = document.getElementById(`strip-${cfg.stripId}`);
+    if (!stripEl) return;
+    const setTag = (text) => {
+      const t = stripEl.querySelector('.ind-status-text');
+      if (t) t.textContent = text;
+    };
+
+    const rawObs = (map[cfg.fredId] && map[cfg.fredId].observations) || [];
+    const series = applyTransform(rawObs, cfg.transform);
+    if (!series.length) {
+      setTag('No data');
+      stripEl.classList.remove('is-loading');
+      stripEl.classList.add('is-error');
+      return;
+    }
+    const last  = series[series.length - 1];
+    const delta = delta12mo(series);
+    const kind  = deltaKind(delta, cfg.direction);
+    const tier  = cfg.tier(last.value);
+
+    stripEl.querySelector('.ind-value').textContent = fmtValue(last.value, cfg.decimals);
+    stripEl.querySelector('.ind-unit').textContent  = cfg.unit;
+
+    const delEl = stripEl.querySelector('.ind-delta');
+    delEl.className = `ind-delta ${kind}`;
+    delEl.textContent = Number.isFinite(delta)
+      ? `${kind === 'up' ? '▲' : kind === 'down' ? '▼' : '•'} ${fmtDeltaText(delta, cfg.decimals, cfg.transform === 'level_m' ? 'M' : 'pp').replace(' pp','pp').replace(' M','M')} 12mo`
+      : '·';
+
+    const tierEl = stripEl.querySelector('.ind-tier');
+    tierEl.classList.remove('t-healthy', 't-trend', 't-cooling', 't-weak');
+    if (tier.cls) tierEl.classList.add(tier.cls);
+    tierEl.querySelector('.ind-tier-label').textContent = tier.label;
+    tierEl.querySelector('.ind-tier-sub').textContent   = tier.sub;
+
+    const sparkEl = stripEl.querySelector('.ind-spark');
+    renderSparkline(sparkEl, series.slice(-120), {
+      width: 520, height: 56, fill: true,
+      stroke: tier.cls === 't-weak' ? COLOR_RED
+            : tier.cls === 't-healthy' ? COLOR_GREEN
+            : tier.cls === 't-cooling' ? COLOR_AMBER
+            : COLOR_TEAL,
+      zeroLine: cfg.transform === 'yoy',
+    });
+
+    stripEl.querySelector('.ind-asof').textContent = `Data as of ${fmtMonth(last.date)}`;
+
+    stripEl.classList.remove('is-loading');
+    stripEl.classList.add('is-ready');
+    setTag('Live');
+  }
+
+  function renderRecession(map) {
+    const stripEl = document.getElementById('rec-strip');
+    if (!stripEl) return;
+    const setTag = (text) => {
+      const t = stripEl.querySelector('.rec-status-text');
+      if (t) t.textContent = text;
+    };
+
+    const raw = {};
+    for (const id of REC_SERIES) raw[id] = (map[id] && map[id].observations) || [];
+    const { signals } = computeSignals(raw);
+    const triggered = signals.filter((s) => s.triggered).length;
+    const tier = recTierOf(triggered);
+
+    const numEl = document.querySelector('#rec-count .rec-count-num');
+    if (numEl) numEl.textContent = String(triggered);
+
+    const tierEl = document.getElementById('rec-tier');
+    tierEl.classList.remove('tier-benign', 'tier-low', 'tier-elevated', 'tier-high');
+    tierEl.classList.add(tier.cls);
+    document.getElementById('rec-tier-label').textContent = tier.label;
+    document.getElementById('rec-tier-sub').textContent   = tier.sub;
+
+    const dotsRoot = document.getElementById('rec-dots');
+    dotsRoot.innerHTML = signals.map((s) => {
+      const cls = s.triggered ? 'triggered' : 'ok';
+      const status = s.triggered ? 'TRIGGERED' : 'OK';
+      const short = (s.short || s.label)
+        .replace(/-/g, '−')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;');
+      return `<div class="rec-dot-item ${cls}" title="${s.label}: ${status}">
+        <span class="rec-dot"></span><span>${short}</span>
+      </div>`;
+    }).join('');
+
+    const latest = signals.map((s) => s.currentDate).filter(Boolean).sort().pop();
+    const asofEl = document.getElementById('rec-asof');
+    if (asofEl) asofEl.textContent = latest ? `Data as of ${fmtMonth(latest)}` : '';
+
+    stripEl.classList.remove('is-loading');
+    stripEl.classList.add('is-ready');
+    setTag('Live');
+  }
+
+  function markAllErrors() {
+    document.querySelectorAll('.mini-tile').forEach((t) => {
+      t.classList.remove('is-loading');
+      t.classList.add('is-error');
+    });
+    ['AHE', 'EXHOSLUS', 'HOUST'].forEach((id) => {
+      const el = document.getElementById(`strip-${id}`);
+      if (!el) return;
+      el.classList.remove('is-loading');
+      el.classList.add('is-error');
+      const t = el.querySelector('.ind-status-text');
+      if (t) t.textContent = 'Data error';
+    });
+    const rec = document.getElementById('rec-strip');
+    if (rec) {
+      rec.classList.remove('is-loading');
+      rec.classList.add('is-error');
+      const t = rec.querySelector('.rec-status-text');
+      if (t) t.textContent = 'Data error';
+      const tl = document.getElementById('rec-tier-label');
+      const ts = document.getElementById('rec-tier-sub');
+      if (tl) tl.textContent = '—';
+      if (ts) ts.textContent = 'Could not fetch FRED series';
+    }
+  }
+
+  async function main() {
+    const allSeries = new Set(REC_SERIES);
+    HERO_TILES.forEach((t) => allSeries.add(t.id));
+    STRIPS.forEach((s) => allSeries.add(s.fredId));
+
+    let map;
+    try {
+      map = await fetchFred([...allSeries], { start: REC_HISTORY });
+    } catch (err) {
+      console.error('FRED fetch failed', err);
+      markAllErrors();
+      return;
+    }
+
+    renderRecession(map);
+    HERO_TILES.forEach((cfg) => renderHeroTile(cfg, map));
+    STRIPS.forEach((cfg) => renderStrip(cfg, map));
+  }
+
+  main();
+</script>
+
+</body>
+</html>

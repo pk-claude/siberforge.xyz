@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SiberForge — Hero Mockups</title>
+<style>
+  /* ============================================================
+     SETUP — drop these image files in the same folder as this HTML:
+        siberforge-logo.png       (the logo with husky + SIBERFORGE text)
+        husky-bandana.png         (front-facing, blue bandana, silver bg)
+        husky-upsidedown.png      (the upside-down clown shot)
+        husky-profile.png         (side profile, blue collar)
+        husky-clownfish.png       (in the clownfish life vest)
+     ============================================================ */
+
+  :root {
+    --bg: #0a0a0a;
+    --bg-soft: #141414;
+    --bg-silver: linear-gradient(135deg, #d8d8db 0%, #b3b4b8 50%, #d8d8db 100%);
+    --ink: #f5f5f5;
+    --ink-muted: #a8a8a8;
+    --red: #E63946;
+    --red-deep: #b8202c;
+    --ice: #3EB8E0;
+    --amber: #E09A3E;
+    --rule: rgba(255,255,255,0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.4;
+  }
+
+  .hero {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 6vw;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .label {
+    position: absolute;
+    top: 24px;
+    left: 32px;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 600;
+  }
+  .label .num { color: var(--red); margin-right: 8px; }
+
+  .nav {
+    position: absolute;
+    top: 24px;
+    right: 32px;
+    display: flex;
+    gap: 28px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+  .nav span { cursor: default; }
+  .nav .cta {
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+
+  /* ============================================================
+     HERO 1 — Logo-centered minimalist
+     ============================================================ */
+  .hero-1 {
+    background: radial-gradient(ellipse at center, #181818 0%, #050505 80%);
+    flex-direction: column;
+    text-align: center;
+    gap: 48px;
+  }
+  .hero-1 .logo {
+    width: clamp(280px, 32vw, 460px);
+    filter: drop-shadow(0 20px 60px rgba(230,57,70,0.15));
+  }
+  .hero-1 h1 {
+    font-size: clamp(48px, 7vw, 96px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    line-height: 0.95;
+  }
+  .hero-1 h1 .dot { color: var(--red); }
+  .hero-1 .sub {
+    font-size: clamp(16px, 1.5vw, 20px);
+    color: var(--ink-muted);
+    max-width: 540px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+
+  /* ============================================================
+     HERO 2 — Side-by-side: husky-bandana left, copy right
+     ============================================================ */
+  .hero-2 {
+    background: linear-gradient(120deg, #0a0a0a 0%, #1a1a1c 100%);
+  }
+  .hero-2 .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    max-width: 1280px;
+    width: 100%;
+  }
+  .hero-2 .img-wrap {
+    background: var(--bg-silver);
+    border-radius: 4px;
+    padding: 40px;
+    aspect-ratio: 3/4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+  }
+  .hero-2 .img-wrap img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+  }
+  .hero-2 .copy { padding-right: 20px; }
+  .hero-2 .eyebrow {
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .hero-2 h1 {
+    font-size: clamp(56px, 6.5vw, 96px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin-bottom: 24px;
+  }
+  .hero-2 h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .hero-2 .sub {
+    font-size: 19px;
+    color: var(--ink-muted);
+    max-width: 460px;
+    line-height: 1.5;
+    margin-bottom: 36px;
+  }
+  .hero-2 .actions { display: flex; gap: 16px; }
+  .btn {
+    display: inline-block;
+    padding: 14px 26px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.15s ease;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--red); color: #fff; }
+  .btn-ghost { background: transparent; color: var(--ink); border: 1px solid rgba(255,255,255,0.2); }
+
+  /* ============================================================
+     HERO 3 — Eyes mark, text below (most "logo-mark" feeling)
+     ============================================================ */
+  .hero-3 {
+    background: #050507;
+    flex-direction: column;
+    text-align: center;
+    gap: 56px;
+  }
+  .eye-mark {
+    width: clamp(180px, 22vw, 320px);
+    height: auto;
+  }
+  .hero-3 h1 {
+    font-size: clamp(64px, 9vw, 140px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+  }
+  .hero-3 h1 .pipe { color: var(--red); margin: 0 0.15em; }
+  .hero-3 .sub {
+    font-size: clamp(15px, 1.3vw, 18px);
+    color: var(--ink-muted);
+    letter-spacing: 0.05em;
+    max-width: 600px;
+  }
+
+  /* ============================================================
+     HERO 4 — Husky profile with text wrapping the silhouette
+     ============================================================ */
+  .hero-4 {
+    background: linear-gradient(180deg, #0c0c0e 0%, #18181c 100%);
+    align-items: stretch;
+    padding: 0;
+  }
+  .hero-4 .inner {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    width: 100%;
+    align-items: center;
+  }
+  .hero-4 .copy-side {
+    padding: 12vh 6vw;
+  }
+  .hero-4 .copy-side h1 {
+    font-size: clamp(56px, 7vw, 110px);
+    font-weight: 900;
+    line-height: 0.92;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+  }
+  .hero-4 .copy-side h1 .accent {
+    color: var(--red);
+    display: block;
+  }
+  .hero-4 .copy-side .sub {
+    font-size: 20px;
+    color: var(--ink-muted);
+    max-width: 480px;
+    line-height: 1.5;
+    margin-bottom: 36px;
+  }
+  .hero-4 .copy-side .meta {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    font-weight: 700;
+    margin-bottom: 28px;
+  }
+  .hero-4 .img-side {
+    height: 100%;
+    min-height: 100vh;
+    background: radial-gradient(circle at 30% 50%, #1f1f23 0%, #0a0a0c 70%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-4 .img-side::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 35% 50%, rgba(230,57,70,0.08) 0%, transparent 60%);
+  }
+  .hero-4 .img-side img {
+    max-width: 90%;
+    max-height: 80vh;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ============================================================
+     HERO 5 — Playful clownfish vest, type-driven
+     ============================================================ */
+  .hero-5 {
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0c 100%);
+    flex-direction: column;
+    gap: 56px;
+    text-align: center;
+  }
+  .hero-5 .top-copy {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-5 h1 {
+    font-size: clamp(64px, 10vw, 160px);
+    font-weight: 900;
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+  }
+  .hero-5 h1 .red { color: var(--red); }
+  .hero-5 .sub {
+    font-size: clamp(16px, 1.5vw, 22px);
+    color: var(--ink-muted);
+    max-width: 620px;
+    margin: 32px auto 0;
+    line-height: 1.5;
+  }
+  .hero-5 .img-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .hero-5 .img-wrap img {
+    max-width: min(560px, 50vw);
+    height: auto;
+    filter: drop-shadow(0 30px 60px rgba(0,0,0,0.6));
+  }
+  .hero-5 .hero5-eyes {
+    width: min(520px, 60vw);
+    height: auto;
+    filter: drop-shadow(0 0 60px rgba(62,184,224,0.25)) drop-shadow(0 0 60px rgba(224,154,62,0.2));
+  }
+  .hero-5 .footer-row {
+    position: absolute;
+    bottom: 32px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 6vw;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  /* ============================================================
+     HERO 6 — Sticker collage, multiple husky shots scattered
+     ============================================================ */
+  .hero-6 {
+    background: #0a0a0a;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-6 .center-copy {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    max-width: 760px;
+  }
+  .hero-6 .eyebrow {
+    color: var(--red);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-6 h1 {
+    font-size: clamp(56px, 7vw, 108px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.035em;
+    margin-bottom: 28px;
+  }
+  .hero-6 h1 .red { color: var(--red); }
+  .hero-6 .sub {
+    font-size: 18px;
+    color: var(--ink-muted);
+    line-height: 1.5;
+    max-width: 520px;
+    margin: 0 auto 32px;
+  }
+  .hero-6 .actions { display: flex; gap: 16px; justify-content: center; }
+  .sticker {
+    position: absolute;
+    pointer-events: none;
+    filter: drop-shadow(0 12px 24px rgba(0,0,0,0.5));
+    opacity: 0.85;
+  }
+  .sticker img { width: 100%; height: auto; display: block; }
+  .sticker-1 { top: 8%; left: 4%; width: 180px; transform: rotate(-12deg); }
+  .sticker-2 { top: 12%; right: 6%; width: 160px; transform: rotate(8deg); }
+  .sticker-3 { bottom: 8%; left: 10%; width: 200px; transform: rotate(15deg); }
+  .sticker-4 { bottom: 6%; right: 8%; width: 170px; transform: rotate(-8deg); }
+
+  /* ============================================================
+     HERO 7 — Type-only, brand-tone test (no image)
+     ============================================================ */
+  .hero-7 {
+    background: #0a0a0a;
+    flex-direction: column;
+    text-align: center;
+    gap: 24px;
+  }
+  .hero-7 h1 {
+    font-size: clamp(80px, 12vw, 200px);
+    font-weight: 900;
+    letter-spacing: -0.05em;
+    line-height: 0.85;
+  }
+  .hero-7 h1 .siber { color: var(--ink); }
+  .hero-7 h1 .forge { color: var(--red); }
+  .hero-7 .tag {
+    font-size: clamp(20px, 2vw, 28px);
+    color: var(--ink-muted);
+    letter-spacing: 0.04em;
+    margin-top: 24px;
+    font-weight: 500;
+  }
+  .hero-7 .tag .pipe { color: var(--red); margin: 0 12px; }
+  .hero-7 .small-eyes {
+    width: 80px;
+    margin-bottom: 8px;
+  }
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width: 880px) {
+    .hero-2 .grid,
+    .hero-4 .inner {
+      grid-template-columns: 1fr;
+    }
+    .hero-2 .img-wrap { aspect-ratio: 4/5; }
+    .hero-4 .img-side { min-height: 50vh; }
+    .nav { display: none; }
+  }
+
+  /* Image fallback placeholder */
+  .fallback {
+    width: 100%;
+    height: 100%;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .fallback svg { width: min(280px, 70%); height: auto; display: block; }
+  .fallback .filename {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    font-weight: 600;
+    border: 1px dashed rgba(255,255,255,0.2);
+    padding: 6px 12px;
+    border-radius: 4px;
+  }
+  .hero-2 .fallback { color: rgba(0,0,0,0.5); }
+  .hero-2 .fallback .filename { color: rgba(0,0,0,0.5); border-color: rgba(0,0,0,0.25); }
+  .sticker .fallback { min-height: 0; }
+  .sticker .fallback .filename { display: none; }
+
+  /* Section spacer with section name */
+  .marker {
+    background: #050505;
+    color: var(--ink-muted);
+    text-align: center;
+    padding: 16px;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--rule);
+  }
+  .marker .pipe { color: var(--red); margin: 0 12px; }
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HERO 1 — Logo-forward, minimalist
+     Tagline: Tempered. Untamed.
+     ============================================================ -->
+<section class="hero hero-1">
+  <div class="label"><span class="num">01</span>Logo-forward · minimalist</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+  <img src="siberforge-logo.png" alt="SiberForge" class="logo" onerror="logoFallback(this)">
+  <h1>Tempered<span class="dot">.</span> Untamed<span class="dot">.</span></h1>
+  <p class="sub">Finance and analytics, off the leash.</p>
+</section>
+
+<div class="marker">Hero 02 <span class="pipe">/</span> Side-by-side, balanced</div>
+
+<!-- ============================================================
+     HERO 2 — Husky-bandana, side-by-side editorial
+     Tagline: Cold logic. Sharp output.
+     ============================================================ -->
+<section class="hero hero-2">
+  <div class="label"><span class="num">02</span>Editorial · side-by-side</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+  <div class="grid">
+    <div class="img-wrap">
+      <img src="husky-bandana.png" alt="SiberForge mascot" onerror="huskyFallback(this,'husky-bandana.png')">
+    </div>
+    <div class="copy">
+      <div class="eyebrow">SiberForge</div>
+      <h1>Cold logic<em>.</em><br>Sharp output<em>.</em></h1>
+      <p class="sub">Economic analysis, forged in the data tundra. Quantitative work with a pulse — and a personality.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#">See the work</a>
+        <a class="btn btn-ghost" href="#">What we do</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="marker">Hero 03 <span class="pipe">/</span> Eye-mark hero</div>
+
+<!-- ============================================================
+     HERO 3 — Heterochromatic eyes (recreated as SVG) + big type
+     Tagline: Forge signal from noise.
+     ============================================================ -->
+<section class="hero hero-3">
+  <div class="label"><span class="num">03</span>Mark-led · symmetric</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+  <svg class="eye-mark" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+    <!-- left eye, ice blue -->
+    <ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/>
+    <circle cx="100" cy="70" r="22" fill="#0a0a0a"/>
+    <circle cx="108" cy="62" r="6" fill="#ffffff"/>
+    <!-- right eye, amber -->
+    <ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/>
+    <circle cx="220" cy="70" r="22" fill="#0a0a0a"/>
+    <circle cx="228" cy="62" r="6" fill="#ffffff"/>
+  </svg>
+  <h1>Forge signal<span class="pipe">/</span>from noise<span style="color:var(--red)">.</span></h1>
+  <p class="sub">Two eyes. One ice, one fire. Built that way on purpose.</p>
+</section>
+
+<div class="marker">Hero 04 <span class="pipe">/</span> Profile silhouette, asymmetric</div>
+
+<!-- ============================================================
+     HERO 4 — Profile husky, asymmetric editorial
+     Tagline: Built for the long haul north.
+     ============================================================ -->
+<section class="hero hero-4">
+  <div class="label"><span class="num">04</span>Editorial · asymmetric</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+  <div class="inner">
+    <div class="copy-side">
+      <div class="meta">SiberForge · Est. 2026</div>
+      <h1>Built for the<br>long haul <span class="accent">north.</span></h1>
+      <p class="sub">Analytical work that pulls its weight — and tells you about it. Rigorous models, dramatic delivery.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#">Pull the sled</a>
+      </div>
+    </div>
+    <div class="img-side">
+      <img src="husky-profile.png" alt="SiberForge profile" onerror="huskyFallback(this,'husky-profile.png')">
+    </div>
+  </div>
+</section>
+
+<div class="marker">Hero 05 <span class="pipe">/</span> Big type, image anchored bottom</div>
+
+<!-- ============================================================
+     HERO 5 — Big type top, clownfish husky bottom
+     Tagline: Pulls hard. Sheds insight.
+     ============================================================ -->
+<section class="hero hero-5">
+  <div class="label"><span class="num">05</span>Type-led · playful</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+  <div class="img-wrap">
+    <svg class="hero5-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-label="SiberForge mark">
+      <ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/>
+      <circle cx="100" cy="70" r="22" fill="#0a0a0a"/>
+      <circle cx="108" cy="62" r="6" fill="#ffffff"/>
+      <ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/>
+      <circle cx="220" cy="70" r="22" fill="#0a0a0a"/>
+      <circle cx="228" cy="62" r="6" fill="#ffffff"/>
+    </svg>
+  </div>
+  <div class="top-copy">
+    <h1>Pulls hard.<br><span class="red">Sheds insight.</span></h1>
+    <p class="sub">Financial analysis with a personality.</p>
+  </div>
+  <div class="footer-row">
+    <span>SiberForge · 2026</span>
+    <span>Models · Methods · Howl</span>
+  </div>
+</section>
+
+<div class="marker">Hero 06 <span class="pipe">/</span> Sticker collage</div>
+
+<!-- ============================================================
+     HERO 6 — Sticker-collage, multiple stickers scattered
+     Tagline: Serious models. Loud findings.
+     ============================================================ -->
+<section class="hero hero-6">
+  <div class="label"><span class="num">06</span>Collage · sticker-style</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+
+  <div class="sticker sticker-1"><img src="husky-bandana.png" alt="" onerror="huskyFallback(this,'husky-bandana.png')"></div>
+  <div class="sticker sticker-2"><img src="husky-profile.png" alt="" onerror="huskyFallback(this,'husky-profile.png')"></div>
+  <div class="sticker sticker-3"><img src="husky-upsidedown.png" alt="" onerror="huskyFallback(this,'husky-upsidedown.png')"></div>
+  <div class="sticker sticker-4"><img src="husky-clownfish.png" alt="" onerror="huskyFallback(this,'husky-clownfish.png')"></div>
+
+  <div class="center-copy">
+    <div class="eyebrow">SiberForge</div>
+    <h1>Serious models.<br><span class="red">Loud findings.</span></h1>
+    <p class="sub">Finance, economics, and analytical work that earns the howl.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#">Start here</a>
+      <a class="btn btn-ghost" href="#">What's inside</a>
+    </div>
+  </div>
+</section>
+
+<div class="marker">Hero 07 <span class="pipe">/</span> Type-only, no photo</div>
+
+<!-- ============================================================
+     HERO 7 — Pure typography, brand-mark size test
+     Tagline: All bark. All bite. All backed by data.
+     ============================================================ -->
+<section class="hero hero-7">
+  <div class="label"><span class="num">07</span>Type-only · symmetric</div>
+  <div class="nav"><span>Models</span><span>Methods</span><span>Notes</span><span class="cta">Get in</span></div>
+  <svg class="small-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/>
+    <circle cx="100" cy="70" r="22" fill="#0a0a0a"/>
+    <circle cx="108" cy="62" r="6" fill="#ffffff"/>
+    <ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/>
+    <circle cx="220" cy="70" r="22" fill="#0a0a0a"/>
+    <circle cx="228" cy="62" r="6" fill="#ffffff"/>
+  </svg>
+  <h1><span class="siber">SIBER</span><span class="forge">FORGE</span></h1>
+  <p class="tag">All bark<span class="pipe">·</span>All bite<span class="pipe">·</span>All backed by data</p>
+</section>
+
+<script>
+  // ==================================================================
+  // Image fallbacks: when a husky photo file isn't found, swap in
+  // an inline SVG silhouette + the expected filename label.
+  // Save your real photos with the matching filenames into this folder
+  // and refresh — the SVGs will be replaced by your actual photos.
+  // ==================================================================
+
+  const HUSKY_SVG = `
+    <svg viewBox="0 0 240 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <!-- ears outer -->
+      <path d="M 28 95 L 58 12 L 100 100 Z" fill="#3a3a3e"/>
+      <path d="M 212 95 L 182 12 L 140 100 Z" fill="#3a3a3e"/>
+      <!-- ears inner pink -->
+      <path d="M 52 88 L 65 35 L 88 95 Z" fill="#d4a8a0"/>
+      <path d="M 188 88 L 175 35 L 152 95 Z" fill="#d4a8a0"/>
+      <!-- head main -->
+      <ellipse cx="120" cy="170" rx="92" ry="100" fill="#3a3a3e"/>
+      <!-- white face mask -->
+      <path d="M 120 95 Q 75 135 62 205 Q 75 258 120 268 Q 165 258 178 205 Q 165 135 120 95 Z" fill="#f0e8d8"/>
+      <!-- forehead stripes (gray) -->
+      <path d="M 95 100 Q 108 145 102 175 Q 88 150 88 110 Z" fill="#3a3a3e"/>
+      <path d="M 145 100 Q 132 145 138 175 Q 152 150 152 110 Z" fill="#3a3a3e"/>
+      <!-- eyes: heterochromatic -->
+      <ellipse cx="92" cy="165" rx="15" ry="11" fill="#3EB8E0"/>
+      <circle cx="92" cy="165" r="6" fill="#0a0a0a"/>
+      <circle cx="95" cy="162" r="2.5" fill="#fff"/>
+      <ellipse cx="148" cy="165" rx="15" ry="11" fill="#E09A3E"/>
+      <circle cx="148" cy="165" r="6" fill="#0a0a0a"/>
+      <circle cx="151" cy="162" r="2.5" fill="#fff"/>
+      <!-- snout -->
+      <ellipse cx="120" cy="220" rx="24" ry="20" fill="#f0e8d8"/>
+      <!-- nose -->
+      <ellipse cx="120" cy="212" rx="13" ry="9" fill="#0a0a0a"/>
+      <!-- mouth -->
+      <path d="M 120 222 L 120 242" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M 120 242 Q 105 252 94 242" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M 120 242 Q 135 252 146 242" stroke="#0a0a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  `;
+
+  const LOGO_SVG = `
+    <svg viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="width:100%;height:auto;">
+      <!-- husky silhouette mini -->
+      <g transform="translate(140,10) scale(0.85)">
+        <path d="M 28 95 L 58 12 L 100 100 Z" fill="#3a3a3e"/>
+        <path d="M 212 95 L 182 12 L 140 100 Z" fill="#3a3a3e"/>
+        <path d="M 52 88 L 65 35 L 88 95 Z" fill="#d4a8a0"/>
+        <path d="M 188 88 L 175 35 L 152 95 Z" fill="#d4a8a0"/>
+        <ellipse cx="120" cy="150" rx="80" ry="80" fill="#3a3a3e"/>
+        <path d="M 120 90 Q 80 125 70 180 Q 80 220 120 228 Q 160 220 170 180 Q 160 125 120 90 Z" fill="#f0e8d8"/>
+        <ellipse cx="95" cy="150" rx="13" ry="9" fill="#3EB8E0"/>
+        <circle cx="95" cy="150" r="5" fill="#0a0a0a"/>
+        <ellipse cx="145" cy="150" rx="13" ry="9" fill="#E09A3E"/>
+        <circle cx="145" cy="150" r="5" fill="#0a0a0a"/>
+        <ellipse cx="120" cy="195" rx="11" ry="8" fill="#0a0a0a"/>
+      </g>
+      <!-- text SIBERFORGE -->
+      <text x="260" y="265" font-family="Inter, -apple-system, system-ui, sans-serif" font-weight="900" font-size="56" text-anchor="middle" letter-spacing="-1.5">
+        <tspan fill="#0a0a0a">SIBER</tspan><tspan fill="#E63946">FORGE</tspan>
+      </text>
+    </svg>
+  `;
+
+  function huskyFallback(img, filename) {
+    const div = document.createElement('div');
+    div.className = 'fallback';
+    div.innerHTML = HUSKY_SVG + `<div class="filename">${filename}</div>`;
+    // copy width/height/object-fit hints from the img if any
+    const cs = window.getComputedStyle(img);
+    if (cs.maxWidth) div.style.maxWidth = cs.maxWidth;
+    img.replaceWith(div);
+  }
+
+  function logoFallback(img) {
+    const div = document.createElement('div');
+    div.style.cssText = 'background:#f0e8d8;border-radius:8px;padding:24px 32px;display:inline-flex;align-items:center;justify-content:center;width:clamp(280px,32vw,460px);';
+    div.innerHTML = LOGO_SVG;
+    img.replaceWith(div);
+  }
+</script>
+</body>
+</html>
