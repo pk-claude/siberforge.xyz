@@ -26,128 +26,11 @@ body, table, .pick-card, .thesis-box, .kpi, .ratios-table, .nav-cat,
    page-specific nav (tier-1/tier-2 on Top-5; scenario/industry-tabs on Screen).
    Suppress its title/sub/cross-nav/own-theme-toggle since the siberforge top + deep-dive-nav
    provide those globally. */
-body > header:not(.top) {
-  position: static !important;
-  background: transparent !important;
-  border-bottom: 1px solid var(--line) !important;
-  padding: 8px 24px !important;
-  z-index: auto !important;
-  backdrop-filter: none !important;
-}
-body > header:not(.top) .hdr-title { display: none !important; }
-body > header:not(.top) .hdr-row1 { min-height: 0 !important; gap: 8px !important; }
-.top { z-index: 100; }
-.deep-dive-nav { z-index: 99; }
-main { padding-top: 14px; }
+/* Removed: header:not(.top) rules now unnecessary */
+/* Removed: header:not(.top) rules now unnecessary */
+/* Removed: header:not(.top) rules now unnecessary */
 </style>
-<style>
-:root{
-  --bg:#0b0d10; --panel:#13171c; --panel2:#1a2028; --line:#232b35;
-  --ink:#e5e9ee; --ink2:#8a94a3; --ink3:#6b7689;
-  --accent:#f7a700; --good:#3ecf8e; --warn:#f7a700; --bad:#ef4f5a;
-  --gold:#f7a700; --pick:#1c2a1f; --slate:#64748b;
-}
-[data-theme="light"]{
-  --bg:#f7f9fb; --panel:#ffffff; --panel2:#f0f3f7; --line:#d8dee5;
-  --ink:#1a2028; --ink2:#5a6470; --ink3:#9aa3ad;
-  --accent:#b56700; --good:#1f8a55; --warn:#b56700; --bad:#c4283c;
-  --gold:#b56700; --pick:#ecfdf5; --slate:#475569;
-}
-[data-theme="light"] .pick-card{background:#ecfdf5;border-color:#bbf7d0}
-[data-theme="light"] .pick-card .tk{color:#15803d}
-[data-theme="light"] tr.top-pick{background:rgba(100,116,139,.07)}
-[data-theme="light"] .caveat{background:#fef3c7;border-color:#fde68a;color:#78350f}
-[data-theme="light"] .scen-tag.s1{background:#fee2e2;color:#b91c1c}
-[data-theme="light"] .scen-tag.s2{background:#dbeafe;color:#1e40af}
-[data-theme="light"] .scen-tag.s3{background:#dcfce7;color:#15803d}
-[data-theme="light"] .scen-tag.s4{background:#fef3c7;color:#b45309}
-[data-theme="light"] .exp-direct{background:rgba(22,163,74,.18);color:#15803d}
-[data-theme="light"] .exp-high{background:rgba(37,99,235,.18);color:#1e40af}
-[data-theme="light"] .exp-mid{background:rgba(217,119,6,.18);color:#92400e}
-[data-theme="light"] .exp-low{background:rgba(220,38,38,.18);color:#b91c1c}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 -apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-header{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,var(--panel) 0%, var(--bg) 95%);border-bottom:1px solid var(--line);padding:10px 24px;backdrop-filter:blur(8px)}
-.hdr-row1{display:flex;align-items:center;gap:18px;min-height:38px}
-.hdr-title{display:flex;flex-direction:column;line-height:1.15;flex-shrink:0;min-width:140px}
-.title-main{font-size:15px;font-weight:700;color:var(--ink)}
-.title-sub{font-size:11px;color:var(--ink3)}
-.hdr-actions{margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.cross-nav{background:var(--panel2);border:1px solid var(--line);color:var(--ink2);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:.12s}
-.cross-nav:hover{border-color:var(--accent);color:var(--accent)}
-.cross-nav .arrow{font-size:14px}
-.theme-btn{background:var(--panel2);border:1px solid var(--line);color:var(--ink);padding:5px 12px;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px;transition:.12s}
-.theme-btn:hover{border-color:var(--accent);color:var(--accent)}
-.theme-icon{font-size:14px;line-height:1}
-h1{margin:0 0 4px;font-size:15px;font-weight:700;letter-spacing:.2px}
-.sub{color:var(--ink2);font-size:12px}
-.controls{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;align-items:center}
-.scenario-btn{background:var(--panel);border:1px solid var(--line);color:var(--ink2);padding:7px 12px;border-radius:6px;cursor:pointer;font-size:12px;transition:.15s}
-.scenario-btn:hover{color:var(--ink);border-color:var(--accent)}
-.scenario-btn.active{background:var(--accent);color:#06121f;border-color:var(--accent);font-weight:600}
-.industry-tabs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.tab{background:transparent;border:1px solid var(--line);color:var(--ink2);padding:6px 11px;border-radius:5px;cursor:pointer;font-size:12px}
-.tab:hover{color:var(--ink)}
-.tab.active{background:var(--panel2);color:var(--ink);border-color:var(--accent)}
-main{padding:18px 22px 80px;max-width:1480px;margin:0 auto}
-.thesis{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 16px;border-radius:6px;margin-bottom:14px}
-.thesis h2{margin:0 0 6px;font-size:15px}
-.thesis p{margin:0;color:var(--ink2);font-size:13px}
-.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11px;color:var(--ink3);margin-top:8px}
-.legend span{display:flex;align-items:center;gap:6px}
-.dot{width:9px;height:9px;border-radius:50%;display:inline-block}
-.picks{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:12px 16px;margin-bottom:14px}
-.picks h3{margin:0 0 8px;font-size:13px;color:var(--gold);text-transform:uppercase;letter-spacing:.6px}
-.picks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
-.pick-card{background:var(--pick);border:1px solid #2a4031;border-radius:5px;padding:10px 12px}
-.pick-card .tk{font-weight:700;font-size:14px;color:#bcebd0}
-.pick-card .nm{color:var(--ink2);font-size:11px;margin-bottom:4px}
-.pick-card .why{font-size:11px;color:var(--ink);line-height:1.4}
-table{width:100%;border-collapse:collapse;background:var(--panel);border-radius:6px;overflow:hidden;margin-top:8px;font-size:12px}
-th{background:var(--panel2);text-align:left;padding:9px 10px;font-weight:600;color:var(--ink2);border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.4px;cursor:pointer;user-select:none}
-th:hover{color:var(--ink)}
-td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
-tr:last-child td{border-bottom:none}
-tr.top-pick{background:rgba(100,116,139,.08)}
-tr.top-pick td:first-child::before{content:"★ ";color:var(--gold)}
-.tk-cell{font-weight:700;font-size:13px}
-.nm-cell{color:var(--ink2);font-size:11px}
-.exp{display:inline-block;padding:2px 7px;border-radius:3px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
-.exp-direct{background:rgba(63,209,122,.18);color:#7be0a3}
-.exp-high{background:rgba(90,166,255,.18);color:#8ec1ff}
-.exp-mid{background:rgba(240,179,93,.18);color:#f0c98a}
-.exp-low{background:rgba(239,107,107,.18);color:#ef9999}
-.conf{display:inline-flex;gap:2px}
-.conf .d{width:7px;height:7px;border-radius:50%;background:var(--line)}
-.conf .d.on{background:var(--slate)}
-.upside{font-weight:600}
-.up-strong{color:var(--good)}
-.up-mod{color:#9bd1ef}
-.up-flat{color:var(--ink3)}
-.up-down{color:var(--bad)}
-.rationale{color:var(--ink2);font-size:11px;line-height:1.45;max-width:340px}
-.caveat{background:#2a1d12;border:1px solid #4a3520;color:#f3d3a8;padding:11px 16px;border-radius:6px;margin-bottom:14px;font-size:12.5px;line-height:1.55}
-.macro{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 16px;margin-bottom:14px}
-.macro h3{margin:0 0 8px;font-size:13px;color:var(--accent)}
-.macro p{margin:6px 0;color:var(--ink2);font-size:12px;line-height:1.5}
-.macro ul{margin:6px 0 0;padding-left:18px;color:var(--ink2);font-size:12px}
-.macro li{margin:4px 0}
-.scen-toggle{font-size:11px;color:var(--ink3);margin-left:auto}
-.industry{display:none}
-.industry.active{display:block}
-.search{background:var(--panel);border:1px solid var(--line);color:var(--ink);padding:6px 10px;border-radius:5px;font-size:12px;width:200px}
-.search::placeholder{color:var(--ink3)}
-.kpi-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-bottom:14px}
-.kpi{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:10px 12px}
-.kpi .lbl{font-size:10px;text-transform:uppercase;color:var(--ink3);letter-spacing:.4px}
-.kpi .val{font-size:18px;font-weight:600;margin-top:3px}
-.scen-tag{display:inline-block;padding:1px 6px;border-radius:3px;font-size:10px;font-weight:600;margin-right:4px}
-.scen-tag.s1{background:#3a2a2a;color:#ef9999}
-.scen-tag.s2{background:#2a3340;color:#8ec1ff}
-.scen-tag.s3{background:#2a4031;color:#7be0a3}
-.scen-tag.s4{background:#403520;color:var(--gold)}
-.footer{text-align:center;color:var(--ink3);font-size:12.5px;margin-top:30px;padding-top:20px;border-top:1px solid var(--line)}
-</style>
+
 </head>
 <body>
 <header class="top">
@@ -181,26 +64,26 @@ tr.top-pick td:first-child::before{content:"★ ";color:var(--gold)}
     <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
   </div>
 </nav>
-<header>
-  <div class="hdr-row1">
-    <div class="hdr-title">
-      <span class="title-main">AI Beneficiaries &mdash; Industry Screen</span>
-      <span class="title-sub">8 industries &middot; 160 companies &middot; 4 scenarios</span>
-    </div>
-    <div class="hdr-actions">
-    </div>
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
   </div>
-  <div class="controls">
-    <span style="font-size:11px;color:var(--ink3);text-transform:uppercase;letter-spacing:.5px;margin-right:4px">Scenario:</span>
-    <button class="scenario-btn active" data-scen="all">All</button>
-    <button class="scenario-btn" data-scen="none">1. No Impact</button>
-    <button class="scenario-btn" data-scen="modest">2. Modest</button>
-    <button class="scenario-btn" data-scen="strong">3. Strong</button>
-    <button class="scenario-btn" data-scen="massive">4. Massive</button>
-    <input class="search" placeholder="Filter ticker or name..." id="search">
+  <div class="section-pages">
+    <span class="dd-label">AI Views</span>
+    <a href="/core/ai/" class="dd-link">Hub</a>
+    <a href="/core/ai/compute.html" class="dd-link">Compute</a>
+    <a href="/core/ai/hyperscalers.html" class="dd-link">Hyperscalers</a>
+    <a href="/core/ai/power.html" class="dd-link">Power</a>
+    <a href="/core/ai/adopters.html" class="dd-link">Adopters</a>
+    <a href="/core/ai/screen/" class="dd-link active">Screen</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5</a>
   </div>
-  <div class="industry-tabs" id="tabs"></div>
-</header>
+</nav>
 <main>
   <div class="caveat">
     <strong>Read first.</strong> Financial figures reflect training data through ~May 2025; today is 2026-04-25. Treat company stats as <em>order-of-magnitude anchors</em>, not the latest reported quarter. Scenario "upside" is a directional 24-month view of stock performance vs. the S&P 500, not a price target. None of this is investment advice. The scenario logic and top picks reflect relative AI leverage, moat, and balance-sheet durability — verify any name against current filings before acting.

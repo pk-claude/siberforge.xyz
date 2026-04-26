@@ -1,7 +1,7 @@
 /* AI section local styles — sits on top of /core/macro/styles.css                  */
-/* Adds layout for overview cards + scenario bar + adapts AI dashboard internals.       */
+/* Adds layout for scenario tabs, exposure pills, KPI grids, pick cards, thesis boxes */
 
-/* ============ Overview landing ============ */
+/* ============ Overview landing (index page) ============ */
 .ai-overview { max-width: 1200px; margin: 0 auto; padding: 28px 24px 64px; }
 .overview-hero { margin-bottom: 28px; }
 .overview-hero h1 { font-size: 28px; font-weight: 700; margin: 0 0 10px; letter-spacing: -0.3px; }
@@ -18,7 +18,6 @@
 .ov-card:hover { transform: translateY(-2px); border-color: var(--accent); box-shadow: var(--shadow-md); }
 .ov-card-meta { display: flex; gap: 12px; align-items: center; margin-bottom: 10px; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
 .ov-card-meta .tag { background: rgba(247, 167, 0, 0.14); color: var(--accent); padding: 2px 8px; border-radius: 3px; font-weight: 700; }
-:root[data-theme="light"] .ov-card-meta .tag { background: rgba(181, 103, 0, 0.16); }
 .ov-count { color: var(--muted); }
 .ov-card h2 { font-size: 20px; font-weight: 700; margin: 0 0 8px; color: var(--text); }
 .ov-card p { color: var(--muted); font-size: 13.5px; line-height: 1.6; margin: 0 0 12px; }
@@ -39,7 +38,6 @@
 }
 .sb-btn:hover { color: var(--text); border-color: var(--accent); }
 .sb-btn.active { background: rgba(247, 167, 0, 0.12); border-color: var(--accent); color: var(--accent); }
-:root[data-theme="light"] .sb-btn.active { background: rgba(181, 103, 0, 0.12); }
 .sb-help { font-size: 11.5px; color: var(--muted); margin: 8px 0 0; font-style: italic; }
 
 .meth-block {
@@ -51,13 +49,194 @@
 .meth-block li { margin: 6px 0; }
 .meth-block strong { color: var(--text); }
 
-/* ============ Hide AI-specific dashboard's own header so siberforge top + nav are the only chrome ============ */
-.ai-screen-host > header,
-.ai-screen-host > .filter-bar,
-.ai-top5-host > header { display: none !important; }
+/* ============ Screen page — scenario tags, exposure pills ============ */
+.scenario-btn {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 7px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: .15s;
+}
+.scenario-btn:hover { color: var(--text); border-color: var(--accent); }
+.scenario-btn.active { background: var(--accent); color: #06121f; border-color: var(--accent); font-weight: 600; }
 
-/* The AI internal main wrapper inherits siberforge background but keep AI internal CSS scoped */
-.ai-screen-host main, .ai-top5-host main { padding-top: 16px; }
+.tab {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  padding: 6px 11px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.tab:hover { color: var(--text); }
+.tab.active { background: var(--panel-2); color: var(--text); border-color: var(--accent); }
+
+/* Scenario tag colors (semantic meaning) */
+.scen-tag {
+  display: inline-block;
+  padding: 1px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  margin-right: 4px;
+}
+.scen-tag.s1 { background: #3a2a2a; color: #ef9999; }
+.scen-tag.s2 { background: #2a3340; color: #8ec1ff; }
+.scen-tag.s3 { background: #2a4031; color: #7be0a3; }
+.scen-tag.s4 { background: #403520; color: #f3c969; }
+
+/* Exposure pills (semantic: direct/high/mid/low) */
+.exp {
+  display: inline-block;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+}
+.exp-direct { background: rgba(63, 209, 122, 0.18); color: #7be0a3; }
+.exp-high { background: rgba(90, 166, 255, 0.18); color: #8ec1ff; }
+.exp-mid { background: rgba(240, 179, 93, 0.18); color: #f0c98a; }
+.exp-low { background: rgba(239, 107, 107, 0.18); color: #ef9999; }
+
+/* Top pick row highlight */
+tr.top-pick { background: rgba(100, 116, 139, 0.08); }
+tr.top-pick td:first-child::before { content: "★ "; color: #f3c969; }
+
+/* Cell styles */
+.tk-cell { font-weight: 700; font-size: 13px; }
+.nm-cell { color: var(--muted); font-size: 11px; }
+.conf { display: inline-flex; gap: 2px; }
+.conf .d { width: 7px; height: 7px; border-radius: 50%; background: var(--line); }
+.conf .d.on { background: #64748b; }
+
+.upside { font-weight: 600; }
+.up-strong { color: var(--green); }
+.up-mod { color: #9bd1ef; }
+.up-flat { color: var(--muted); }
+.up-down { color: var(--red); }
+
+.rationale { color: var(--muted); font-size: 11px; line-height: 1.45; max-width: 340px; }
+
+/* ============ Top-5 page — KPI grids, thesis boxes, ratios table ============ */
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.kpi {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 12px;
+}
+.kpi .lbl { font-size: 10px; text-transform: uppercase; color: var(--muted); letter-spacing: .4px; }
+.kpi .val { font-size: 18px; font-weight: 600; margin-top: 3px; }
+
+.pick-card {
+  background: #1c2a1f;
+  border: 1px solid #2a4031;
+  border-radius: 5px;
+  padding: 10px 12px;
+}
+.pick-card .tk { font-weight: 700; font-size: 14px; color: #bcebd0; }
+.pick-card .nm { color: var(--muted); font-size: 11px; margin-bottom: 4px; }
+.pick-card .why { font-size: 11px; color: var(--text); line-height: 1.4; }
+
+.picks { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 16px; margin-bottom: 14px; }
+.picks h3 { margin: 0 0 8px; font-size: 13px; color: #f3c969; text-transform: uppercase; letter-spacing: .6px; }
+.picks-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+
+.thesis { background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent); padding: 12px 16px; border-radius: 6px; margin-bottom: 14px; }
+.thesis h2 { margin: 0 0 6px; font-size: 15px; }
+.thesis p { margin: 0; color: var(--muted); font-size: 13px; }
+
+.thesis-box {
+  background: var(--panel);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin: 12px 0;
+}
+.thesis-box h4 { margin: 0 0 6px; font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--muted); }
+.thesis-box p { margin: 4px 0; font-size: 13px; color: var(--text); }
+.thesis-box ul { margin: 4px 0; padding-left: 20px; }
+.thesis-box li { margin: 3px 0; font-size: 13px; }
+
+.ratios-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  font-size: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin-top: 8px;
+}
+.ratios-table th {
+  background: var(--panel-2);
+  padding: 11px 10px;
+  color: var(--muted);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  font-weight: 600;
+}
+.ratios-table th:first-child { text-align: left; width: 260px; }
+.ratios-table td {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+.ratios-table td:first-child { text-align: left; color: var(--muted); font-weight: 500; }
+.ratios-table tr:hover td:not(.best-cell):not(.worst-cell) { background: rgba(255, 255, 255, 0.02); }
+
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 11px; color: var(--muted); margin-top: 8px; }
+.legend span { display: flex; align-items: center; gap: 6px; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+
+.search {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 200px;
+}
+.search::placeholder { color: var(--muted); }
+
+.caveat {
+  background: #2a1d12;
+  border: 1px solid #4a3520;
+  color: #f3d3a8;
+  padding: 11px 16px;
+  border-radius: 6px;
+  margin-bottom: 14px;
+  font-size: 12.5px;
+  line-height: 1.55;
+}
+
+.macro {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.macro h3 { margin: 0 0 8px; font-size: 13px; color: var(--accent); }
+.macro p { margin: 6px 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.macro ul { margin: 6px 0 0; padding-left: 18px; color: var(--muted); font-size: 12px; }
+.macro li { margin: 4px 0; }
+
+.industry { display: none; }
+.industry.active { display: block; }
+
+.footer { text-align: center; color: var(--muted); font-size: 12.5px; margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--line); }
 
 /* ===== Brand icon (eye-mark) in siberforge top bar ===== */
 .brand-icon {
