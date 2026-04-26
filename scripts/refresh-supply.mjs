@@ -196,7 +196,7 @@ function deriveScpComposite(deps) {
   if (gscpi.length === 0) return [];
   const cass = deps.CASS_SHIPMENTS || [];
   const diesel = deps.DIESEL_RETAIL || [];
-  const wci = deps.WCI_COMPOSITE || [];
+  const fbx = deps.FBX_GLOBAL || [];
   const bunker = deps.BUNKER_VLSFO_SIN || [];
   const out = [];
   for (let gi = 0; gi < gscpi.length; gi++) {
@@ -205,7 +205,7 @@ function deriveScpComposite(deps) {
     components.push(zscoreAsOf(gscpi, gi, 120));
     const cassZ = zscoreNearest(cass, g.date, 120); if (cassZ != null) components.push(-cassZ);
     const dieselZ = zscoreNearest(diesel, g.date, 520); if (dieselZ != null) components.push(dieselZ);
-    const wciZ = zscoreNearest(wci, g.date, 260); if (wciZ != null) components.push(wciZ);
+    const fbxZ = zscoreNearest(fbx, g.date, 260); if (fbxZ != null) components.push(fbxZ);
     const bunkerZ = zscoreNearest(bunker, g.date, 1825); if (bunkerZ != null) components.push(bunkerZ);
     const valid = components.filter(v => Number.isFinite(v));
     if (valid.length >= 2) {
