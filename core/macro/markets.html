@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Markets</title>
+<link rel="stylesheet" href="./styles.css" />
+<style>
+/* markets.html — page-specific layout above the shared ticker drilldown DOM */
+.markets-banner-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 14px 24px 0;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.markets-banner-head h1 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.markets-banner-head .markets-sub {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.45;
+  margin: 4px 0 0;
+}
+.markets-banner-head .markets-permalink {
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--line);
+  padding: 5px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  transition: background-color .15s, border-color .15s;
+}
+.markets-banner-head .markets-permalink:hover {
+  background: var(--panel-2);
+  border-color: var(--accent);
+}
+.markets-detail {
+  margin-top: 8px;
+  border-top: 1px solid var(--line);
+  padding-top: 4px;
+}
+.quote-tile.is-selected {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Markets</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">&rsaquo;</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+    <a href="/core/macro/network.html" class="dd-link">Network</a>
+    <a href="/core/macro/markets.html" class="dd-link active">Markets</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+  </div>
+</nav>
+
+<div class="markets-banner-head">
+  <div>
+    <h1>Markets</h1>
+    <p class="markets-sub">SPY plus the eleven SPDR sector ETFs. Click any tile for the drill-down: chart vs SPY, top holdings with daily contributions, and recent news. Selection is in the URL hash so links are shareable.</p>
+  </div>
+</div>
+
+<!-- Banner: live quotes strip. Same DOM hook as the Regime page so the quotes
+     module from dashboard.js can populate it identically. -->
+<section class="quotes" id="quotes-strip"></section>
+
+<!-- Selected ticker drilldown: same DOM ids as ticker.html so the rendering
+     logic is identical. markets.js swaps the active symbol on hashchange. -->
+<div class="markets-detail">
+  <section class="ticker-hero">
+    <div class="ticker-headline">
+      <div class="ticker-symbol-block">
+        <div class="ticker-symbol" id="t-symbol">&mdash;</div>
+        <div class="ticker-name" id="t-name">&mdash;</div>
+      </div>
+      <div class="ticker-price-block">
+        <div class="ticker-price" id="t-price">&mdash;</div>
+        <div class="ticker-change" id="t-change">&mdash;</div>
+      </div>
+      <div class="ticker-meta-block">
+        <div class="ticker-meta-row"><span class="t-meta-label">Open</span> <span id="t-open">&mdash;</span></div>
+        <div class="ticker-meta-row"><span class="t-meta-label">Day H/L</span> <span id="t-hilo">&mdash;</span></div>
+        <div class="ticker-meta-row"><span class="t-meta-label">Prev close</span> <span id="t-prevclose">&mdash;</span></div>
+      </div>
+      <div style="margin-left:auto">
+        <a id="markets-permalink" class="markets-permalink" href="/core/macro/ticker.html?sym=SPY" target="_blank" rel="noopener" title="Open this ticker in its own page">Standalone &nearr;</a>
+      </div>
+    </div>
+    <p class="ticker-profile" id="t-profile"></p>
+  </section>
+
+  <section class="ticker-chart-section">
+    <div class="ticker-chart-controls">
+      <div class="control-group">
+        <span class="control-label">Period</span>
+        <div class="control-tabs">
+          <button class="period-tab" data-y="1">1Y</button>
+          <button class="period-tab active" data-y="5">5Y</button>
+          <button class="period-tab" data-y="10">10Y</button>
+          <button class="period-tab" data-y="30">Max</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <span class="control-label">Mode</span>
+        <div class="control-tabs">
+          <button class="chart-mode-tab active" data-m="normalized">Normalized vs SPY</button>
+          <button class="chart-mode-tab" data-m="absolute">Absolute price</button>
+        </div>
+      </div>
+      <div id="t-chart-stats" class="ticker-chart-stats"></div>
+    </div>
+    <div class="ticker-chart-wrap"><canvas id="ticker-chart"></canvas></div>
+    <p class="note" id="t-chart-note"></p>
+  </section>
+
+  <section class="ticker-grid">
+    <div class="ticker-holdings">
+      <h3>Top Holdings <span class="t-as-of" id="t-holdings-asof"></span></h3>
+      <div id="t-holdings-table"></div>
+      <p class="t-holdings-note" id="t-holdings-note"></p>
+    </div>
+    <div class="ticker-news">
+      <h3>News &amp; Drivers <span class="t-as-of" id="t-news-asof"></span></h3>
+      <div id="t-news-list"></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <span>Quotes via Finnhub. Daily history via Yahoo Finance (adjusted close). News via Finnhub /company-news.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./markets.js"></script>
+<script src="../lib/ui.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+</body>
+</html>

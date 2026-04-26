@@ -40,6 +40,7 @@
     <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
     <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
     <a href="/core/macro/network.html" class="dd-link">Network</a>
+    <a href="/core/macro/markets.html" class="dd-link">Markets</a>
   </div>
   <span class="dd-divider"></span>
   <div class="dd-group dd-group-tail">
@@ -147,4 +148,15 @@
   import { renderStockBondCorrelation } from '/core/macro/stock-bond-corr.js';
   renderTodayRead().catch(err => {
     console.error('Today\'s Read failed:', err);
-    document.getElementById('today-read').innerHTML = '<div class="tr-loading">Today\'s Read unavailable. <a href="/core/macro/cycle/" style="color:var(--accen
+    document.getElementById('today-read').innerHTML = '<div class="tr-loading">Today\'s Read unavailable. <a href="/core/macro/cycle/" style="color:var(--accent)">Open Cycle dashboard &rarr;</a></div>';
+  });
+  renderStockBondCorrelation('sbc-chart').catch(err => console.warn('SBC failed:', err));
+</script>
+<script src="../lib/ui.js"></script>
+<script src="./ui.js"></script>
+<script src="/core/lib/download-button.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+<script type="module" src="/core/lib/tile-tooltip.js"></script>
+</body>
+</html>
