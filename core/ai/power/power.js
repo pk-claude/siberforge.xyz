@@ -30,6 +30,52 @@ function trailing12YoY(arr) {
   });
 }
 
+// --- loading-state helpers ---
+// EIA fetches can take several seconds; surface progress via the top-right status
+// indicator and per-chart overlays so the page doesn't look frozen.
+function injectLoadingStyles() {
+  if (document.getElementById('power-loading-styles')) return;
+  const s = document.createElement('style');
+  s.id = 'power-loading-styles';
+  s.textContent = '.dot.busy{background:#f7a700;animation:power-pulse 1.1s ease-in-out infinite}@keyframes power-pulse{0%,100%{opacity:1}50%{opacity:.3}}.chart-loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:#9aa0a6;pointer-events:none;z-index:5}.chart-loading-overlay::before{content:"";width:10px;height:10px;border-radius:50%;background:#f7a700;animation:power-pulse 1.1s ease-in-out infinite}';
+  document.head.appendChild(s);
+}
+function setStatus(text, busy) {
+  const t = document.getElementById('refresh-text');
+  const d = document.getElementById('refresh-indicator');
+  if (t) t.textContent = text;
+  if (d) d.classList.toggle('busy', !!busy);
+}
+function showChartLoading(canvasId, text) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const wrap = canvas.parentElement;
+  if (!wrap) return;
+  if (getComputedStyle(wrap).position === 'static') wrap.style.position = 'relative';
+  let overlay = wrap.querySelector('.chart-loading-overlay');
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'chart-loading-overlay';
+    wrap.appendChild(overlay);
+  }
+  overlay.append(document.createTextNode(text || 'Loading...'));
+}
+function hideChartLoading(canvasId) {
+  const canvas = document.getElementById(canvasId);
+  if (!canvas) return;
+  const wrap = canvas.parentElement;
+  if (!wrap) return;
+  const overlay = wrap.querySelector('.chart-loading-overlay');
+  if (overlay) overlay.remove();
+}
+
+// --- fetch memoization ---
+// Each chart calls fetchGenerationData/fetchPriceData independently; without a
+// cache the EIA API is hit 3-4 times per page load. Memoize the in-flight promise
+// so the second/third callers reuse the first request.
+let _genDataPromise = null;
+let _priceDataPromise = null;
+
 // Basket tickers
 const BASKET_TICKERS = [
   { sym: 'CEG', name: 'Constellation Energy', ytd: 45, trend: 'up' },
@@ -62,57 +108,59 @@ const FALLBACK_PRICES = {
 };
 
 /**
- * Fetch generation data from EIA API.
+ * Fetch generation data from EIA API. Memoized — repeated callers share one request.
  */
-async function fetchGenerationData() {
-  try {
-    const url = `/api/eia?series=NUCLEAR_GEN_US,RENEWABLE_GEN_US,GAS_GEN_US,COAL_GEN_US`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${res.status}`);
-    const json = await res.json();
-    
-    const data = {};
-    for (const series of json.series || []) {
-      const obs = series.observations || [];
-      // Sort chronologically
-      obs.sort((a, b) => new Date(a.date) - new Date(b.date));
-      
-      // Normalize ID to lowercase key
-      const key = series.id.toLowerCase();
-      data[key] = obs;
+function fetchGenerationData() {
+  if (_genDataPromise) return _genDataPromise;
+  _genDataPromise = (async () => {
+    try {
+      const url = `/api/eia?series=NUCLEAR_GEN_US,RENEWABLE_GEN_US,GAS_GEN_US,COAL_GEN_US`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`${res.status}`);
+      const json = await res.json();
+
+      const data = {};
+      for (const series of json.series || []) {
+        const obs = series.observations || [];
+        obs.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const key = series.id.toLowerCase();
+        data[key] = obs;
+      }
+      return data;
+    } catch (err) {
+      console.warn('Failed to fetch EIA generation data:', err);
+      return null;
     }
-    
-    return data;
-  } catch (err) {
-    console.warn('Failed to fetch EIA generation data:', err);
-    return null;
-  }
+  })();
+  return _genDataPromise;
 }
 
 /**
- * Fetch electricity price data from EIA API.
+ * Fetch electricity price data from EIA API. Memoized.
  */
-async function fetchPriceData() {
-  try {
-    const url = `/api/eia?series=ELEC_INDUSTRIAL,ELEC_RESIDENTIAL`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${res.status}`);
-    const json = await res.json();
-    
-    const data = {};
-    for (const series of json.series || []) {
-      const obs = series.observations || [];
-      obs.sort((a, b) => new Date(a.date) - new Date(b.date));
-      
-      const key = series.id.toLowerCase();
-      data[key] = obs;
+function fetchPriceData() {
+  if (_priceDataPromise) return _priceDataPromise;
+  _priceDataPromise = (async () => {
+    try {
+      const url = `/api/eia?series=ELEC_INDUSTRIAL,ELEC_RESIDENTIAL`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`${res.status}`);
+      const json = await res.json();
+
+      const data = {};
+      for (const series of json.series || []) {
+        const obs = series.observations || [];
+        obs.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const key = series.id.toLowerCase();
+        data[key] = obs;
+      }
+      return data;
+    } catch (err) {
+      console.warn('Failed to fetch EIA price data:', err);
+      return null;
     }
-    
-    return data;
-  } catch (err) {
-    console.warn('Failed to fetch EIA price data:', err);
-    return null;
-  }
+  })();
+  return _priceDataPromise;
 }
 
 async function renderGenerationChart() {
@@ -396,15 +444,22 @@ function buildTakeaway(liveData) {
   } else {
     actionText = 'Reduce conviction on nuclear-restart names — supply-side response is materializing. Rotate to gas (GEV) and grid build-out names (EATON, NDSN).';
   }
-  
+
   return `
     <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">US generation mix is shifting: nuclear stable at ${nuclearShare}% of total, gas at ${gasShare}%, renewables at ${renewablesShare}%. ${aiAdditionLanguage}</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Grid operators face a "peaker paradox": AI data centers run continuous (baseload equivalent) but in regions without nuclear or hydro. Gas peaker profitability is exploding. Brownfield nuclear restarts are the 2026-2027 inflection.</span></div>
     <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Power consumption growth from AI is the most inelastic demand shock in 20 years. Utilities with nuclear or gas exposure are realizing massive pricing power; wind/solar OEMs get margin tailwinds.</span></div>
     <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>
   `;
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  injectLoadingStyles();
+  setStatus('Loading EIA data...', true);
+  showChartLoading('anchor-chart', 'Loading generation data...');
+  showChartLoading('support-1-chart', 'Loading nuclear/renewables data...');
+  showChartLoading('support-2-chart', 'Loading price data...');
+
   renderBasketGrid();
 
   // Fetch live data for takeaway. Use trailing-12mo aggregates so the shares and YoY
@@ -455,6 +510,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   await renderGenerationChart();
+  hideChartLoading('anchor-chart');
   await renderGrowthChart();
+  hideChartLoading('support-1-chart');
   await renderPriceChart();
+  hideChartLoading('support-2-chart');
+
+  setStatus('Ready', false);
 });
