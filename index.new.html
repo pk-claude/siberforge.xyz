@@ -36,9 +36,12 @@
     <span class="ed-brand-text"><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
   </a>
   <div class="ed-nav-right">
-    <a href="#live" class="ed-nav-link">Live</a>
-    <a href="#themes" class="ed-nav-link">Themes</a>
-    <a href="#hub" class="ed-nav-link">Dashboards</a>
+    <a href="/core/macro/markets.html" class="ed-nav-link">Financials</a>
+    <a href="/core/macro/" class="ed-nav-link">Macro</a>
+    <a href="/core/macro/regional/" class="ed-nav-link">Regional</a>
+    <a href="/core/ai/" class="ed-nav-link">AI</a>
+    <a href="/core/supply/" class="ed-nav-link">Supply</a>
+    <a href="/core/macro/research.html" class="ed-nav-link">Tools</a>
     <a href="#about" class="ed-nav-link">About</a>
     <a href="#subscribe" class="ed-nav-cta">Subscribe</a>
     <span class="ed-status">
@@ -204,12 +207,28 @@
 
   <div class="cat-grid">
 
-    <!-- ========== MACRO & MARKETS ========== -->
-    <div class="cat" data-cat="macro">
+    <!-- ========== FINANCIALS ========== -->
+    <div class="cat" data-cat="financials">
       <div class="cat-head">
         <span class="cat-arrow">&#9660;</span>
-        <h2>Macro &amp; Markets</h2>
-        <span class="cat-count">12 views</span>
+        <h2>Financials</h2>
+        <span class="cat-count">4 views</span>
+        <span class="cat-tag">Live</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/macro/markets.html" class="leaf"><span class="leaf-name">Markets overview</span><span class="leaf-meta">Equity dashboards, sector flows</span></a>
+        <a href="/core/macro/bonds.html" class="leaf"><span class="leaf-name">Bonds</span><span class="leaf-meta">Yield curve, term structure, credit spreads</span></a>
+        <a href="/core/single-name/" class="leaf"><span class="leaf-name">Single-name research</span><span class="leaf-meta">All single-name deep dives</span></a>
+        <a href="/core/plug/" class="leaf"><span class="leaf-name">Plug Power (PLUG)</span><span class="leaf-meta">Quarterly cash flow 2015-2025 from EDGAR XBRL</span></a>
+      </div>
+    </div>
+
+    <!-- ========== MACRO (NATIONAL) ========== -->
+    <div class="cat" data-cat="macro-national">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>Macro (National)</h2>
+        <span class="cat-count">9 views &middot; 22 indicators</span>
         <span class="cat-tag">Live</span>
       </div>
       <div class="cat-body">
@@ -220,53 +239,8 @@
         <a href="/core/macro/real-economy/" class="leaf"><span class="leaf-name">Consumer</span><span class="leaf-meta">Spending, savings, credit health</span></a>
         <a href="/core/macro/credit/" class="leaf"><span class="leaf-name">Credit</span><span class="leaf-meta">Spreads, default rates, loan growth</span></a>
         <a href="/core/macro/labor/" class="leaf"><span class="leaf-name">Labor</span><span class="leaf-meta">Payrolls, wages, participation</span></a>
-        <div class="branch">
-          <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Regional Dispersion</span><span class="leaf-meta">7 sub-views</span></button>
-          <div class="branch-body">
-            <a href="/core/macro/regional/" class="leaf sub"><span class="leaf-name">All regional</span></a>
-            <a href="/core/macro/regional/?view=cpi" class="leaf sub"><span class="leaf-name">CPI dispersion</span></a>
-            <a href="/core/macro/regional/?view=build-buy" class="leaf sub"><span class="leaf-name">Build vs Buy</span></a>
-            <a href="/core/macro/regional/?view=channel-mix" class="leaf sub"><span class="leaf-name">Channel mix</span></a>
-            <a href="/core/macro/regional/?view=migration" class="leaf sub"><span class="leaf-name">Migration</span></a>
-            <a href="/core/macro/regional/?view=demographics" class="leaf sub"><span class="leaf-name">Demographics</span></a>
-            <a href="/core/macro/regional/?view=affordability" class="leaf sub"><span class="leaf-name">Affordability</span></a>
-            <a href="/core/macro/regional/?view=climate" class="leaf sub"><span class="leaf-name">Climate risk</span></a>
-          </div>
-        </div>
-        <a href="/core/macro/geography/" class="leaf"><span class="leaf-name">Geography</span><span class="leaf-meta">State + MSA selectors, ranked bars</span></a>
-        <a href="/core/macro/backtest/" class="leaf"><span class="leaf-name">Backtest</span><span class="leaf-meta">Walk-forward regime rotation vs SPY + 60/40</span></a>
-        <a href="/core/macro/research.html" class="leaf"><span class="leaf-name">Pair Explorer</span><span class="leaf-meta">Correlation + regression any two series</span></a>
-        <a href="/core/macro/network.html" class="leaf"><span class="leaf-name">Transmission Network</span><span class="leaf-meta">All-pairs correlation map &middot; 60m window &middot; lead-lag arrows</span></a>
-      </div>
-    </div>
-
-    <!-- ========== AI BENEFICIARIES ========== -->
-    <div class="cat" data-cat="ai">
-      <div class="cat-head">
-        <span class="cat-arrow">&#9660;</span>
-        <h2>AI Beneficiaries</h2>
-        <span class="cat-count">3 views</span>
-        <span class="cat-tag">New</span>
-      </div>
-      <div class="cat-body">
-        <a href="/core/ai/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">Both views with cross-page scenario picker</span></a>
-        <a href="/core/ai/screen/" class="leaf"><span class="leaf-name">Industry Screen</span><span class="leaf-meta">160 companies &middot; 8 industries &middot; 4 scenarios</span></a>
-        <a href="/core/ai/top-5/" class="leaf"><span class="leaf-name">Top-5 Deep Dive</span><span class="leaf-meta">Modest-scenario picks: META &middot; CDNS &middot; AVGO &middot; SNPS &middot; MSFT</span></a>
-      </div>
-    </div>
-
-    <!-- ========== ECONOMIC INDICATORS ========== -->
-    <div class="cat" data-cat="econ">
-      <div class="cat-head">
-        <span class="cat-arrow">&#9660;</span>
-        <h2>Economic Indicators</h2>
-        <span class="cat-count">25 views</span>
-        <span class="cat-tag">Live</span>
-      </div>
-      <div class="cat-body">
-        <a href="/core/econ/" class="leaf"><span class="leaf-name">22-indicator overview</span><span class="leaf-meta">Latest, YoY, percentile, sparkline per card</span></a>
         <a href="/core/econ/recession.html" class="leaf"><span class="leaf-name">Recession composite</span><span class="leaf-meta">5-signal model: Sahm, 10Y-3M, HY OAS, UNRATE, NFP</span></a>
-        <a href="/core/econ/compare.html" class="leaf"><span class="leaf-name">Comparison tool</span><span class="leaf-meta">Compare any two indicators side-by-side</span></a>
+        <a href="/core/econ/" class="leaf"><span class="leaf-name">22-indicator overview</span><span class="leaf-meta">Latest, YoY, percentile, sparkline per card</span></a>
         <div class="branch">
           <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Individual indicator drill-downs</span><span class="leaf-meta">22 series</span></button>
           <div class="branch-body">
@@ -297,25 +271,62 @@
       </div>
     </div>
 
-    <!-- ========== SINGLE-NAME RESEARCH ========== -->
-    <div class="cat" data-cat="single">
+    <!-- ========== MACRO (REGIONAL) ========== -->
+    <div class="cat" data-cat="macro-regional">
       <div class="cat-head">
         <span class="cat-arrow">&#9660;</span>
-        <h2>Single-Name Research</h2>
-        <span class="cat-count">2 views</span>
+        <h2>Macro (Regional)</h2>
+        <span class="cat-count">9 views</span>
+        <span class="cat-tag">Live</span>
       </div>
       <div class="cat-body">
-        <a href="/core/single-name/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">All single-name deep dives</span></a>
-        <a href="/core/plug/" class="leaf"><span class="leaf-name">Plug Power (PLUG)</span><span class="leaf-meta">Quarterly cash flow 2015-2025 from EDGAR XBRL &middot; CFO/CFI/CFF/Cash drivers</span></a>
+        <a href="/core/macro/regional/" class="leaf"><span class="leaf-name">Regional overview</span><span class="leaf-meta">All regional dispersion views</span></a>
+        <div class="branch">
+          <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Regional sub-views</span><span class="leaf-meta">7 dispersion cuts</span></button>
+          <div class="branch-body">
+            <a href="/core/macro/regional/?view=cpi" class="leaf sub"><span class="leaf-name">CPI dispersion</span></a>
+            <a href="/core/macro/regional/?view=build-buy" class="leaf sub"><span class="leaf-name">Build vs Buy</span></a>
+            <a href="/core/macro/regional/?view=channel-mix" class="leaf sub"><span class="leaf-name">Channel mix</span></a>
+            <a href="/core/macro/regional/?view=migration" class="leaf sub"><span class="leaf-name">Migration</span></a>
+            <a href="/core/macro/regional/?view=demographics" class="leaf sub"><span class="leaf-name">Demographics</span></a>
+            <a href="/core/macro/regional/?view=affordability" class="leaf sub"><span class="leaf-name">Affordability</span></a>
+            <a href="/core/macro/regional/?view=climate" class="leaf sub"><span class="leaf-name">Climate risk</span></a>
+          </div>
+        </div>
+        <a href="/core/macro/geography/" class="leaf"><span class="leaf-name">Geography</span><span class="leaf-meta">State + MSA selectors, ranked bars</span></a>
       </div>
     </div>
 
-    <!-- ========== SUPPLY CHAIN ========== -->
+    <!-- ========== AI FOCUS ========== -->
+    <div class="cat" data-cat="ai">
+      <div class="cat-head">
+        <span class="cat-arrow">&#9660;</span>
+        <h2>AI Focus</h2>
+        <span class="cat-count">3 views &middot; 4 sub-sectors</span>
+        <span class="cat-tag">New</span>
+      </div>
+      <div class="cat-body">
+        <a href="/core/ai/" class="leaf"><span class="leaf-name">Section overview</span><span class="leaf-meta">Both views with cross-page scenario picker</span></a>
+        <a href="/core/ai/screen/" class="leaf"><span class="leaf-name">Industry Screen</span><span class="leaf-meta">160 companies &middot; 8 industries &middot; 4 scenarios</span></a>
+        <a href="/core/ai/top-5/" class="leaf"><span class="leaf-name">Top-5 Deep Dive</span><span class="leaf-meta">Modest-scenario picks: META &middot; CDNS &middot; AVGO &middot; SNPS &middot; MSFT</span></a>
+        <div class="branch">
+          <button class="branch-head" type="button"><span class="branch-arrow">&#9654;</span><span class="leaf-name">Sub-sectors</span><span class="leaf-meta">4 deep dives</span></button>
+          <div class="branch-body">
+            <a href="/core/ai/hyperscalers/" class="leaf sub"><span class="leaf-name">Hyperscaler capex</span><span class="leaf-meta">MSFT, GOOGL, META, AMZN spend</span></a>
+            <a href="/core/ai/compute/" class="leaf sub"><span class="leaf-name">Compute &amp; semis</span><span class="leaf-meta">NVDA, AVGO, AMD, custom silicon</span></a>
+            <a href="/core/ai/power/" class="leaf sub"><span class="leaf-name">Power &amp; grid</span><span class="leaf-meta">Datacenter load, utilities, IPPs</span></a>
+            <a href="/core/ai/adopters/" class="leaf sub"><span class="leaf-name">Adopters &amp; second derivatives</span><span class="leaf-meta">Software, services, productivity beneficiaries</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== SUPPLY CHAIN DATA ========== -->
     <div class="cat" data-cat="supply">
       <div class="cat-head">
         <span class="cat-arrow">&#9660;</span>
-        <h2>Supply Chain</h2>
-        <span class="cat-count">~50 metrics</span>
+        <h2>Supply Chain Data</h2>
+        <span class="cat-count">8 views &middot; ~50 metrics</span>
         <span class="cat-tag">Weekly</span>
       </div>
       <div class="cat-body">
@@ -325,23 +336,29 @@
         <a href="/core/supply/middle-mile/" class="leaf"><span class="leaf-name">Middle Mile</span><span class="leaf-meta">Diesel, Cass, ATA tonnage, intermodal, DAT spot</span></a>
         <a href="/core/supply/last-mile/" class="leaf"><span class="leaf-name">Last Mile</span><span class="leaf-meta">Couriers, USPS volume, e-commerce share</span></a>
         <a href="/core/supply/international/" class="leaf"><span class="leaf-name">International / Sourcing</span><span class="leaf-meta">GSCPI, WCI, SCFI, FBX, BDI, ports, bunker</span></a>
+        <a href="/core/supply/insights/" class="leaf"><span class="leaf-name">Insights</span><span class="leaf-meta">Curated weekly read on what moved</span></a>
         <a href="/core/supply/data.html" class="leaf"><span class="leaf-name">Downloads (CSV + bundle.zip)</span><span class="leaf-meta">All series, full history</span></a>
       </div>
     </div>
 
-    <!-- ========== DATA CATALOG ========== -->
-    <div class="cat" data-cat="data">
+    <!-- ========== TOOLS ========== -->
+    <div class="cat" data-cat="tools">
       <div class="cat-head">
         <span class="cat-arrow">&#9660;</span>
-        <h2>Data Catalog</h2>
-        <span class="cat-count">All series</span>
+        <h2>Tools</h2>
+        <span class="cat-count">6 views</span>
       </div>
       <div class="cat-body">
-        <a href="/core/data/" class="leaf"><span class="leaf-name">All series with metadata</span><span class="leaf-meta">FRED IDs, transforms, refresh cadence, lookback windows</span></a>
+        <a href="/core/macro/research.html" class="leaf"><span class="leaf-name">Pair Explorer</span><span class="leaf-meta">Correlation + regression any two series</span></a>
+        <a href="/core/macro/network.html" class="leaf"><span class="leaf-name">Transmission Network</span><span class="leaf-meta">All-pairs correlation map &middot; 60m window &middot; lead-lag arrows</span></a>
+        <a href="/core/macro/backtest/" class="leaf"><span class="leaf-name">Backtest</span><span class="leaf-meta">Walk-forward regime rotation vs SPY + 60/40</span></a>
+        <a href="/core/econ/compare.html" class="leaf"><span class="leaf-name">Comparison tool</span><span class="leaf-meta">Compare any two indicators side-by-side</span></a>
+        <a href="/core/macro/ticker.html" class="leaf"><span class="leaf-name">Ticker</span><span class="leaf-meta">Quick lookup across the macro series universe</span></a>
+        <a href="/core/data/" class="leaf"><span class="leaf-name">Data catalog</span><span class="leaf-meta">All series with FRED IDs, transforms, refresh cadence</span></a>
       </div>
     </div>
 
-  </div>
+    </div>
 </section>
 
 <!-- ==================== ABOUT ==================== -->
@@ -351,7 +368,7 @@
       <div class="ed-eyebrow">The forge</div>
       <h2>Built by a husky &mdash; and the human who serves him.</h2>
       <p>Siberforge is independent macro and financial analysis: written with conviction, debated with rigor, and named after a Siberian Husky who was beautiful, serious, and an absolute clown.</p>
-      <p>Sixteen years across finance, with a stubborn preference for symmetry, falsifiable claims, and the leading edge of a print.</p>
+      <p>Sixteen years across finance, with a stubborn preference for symmetry and the leading edge of a print.</p>
       <div class="ed-stat-row">
         <div class="ed-stat">
           <div class="ed-big">16y</div>
