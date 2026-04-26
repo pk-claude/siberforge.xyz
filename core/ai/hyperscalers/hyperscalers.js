@@ -6,25 +6,24 @@ import { renderSparklineGrid } from '../lib/sparkline-grid.js';
 const HYPERSCALER_COMPANIES = ['AMZN', 'MSFT', 'GOOGL', 'META'];
 
 // Fallback hardcoded data (last 8 quarters)
+const FALLBACK_CAPEX_QUARTERS = ["Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25"];
 const FALLBACK_CAPEX = {
-  quarters: ["Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25"],
-  amzn: [14.0, 17.6, 22.6, 26.3, 24.3, 26.0, 27.5, 30.0],
-  msft: [14.0, 13.9, 14.9, 15.8, 16.7, 17.5, 19.0, 22.0],
-  googl: [12.0, 13.2, 13.1, 14.3, 17.2, 22.4, 24.0, 26.0],
-  meta: [6.7, 8.5, 9.2, 14.8, 13.7, 17.0, 19.0, 21.0]
+  AMZN: [14.0, 17.6, 22.6, 26.3, 24.3, 26.0, 27.5, 30.0],
+  MSFT: [14.0, 13.9, 14.9, 15.8, 16.7, 17.5, 19.0, 22.0],
+  GOOGL: [12.0, 13.2, 13.1, 14.3, 17.2, 22.4, 24.0, 26.0],
+  META: [6.7, 8.5, 9.2, 14.8, 13.7, 17.0, 19.0, 21.0]
 };
 
 const FALLBACK_REVENUE = {
-  quarters: ["Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25"],
-  msft: [56.5, 61.9, 65.6, 69.6, 70.1, 73.5, 76.0, 78.0],
-  googl: [80.5, 84.7, 88.3, 96.5, 90.2, 96.4, 100.0, 105.0],
-  meta: [36.5, 39.1, 40.6, 48.4, 42.3, 47.5, 49.0, 52.0],
-  amzn: [143.3, 148.0, 158.9, 187.8, 155.7, 167.7, 176.0, 190.0]
+  MSFT: [56.5, 61.9, 65.6, 69.6, 70.1, 73.5, 76.0, 78.0],
+  GOOGL: [80.5, 84.7, 88.3, 96.5, 90.2, 96.4, 100.0, 105.0],
+  META: [36.5, 39.1, 40.6, 48.4, 42.3, 47.5, 49.0, 52.0],
+  AMZN: [143.3, 148.0, 158.9, 187.8, 155.7, 167.7, 176.0, 190.0]
 };
 
 // AI-attributable capex share % (v2 placeholder — estimated from disclosures)
 const AI_SHARE_PCT = {
-  msft: 60, googl: 55, meta: 80, amzn: 50
+  MSFT: 60, GOOGL: 55, META: 80, AMZN: 50
 };
 
 // Basket tickers
@@ -114,11 +113,19 @@ async function fetchRevenueData() {
         return null;
       }
       
-      // Filter to 10-Q (quarterly) observations, sort chronologically
-      const quarterly = (foundRevenue.observations || [])
-        .filter(o => o.form === '10-Q')
+      // Filter to 10-Q observations and dedupe by end-date. EDGAR XBRL revenue facts
+      // for the same period appear multiple times: YTD-cumulative ($135B for MSFT 6m YTD)
+      // AND standalone-quarter ($69B). We want only the standalone quarter, so for each
+      // end-date keep the SMALLEST val (YTD is always >= standalone).
+      const byEnd = new Map();
+      for (const o of (foundRevenue.observations || [])) {
+        if (o.form !== '10-Q') continue;
+        const cur = byEnd.get(o.end);
+        if (!cur || o.val < cur.val) byEnd.set(o.end, o);
+      }
+      const quarterly = Array.from(byEnd.values())
         .sort((a, b) => new Date(a.end) - new Date(b.end))
-        .slice(-8); // Last 8 quarters
+        .slice(-8); // Last 8 unique quarters
       
       if (quarterly.length < 4) {
         console.warn(`Insufficient quarters for ${company}`);
@@ -185,7 +192,7 @@ async function renderRankChart() {
   }));
   
   const quarters = Object.values(capexData)[0].length > 0
-    ? FALLBACK_CAPEX.quarters.slice(0, ranks.length)
+    ? FALLBACK_CAPEX_QUARTERS.slice(0, ranks.length)
     : [];
   
   new Chart(ctx.getContext('2d'), {
@@ -263,7 +270,7 @@ async function renderIntensityHeatmap() {
   ctx.parentElement.appendChild(intensityChart);
   
   const coIndexes = HYPERSCALER_COMPANIES;
-  const quarterLabels = (FALLBACK_CAPEX.quarters || []).slice(0, minLen);
+  const quarterLabels = (FALLBACK_CAPEX_QUARTERS || []).slice(0, minLen);
   
   new Chart(intensityChart, {
     type: 'bar',
@@ -300,7 +307,7 @@ async function renderAIShareChart() {
   if (liveCapex) capexData = liveCapex;
   
   const minLen = Math.min(...Object.values(capexData).map(v => v.length));
-  const quarters = FALLBACK_CAPEX.quarters.slice(0, minLen);
+  const quarters = FALLBACK_CAPEX_QUARTERS.slice(0, minLen);
   
   // Compute total capex and AI-attributable share
   const datasets = [];
