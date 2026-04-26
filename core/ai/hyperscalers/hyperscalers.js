@@ -264,15 +264,13 @@ async function renderIntensityHeatmap() {
     labels.push(co);
   }
   
-  // Render as stacked heatmap visualization using bar chart
-  // (HTML5 canvas doesn't have native heatmap, so we'll approximate with color gradation)
-  const intensityChart = document.createElement('canvas');
-  ctx.parentElement.appendChild(intensityChart);
-  
+  // Render onto the EXISTING support-1-chart canvas (don't create a sibling — the
+  // .ai-chart-wrap parent has fixed height that's already occupied by the existing canvas,
+  // so a new sibling canvas would render at zero height and be invisible).
   const coIndexes = HYPERSCALER_COMPANIES;
   const quarterLabels = (FALLBACK_CAPEX_QUARTERS || []).slice(0, minLen);
   
-  new Chart(intensityChart, {
+  new Chart(ctx.getContext('2d'), {
     type: 'bar',
     data: {
       labels: quarterLabels,
