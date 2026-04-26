@@ -110,6 +110,31 @@ async function yahooHistory(symbol, years) {
   return { symbol, closes: out };
 }
 
+
+// ---- Finnhub (quarterly financials) ----
+async function finnhubFinancials(symbol, key) {
+  const url = `${FINN_BASE}/financials-reported?symbol=${symbol}&token=${key}`;
+  const res = await fetch(url);
+  if (!res.ok) throw new Error(`Finnhub financials ${symbol} ${res.status}`);
+  const data = await res.json();
+  // data.data is array of reports: { quarter, year, value, currency, symbol }
+  // Quarterly items have 'quarter' field; annual have null quarter
+  const quarterly = (data.data || []).filter(r => r.quarter && r.currency === 'USD');
+  return {
+    symbol,
+    reports: quarterly.map(r => ({
+      quarter: r.quarter,
+      year: r.year,
+      revenue: r.revenue,
+      netIncome: r.netIncome,
+      operatingCashFlow: r.operatingCashFlow,
+      capex: r.capex,
+      // Note: Finnhub free tier may not expose all fields
+    }))
+  };
+}
+
+
 export default async function handler(req, res) {
   const mode = req.query.mode || 'quote';
 
@@ -143,6 +168,14 @@ export default async function handler(req, res) {
       const series = await Promise.all(symbols.map(s => yahooHistory(s, years)));
       res.setHeader('Cache-Control', 'public, s-maxage=86400, stale-while-revalidate=172800');
       return res.status(200).json({ series, ts: Date.now(), source: 'yahoo' });
+    }
+
+    if (mode === 'financials') {
+      const key = process.env.FINNHUB_API_KEY;
+      if (!key) return res.status(500).json({ error: 'FINNHUB_API_KEY not configured on server' });
+      const financials = await Promise.all(symbols.map(s => finnhubFinancials(s, key)));
+      res.setHeader('Cache-Control', 'public, s-maxage=3600, stale-while-revalidate=86400');
+      return res.status(200).json({ financials, ts: Date.now() });
     }
 
     if (mode === 'news') {
