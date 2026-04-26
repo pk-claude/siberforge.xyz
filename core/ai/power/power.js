@@ -3,6 +3,33 @@
 
 import { renderSparklineGrid } from '../lib/sparkline-grid.js';
 
+// --- trailing-12 helpers ---
+// All three power charts use a rolling-annual view: each plotted point is the
+// trailing 12 months of monthly data. This eliminates seasonality (summer gas
+// peaks, spring hydro) so the long-run trend is legible.
+function trailing12Sum(arr) {
+  const out = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (i < 11) { out.push(null); continue; }
+    let s = 0;
+    for (let j = i - 11; j <= i; j++) s += arr[j];
+    out.push(s);
+  }
+  return out;
+}
+function trailing12Avg(arr) {
+  return trailing12Sum(arr).map(s => s == null ? null : s / 12);
+}
+function trailing12YoY(arr) {
+  const t12 = trailing12Sum(arr);
+  return t12.map((s, i) => {
+    if (s == null || i < 23) return null;
+    const prior = t12[i - 12];
+    if (prior == null || prior === 0) return null;
+    return ((s / prior) - 1) * 100;
+  });
+}
+
 // Basket tickers
 const BASKET_TICKERS = [
   { sym: 'CEG', name: 'Constellation Energy', ytd: 45, trend: 'up' },
@@ -14,23 +41,24 @@ const BASKET_TICKERS = [
   { sym: 'DUK', name: 'Duke Energy', ytd: 2, trend: 'up' }
 ];
 
-// Fallback hardcoded generation data (5 years monthly)
+// Fallback hardcoded generation data (15 years monthly so trailing-12 has ~14y of output)
+const FALLBACK_LEN = 180;
 const FALLBACK_GENERATION = {
-  months: Array.from({ length: 60 }, (_, i) => {
-    const year = Math.floor(i / 12) + 2021;
+  months: Array.from({ length: FALLBACK_LEN }, (_, i) => {
+    const year = Math.floor(i / 12) + 2011;
     const month = (i % 12) + 1;
-    return `${month}/${year % 2 > 0 ? '21' : String(year).slice(-2)}`;
+    return `${month}/${String(year).slice(-2)}`;
   }),
-  nuclear: Array(60).fill(0).map((_, i) => 170 + Math.sin(i / 12) * 5 + Math.random() * 2),
-  renewables: Array(60).fill(0).map((_, i) => 140 + (i * 0.5) + Math.sin(i / 6) * 8 + Math.random() * 2),
-  gas: Array(60).fill(0).map((_, i) => 200 + (i * 0.7) + Math.sin((i - 3) / 12) * 12 + Math.random() * 2),
-  coal: Array(60).fill(0).map((_, i) => 120 - (i * 0.5) - Math.sin(i / 12) * 8 + Math.random() * 2)
+  nuclear: Array(FALLBACK_LEN).fill(0).map((_, i) => 67 + Math.sin(i / 12 * 2 * Math.PI) * 3 + (Math.random() - 0.5) * 1.5),
+  renewables: Array(FALLBACK_LEN).fill(0).map((_, i) => 38 + (i * 0.42) + Math.sin((i - 3) / 12 * 2 * Math.PI) * 6 + (Math.random() - 0.5) * 3),
+  gas: Array(FALLBACK_LEN).fill(0).map((_, i) => 95 + (i * 0.45) + Math.sin((i - 6) / 12 * 2 * Math.PI) * 22 + (Math.random() - 0.5) * 5),
+  coal: Array(FALLBACK_LEN).fill(0).map((_, i) => Math.max(40, 150 - (i * 0.55) + Math.sin(i / 12 * 2 * Math.PI) * 8 + (Math.random() - 0.5) * 4))
 };
 
 const FALLBACK_PRICES = {
   months: FALLBACK_GENERATION.months,
-  industrial: Array(60).fill(0).map((_, i) => 6.5 + (i * 0.01) + Math.sin(i / 12) * 0.3 + Math.random() * 0.15),
-  residential: Array(60).fill(0).map((_, i) => 13.8 + (i * 0.015) + Math.sin((i - 2) / 12) * 0.4 + Math.random() * 0.2)
+  industrial: Array(FALLBACK_LEN).fill(0).map((_, i) => 6.5 + (i * 0.012) + Math.sin(i / 12 * 2 * Math.PI) * 0.3 + (Math.random() - 0.5) * 0.15),
+  residential: Array(FALLBACK_LEN).fill(0).map((_, i) => 11.8 + (i * 0.018) + Math.sin((i - 2) / 12 * 2 * Math.PI) * 0.4 + (Math.random() - 0.5) * 0.2)
 };
 
 /**
@@ -95,13 +123,12 @@ async function renderGenerationChart() {
   if (!ctx) return;
   
   let genData = FALLBACK_GENERATION;
-  
+
   const liveData = await fetchGenerationData();
-  if (liveData && liveData.nuclear_gen_us && liveData.renewable_gen_us && 
+  if (liveData && liveData.nuclear_gen_us && liveData.renewable_gen_us &&
       liveData.gas_gen_us && liveData.coal_gen_us) {
-    
-    // Extract latest 60 points
-    const n = 60;
+    // Pull ~15y monthly so the trailing-12 window has plenty of history
+    const n = 180;
     genData = {
       months: (liveData.nuclear_gen_us.slice(-n) || []).map(o => {
         const d = new Date(o.date + 'T12:00:00Z');
@@ -113,15 +140,25 @@ async function renderGenerationChart() {
       coal: liveData.coal_gen_us.slice(-n).map(o => o.value)
     };
   }
-  
+
+  // Trailing-12mo SUM in TWh (input is thousand MWh; /1000 -> TWh)
+  const t12Coal = trailing12Sum(genData.coal).map(v => v == null ? null : v / 1000);
+  const t12Gas = trailing12Sum(genData.gas).map(v => v == null ? null : v / 1000);
+  const t12Renew = trailing12Sum(genData.renewables).map(v => v == null ? null : v / 1000);
+  const t12Nuke = trailing12Sum(genData.nuclear).map(v => v == null ? null : v / 1000);
+
+  // Display the most recent ~10 years of trailing-12 output
+  const displayN = Math.min(120, Math.max(0, genData.months.length - 11));
+  const labels = genData.months.slice(-displayN).map((m) => m.startsWith('1/') ? `'${m.slice(-2)}` : '');
+
   new Chart(ctx.getContext('2d'), {
     type: 'line',
     data: {
-      labels: genData.months.map((m, i) => i % 6 === 0 ? m : ''),
+      labels: labels,
       datasets: [
         {
           label: 'Coal',
-          data: genData.coal,
+          data: t12Coal.slice(-displayN),
           borderColor: '#95a5a6',
           backgroundColor: 'rgba(149, 165, 166, 0.3)',
           borderWidth: 1,
@@ -131,7 +168,7 @@ async function renderGenerationChart() {
         },
         {
           label: 'Gas',
-          data: genData.gas,
+          data: t12Gas.slice(-displayN),
           borderColor: '#f39c12',
           backgroundColor: 'rgba(243, 156, 18, 0.3)',
           borderWidth: 1,
@@ -141,7 +178,7 @@ async function renderGenerationChart() {
         },
         {
           label: 'Renewables',
-          data: genData.renewables,
+          data: t12Renew.slice(-displayN),
           borderColor: '#27ae60',
           backgroundColor: 'rgba(39, 174, 96, 0.3)',
           borderWidth: 1,
@@ -151,7 +188,7 @@ async function renderGenerationChart() {
         },
         {
           label: 'Nuclear',
-          data: genData.nuclear,
+          data: t12Nuke.slice(-displayN),
           borderColor: ACCENT,
           backgroundColor: 'rgba(247, 167, 0, 0.3)',
           borderWidth: 1,
@@ -174,7 +211,7 @@ async function renderGenerationChart() {
       scales: {
         y: {
           stacked: true,
-          title: { display: true, text: 'Generation (thousand MWh)' }
+          title: { display: true, text: 'Generation (TWh, trailing 12-mo)' }
         }
       }
     }
@@ -189,10 +226,10 @@ async function renderGrowthChart() {
   if (!ctx) return;
   
   let genData = FALLBACK_GENERATION;
-  
+
   const liveData = await fetchGenerationData();
   if (liveData && liveData.nuclear_gen_us && liveData.renewable_gen_us) {
-    const n = 60;
+    const n = 180;
     genData = {
       months: (liveData.nuclear_gen_us.slice(-n) || []).map(o => {
         const d = new Date(o.date + 'T12:00:00Z');
@@ -202,41 +239,41 @@ async function renderGrowthChart() {
       renewables: liveData.renewable_gen_us.slice(-n).map(o => o.value)
     };
   }
-  
-  // Compute YoY growth (last 12 months vs prior 12 months)
-  const nuclearGrowth = genData.nuclear.slice(-12).map((v, i) => 
-    ((v - genData.nuclear[genData.nuclear.length - 24 + i]) / genData.nuclear[genData.nuclear.length - 24 + i]) * 100
-  );
-  
-  const renewablesGrowth = genData.renewables.slice(-12).map((v, i) => 
-    ((v - genData.renewables[genData.renewables.length - 24 + i]) / genData.renewables[genData.renewables.length - 24 + i]) * 100
-  );
-  
+
+  // Rolling 12-mo YoY (this month's t12 sum vs same month a year ago)
+  // First 23 months are null; data starts on month 24 onward.
+  const nuclearGrowth = trailing12YoY(genData.nuclear);
+  const renewablesGrowth = trailing12YoY(genData.renewables);
+
+  // Display the most recent ~10 years of valid YoY output
+  const displayN = Math.min(120, Math.max(0, genData.months.length - 23));
+  const labels = genData.months.slice(-displayN).map((m) => m.startsWith('1/') ? `'${m.slice(-2)}` : '');
+
   new Chart(ctx.getContext('2d'), {
     type: 'line',
     data: {
-      labels: Array.from({ length: 12 }, (_, i) => `M${i + 1}`),
+      labels: labels,
       datasets: [
         {
           label: 'Nuclear YoY %',
-          data: nuclearGrowth,
+          data: nuclearGrowth.slice(-displayN),
           borderColor: ACCENT,
           backgroundColor: 'transparent',
           borderWidth: 2,
           fill: false,
           tension: 0.3,
-          pointRadius: 3,
+          pointRadius: 0,
           pointBackgroundColor: ACCENT
         },
         {
           label: 'Renewables YoY %',
-          data: renewablesGrowth,
+          data: renewablesGrowth.slice(-displayN),
           borderColor: '#27ae60',
           backgroundColor: 'transparent',
           borderWidth: 2,
           fill: false,
           tension: 0.3,
-          pointRadius: 3,
+          pointRadius: 0,
           pointBackgroundColor: '#27ae60'
         }
       ]
@@ -252,7 +289,7 @@ async function renderGrowthChart() {
       },
       scales: {
         y: {
-          title: { display: true, text: 'YoY Growth %' }
+          title: { display: true, text: 'YoY Growth % (rolling 12-mo)' }
         }
       }
     }
@@ -264,10 +301,10 @@ async function renderPriceChart() {
   if (!ctx) return;
   
   let priceData = FALLBACK_PRICES;
-  
+
   const liveData = await fetchPriceData();
   if (liveData && liveData.elec_industrial && liveData.elec_residential) {
-    const n = 60;
+    const n = 180;
     priceData = {
       months: (liveData.elec_industrial.slice(-n) || []).map(o => {
         const d = new Date(o.date + 'T12:00:00Z');
@@ -277,32 +314,39 @@ async function renderPriceChart() {
       residential: liveData.elec_residential.slice(-n).map(o => o.value)
     };
   }
-  
+
+  // Trailing-12mo average smooths seasonal swings (heating/cooling)
+  const t12Industrial = trailing12Avg(priceData.industrial);
+  const t12Residential = trailing12Avg(priceData.residential);
+
+  const displayN = Math.min(120, Math.max(0, priceData.months.length - 11));
+  const labels = priceData.months.slice(-displayN).map((m) => m.startsWith('1/') ? `'${m.slice(-2)}` : '');
+
   new Chart(ctx.getContext('2d'), {
     type: 'line',
     data: {
-      labels: priceData.months.map((m, i) => i % 6 === 0 ? m : ''),
+      labels: labels,
       datasets: [
         {
           label: 'Industrial (cents/kWh)',
-          data: priceData.industrial,
+          data: t12Industrial.slice(-displayN),
           borderColor: '#95a5a6',
           backgroundColor: 'transparent',
           borderWidth: 2,
           fill: false,
           tension: 0.3,
-          pointRadius: 2,
+          pointRadius: 0,
           pointBackgroundColor: '#95a5a6'
         },
         {
           label: 'Residential (cents/kWh)',
-          data: priceData.residential,
+          data: t12Residential.slice(-displayN),
           borderColor: '#e74c3c',
           backgroundColor: 'transparent',
           borderWidth: 2,
           fill: false,
           tension: 0.3,
-          pointRadius: 2,
+          pointRadius: 0,
           pointBackgroundColor: '#e74c3c'
         }
       ]
@@ -318,7 +362,7 @@ async function renderPriceChart() {
       },
       scales: {
         y: {
-          title: { display: true, text: 'Price (cents/kWh)' }
+          title: { display: true, text: 'Price (cents/kWh, trailing 12-mo)' }
         }
       }
     }
@@ -355,7 +399,6 @@ function buildTakeaway(liveData) {
   
   return `
     <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">US generation mix is shifting: nuclear stable at ${nuclearShare}% of total, gas at ${gasShare}%, renewables at ${renewablesShare}%. ${aiAdditionLanguage}</span></div>
-    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Grid operators face a "peaker paradox": AI data centers run continuous (baseload equivalent) but in regions without nuclear or hydro. Gas peaker profitability is exploding. Brownfield nuclear restarts are the 2026-2027 inflection.</span></div>
     <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Power consumption growth from AI is the most inelastic demand shock in 20 years. Utilities with nuclear or gas exposure are realizing massive pricing power; wind/solar OEMs get margin tailwinds.</span></div>
     <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>
   `;
@@ -363,37 +406,40 @@ function buildTakeaway(liveData) {
 
 window.addEventListener('DOMContentLoaded', async () => {
   renderBasketGrid();
-  
-  // Fetch live data for takeaway
+
+  // Fetch live data for takeaway. Use trailing-12mo aggregates so the shares and YoY
+  // shown in the takeaway match the rolling-annual view in the charts.
   const liveGenData = await fetchGenerationData();
   let liveData = null;
-  if (liveGenData && liveGenData.nuclear_gen_us && liveGenData.renewable_gen_us && 
+  if (liveGenData && liveGenData.nuclear_gen_us && liveGenData.renewable_gen_us &&
       liveGenData.gas_gen_us && liveGenData.coal_gen_us) {
-    
-    const nukeData = liveGenData.nuclear_gen_us.slice(-12);
-    const renewData = liveGenData.renewable_gen_us.slice(-12);
-    const gasData = liveGenData.gas_gen_us.slice(-12);
-    const coalData = liveGenData.coal_gen_us.slice(-12);
-    
-    if (nukeData.length > 0) {
-      // Latest month values
-      const latestNuke = nukeData[nukeData.length - 1].value;
-      const latestRenew = renewData[renewData.length - 1].value;
-      const latestGas = gasData[gasData.length - 1].value;
-      const latestCoal = coalData[coalData.length - 1].value;
-      
-      // Total generation (sum across all sources, approximate)
-      const totalGen = latestNuke + latestRenew + latestGas + latestCoal;
-      const nuclearShare = Math.round((latestNuke / totalGen) * 100);
-      const gasShare = Math.round((latestGas / totalGen) * 100);
-      const renewablesShare = Math.round((latestRenew / totalGen) * 100);
-      
-      // Compute nuclear YoY (12 months ago vs now)
+
+    const nukeArr = liveGenData.nuclear_gen_us.slice(-24).map(o => o.value);
+    const renewArr = liveGenData.renewable_gen_us.slice(-24).map(o => o.value);
+    const gasArr = liveGenData.gas_gen_us.slice(-24).map(o => o.value);
+    const coalArr = liveGenData.coal_gen_us.slice(-24).map(o => o.value);
+
+    if (nukeArr.length >= 12) {
+      const sum = (a) => a.reduce((s, v) => s + v, 0);
+      const t12 = (a) => sum(a.slice(-12));
+      const t12Nuke = t12(nukeArr);
+      const t12Renew = t12(renewArr);
+      const t12Gas = t12(gasArr);
+      const t12Coal = t12(coalArr);
+      const totalGen = t12Nuke + t12Renew + t12Gas + t12Coal;
+
+      const nuclearShare = Math.round((t12Nuke / totalGen) * 100);
+      const gasShare = Math.round((t12Gas / totalGen) * 100);
+      const renewablesShare = Math.round((t12Renew / totalGen) * 100);
+
       let nuclearYoY = 1.5;
-      if (nukeData.length >= 2 && nukeData[0].value > 0) {
-        nuclearYoY = Math.round(((latestNuke / nukeData[0].value) - 1) * 100 * 10) / 10;
+      if (nukeArr.length >= 24) {
+        const priorT12Nuke = sum(nukeArr.slice(0, 12));
+        if (priorT12Nuke > 0) {
+          nuclearYoY = Math.round(((t12Nuke / priorT12Nuke) - 1) * 100 * 10) / 10;
+        }
       }
-      
+
       liveData = {
         nuclearShare,
         gasShare,
@@ -402,13 +448,12 @@ window.addEventListener('DOMContentLoaded', async () => {
       };
     }
   }
-  
-  // Inject dynamic takeaway
+
   const takeawayEl = document.querySelector('.ai-takeaway');
   if (takeawayEl) {
     takeawayEl.innerHTML = buildTakeaway(liveData);
   }
-  
+
   await renderGenerationChart();
   await renderGrowthChart();
   await renderPriceChart();

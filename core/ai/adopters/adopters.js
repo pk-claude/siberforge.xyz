@@ -15,10 +15,13 @@ const FALLBACK_SOFTWARE_DATA = {
   panw: [16, 16.5, 17, 17.5, 17, 17.5, 18, 17.5]
 };
 
+// Note: swCapex must be >= length of any live productivity series. Chart.js plots
+// shorter series left-aligned against the labels axis, so a short swCapex array
+// makes the line "fall off" the right edge of the chart.
 const FALLBACK_PRODUCTIVITY_DATA = {
-  quarters: ["Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25"],
-  productivityYoY: [1.8, 1.2, 0.9, 1.1, 1.3, 1.5, 1.6, 1.4],
-  swCapex: [22, 23, 24.5, 25.2, 26, 27.5, 28, 29]
+  quarters: ["Q1'23", "Q2'23", "Q3'23", "Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25", "Q4'25", "Q1'26"],
+  productivityYoY: [0.0, 1.8, 3.0, 3.5, 3.3, 3.2, 2.9, 2.3, 1.9, 2.0, 2.4, 2.5, 2.5],
+  swCapex: [19, 20, 21, 22, 23, 24.5, 25.2, 26, 27.5, 28, 29, 30, 31]
 };
 
 // Margin expansion YoY change (pp) — v2 placeholder if Finnhub margin data unavailable
@@ -387,5 +390,20 @@ window.addEventListener('DOMContentLoaded', async () => {
   
   await renderRevenueChart();
   await renderProductivityChart();
+  await renderMarginChart();
+});
+      liveData = { basketYoY };
+    }
+  }
+
+  const takeawayEl = document.querySelector('.ai-takeaway');
+  if (takeawayEl) {
+    takeawayEl.innerHTML = buildTakeaway(liveData);
+  }
+
+  await renderRevenueChart();
+  await renderProductivityChart();
+  await renderMarginChart();
+});
   await renderMarginChart();
 });
