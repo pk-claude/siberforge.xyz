@@ -161,39 +161,52 @@ function findOutliers() {
   return flags;
 }
 
-// One-paragraph tilt recommendation based on the regime + composite scores.
-function buildNarrative(regimeLabel, scores) {
-  const cycle = scores.cycle?.score;
-  const inflation = scores.inflation?.score;
-  const housing = scores.housing?.score;
-  const consumer = scores.consumer?.score;
+// Plain-language translation of a z-score against the 10-year (120-month)
+// trailing window used in regimes.js. Anchor "10-yr norm" is surfaced
+// explicitly so readers know the reference is recent history (not all-history,
+// which would drag in the 1970s inflation regime).
+function zPhrase(z) {
+  if (!Number.isFinite(z)) return null;
+  const abs = Math.abs(z);
+  if (abs < 0.25) return 'near 10-yr norm';
+  const dir = z >= 0 ? 'above' : 'below';
+  if (abs < 0.75) return `modestly ${dir} 10-yr norm`;
+  if (abs < 1.5)  return `${dir} 10-yr norm`;
+  return `well ${dir} 10-yr norm`;
+}
 
-  const bits = [];
-  bits.push(`<strong>Regime:</strong> ${regimeLabel}`);
+// Curated tilt picks per regime, matched to the EMPIRICAL regime-conditional
+// returns table (Positioning section). Source-of-truth alignment is critical
+// — earlier versions of this code derived tilt from the cycle composite SCORE
+// which doesn't always match the regime CLASSIFIER (e.g. early-Disinflation
+// looks like "expansion" by cycle score but is actually recession-middle by
+// growth/inflation z's). Curated lookup keeps the V3 chips consistent with
+// the Positioning detail below it.
+const REGIME_TILT = {
+  goldilocks: {
+    action: 'Add risk',
+    overweights:  'XLK tech, XLY discretionary, XLC communications',
+    underweights: 'XLP staples, XLU utilities, XLE energy',
+  },
+  reflation: {
+    action: 'Real-asset bias',
+    overweights:  'XLE energy, XLB materials, XLF financials',
+    underweights: 'XLK tech, XLU utilities, XLP staples',
+  },
+  stagflation: {
+    action: 'Defensive + commodities',
+    overweights:  'XLE energy, XLP staples, XLV healthcare',
+    underweights: 'XLK tech, XLY discretionary, XLC communications',
+  },
+  disinflation: {
+    action: 'Position for recovery',
+    overweights:  'XLB materials, XLY discretionary, XLF financials',
+    underweights: 'XLK tech, XLU utilities, XLP staples',
+  },
+};
 
-  if (cycle != null) {
-    if (cycle < 35) bits.push('cycle expanding');
-    else if (cycle < 60) bits.push('cycle late-stage');
-    else bits.push('cycle in slowdown / contraction');
-  }
-  if (inflation != null) {
-    if (inflation < 35) bits.push('inflation cooling');
-    else if (inflation < 65) bits.push('inflation sticky');
-    else bits.push('inflation persistent');
-  }
-
-  let tilt;
-  if ((cycle ?? 50) < 35 && (inflation ?? 50) < 45) {
-    tilt = `<strong>Tilt:</strong> pro-cyclical &mdash; favor growth/tech, small-caps, credit carry. Quality over duration.`;
-  } else if ((cycle ?? 50) > 60 || (consumer ?? 50) > 55) {
-    tilt = `<strong>Tilt:</strong> defensive &mdash; reduce cyclicals, add quality + duration, favor staples + utilities + healthcare.`;
-  } else if ((inflation ?? 50) > 60) {
-    tilt = `<strong>Tilt:</strong> real-asset bias &mdash; energy + materials + financials; underweight long-duration tech.`;
-  } else {
-    tilt = `<strong>Tilt:</strong> balanced &mdash; no single dimension is in extreme regime; maintain neutral risk with attention to housing-cycle position (${housing != null ? housing.toFixed(0) : '—'}/100).`;
-  }
-
-  return bits.join(' · ') + '. ' + tilt;
+function buildTilt(regimeKey) {
+  return REGIME_TILT[regimeKey] || { action: 'Stay neutral', overweights: '', underweights: '' };
 }
 
 // ---------- rendering ----------
@@ -527,24 +540,33 @@ export async function renderTodayRead() {
   };
 
   const outliers = findOutliers();
-  const narrative = buildNarrative(regimeLabel, scoresNow);
 
   // Pretty date
   const [y, m] = currentYm.split('-').map(Number);
   const monthName = new Date(y, m - 1, 1).toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
 
-  tgt.innerHTML = `
-    <div class="tr-eyebrow">TODAY'S READ &middot; ${monthName}</div>
-    <div class="tr-narrative">${narrative}</div>
+  // V3 header: plain-language z phrases + structured tilt chips
+  const growthPhrase = currentInfo ? zPhrase(currentInfo.growthZ) : null;
+  const inflPhrase   = currentInfo ? zPhrase(currentInfo.inflationZ) : null;
+  const regimeKey    = smoothed?.regime || null;
+  const tilt         = buildTilt(regimeKey);
 
-    <div class="tr-regime-block" style="--tr-color:${regimeColor}">
-      <div class="tr-regime-label">REGIME &middot; 3-MONTH SMOOTHED</div>
-      <div class="tr-regime-row">
-        <div class="tr-regime-name" style="color:${regimeColor}">${regimeLabel}</div>
-        ${conviction ? `<div class="tr-conviction" style="color:${conviction.color}; border-color:${conviction.color}">CONVICTION: ${conviction.label}</div>` : ''}
+  tgt.innerHTML = `
+    <div class="tr-summary" style="--tr-color:${regimeColor}">
+      <div class="tr-summary-row tr-summary-regime">
+        <span class="tr-summary-label">REGIME</span>
+        <span class="tr-summary-name" style="color:${regimeColor}">${regimeLabel}</span>
+        ${conviction ? `<span class="tr-summary-conv" style="color:${conviction.color}; border-color:${conviction.color}">${conviction.label} conviction</span>` : ''}
+        ${(growthPhrase || inflPhrase) ? `<span class="tr-summary-bullet">&middot;</span><span class="tr-summary-z">${growthPhrase ? `growth ${growthPhrase}` : ''}${growthPhrase && inflPhrase ? ', ' : ''}${inflPhrase ? `inflation ${inflPhrase}` : ''}</span>` : ''}
+        <span class="tr-summary-bullet">&middot;</span>
+        <span class="tr-summary-period">3-month smoothed, ${monthName}</span>
       </div>
-      ${conviction ? `<div class="tr-conviction-desc">${conviction.desc}</div>` : ''}
-      ${currentInfo ? `<div class="tr-regime-zs">Growth z: ${currentInfo.growthZ >= 0 ? '+' : ''}${fmt(currentInfo.growthZ, 2)} &middot; Inflation z: ${currentInfo.inflationZ >= 0 ? '+' : ''}${fmt(currentInfo.inflationZ, 2)}</div>` : ''}
+      <div class="tr-summary-row tr-summary-tilt">
+        <span class="tr-summary-label">TILT</span>
+        <span class="tr-summary-action">${tilt.action}</span>
+        ${tilt.overweights ? `<span class="tr-summary-bullet">&middot;</span><span class="tr-chip-block"><span class="tr-chip-tag tr-chip-ow">OW</span><span class="tr-chip-list">${tilt.overweights}</span></span>` : ''}
+        ${tilt.underweights ? `<span class="tr-chip-block"><span class="tr-chip-tag tr-chip-uw">UW</span><span class="tr-chip-list">${tilt.underweights}</span></span>` : ''}
+      </div>
     </div>
 
     <div class="tr-hero-row">

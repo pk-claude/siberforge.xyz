@@ -1363,7 +1363,10 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
 // month with a known regime AND a regime 6 months later, count transitions.
 
 function renderRegimeTransitions(regimeMap) {
-  const tgt = el('regime-transitions');
+  // Option A restructure: bars now render into #regime-base-rates inside
+  // regime-hero (next to the trajectory rose). Old #regime-transitions
+  // section is no longer in the DOM.
+  const tgt = el('regime-base-rates') || el('regime-transitions');
   if (!tgt) return;
 
   const months = [...regimeMap.keys()].sort();
@@ -1390,29 +1393,31 @@ function renderRegimeTransitions(regimeMap) {
   const total = Object.values(fromCounts).reduce((s, n) => s + n, 0);
   if (!total) { tgt.innerHTML = ''; return; }
 
-  const order = ['goldilocks', 'reflation', 'stagflation', 'disinflation'];
-  const tiles = order.map(r => {
-    const meta = REGIMES[r];
-    const n = fromCounts[r];
-    const pct = (n / total) * 100;
+  // Sort by likelihood so the most-probable next regime reads first;
+  // the current regime gets a STAY tag and prominent styling regardless.
+  const order = ['goldilocks', 'reflation', 'stagflation', 'disinflation']
+    .map(r => ({ r, n: fromCounts[r], pct: (fromCounts[r] / total) * 100 }))
+    .sort((a, b) => b.pct - a.pct);
+
+  const meta = REGIMES[current];
+  const bars = order.map(({ r, n, pct }) => {
+    const m = REGIMES[r];
     const isCurrent = r === current;
-    const intensity = pct / 100;
-    return `<div class="rt-tile ${isCurrent ? 'self' : ''}" style="--rt-color:${meta.color};--rt-intensity:${intensity.toFixed(3)}">
-      <div class="rt-tile-name">${meta.label}</div>
-      <div class="rt-tile-pct">${pct.toFixed(0)}%</div>
-      <div class="rt-tile-n">${n} of ${total} obs</div>
-      ${isCurrent ? '<div class="rt-tile-stay">stay</div>' : ''}
+    return `<div class="rb-bar ${isCurrent ? 'rb-bar-stay' : ''}" data-regime="${r}">
+      <span class="rb-bar-name" style="color:${m.color}">${m.label}</span>
+      <span class="rb-bar-track"><span class="rb-bar-fill" style="width:${pct.toFixed(1)}%; background:${m.color}"></span></span>
+      <span class="rb-bar-pct">${pct.toFixed(0)}%</span>
+      ${isCurrent ? '<span class="rb-bar-tag">STAY</span>' : `<span class="rb-bar-n">${n}</span>`}
     </div>`;
   }).join('');
 
-  const meta = REGIMES[current];
   tgt.innerHTML = `
-    <div class="rt-trans-header">
-      <h3>What historically came next?</h3>
-      <p class="rt-trans-sub">Current regime: <strong style="color:${meta.color}">${meta.label}</strong>. Base rate of being in each regime 6 months from now, computed from every prior occurrence of the current regime.</p>
+    <div class="rb-head">
+      <span class="rb-head-label">6M FORWARD BASE RATES</span>
+      <span class="rb-head-sub">From every prior occurrence of <strong style="color:${meta.color}">${meta.label}</strong> · sample ${total} windows</span>
     </div>
-    <div class="rt-trans-grid">${tiles}</div>
-    <p class="rt-trans-foot">Past base rates, not forecasts. Sample of ${total} historical 6-month windows.</p>
+    <div class="rb-bars">${bars}</div>
+    <p class="rb-foot">Past base rates, not forecasts.</p>
   `;
 }
 

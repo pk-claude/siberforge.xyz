@@ -62,30 +62,23 @@
 </section>
 
 <section class="regime-section">
-  <h2>Regime-Conditional Sector Returns</h2>
-  <p class="sub">
-    Each historical month is classified into one of four growth &times; inflation regimes. Cells show the average forward
-    total return for SPY and each sector ETF given that regime. <strong>Growth</strong> = composite z-score of <a class="meth-link" href="/core/econ/indicator.html?id=INDPRO" title="See indicator drill-down">INDPRO</a>,
-    nonfarm <a class="meth-link" href="/core/econ/indicator.html?id=PAYEMS" title="See indicator drill-down">payrolls</a>, and <a class="meth-link" href="/core/econ/indicator.html?id=RRSFS" title="See indicator drill-down">real retail sales</a> (each 6m annualized). <strong>Inflation</strong> = z-score of <a class="meth-link" href="/core/econ/indicator.html?id=CPILFESL" title="See indicator drill-down">Core CPI</a> 6m
-    annualized. Both z-scores use a trailing 120-month window so the regime is &ldquo;vs recent history&rdquo; rather than
-    against the inflationary 1970s.
-  </p>
+  <div class="regime-section-head">
+    <h2>Regime &mdash; trajectory &amp; what came next</h2>
+    <span class="regime-meth-q" tabindex="0" title="Growth = composite z-score of INDPRO + nonfarm payrolls + real retail sales (each 6m annualized). Inflation = z-score of Core CPI 6m annualized. Trailing 120-month window so the regime is 'vs recent history' rather than against the inflationary 1970s." aria-label="Methodology">?</span>
+  </div>
 
-  <div class="regime-hero">
+  <div class="regime-hero regime-hero-v2">
     <div class="regime-trajectory-wrap">
       <div class="regime-trajectory-header">
-        <h3>Regime trajectory &middot; last 24 months</h3>
-        <p class="regime-trajectory-sub">Each dot is one month. Newest = brightest. Watch for boundary crossings — that&rsquo;s the actionable signal.</p>
+        <h3>Trajectory &middot; last 24 months</h3>
+        <p class="regime-trajectory-sub">Each dot is one month. Newest = brightest. Boundary crossings are the actionable signal.</p>
       </div>
       <div class="regime-trajectory-chart">
         <div id="regime-trajectory" class="regime-trajectory-svg" data-no-range="true"></div>
       </div>
     </div>
-    <div id="regime-current" class="regime-current"></div>
+    <div id="regime-base-rates" class="regime-base-rates"></div>
   </div>
-
-  <!-- Regime transition matrix — historical 6m forward base rates -->
-  <section class="regime-transitions" id="regime-transitions"></section>
 
   <div class="regime-controls">
     <div class="control-group">

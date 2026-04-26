@@ -2280,3 +2280,187 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================================================= */
+/* Today's Read V3 summary header (2026-04 restructure)                       */
+/* Two-row compact layout: REGIME line + TILT line with OW/UW chips.          */
+/* ========================================================================= */
+.tr-summary {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--tr-color, var(--accent));
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 16px;
+}
+.tr-summary-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+  line-height: 1.55;
+  font-size: 12.5px;
+}
+.tr-summary-row.tr-summary-regime { color: var(--muted); }
+.tr-summary-row.tr-summary-tilt {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+  color: var(--text);
+}
+.tr-summary-label {
+  font-size: 10px;
+  letter-spacing: 1.4px;
+  color: var(--accent);
+  font-weight: 700;
+  min-width: 52px;
+}
+.tr-summary-name { font-size: 14.5px; font-weight: 700; }
+.tr-summary-conv {
+  font-size: 10.5px;
+  padding: 1px 6px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 3px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+}
+.tr-summary-bullet { color: var(--muted); opacity: 0.5; }
+.tr-summary-z { font-size: 12.5px; color: var(--text); opacity: 0.85; }
+.tr-summary-period { font-size: 11px; color: var(--muted); }
+.tr-summary-action { font-size: 13px; font-weight: 700; color: var(--accent); }
+
+.tr-chip-block { display: inline-flex; align-items: center; gap: 6px; }
+.tr-chip-tag {
+  font-size: 9.5px; font-weight: 700; padding: 2px 6px;
+  border-radius: 3px; letter-spacing: 0.8px;
+}
+.tr-chip-ow {
+  background: rgba(62,207,142,0.15); color: var(--green);
+  border: 1px solid rgba(62,207,142,0.4);
+}
+.tr-chip-uw {
+  background: rgba(239,79,90,0.13); color: var(--red);
+  border: 1px solid rgba(239,79,90,0.4);
+}
+.tr-chip-list { font-size: 12px; color: var(--text); }
+
+@media (max-width: 700px) {
+  .tr-summary-name { font-size: 13px; }
+  .tr-summary-row { font-size: 11.5px; gap: 6px; }
+}
+
+/* ========================================================================= */
+/* Option A: regime section restructure (2026-04)                             */
+/* Methodology paragraph collapses to a "?" hover next to the section title;  */
+/* base-rate bars sit next to the trajectory rose where the current-regime    */
+/* card used to live.                                                         */
+/* ========================================================================= */
+.regime-section .regime-section-head {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.regime-section .regime-section-head h2 {
+  margin: 0; font-size: 18px; font-weight: 600;
+}
+.regime-meth-q {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: help;
+  border: 1px solid var(--line);
+  transition: color .15s, border-color .15s;
+}
+.regime-meth-q:hover, .regime-meth-q:focus {
+  color: var(--accent);
+  border-color: var(--accent);
+  outline: none;
+}
+
+.regime-hero-v2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 14px;
+  align-items: stretch;
+}
+@media (max-width: 980px) {
+  .regime-hero-v2 { grid-template-columns: 1fr; }
+}
+
+/* base-rate bars panel */
+.regime-base-rates {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.rb-head { display: flex; flex-direction: column; gap: 4px; }
+.rb-head-label {
+  font-size: 10.5px; letter-spacing: 1.3px;
+  color: var(--muted); font-weight: 600;
+}
+.rb-head-sub { font-size: 11.5px; color: var(--muted); line-height: 1.45; }
+.rb-bars { display: flex; flex-direction: column; gap: 8px; }
+.rb-bar {
+  display: grid;
+  grid-template-columns: 110px 1fr 38px 44px;
+  gap: 10px;
+  align-items: center;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.rb-bar-stay {
+  background: rgba(247, 167, 0, 0.06);
+  outline: 1px solid rgba(247, 167, 0, 0.25);
+}
+.rb-bar-name {
+  font-size: 10.5px;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.rb-bar-track {
+  background: var(--line);
+  border-radius: 2px;
+  height: 8px;
+  overflow: hidden;
+  min-width: 0;
+}
+.rb-bar-fill { display: block; height: 100%; transition: width .25s ease-out; }
+.rb-bar-pct {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  color: var(--text);
+  text-align: right;
+  font-weight: 600;
+}
+.rb-bar-tag {
+  font-size: 9px; padding: 2px 6px;
+  background: rgba(247,167,0,0.18);
+  color: var(--accent);
+  border: 1px solid rgba(247,167,0,0.45);
+  border-radius: 3px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-align: center;
+}
+.rb-bar-n {
+  font-size: 10.5px; color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  text-align: center;
+}
+.rb-foot {
+  margin: 0; font-size: 10.5px; color: var(--muted);
+  font-style: italic;
+}
