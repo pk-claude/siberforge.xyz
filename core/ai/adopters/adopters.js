@@ -205,6 +205,10 @@ async function renderRevenueChart() {
 }
 
 async function renderProductivityChart() {
+  const root = getComputedStyle(document.documentElement);
+  const ACCENT = root.getPropertyValue('--accent').trim() || '#f7a700';
+  const MUTED  = root.getPropertyValue('--muted').trim() || '#888';
+
   const ctx = document.getElementById('support-1-chart');
   if (!ctx) return;
   
@@ -230,7 +234,7 @@ async function renderProductivityChart() {
         {
           label: 'Productivity YoY %',
           data: prodData.productivityYoY,
-          borderColor: 'var(--accent)',
+          borderColor: ACCENT,
           backgroundColor: 'transparent',
           yAxisID: 'y',
           borderWidth: 2,
@@ -241,7 +245,7 @@ async function renderProductivityChart() {
         {
           label: 'Software capex estimate ($B)',
           data: prodData.swCapex,
-          borderColor: 'var(--muted)',
+          borderColor: MUTED,
           backgroundColor: 'transparent',
           yAxisID: 'y1',
           borderWidth: 1.5,

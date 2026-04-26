@@ -144,7 +144,7 @@ export default async function handler(req, res) {
   }
 
   // For the open modes (quote/history/news), allow any well-formed symbol.
-  const allowAny = mode === 'quote' || mode === 'history' || mode === 'news';
+  const allowAny = mode === 'quote' || mode === 'history' || mode === 'news' || mode === 'financials';
   const requested = (req.query.symbols || '').trim();
   const symbols = requested
     ? sanitizeSymbols(requested, allowAny)

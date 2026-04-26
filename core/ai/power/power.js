@@ -88,6 +88,9 @@ async function fetchPriceData() {
 }
 
 async function renderGenerationChart() {
+  const root = getComputedStyle(document.documentElement);
+  const ACCENT = root.getPropertyValue('--accent').trim() || '#f7a700';
+
   const ctx = document.getElementById('anchor-chart');
   if (!ctx) return;
   
@@ -149,7 +152,7 @@ async function renderGenerationChart() {
         {
           label: 'Nuclear',
           data: genData.nuclear,
-          borderColor: 'var(--accent)',
+          borderColor: ACCENT,
           backgroundColor: 'rgba(var(--accent-rgb), 0.3)',
           borderWidth: 1,
           fill: true,
@@ -179,6 +182,9 @@ async function renderGenerationChart() {
 }
 
 async function renderGrowthChart() {
+  const root = getComputedStyle(document.documentElement);
+  const ACCENT = root.getPropertyValue('--accent').trim() || '#f7a700';
+
   const ctx = document.getElementById('support-1-chart');
   if (!ctx) return;
   
@@ -214,13 +220,13 @@ async function renderGrowthChart() {
         {
           label: 'Nuclear YoY %',
           data: nuclearGrowth,
-          borderColor: 'var(--accent)',
+          borderColor: ACCENT,
           backgroundColor: 'transparent',
           borderWidth: 2,
           fill: false,
           tension: 0.3,
           pointRadius: 3,
-          pointBackgroundColor: 'var(--accent)'
+          pointBackgroundColor: ACCENT
         },
         {
           label: 'Renewables YoY %',

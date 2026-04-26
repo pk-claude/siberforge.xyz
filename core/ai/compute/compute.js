@@ -180,6 +180,10 @@ function computeCapexLTM(data) {
 }
 
 async function renderAnchorChart() {
+  const root = getComputedStyle(document.documentElement);
+  const ACCENT = root.getPropertyValue('--accent').trim() || '#f7a700';
+  const MUTED  = root.getPropertyValue('--muted').trim() || '#888';
+
   const ctx = document.getElementById('anchor-chart');
   if (!ctx) return;
   
@@ -211,19 +215,19 @@ async function renderAnchorChart() {
         {
           label: 'Basket revenue YoY (%)',
           data: basketRevYoY,
-          borderColor: 'var(--accent)',
+          borderColor: ACCENT,
           backgroundColor: 'rgba(var(--accent-rgb), 0.1)',
           yAxisID: 'y',
           borderWidth: 2,
           fill: true,
           tension: 0.3,
           pointRadius: 4,
-          pointBackgroundColor: 'var(--accent)'
+          pointBackgroundColor: ACCENT
         },
         {
           label: 'Hyperscaler capex LTM ($B)',
           data: capexLTM,
-          borderColor: 'var(--muted)',
+          borderColor: MUTED,
           backgroundColor: 'transparent',
           yAxisID: 'y1',
           borderWidth: 1.5,
@@ -231,7 +235,7 @@ async function renderAnchorChart() {
           fill: false,
           tension: 0.3,
           pointRadius: 3,
-          pointBackgroundColor: 'var(--muted)'
+          pointBackgroundColor: MUTED
         }
       ]
     },
@@ -322,6 +326,10 @@ function renderBookToBillChart() {
 }
 
 function renderDCShareChart() {
+  const root = getComputedStyle(document.documentElement);
+  const ACCENT = root.getPropertyValue('--accent').trim() || '#f7a700';
+  const LINE   = root.getPropertyValue('--line').trim() || '#444';
+
   const ctx = document.getElementById('support-2-chart');
   if (!ctx) return;
   
@@ -341,7 +349,7 @@ function renderDCShareChart() {
         {
           label: 'DC revenue %',
           data: NVDA_DC_SHARE.dcShare,
-          backgroundColor: 'var(--accent)',
+          backgroundColor: ACCENT,
           borderColor: 'transparent',
           borderRadius: 4,
           stack: 'Group 1'
@@ -349,7 +357,7 @@ function renderDCShareChart() {
         {
           label: 'Other revenue %',
           data: NVDA_DC_SHARE.other,
-          backgroundColor: 'var(--line)',
+          backgroundColor: LINE,
           borderColor: 'transparent',
           borderRadius: 4,
           stack: 'Group 1'
