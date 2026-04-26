@@ -4,130 +4,87 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Siberforge &mdash; AI Beneficiaries</title>
-<link rel="icon" href="/favicon.ico" sizes="any" />
-<link rel="icon" type="image/png" href="/siberforge-mark.png" />
-<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-<meta property="og:type" content="website" />
-<meta property="og:title" content="Siberforge — Research from primary sources" />
-<meta property="og:description" content="Analyst-grade research reconstructed from SEC EDGAR filings and FRED series. Every line item ties back to a filing or a series." />
-<meta property="og:image" content="https://siberforge.xyz/siberforge-og.png" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:image" content="https://siberforge.xyz/siberforge-og.png" />
-<link rel="preconnect" href="https://rsms.me/" />
-<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-<link rel="stylesheet" href="/core/macro/styles.css" />
-<link rel="stylesheet" href="./ai.css" />
+<link rel="stylesheet" href="../macro/styles.css" />
 </head>
 <body>
 <header class="top">
   <div class="brand">
-    <a href="/core/ai/" class="home-link" title="Back to AI section">&larr;</a>
-    
-    <img src="/siberforge-mark.png" class="brand-icon" alt="" />
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
     <span class="mark">SIBERFORGE</span>
     <span class="sub">AI Beneficiaries</span>
   </div>
   <div class="status">
     <span id="refresh-indicator" class="dot"></span>
-    <span id="refresh-text">Modest scenario &middot; Apr 25, 2026</span>
+    <span id="refresh-text">Ready</span>
   </div>
 </header>
-<nav class="deep-dive-nav">
-  <span class="dd-label">AI Beneficiaries</span>
-  <div class="dd-group dd-group-master">
-    <a href="/core/ai/" class="dd-link dd-master active">Overview</a>
-    <span class="dd-tree">&rsaquo;</span>
-    <a href="/core/ai/screen/" class="dd-link dd-sub">Industry Screen</a>
-    <a href="/core/ai/top-5/" class="dd-link dd-sub">Top-5 Deep Dive</a>
-  </div>
-  <span class="dd-divider"></span>
-  <div class="dd-group">
-    <a href="/core/macro/" class="dd-link">Macro &amp; Markets</a>
-    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
-  </div>
-  <span class="dd-divider"></span>
-  <div class="dd-group dd-group-tail">
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
     <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">AI views</span>
+    <a href="#" class="dd-link active">Roadmap</a>
   </div>
 </nav>
 
-<main class="ai-overview">
-  <section class="overview-hero">
-    <h1>AI Beneficiaries</h1>
-    <p class="overview-lede">Two views into the same universe: a wide-angle <strong>Industry Screen</strong> covering 160 publicly traded AI-leveraged equities across 8 industries, and a focused <strong>Top-5 Deep Dive</strong> on the highest-conviction modest-scenario picks. Both share scenario state &mdash; pick a scenario in one view and the other respects it.</p>
-  </section>
+<section class="ai-stub">
+  <div class="section-head">
+    <h2>AI Beneficiaries &mdash; coming soon</h2>
+    <span class="section-head-sub">A working theory of who captures the AI capex cycle and how to position around it.</span>
+  </div>
 
-  <section class="overview-cards">
-    <a class="ov-card" href="./screen/" id="ov-card-screen">
-      <div class="ov-card-meta"><span class="tag">Wide angle</span><span class="ov-count">160 companies &middot; 8 industries</span></div>
-      <h2>Industry Screen</h2>
-      <p>One row per company across 8 AI-beneficiary industries: semiconductors, equipment, hyperscalers, AI software, networking + server hardware, datacenter REITs + cooling + power equipment, power generation + nuclear, cybersecurity. Each company gets a directional 24-mo return vs S&amp;P under all 4 scenarios, with confidence dots and one-line rationale.</p>
-      <p class="ov-cta">Open the screen <span class="arrow">&rarr;</span></p>
-    </a>
-    <a class="ov-card" href="./top-5/" id="ov-card-top5">
-      <div class="ov-card-meta"><span class="tag">Focused</span><span class="ov-count">5 names &middot; modest scenario</span></div>
-      <h2>Top-5 Deep Dive</h2>
-      <p>Bull / bear bullets with supporting charts on each, KPI peer comparisons, 20-ratio comparative matrix (history / current / forecast), max-Sharpe portfolio across all 4 scenarios with weighted probabilities, counter-intuitive shorts under massive AI, and 10-Q working-capital scan per name.</p>
-      <p class="ov-cta">Open the deep dive <span class="arrow">&rarr;</span></p>
-    </a>
-  </section>
-
-  <section class="scenario-bar">
-    <span class="sb-label">Active scenario</span>
-    <div class="sb-buttons">
-      <button class="sb-btn" data-scen="all">All</button>
-      <button class="sb-btn" data-scen="none">No Impact</button>
-      <button class="sb-btn active" data-scen="modest">Modest</button>
-      <button class="sb-btn" data-scen="strong">Strong</button>
-      <button class="sb-btn" data-scen="massive">Massive</button>
+  <div class="ai-stub-grid">
+    <div class="ai-stub-card">
+      <div class="ai-stub-eyebrow">PILLAR 1</div>
+      <h3>Compute & semis</h3>
+      <p>NVDA, AMD, AVGO, TSM, ASML &mdash; the picks and shovels. Track revenue concentration, design-win share, and the gap between hyperscaler capex commitments and supplier book-to-bill.</p>
+      <p class="ai-stub-status">Planned: Q3 2026</p>
     </div>
-    <p class="sb-help">Choice persists in URL hash and travels with you when you click into Screen or Top-5.</p>
-  </section>
 
-  <section class="meth-block">
-  <h3>Methodology</h3>
-  <ul>
-    <li><strong>Universe:</strong> 160 publicly traded names across 8 AI-beneficiary industries. S&amp;P 500 members, &gt;$10B mkt cap, or sector-thematic ETFs. No options. No leveraged/inverse ETFs.</li>
-    <li><strong>Scenarios:</strong> 24-month directional return vs S&amp;P 500. <em>None</em> = AI hype unwinds, hyperscaler capex normalizes. <em>Modest</em> = capex grows 15-20%/yr, gradual enterprise adoption. <em>Strong</em> = 25-35% capex growth, power binding constraint. <em>Massive</em> = AGI-adjacent shock, capex doubles.</li>
-    <li><strong>Top-5 selection:</strong> composite score = confidence (1-5) &times; upside &times; operating margin under modest scenario.</li>
-    <li><strong>Numbers vintage:</strong> historical figures from issuer 10-Ks; current quarter from latest earnings release; forward estimates are author projections under named scenario, not analyst consensus.</li>
-    <li><strong>Not advice:</strong> framework for evaluation, not a buy list. Verify against current filings before any action.</li>
-  </ul>
+    <div class="ai-stub-card">
+      <div class="ai-stub-eyebrow">PILLAR 2</div>
+      <h3>Hyperscaler capex</h3>
+      <p>MSFT, GOOGL, META, AMZN &mdash; the customers paying for it all. Quarterly capex prints, AI-attributable revenue lift, and the ROIC question (when does the spending pay off, or stop?).</p>
+      <p class="ai-stub-status">Planned: Q3 2026</p>
+    </div>
+
+    <div class="ai-stub-card">
+      <div class="ai-stub-eyebrow">PILLAR 3</div>
+      <h3>Power & grid</h3>
+      <p>CEG, VST, NEE, GEV, ETR &mdash; the constraint nobody priced in. Data center power demand, nuclear restart timelines, transmission build-out, PPA pricing for hyperscalers.</p>
+      <p class="ai-stub-status">Planned: Q4 2026</p>
+    </div>
+
+    <div class="ai-stub-card">
+      <div class="ai-stub-eyebrow">PILLAR 4</div>
+      <h3>Adopters & second derivatives</h3>
+      <p>Software (CRM, NOW, ADBE, PANW), services (ACN, IBM), industrial automation (ROK, EMR), and enterprises measurably saving cost from AI deployment. Where productivity actually shows up in the P&L.</p>
+      <p class="ai-stub-status">Planned: Q4 2026</p>
+    </div>
+
+    <div class="ai-stub-card ai-stub-card-wide">
+      <div class="ai-stub-eyebrow">CROSS-CUTTING</div>
+      <h3>How this connects to the macro view</h3>
+      <p>The Regime page treats sectors as base-rate plays. AI Beneficiaries layers on a structural-tilt overlay: which sectors get re-rated regardless of the macro regime because the AI capex cycle is exogenous to the standard growth/inflation framework. The Sample Window toggle on the Positioning section already addresses part of this &mdash; Post-2022 returns reflect the AI era. AI Beneficiaries goes further: per-name picks, per-pillar capex tracking, valuation sanity checks against historical capex booms (telecom 1999, fiber 2000, cloud 2014).</p>
+    </div>
+  </div>
+
+  <p class="ai-stub-meta">If you have specific picks, capex data sources, or framing arguments you want incorporated, drop them in the issues backlog. Build order is shaped by data availability &mdash; Compute and Hyperscalers ship first because the data is clean (10-Q capex, FactSet consensus). Power & grid is harder (PPA pricing is opaque). Adopters is hardest (productivity attribution is genuinely contested).</p>
 </section>
-</main>
 
 <footer>
-  <span>Data: company 10-Ks/10-Qs (most recent reported), management guidance, public earnings press releases. Scenario probabilities are heuristic.</span>
-  <span id="last-updated">Built 2026-04-25 &middot; Not investment advice</span>
+  <span>AI Beneficiaries is a working theory in progress, not a model. Updated alongside the macro views.</span>
+  <span id="last-updated"></span>
 </footer>
 
+<script src="../lib/ui.js"></script>
 <script src="/core/lib/theme-toggle.js"></script>
-<script>
-// URL-hash scenario state. Read on load, update on change, and append to outbound /core/ai/* links.
-(function() {
-  const qs = new URLSearchParams(window.location.search);
-  const scen = qs.get('scenario') || 'modest';
-  document.querySelectorAll('.sb-btn').forEach(b => b.classList.toggle('active', b.dataset.scen === scen));
-  document.querySelectorAll('.sb-btn').forEach(b => b.addEventListener('click', () => {
-    const v = b.dataset.scen;
-    document.querySelectorAll('.sb-btn').forEach(x => x.classList.toggle('active', x === b));
-    const q = new URLSearchParams(window.location.search);
-    q.set('scenario', v);
-    history.replaceState(null,'','?'+q.toString()+window.location.hash);
-    document.querySelectorAll('a.ov-card').forEach(a => {
-      const url = new URL(a.href, window.location.origin);
-      url.searchParams.set('scenario', v);
-      a.href = url.toString();
-    });
-  }));
-  // Initial: append query to outbound links
-  document.querySelectorAll('a.ov-card').forEach(a => {
-    const url = new URL(a.href, window.location.origin);
-    url.searchParams.set('scenario', scen);
-    a.href = url.toString();
-  });
-  document.getElementById('refresh-text').textContent = 'Active: ' + scen.charAt(0).toUpperCase() + scen.slice(1) + ' scenario';
-})();
-</script>
 </body>
 </html>
