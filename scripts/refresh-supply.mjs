@@ -36,6 +36,7 @@ import * as suezSrc from './sources/suez-canal.mjs';
 import * as panamaSrc from './sources/panama-canal.mjs';
 import * as euEtsSrc from './sources/eu-ets.mjs';
 import * as reshoringSrc from './sources/reshoring.mjs';
+import * as portWatchSrc from './sources/imf-portwatch.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
@@ -65,6 +66,7 @@ const SOURCE_MODULES = {
   'scrape:panama-canal': panamaSrc,
   'scrape:eu-ets': euEtsSrc,
   'scrape:reshoring': reshoringSrc,
+  'scrape:imf-portwatch': portWatchSrc,
 };
 
 async function main() {
