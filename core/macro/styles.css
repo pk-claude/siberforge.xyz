@@ -2194,3 +2194,89 @@ footer {
   color: var(--accent);
   border-color: var(--accent);
 }
+
+/* ========================================================================= */
+/* Two-tier deep-dive nav (Markets restructure 2026-04)                       */
+/* Top tier = section tabs (FINANCIALS / MACRO / TOOLS / REFERENCE)           */
+/* Bottom tier = pages within active section                                  */
+/* ========================================================================= */
+.deep-dive-nav.two-tier {
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  gap: 0;
+}
+.deep-dive-nav.two-tier .section-tabs {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 8px 24px;
+  background: var(--panel-2);
+  border-bottom: 1px solid var(--line);
+}
+.deep-dive-nav.two-tier .section-tab {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 11.5px;
+  letter-spacing: 1.4px;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+  transition: color .15s, border-color .15s;
+  white-space: nowrap;
+}
+.deep-dive-nav.two-tier .section-tab:hover {
+  color: var(--text);
+}
+.deep-dive-nav.two-tier .section-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+.deep-dive-nav.two-tier .section-tabs .theme-toggle {
+  margin-left: auto;
+}
+.deep-dive-nav.two-tier .section-pages {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  padding: 10px 24px;
+}
+@media (max-width: 800px) {
+  .deep-dive-nav.two-tier .section-tabs { gap: 12px; padding: 6px 12px; }
+  .deep-dive-nav.two-tier .section-tab { font-size: 10.5px; letter-spacing: 1px; }
+  .deep-dive-nav.two-tier .section-pages { padding: 8px 12px; }
+}
+
+/* ========================================================================= */
+/* Today's Read hero — trajectory col tight-left of composite-scores rose    */
+/* (Layout restructure 2026-04: drop redundant text-score-rows.)             */
+/* ========================================================================= */
+.tr-trajectory-col {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px 18px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.tr-trajectory-col .tr-trajectory-header { margin-bottom: 4px; }
+.tr-trajectory-col .tr-rail-row { padding: 6px 0; }
+.tr-trajectory-col .tr-trajectory-scale { margin-top: 6px; }
+
+/* Make the hero row two columns: trajectory left, rose right, tight gap.
+   Rose stays sized to its native viewBox; trajectory takes remaining width. */
+.tr-hero-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: stretch;
+}
+@media (max-width: 1100px) {
+  .tr-hero-row {
+    grid-template-columns: 1fr;
+  }
+}

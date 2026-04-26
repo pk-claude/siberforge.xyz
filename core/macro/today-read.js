@@ -537,23 +537,33 @@ export async function renderTodayRead() {
     <div class="tr-eyebrow">TODAY'S READ &middot; ${monthName}</div>
     <div class="tr-narrative">${narrative}</div>
 
+    <div class="tr-regime-block" style="--tr-color:${regimeColor}">
+      <div class="tr-regime-label">REGIME &middot; 3-MONTH SMOOTHED</div>
+      <div class="tr-regime-row">
+        <div class="tr-regime-name" style="color:${regimeColor}">${regimeLabel}</div>
+        ${conviction ? `<div class="tr-conviction" style="color:${conviction.color}; border-color:${conviction.color}">CONVICTION: ${conviction.label}</div>` : ''}
+      </div>
+      ${conviction ? `<div class="tr-conviction-desc">${conviction.desc}</div>` : ''}
+      ${currentInfo ? `<div class="tr-regime-zs">Growth z: ${currentInfo.growthZ >= 0 ? '+' : ''}${fmt(currentInfo.growthZ, 2)} &middot; Inflation z: ${currentInfo.inflationZ >= 0 ? '+' : ''}${fmt(currentInfo.inflationZ, 2)}</div>` : ''}
+    </div>
+
     <div class="tr-hero-row">
-      <div class="tr-cards-col">
-        <div class="tr-regime-block" style="--tr-color:${regimeColor}">
-          <div class="tr-regime-label">REGIME &middot; 3-MONTH SMOOTHED</div>
-          <div class="tr-regime-row">
-            <div class="tr-regime-name" style="color:${regimeColor}">${regimeLabel}</div>
-            ${conviction ? `<div class="tr-conviction" style="color:${conviction.color}; border-color:${conviction.color}">CONVICTION: ${conviction.label}</div>` : ''}
-          </div>
-          ${conviction ? `<div class="tr-conviction-desc">${conviction.desc}</div>` : ''}
-          ${currentInfo ? `<div class="tr-regime-zs">Growth z: ${currentInfo.growthZ >= 0 ? '+' : ''}${fmt(currentInfo.growthZ, 2)} · Inflation z: ${currentInfo.inflationZ >= 0 ? '+' : ''}${fmt(currentInfo.inflationZ, 2)}</div>` : ''}
+      <div class="tr-trajectory-col">
+        <div class="tr-trajectory-header">
+          <div class="tr-trajectory-title">SCORE TRAJECTORY &middot; 12 MONTHS &rarr; NOW</div>
+          <div class="tr-trajectory-sub">Each row is a 0-100 risk track. Faded dots = older snapshots; solid dot = today. Connecting line shows direction; phase color tracks the score.</div>
         </div>
-        ${renderScoreRow('Cycle Risk',           'cycle',     scoresNow.cycle,     scores1m.cycle)}
-        ${renderScoreRow('Inflation Persistence','inflation', scoresNow.inflation, scores1m.inflation)}
-        ${renderScoreRow('Housing Cycle',        'housing',   scoresNow.housing,   scores1m.housing)}
-        ${renderScoreRow('Consumer Stress',      'consumer',  scoresNow.consumer,  scores1m.consumer)}
-        ${renderScoreRow('Credit & Liquidity',   'credit',    scoresNow.credit,    scores1m.credit)}
-        ${renderScoreRow('Labor Market',         'labor',     scoresNow.labor,     scores1m.labor)}
+        ${[
+          ['Cycle Risk',           'cycle'],
+          ['Inflation Persistence','inflation'],
+          ['Housing Cycle',        'housing'],
+          ['Consumer Stress',      'consumer'],
+          ['Credit & Liquidity',   'credit'],
+          ['Labor Market',         'labor'],
+        ].map(([label, k]) => renderTrajRail(label, k, scores12m[k], scores3m[k], scores1m[k], scoresNow[k])).join('')}
+        <div class="tr-trajectory-scale">
+          <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
+        </div>
       </div>
       <div class="tr-rose-col">
         <div class="tr-rose-title">Composite scores &middot; today vs 12 months ago</div>
@@ -572,25 +582,7 @@ export async function renderTodayRead() {
       }).join('')}
     </div>` : ''}
 
-    <div class="tr-trajectory">
-      <div class="tr-trajectory-header">
-        <div class="tr-trajectory-title">SCORE TRAJECTORY &middot; 12 MONTHS &rarr; NOW</div>
-        <div class="tr-trajectory-sub">Each row is a 0-100 risk track. Faded dots = older snapshots; solid dot = today. Connecting line shows direction; phase color tracks the score.</div>
-      </div>
-      ${[
-        ['Cycle Risk',           'cycle'],
-        ['Inflation Persistence','inflation'],
-        ['Housing Cycle',        'housing'],
-        ['Consumer Stress',      'consumer'],
-        ['Credit & Liquidity',   'credit'],
-        ['Labor Market',         'labor'],
-      ].map(([label, k]) => renderTrajRail(label, k, scores12m[k], scores3m[k], scores1m[k], scoresNow[k])).join('')}
-      <div class="tr-trajectory-scale">
-        <span>0</span><span>25</span><span>50</span><span>75</span><span>100</span>
-      </div>
-    </div>
-
-    <div class="tr-quick-jump">
+        <div class="tr-quick-jump">
       <a href="/core/macro/cycle/">Cycle &rarr;</a>
       <a href="/core/macro/inflation/">Inflation &rarr;</a>
       <a href="/core/macro/housing/">Housing &rarr;</a>
