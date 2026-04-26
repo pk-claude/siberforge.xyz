@@ -288,8 +288,7 @@ async function renderIntensityHeatmap() {
       scales: {
         y: {
           title: { display: true, text: 'Capex Intensity (% revenue)' },
-          beginAtZero: true,
-          max: 35
+          beginAtZero: true
         }
       }
     }
