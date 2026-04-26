@@ -216,7 +216,7 @@ async function renderAnchorChart() {
           label: 'Basket revenue YoY (%)',
           data: basketRevYoY,
           borderColor: ACCENT,
-          backgroundColor: 'rgba(var(--accent-rgb), 0.1)',
+          backgroundColor: 'rgba(247, 167, 0, 0.1)',
           yAxisID: 'y',
           borderWidth: 2,
           fill: true,
@@ -397,6 +397,49 @@ function renderBasketGrid() {
  * Build dynamic takeaway block for compute pillar.
  * Interpolates live data into four-row structure.
  */
+
+/**
+ * Fetch book-to-bill ratios from /core/ai/data/book-to-bill.json (manually-updated).
+ * Transforms {symbol, ratio} -> {name, value} to match render shape.
+ * Falls back to hardcoded BOOK_TO_BILL on failure.
+ */
+async function fetchBookToBillData() {
+  try {
+    const res = await fetch('/core/ai/data/book-to-bill.json');
+    if (!res.ok) return;
+    const json = await res.json();
+    if (Array.isArray(json.data)) {
+      BOOK_TO_BILL = json.data.map(d => ({ name: d.symbol, value: d.ratio }));
+      BTB_UPDATED = json.updated || null;
+    }
+  } catch (err) {
+    console.warn('book-to-bill fetch failed; using fallback', err);
+  }
+}
+
+/**
+ * Fetch NVDA segment shares from /core/ai/data/nvda-segments.json.
+ * Transforms [{quarter, dc_share, other_share}] -> {quarters, dcShare, other}.
+ * Falls back to hardcoded NVDA_DC_SHARE on failure.
+ */
+async function fetchNVDASegmentData() {
+  try {
+    const res = await fetch('/core/ai/data/nvda-segments.json');
+    if (!res.ok) return;
+    const json = await res.json();
+    if (Array.isArray(json.data) && json.data.length > 0) {
+      NVDA_DC_SHARE = {
+        quarters: json.data.map(d => d.quarter),
+        dcShare:  json.data.map(d => d.dc_share),
+        other:    json.data.map(d => d.other_share)
+      };
+      NVDA_UPDATED = json.updated || null;
+    }
+  } catch (err) {
+    console.warn('nvda-segments fetch failed; using fallback', err);
+  }
+}
+
 function buildTakeaway(liveData) {
   // Extract live values or fall back to hardcoded
   const basketYoY = liveData?.basketYoY ?? 47;

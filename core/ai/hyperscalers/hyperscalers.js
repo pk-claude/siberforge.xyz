@@ -149,7 +149,7 @@ async function renderRankChart() {
   
   const ranks = rankResult.ranks;
   const coNames = HYPERSCALER_COMPANIES;
-  const colors = ['var(--accent)', 'var(--muted)', 'var(--line)', 'rgba(255,150,0,0.7)'];
+  const colors = ['#f7a700', '#5aa6ff', '#3fd17a', '#ef6b6b'];
   
   const datasets = coNames.map((co, idx) => ({
     label: co,

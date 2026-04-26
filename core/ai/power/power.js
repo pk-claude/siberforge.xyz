@@ -153,7 +153,7 @@ async function renderGenerationChart() {
           label: 'Nuclear',
           data: genData.nuclear,
           borderColor: ACCENT,
-          backgroundColor: 'rgba(var(--accent-rgb), 0.3)',
+          backgroundColor: 'rgba(247, 167, 0, 0.3)',
           borderWidth: 1,
           fill: true,
           tension: 0.2,
