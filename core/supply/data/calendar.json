@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-26T14:45:01.870Z",
+  "generatedAt": "2026-04-26T14:51:29.544Z",
   "windowDays": 14,
   "windows": {
     "next14": [
@@ -107,19 +107,6 @@
         "unit": "k",
         "decimals": 0,
         "context": "Last: 15,277 on 2026-03-01"
-      },
-      {
-        "date": "2026-05-01",
-        "id": "SCFI",
-        "label": "Shanghai Containerized Freight Index",
-        "shortLabel": "SCFI",
-        "category": "international",
-        "cadence": "SSE, every Friday",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "",
-        "decimals": 1,
-        "context": "no prior data on file"
       },
       {
         "date": "2026-05-01",
@@ -250,19 +237,6 @@
         "unit": "$/gal",
         "decimals": 3,
         "context": "Last: 4.044 on 2026-04-20"
-      },
-      {
-        "date": "2026-05-08",
-        "id": "SCFI",
-        "label": "Shanghai Containerized Freight Index",
-        "shortLabel": "SCFI",
-        "category": "international",
-        "cadence": "SSE, every Friday",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "",
-        "decimals": 1,
-        "context": "no prior data on file"
       }
     ],
     "byCategory": {
@@ -442,19 +416,6 @@
         },
         {
           "date": "2026-05-01",
-          "id": "SCFI",
-          "label": "Shanghai Containerized Freight Index",
-          "shortLabel": "SCFI",
-          "category": "international",
-          "cadence": "SSE, every Friday",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "",
-          "decimals": 1,
-          "context": "no prior data on file"
-        },
-        {
-          "date": "2026-05-01",
           "id": "SUEZ_TRANSITS",
           "label": "Suez Canal Monthly Transits",
           "shortLabel": "Suez Transits",
@@ -464,19 +425,6 @@
           "lastDate": null,
           "unit": "",
           "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
-          "date": "2026-05-08",
-          "id": "SCFI",
-          "label": "Shanghai Containerized Freight Index",
-          "shortLabel": "SCFI",
-          "category": "international",
-          "cadence": "SSE, every Friday",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "",
-          "decimals": 1,
           "context": "no prior data on file"
         }
       ],
