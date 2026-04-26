@@ -206,7 +206,55 @@ const REGIME_TILT = {
 };
 
 function buildTilt(regimeKey) {
-  return REGIME_TILT[regimeKey] || { action: 'Stay neutral', overweights: '', underweights: '' };
+  // Sync with empirical positioning picks from dashboard.js
+  const sample = window.__SF_STATE?.positioningSample || 'full';
+  const table = sample === 'post2022' ? window.__SF_STATE?.regimeTablePost2022 : window.__SF_STATE?.regimeTable;
+  const minN = sample === 'post2022' ? 6 : 24;
+
+  if (!table || !regimeKey) {
+    // Fallback to static map if dashboard hasn't loaded
+    return REGIME_TILT[regimeKey] || { action: 'Stay neutral', overweights: '', underweights: '' };
+  }
+
+  // Replicate positioning logic: filter by minN, sort by mean, top 3 / bottom 3
+  const allSyms = window.__SF_STATE?.regimeSymbols?.filter(s => s !== 'SPY') || [];
+  const cells = allSyms
+    .map(s => ({ s, c: table[s]?.[regimeKey]?.[6] }))
+    .filter(o => o.c && o.c.n >= minN)
+    .sort((a, b) => b.c.mean - a.c.mean);
+
+  if (cells.length < 6) {
+    // Not enough picks
+    return REGIME_TILT[regimeKey] || { action: 'Stay neutral', overweights: '', underweights: '' };
+  }
+
+  const top = cells.slice(0, 3);
+  const bottom = cells.slice(-3).reverse();
+
+  // Map symbols to sector labels
+  const getSectorLabel = (sym) => {
+    // Import SECTOR_PROFILES lazily or assume it's available globally
+    const profiles = window.__SF_STATE?.SECTOR_PROFILES || {};
+    const profile = profiles[sym];
+    return profile?.label || sym;
+  };
+
+  const overweights = top.map(t => `${t.s} ${getSectorLabel(t.s)}`).join(', ');
+  const underweights = bottom.map(t => `${t.s} ${getSectorLabel(t.s)}`).join(', ');
+
+  // Use static action string for this regime
+  const actions = {
+    goldilocks: 'Add risk',
+    reflation: 'Real-asset bias',
+    stagflation: 'Defensive + commodities',
+    disinflation: 'Position for recovery',
+  };
+
+  return {
+    action: actions[regimeKey] || 'Stay neutral',
+    overweights,
+    underweights,
+  };
 }
 
 // ---------- rendering ----------
@@ -624,3 +672,8 @@ export async function renderTodayRead() {
 
   `;
 }
+
+// Sync with Positioning sample toggle
+document.addEventListener('regime:sample-changed', () => {
+  renderTodayRead().catch(() => {});
+});

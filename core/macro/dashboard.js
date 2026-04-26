@@ -607,6 +607,8 @@ async function renderRegimeReturns() {
   console.log('[regime] classified months:', regimeMap.size, dist);
 
   state.regimeTable = buildRegimeReturnsTable(history, regimeMap, [1, 3, 6]);
+  state.regimeTablePost2022 = buildRegimeReturnsTable(history, regimeMap, [1, 3, 6], { since: "2022-01-01" });
+  state.positioningSample = "full";
 
   const months = [...regimeMap.keys()].sort();
   const currentYm = months[months.length - 1];
@@ -1542,34 +1544,68 @@ main();
 // has something they can act on directly. The pillar the user explicitly asked
 // for — "clear so whats and takeaways to help drive decisions."
 
+// Expose state for cross-module sync (V3 Tilt needs this)
+window.__SF_STATE = state;
+
 function renderPositioning() {
   const tgt = el('regime-positioning');
   if (!tgt || !state.regimeTable || !state.currentRegime) return;
   const regime = state.currentRegime;
   const meta = REGIMES[regime];
-  const horizon = 6; // capstone always uses 6m horizon — matches the user's stated decision horizon
+  const horizon = 6;
+
+  const sample = state.positioningSample || 'full';
+  const regimeTable = sample === 'post2022' ? state.regimeTablePost2022 : state.regimeTable;
+  const minN = sample === 'post2022' ? 6 : 24;
 
   const sym = state.regimeSymbols.filter(s => s !== 'SPY');
   const cells = sym
-    .map(s => ({ s, c: state.regimeTable[s]?.[regime]?.[horizon] }))
-    .filter(o => o.c && o.c.n >= 24); // require 2+ years of observations to qualify
+    .map(s => ({ s, c: regimeTable[s]?.[regime]?.[horizon] }))
+    .filter(o => o.c && o.c.n >= minN);
 
   if (cells.length < 4) {
-    tgt.innerHTML = `<div class="rp-empty">Insufficient sector history in this regime to issue tilt recommendations (require n &ge; 24 per sector).</div>`;
+    const msg = sample === 'post2022'
+      ? 'Insufficient post-2022 sector data in this regime (require n ≥ 6 per sector).'
+      : 'Insufficient sector history in this regime to issue tilt recommendations (require n ≥ 24 per sector).';
+    tgt.innerHTML = `<div class="rp-empty">${msg}</div>`;
     return;
   }
+
+  // Compute σ percentile for confidence bucketing
+  const allStds = [];
+  for (const s of sym) {
+    const c = regimeTable[s]?.[regime]?.[horizon];
+    if (c && c.n >= minN) allStds.push(c.std);
+  }
+  allStds.sort((a, b) => a - b);
+  const p33 = allStds[Math.floor(allStds.length * 0.33)];
+  const p67 = allStds[Math.floor(allStds.length * 0.67)];
+
+  function getConfidence(c) {
+    if (sample === 'post2022' && c.n < 20) return 'low';
+    if (c.std <= p33) return 'high';
+    if (c.std <= p67) return 'med';
+    return 'low';
+  }
+
+  const confExplain = {
+    high: 'Tight historical distribution — anchor the tilt.',
+    med: 'Moderate dispersion — normal sizing.',
+    low: 'Wide dispersion — often a sign of structural change. Smaller position size.',
+  };
 
   cells.sort((a, b) => b.c.mean - a.c.mean);
   const top    = cells.slice(0, 3);
   const bottom = cells.slice(-3).reverse();
 
-  const spyCell = state.regimeTable.SPY?.[regime]?.[horizon];
+  const spyCell = regimeTable.SPY?.[regime]?.[horizon];
   const spyMean = spyCell?.mean;
 
   function renderRec(item, kind) {
     const profile = SECTOR_PROFILES[item.s];
     const sign = v => v > 0 ? '+' : '';
     const c = item.c;
+    const conf = getConfidence(c);
     const vsSpy = Number.isFinite(spyMean) ? c.mean - spyMean : null;
     const tailLine = Number.isFinite(c.q1)
       ? `Worst-quartile outcome: ${sign(c.q1)}${fmt(c.q1, 1)}% (size positions accordingly).`
@@ -1585,11 +1621,17 @@ function renderPositioning() {
         <span class="rp-rec-meta">avg fwd 6m</span>
         ${vsSpy != null ? `<span class="rp-rec-vsspy ${vsSpy >= 0 ? 'pos' : 'neg'}">${sign(vsSpy)}${fmt(vsSpy, 1)}pp vs SPY</span>` : ''}
         <span class="rp-rec-n">n=${c.n}</span>
+        <span class="rp-rec-conf rp-conf-${conf}" title="σ=${c.std.toFixed(1)}% across n=${c.n} prior occurrences. ${confExplain[conf]}">●${conf.toUpperCase()}</span>
       </div>
       <div class="rp-rec-rationale">${profile?.byRegime?.[regime] || ''}</div>
       ${tailLine ? `<div class="rp-rec-tail">${tailLine}</div>` : ''}
     </div>`;
   }
+
+  const sampCountNote = `n=${allStds.length} obs`;
+  const smallNWarn = sample === 'post2022' && allStds.length < 20
+    ? ' <span class="rp-small-n-warning">(small sample — use with caution)</span>'
+    : '';
 
   tgt.innerHTML = `
     <div class="rp-header">
@@ -1598,10 +1640,20 @@ function renderPositioning() {
       <p class="rp-sub">
         Translates the current regime call into a specific over/under-weight tilt.
         Picks the top 3 and bottom 3 sectors by historical forward 6-month return
-        in this regime (n ≥ 24 required to qualify). These are base rates, not
+        in this regime (n ≥ ${minN} required to qualify). These are base rates, not
         forecasts — but absent a strong contrary view, they're the prior that
         should anchor sector positioning today.
       </p>
+    </div>
+    <div class="rp-toolbar">
+      <div class="control-group">
+        <span class="control-label">Sample window</span>
+        <div class="control-tabs">
+          <button class="rp-sample-tab ${sample === 'full' ? 'active' : ''}" data-sample="full">Full history (1990+)</button>
+          <button class="rp-sample-tab ${sample === 'post2022' ? 'active' : ''}" data-sample="post2022">Post-2022 only</button>
+        </div>
+      </div>
+      <span class="rp-toolbar-note" id="rp-toolbar-note">${sampCountNote} sector × regime cells · σ percentile computed in this sample${smallNWarn}</span>
     </div>
     <div class="rp-grid">
       <div class="rp-col rp-overweights">
@@ -1613,12 +1665,33 @@ function renderPositioning() {
         ${bottom.map(t => renderRec(t, 'under')).join('')}
       </div>
     </div>
+    <details class="rp-conf-legend"><summary>What the dot means</summary>
+      <p>Each dot reflects the standard deviation (σ) of historical 6-month forward returns for that sector × regime combination, ranked against the cross-section of all sector × regime cells in the chosen sample.</p>
+      <ul>
+        <li><span class="rp-conf-dot rp-conf-high">●</span> <strong>HIGH</strong> — tight distribution. Anchor the tilt.</li>
+        <li><span class="rp-conf-dot rp-conf-med">●</span> <strong>MED</strong> — moderate dispersion. Normal sizing.</li>
+        <li><span class="rp-conf-dot rp-conf-low">●</span> <strong>LOW</strong> — wide dispersion. Often signals structural change (e.g. AI capex post-2022). Smaller position size.</li>
+      </ul>
+    </details>
     <p class="rp-foot">
       Methodology: 30+ years of monthly history classified into four regimes,
       forward-6-month total returns averaged within the current regime, top/bottom
-      ranked. Excludes sectors with &lt; 24 historical observations in this regime
+      ranked. Excludes sectors with &lt; ${minN} historical observations in this regime
       (XLRE pre-2015, XLC pre-2018 may be excluded depending on the regime).
       <strong>Past base rates — not forecasts.</strong>
     </p>
   `;
+
+  // Wire up sample toggle
+  const tabs = tgt.querySelectorAll('.rp-sample-tab');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const newSample = tab.dataset.sample;
+      if (newSample === state.positioningSample) return;
+      state.positioningSample = newSample;
+      renderPositioning();
+      document.dispatchEvent(new CustomEvent('regime:sample-changed', { detail: { sample: newSample } }));
+    });
+  });
 }
+

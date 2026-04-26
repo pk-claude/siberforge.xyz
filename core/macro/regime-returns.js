@@ -40,7 +40,7 @@ function quantile(sorted, q) {
 
 // Aggregate forward returns by regime for one symbol. Returns:
 //   { goldilocks: { 1: {mean, std, n, min, q1, median, q3, max}, 3: ..., 6: ... }, ... }
-export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3, 6]) {
+export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3, 6], { since = null } = {}) {
   const samples = {};
   for (const r of ['goldilocks', 'reflation', 'stagflation', 'disinflation']) {
     samples[r] = {};
@@ -51,6 +51,7 @@ export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3
 
   for (let i = 0; i < months.length; i++) {
     const ym = months[i];
+    if (since && ym < since.slice(0, 7)) continue;
     const info = regimeMap.get(ym);
     if (!info) continue;
     const startVal = monthEndCloses.get(ym).value;
@@ -97,11 +98,11 @@ export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3
 }
 
 // Build the full table for a set of symbols.
-export function buildRegimeReturnsTable(stockHistoryMap, regimeMap, horizons = [1, 3, 6]) {
+export function buildRegimeReturnsTable(stockHistoryMap, regimeMap, horizons = [1, 3, 6], { since = null } = {}) {
   const result = {};
   for (const [symbol, closes] of Object.entries(stockHistoryMap)) {
     const monthEnds = dailyToMonthEnd(closes);
-    result[symbol] = regimeForwardReturns(monthEnds, regimeMap, horizons);
+    result[symbol] = regimeForwardReturns(monthEnds, regimeMap, horizons, { since });
   }
   return result;
 }
