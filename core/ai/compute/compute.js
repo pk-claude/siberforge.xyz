@@ -2,6 +2,7 @@
 // Compute & semis pillar page: charts + sparkline grid with live data fetches
 
 import { renderSparklineGrid } from '../lib/sparkline-grid.js';
+import { injectLoadingStyles, setStatus, showLoading, hideLoading } from '../lib/loading.js';
 
 // Basket definitions (symbols for sparkline grid)
 const BASKET_TICKERS = [
@@ -452,11 +453,17 @@ function buildTakeaway(liveData) {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  injectLoadingStyles();
+  setStatus('Loading EDGAR data...', true);
+  showLoading('anchor-chart', 'Loading capex vs revenue data...');
+  showLoading('support-1-chart', 'Loading book-to-bill data...');
+  showLoading('support-2-chart', 'Loading NVDA segment data...');
+
   renderBasketGrid();
-  
+
   // Fetch externalized JSON data
   await Promise.all([fetchBookToBillData(), fetchNVDASegmentData()]);
-  
+
   // Fetch live data for takeaway
   const basketRevData = await fetchComputeBasketRevenue();
   let liveData = null;
@@ -470,14 +477,19 @@ window.addEventListener('DOMContentLoaded', async () => {
       };
     }
   }
-  
+
   // Inject dynamic takeaway
   const takeawayEl = document.querySelector('.ai-takeaway');
   if (takeawayEl) {
     takeawayEl.innerHTML = buildTakeaway(liveData);
   }
-  
+
   await renderAnchorChart();
+  hideLoading('anchor-chart');
   renderBookToBillChart();
+  hideLoading('support-1-chart');
   renderDCShareChart();
+  hideLoading('support-2-chart');
+
+  setStatus('Ready', false);
 });

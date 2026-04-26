@@ -2,6 +2,7 @@
 // Power & grid pillar page: generation mix chart + growth rates + electricity prices (live EIA data)
 
 import { renderSparklineGrid } from '../lib/sparkline-grid.js';
+import { injectLoadingStyles, setStatus, showLoading, hideLoading } from '../lib/loading.js';
 
 // --- trailing-12 helpers ---
 // All three power charts use a rolling-annual view: each plotted point is the
@@ -28,45 +29,6 @@ function trailing12YoY(arr) {
     if (prior == null || prior === 0) return null;
     return ((s / prior) - 1) * 100;
   });
-}
-
-// --- loading-state helpers ---
-// EIA fetches can take several seconds; surface progress via the top-right status
-// indicator and per-chart overlays so the page doesn't look frozen.
-function injectLoadingStyles() {
-  if (document.getElementById('power-loading-styles')) return;
-  const s = document.createElement('style');
-  s.id = 'power-loading-styles';
-  s.textContent = '.dot.busy{background:#f7a700;animation:power-pulse 1.1s ease-in-out infinite}@keyframes power-pulse{0%,100%{opacity:1}50%{opacity:.3}}.chart-loading-overlay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:#9aa0a6;pointer-events:none;z-index:5}.chart-loading-overlay::before{content:"";width:10px;height:10px;border-radius:50%;background:#f7a700;animation:power-pulse 1.1s ease-in-out infinite}';
-  document.head.appendChild(s);
-}
-function setStatus(text, busy) {
-  const t = document.getElementById('refresh-text');
-  const d = document.getElementById('refresh-indicator');
-  if (t) t.textContent = text;
-  if (d) d.classList.toggle('busy', !!busy);
-}
-function showChartLoading(canvasId, text) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  const wrap = canvas.parentElement;
-  if (!wrap) return;
-  if (getComputedStyle(wrap).position === 'static') wrap.style.position = 'relative';
-  let overlay = wrap.querySelector('.chart-loading-overlay');
-  if (!overlay) {
-    overlay = document.createElement('div');
-    overlay.className = 'chart-loading-overlay';
-    wrap.appendChild(overlay);
-  }
-  overlay.append(document.createTextNode(text || 'Loading...'));
-}
-function hideChartLoading(canvasId) {
-  const canvas = document.getElementById(canvasId);
-  if (!canvas) return;
-  const wrap = canvas.parentElement;
-  if (!wrap) return;
-  const overlay = wrap.querySelector('.chart-loading-overlay');
-  if (overlay) overlay.remove();
 }
 
 // --- fetch memoization ---
@@ -456,9 +418,9 @@ function buildTakeaway(liveData) {
 window.addEventListener('DOMContentLoaded', async () => {
   injectLoadingStyles();
   setStatus('Loading EIA data...', true);
-  showChartLoading('anchor-chart', 'Loading generation data...');
-  showChartLoading('support-1-chart', 'Loading nuclear/renewables data...');
-  showChartLoading('support-2-chart', 'Loading price data...');
+  showLoading('anchor-chart', 'Loading generation data...');
+  showLoading('support-1-chart', 'Loading nuclear/renewables data...');
+  showLoading('support-2-chart', 'Loading price data...');
 
   renderBasketGrid();
 
@@ -510,11 +472,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
 
   await renderGenerationChart();
-  hideChartLoading('anchor-chart');
+  hideLoading('anchor-chart');
   await renderGrowthChart();
-  hideChartLoading('support-1-chart');
+  hideLoading('support-1-chart');
   await renderPriceChart();
-  hideChartLoading('support-2-chart');
+  hideLoading('support-2-chart');
 
   setStatus('Ready', false);
 });

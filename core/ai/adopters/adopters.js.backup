@@ -358,14 +358,9 @@ function buildTakeaway(liveData) {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
-  injectLoadingStyles();
-  setStatus('Loading data...', true);
-  showLoading('anchor-chart', 'Loading software revenue data...');
-  showLoading('support-1-chart', 'Loading productivity data...');
-  showLoading('support-2-chart', 'Loading margin data...');
-
   renderBasketGrid();
-
+  
+  // Fetch live data for takeaway
   const swRevData = await fetchSoftwareRevenue();
   let liveData = null;
   if (swRevData && swRevData.CRM && swRevData.NOW && swRevData.ADBE && swRevData.PANW) {
@@ -373,27 +368,24 @@ window.addEventListener('DOMContentLoaded', async () => {
     const now = swRevData.NOW;
     const adbe = swRevData.ADBE;
     const panw = swRevData.PANW;
+    
     if (crm.length > 4 && now.length > 4 && adbe.length > 4 && panw.length > 4) {
+      // Compute basket YoY (latest vs 4 quarters prior)
       const latest = [crm[crm.length-1], now[now.length-1], adbe[adbe.length-1], panw[panw.length-1]];
       const prior = [crm[crm.length-5], now[now.length-5], adbe[adbe.length-5], panw[panw.length-5]];
+      
       const latestSum = latest.reduce((a, b) => a + b, 0);
       const priorSum = prior.reduce((a, b) => a + b, 0);
+      
       const basketYoY = priorSum > 0 ? Math.round(((latestSum / priorSum) - 1) * 100) : 12;
+      
       liveData = { basketYoY };
     }
   }
-
+  
+  // Inject dynamic takeaway
   const takeawayEl = document.querySelector('.ai-takeaway');
   if (takeawayEl) {
     takeawayEl.innerHTML = buildTakeaway(liveData);
   }
-
-  await renderRevenueChart();
-  hideLoading('anchor-chart');
-  await renderProductivityChart();
-  hideLoading('support-1-chart');
-  await renderMarginChart();
-  hideLoading('support-2-chart');
-
-  setStatus('Ready', false);
 });

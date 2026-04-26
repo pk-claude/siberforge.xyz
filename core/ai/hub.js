@@ -1,4 +1,5 @@
 // /core/ai/hub.js — AI hub page: sankey hero + pillar card metrics
+import { injectLoadingStyles, setStatus, showLoading, hideLoading } from './lib/loading.js';
 
 // Hardcoded sankey data (2025E): hyperscalers → capex buckets → end beneficiaries
 // Values are approximate capex $ billions. Will be replaced by live data in Phase 2-3.
@@ -149,8 +150,18 @@ function setMetrics() {
 }
 
 // Initialize on page load
-window.addEventListener('DOMContentLoaded', () => {
-  renderSankey().catch(err => console.error('Sankey render failed:', err));
-  setupThemeListener();
+window.addEventListener('DOMContentLoaded', async () => {
+  injectLoadingStyles();
+  setStatus('Loading capex flows...', true);
+  showLoading('ai-sankey', 'Loading capex flows...');
   setMetrics();
+  setupThemeListener();
+  try {
+    await renderSankey();
+  } catch (err) {
+    console.error('Sankey render failed:', err);
+  } finally {
+    hideLoading('ai-sankey');
+    setStatus('Ready', false);
+  }
 });

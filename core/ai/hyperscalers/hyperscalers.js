@@ -2,8 +2,14 @@
 // Hyperscaler capex pillar page: rank chart + intensity heatmap + AI share stacked area
 
 import { renderSparklineGrid } from '../lib/sparkline-grid.js';
+import { injectLoadingStyles, setStatus, showLoading, hideLoading } from '../lib/loading.js';
 
 const HYPERSCALER_COMPANIES = ['AMZN', 'MSFT', 'GOOGL', 'META'];
+
+// Memoize EDGAR fetches — without this each render function hits EDGAR independently,
+// firing 4+ identical requests per page load.
+let _capexPromise = null;
+let _revenuePromise = null;
 
 // Fallback hardcoded data (last 8 quarters)
 const FALLBACK_CAPEX_QUARTERS = ["Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25"];
@@ -39,107 +45,93 @@ const BASKET_TICKERS = [
  * Fetch quarterly capex for hyperscalers via EDGAR.
  * Returns data keyed by company: { MSFT: [...], GOOGL: [...], ... }
  */
-async function fetchCapexData() {
-  try {
-    const data = {};
-    
-    for (const company of HYPERSCALER_COMPANIES) {
-      const url = `/api/edgar?company=${company}&concepts=PaymentsToAcquirePropertyPlantAndEquipment`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`EDGAR ${company} ${res.status}`);
-      const json = await res.json();
-      
-      const series = json.series && json.series.length > 0 ? json.series[0] : null;
-      if (!series) {
-        console.warn(`No EDGAR capex data for ${company}`);
-        return null;
+function fetchCapexData() {
+  if (_capexPromise) return _capexPromise;
+  _capexPromise = (async () => {
+    try {
+      const data = {};
+      for (const company of HYPERSCALER_COMPANIES) {
+        const url = `/api/edgar?company=${company}&concepts=PaymentsToAcquirePropertyPlantAndEquipment`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`EDGAR ${company} ${res.status}`);
+        const json = await res.json();
+        const series = json.series && json.series.length > 0 ? json.series[0] : null;
+        if (!series) {
+          console.warn(`No EDGAR capex data for ${company}`);
+          return null;
+        }
+        const quarterly = (series.observations || [])
+          .filter(o => o.form === '10-Q')
+          .sort((a, b) => new Date(a.end) - new Date(b.end))
+          .slice(-8);
+        if (quarterly.length < 4) {
+          console.warn(`Insufficient quarters for ${company}`);
+          return null;
+        }
+        data[company] = quarterly.map(o => o.val / 1e9);
       }
-      
-      // Filter to 10-Q (quarterly) observations, sort chronologically
-      const quarterly = (series.observations || [])
-        .filter(o => o.form === '10-Q')
-        .sort((a, b) => new Date(a.end) - new Date(b.end))
-        .slice(-8); // Last 8 quarters
-      
-      if (quarterly.length < 4) {
-        console.warn(`Insufficient quarters for ${company}`);
-        return null;
-      }
-      
-      data[company] = quarterly.map(o => o.val / 1e9); // Billions
+      return data;
+    } catch (err) {
+      console.warn('Failed to fetch capex data:', err);
+      return null;
     }
-    
-    return data;
-  } catch (err) {
-    console.warn('Failed to fetch capex data:', err);
-    return null;
-  }
+  })();
+  return _capexPromise;
 }
 
 /**
  * Fetch quarterly revenue for hyperscalers via EDGAR.
  * Tries Revenues concept first, falls back to RevenueFromContractWithCustomerExcludingAssessedTax.
  */
-async function fetchRevenueData() {
-  try {
-    const data = {};
-    const revenueConcepts = ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax'];
-    
-    for (const company of HYPERSCALER_COMPANIES) {
-      const conceptsParam = revenueConcepts.join(',');
-      const url = `/api/edgar?company=${company}&concepts=${conceptsParam}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`EDGAR ${company} ${res.status}`);
-      const json = await res.json();
-      
-      // Pick the concept with the MOST RECENT observation. Microsoft etc. file under
-      // 'Revenues' pre-2018 and 'RevenueFromContractWithCustomerExcludingAssessedTax' from
-      // ASC-606 adoption onward. A naive fallback picks the older, stale series.
-      let foundRevenue = null;
-      let latestEnd = '0000-00-00';
-      for (const series of (json.series || [])) {
-        const obs = series.observations || [];
-        if (obs.length === 0) continue;
-        // Find the most recent end date in this concept's observations
-        const lastEnd = obs.reduce((max, o) => o.end > max ? o.end : max, '0000-00-00');
-        if (lastEnd > latestEnd) {
-          latestEnd = lastEnd;
-          foundRevenue = series;
+function fetchRevenueData() {
+  if (_revenuePromise) return _revenuePromise;
+  _revenuePromise = (async () => {
+    try {
+      const data = {};
+      const revenueConcepts = ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax'];
+      for (const company of HYPERSCALER_COMPANIES) {
+        const conceptsParam = revenueConcepts.join(',');
+        const url = `/api/edgar?company=${company}&concepts=${conceptsParam}`;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`EDGAR ${company} ${res.status}`);
+        const json = await res.json();
+        let foundRevenue = null;
+        let latestEnd = '0000-00-00';
+        for (const series of (json.series || [])) {
+          const obs = series.observations || [];
+          if (obs.length === 0) continue;
+          const lastEnd = obs.reduce((max, o) => o.end > max ? o.end : max, '0000-00-00');
+          if (lastEnd > latestEnd) {
+            latestEnd = lastEnd;
+            foundRevenue = series;
+          }
         }
+        if (!foundRevenue) {
+          console.warn(`No EDGAR revenue data for ${company}`);
+          return null;
+        }
+        const byEnd = new Map();
+        for (const o of (foundRevenue.observations || [])) {
+          if (o.form !== '10-Q') continue;
+          const cur = byEnd.get(o.end);
+          if (!cur || o.val < cur.val) byEnd.set(o.end, o);
+        }
+        const quarterly = Array.from(byEnd.values())
+          .sort((a, b) => new Date(a.end) - new Date(b.end))
+          .slice(-8);
+        if (quarterly.length < 4) {
+          console.warn(`Insufficient quarters for ${company}`);
+          return null;
+        }
+        data[company] = quarterly.map(o => o.val / 1e9);
       }
-      
-      if (!foundRevenue) {
-        console.warn(`No EDGAR revenue data for ${company}`);
-        return null;
-      }
-      
-      // Filter to 10-Q observations and dedupe by end-date. EDGAR XBRL revenue facts
-      // for the same period appear multiple times: YTD-cumulative ($135B for MSFT 6m YTD)
-      // AND standalone-quarter ($69B). We want only the standalone quarter, so for each
-      // end-date keep the SMALLEST val (YTD is always >= standalone).
-      const byEnd = new Map();
-      for (const o of (foundRevenue.observations || [])) {
-        if (o.form !== '10-Q') continue;
-        const cur = byEnd.get(o.end);
-        if (!cur || o.val < cur.val) byEnd.set(o.end, o);
-      }
-      const quarterly = Array.from(byEnd.values())
-        .sort((a, b) => new Date(a.end) - new Date(b.end))
-        .slice(-8); // Last 8 unique quarters
-      
-      if (quarterly.length < 4) {
-        console.warn(`Insufficient quarters for ${company}`);
-        return null;
-      }
-      
-      data[company] = quarterly.map(o => o.val / 1e9); // Billions
+      return data;
+    } catch (err) {
+      console.warn('Failed to fetch revenue data:', err);
+      return null;
     }
-    
-    return data;
-  } catch (err) {
-    console.warn('Failed to fetch revenue data:', err);
-    return null;
-  }
+  })();
+  return _revenuePromise;
 }
 
 function computeRanks(capexData) {
@@ -396,8 +388,14 @@ function buildTakeaway(liveData) {
 }
 
 window.addEventListener('DOMContentLoaded', async () => {
+  injectLoadingStyles();
+  setStatus('Loading EDGAR data...', true);
+  showLoading('anchor-chart', 'Loading capex data...');
+  showLoading('support-1-chart', 'Loading capex intensity...');
+  showLoading('support-2-chart', 'Loading AI share data...');
+
   renderBasketGrid();
-  
+
   // Fetch live data for takeaway
   const capexData = await fetchCapexData();
   let liveData = null;
@@ -441,6 +439,11 @@ window.addEventListener('DOMContentLoaded', async () => {
   }
   
   await renderRankChart();
+  hideLoading('anchor-chart');
   await renderIntensityHeatmap();
+  hideLoading('support-1-chart');
   await renderAIShareChart();
+  hideLoading('support-2-chart');
+
+  setStatus('Ready', false);
 });
