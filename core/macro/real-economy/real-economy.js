@@ -1,9 +1,9 @@
-// Real Economy page — consumer + housing + home-improvement / building-materials.
+// Real Economy page — consumer indicators: income, spending, credit health.
 //
 // Same visual pattern as cycle/inflation: composite score hero, three sections
 // each with a chart + tile array + interpretation note, then a synthesis
-// paragraph. Decision-relevant focus on the housing-exposed P&L (HD/LOW/XHB/
-// WOOD + lumber PPI + builders).
+// paragraph. Decision-relevant for consumer-discretionary and staples retail,
+// consumer finance, and credit-sensitive businesses (XLY/XLP/consumer finance names).
 
 const state = {
   series: {},
@@ -169,6 +169,7 @@ async function loadAllData() {
     ['MORTGAGE30US', 'CSUSHPISA', 'WPU081'],
     ['PCE', 'DSPI', 'PSAVERT', 'TDSP'],
     ['CES0500000003', 'CPILFESL', 'IC4WSA', 'DRCCLACBS', 'UMCSENT'],
+    ['DSPIC96', 'REVOLSL', 'DRALACBS'],
   ];
   const errors = [];
   for (const b of fredBatches) {
@@ -210,205 +211,160 @@ async function loadAllData() {
   }
 }
 
-// ---------- Section 1: Housing ----------
 
-function renderHousing() {
-  const permit = state.series._permitYoy || [];
-  const houst  = state.series._houstYoy  || [];
-  const sales  = state.series._hsn1fYoy  || [];
-  const supply = state.series.HOSSUPUSM673N     || [];
-  const mort   = state.series.MORTGAGE30US || [];
-  const hpi    = state.series._hpiYoy    || [];
+// ---------- Section 2: Income & Purchasing Power ----------
 
-  // Build chart: permits/starts/sales (left axis) + months supply (right axis)
-  timeSeriesChart(el('chart-housing'), [
-    { label: 'Building Permits YoY', data: permit.map(o => ({ x: o.date, y: o.value })),
-      borderColor: '#5a9cff', borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y' },
-    { label: 'Housing Starts YoY', data: houst.map(o => ({ x: o.date, y: o.value })),
-      borderColor: '#f7a700', backgroundColor: 'rgba(247, 167, 0, 0.10)', borderWidth: 1.6, pointRadius: 0, fill: true, tension: 0.1, yAxisID: 'y' },
-    { label: 'New Home Sales YoY', data: sales.map(o => ({ x: o.date, y: o.value })),
-      borderColor: '#3ecf8e', borderWidth: 1.3, borderDash: [3, 3], pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y' },
-    { label: 'Months Supply (right axis)', data: supply.map(o => ({ x: o.date, y: o.value })),
-      borderColor: '#ef4f5a', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y1' },
+function renderIncome() {
+  const dspicYoy = state.series._dspic96Yoy || [];
+  const realWageYoy = state.series._realWageIndexYoy || [];
+  const savings = state.series.PSAVERT || [];
+
+  timeSeriesChart(el('chart-income'), [
+    { label: 'Real Disposable Income YoY', data: dspicYoy.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#5a9cff', borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.1 },
+    { label: 'Real Wages YoY', data: realWageYoy.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#3ecf8e', backgroundColor: 'rgba(62, 207, 142, 0.10)', borderWidth: 1.6, pointRadius: 0, fill: true, tension: 0.1 },
   ], {
-    yTitle: 'YoY change (%)',
-    y2: { yTitle: 'months', yTicks: v => `${v}` },
+    yTitle: 'YoY (%)',
     extraPlugins: [thresholdLinePlugin([
-      { value: 0, label: '0% YoY', color: 'rgba(138, 148, 163, 0.4)' },
+      { value: 0, label: '0% YoY', color: 'rgba(138, 148, 163, 0.5)' },
     ])],
   });
 
-  const lp = latestValue(permit), lh = latestValue(houst), lsa = latestValue(sales);
-  const lms = latestValue(supply), lmt = latestValue(mort), lhp = latestValue(hpi);
-  const supplyPct = percentile(supply, lms?.value);
+  const ldspic = latestValue(dspicYoy), lrw = latestValue(realWageYoy);
+  const lsav = latestValue(savings);
+  const dspic12m = valueMonthsAgo(dspicYoy, 12), rw12m = valueMonthsAgo(realWageYoy, 12);
+  const sav12m = valueMonthsAgo(savings, 12);
 
   const tiles = [
     {
-      metric: 'HOSSUPUSM673N',
-      label: 'Months Supply (new homes)',
-      value: lms ? `${fmt(lms.value, 1)} mo` : '—',
-      meta: supplyPct != null ? `${supplyPct}th %ile post-1990` : '',
-      threshold: '&lt; 4 sellers&rsquo; · 4–6 balanced · &gt; 6 buyers&rsquo;',
-      status: lms ? (lms.value > 7 ? 'warn' : lms.value > 5 ? 'caution' : 'ok') : '',
-      help: 'Inventory of new homes for sale ÷ current monthly sales rate. The cleanest single read on housing-cycle position.',
+      metric: 'DSPIC96',
+      label: 'Real disposable income YoY',
+      value: ldspic ? `${ldspic.value >= 0 ? '+' : ''}${fmt(ldspic.value, 1)}%` : '—',
+      meta: dspic12m && ldspic ? `12m change: ${(ldspic.value - dspic12m.value >= 0 ? '+' : '')}${fmt(ldspic.value - dspic12m.value, 1)}pp` : '',
+      threshold: '&gt; 0 = rising spending power',
+      status: ldspic ? (ldspic.value > 1 ? 'ok' : ldspic.value > -1 ? 'caution' : 'warn') : '',
     },
     {
-      metric: 'PERMIT',
-      label: 'Building permits YoY',
-      value: lp ? `${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%` : '—',
-      meta: lp ? `as of ${lp.date.slice(0, 7)}` : '',
-      threshold: 'leads starts by 1–2 months · falling permits = cycle rollover',
-      status: lp ? (lp.value > 5 ? 'ok' : lp.value > -5 ? 'caution' : 'warn') : '',
+      metric: 'REAL_WAGES',
+      label: 'Real wages YoY',
+      value: lrw ? `${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%` : '—',
+      meta: rw12m && lrw ? `12m change: ${(lrw.value - rw12m.value >= 0 ? '+' : '')}${fmt(lrw.value - rw12m.value, 1)}pp` : '',
+      threshold: 'excludes inflation · reflects purchasing power gains',
+      status: lrw ? (lrw.value > 0.5 ? 'ok' : lrw.value > -0.5 ? 'caution' : 'warn') : '',
     },
     {
-      metric: 'MORTGAGE30US',
-      label: '30Y Mortgage rate',
-      value: lmt ? `${fmt(lmt.value, 2)}%` : '—',
-      meta: 'Freddie Mac PMMS, weekly',
-      threshold: 'every 100bp ≈ ~$260/mo on a $400k loan',
-      status: lmt ? (lmt.value < 5.5 ? 'ok' : lmt.value < 7 ? 'caution' : 'warn') : '',
-    },
-    {
-      metric: 'CSUSHPISA',
-      label: 'Case-Shiller HPI YoY',
-      value: lhp ? `${lhp.value >= 0 ? '+' : ''}${fmt(lhp.value, 1)}%` : '—',
-      meta: 'lags actual price-discovery 6mo',
-      threshold: '&gt; 6% = unsustainable · &lt; 0% = stress',
-      status: lhp ? (lhp.value > -1 && lhp.value < 6 ? 'ok' : Math.abs(lhp.value) < 8 ? 'caution' : 'warn') : '',
+      metric: 'PSAVERT',
+      label: 'Personal saving rate',
+      value: lsav ? `${fmt(lsav.value, 1)}%` : '—',
+      meta: sav12m && lsav ? `12m ago: ${fmt(sav12m.value, 1)}%` : '',
+      threshold: '&gt; 5% healthy · &lt; 3% stretched',
+      status: lsav ? (lsav.value > 5 ? 'ok' : lsav.value > 3.5 ? 'caution' : 'warn') : '',
     },
   ];
-  renderTiles('tiles-housing', tiles);
+  renderTiles('tiles-income', tiles);
 
   let note = '<strong>Current read:</strong> ';
-  if (lms) {
-    if (lms.value > 7)        note += `Months supply at ${fmt(lms.value, 1)} — buyers&rsquo; market territory; builders cutting starts. `;
-    else if (lms.value > 5)   note += `Months supply at ${fmt(lms.value, 1)} — balanced-to-soft. Builder pricing power moderating. `;
-    else                      note += `Months supply at ${fmt(lms.value, 1)} — sellers&rsquo; market; tight inventory supports prices. `;
+  if (ldspic && lrw) {
+    if (ldspic.value > 1 && lrw.value > 0) 
+      note += `Both real disposable income (+${fmt(ldspic.value, 1)}%) and real wages (+${fmt(lrw.value, 1)}%) positive — purchasing power expanding. Consumers can spend more in real terms. `;
+    else if (ldspic.value < 0 && lrw.value < 0)
+      note += `Both real disposable income (${fmt(ldspic.value, 1)}%) and real wages (${fmt(lrw.value, 1)}%) negative — purchasing power contracting. `;
+    else
+      note += `Mixed signal: real disposable income ${ldspic.value >= 0 ? '+' : ''}${fmt(ldspic.value, 1)}%, real wages ${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%. `;
   }
-  if (lp && lh) {
-    const trend = lp.value > lh.value ? 'leading starts higher' : 'leading starts lower';
-    note += `Permits (${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%) ${trend} (${lh.value >= 0 ? '+' : ''}${fmt(lh.value, 1)}% YoY). `;
+  if (ldspic && lrw && lsav) {
+    if (ldspic.value > 1 && lrw.value >= 0 && lsav.value > 5)
+      note += `<em>Benign scenario: income growing, wages keeping up with inflation, saving rate healthy. Consumers have room to spend or build cushion.</em>`;
+    else if (ldspic.value < 0 && lsav.value < 3.5)
+      note += `<em>Squeeze scenario: real income falling AND saving rate depleted. Consumers will cut discretionary spending or increase borrowing.</em>`;
   }
-  if (lmt && lhp) {
-    if (lmt.value > 6.5 && lhp.value > 3) note += `<em>Affordability squeeze: rates above 6.5% AND prices still rising YoY — pent-up supply will eventually break this.</em>`;
-    else if (lmt.value < 5.5 && lhp.value < 3) note += `<em>Affordability normalizing: rates below 6% with cooling prices — typical late-rebalance dynamics.</em>`;
-  }
-  el('note-housing').innerHTML = note;
+  el('note-income').innerHTML = note;
 }
 
-// ---------- Section 2: Home improvement & building materials ----------
+// ---------- Section 3: Credit Health & Stress ----------
 
-function renderHomeImprovement() {
-  // Normalize HD, LOW, XHB, WOOD, BLDR, SPY to 100 at the start of the visible window (~10y)
-  const startBase = '2018-01-01';
-  const dsForChart = [];
-  const colors = { HD: '#f7a700', LOW: '#5a9cff', XHB: '#3ecf8e', WOOD: '#a855f7', BLDR: '#ef4f5a', SPY: '#8a94a3' };
-  for (const sym of ['HD', 'LOW', 'XHB', 'WOOD', 'BLDR', 'SPY']) {
-    if (!state.stocks[sym]) continue;
-    const norm = normalizeSeries(state.stocks[sym], startBase);
-    if (!norm.length) continue;
-    dsForChart.push({
-      label: sym === 'SPY' ? 'SPY (benchmark)' : sym,
-      data: norm.map(o => ({ x: o.date, y: o.value })),
-      borderColor: colors[sym],
-      backgroundColor: 'transparent',
-      borderWidth: sym === 'SPY' ? 1.0 : sym === 'HD' || sym === 'LOW' ? 1.8 : 1.3,
-      borderDash: sym === 'SPY' ? [4, 4] : [],
-      pointRadius: 0,
-      tension: 0.1,
-    });
-  }
+function renderCredit() {
+  const revolvingYoy = state.series._revolvingYoy || [];
+  const ccDelinq = state.series.DRCCLACBS || [];
+  const autoDelinq = state.series.DRALACBS || [];
+  const tdsp = state.series.TDSP || [];
 
-  timeSeriesChart(el('chart-home-improvement'), dsForChart, {
-    yTitle: 'rebased to 100 at start',
+  timeSeriesChart(el('chart-credit'), [
+    { label: 'Revolving Credit YoY', data: revolvingYoy.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#5a9cff', borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.1 },
+    { label: 'Credit Card Delinquency Rate', data: ccDelinq.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#f7a700', borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0.1 },
+    { label: 'Auto Loan Delinquency Rate', data: autoDelinq.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#ef4f5a', backgroundColor: 'rgba(239, 79, 90, 0.08)', borderWidth: 1.6, pointRadius: 0, fill: true, tension: 0.1 },
+  ], {
+    yTitle: 'YoY credit growth (%) / Delinquency (%)',
     extraPlugins: [thresholdLinePlugin([
-      { value: 100, label: 'base', color: 'rgba(138, 148, 163, 0.4)' },
+      { value: 0, label: '0% growth', color: 'rgba(138, 148, 163, 0.5)' },
     ])],
   });
 
-  // Tiles: HD vs LOW relative, lumber PPI YoY, WOOD vs SPY 1y, current builder ETF percentile
-  function pctChange(closes, days) {
-    if (!closes || closes.length < days + 1) return null;
-    const recent = closes[closes.length - 1].value;
-    const old = closes[closes.length - 1 - days].value;
-    if (!recent || !old) return null;
-    return (recent / old - 1) * 100;
-  }
-
-  const hd1y = pctChange(state.stocks.HD, 252);
-  const low1y = pctChange(state.stocks.LOW, 252);
-  const xhb1y = pctChange(state.stocks.XHB, 252);
-  const wood1y = pctChange(state.stocks.WOOD, 252);
-  const spy1y = pctChange(state.stocks.SPY, 252);
-  const lumberYoy = latestValue(state.series._lumberYoy || []);
-
-  // HD vs LOW relative: positive = HD leading, negative = LOW leading
-  const hdLowSpread = (hd1y != null && low1y != null) ? hd1y - low1y : null;
+  const lrevolving = latestValue(revolvingYoy), lccDelinq = latestValue(ccDelinq);
+  const lautoDelinq = latestValue(autoDelinq), ltdsp = latestValue(tdsp);
+  const ccDelinqPct = percentile(ccDelinq, lccDelinq?.value);
+  const autoDelinqPct = percentile(autoDelinq, lautoDelinq?.value);
+  const tdspPct = percentile(tdsp, ltdsp?.value);
+  const revolving12m = valueMonthsAgo(revolvingYoy, 12);
 
   const tiles = [
     {
-      label: 'HD 1Y total return',
-      value: hd1y != null ? `${hd1y >= 0 ? '+' : ''}${fmt(hd1y, 1)}%` : '—',
-      meta: spy1y != null ? `vs SPY: ${(hd1y - spy1y >= 0 ? '+' : '')}${fmt(hd1y - spy1y, 1)}pp` : '',
-      threshold: 'home-improvement bellwether',
-      status: hd1y != null && spy1y != null ? (hd1y > spy1y + 3 ? 'ok' : hd1y > spy1y - 3 ? 'caution' : 'warn') : '',
+      metric: 'REVOLSL',
+      label: 'Revolving credit YoY',
+      value: lrevolving ? `${lrevolving.value >= 0 ? '+' : ''}${fmt(lrevolving.value, 1)}%` : '—',
+      meta: revolving12m && lrevolving ? `12m change: ${(lrevolving.value - revolving12m.value >= 0 ? '+' : '')}${fmt(lrevolving.value - revolving12m.value, 1)}pp` : '',
+      threshold: '&gt; 5% = aggressive borrowing · &lt; 0% = paydown',
+      status: lrevolving ? (lrevolving.value > 3 ? 'warn' : lrevolving.value > 0 ? 'caution' : 'ok') : '',
     },
     {
-      label: 'LOW 1Y total return',
-      value: low1y != null ? `${low1y >= 0 ? '+' : ''}${fmt(low1y, 1)}%` : '—',
-      meta: spy1y != null ? `vs SPY: ${(low1y - spy1y >= 0 ? '+' : '')}${fmt(low1y - spy1y, 1)}pp` : '',
-      threshold: 'second-largest US home-improvement retailer',
-      status: low1y != null && spy1y != null ? (low1y > spy1y + 3 ? 'ok' : low1y > spy1y - 3 ? 'caution' : 'warn') : '',
+      metric: 'DRCCLACBS',
+      label: 'Credit card delinquency',
+      value: lccDelinq ? `${fmt(lccDelinq.value, 2)}%` : '—',
+      meta: ccDelinqPct != null ? `${ccDelinqPct}th %ile post-1990` : '',
+      threshold: 'leads spending slowdown by 1–2Q · 2007 peak: 5.5%',
+      status: lccDelinq ? (lccDelinq.value < 2.5 ? 'ok' : lccDelinq.value < 4 ? 'caution' : 'warn') : '',
     },
     {
-      label: 'HD vs LOW spread',
-      value: hdLowSpread != null ? `${hdLowSpread >= 0 ? '+' : ''}${fmt(hdLowSpread, 1)}pp` : '—',
-      meta: 'HD 1y minus LOW 1y',
-      threshold: 'wide divergence = market is rewarding one over the other',
-      status: hdLowSpread != null ? (Math.abs(hdLowSpread) < 5 ? 'ok' : Math.abs(hdLowSpread) < 12 ? 'caution' : 'warn') : '',
+      metric: 'DRALACBS',
+      label: 'Auto loan delinquency',
+      value: lautoDelinq ? `${fmt(lautoDelinq.value, 2)}%` : '—',
+      meta: autoDelinqPct != null ? `${autoDelinqPct}th %ile post-1990` : '',
+      threshold: 'leads credit card delinq by 2–3Q · 2008-09 peak: 3.8%',
+      status: lautoDelinq ? (lautoDelinq.value < 1.8 ? 'ok' : lautoDelinq.value < 2.5 ? 'caution' : 'warn') : '',
     },
     {
-      label: 'XHB Homebuilders 1Y',
-      value: xhb1y != null ? `${xhb1y >= 0 ? '+' : ''}${fmt(xhb1y, 1)}%` : '—',
-      meta: 'leads home-improvement demand by 6-9mo',
-      threshold: 'down from highs = housing-cycle rollover',
-      status: xhb1y != null ? (xhb1y > 5 ? 'ok' : xhb1y > -10 ? 'caution' : 'warn') : '',
-    },
-    {
-      metric: 'WPU081',
-      label: 'Lumber PPI YoY',
-      value: lumberYoy ? `${lumberYoy.value >= 0 ? '+' : ''}${fmt(lumberYoy.value, 1)}%` : '—',
-      meta: 'producer price index, lumber & wood',
-      threshold: 'rising = ticket-size tailwind; falling = pro-mix headwind',
-      status: lumberYoy ? (lumberYoy.value > 0 && lumberYoy.value < 15 ? 'ok' : lumberYoy.value < -10 ? 'warn' : 'caution') : '',
-    },
-    {
-      label: 'WOOD ETF 1Y',
-      value: wood1y != null ? `${wood1y >= 0 ? '+' : ''}${fmt(wood1y, 1)}%` : '—',
-      meta: 'lumber & forestry equity proxy',
-      threshold: 'tracks public lumber distributors / forest-product producers',
-      status: wood1y != null ? (wood1y > 5 ? 'ok' : wood1y > -10 ? 'caution' : 'warn') : '',
+      metric: 'TDSP',
+      label: 'Debt service ratio',
+      value: ltdsp ? `${fmt(ltdsp.value, 1)}%` : '—',
+      meta: tdspPct != null ? `${tdspPct}th %ile post-1990` : '',
+      threshold: '&gt; 12% = stretched (2007 peak: 13.2%) · &lt; 10% healthy',
+      status: ltdsp ? (ltdsp.value < 10 ? 'ok' : ltdsp.value < 12 ? 'caution' : 'warn') : '',
     },
   ];
-  renderTiles('tiles-home-improvement', tiles);
+  renderTiles('tiles-credit', tiles);
 
   let note = '<strong>Current read:</strong> ';
-  if (hd1y != null && low1y != null && spy1y != null) {
-    const avgHi = (hd1y + low1y) / 2;
-    const vsSpy = avgHi - spy1y;
-    if (vsSpy > 3)         note += `Home-improvement retail (HD/LOW avg ${fmt(avgHi, 1)}%) outperforming SPY by ${fmt(vsSpy, 1)}pp. Cycle bid intact. `;
-    else if (vsSpy > -3)   note += `Home-improvement retail tracking SPY (avg ${fmt(avgHi, 1)}% vs ${fmt(spy1y, 1)}%). No sector-specific bid. `;
-    else                   note += `Home-improvement retail underperforming SPY by ${fmt(-vsSpy, 1)}pp — market pricing demand softness ahead. `;
+  if (lrevolving && lccDelinq) {
+    if (lrevolving.value > 5 && lccDelinq.value > 3)
+      note += `Late-cycle pattern: revolving credit growing (${lrevolving.value >= 0 ? '+' : ''}${fmt(lrevolving.value, 1)}%) AND delinquencies elevated (${fmt(lccDelinq.value, 2)}%). Consumers borrowing AND defaulting at the margin. `;
+    else if (lrevolving.value < 0 && lccDelinq.value < 2.5)
+      note += `Healthy pattern: consumers paying down revolving credit (${fmt(lrevolving.value, 1)}%) with low delinquencies (${fmt(lccDelinq.value, 2)}%). `;
+    else
+      note += `Mixed: revolving credit ${lrevolving.value >= 0 ? '+' : ''}${fmt(lrevolving.value, 1)}%, CC delinquency ${fmt(lccDelinq.value, 2)}%. `;
   }
-  if (lumberYoy) {
-    if (lumberYoy.value > 5)        note += `<em>Lumber PPI ${lumberYoy.value >= 0 ? '+' : ''}${fmt(lumberYoy.value, 1)}% YoY — input cost tailwind for distributors, ticket-size tailwind for retailers.</em>`;
-    else if (lumberYoy.value < -5)  note += `<em>Lumber PPI ${fmt(lumberYoy.value, 1)}% YoY — pro-channel revenue headwind; distributors particularly exposed.</em>`;
-    else                            note += `Lumber PPI flat YoY — neutral for distributor revenue.`;
+  if (lautoDelinq && lccDelinq) {
+    const gap = lautoDelinq.value - lccDelinq.value;
+    if (gap > 0.5)
+      note += `<em>Auto delinquency (${fmt(lautoDelinq.value, 2)}%) leading credit card delinquency (${fmt(lccDelinq.value, 2)}%) by +${fmt(gap, 2)}pp — watch for CC delinquency to follow in next 2-3 quarters.</em>`;
   }
-  el('note-home-improvement').innerHTML = note;
+  el('note-credit').innerHTML = note;
 }
 
-// ---------- Section 3: Consumer balance sheet ----------
+// ---------- Section 4: Consumer balance sheet ----------
 
 function renderConsumer() {
   const pceYoy = state.series._pceYoy || [];
@@ -596,26 +552,27 @@ function renderSynthesis() {
   if (!tgt || !result) return;
   const score = result.score;
 
-  // Pull a few key reads for the paragraph
-  const lms = latestValue(state.series.HOSSUPUSM673N || []);
-  const lmt = latestValue(state.series.MORTGAGE30US || []);
-  const lumberYoy = latestValue(state.series._lumberYoy || []);
+  // Pull key reads for consumer-focused narrative
+  const ldspic = latestValue(state.series._dspic96Yoy || []);
+  const lrevolving = latestValue(state.series._revolvingYoy || []);
+  const lccDelinq = latestValue(state.series.DRCCLACBS || []);
 
   let paragraph = '';
   if (score < 35) {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — the consumer is in good shape. `;
-    paragraph += lms && lms.value < 5 ? `Tight housing inventory (${fmt(lms.value, 1)} months) supports prices and project demand. ` : `Housing inventory at ${lms ? fmt(lms.value, 1) : '—'} months. `;
-    paragraph += `For housing-exposed P&L: this is the <strong>upside scenario</strong> — sustained spending power + tight inventory = sustained ticket sizes and pro-channel demand. Lumber PPI ${lumberYoy ? (lumberYoy.value >= 0 ? '+' : '') + fmt(lumberYoy.value, 1) + '%' : '—'} ${lumberYoy && lumberYoy.value > 0 ? 'tailwind on revenue' : 'neutral on input costs'}. <em>Watch:</em> a meaningful uptick in delinquencies or claims would be the first flag this is rolling over.`;
+    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — the consumer is in robust shape. `;
+    paragraph += ldspic && ldspic.value > 1 ? `Real disposable income running positive (+${fmt(ldspic.value, 1)}%), spending power expanding. ` : '';
+    paragraph += `For consumer-exposed P&L (XLY/XLP retail, consumer finance): this is the <strong>upside scenario</strong> — sustained income growth + low delinquencies = resilient discretionary spending. Watch credit-card and auto delinquencies for early warning signs of rolling over.`;
   } else if (score < 55) {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — mixed picture. Some indicators healthy (typically employment), others showing strain (savings + delinquencies). `;
-    paragraph += lmt && lmt.value > 6 ? `30Y mortgage at ${fmt(lmt.value, 2)}% is the binding constraint — housing turnover suppressed, refi demand near zero. ` : '';
-    paragraph += `For housing-exposed P&L: <strong>defensive bias</strong>. DIY mix likely > Pro mix, ticket sizes pressured. Repair/remodel resilient; new-construction-related demand slows. Lumber distributors more cyclical than home-improvement retailers in this regime.`;
+    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — mixed picture. Some income metrics stable, but delinquencies rising at the margin. `;
+    paragraph += lrevolving && lrevolving.value > 5 ? `Revolving credit growing (+${fmt(lrevolving.value, 1)}%) — consumers increasingly leaning on credit. ` : '';
+    paragraph += `For consumer-exposed P&L: <strong>defensive positioning</strong>. Discretionary retail under pressure; staple retailers resilient. Consumer-finance businesses see rising charge-offs.`;
   } else if (score < 75) {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — stressed. Real wages and savings buffer are eroded; delinquencies elevated; spending power compressed. `;
-    paragraph += `For housing-exposed P&L: <strong>brace for revenue compression</strong>. Big-ticket renovations get deferred first, followed by pro-channel demand as builder backlogs work down. Historically, home-improvement retailers see ~5-8% same-store-sales decline in this regime over 2-3 quarters. Inventory discipline > revenue chase.`;
+    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — stressed. Income pressure + rising delinquencies = household buffer eroding. `;
+    if (lccDelinq && lccDelinq.value > 3.5) paragraph += `Credit card delinquency at ${fmt(lccDelinq.value, 2)}% — elevated and accelerating. `;
+    paragraph += `For consumer-exposed P&L: <strong>brace for spending slowdown</strong>. Discretionary categories (apparel, furniture, furnishings) see 5-10% same-store-sales declines. Necessity goods and services (food, pharmacy, discount retail) hold up better.`;
   } else {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — distressed. Multiple structural breaks (negative real wages + rising delinquencies + collapsing sentiment). This is the 2008-style regime. `;
-    paragraph += `For housing-exposed P&L: <strong>survival mode</strong>. Demand evaporates first in pro-channel and discretionary remodel; staples-of-the-home (paint, hardware, HVAC repair) hold up best. Both HD and LOW historically beat SPY in actual recessions because demand goes from "want" to "fix-it-now" — but the absolute return is still negative.`;
+    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — distressed. Negative real wages + elevated delinquencies + collapsing sentiment. This is the 2008-style recession regime. `;
+    paragraph += `For consumer-exposed P&L: <strong>survival mode</strong>. Discretionary spending evaporates; staples dominate. XLP significantly outperforms XLY. Consumer-finance defaults spike. Recovery comes only when labor market stabilizes and real wages resume positive growth.`;
   }
 
   tgt.innerHTML = `<p class="cycle-synthesis-para">${paragraph}</p>
@@ -625,6 +582,7 @@ function renderSynthesis() {
       <a href="/core/macro/cycle/">Cycle position &rarr;</a>
       <a href="/core/macro/inflation/">Inflation persistence &rarr;</a>
       <a href="/core/macro/ticker.html?sym=XLY">XLY (Discretionary) drilldown &rarr;</a>
+      <a href="/core/macro/ticker.html?sym=XLP">XLP (Staples) drilldown &rarr;</a>
     </div>`;
 }
 
@@ -636,8 +594,8 @@ async function main() {
     await Promise.all([loadRecessionRanges(), loadAllData()]);
 
     renderHealthScore();
-    renderHousing();
-    renderHomeImprovement();
+    renderIncome();
+    renderCredit();
     renderConsumer();
     renderSynthesis();
 

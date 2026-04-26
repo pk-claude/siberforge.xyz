@@ -44,6 +44,9 @@ const CATALOG = {
   MSACSR:        { label: 'Monthly Supply of New Houses',               freq: 'monthly',   unit: 'months',  transform: 'level',   group: 'real-economy' },
   HOSSUPUSM673N: { label: 'Months Supply of Existing Homes',            freq: 'monthly',   unit: 'months',  transform: 'level',   group: 'real-economy' },
   WPU081:        { label: 'PPI: Lumber & Wood Products',                freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'real-economy' },
+  DSPIC96:       { label: 'Real Disposable Personal Income',       freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
+  REVOLSL:       { label: 'Revolving Consumer Credit Outstanding',   freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
+  DRALACBS:      { label: 'Auto Loan Delinquency Rate',             freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'real-economy' },
 
   // ================= HOUSING DASHBOARD (/core/macro/housing/) =================
   HOUST1F:       { label: 'Housing Starts: Single-Family',  freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
