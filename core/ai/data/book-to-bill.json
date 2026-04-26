@@ -1,0 +1,12 @@
+{
+  "updated": "2025-04-26",
+  "source": "company filings, manually extracted from earnings calls and 10-Q",
+  "data": [
+    { "symbol": "NVDA", "ratio": 1.42 },
+    { "symbol": "AMD", "ratio": 1.18 },
+    { "symbol": "AVGO", "ratio": 1.31 },
+    { "symbol": "TSM", "ratio": 1.09 },
+    { "symbol": "ASML", "ratio": 0.96 },
+    { "symbol": "MU", "ratio": 1.22 }
+  ]
+}

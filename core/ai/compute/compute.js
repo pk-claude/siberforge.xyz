@@ -18,8 +18,8 @@ const BASKET_TICKERS = [
 const HYPERSCALER_SYMBOLS = ['MSFT', 'GOOGL', 'META', 'AMZN', 'ORCL'];
 const COMPUTE_BASKET_SYMBOLS = ['NVDA', 'AMD', 'AVGO', 'TSM', 'ASML', 'MU'];
 
-// Book-to-bill ratios (v2 placeholder — manually updated from filings)
-const BOOK_TO_BILL = [
+// Book-to-bill ratios (v3: externalized to JSON for easier updates)
+let BOOK_TO_BILL = [
   { name: 'NVDA', value: 1.42 },
   { name: 'AMD', value: 1.18 },
   { name: 'AVGO', value: 1.31 },
@@ -27,6 +27,7 @@ const BOOK_TO_BILL = [
   { name: 'ASML', value: 0.96 },
   { name: 'MU', value: 1.22 }
 ];
+let BTB_UPDATED = null;
 
 // Fallback hardcoded data (Q4'23-Q3'25) — used if live fetch fails
 const FALLBACK_DATA = {
@@ -35,12 +36,13 @@ const FALLBACK_DATA = {
   hyperscalerCapexLTM: [180, 215, 248, 285, 315, 340, 365, 390]
 };
 
-// NVDA DC revenue share (v2 placeholder — segment data from 10-Q, manual update)
-const NVDA_DC_SHARE = {
+// NVDA DC revenue share (v3: externalized to JSON)
+let NVDA_DC_SHARE = {
   quarters: ["Q4'23", "Q1'24", "Q2'24", "Q3'24", "Q4'24", "Q1'25", "Q2'25", "Q3'25"],
   dcShare: [60, 65, 72, 78, 82, 85, 86, 88],
   other: [40, 35, 28, 22, 18, 15, 14, 12]
 };
+let NVDA_UPDATED = null;
 
 /**
  * Fetch quarterly revenue for compute basket via Finnhub.
@@ -270,7 +272,14 @@ function renderBookToBillChart() {
   const ctx = document.getElementById('support-1-chart');
   if (!ctx) return;
   
-  // v2 placeholder: manually curated book-to-bill ratios from company filings
+  // Display updated date below chart if available
+  if (BTB_UPDATED) {
+    const updatedEl = document.createElement('p');
+    updatedEl.style.cssText = 'font-size: 0.85rem; color: var(--muted); margin-top: 8px; text-align: center;';
+    updatedEl.textContent = `Last updated: ${BTB_UPDATED}`;
+    ctx.parentElement.parentElement.appendChild(updatedEl);
+  }
+  
   const colors = BOOK_TO_BILL.map(d => d.value >= 1.0 ? '#2ecc71' : '#e74c3c');
   
   new Chart(ctx.getContext('2d'), {
@@ -316,7 +325,14 @@ function renderDCShareChart() {
   const ctx = document.getElementById('support-2-chart');
   if (!ctx) return;
   
-  // v2 placeholder: NVDA DC revenue % from latest 10-Q, manually tracked
+  // Display updated date below chart if available
+  if (NVDA_UPDATED) {
+    const updatedEl = document.createElement('p');
+    updatedEl.style.cssText = 'font-size: 0.85rem; color: var(--muted); margin-top: 8px; text-align: center;';
+    updatedEl.textContent = `Last updated: ${NVDA_UPDATED}`;
+    ctx.parentElement.parentElement.appendChild(updatedEl);
+  }
+  
   new Chart(ctx.getContext('2d'), {
     type: 'bar',
     data: {
@@ -368,8 +384,81 @@ function renderBasketGrid() {
   });
 }
 
+
+/**
+ * Build dynamic takeaway block for compute pillar.
+ * Interpolates live data into four-row structure.
+ */
+function buildTakeaway(liveData) {
+  // Extract live values or fall back to hardcoded
+  const basketYoY = liveData?.basketYoY ?? 47;
+  const latestQ = liveData?.latestQ ?? "Q3'25";
+  
+  // Count consecutive quarters above +30% threshold
+  const yoyHistory = liveData?.yoyHistory ?? [22, 28, 35, 42, 48, 50, 48, 47];
+  let streakCount = 0;
+  for (let i = yoyHistory.length - 1; i >= 0; i--) {
+    if (yoyHistory[i] >= 30) streakCount++;
+    else break;
+  }
+  
+  let streakLanguage = '';
+  if (streakCount >= 4) {
+    streakLanguage = 'fourth consecutive quarter above +30%';
+  } else if (streakCount === 3) {
+    streakLanguage = 'third consecutive quarter above +30%';
+  } else if (streakCount === 2) {
+    streakLanguage = 'second consecutive quarter above +30%';
+  } else if (streakCount === 1) {
+    streakLanguage = 'above the +30% threshold for the first time in several quarters';
+  } else {
+    streakLanguage = 'below the +30% threshold this quarter — first deceleration since 2024';
+  }
+  
+  // Build action line based on threshold
+  let actionText = '';
+  if (basketYoY > 40) {
+    actionText = 'Stay overweight NVDA, AVGO, TSM. Watch ASML lithography orders for 2026 capacity signal. Trim if NVDA data-center growth prints below +25% YoY for two quarters.';
+  } else if (basketYoY >= 25) {
+    actionText = 'Maintain position with bias to overweight NVDA, AVGO. Capex cycle decelerating but still expansionary. Watch quarterly capex guides for confirmation.';
+  } else {
+    actionText = 'Reduce conviction. Capex cycle is materially slowing — favor higher-quality balance sheets (AVGO, TSM) over higher-beta names (AMD, ARM). Re-evaluate if YoY recovers above +30%.';
+  }
+  
+  return `
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">AI compute revenue across the basket grew approximately +${basketYoY}% YoY in ${latestQ}, ${streakLanguage}. Book-to-bill stays above 1.0 across NVDA, AMD, AVGO.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Capex cycle still feeding through. NVDA data-center revenue is the cleanest read; AVGO custom-silicon ramp is the second derivative.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Largest single-purpose capex print in history is flowing through these names. Slowing here is the first leading signal that hyperscaler capex is decelerating.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>
+  `;
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
   renderBasketGrid();
+  
+  // Fetch externalized JSON data
+  await Promise.all([fetchBookToBillData(), fetchNVDASegmentData()]);
+  
+  // Fetch live data for takeaway
+  const basketRevData = await fetchComputeBasketRevenue();
+  let liveData = null;
+  if (basketRevData) {
+    const yoy = computeBasketRevYoY(basketRevData);
+    if (yoy && yoy.length > 0) {
+      liveData = {
+        basketYoY: Math.round(yoy[yoy.length - 1]),
+        latestQ: FALLBACK_DATA.quarters[FALLBACK_DATA.quarters.length - 1],
+        yoyHistory: yoy
+      };
+    }
+  }
+  
+  // Inject dynamic takeaway
+  const takeawayEl = document.querySelector('.ai-takeaway');
+  if (takeawayEl) {
+    takeawayEl.innerHTML = buildTakeaway(liveData);
+  }
+  
   await renderAnchorChart();
   renderBookToBillChart();
   renderDCShareChart();

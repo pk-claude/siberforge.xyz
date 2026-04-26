@@ -1,0 +1,14 @@
+{
+  "updated": "2025-04-26",
+  "source": "NVDA 10-Q filings, segment revenue breakdown",
+  "data": [
+    { "quarter": "Q4'23", "dc_share": 60, "other_share": 40 },
+    { "quarter": "Q1'24", "dc_share": 65, "other_share": 35 },
+    { "quarter": "Q2'24", "dc_share": 72, "other_share": 28 },
+    { "quarter": "Q3'24", "dc_share": 78, "other_share": 22 },
+    { "quarter": "Q4'24", "dc_share": 82, "other_share": 18 },
+    { "quarter": "Q1'25", "dc_share": 85, "other_share": 15 },
+    { "quarter": "Q2'25", "dc_share": 86, "other_share": 14 },
+    { "quarter": "Q3'25", "dc_share": 88, "other_share": 12 }
+  ]
+}

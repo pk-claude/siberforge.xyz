@@ -47,6 +47,7 @@ const CATALOG = {
   DSPIC96:       { label: 'Real Disposable Personal Income',       freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
   REVOLSL:       { label: 'Revolving Consumer Credit Outstanding',   freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
   DRALACBS:      { label: 'Auto Loan Delinquency Rate',             freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'real-economy' },
+  OPHNFB:        { label: 'Output Per Hour (Nonfarm Business)', freq: 'quarterly', unit: 'index', transform: 'yoy_pct', group: 'real-economy' },
 
   // ================= HOUSING DASHBOARD (/core/macro/housing/) =================
   HOUST1F:       { label: 'Housing Starts: Single-Family',  freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },

@@ -344,8 +344,80 @@ function renderBasketGrid() {
   });
 }
 
+
+/**
+ * Build dynamic takeaway block for hyperscalers pillar.
+ */
+function buildTakeaway(liveData) {
+  const aggCapex = liveData?.aggCapex ?? 100;
+  const aggYoY = liveData?.aggYoY ?? 42;
+  const leader = liveData?.leader ?? 'AMZN';
+  const leaderCapex = liveData?.leaderCapex ?? 30;
+  const laggard = liveData?.laggard ?? 'META';
+  const laggardLanguage = liveData?.laggardLanguage ?? 'rose to fourth at $21B but capex intensity is highest in the group';
+  
+  let actionText = '';
+  if (aggYoY > 50) {
+    actionText = 'Stay long the customers of the hyperscaler capex cycle: semiconductor equipment, power utilities, real estate, software infrastructure. Widening margin here is the margin squeeze upstream (NVDA, TSM) and downstream (electricals, infra). Watch for inflection in equipment order books.';
+  } else if (aggYoY >= 20) {
+    actionText = 'Hold; watch for any two of four guiding capex flat or down. Deceleration here is the leading edge of downstream weakness.';
+  } else {
+    actionText = 'Cycle is decelerating. Trim cyclical AI exposure; rotate to free-cash-flow-stable names (GOOGL > META > AMZN).';
+  }
+  
+  return `
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">Aggregate hyperscaler capex hit a record approximately $${aggCapex}B in Q3'25, ${aggYoY}% YoY. ${leader} leads the pack at $${leaderCapex}B; ${laggard} ${laggardLanguage}.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Hyperscaler capex is front-loaded on AI infrastructure (GPU clusters, HBM systems, custom silicon). Each company is chasing differentiation but building the same stacks.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">This capex is the demand pull for semis, equipment, and power. Decelerating capex here triggers cascading negative revisions down the supply chain within two quarters.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>
+  `;
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
   renderBasketGrid();
+  
+  // Fetch live data for takeaway
+  const capexData = await fetchCapexData();
+  let liveData = null;
+  if (capexData) {
+    const companies = Object.keys(capexData);
+    const minLen = Math.min(...companies.map(c => capexData[c].length));
+    if (minLen > 0) {
+      // Latest quarter aggregate and YoY
+      const latestIdx = minLen - 1;
+      const priorIdx = Math.max(0, minLen - 5); // Approximate prior year quarter
+      
+      const aggCapexLatest = companies.reduce((s, c) => s + capexData[c][latestIdx], 0);
+      const aggCapexPrior = companies.reduce((s, c) => s + capexData[c][priorIdx], 0);
+      const aggYoY = aggCapexPrior > 0 ? Math.round(((aggCapexLatest / aggCapexPrior) - 1) * 100) : 0;
+      
+      // Find leader and laggard
+      const latestCapex = companies.map(c => ({ name: c, val: capexData[c][latestIdx] }))
+        .sort((a, b) => b.val - a.val);
+      const leader = latestCapex[0];
+      const laggard = latestCapex[latestCapex.length - 1];
+      
+      const laggardLanguage = laggard.name === 'META'
+        ? `rose to fourth at $${laggard.val.toFixed(1)}B but capex intensity is highest in the group`
+        : `is at $${laggard.val.toFixed(1)}B`;
+      
+      liveData = {
+        aggCapex: Math.round(aggCapexLatest),
+        aggYoY: aggYoY,
+        leader: leader.name,
+        leaderCapex: Math.round(leader.val),
+        laggard: laggard.name,
+        laggardLanguage: laggardLanguage
+      };
+    }
+  }
+  
+  // Inject dynamic takeaway
+  const takeawayEl = document.querySelector('.ai-takeaway');
+  if (takeawayEl) {
+    takeawayEl.innerHTML = buildTakeaway(liveData);
+  }
+  
   await renderRankChart();
   await renderIntensityHeatmap();
   await renderAIShareChart();

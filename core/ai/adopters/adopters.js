@@ -208,11 +208,19 @@ async function renderProductivityChart() {
   const ctx = document.getElementById('support-1-chart');
   if (!ctx) return;
   
-  // Productivity data is from FRED OPHNFB (output per hour, nonfarm business)
-  // For now, keep fallback as it requires FRED integration
-  // Software capex could be computed from Finnhub, but for v2 use fallback
+  let prodData = FALLBACK_PRODUCTIVITY_DATA;
   
-  const prodData = FALLBACK_PRODUCTIVITY_DATA;
+  // Fetch live productivity data from FRED OPHNFB
+  const liveProd = await fetchProductivityData();
+  if (liveProd && liveProd.yoy && liveProd.yoy.length > 0) {
+    // Slice fallback capex to match the length of live productivity data
+    const swCapexSlice = FALLBACK_PRODUCTIVITY_DATA.swCapex.slice(-liveProd.yoy.length);
+    prodData = {
+      quarters: liveProd.quarters,
+      productivityYoY: liveProd.yoy,
+      swCapex: swCapexSlice
+    };
+  }
   
   new Chart(ctx.getContext('2d'), {
     type: 'line',
@@ -329,8 +337,110 @@ function renderBasketGrid() {
   });
 }
 
+
+/**
+ * Build dynamic takeaway block for adopters pillar.
+ */
+/**
+ * Fetch productivity data (OPHNFB) from FRED API.
+ * Returns quarterly YoY % computed from index series.
+ */
+async function fetchProductivityData() {
+  try {
+    const url = `/api/fred?series=OPHNFB`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`${res.status}`);
+    const json = await res.json();
+    
+    if (!json.series || json.series.length === 0) return null;
+    
+    const series = json.series[0];
+    const obs = (series.observations || [])
+      .sort((a, b) => new Date(a.date) - new Date(b.date))
+      .slice(-16); // Last 16 quarters for history
+    
+    if (obs.length < 4) return null;
+    
+    // Compute YoY % for each quarter (current / 4-quarters-prior)
+    const yoyData = [];
+    for (let i = 4; i < obs.length; i++) {
+      const current = parseFloat(obs[i].value);
+      const prior = parseFloat(obs[i - 4].value);
+      if (current > 0 && prior > 0) {
+        const yoy = ((current / prior) - 1) * 100;
+        yoyData.push(yoy);
+      }
+    }
+    
+    return {
+      quarters: obs.slice(4).map((o, i) => {
+        const d = new Date(o.date + 'T12:00:00Z');
+        const yr = d.getFullYear();
+        const q = Math.floor(d.getMonth() / 3) + 1;
+        return `Q${q}'${String(yr).slice(-2)}`;
+      }),
+      yoy: yoyData
+    };
+  } catch (err) {
+    console.warn('Failed to fetch productivity data:', err);
+    return null;
+  }
+}
+
+function buildTakeaway(liveData) {
+  const basketYoY = liveData?.basketYoY ?? 12;
+  
+  let disclosureLanguage = 'Disclosures: CRM AI use-cases are widening (Sales Cloud AI, Service Einstein). PANW integrating its foundational model into every product SKU. NOW and ADBE both seeing product-attach lift.';
+  
+  let actionText = '';
+  if (basketYoY > 15) {
+    actionText = 'Selectively long CRM (Einstein), NOW (industrial workflow AI), ADBE (creative cloud); avoid laggards still pricing legacy SaaS without AI angle. Watch enterprise software DBNRR for the leading signal — when it reaccelerates, AI is monetizing.';
+  } else if (basketYoY >= 10) {
+    actionText = 'Hold quality (CRM, NOW). Cycle is plateauing; differentiation matters more than basket exposure.';
+  } else {
+    actionText = 'Trim. Software is decelerating faster than the AI capex cycle would suggest — implies adoption isn't translating to revenue. Re-evaluate when DBNRR reaccelerates above 110%.';
+  }
+  
+  return `
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">Software basket revenue growth has stabilized around ${basketYoY}% YoY across CRM/NOW/ADBE/PANW. ${disclosureLanguage}</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Enterprise SaaS is in the AI monetization window. Product-level attachment rates are climbing, but land expansion is decelerating (customers consolidating vendors, not expanding footprint).</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">If software adoption of AI is slowing, capex spend from hyperscalers was ahead of enterprise demand. That's the recession signal: capex for tools customers aren't yet buying at scale.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>
+  `;
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
   renderBasketGrid();
+  
+  // Fetch live data for takeaway
+  const swRevData = await fetchSoftwareRevenue();
+  let liveData = null;
+  if (swRevData && swRevData.CRM && swRevData.NOW && swRevData.ADBE && swRevData.PANW) {
+    const crm = swRevData.CRM;
+    const now = swRevData.NOW;
+    const adbe = swRevData.ADBE;
+    const panw = swRevData.PANW;
+    
+    if (crm.length > 4 && now.length > 4 && adbe.length > 4 && panw.length > 4) {
+      // Compute basket YoY (latest vs 4 quarters prior)
+      const latest = [crm[crm.length-1], now[now.length-1], adbe[adbe.length-1], panw[panw.length-1]];
+      const prior = [crm[crm.length-5], now[now.length-5], adbe[adbe.length-5], panw[panw.length-5]];
+      
+      const latestSum = latest.reduce((a, b) => a + b, 0);
+      const priorSum = prior.reduce((a, b) => a + b, 0);
+      
+      const basketYoY = priorSum > 0 ? Math.round(((latestSum / priorSum) - 1) * 100) : 12;
+      
+      liveData = { basketYoY };
+    }
+  }
+  
+  // Inject dynamic takeaway
+  const takeawayEl = document.querySelector('.ai-takeaway');
+  if (takeawayEl) {
+    takeawayEl.innerHTML = buildTakeaway(liveData);
+  }
+  
   await renderRevenueChart();
   await renderProductivityChart();
   await renderMarginChart();

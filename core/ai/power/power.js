@@ -326,8 +326,83 @@ function renderBasketGrid() {
   });
 }
 
+
+/**
+ * Build dynamic takeaway block for power pillar.
+ */
+function buildTakeaway(liveData) {
+  const nuclearShare = liveData?.nuclearShare ?? 20;
+  const gasShare = liveData?.gasShare ?? 38;
+  const renewablesShare = liveData?.renewablesShare ?? 22;
+  const aiAdditionLanguage = 'AI load centers are new marginal demand, pulling from gas and creating grid constraints in regions without hydro or nuclear.';
+  
+  const nuclearYoY = liveData?.nuclearYoY ?? 1.5;
+  
+  let actionText = '';
+  if (nuclearYoY < 0) {
+    actionText = 'Overweight CEG (nuclear, restart optionality), VST (fleet utilization). Gas is the macro levered bet (GEV, AES). Nuclear restarts are still 2-3 years out; own the capital intensity of grid build now.';
+  } else if (nuclearYoY <= 2) {
+    actionText = 'Maintain weight. Nuclear flat = restarts not yet flowing through. CEG/VST priced for it; own if you believe in 2027+ capacity adds.';
+  } else {
+    actionText = 'Reduce conviction on nuclear-restart names — supply-side response is materializing. Rotate to gas (GEV) and grid build-out names (EATON, NDSN).';
+  }
+  
+  return `
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">US generation mix is shifting: nuclear stable at ${nuclearShare}% of total, gas at ${gasShare}%, renewables at ${renewablesShare}%. ${aiAdditionLanguage}</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Grid operators face a "peaker paradox": AI data centers run continuous (baseload equivalent) but in regions without nuclear or hydro. Gas peaker profitability is exploding. Brownfield nuclear restarts are the 2026-2027 inflection.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Power consumption growth from AI is the most inelastic demand shock in 20 years. Utilities with nuclear or gas exposure are realizing massive pricing power; wind/solar OEMs get margin tailwinds.</span></div>
+    <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>
+  `;
+}
+
 window.addEventListener('DOMContentLoaded', async () => {
   renderBasketGrid();
+  
+  // Fetch live data for takeaway
+  const liveGenData = await fetchGenerationData();
+  let liveData = null;
+  if (liveGenData && liveGenData.nuclear_gen_us && liveGenData.renewable_gen_us && 
+      liveGenData.gas_gen_us && liveGenData.coal_gen_us) {
+    
+    const nukeData = liveGenData.nuclear_gen_us.slice(-12);
+    const renewData = liveGenData.renewable_gen_us.slice(-12);
+    const gasData = liveGenData.gas_gen_us.slice(-12);
+    const coalData = liveGenData.coal_gen_us.slice(-12);
+    
+    if (nukeData.length > 0) {
+      // Latest month values
+      const latestNuke = nukeData[nukeData.length - 1].value;
+      const latestRenew = renewData[renewData.length - 1].value;
+      const latestGas = gasData[gasData.length - 1].value;
+      const latestCoal = coalData[coalData.length - 1].value;
+      
+      // Total generation (sum across all sources, approximate)
+      const totalGen = latestNuke + latestRenew + latestGas + latestCoal;
+      const nuclearShare = Math.round((latestNuke / totalGen) * 100);
+      const gasShare = Math.round((latestGas / totalGen) * 100);
+      const renewablesShare = Math.round((latestRenew / totalGen) * 100);
+      
+      // Compute nuclear YoY (12 months ago vs now)
+      let nuclearYoY = 1.5;
+      if (nukeData.length >= 2 && nukeData[0].value > 0) {
+        nuclearYoY = Math.round(((latestNuke / nukeData[0].value) - 1) * 100 * 10) / 10;
+      }
+      
+      liveData = {
+        nuclearShare,
+        gasShare,
+        renewablesShare,
+        nuclearYoY
+      };
+    }
+  }
+  
+  // Inject dynamic takeaway
+  const takeawayEl = document.querySelector('.ai-takeaway');
+  if (takeawayEl) {
+    takeawayEl.innerHTML = buildTakeaway(liveData);
+  }
+  
   await renderGenerationChart();
   await renderGrowthChart();
   await renderPriceChart();
