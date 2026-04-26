@@ -36,33 +36,33 @@ function renderScoreHero() {
   const tgt = el('labor-score-section');
   if (!tgt) return;
   const result = computeLaborScore(state.data);
-  if (!result) { tgt.innerHTML = '<div class="cycle-empty">Insufficient data.</div>'; return; }
+  if (!result) { tgt.innerHTML = '<div class="cs-empty">Insufficient data.</div>'; return; }
   const phase = phaseFor('labor', result.score);
 
-  const signalsHtml = result.signals.map(s => `
-    <div class="cycle-signal-row">
-      <div class="cycle-signal-name">${s.name}</div>
-      <div class="cycle-signal-bar"><div class="cycle-signal-fill" style="width:${s.score.toFixed(1)}%; background:${phaseFor('labor', s.score).color}"></div></div>
-      <div class="cycle-signal-score">${s.score.toFixed(0)}</div>
-      <div class="cycle-signal-raw">${s.raw}</div>
-      <div class="cycle-signal-weight">${(s.weight * 100).toFixed(0)}%</div>
-    </div>`).join('');
+  const signalBars = result.signals.map(s => {
+    const sevColor = phaseFor('labor', s.score).color;
+    return `<div class="cs-signal">
+      <div class="cs-signal-name">${s.name}</div>
+      <div class="cs-signal-bar"><div class="cs-signal-fill" style="width:${s.score.toFixed(0)}%;background:${sevColor}"></div></div>
+      <div class="cs-signal-value">${s.raw}</div>
+    </div>`;
+  }).join('');
 
   tgt.innerHTML = `
-    <div class="cycle-score-card">
-      <div class="cycle-score-left">
-        <div class="cycle-score-label">LABOR MARKET COMPOSITE</div>
-        <div class="cycle-score-value" style="color:${phase.color}">${result.score.toFixed(0)}<span class="cycle-score-scale">/100</span></div>
-        <div class="cycle-score-phase" style="color:${phase.color}">${phase.label}</div>
-        <div class="cycle-score-desc">Higher = labor market weakening. Below 25 = very tight (full employment); 65+ = weakening; 80+ = recessionary.</div>
+    <div class="cs-score-card">
+      <div class="cs-score-dial" style="--cs-color:${phase.color}">
+        <div class="cs-score-label">LABOR MARKET COMPOSITE</div>
+        <div class="cs-score-value">${result.score.toFixed(0)}<span class="cs-score-scale">/100</span></div>
+        <div class="cs-score-phase" style="color:${phase.color}">${phase.label}</div>
+        <div class="cs-score-desc">Higher = labor market weakening. 0&ndash;25 very tight; 25&ndash;45 tight; 45&ndash;65 cooling; 65&ndash;80 weakening; 80+ recessionary.</div>
       </div>
-      <div class="cycle-score-right">
-        <div class="cycle-signals-head">
-          <span>Signal</span><span></span><span>Score</span><span>Now</span><span>Wt</span>
-        </div>
-        ${signalsHtml}
+      <div class="cs-signals">
+        <div class="cs-signals-title">Component readings</div>
+        ${signalBars}
+        <div class="cs-weights-note">Weights: UNRATE 20% · Sahm Rule 20% · Initial claims 20% · Payrolls 6m ann. 20% · Wage growth 20%.</div>
       </div>
-    </div>`;
+    </div>
+  `;
 }
 
 function renderUnrateChart() {
