@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Bonds</title>
+<link rel="stylesheet" href="./styles.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Bonds</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab active">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab">AI Beneficiaries</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">Financials</span>
+    <a href="/core/macro/markets.html" class="dd-link">Markets</a>
+    <a href="/core/macro/bonds.html" class="dd-link active">Bonds</a>
+  </div>
+</nav>
+
+<div class="bonds-banner-head">
+  <div>
+    <h1>Bonds</h1>
+    <p class="bonds-sub">Cross-asset signal, curve shape, real yields, credit spreads, vol regime, and inflation expectations. Everything that drives whether duration is a hedge or a correlated risk.</p>
+  </div>
+</div>
+
+<section class="bonds-page">
+  <!-- 1. SBC -->
+  <section class="sbc-section">
+    <div class="section-head"><h2>Stock-bond correlation regime</h2></div>
+    <p class="sbc-sub">The single most decision-relevant cross-asset signal for any 60/40-style portfolio.</p>
+    <div class="sbc-chart-wrap"><canvas id="sbc-chart"></canvas></div>
+    <div class="sbc-note" id="sbc-note"></div>
+  </section>
+
+  <!-- 2. Yield curve -->
+  <section class="yc-section">
+    <div class="section-head"><h2>Yield curve</h2><span class="section-head-sub">Shape today vs 3m and 12m ago. Spread tracker for the recession-leading reads.</span></div>
+    <div class="yc-grid">
+      <div class="yc-plot-wrap"><canvas id="yc-curve-chart"></canvas></div>
+      <div class="yc-spreads" id="yc-spreads-table"></div>
+    </div>
+    <p class="yc-note" id="yc-note"></p>
+  </section>
+
+  <!-- 3. Real yields -->
+  <section class="ry-section">
+    <div class="section-head"><h2>Real yields (TIPS)</h2><span class="section-head-sub">The valuation rate for risk assets. 10y real > 2% is restrictive historically.</span></div>
+    <div class="ry-chart-wrap"><canvas id="ry-chart"></canvas></div>
+    <div class="ry-table" id="ry-table"></div>
+    <p class="ry-note" id="ry-note"></p>
+  </section>
+
+  <!-- 4. Credit spreads -->
+  <section class="cs-section">
+    <div class="section-head"><h2>Credit spreads</h2><span class="section-head-sub">IG and HY OAS plus the HY-IG basis. Tight spreads + positive SBC = late-cycle risk-on with no diversification.</span></div>
+    <div class="cs-chart-wrap"><canvas id="cs-chart"></canvas></div>
+    <div class="cs-regime" id="cs-regime"></div>
+    <p class="cs-note" id="cs-note"></p>
+  </section>
+
+  <!-- 5. Cross-asset vol -->
+  <section class="cav-section">
+    <div class="section-head"><h2>Cross-asset volatility</h2><span class="section-head-sub">Equity vol (VIX) vs realized 10y yield vol. Ratio shows where risk is concentrated.</span></div>
+    <div class="cav-chart-wrap"><canvas id="cav-chart"></canvas></div>
+    <div class="cav-ratio" id="cav-ratio"></div>
+    <p class="cav-note" id="cav-note"></p>
+  </section>
+
+  <!-- 6. Breakeven inflation -->
+  <section class="bei-section">
+    <div class="section-head"><h2>Breakeven inflation</h2><span class="section-head-sub">Market-implied inflation expectations vs Fed target and survey-based measures.</span></div>
+    <div class="bei-chart-wrap"><canvas id="bei-chart"></canvas></div>
+    <div class="bei-table" id="bei-table"></div>
+    <p class="bei-note" id="bei-note"></p>
+  </section>
+</section>
+
+<footer>
+  <span>Data: FRED. Yields are daily; UMich is monthly. Real yields are TIPS-derived. Credit spreads are ICE BofA OAS.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./bonds.js"></script>
+<script src="../lib/ui.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+</body>
+</html>

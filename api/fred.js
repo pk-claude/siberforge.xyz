@@ -148,6 +148,12 @@ const CATALOG = {
   // V2 additions: Mfg PMI delivery times (regional Fed surveys) + pulp PPI
   DTCDISA066MSFRBNY: { label: 'Empire State Mfg Delivery Time',   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
   DTCDFSA066MSFRBPHI:{ label: 'Philly Fed Mfg Delivery Time',     freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+
+  // ====================== BONDS DASHBOARD (/core/macro/bonds.html) ====================
+  DGS30:         { label: '30Y Treasury Yield',            freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
+  DFII5:         { label: '5Y TIPS Real Yield',            freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
+  DFII30:        { label: '30Y TIPS Real Yield',           freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
+  DTB3:          { label: '3-Month Treasury Bill',         freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
   DTMSAMFRBDAL:      { label: 'Dallas Fed Mfg Delivery Time',     freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
   WPU0911:           { label: 'PPI: Wood Pulp',                   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
 };

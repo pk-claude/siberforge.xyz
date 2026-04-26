@@ -2543,3 +2543,46 @@ footer {
 .ai-stub-status { font-size: 11px; color: var(--accent); font-weight: 500; }
 .ai-stub-meta { margin-top: 18px; font-size: 12px; color: var(--muted); line-height: 1.55; padding: 14px 16px; background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--muted); border-radius: 4px; }
 @media (max-width: 800px) { .ai-stub-grid { grid-template-columns: 1fr; } }
+
+/* ===================== BONDS PAGE (patch 4) ===================== */
+
+.bonds-page { padding: 0 24px 24px; }
+
+.bonds-banner-head { padding: 14px 0 18px; }
+.bonds-banner-head h1 { font-size: 18px; margin: 0; font-weight: 600; letter-spacing: -0.005em; }
+.bonds-banner-head .bonds-sub { font-size: 12px; color: var(--muted); line-height: 1.45; margin: 4px 0 0; max-width: 900px; }
+
+.yc-section, .ry-section, .cs-section, .cav-section, .bei-section, .sbc-section { margin: 28px 0; padding: 18px 20px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; }
+
+.yc-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 18px; align-items: start; }
+.yc-plot-wrap { position: relative; height: 260px; }
+.yc-spreads { display: flex; flex-direction: column; gap: 8px; }
+.yc-spread-row { display: grid; grid-template-columns: max-content 1fr max-content max-content; gap: 12px; align-items: baseline; padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; }
+.yc-spread-label { font-size: 13px; font-weight: 600; color: var(--text); }
+.yc-spread-name { font-size: 11px; color: var(--muted); }
+.yc-spread-val { font-size: 14px; font-weight: 600; }
+.yc-spread-pct { font-size: 11px; color: var(--muted); }
+
+.ry-chart-wrap, .cs-chart-wrap, .cav-chart-wrap, .bei-chart-wrap { position: relative; height: 280px; margin: 14px 0; }
+
+.ry-table, .bei-table { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.ry-cell, .bei-cell { padding: 10px 12px; background: var(--panel-2); border: 1px solid var(--line); border-radius: 4px; }
+.ry-cell-label, .bei-cell-label { font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.ry-cell-val, .bei-cell-val { font-size: 16px; font-weight: 600; color: var(--text); margin: 4px 0 2px; }
+.ry-cell-meta, .bei-cell-meta { font-size: 11px; color: var(--muted); }
+
+.cs-regime { display: inline-block; padding: 6px 12px; border-radius: 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-top: 8px; }
+.cs-regime-tight { background: rgba(46, 204, 113, 0.12); color: #2ecc71; border: 1px solid rgba(46, 204, 113, 0.3); }
+.cs-regime-neutral { background: var(--panel-2); color: var(--muted); border: 1px solid var(--line); }
+.cs-regime-stressed { background: rgba(247, 167, 0, 0.12); color: #f7a700; border: 1px solid rgba(247, 167, 0, 0.3); }
+.cs-regime-panic { background: rgba(231, 76, 60, 0.12); color: #e74c3c; border: 1px solid rgba(231, 76, 60, 0.3); }
+
+.cav-ratio { font-size: 13px; color: var(--muted); margin-top: 8px; padding: 8px 12px; background: var(--panel-2); border-radius: 4px; }
+.cav-ratio strong { color: var(--text); }
+
+.yc-note, .ry-note, .cs-note, .cav-note, .bei-note { font-size: 12px; color: var(--muted); line-height: 1.55; margin-top: 12px; }
+
+@media (max-width: 800px) {
+  .yc-grid { grid-template-columns: 1fr; }
+  .ry-table, .bei-table { grid-template-columns: repeat(2, 1fr); }
+}
