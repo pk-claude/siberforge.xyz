@@ -134,7 +134,9 @@ async function finnhubFinancials(symbol, key) {
     return { symbol, error: `read: ${err.message || err}`, reports: [] };
   }
   if (!bodyText || !bodyText.trim().startsWith('{')) {
-    return { symbol, error: 'finnhub non-json body', reports: [] };
+    // Include first 200 chars of body so we can diagnose what Finnhub is actually returning.
+    const preview = (bodyText || '').slice(0, 200).replace(/\n/g, ' ');
+    return { symbol, error: `finnhub non-json body | preview: ${preview || '<empty>'}`, reports: [] };
   }
   let data;
   try {
