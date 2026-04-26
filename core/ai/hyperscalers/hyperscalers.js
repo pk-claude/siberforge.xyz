@@ -78,36 +78,48 @@ async function fetchCapexData() {
 }
 
 /**
- * Fetch quarterly revenue for hyperscalers via Finnhub.
+ * Fetch quarterly revenue for hyperscalers via EDGAR.
+ * Tries Revenues concept first, falls back to RevenueFromContractWithCustomerExcludingAssessedTax.
  */
 async function fetchRevenueData() {
   try {
-    const url = `/api/stocks?mode=financials&symbols=${HYPERSCALER_COMPANIES.join(',')}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${res.status}`);
-    const json = await res.json();
-    
     const data = {};
-    for (const fin of json.financials) {
-      const reports = fin.reports || [];
-      const sorted = reports
-        .filter(r => r.revenue != null)
-        .sort((a, b) => a.year !== b.year ? a.year - b.year : a.quarter - b.quarter);
-      
-      if (sorted.length < 4) {
-        console.warn(`Insufficient quarters for ${fin.symbol}`);
-        return null;
-      }
-      
-      data[fin.symbol] = sorted.slice(-8).map(r => r.revenue / 1e9); // Billions
-    }
+    const revenueConcepts = ['Revenues', 'RevenueFromContractWithCustomerExcludingAssessedTax'];
     
-    // Verify all companies have data
-    for (const co of HYPERSCALER_COMPANIES) {
-      if (!data[co]) {
-        console.warn(`Missing revenue for ${co}`);
+    for (const company of HYPERSCALER_COMPANIES) {
+      const conceptsParam = revenueConcepts.join(',');
+      const url = `/api/edgar?company=${company}&concepts=${conceptsParam}`;
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`EDGAR ${company} ${res.status}`);
+      const json = await res.json();
+      
+      // Try each concept in fallback order
+      let foundRevenue = null;
+      for (const concept of revenueConcepts) {
+        const series = json.series?.find(s => s.concept === concept);
+        if (series && series.observations && series.observations.length > 0) {
+          foundRevenue = series;
+          break;
+        }
+      }
+      
+      if (!foundRevenue) {
+        console.warn(`No EDGAR revenue data for ${company}`);
         return null;
       }
+      
+      // Filter to 10-Q (quarterly) observations, sort chronologically
+      const quarterly = (foundRevenue.observations || [])
+        .filter(o => o.form === '10-Q')
+        .sort((a, b) => new Date(a.end) - new Date(b.end))
+        .slice(-8); // Last 8 quarters
+      
+      if (quarterly.length < 4) {
+        console.warn(`Insufficient quarters for ${company}`);
+        return null;
+      }
+      
+      data[company] = quarterly.map(o => o.val / 1e9); // Billions
     }
     
     return data;

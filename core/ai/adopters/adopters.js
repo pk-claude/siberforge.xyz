@@ -49,29 +49,8 @@ const BASKET_TICKERS = [
  * Fetch quarterly revenue for software basket via Finnhub.
  */
 async function fetchSoftwareRevenue() {
-  try {
-    const url = `/api/stocks?mode=financials&symbols=${SOFTWARE_BASKET.join(',')}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${res.status}`);
-    const json = await res.json();
-    
-    const data = {};
-    for (const fin of json.financials) {
-      const reports = fin.reports || [];
-      const sorted = reports
-        .filter(r => r.revenue != null)
-        .sort((a, b) => a.year !== b.year ? a.year - b.year : a.quarter - b.quarter);
-      
-      if (sorted.length < 4) return null;
-      
-      data[fin.symbol] = sorted.slice(-8).map(r => r.revenue / 1e9); // Billions
-    }
-    
-    return data;
-  } catch (err) {
-    console.warn('Failed to fetch software revenue:', err);
-    return null;
-  }
+  // Finnhub financials-reported is Premium-tier; revenue stays hardcoded until paid or migrated.
+  return null;
 }
 
 /**
@@ -79,47 +58,8 @@ async function fetchSoftwareRevenue() {
  * Returns array of { sym, expansion } (YoY change in operating margin, pp)
  */
 async function fetchMarginData() {
-  try {
-    const symbols = BASKET_TICKERS.map(t => t.sym).join(',');
-    const url = `/api/stocks?mode=financials&symbols=${symbols}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${res.status}`);
-    const json = await res.json();
-    
-    const data = [];
-    for (const fin of json.financials) {
-      const reports = fin.reports || [];
-      
-      // Compute operating margin: operatingIncome / revenue
-      // For simplicity, use last 2 available reports (current and prior year)
-      if (reports.length < 2) {
-        console.warn(`Insufficient reports for ${fin.symbol}`);
-        continue;
-      }
-      
-      const current = reports[reports.length - 1];
-      const prior = reports[reports.length - 5] || reports[0]; // Try to get 1 year prior
-      
-      if (!current.revenue || !prior.revenue) {
-        console.warn(`Missing revenue data for ${fin.symbol}`);
-        continue;
-      }
-      
-      // Estimate operating margin from net income as proxy (if operating margin not available)
-      const currentMargin = current.netIncome ? (current.netIncome / current.revenue) * 100 : null;
-      const priorMargin = prior.netIncome ? (prior.netIncome / prior.revenue) * 100 : null;
-      
-      if (currentMargin != null && priorMargin != null) {
-        const expansion = currentMargin - priorMargin;
-        data.push({ sym: fin.symbol, expansion });
-      }
-    }
-    
-    return data.length > 0 ? data : null;
-  } catch (err) {
-    console.warn('Failed to fetch margin data:', err);
-    return null;
-  }
+  // Finnhub financials-reported is Premium-tier; margin stays hardcoded until paid or migrated.
+  return null;
 }
 
 async function renderRevenueChart() {
@@ -402,7 +342,7 @@ function buildTakeaway(liveData) {
   } else if (basketYoY >= 10) {
     actionText = 'Hold quality (CRM, NOW). Cycle is plateauing; differentiation matters more than basket exposure.';
   } else {
-    actionText = 'Trim. Software is decelerating faster than the AI capex cycle would suggest — implies adoption isn't translating to revenue. Re-evaluate when DBNRR reaccelerates above 110%.';
+    actionText = 'Trim. Software is decelerating faster than the AI capex cycle would suggest — implies adoption isn\'t translating to revenue. Re-evaluate when DBNRR reaccelerates above 110%.';
   }
   
   return `

@@ -46,43 +46,10 @@ let NVDA_UPDATED = null;
 
 /**
  * Fetch quarterly revenue for compute basket via Finnhub.
- * Returns { quarters, symbols, data: { NVDA: [q1, q2, ...], ... } }
- * Falls back to null on error.
+ * Finnhub financials-reported is Premium-tier; revenue stays hardcoded until paid or migrated.
  */
 async function fetchComputeBasketRevenue() {
-  try {
-    const symbols = COMPUTE_BASKET_SYMBOLS.join(',');
-    const url = `/api/stocks?mode=financials&symbols=${symbols}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`${res.status}`);
-    const json = await res.json();
-    
-    // Aggregate by company
-    const data = {};
-    for (const fin of json.financials) {
-      const reports = fin.reports || [];
-      // Sort by year + quarter to get chronological order
-      const sorted = reports
-        .filter(r => r.revenue != null)
-        .sort((a, b) => a.year !== b.year ? a.year - b.year : a.quarter - b.quarter);
-      data[fin.symbol] = sorted.map(r => r.revenue);
-    }
-    
-    // Compute YoY for basket (sum of all symbols' revenue per quarter)
-    // This is simplified: we'd ideally align quarters across all companies
-    // For now, use the hardcoded fallback if any symbol is missing
-    for (const sym of COMPUTE_BASKET_SYMBOLS) {
-      if (!data[sym] || data[sym].length < 4) {
-        console.warn(`Incomplete data for ${sym}, falling back to hardcoded`);
-        return null;
-      }
-    }
-    
-    return data;
-  } catch (err) {
-    console.warn('Failed to fetch compute basket revenue:', err);
-    return null;
-  }
+  return null;
 }
 
 /**
