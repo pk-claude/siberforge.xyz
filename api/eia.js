@@ -29,6 +29,16 @@ const CATALOG = {
   ELEC_INDUSTRIAL: {
     path: '/electricity/retail-sales/data',
     facets: { sectorid: ['IND'], stateid: ['US'] },
+    freq: 'monthly',
+    value: 'price',
+  },
+  // Residential electricity price, US average — monthly
+  ELEC_RESIDENTIAL: {
+    path: '/electricity/retail-sales/data',
+    facets: { sectorid: ['RES'], stateid: ['US'] },
+    freq: 'monthly',
+    value: 'price',
+  },
   // Nuclear generation, US total — monthly
   NUCLEAR_GEN_US: {
     path: '/electricity/electric-power-operational-data/data',
@@ -56,17 +66,6 @@ const CATALOG = {
     facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['COW'] },
     freq: 'monthly',
     value: 'generation',
-  },
-  // Residential electricity price, US average — monthly
-  ELEC_RESIDENTIAL: {
-    path: '/electricity/retail-sales/data',
-    facets: { sectorid: ['RES'], stateid: ['US'] },
-    freq: 'monthly',
-    value: 'price',
-  },
-
-    freq: 'monthly',
-    value: 'price',
   },
 };
 
