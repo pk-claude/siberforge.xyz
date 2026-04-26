@@ -1636,7 +1636,9 @@ function renderPositioning() {
   tgt.innerHTML = `
     <div class="rp-header">
       <div class="rp-eyebrow">Positioning &middot; based on ${meta.label} regime + 6m historical returns</div>
-      <h3>So what — how to tilt the book</h3>
+      <div class="section-head">
+        <h2>So what — how to tilt the book</h2>
+      </div>
       <p class="rp-sub">
         Translates the current regime call into a specific over/under-weight tilt.
         Picks the top 3 and bottom 3 sectors by historical forward 6-month return

@@ -133,16 +133,70 @@ export async function renderStockBondCorrelation(canvasId) {
     }],
   });
 
-  // Auto-interpretation under the chart
+  // Auto-interpretation: four-row takeaway block
   const note = document.getElementById('sbc-note');
   if (note && corr.length) {
     const last = corr[corr.length - 1];
     const v = last.value;
-    let msg;
-    if (v < -0.3)      msg = `Currently strongly negative at <strong>${v.toFixed(2)}</strong> — bonds are an effective equity hedge; classic 60/40 dynamics intact.`;
-    else if (v < 0)    msg = `Currently mildly negative at <strong>${v.toFixed(2)}</strong> — bonds still hedging but with weakening protection.`;
-    else if (v < 0.3)  msg = `Currently mildly positive at <strong>${v.toFixed(2)}</strong> — bonds and equities moving in sync; reduced 60/40 diversification value.`;
-    else                msg = `Currently strongly positive at <strong>${v.toFixed(2)}</strong> — bonds amplify rather than hedge equity drawdowns. 60/40 portfolios need alternative diversifiers (gold, commodities, cash).`;
-    note.innerHTML = `<strong>Current read:</strong> ${msg} 24-month rolling, monthly returns.`;
+    
+    // Determine regime label and stand copy
+    let standCopy, regimeLabel;
+    if (v < -0.20) {
+      regimeLabel = 'Strongly negative';
+      standCopy = `Strongly negative at <strong>${v.toFixed(2)}</strong>. Bonds are hedging equities — the textbook 60/40 environment.`;
+    } else if (v < 0) {
+      regimeLabel = 'Mildly negative';
+      standCopy = `Mildly negative at <strong>${v.toFixed(2)}</strong>. Bonds still hedge but the cushion is thin.`;
+    } else if (v < 0.20) {
+      regimeLabel = 'Mildly positive';
+      standCopy = `Mildly positive at <strong>${v.toFixed(2)}</strong>. Diversification is degraded — bonds and equities drift together.`;
+    } else {
+      regimeLabel = 'Strongly positive';
+      standCopy = `Strongly positive at <strong>${v.toFixed(2)}</strong>. Broken regime — duration is now a correlated risk, not a hedge.`;
+    }
+    
+    // Add 12-month delta if available
+    if (corr.length >= 13) {
+      const v12m = corr[corr.length - 13].value;
+      const delta = (v - v12m).toFixed(2);
+      const sign = delta > 0 ? '+' : '';
+      standCopy += `, ${sign}${delta} pts vs 12m ago`;
+    }
+    
+    // Forward copy based on regime
+    let forwardCopy;
+    if (v > 0.20) {
+      forwardCopy = 'Still in the broken regime. Below +0.20 marks a re-anchoring; below -0.10 for two consecutive months is required before treating Treasuries as a durable hedge again.';
+    } else if (v >= 0) {
+      forwardCopy = 'Re-anchoring underway from the 2024 peak (~+0.75). Mean-reversion path is plausible but not confirmed — needs a print below -0.10 to validate.';
+    } else {
+      forwardCopy = 'Re-anchoring confirmed. Holds as long as the level stays sub-zero; watch for upward drift back toward zero.';
+    }
+    
+    // Action is always the same playbook
+    const actionCopy = 'Reduce long-duration Treasuries as the primary equity hedge. Substitute with managed-futures (DBMF, KMLM), gold (GLD), short-duration cash (BIL, SGOV), or tail-risk overlays. Size equity beta off VIX rather than off the bond ladder. Re-evaluate 60/40 weights when this correlation prints below -0.10 for two consecutive months.';
+    
+    // Build the four-row takeaway block
+    const block = `
+  <div class="sbc-takeaway">
+    <div class="sbc-row sbc-row-stand">
+      <span class="sbc-label">Where it stands</span>
+      <span class="sbc-text">${standCopy}</span>
+    </div>
+    <div class="sbc-row sbc-row-broke">
+      <span class="sbc-label">What the break did</span>
+      <span class="sbc-text">2022 saw a 60/40 portfolio drawdown of ~17% — the worst since 1937 — because Treasuries fell alongside equities instead of hedging them. The textbook diversification benefit only works when this correlation is negative.</span>
+    </div>
+    <div class="sbc-row sbc-row-fwd">
+      <span class="sbc-label">Going forward</span>
+      <span class="sbc-text">${forwardCopy}</span>
+    </div>
+    <div class="sbc-row sbc-row-act">
+      <span class="sbc-label">Action</span>
+      <span class="sbc-text">${actionCopy}</span>
+    </div>
+  </div>
+`;
+    note.innerHTML = block;
   }
 }

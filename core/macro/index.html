@@ -57,20 +57,23 @@
 
 
 <!-- Live macro strip: 6 indicators with current value, percentile, 1m delta -->
+<div class="section-head">
+  <h2>Live macro indicators</h2>
+</div>
 <section class="macro-strip" id="macro-strip">
   <!-- Populated by renderMacroStrip() -->
 </section>
 
 <section class="regime-section">
-  <div class="regime-section-head">
-    <h2>Regime &mdash; trajectory &amp; what came next</h2>
-    <span class="regime-meth-q" tabindex="0" title="Growth = composite z-score of INDPRO + nonfarm payrolls + real retail sales (each 6m annualized). Inflation = z-score of Core CPI 6m annualized. Trailing 120-month window so the regime is 'vs recent history' rather than against the inflationary 1970s." aria-label="Methodology">?</span>
+  <div class="section-head">
+    <h2>Regime — trajectory &amp; what came next</h2>
+    <span class="regime-meth-q section-head-meta" tabindex="0" title="Growth = composite z-score of INDPRO + nonfarm payrolls + real retail sales (each 6m annualized). Inflation = z-score of Core CPI 6m annualized. Trailing 120-month window so the regime is 'vs recent history' rather than against the inflationary 1970s." aria-label="Methodology">?</span>
   </div>
 
   <div class="regime-hero regime-hero-v2">
     <div class="regime-trajectory-wrap">
       <div class="regime-trajectory-header">
-        <h3>Trajectory &middot; last 24 months</h3>
+        <h4 class="subsection-head">Trajectory · last 24 months</h4>
         <p class="regime-trajectory-sub">Each dot is one month. Newest = brightest. Boundary crossings are the actionable signal.</p>
       </div>
       <div class="regime-trajectory-chart">
@@ -115,7 +118,9 @@
 
   <!-- Stock-bond correlation regime — the cross-asset signal for 60/40 portfolios -->
   <section class="sbc-section">
-    <h3>Stock-bond correlation regime</h3>
+    <div class="section-head">
+      <h2>Stock-bond correlation regime</h2>
+    </div>
     <p class="sbc-sub">
       The single most decision-relevant cross-asset signal for any 60/40-style portfolio.
       Below zero = bonds hedge equity drawdowns (the post-2000 default); above zero = bonds amplify
@@ -123,7 +128,7 @@
       diversifier or a correlated risk.
     </p>
     <div class="sbc-chart-wrap"><canvas id="sbc-chart"></canvas></div>
-    <p class="sbc-note" id="sbc-note"></p>
+    <div class="sbc-note" id="sbc-note"></div>
   </section>
 </section>
 
