@@ -2577,7 +2577,7 @@ footer {
 
 .bonds-page { padding: 0 24px 24px; }
 
-.bonds-banner-head { padding: 14px 0 18px; }
+.bonds-banner-head { padding: 14px 24px 18px; }
 .bonds-banner-head h1 { font-size: 18px; margin: 0; font-weight: 600; letter-spacing: -0.005em; }
 .bonds-banner-head .bonds-sub { font-size: 12px; color: var(--muted); line-height: 1.45; margin: 4px 0 0; max-width: 900px; }
 
