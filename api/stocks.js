@@ -114,9 +114,25 @@ async function yahooHistory(symbol, years) {
 // ---- Finnhub (quarterly financials) ----
 async function finnhubFinancials(symbol, key) {
   const url = `${FINN_BASE}/financials-reported?symbol=${symbol}&token=${key}`;
-  const res = await fetch(url);
-  if (!res.ok) throw new Error(`Finnhub financials ${symbol} ${res.status}`);
-  const data = await res.json();
+  let res;
+  try {
+    res = await fetch(url);
+  } catch (err) {
+    return { symbol, error: `network: ${err.message || err}`, reports: [] };
+  }
+  // Finnhub returns HTML rate-limit pages on 429 — JSON.parse would throw and crash the
+  // whole multi-symbol response. Detect non-JSON content and degrade to a per-symbol error.
+  const ctype = res.headers.get('content-type') || '';
+  if (!res.ok || !ctype.includes('application/json')) {
+    const status = res.status;
+    return { symbol, error: `finnhub ${status}${status === 429 ? ' rate_limited' : ''}`, reports: [] };
+  }
+  let data;
+  try {
+    data = await res.json();
+  } catch (err) {
+    return { symbol, error: `parse: ${err.message || err}`, reports: [] };
+  }
   // data.data is array of reports: { quarter, year, value, currency, symbol }
   // Quarterly items have 'quarter' field; annual have null quarter
   const quarterly = (data.data || []).filter(r => r.quarter && r.currency === 'USD');
