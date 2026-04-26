@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-26T14:16:59.000Z",
+  "generatedAt": "2026-04-26T14:45:01.870Z",
   "windowDays": 14,
   "windows": {
     "next14": [
@@ -44,45 +44,6 @@
         "context": "Last: 4.044 on 2026-04-20"
       },
       {
-        "date": "2026-04-30",
-        "id": "WCI_SHA_LA",
-        "label": "Drewry WCI: Shanghai → Los Angeles",
-        "shortLabel": "WCI SHA→LA",
-        "category": "international",
-        "cadence": "Drewry",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "$/40ft",
-        "decimals": 0,
-        "context": "no prior data on file"
-      },
-      {
-        "date": "2026-04-30",
-        "id": "WCI_SHA_RTM",
-        "label": "Drewry WCI: Shanghai → Rotterdam",
-        "shortLabel": "WCI SHA→RTM",
-        "category": "international",
-        "cadence": "Drewry",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "$/40ft",
-        "decimals": 0,
-        "context": "no prior data on file"
-      },
-      {
-        "date": "2026-04-30",
-        "id": "WCI_COMPOSITE",
-        "label": "Drewry World Container Index — Composite",
-        "shortLabel": "WCI Composite",
-        "category": "international",
-        "cadence": "Drewry, every Thursday",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "$/40ft",
-        "decimals": 0,
-        "context": "no prior data on file"
-      },
-      {
         "date": "2026-05-01",
         "id": "AIR_TRANSP_EMP",
         "label": "Air Transportation Employment",
@@ -94,19 +55,6 @@
         "unit": "k",
         "decimals": 0,
         "context": "Last: 575 on 2026-03-01"
-      },
-      {
-        "date": "2026-05-01",
-        "id": "CLASS8_ORDERS",
-        "label": "Class 8 Net Orders",
-        "shortLabel": "Class 8 Orders",
-        "category": "middle-mile",
-        "cadence": "ACT/FTR, ~5th of month",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "k",
-        "decimals": 1,
-        "context": "no prior data on file"
       },
       {
         "date": "2026-05-01",
@@ -128,11 +76,11 @@
         "shortLabel": "GSCPI",
         "category": "international",
         "cadence": "NY Fed, ~5th of month",
-        "lastValue": null,
-        "lastDate": null,
+        "lastValue": 0.68,
+        "lastDate": "2026-03-31",
         "unit": "σ",
         "decimals": 2,
-        "context": "no prior data on file"
+        "context": "Last: 0.68 on 2026-03-31"
       },
       {
         "date": "2026-05-01",
@@ -193,11 +141,11 @@
         "shortLabel": "SC Pressure",
         "category": "composite",
         "cadence": "recomputed at GSCPI release",
-        "lastValue": null,
-        "lastDate": null,
+        "lastValue": 1.235,
+        "lastDate": "2026-03-31",
         "unit": "σ",
         "decimals": 2,
-        "context": "no prior data on file"
+        "context": "Last: 1.24 on 2026-03-31"
       },
       {
         "date": "2026-05-01",
@@ -304,45 +252,6 @@
         "context": "Last: 4.044 on 2026-04-20"
       },
       {
-        "date": "2026-05-07",
-        "id": "WCI_SHA_LA",
-        "label": "Drewry WCI: Shanghai → Los Angeles",
-        "shortLabel": "WCI SHA→LA",
-        "category": "international",
-        "cadence": "Drewry",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "$/40ft",
-        "decimals": 0,
-        "context": "no prior data on file"
-      },
-      {
-        "date": "2026-05-07",
-        "id": "WCI_SHA_RTM",
-        "label": "Drewry WCI: Shanghai → Rotterdam",
-        "shortLabel": "WCI SHA→RTM",
-        "category": "international",
-        "cadence": "Drewry",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "$/40ft",
-        "decimals": 0,
-        "context": "no prior data on file"
-      },
-      {
-        "date": "2026-05-07",
-        "id": "WCI_COMPOSITE",
-        "label": "Drewry World Container Index — Composite",
-        "shortLabel": "WCI Composite",
-        "category": "international",
-        "cadence": "Drewry, every Thursday",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "$/40ft",
-        "decimals": 0,
-        "context": "no prior data on file"
-      },
-      {
         "date": "2026-05-08",
         "id": "SCFI",
         "label": "Shanghai Containerized Freight Index",
@@ -383,19 +292,6 @@
           "unit": "$/gal",
           "decimals": 3,
           "context": "Last: 4.044 on 2026-04-20"
-        },
-        {
-          "date": "2026-05-01",
-          "id": "CLASS8_ORDERS",
-          "label": "Class 8 Net Orders",
-          "shortLabel": "Class 8 Orders",
-          "category": "middle-mile",
-          "cadence": "ACT/FTR, ~5th of month",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "k",
-          "decimals": 1,
-          "context": "no prior data on file"
         },
         {
           "date": "2026-05-01",
@@ -506,45 +402,6 @@
       ],
       "international": [
         {
-          "date": "2026-04-30",
-          "id": "WCI_SHA_LA",
-          "label": "Drewry WCI: Shanghai → Los Angeles",
-          "shortLabel": "WCI SHA→LA",
-          "category": "international",
-          "cadence": "Drewry",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "$/40ft",
-          "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
-          "date": "2026-04-30",
-          "id": "WCI_SHA_RTM",
-          "label": "Drewry WCI: Shanghai → Rotterdam",
-          "shortLabel": "WCI SHA→RTM",
-          "category": "international",
-          "cadence": "Drewry",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "$/40ft",
-          "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
-          "date": "2026-04-30",
-          "id": "WCI_COMPOSITE",
-          "label": "Drewry World Container Index — Composite",
-          "shortLabel": "WCI Composite",
-          "category": "international",
-          "cadence": "Drewry, every Thursday",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "$/40ft",
-          "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
           "date": "2026-05-01",
           "id": "AIR_TRANSP_EMP",
           "label": "Air Transportation Employment",
@@ -564,11 +421,11 @@
           "shortLabel": "GSCPI",
           "category": "international",
           "cadence": "NY Fed, ~5th of month",
-          "lastValue": null,
-          "lastDate": null,
+          "lastValue": 0.68,
+          "lastDate": "2026-03-31",
           "unit": "σ",
           "decimals": 2,
-          "context": "no prior data on file"
+          "context": "Last: 0.68 on 2026-03-31"
         },
         {
           "date": "2026-05-01",
@@ -610,45 +467,6 @@
           "context": "no prior data on file"
         },
         {
-          "date": "2026-05-07",
-          "id": "WCI_SHA_LA",
-          "label": "Drewry WCI: Shanghai → Los Angeles",
-          "shortLabel": "WCI SHA→LA",
-          "category": "international",
-          "cadence": "Drewry",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "$/40ft",
-          "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
-          "date": "2026-05-07",
-          "id": "WCI_SHA_RTM",
-          "label": "Drewry WCI: Shanghai → Rotterdam",
-          "shortLabel": "WCI SHA→RTM",
-          "category": "international",
-          "cadence": "Drewry",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "$/40ft",
-          "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
-          "date": "2026-05-07",
-          "id": "WCI_COMPOSITE",
-          "label": "Drewry World Container Index — Composite",
-          "shortLabel": "WCI Composite",
-          "category": "international",
-          "cadence": "Drewry, every Thursday",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "$/40ft",
-          "decimals": 0,
-          "context": "no prior data on file"
-        },
-        {
           "date": "2026-05-08",
           "id": "SCFI",
           "label": "Shanghai Containerized Freight Index",
@@ -670,11 +488,11 @@
           "shortLabel": "SC Pressure",
           "category": "composite",
           "cadence": "recomputed at GSCPI release",
-          "lastValue": null,
-          "lastDate": null,
+          "lastValue": 1.235,
+          "lastDate": "2026-03-31",
           "unit": "σ",
           "decimals": 2,
-          "context": "no prior data on file"
+          "context": "Last: 1.24 on 2026-03-31"
         }
       ],
       "dc": [
