@@ -1,5 +1,5 @@
 // /core/ai/hub.js — AI hub page: sankey hero + pillar card metrics
-import { injectLoadingStyles, setStatus, showLoading, hideLoading } from './lib/loading.js';
+import { injectLoadingStyles, setStatus } from './lib/loading.js';
 
 // Hardcoded sankey data (2025E): hyperscalers → capex buckets → end beneficiaries
 // Values are approximate capex $ billions. Will be replaced by live data in Phase 2-3.
@@ -149,19 +149,24 @@ function setMetrics() {
   }
 }
 
-// Initialize on page load
+// Initialize on page load.
+// Note: don't put the loading overlay inside #ai-sankey — renderSankey() clears
+// the container with innerHTML='' which would wipe the overlay AND any failure
+// state. Use only the top-right status indicator for sankey load progress.
 window.addEventListener('DOMContentLoaded', async () => {
   injectLoadingStyles();
   setStatus('Loading capex flows...', true);
-  showLoading('ai-sankey', 'Loading capex flows...');
   setMetrics();
   setupThemeListener();
   try {
     await renderSankey();
+    setStatus('Ready', false);
   } catch (err) {
     console.error('Sankey render failed:', err);
-  } finally {
-    hideLoading('ai-sankey');
-    setStatus('Ready', false);
+    setStatus('Sankey failed to load', false);
+    const container = document.getElementById('ai-sankey');
+    if (container) {
+      container.innerHTML = '<div style="padding:1.5rem;color:#9aa0a6;font-size:13px;">Capex flow chart failed to load. Check console for details.</div>';
+    }
   }
 });

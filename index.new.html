@@ -519,8 +519,7 @@
     const abs = Math.abs(delta);
     return `${sign}${abs.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals })} ${unit}`;
   }
-  // Palette for sparklines. Matches editorial accent set on dark + retains
-  // semantic green/red for healthy/weak.
+  // Palette for sparklines. Editorial accents on dark; semantic green/red retained.
   const COLOR_GREEN  = '#3ECF8E';
   const COLOR_RED    = '#E63946';
   const COLOR_TEAL   = '#3EB8E0';
@@ -540,10 +539,10 @@
     { id: 'UNRATE',    transform: 'level',   unit: '%', decimals: 1, direction: 'lower_better',  contextLabel: 'Level' },
   ];
 
-  // 3 indicator strips. Only AHE has a DOM target on this page; the other
-  // two are kept for parity with the original config (renderStrip no-ops if
-  // the element is missing). Restoring the full list trivially supports
-  // future strips without code changes.
+  // 3 indicator strips. Only AHE has a DOM target on this page; the other two
+  // are kept for parity with the original config (renderStrip no-ops if the
+  // element is missing). Restoring the full list trivially supports adding
+  // strips later without touching the data layer.
   const STRIPS = [
     {
       stripId: 'AHE',
@@ -553,11 +552,11 @@
       decimals: 1,
       direction: 'neutral',
       tier(v) {
-        if (!Number.isFinite(v))  return { cls: '',          label: '—',        sub: '' };
-        if (v >= 4.0)             return { cls: 't-cooling', label: 'HOT',      sub: 'Above 4% is hot — historically feeds back into CPI.' };
-        if (v >= 3.0)             return { cls: 't-healthy', label: 'TREND',    sub: '3–4% is the pre-2020 trend band.' };
-        if (v >= 2.0)             return { cls: 't-cooling', label: 'COOLING',  sub: 'Decelerating — watch for real-wage compression.' };
-        return                         { cls: 't-weak',    label: 'WEAK',     sub: 'Wage growth below 2% is sub-trend.' };
+        if (!Number.isFinite(v))  return { cls: '',          label: '—',    sub: '' };
+        if (v >= 4.0)             return { cls: 't-cooling', label: 'HOT',       sub: 'Above 4% is hot — historically feeds back into CPI.' };
+        if (v >= 3.0)             return { cls: 't-healthy', label: 'TREND',     sub: '3–4% is the pre-2020 trend band.' };
+        if (v >= 2.0)             return { cls: 't-cooling', label: 'COOLING',   sub: 'Decelerating — watch for real-wage compression.' };
+        return                         { cls: 't-weak',    label: 'WEAK',      sub: 'Wage growth below 2% is sub-trend.' };
       },
     },
     {
@@ -568,10 +567,10 @@
       decimals: 2,
       direction: 'higher_better',
       tier(v) {
-        if (!Number.isFinite(v)) return { cls: '',          label: '—',        sub: '' };
-        if (v >= 5.0)            return { cls: 't-healthy', label: 'HEALTHY',  sub: 'SAAR above the 5M cyclical neutral.' };
-        if (v >= 4.0)            return { cls: 't-cooling', label: 'SOFT',     sub: 'Below long-run neutral, above trough.' };
-        return                        { cls: 't-weak',    label: 'WEAK',     sub: 'SAAR below 4M — near cycle lows.' };
+        if (!Number.isFinite(v)) return { cls: '',          label: '—',    sub: '' };
+        if (v >= 5.0)            return { cls: 't-healthy', label: 'HEALTHY',   sub: 'SAAR above the 5M cyclical neutral.' };
+        if (v >= 4.0)            return { cls: 't-cooling', label: 'SOFT',      sub: 'Below long-run neutral, above trough.' };
+        return                        { cls: 't-weak',    label: 'WEAK',      sub: 'SAAR below 4M — near cycle lows.' };
       },
     },
     {
@@ -582,9 +581,9 @@
       decimals: 1,
       direction: 'higher_better',
       tier(v) {
-        if (!Number.isFinite(v)) return { cls: '',          label: '—',           sub: '' };
-        if (v >=  5.0)           return { cls: 't-healthy', label: 'EXPANDING',   sub: 'Starts up year-on-year.' };
-        if (v >= -5.0)           return { cls: 't-trend',   label: 'FLAT',        sub: 'Within ±5% YoY — trend pace.' };
+        if (!Number.isFinite(v)) return { cls: '',          label: '—',    sub: '' };
+        if (v >=  5.0)           return { cls: 't-healthy', label: 'EXPANDING', sub: 'Starts up year-on-year.' };
+        if (v >= -5.0)           return { cls: 't-trend',   label: 'FLAT',      sub: 'Within ±5% YoY — trend pace.' };
         return                        { cls: 't-weak',    label: 'CONTRACTING', sub: 'YoY below −5% — builders pulling back.' };
       },
     },
