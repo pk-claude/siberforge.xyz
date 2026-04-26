@@ -34,11 +34,17 @@ async function renderSankey() {
   const container = document.getElementById('ai-sankey');
   if (!container) return;
 
-  // Dynamic import: D3 from CDN
-  const d3 = await import('https://cdn.jsdelivr.net/npm/d3@7.8.5/+esm').then(m => m.default);
-  const { sankey: d3Sankey, sankeyLinkHorizontal } = await import(
-    'https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/+esm'
-  ).then(m => ({ sankey: m.sankey, sankeyLinkHorizontal: m.sankeyLinkHorizontal }));
+  // Dynamic import: D3 from CDN. jsdelivr's +esm output exposes named exports
+  // and sometimes a default export — handle both shapes so this doesn't break
+  // when the bundle layout changes.
+  const d3Mod = await import('https://cdn.jsdelivr.net/npm/d3@7.8.5/+esm');
+  const d3 = d3Mod.default || d3Mod;
+  const sankeyMod = await import('https://cdn.jsdelivr.net/npm/d3-sankey@0.12.3/+esm');
+  const d3Sankey = sankeyMod.sankey || (sankeyMod.default && sankeyMod.default.sankey);
+  const sankeyLinkHorizontal = sankeyMod.sankeyLinkHorizontal || (sankeyMod.default && sankeyMod.default.sankeyLinkHorizontal);
+  if (!d3 || !d3.create || !d3Sankey) {
+    throw new Error('d3/d3-sankey CDN bundle missing expected exports');
+  }
 
   const width = container.clientWidth || 960;
   const height = 340;
@@ -166,7 +172,9 @@ window.addEventListener('DOMContentLoaded', async () => {
     setStatus('Sankey failed to load', false);
     const container = document.getElementById('ai-sankey');
     if (container) {
-      container.innerHTML = '<div style="padding:1.5rem;color:#9aa0a6;font-size:13px;">Capex flow chart failed to load. Check console for details.</div>';
+      const msg = (err && err.message) ? err.message : String(err);
+      const safe = msg.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
+      container.innerHTML = '<div style="padding:1.5rem;color:#9aa0a6;font-size:13px;">Capex flow chart failed to load: <code style="color:#ef6b6b;">' + safe + '</code></div>';
     }
   }
 });
