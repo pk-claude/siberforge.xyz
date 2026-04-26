@@ -63,20 +63,20 @@ async function renderYieldCurve() {
     twoMonthsAgo.setMonth(twoMonthsAgo.getMonth() - 2);
     const start = twoMonthsAgo.toISOString().split('T')[0];
 
-    const { series, errors } = await fetchFred(
+    const map = await fetchFred(
       ['DTB3', 'DGS2', 'DGS5', 'DGS10', 'DGS30'],
       { start }
     );
 
-    if (series.length === 0) {
+    if (Object.keys(map).length === 0) {
       document.getElementById('yc-note').textContent = 'Yield curve data unavailable.';
       return;
     }
 
     const dataMap = {};
-    series.forEach(s => {
-      dataMap[s.id] = s.observations.sort((a, b) => new Date(a.date) - new Date(b.date));
-    });
+    for (const [id, payload] of Object.entries(map)) {
+      dataMap[id] = [...(payload.observations || [])].sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
 
     // Get latest, 3m ago, 12m ago dates
     const latest = new Date();
@@ -237,16 +237,16 @@ async function renderRealYields() {
     oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 10);
     const start = oneYearAgo.toISOString().split('T')[0];
 
-    const { series } = await fetchFred(['DFII5', 'DFII10', 'DFII30'], { start });
-    if (series.length === 0) {
+    const map = await fetchFred(['DFII5', 'DFII10', 'DFII30'], { start });
+    if (Object.keys(map).length === 0) {
       document.getElementById('ry-note').textContent = 'Real yield data unavailable.';
       return;
     }
 
     const dataMap = {};
-    series.forEach(s => {
-      dataMap[s.id] = s.observations.map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
-    });
+    for (const [id, payload] of Object.entries(map)) {
+      dataMap[id] = (payload.observations || []).map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
 
     const latest = new Date();
 
@@ -337,16 +337,16 @@ async function renderCreditSpreads() {
     tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - 10);
     const start = tenYearsAgo.toISOString().split('T')[0];
 
-    const { series } = await fetchFred(['BAMLC0A0CM', 'BAMLH0A0HYM2'], { start });
-    if (series.length === 0) {
+    const map = await fetchFred(['BAMLC0A0CM', 'BAMLH0A0HYM2'], { start });
+    if (Object.keys(map).length === 0) {
       document.getElementById('cs-note').textContent = 'Credit spread data unavailable.';
       return;
     }
 
     const dataMap = {};
-    series.forEach(s => {
-      dataMap[s.id] = s.observations.map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
-    });
+    for (const [id, payload] of Object.entries(map)) {
+      dataMap[id] = (payload.observations || []).map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
 
     // Chart: IG and HY with recession shading
     const ctx = document.getElementById('cs-chart').getContext('2d');
@@ -427,16 +427,16 @@ async function renderCrossAssetVol() {
     fiveYearsAgo.setFullYear(fiveYearsAgo.getFullYear() - 5);
     const start = fiveYearsAgo.toISOString().split('T')[0];
 
-    const { series } = await fetchFred(['VIXCLS', 'DGS10'], { start });
-    if (series.length === 0) {
+    const map = await fetchFred(['VIXCLS', 'DGS10'], { start });
+    if (Object.keys(map).length === 0) {
       document.getElementById('cav-note').textContent = 'Cross-asset vol data unavailable.';
       return;
     }
 
     const dataMap = {};
-    series.forEach(s => {
-      dataMap[s.id] = s.observations.map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
-    });
+    for (const [id, payload] of Object.entries(map)) {
+      dataMap[id] = (payload.observations || []).map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
 
     const vixData = dataMap['VIXCLS'] || [];
     const dgs10Data = dataMap['DGS10'] || [];
@@ -519,16 +519,16 @@ async function renderBreaekevenInflation() {
     tenYearsAgo.setFullYear(tenYearsAgo.getFullYear() - 10);
     const start = tenYearsAgo.toISOString().split('T')[0];
 
-    const { series } = await fetchFred(['T5YIE', 'T10YIE', 'T5YIFR', 'MICH'], { start });
-    if (series.length === 0) {
+    const map = await fetchFred(['T5YIE', 'T10YIE', 'T5YIFR', 'MICH'], { start });
+    if (Object.keys(map).length === 0) {
       document.getElementById('bei-note').textContent = 'Inflation expectation data unavailable.';
       return;
     }
 
     const dataMap = {};
-    series.forEach(s => {
-      dataMap[s.id] = s.observations.map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
-    });
+    for (const [id, payload] of Object.entries(map)) {
+      dataMap[id] = (payload.observations || []).map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
 
     // Chart: T5YIE, T10YIE, T5YIFR as lines + MICH as dashed
     const ctx = document.getElementById('bei-chart').getContext('2d');
@@ -654,6 +654,15 @@ async function init() {
   ]);
 
   document.getElementById('refresh-text').textContent = 'Updated ' + new Date().toLocaleTimeString();
+  document.getElementById('last-updated').textContent = 'Last updated ' + new Date().toLocaleString();
+}
+
+init();
+
+// Re-render on theme change
+document.addEventListener('themechange', () => {
+  init();
+});
   document.getElementById('last-updated').textContent = 'Last updated ' + new Date().toLocaleString();
 }
 

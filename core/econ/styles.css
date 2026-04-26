@@ -70,11 +70,22 @@ html, body {
 .home-link:hover { color: var(--accent); background: var(--panel-2); }
 
 .brand .mark {
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: var(--accent);
-  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  font-size: 18px;
+  color: var(--text);
 }
+.brand .mark .brand-eyes {
+  width: 36px;
+  height: 16px;
+  flex: 0 0 36px;
+}
+.brand .mark .siber { color: var(--text); }
+.brand .mark .forge { color: #E63946; }
 
 .brand .sub {
   color: var(--muted);
