@@ -2586,3 +2586,33 @@ footer {
   .yc-grid { grid-template-columns: 1fr; }
   .ry-table, .bei-table { grid-template-columns: repeat(2, 1fr); }
 }
+
+
+/* AI Beneficiaries hub (added: Phase 1) */
+.ai-hub { padding: 0 24px 32px; max-width: 1280px; margin: 0 auto; }
+.ai-hub-banner { padding: 18px 0 8px; }
+.ai-hub-banner h1 { font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.005em; }
+.ai-hub-thesis { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; max-width: 800px; }
+
+.ai-hub-section-head { display: flex; align-items: baseline; gap: 12px; margin: 28px 0 14px; padding: 0 0 8px; border-bottom: 1px solid var(--line); }
+.ai-hub-section-head h2 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: -0.005em; color: var(--text); }
+.ai-hub-section-head .ai-hub-section-sub { font-size: 12px; color: var(--muted); }
+
+.ai-sankey-wrap { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 18px 16px; min-height: 340px; }
+
+.ai-hub-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+.ai-hub-grid-2 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 1100px) { .ai-hub-grid:not(.ai-hub-grid-2) { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 800px) { .ai-hub-grid, .ai-hub-grid-2 { grid-template-columns: 1fr; } }
+
+.ai-hub-card { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+.ai-hub-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.ai-hub-card-pillar { border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; }
+.ai-hub-card-name { border-left: 3px solid var(--muted); border-radius: 0 6px 6px 0; }
+.ai-hub-card-eyebrow { font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 6px; }
+.ai-hub-card-name .ai-hub-card-eyebrow { color: var(--muted); }
+.ai-hub-card h3 { font-size: 15px; font-weight: 600; margin: 0 0 6px; color: var(--text); letter-spacing: -0.003em; }
+.ai-hub-card p { font-size: 12.5px; color: var(--muted); margin: 0 0 12px; line-height: 1.45; }
+.ai-hub-card-metric { display: flex; align-items: baseline; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
+.ai-hub-card-val { font-size: 18px; font-weight: 600; color: var(--text); }
+.ai-hub-card-label { font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }

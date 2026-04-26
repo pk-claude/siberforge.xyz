@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge &mdash; AI Beneficiaries</title>
-<link rel="stylesheet" href="../macro/styles.css" />
+<title>Siberforge — AI Beneficiaries</title>
+<link rel="stylesheet" href="/core/macro/styles.css" />
 </head>
 <body>
 <header class="top">
@@ -30,61 +30,84 @@
   </div>
   <div class="section-pages">
     <span class="dd-label">AI views</span>
-    <a href="#" class="dd-link active">Roadmap</a>
+    <a href="/core/ai/" class="dd-link active">Hub</a>
+    <a href="/core/ai/compute/" class="dd-link">Compute</a>
+    <a href="/core/ai/hyperscalers/" class="dd-link">Hyperscalers</a>
+    <a href="/core/ai/power/" class="dd-link">Power</a>
+    <a href="/core/ai/adopters/" class="dd-link">Adopters</a>
+    <a href="/core/ai/screen/" class="dd-link">Screen</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5</a>
   </div>
 </nav>
 
-<section class="ai-stub">
-  <div class="section-head">
-    <h2>AI Beneficiaries &mdash; coming soon</h2>
-    <span class="section-head-sub">A working theory of who captures the AI capex cycle and how to position around it.</span>
+<section class="ai-hub">
+  <div class="ai-hub-banner">
+    <h1>AI Beneficiaries</h1>
+    <p class="ai-hub-thesis">A working theory of who captures the AI capex cycle. Four thematic pillars (top-down) plus two name-level views (bottom-up).</p>
   </div>
 
-  <div class="ai-stub-grid">
-    <div class="ai-stub-card">
-      <div class="ai-stub-eyebrow">PILLAR 1</div>
-      <h3>Compute & semis</h3>
-      <p>NVDA, AMD, AVGO, TSM, ASML &mdash; the picks and shovels. Track revenue concentration, design-win share, and the gap between hyperscaler capex commitments and supplier book-to-bill.</p>
-      <p class="ai-stub-status">Planned: Q3 2026</p>
-    </div>
+  <div class="ai-hub-section-head">
+    <h2>The capex flow</h2>
+    <span class="ai-hub-section-sub">Hyperscaler spend &rarr; compute &amp; power &rarr; ultimate beneficiaries. Hover any flow for $B detail.</span>
+  </div>
+  <div id="ai-sankey" class="ai-sankey-wrap"></div>
 
-    <div class="ai-stub-card">
-      <div class="ai-stub-eyebrow">PILLAR 2</div>
+  <div class="ai-hub-section-head">
+    <h2>Pillar views</h2>
+    <span class="ai-hub-section-sub">Top-down thematic.</span>
+  </div>
+  <div class="ai-hub-grid">
+    <a href="/core/ai/compute/" class="ai-hub-card ai-hub-card-pillar">
+      <div class="ai-hub-card-eyebrow">PILLAR 1</div>
+      <h3>Compute &amp; semis</h3>
+      <p>Picks and shovels. NVDA, AMD, AVGO, TSM, ASML.</p>
+      <div class="ai-hub-card-metric"><span class="ai-hub-card-val" id="hub-compute-val">&mdash;</span><span class="ai-hub-card-label">basket rev YoY</span></div>
+    </a>
+    <a href="/core/ai/hyperscalers/" class="ai-hub-card ai-hub-card-pillar">
+      <div class="ai-hub-card-eyebrow">PILLAR 2</div>
       <h3>Hyperscaler capex</h3>
-      <p>MSFT, GOOGL, META, AMZN &mdash; the customers paying for it all. Quarterly capex prints, AI-attributable revenue lift, and the ROIC question (when does the spending pay off, or stop?).</p>
-      <p class="ai-stub-status">Planned: Q3 2026</p>
-    </div>
-
-    <div class="ai-stub-card">
-      <div class="ai-stub-eyebrow">PILLAR 3</div>
-      <h3>Power & grid</h3>
-      <p>CEG, VST, NEE, GEV, ETR &mdash; the constraint nobody priced in. Data center power demand, nuclear restart timelines, transmission build-out, PPA pricing for hyperscalers.</p>
-      <p class="ai-stub-status">Planned: Q4 2026</p>
-    </div>
-
-    <div class="ai-stub-card">
-      <div class="ai-stub-eyebrow">PILLAR 4</div>
-      <h3>Adopters & second derivatives</h3>
-      <p>Software (CRM, NOW, ADBE, PANW), services (ACN, IBM), industrial automation (ROK, EMR), and enterprises measurably saving cost from AI deployment. Where productivity actually shows up in the P&L.</p>
-      <p class="ai-stub-status">Planned: Q4 2026</p>
-    </div>
-
-    <div class="ai-stub-card ai-stub-card-wide">
-      <div class="ai-stub-eyebrow">CROSS-CUTTING</div>
-      <h3>How this connects to the macro view</h3>
-      <p>The Regime page treats sectors as base-rate plays. AI Beneficiaries layers on a structural-tilt overlay: which sectors get re-rated regardless of the macro regime because the AI capex cycle is exogenous to the standard growth/inflation framework. The Sample Window toggle on the Positioning section already addresses part of this &mdash; Post-2022 returns reflect the AI era. AI Beneficiaries goes further: per-name picks, per-pillar capex tracking, valuation sanity checks against historical capex booms (telecom 1999, fiber 2000, cloud 2014).</p>
-    </div>
+      <p>Customers paying for it. MSFT, GOOGL, META, AMZN.</p>
+      <div class="ai-hub-card-metric"><span class="ai-hub-card-val" id="hub-hyperscaler-val">&mdash;</span><span class="ai-hub-card-label">aggregate quarterly capex</span></div>
+    </a>
+    <a href="/core/ai/power/" class="ai-hub-card ai-hub-card-pillar">
+      <div class="ai-hub-card-eyebrow">PILLAR 3</div>
+      <h3>Power &amp; grid</h3>
+      <p>Constraint nobody priced in. CEG, VST, NEE, GEV.</p>
+      <div class="ai-hub-card-metric"><span class="ai-hub-card-val" id="hub-power-val">&mdash;</span><span class="ai-hub-card-label">US nuclear gen YoY</span></div>
+    </a>
+    <a href="/core/ai/adopters/" class="ai-hub-card ai-hub-card-pillar">
+      <div class="ai-hub-card-eyebrow">PILLAR 4</div>
+      <h3>Adopters</h3>
+      <p>Where productivity shows up. CRM, NOW, ADBE, ROK.</p>
+      <div class="ai-hub-card-metric"><span class="ai-hub-card-val" id="hub-adopter-val">&mdash;</span><span class="ai-hub-card-label">software basket rev YoY</span></div>
+    </a>
   </div>
 
-  <p class="ai-stub-meta">If you have specific picks, capex data sources, or framing arguments you want incorporated, drop them in the issues backlog. Build order is shaped by data availability &mdash; Compute and Hyperscalers ship first because the data is clean (10-Q capex, FactSet consensus). Power & grid is harder (PPA pricing is opaque). Adopters is hardest (productivity attribution is genuinely contested).</p>
+  <div class="ai-hub-section-head">
+    <h2>Name-level views</h2>
+    <span class="ai-hub-section-sub">Bottom-up.</span>
+  </div>
+  <div class="ai-hub-grid ai-hub-grid-2">
+    <a href="/core/ai/screen/" class="ai-hub-card ai-hub-card-name">
+      <div class="ai-hub-card-eyebrow">SCREEN</div>
+      <h3>Industry screen</h3>
+      <p>160 companies tagged by exposure (direct / high / mid / low) across four scenarios. The full universe.</p>
+    </a>
+    <a href="/core/ai/top-5/" class="ai-hub-card ai-hub-card-name">
+      <div class="ai-hub-card-eyebrow">TOP 5</div>
+      <h3>Top 5 deep dive</h3>
+      <p>April 2026 modest-scenario picks with KPI grids, ratio tables, and scenario analysis.</p>
+    </a>
+  </div>
 </section>
 
 <footer>
-  <span>AI Beneficiaries is a working theory in progress, not a model. Updated alongside the macro views.</span>
+  <span>Methodology: Each pillar combines FRED macro series, Finnhub financials, Yahoo daily closes, EIA generation data, and SEC EDGAR companyfacts XBRL. Every chart cites its source.</span>
   <span id="last-updated"></span>
 </footer>
 
-<script src="../lib/ui.js"></script>
+<script type="module" src="./hub.js"></script>
+<script src="../macro/ui.js"></script>
 <script src="/core/lib/theme-toggle.js"></script>
 </body>
 </html>

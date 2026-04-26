@@ -29,6 +29,42 @@ const CATALOG = {
   ELEC_INDUSTRIAL: {
     path: '/electricity/retail-sales/data',
     facets: { sectorid: ['IND'], stateid: ['US'] },
+  // Nuclear generation, US total — monthly
+  NUCLEAR_GEN_US: {
+    path: '/electricity/electric-power-operational-data/data',
+    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['NUC'] },
+    freq: 'monthly',
+    value: 'generation',
+  },
+  // Renewable generation, US total — monthly
+  RENEWABLE_GEN_US: {
+    path: '/electricity/electric-power-operational-data/data',
+    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['REN'] },
+    freq: 'monthly',
+    value: 'generation',
+  },
+  // Natural gas generation, US total — monthly
+  GAS_GEN_US: {
+    path: '/electricity/electric-power-operational-data/data',
+    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['NG'] },
+    freq: 'monthly',
+    value: 'generation',
+  },
+  // Coal generation, US total — monthly
+  COAL_GEN_US: {
+    path: '/electricity/electric-power-operational-data/data',
+    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['COW'] },
+    freq: 'monthly',
+    value: 'generation',
+  },
+  // Residential electricity price, US average — monthly
+  ELEC_RESIDENTIAL: {
+    path: '/electricity/retail-sales/data',
+    facets: { sectorid: ['RES'], stateid: ['US'] },
+    freq: 'monthly',
+    value: 'price',
+  },
+
     freq: 'monthly',
     value: 'price',
   },
