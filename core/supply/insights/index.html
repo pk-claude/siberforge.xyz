@@ -15,8 +15,8 @@
       <span class="mark">SIBERFORGE</span>
       <span class="sub">Supply Chain · Insights</span>
     </div>
-    <div style="font-size:11px;color:var(--muted);"><a href="../" style="color:var(--accent);">← overview</a></div>
-  </header>
+    <div style="display:flex;gap:10px;align-items:center;"><div style="font-size:11px;color:var(--muted);"><a href="../" style="color:var(--accent);">← overview</a></div><button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button></div>
+</header>
   <nav class="deep-dive-nav">
     <a href="../">Overview</a>
     <a class="active" href="./">Insights</a>
@@ -30,5 +30,6 @@
   <div id="calendar-strip-host"></div>
   <div id="insights-root"></div>
   <script type="module" src="../dashboard.js"></script>
+<script src="../../lib/theme-toggle.js"></script>
 </body>
 </html>

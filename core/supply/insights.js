@@ -99,7 +99,7 @@ export function renderWatchBand(host, opts = {}) {
       <div class="watch-score">${f.score}</div>
       <div class="watch-icon">${icon}</div>
       <div class="watch-label">${escape(f.shortLabel || f.label)}</div>
-      <div class="watch-z">${formatZ(f.z)}</div>
+      <div class="watch-z">${formatVariance(f)}</div>
       <div class="watch-headline">${escape(f.headline)}</div>
     `;
     card.title = f.rightNow || '';
@@ -125,6 +125,11 @@ export function renderEnvironmentSummary(host) {
     ? `${scpVal >= 0 ? '+' : ''}${scpVal.toFixed(2)}σ ${regime.toUpperCase()}`
     : 'awaiting first data';
 
+  // When SCP composite is unavailable, show top-3 movers as fallback signal.
+  const fallback = (scpVal == null && Array.isArray(INSIGHTS.all))
+    ? INSIGHTS.all.slice(0, 3)
+    : null;
+
   host.innerHTML = `
     <div class="env-head">
       <div class="env-title">ENVIRONMENT · refresh ${(INSIGHTS.generatedAt || '').slice(0, 10)}</div>
@@ -134,10 +139,30 @@ export function renderEnvironmentSummary(host) {
         <span class="env-pill env-watch">${s.watches} watch</span>
       </div>
     </div>
+    ${scpVal != null ? `
     <div class="env-scp env-regime-${regimeCls}">
       <div class="env-scp-label">Composite Supply Chain Pressure</div>
       <div class="env-scp-value">${scpStr}</div>
     </div>
+    ` : (fallback && fallback.length ? `
+    <div class="env-scp env-regime-normal">
+      <div class="env-scp-label">Composite pending; top movers right now</div>
+      <div style="display:grid;grid-template-columns:repeat(${fallback.length}, 1fr);gap:14px;margin-top:8px;width:100%;">
+        ${fallback.map(f => `
+          <div>
+            <div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;">${escape(f.shortLabel || f.label)}</div>
+            <div style="font-size:22px;font-weight:600;color:var(--text);">${formatVariance(f)}</div>
+            <div style="font-size:11px;color:var(--muted);">${escape(f.headline)}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+    ` : `
+    <div class="env-scp env-regime-normal">
+      <div class="env-scp-label">Composite Supply Chain Pressure</div>
+      <div class="env-scp-value" style="color:var(--muted-2);">awaiting first data</div>
+    </div>
+    `)}
     ${s.topAction ? `
       <div class="env-action env-action-risk">
         <div class="env-action-label">⚠ TOP ACTION</div>
@@ -202,7 +227,7 @@ export function renderInsightsPage(host) {
       <td><a href="${pathPrefix()}metric.html?id=${encodeURIComponent(f.id)}">${escape(f.label)}</a></td>
       <td>${escape(f.category)}</td>
       <td>${escape(f.headline)}</td>
-      <td>${formatZ(f.z)}</td>
+      <td>${formatVariance(f)}</td>
       <td class="t-rightnow">${escape(f.rightNow || '')}</td>
     `;
     tb.appendChild(tr);
@@ -228,6 +253,16 @@ function fillGrid(id, list) {
     `;
     host.appendChild(card);
   }
+}
+
+function formatVariance(f) {
+  if (f.vsMeanPct != null && Number.isFinite(f.vsMeanPct)) {
+    return (f.vsMeanPct >= 0 ? '+' : '') + f.vsMeanPct.toFixed(1) + '%';
+  }
+  if (f.z != null && Number.isFinite(f.z)) {
+    return (f.z >= 0 ? '+' : '') + f.z.toFixed(2) + 'σ';
+  }
+  return '—';
 }
 
 function formatZ(z) {

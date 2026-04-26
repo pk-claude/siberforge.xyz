@@ -117,7 +117,7 @@ function computeDeltas(history, freq, longTermNormYears = 10) {
     last, lastDate: history[lastIdx][0],
     vsLastMonth: (lastMo != null && lastMo !== 0) ? ((last - lastMo) / Math.abs(lastMo)) * 100 : null,
     vsLastYear:  (lastYr != null && lastYr !== 0) ? ((last - lastYr) / Math.abs(lastYr)) * 100 : null,
-    vsLongTermMean: z, percentile: pct,
+    vsLongTermMean: z, vsMeanPct: (mean != null && mean !== 0) ? ((last - mean) / Math.abs(mean)) * 100 : null, percentile: pct,
   };
 }
 
@@ -143,7 +143,7 @@ function showTooltip(target, ind, deltas) {
     <dl class="deltas">
       <dt>Δ vs last month</dt><dd class="${cls(deltas?.vsLastMonth)}">${fmtSigned(deltas?.vsLastMonth, 1, '%')}</dd>
       <dt>Δ vs last year</dt><dd class="${cls(deltas?.vsLastYear)}">${fmtSigned(deltas?.vsLastYear, 1, '%')}</dd>
-      <dt>vs ${ind.longTermNormYears || 10}y norm</dt><dd>${fmtZ(deltas?.vsLongTermMean)}</dd>
+      <dt>vs ${ind.longTermNormYears || 10}y avg</dt><dd>${fmtVariancePct(deltas?.vsMeanPct)}</dd>
       <dt>Percentile</dt><dd>${deltas?.percentile != null ? deltas.percentile + 'th' : '—'}</dd>
     </dl>
     ${rightNow ? `<h4>▶ Right now</h4><p class="rightnow">${escape(rightNow)}</p>` : ''}
@@ -158,6 +158,7 @@ function showTooltip(target, ind, deltas) {
 
 function fmtLatest(v, dec, unit) { return Number.isFinite(v) ? fmt(v, dec ?? 1, unit || '') : '—'; }
 function fmtZ(z) { if (z == null || !Number.isFinite(z)) return '—'; return (z >= 0 ? '+' : '') + z.toFixed(2) + 'σ'; }
+function fmtVariancePct(p) { if (p == null || !Number.isFinite(p)) return '—'; return (p >= 0 ? '+' : '') + p.toFixed(1) + '%'; }
 function cls(v) { if (!Number.isFinite(v)) return ''; return v > 0 ? 'pos' : v < 0 ? 'neg' : ''; }
 function escape(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c])); }
 
@@ -179,13 +180,16 @@ function renderTile(parent, ind) {
   const tile = document.createElement('div');
   tile.className = 'kpi-tile' + (data && data.lastValue != null ? '' : ' dim');
   tile.dataset.id = ind.id;
+  tile.dataset.category = ind.category;
   const accent = CATEGORIES[ind.category]?.accent || '#5a9cff';
 
   if (data && data.lastValue != null) {
     const deltas = computeDeltas(data.history, ind.freq, ind.longTermNormYears);
     const yoyClass = ind.direction === 'lower_better'
       ? (deltas?.vsLastYear < 0 ? 'pos' : deltas?.vsLastYear > 0 ? 'neg' : '')
-      : (deltas?.vsLastYear > 0 ? 'pos' : deltas?.vsLastYear < 0 ? 'neg' : '');
+      : ind.direction === 'higher_better'
+      ? (deltas?.vsLastYear > 0 ? 'pos' : deltas?.vsLastYear < 0 ? 'neg' : '')
+      : '';
     const insight = (getInsights()?.all || []).find(f => f.id === ind.id);
     const insightDot = insight ? `<span class="kpi-insight-dot kpi-insight-${insight.class}" title="${insight.headline}"></span>` : '';
 
@@ -193,7 +197,7 @@ function renderTile(parent, ind) {
       ${insightDot}
       <div class="kpi-label">${escape(ind.shortLabel)}</div>
       <div class="kpi-value">${fmtLatest(data.lastValue, ind.decimals, ind.unit)}</div>
-      <div class="kpi-delta ${yoyClass}">YoY ${fmtSigned(deltas?.vsLastYear, 1, '%')}</div>
+      <div class="kpi-delta ${yoyClass}">${(ind.composite && ind.composite.compute === 'yoy') ? 'level' : ('YoY ' + fmtSigned(deltas?.vsLastYear, 1, '%'))}</div>
     `;
     const sparkHolder = document.createElement('div');
     tile.appendChild(sparkHolder);
@@ -345,7 +349,7 @@ function renderDrillPage() {
         <div style="display:grid;grid-template-columns:repeat(4,auto);gap:18px;font-size:12px;">
           <div><div style="color:var(--muted);">Δ MoM</div><div class="${cls(deltas?.vsLastMonth)}">${fmtSigned(deltas?.vsLastMonth, 1, '%')}</div></div>
           <div><div style="color:var(--muted);">Δ YoY</div><div class="${cls(deltas?.vsLastYear)}">${fmtSigned(deltas?.vsLastYear, 1, '%')}</div></div>
-          <div><div style="color:var(--muted);">vs norm</div><div>${fmtZ(deltas?.vsLongTermMean)}</div></div>
+          <div><div style="color:var(--muted);">vs avg</div><div>${fmtVariancePct(deltas?.vsMeanPct)}</div></div>
           <div><div style="color:var(--muted);">pct</div><div>${deltas?.percentile ?? '—'}</div></div>
         </div>
       </div>
@@ -416,8 +420,17 @@ function renderInsightsPageWrapper() {
 }
 
 // ============================ Boot ============================
+function populateLastRefresh() {
+  const el = document.getElementById('last-refresh-stamp');
+  if (el && SNAPSHOT && SNAPSHOT.generatedAt) {
+    const d = new Date(SNAPSHOT.generatedAt);
+    el.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+  }
+}
+
 async function main() {
   await Promise.all([loadData(), loadV2()]);
+  populateLastRefresh();
   const page = document.body.dataset.page;
   if (page === 'overview')          renderOverview();
   else if (page === 'category')     renderCategoryPage(document.body.dataset.category);

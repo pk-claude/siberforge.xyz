@@ -16,8 +16,8 @@
       <span class="mark">SIBERFORGE</span>
       <span class="sub">Supply Chain Dashboard</span>
     </div>
-    <div style="font-size:11px;color:var(--muted);">refreshes weekly · <a href="./data.html" style="color:var(--accent);">data &amp; downloads</a></div>
-  </header>
+    <div style="display:flex;gap:10px;align-items:center;"><div style="font-size:11px;color:var(--muted);">last refresh <span id="last-refresh-stamp">pending</span> · <a href="./data.html" style="color:var(--accent);">data &amp; downloads</a></div><button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button></div>
+</header>
   <nav class="deep-dive-nav">
     <a class="active" href="./">Overview</a>
     <a href="./insights/">Insights</a>
@@ -54,5 +54,6 @@
     </div>
   </div>
   <script type="module" src="./dashboard.js"></script>
+<script src="../lib/theme-toggle.js"></script>
 </body>
 </html>

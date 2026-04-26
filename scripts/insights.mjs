@@ -44,6 +44,7 @@ export async function buildInsights({ snapshot, indicators, dryRun = false }) {
       lastDate: stats.lastDate,
       norm: stats.mean,
       z: stats.z,
+      vsMeanPct: stats.vsMeanPct,
       vsLastMonth: stats.mom,
       vsLastYear: stats.yoy,
       percentile: stats.percentile,
@@ -159,7 +160,8 @@ function computeStats(history, longTermNormYears) {
     if (sd > 0) zChange3mo = (last - v3) / sd;
   }
 
-  return { last, lastDate, mean, sd, z, percentile, mom, yoy, persistence, acceleration, zChange3mo };
+  const vsMeanPct = (mean != null && mean !== 0) ? ((last - mean) / Math.abs(mean)) * 100 : null;
+  return { last, lastDate, mean, sd, z, vsMeanPct, percentile, mom, yoy, persistence, acceleration, zChange3mo };
 }
 
 function computeDelta(sorted, lastIdx, daysBack) {
@@ -216,7 +218,7 @@ function computeScore(stats) {
 }
 
 function synthesizeRightNow(stats, ind, rule) {
-  const zStr = stats.z >= 0 ? `+${stats.z.toFixed(2)}σ` : `${stats.z.toFixed(2)}σ`;
+  const pctStr = stats.vsMeanPct != null && Number.isFinite(stats.vsMeanPct) ? ((stats.vsMeanPct >= 0 ? "+" : "") + stats.vsMeanPct.toFixed(1) + "%") : `${stats.z >= 0 ? "+" : ""}${stats.z.toFixed(2)}σ`;
   const moveTxt = stats.persistence >= 2
     ? `${stats.persistence} consecutive ${ind.freq === 'daily' ? 'days' : ind.freq === 'weekly' ? 'weeks' : 'months'} same direction`
     : 'recent direction mixed';
@@ -230,7 +232,7 @@ function synthesizeRightNow(stats, ind, rule) {
   } else if (rule.cls === 'watch') {
     interp = `Direction may be turning; confirm with related metrics before acting.`;
   }
-  return `${zStr} vs 10y norm, ${moveTxt}, ${pctTxt}. ${interp}`.trim();
+  return `${pctStr} vs 10y avg, ${moveTxt}, ${pctTxt}. ${interp}`.trim();
 }
 
 // CLI entry point — used when run directly via `node scripts/insights.mjs`
