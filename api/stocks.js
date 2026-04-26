@@ -120,16 +120,25 @@ async function finnhubFinancials(symbol, key) {
   } catch (err) {
     return { symbol, error: `network: ${err.message || err}`, reports: [] };
   }
-  // Finnhub returns HTML rate-limit pages on 429 — JSON.parse would throw and crash the
-  // whole multi-symbol response. Detect non-JSON content and degrade to a per-symbol error.
-  const ctype = res.headers.get('content-type') || '';
-  if (!res.ok || !ctype.includes('application/json')) {
+  // Defensive: read body as text first, then attempt JSON parse. This handles three failure
+  // modes: (1) Finnhub HTML rate-limit pages on 429, (2) non-standard Content-Type values like
+  // 'application/javascript' or 'text/json' that strict parsing rejects, (3) empty bodies.
+  if (!res.ok) {
     const status = res.status;
     return { symbol, error: `finnhub ${status}${status === 429 ? ' rate_limited' : ''}`, reports: [] };
   }
+  let bodyText;
+  try {
+    bodyText = await res.text();
+  } catch (err) {
+    return { symbol, error: `read: ${err.message || err}`, reports: [] };
+  }
+  if (!bodyText || !bodyText.trim().startsWith('{')) {
+    return { symbol, error: 'finnhub non-json body', reports: [] };
+  }
   let data;
   try {
-    data = await res.json();
+    data = JSON.parse(bodyText);
   } catch (err) {
     return { symbol, error: `parse: ${err.message || err}`, reports: [] };
   }
