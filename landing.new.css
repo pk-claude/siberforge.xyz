@@ -497,7 +497,7 @@ body.landing-page.editorial .ed-hub .cat-tag {
 }
 
 body.landing-page.editorial .ed-hub .cat-body {
-  padding: 6px 0; max-height: 9999px; transition: max-height .2s;
+  padding: 4px 0; max-height: 9999px; transition: max-height .2s;
 }
 body.landing-page.editorial .ed-hub .cat.collapsed .cat-body {
   max-height: 0; padding: 0; overflow: hidden;
@@ -505,7 +505,7 @@ body.landing-page.editorial .ed-hub .cat.collapsed .cat-body {
 
 body.landing-page.editorial .ed-hub .leaf {
   display: flex; align-items: baseline; gap: 14px;
-  padding: 10px 20px 10px 36px;
+  padding: 5px 20px 5px 36px;
   text-decoration: none; color: var(--ed-ink);
   border-left: 2px solid transparent;
   transition: background .12s, border-color .12s;
@@ -529,7 +529,7 @@ body.landing-page.editorial .ed-hub .leaf.sub .leaf-name {
 body.landing-page.editorial .ed-hub .branch { border-bottom: 1px solid transparent; }
 body.landing-page.editorial .ed-hub .branch-head {
   display: flex; align-items: baseline; gap: 14px;
-  padding: 10px 20px 10px 36px;
+  padding: 5px 20px 5px 36px;
   background: transparent; border: none;
   color: var(--ed-ink); cursor: pointer;
   font-family: inherit; width: 100%; text-align: left;
@@ -593,6 +593,18 @@ body.landing-page.editorial .ed-about-mark {
   background: radial-gradient(circle at center, #fff 0%, #f0eee8 70%);
 }
 body.landing-page.editorial .ed-about-mark svg { width: 70%; height: auto; }
+body.landing-page.editorial .ed-husky-img {
+  width: 88%; height: auto;
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,0.45))
+          drop-shadow(0 0 30px rgba(62,184,224,0.10));
+  transition: transform 0.4s ease;
+}
+body.landing-page.editorial .ed-about-mark:hover .ed-husky-img {
+  transform: scale(1.02) rotate(-1deg);
+}
+:root[data-theme="light"] body.landing-page.editorial .ed-husky-img {
+  filter: drop-shadow(0 12px 40px rgba(0,0,0,0.18));
+}
 
 /* ===================== SUBSCRIBE (FUTURE) ===================== */
 body.landing-page.editorial .ed-subscribe {
@@ -683,4 +695,11 @@ body.landing-page.editorial .ed-copyright {
 @media (max-width: 880px) {
   body.landing-page.editorial .ed-nav-link { display: none; }
   body.landing-page.editorial .ed-status { display: none; }
+}
+
+
+/* Alignment fix: top-level leaves get an invisible placeholder matching the
+   branch-arrow width so leaf-name and branch-head label start at the same X. */
+body.landing-page.editorial .ed-hub .leaf:not(.sub)::before {
+  content: ''; flex: 0 0 10px; height: 0; display: block;
 }
