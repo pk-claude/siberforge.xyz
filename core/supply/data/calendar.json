@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-04-26T15:19:14.882Z",
+  "generatedAt": "2026-04-26T15:33:38.276Z",
   "windowDays": 14,
   "windows": {
     "next14": [
@@ -89,11 +89,11 @@
         "shortLabel": "Panama Transits",
         "category": "international",
         "cadence": "ACP monthly stats",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "",
+        "lastValue": 997,
+        "lastDate": "2026-03-01",
+        "unit": "ships",
         "decimals": 0,
-        "context": "no prior data on file"
+        "context": "Last: 997 on 2026-03-01"
       },
       {
         "date": "2026-05-01",
@@ -115,11 +115,11 @@
         "shortLabel": "Suez Transits",
         "category": "international",
         "cadence": "SCA monthly press release",
-        "lastValue": null,
-        "lastDate": null,
-        "unit": "",
+        "lastValue": 1180,
+        "lastDate": "2026-03-01",
+        "unit": "ships",
         "decimals": 0,
-        "context": "no prior data on file"
+        "context": "Last: 1,180 on 2026-03-01"
       },
       {
         "date": "2026-05-01",
@@ -128,11 +128,11 @@
         "shortLabel": "SC Pressure",
         "category": "composite",
         "cadence": "recomputed at GSCPI release",
-        "lastValue": 1.235,
+        "lastValue": 1.314,
         "lastDate": "2026-03-31",
         "unit": "σ",
         "decimals": 2,
-        "context": "Last: 1.24 on 2026-03-31"
+        "context": "Last: 1.31 on 2026-03-31"
       },
       {
         "date": "2026-05-01",
@@ -408,11 +408,11 @@
           "shortLabel": "Panama Transits",
           "category": "international",
           "cadence": "ACP monthly stats",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "",
+          "lastValue": 997,
+          "lastDate": "2026-03-01",
+          "unit": "ships",
           "decimals": 0,
-          "context": "no prior data on file"
+          "context": "Last: 997 on 2026-03-01"
         },
         {
           "date": "2026-05-01",
@@ -421,11 +421,11 @@
           "shortLabel": "Suez Transits",
           "category": "international",
           "cadence": "SCA monthly press release",
-          "lastValue": null,
-          "lastDate": null,
-          "unit": "",
+          "lastValue": 1180,
+          "lastDate": "2026-03-01",
+          "unit": "ships",
           "decimals": 0,
-          "context": "no prior data on file"
+          "context": "Last: 1,180 on 2026-03-01"
         }
       ],
       "composite": [
@@ -436,11 +436,11 @@
           "shortLabel": "SC Pressure",
           "category": "composite",
           "cadence": "recomputed at GSCPI release",
-          "lastValue": 1.235,
+          "lastValue": 1.314,
           "lastDate": "2026-03-31",
           "unit": "σ",
           "decimals": 2,
-          "context": "Last: 1.24 on 2026-03-31"
+          "context": "Last: 1.31 on 2026-03-31"
         }
       ],
       "dc": [
