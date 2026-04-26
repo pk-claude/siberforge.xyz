@@ -145,8 +145,6 @@ function renderHeader() {
 
   el('t-profile').textContent = profile?.description || '';
 
-  const link = el('markets-permalink');
-  if (link) link.href = `/core/macro/ticker.html?sym=${state.symbol}`;
 }
 
 async function loadHistory() {
