@@ -2616,3 +2616,60 @@ footer {
 .ai-hub-card-metric { display: flex; align-items: baseline; gap: 6px; padding-top: 10px; border-top: 1px solid var(--line); }
 .ai-hub-card-val { font-size: 18px; font-weight: 600; color: var(--text); }
 .ai-hub-card-label { font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--muted); }
+
+
+/* AI pillar pages (added: Phase 2) */
+.ai-pillar { padding: 0 24px 32px; max-width: 1280px; margin: 0 auto; }
+.ai-pillar-banner { padding: 18px 0 12px; }
+.ai-pillar-banner h1 { font-size: 22px; font-weight: 600; margin: 0 0 6px; letter-spacing: -0.005em; }
+.ai-pillar-sub { font-size: 13px; color: var(--muted); line-height: 1.5; margin: 0; max-width: 800px; }
+
+.ai-takeaway { display: grid; grid-template-columns: max-content 1fr; gap: 8px 14px; margin: 16px 0 24px; padding: 16px 20px; background: var(--panel-2); border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 4px; }
+.ai-takeaway-row { display: contents; }
+.ai-takeaway-label { font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); white-space: nowrap; padding-top: 2px; font-weight: 600; }
+.ai-takeaway-text { font-size: 13px; line-height: 1.55; color: var(--text); }
+.ai-takeaway-row-action .ai-takeaway-label { color: var(--accent); }
+.ai-takeaway-row-action .ai-takeaway-text { font-weight: 500; }
+
+.ai-section-head { display: flex; align-items: baseline; gap: 12px; margin: 28px 0 14px; padding: 0 0 8px; border-bottom: 1px solid var(--line); }
+.ai-section-head h2 { font-size: 16px; font-weight: 600; margin: 0; letter-spacing: -0.005em; color: var(--text); }
+.ai-section-head .ai-section-head-sub { font-size: 12px; color: var(--muted); }
+
+.ai-chart-wrap { position: relative; height: 280px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 14px 16px; }
+.ai-heatmap-wrap { height: auto; padding: 0; background: transparent; border: none; }
+.ai-chart-action { display: flex; align-items: baseline; gap: 10px; margin-top: 8px; padding: 8px 12px; background: var(--panel-2); border-radius: 4px; border-left: 2px solid var(--accent); font-size: 12px; line-height: 1.5; color: var(--muted); }
+.ai-chart-action-label { font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+
+.ai-basket-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 8px; }
+.ai-basket-tile { background: var(--panel); border: 1px solid var(--line); border-radius: 4px; padding: 10px 12px; text-decoration: none; color: inherit; transition: border-color 0.15s, transform 0.15s; cursor: pointer; }
+.ai-basket-tile:hover { border-color: var(--accent); transform: translateY(-1px); }
+.ai-basket-tile-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+.ai-basket-tile-sym { font-size: 12px; font-weight: 600; color: var(--text); }
+.ai-basket-tile-ytd { font-size: 11px; font-weight: 500; }
+.ai-basket-tile-ytd.pos { color: #2ecc71; }
+.ai-basket-tile-ytd.neg { color: #e74c3c; }
+.ai-basket-tile-spark { position: relative; height: 36px; }
+.ai-basket-tile-foot { font-size: 10.5px; color: var(--muted); margin-top: 4px; }
+
+.ai-intensity-heatmap { display: grid; gap: 0; border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.ai-heatmap-row { display: grid; grid-template-columns: 60px repeat(8, 1fr); gap: 0; }
+.ai-heatmap-cell { padding: 10px 8px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); font-size: 11px; display: flex; align-items: center; justify-content: center; }
+.ai-heatmap-cell:last-child { border-right: none; }
+.ai-heatmap-row:last-child .ai-heatmap-cell { border-bottom: none; }
+.ai-heatmap-header { background: var(--panel-2); font-weight: 600; }
+.ai-heatmap-company { font-weight: 600; color: var(--text); background: var(--panel-2); }
+.ai-heatmap-label { font-size: 10px; color: var(--muted); font-weight: 500; }
+.ai-heatmap-cell { background: linear-gradient(135deg, transparent, var(--accent)); background-size: 100% 100%; }
+
+.ai-watch { font-size: 13px; line-height: 1.7; color: var(--text); padding-left: 20px; }
+.ai-watch li { margin-bottom: 4px; }
+
+.ai-methodology { font-size: 11.5px; color: var(--muted); line-height: 1.55; margin-top: 24px; padding: 10px 14px; background: var(--panel-2); border-radius: 4px; }
+
+@media (max-width: 800px) {
+  .ai-basket-grid { grid-template-columns: repeat(2, 1fr); }
+  .ai-takeaway { grid-template-columns: 1fr; gap: 4px 0; }
+  .ai-takeaway-label { padding-top: 8px; }
+  .ai-heatmap-row { grid-template-columns: 50px repeat(8, 1fr); font-size: 9px; }
+  .ai-heatmap-cell { padding: 6px 4px; }
+}
