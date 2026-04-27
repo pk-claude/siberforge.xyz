@@ -7,6 +7,16 @@ import { applyTransform } from '/core/lib/transforms.js';
 
 const theme = { light: '#1a1a1a', dark: '#e8e8e8', gridLight: '#f5f5f5', gridDark: '#2a2a2a' };
 
+// Brand palette -- matches the eye-mark and editorial accents.
+const BRAND = {
+  blue:  '#3EB8E0',  // ice blue (left eye)
+  amber: '#E09A3E',  // amber (right eye)
+  white: '#e8e8e8',  // off-white (line on dark bg)
+  green: '#3ECF8E',  // healthy / cool
+  red:   '#E63946',  // warning / hot
+};
+const LINE_WIDTH = 2;
+
 let currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 document.addEventListener('themechange', (e) => { currentTheme = e.detail; });
 
@@ -113,7 +123,7 @@ async function renderYieldCurve() {
           {
             label: 'Latest',
             data: curveLatest,
-            borderColor: getThemeColor(),
+            borderColor: BRAND.amber,
             borderWidth: 2.5,
             backgroundColor: 'transparent',
             pointRadius: 4,
@@ -124,7 +134,7 @@ async function renderYieldCurve() {
           {
             label: '3m ago',
             data: curve3m,
-            borderColor: getThemeColor(),
+            borderColor: BRAND.blue,
             borderWidth: 1,
             borderDash: [5, 5],
             backgroundColor: 'transparent',
@@ -136,7 +146,7 @@ async function renderYieldCurve() {
           {
             label: '12m ago',
             data: curve12m,
-            borderColor: getThemeColor(),
+            borderColor: BRAND.white,
             borderWidth: 1,
             borderDash: [10, 5],
             backgroundColor: 'transparent',
@@ -254,7 +264,7 @@ async function renderRealYields() {
     const ctx = document.getElementById('ry-chart').getContext('2d');
     const tenors = ['DFII5', 'DFII10', 'DFII30'];
     const labels = tenors.map(t => t === 'DFII5' ? '5Y' : t === 'DFII10' ? '10Y' : '30Y');
-    const colors = [getThemeColor(), getThemeColor(), getThemeColor()];
+    const colors = [BRAND.blue, BRAND.white, BRAND.amber];
 
     const datasets = tenors.map((tid, idx) => {
       const obs = dataMap[tid] || [];
@@ -357,7 +367,7 @@ async function renderCreditSpreads() {
       {
         label: 'IG OAS',
         data: igData.map(o => ({ x: o.date, y: o.value })),
-        borderColor: getThemeColor(),
+        borderColor: BRAND.blue,
         borderWidth: 2,
         backgroundColor: 'transparent',
         pointRadius: 0,
@@ -367,7 +377,7 @@ async function renderCreditSpreads() {
       {
         label: 'HY OAS',
         data: hyData.map(o => ({ x: o.date, y: o.value })),
-        borderColor: getThemeColor(),
+        borderColor: BRAND.amber,
         borderWidth: 2,
         backgroundColor: 'transparent',
         pointRadius: 0,
@@ -459,7 +469,7 @@ async function renderCrossAssetVol() {
           {
             label: 'VIX',
             data: vixAligned.map((o, i) => ({ x: o.date, y: o.value })),
-            borderColor: getThemeColor(),
+            borderColor: BRAND.amber,
             borderWidth: 2,
             backgroundColor: 'transparent',
             pointRadius: 0,
@@ -469,7 +479,7 @@ async function renderCrossAssetVol() {
           {
             label: '10Y Yield Vol (bps)',
             data: yieldVolForChart.map((v, i) => ({ x: vixAligned[i].date, y: v })),
-            borderColor: getThemeColor(),
+            borderColor: BRAND.blue,
             borderWidth: 2,
             backgroundColor: 'transparent',
             pointRadius: 0,
@@ -536,7 +546,7 @@ async function renderBreaekevenInflation() {
       {
         label: '5Y Breakeven',
         data: (dataMap['T5YIE'] || []).map(o => ({ x: o.date, y: o.value })),
-        borderColor: getThemeColor(),
+        borderColor: BRAND.blue,
         borderWidth: 2,
         backgroundColor: 'transparent',
         pointRadius: 0,
@@ -545,7 +555,7 @@ async function renderBreaekevenInflation() {
       {
         label: '10Y Breakeven',
         data: (dataMap['T10YIE'] || []).map(o => ({ x: o.date, y: o.value })),
-        borderColor: getThemeColor(),
+        borderColor: BRAND.white,
         borderWidth: 2,
         backgroundColor: 'transparent',
         pointRadius: 0,
@@ -555,7 +565,7 @@ async function renderBreaekevenInflation() {
       {
         label: '5Y5Y Forward',
         data: (dataMap['T5YIFR'] || []).map(o => ({ x: o.date, y: o.value })),
-        borderColor: getThemeColor(),
+        borderColor: BRAND.amber,
         borderWidth: 2,
         backgroundColor: 'transparent',
         pointRadius: 0,
@@ -565,7 +575,7 @@ async function renderBreaekevenInflation() {
       {
         label: 'UMich 1Y (monthly)',
         data: (dataMap['MICH'] || []).map(o => ({ x: o.date, y: o.value })),
-        borderColor: getThemeColor(),
+        borderColor: BRAND.green,
         borderWidth: 2,
         borderDash: [5, 5],
         backgroundColor: 'transparent',
