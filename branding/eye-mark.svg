@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Siberforge eye-mark. Two husky eyes (blue + amber) on transparent bg.
+     Square viewBox so it crops well to favicon / app-icon dimensions. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <!-- Left eye: ice blue -->
+  <ellipse cx="100" cy="160" rx="60" ry="34" fill="#3EB8E0"/>
+  <circle cx="100" cy="160" r="22" fill="#0a0a0a"/>
+  <circle cx="108" cy="152" r="6" fill="#ffffff"/>
+  <!-- Right eye: amber -->
+  <ellipse cx="220" cy="160" rx="60" ry="34" fill="#E09A3E"/>
+  <circle cx="220" cy="160" r="22" fill="#0a0a0a"/>
+  <circle cx="228" cy="152" r="6" fill="#ffffff"/>
+</svg>
