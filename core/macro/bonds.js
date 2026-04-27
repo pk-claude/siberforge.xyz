@@ -282,7 +282,7 @@ async function renderRealYields() {
     });
 
     new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: { datasets },
       options: {
         responsive: true,
@@ -388,7 +388,7 @@ async function renderCreditSpreads() {
     ];
 
     new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: { datasets },
       options: {
         responsive: true,
@@ -463,7 +463,7 @@ async function renderCrossAssetVol() {
 
     const ctx = document.getElementById('cav-chart').getContext('2d');
     new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: {
         datasets: [
           {
@@ -586,7 +586,7 @@ async function renderBreaekevenInflation() {
     ];
 
     new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: { datasets },
       options: {
         responsive: true,
