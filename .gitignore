@@ -1,10 +1,43 @@
+# Dependencies
 node_modules/
+
+# Vercel
 .vercel
+
+# Env files
 .env
 .env.local
 .env.*.local
+
+# OS noise
 .DS_Store
+Thumbs.db
+
+# Logs
 *.log
 
-# FUSE filesystem shadow files (leaked by in-place edits over WSL/Windows mount)
-.fuse_hidden*
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temp / staging artifacts
+*.tmp
+*.bak
+*.old
+*.new.html
+*.new.css
+*.new.js
+
+# Local-only deploy scripts (kept untracked; live record only)
+HANDOFF-*.ps1
+
+# Branding intermediate artifacts (source-of-truth lives in /branding only)
+branding/*.png
+branding/*.tmp.html
+
+# Python pycache
+__pycache__/
+*.pyc

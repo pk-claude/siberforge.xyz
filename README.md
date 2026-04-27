@@ -144,4 +144,3 @@ Below the tabs: a **regime-conditional sector returns** table. Each historical m
 - **Finnhub (quotes):** free = 60/min. Per user visit: 12 quote requests on load, then 12/min after. Vercel edge caching collapses that to **12 upstream requests per 60s total across all users**. At the 60/min limit that's 5× headroom.
 - **Yahoo (history):** no documented rate limit for this endpoint. 24h edge cache means ~12 upstream calls per day regardless of traffic.
 - **FRED:** no hard limit documented. 6h edge cache.
-                                                                                                                  

@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Transmission Network</title>
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="./styles.css" />
+<style>
+/* ================================================================
+   network.html — scoped styles
+   ================================================================ */
+.net-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 16px;
+  align-items: start;
+}
+@media (max-width: 980px) {
+  .net-grid { grid-template-columns: 1fr; }
+}
+.net-wrap {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px;
+  position: relative;
+  min-height: 620px;
+}
+.net-wrap svg.net {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  cursor: default;
+}
+.net-status {
+  position: absolute; left: 0; right: 0; top: 0; bottom: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12.5px; color: var(--muted);
+  background: var(--panel);
+  z-index: 5;
+}
+.net-status.hidden { display: none; }
+
+/* legend chips */
+.net-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+.net-chip {
+  font-size: 11px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-family: inherit;
+  user-select: none;
+  transition: opacity .15s, background-color .15s, border-color .15s;
+}
+.net-chip:hover { background: var(--panel-2); border-color: var(--muted); }
+.net-chip[data-on="0"] { opacity: 0.32; }
+.net-chip .dot {
+  display: inline-block; width: 8px; height: 8px;
+  border-radius: 50%; margin-right: 6px; vertical-align: 0px;
+}
+.net-chip a {
+  color: inherit; text-decoration: none;
+  display: inline-block; margin-left: 6px;
+  border-left: 1px solid var(--line); padding-left: 6px;
+  font-size: 10px; color: var(--muted);
+}
+.net-chip a:hover { color: var(--accent); }
+
+/* SVG nodes & edges */
+.node circle {
+  transition: opacity .15s, stroke-width .15s, filter .15s;
+}
+.node text {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  fill: var(--text);
+  pointer-events: none;
+}
+.node.muted circle, .node.muted text { opacity: 0.18; }
+.node.recsig circle {
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-dasharray: 0;
+}
+.node.recsig.triggered circle {
+  stroke: var(--red);
+  filter: drop-shadow(0 0 4px rgba(239, 79, 90, 0.7));
+}
+.node:not(.dragging) { cursor: pointer; }
+.node.dragging { cursor: grabbing; }
+.edge {
+  stroke-linecap: round;
+  fill: none;
+  pointer-events: stroke;
+  cursor: pointer;
+  transition: opacity .15s, stroke-width .15s;
+}
+.edge:hover { stroke-width: 3.5 !important; opacity: 1 !important; }
+.lagLbl {
+  font-family: 'Inter', sans-serif;
+  font-size: 9.5px;
+  fill: var(--muted);
+  pointer-events: none;
+  text-anchor: middle;
+  font-weight: 600;
+}
+.lagLbl.hot { fill: var(--text); }
+
+/* recession overlay banner */
+.rec-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+.rec-bar-tier {
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid;
+}
+.rec-bar-tier.tier-benign   { color: var(--green);  border-color: var(--green); }
+.rec-bar-tier.tier-low      { color: var(--blue);   border-color: var(--blue); }
+.rec-bar-tier.tier-elevated { color: var(--accent); border-color: var(--accent); }
+.rec-bar-tier.tier-high     { color: var(--red);    border-color: var(--red); }
+.rec-bar-count { font-weight: 600; }
+.rec-bar-dots { display: flex; gap: 4px; }
+.rec-bar-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--line); border: 1px solid var(--line);
+}
+.rec-bar-dot.triggered { background: var(--red); border-color: var(--red); }
+.rec-bar-link {
+  color: var(--accent);
+  text-decoration: none;
+  font-size: 11px;
+}
+.rec-bar-link:hover { text-decoration: underline; }
+
+/* detail card */
+.net-detail {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-size: 12px;
+  position: sticky;
+  top: 130px;
+}
+.net-detail h3 {
+  font-size: 14px;
+  margin: 0 0 4px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.net-detail .nd-sub { color: var(--muted); font-size: 11px; }
+.net-detail .nd-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-top: 12px;
+}
+.net-detail .nd-row {
+  display: flex; justify-content: space-between;
+  border-bottom: 1px solid var(--line);
+  padding: 4px 0; gap: 8px;
+}
+.net-detail .nd-row span:last-child {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: var(--muted);
+}
+.net-detail .nd-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 5px 10px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  font-size: 11px;
+  color: var(--accent);
+  text-decoration: none;
+}
+.net-detail .nd-cta:hover { background: var(--panel-2); border-color: var(--accent); }
+.net-detail .nd-links { margin-top: 12px; line-height: 1.7; }
+.net-detail .nd-links .label {
+  color: var(--muted);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  display: block;
+  margin: 8px 0 4px;
+}
+.net-detail .nd-tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 4px;
+  border: 1px solid var(--line);
+  margin: 0 4px 4px 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 10.5px;
+  cursor: pointer;
+  background: var(--panel-2);
+}
+.net-detail .nd-tag:hover { border-color: var(--accent); }
+.net-detail .nd-tag.pos { color: var(--green); }
+.net-detail .nd-tag.neg { color: var(--red); }
+.net-detail .nd-lag { color: var(--muted); margin-left: 4px; font-size: 9.5px; }
+.net-detail .nd-empty { color: var(--muted); font-style: italic; font-size: 11px; }
+
+/* footer note styling */
+.net-foot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin: 16px 24px 0;
+  padding-bottom: 16px;
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+@media (max-width: 700px) { .net-foot-grid { grid-template-columns: 1fr; } }
+.net-foot-grid h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin: 0 0 6px;
+  font-weight: 600;
+}
+.net-foot-grid p { margin: 0 0 6px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Macro &middot; Transmission Network</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">&rsaquo;</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+    <a href="/core/macro/network.html" class="dd-link active">Network</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+  </div>
+</nav>
+
+<p class="research-intro">
+  Transmission network: every node is a macro indicator from FRED, every edge is a 60-month rolling
+  correlation between two YoY-transformed (or level) series. Edge color encodes sign (green &gt; 0, red &lt; 0)
+  and width encodes magnitude. Arrows appear when peak cross-correlation has a non-zero lag of at least 2 months
+  and agrees in sign with the rolling estimate. Click a node to drill into the
+  <a href="/core/econ/">Indicator Library</a>; click an edge to open the pair in the
+  <a href="/core/macro/research.html">Pair Explorer</a>.
+</p>
+
+<section class="controls">
+  <div class="control">
+    <label for="net-window">Correlation window</label>
+    <select id="net-window">
+      <option value="36">36 months</option>
+      <option value="60" selected>60 months</option>
+      <option value="120">120 months</option>
+    </select>
+  </div>
+  <div class="control">
+    <label for="net-min-corr">Hide weak edges (|r| &lt;)</label>
+    <select id="net-min-corr">
+      <option value="0">show all</option>
+      <option value="0.2" selected>0.20</option>
+      <option value="0.3">0.30</option>
+      <option value="0.5">0.50</option>
+    </select>
+  </div>
+  <div class="control">
+    <label for="net-show-lags">Lead-lag arrows</label>
+    <select id="net-show-lags">
+      <option value="1" selected>show</option>
+      <option value="0">hide</option>
+    </select>
+  </div>
+  <div class="control" style="justify-content: flex-end;">
+    <label>&nbsp;</label>
+    <button id="net-reset" class="theme-toggle" style="margin-left:0">Reset layout</button>
+  </div>
+</section>
+
+<section class="panel">
+  <div id="rec-bar" class="rec-bar">
+    <span class="rec-bar-count">Recession composite: <strong id="rec-count">&mdash;</strong>/5 signals triggered</span>
+    <span class="rec-bar-dots" id="rec-dots"></span>
+    <span class="rec-bar-tier" id="rec-tier">&mdash;</span>
+    <span style="color: var(--muted)" id="rec-asof">&nbsp;</span>
+    <a href="/core/econ/recession.html" class="rec-bar-link">Open full composite &rarr;</a>
+  </div>
+
+  <div class="net-legend" id="net-legend"></div>
+
+  <div class="net-grid">
+    <div class="net-wrap">
+      <svg id="net" viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Macro indicator transmission network">
+        <defs>
+          <marker id="arrPos" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--green)"/>
+          </marker>
+          <marker id="arrNeg" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0 0 L10 5 L0 10 z" fill="var(--red)"/>
+          </marker>
+        </defs>
+        <g id="edges-g"></g>
+        <g id="lags-g"></g>
+        <g id="nodes-g"></g>
+      </svg>
+      <div id="net-status" class="net-status">Loading FRED series and computing correlations&hellip;</div>
+    </div>
+
+    <aside class="net-detail" id="net-detail">
+      <h3 id="nd-title">Click a node to inspect</h3>
+      <div class="nd-sub" id="nd-sub">Hover highlights the neighborhood. Click a node to pin its detail; click any tag below to walk the graph.</div>
+      <div id="nd-body" style="display:none">
+        <div class="nd-grid">
+          <div>
+            <div class="nd-row"><span>Latest</span><span id="nd-val">&mdash;</span></div>
+            <div class="nd-row"><span>YoY</span><span id="nd-yoy">&mdash;</span></div>
+            <div class="nd-row"><span>As-of</span><span id="nd-asof">&mdash;</span></div>
+          </div>
+          <div>
+            <div class="nd-row"><span>Sector</span><span id="nd-sec">&mdash;</span></div>
+            <div class="nd-row"><span>FRED</span><span id="nd-src">&mdash;</span></div>
+            <div class="nd-row"><span>Edges</span><span id="nd-deg">&mdash;</span></div>
+          </div>
+        </div>
+        <a class="nd-cta" id="nd-cta-drill" href="#" target="_blank" rel="noopener">Open indicator drilldown &rarr;</a>
+        <div class="nd-links" id="nd-links"></div>
+      </div>
+    </aside>
+  </div>
+
+  <div class="net-foot-grid">
+    <div>
+      <h4>Reading the network</h4>
+      <p>
+        Edges measure the trailing-window Pearson correlation on monthly observations.
+        Series in levels (rates, spreads, %) stay in levels; index series (CPI, GDP, IP, S&amp;P, etc.) are YoY-transformed.
+        Arrows show peak cross-correlation lag in [-12, +12] months &mdash; the leader is upstream of the arrow.
+        Lag arrows are suppressed when the peak's sign disagrees with the rolling-window sign (typically a regime artifact).
+      </p>
+    </div>
+    <div>
+      <h4>Recession-composite signals</h4>
+      <p>
+        Nodes ringed in amber are part of the live <a href="/core/econ/recession.html">5-signal recession composite</a>:
+        Sahm Indicator, 10Y-3M Curve, HY OAS, UNRATE 6mo &Delta;, NFP 3mo avg.
+        Triggered signals turn red. The bar at the top mirrors the landing-page composite and is computed
+        from the same series via <code>recession-core.js</code>.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Data: FRED via <code>/api/fred</code>. Computations done client-side.</span>
+  <span id="last-updated">&mdash;</span>
+</footer>
+
+<script src="/core/lib/theme-toggle.js"></script>
+
+<script type="module">
+import { fetchFred } from '/core/lib/fred-client.js';
+import { applyTransform } from '/core/lib/transforms.js';
+import {
+  SERIES as REC_SERIES,
+  HISTORY_START as REC_HISTORY,
+  tierOf as recTierOf,
+  computeSignals as computeRecSignals,
+} from '/core/econ/recession-core.js';
+
+// ============================================================================
+// Configuration: nodes, sectors, edges
+// ============================================================================
+
+// Indicator-drilldown registry — IDs that have a /core/econ/indicator.html?id= page.
+// Pulled from indicators.js. Update this set when the registry expands.
+const DRILLDOWN_REGISTRY = new Set([
+  'AHE','CPILFESL','CSUSHPISA','DGS2','DGS5','DRCCLACBS','EMPIRE','EXHOSLUS',
+  'GDPC1','GDPNOW','HOUST','HSN1F','IC4WSA','INDPRO','MORTGAGE30US','PAYEMS',
+  'PCEPILFE','PERMIT','REAL_WAGES','RRSFS','STICKY','T10Y2Y','T10Y3M','T5YIFR','UNRATE',
+]);
+// Build the FRED-website fallback URL.
+const fredUrl = (fid) => `https://fred.stlouisfed.org/series/${encodeURIComponent(fid)}`;
+
+const SECTORS = {
+  mon: { name: 'Monetary policy', color: '#7c5cd6', page: '/core/macro/cycle/' },
+  inf: { name: 'Inflation',        color: '#e07a5f', page: '/core/macro/inflation/' },
+  grw: { name: 'Growth & Consumer',color: '#3aa39e', page: '/core/macro/real-economy/' },
+  lab: { name: 'Labor',            color: '#3a7bd5', page: '/core/macro/labor/' },
+  mkt: { name: 'Markets',          color: '#d99a2b', page: '/core/macro/research.html' },
+  cdh: { name: 'Credit & Housing', color: '#cf5d8f', page: '/core/macro/credit/' },
+};
+
+// Each node:
+//   id     — short graph id
+//   fid    — FRED series id (used for fetchFred)
+//   tx     — 'level' | 'yoy' | 'mom_diff_k' (passed to applyTransform)
+//   sec    — sector key
+//   label  — display name
+//   unit   — '%' | 'pp' | 'k' | '' for formatting
+//   dl     — id used in /core/econ/indicator.html?id=DL (often == fid; some pages use aliases)
+//   recSig — true if part of the 5-signal recession composite
+const NODES = [
+  // monetary
+  { id: 'fed',     fid: 'DFF',         tx: 'level', sec: 'mon', label: 'Fed Funds',         unit: '%',  dl: '' },
+  { id: 'm2',      fid: 'M2SL',        tx: 'yoy',   sec: 'mon', label: 'M2 Money (YoY)',    unit: '%',  dl: '' },
+  { id: 'gs2',     fid: 'DGS2',        tx: 'level', sec: 'mon', label: '2Y Treasury',       unit: '%',  dl: 'DGS2' },
+  { id: 'gs10',    fid: 'DGS10',       tx: 'level', sec: 'mon', label: '10Y Treasury',      unit: '%',  dl: '' },
+  { id: 'curve',   fid: 'T10Y3M',      tx: 'level', sec: 'mon', label: 'Curve 10Y-3M',      unit: '%',  dl: 'T10Y3M', recSig: true },
+
+  // inflation
+  { id: 'cpi',     fid: 'CPIAUCSL',    tx: 'yoy',   sec: 'inf', label: 'Headline CPI',      unit: '%',  dl: 'CPIAUCSL' },
+  { id: 'corecpi', fid: 'CPILFESL',    tx: 'yoy',   sec: 'inf', label: 'Core CPI',          unit: '%',  dl: 'CPILFESL' },
+  { id: 'pce',     fid: 'PCEPILFE',    tx: 'yoy',   sec: 'inf', label: 'Core PCE',          unit: '%',  dl: 'PCEPILFE' },
+  { id: 'ppi',     fid: 'PPIACO',      tx: 'yoy',   sec: 'inf', label: 'PPI',               unit: '%',  dl: 'PPIACO' },
+  { id: 'wage',    fid: 'CES0500000003',tx: 'yoy',  sec: 'inf', label: 'Avg Hourly Earn.',  unit: '%',  dl: 'AHE' },
+  { id: 'infx',    fid: 'T5YIE',       tx: 'level', sec: 'inf', label: '5Y Infl. Exp.',     unit: '%',  dl: 'T5YIE' },
+
+  // growth & consumer
+  { id: 'gdp',     fid: 'GDPC1',       tx: 'yoy',   sec: 'grw', label: 'Real GDP',          unit: '%',  dl: 'GDPC1' },
+  { id: 'ip',      fid: 'INDPRO',      tx: 'yoy',   sec: 'grw', label: 'Industrial Prod.',  unit: '%',  dl: 'INDPRO' },
+  { id: 'rs',      fid: 'RRSFS',       tx: 'yoy',   sec: 'grw', label: 'Real Retail Sales', unit: '%',  dl: 'RRSFS' },
+  { id: 'capu',    fid: 'CUMFNS',      tx: 'level', sec: 'grw', label: 'Capacity Utiliz.',  unit: '%',  dl: 'CUMFNS' },
+  { id: 'savings', fid: 'PSAVERT',     tx: 'level', sec: 'grw', label: 'Savings Rate',      unit: '%',  dl: 'PSAVERT' },
+
+  // labor
+  { id: 'unr',     fid: 'UNRATE',      tx: 'level', sec: 'lab', label: 'Unemployment',      unit: '%',  dl: 'UNRATE' },
+  { id: 'nfp',     fid: 'PAYEMS',      tx: 'yoy',   sec: 'lab', label: 'NFP (YoY)',         unit: '%',  dl: 'PAYEMS' },
+  { id: 'jolt',    fid: 'JTSJOL',      tx: 'yoy',   sec: 'lab', label: 'JOLTS (YoY)',       unit: '%',  dl: 'JTSJOL' },
+  { id: 'lfpr',    fid: 'CIVPART',     tx: 'level', sec: 'lab', label: 'Labor Force Part.', unit: '%',  dl: 'CIVPART' },
+  { id: 'icsa',    fid: 'IC4WSA',      tx: 'level', sec: 'lab', label: 'Initial Claims (4w)',unit: 'k', dl: 'IC4WSA' },
+  { id: 'sahm',    fid: 'SAHMCURRENT', tx: 'level', sec: 'lab', label: 'Sahm Indicator',    unit: 'pp', dl: 'SAHMCURRENT', recSig: true },
+
+  // markets
+  { id: 'spx',     fid: 'SP500',       tx: 'yoy',   sec: 'mkt', label: 'S&P 500 (YoY)',     unit: '%',  dl: 'SP500' },
+  { id: 'dxy',     fid: 'DTWEXBGS',    tx: 'yoy',   sec: 'mkt', label: 'USD Broad (YoY)',   unit: '%',  dl: 'DTWEXBGS' },
+  { id: 'wti',     fid: 'DCOILWTICO',  tx: 'yoy',   sec: 'mkt', label: 'WTI Crude (YoY)',   unit: '%',  dl: 'DCOILWTICO' },
+  { id: 'vix',     fid: 'VIXCLS',      tx: 'level', sec: 'mkt', label: 'VIX',               unit: '',   dl: 'VIXCLS' },
+  { id: 'nfci',    fid: 'NFCI',        tx: 'level', sec: 'mkt', label: 'NFCI',              unit: '',   dl: 'NFCI' },
+
+  // credit & housing
+  { id: 'hys',     fid: 'BAMLH0A0HYM2',tx: 'level', sec: 'cdh', label: 'HY OAS',            unit: '%',  dl: 'BAMLH0A0HYM2', recSig: true },
+  { id: 'mort',    fid: 'MORTGAGE30US',tx: 'level', sec: 'cdh', label: '30Y Mortgage',      unit: '%',  dl: 'MORTGAGE30US' },
+  { id: 'hpi',     fid: 'CSUSHPISA',   tx: 'yoy',   sec: 'cdh', label: 'Home Px (Case-S)',  unit: '%',  dl: 'CSUSHPISA' },
+  { id: 'houst',   fid: 'HOUST',       tx: 'yoy',   sec: 'cdh', label: 'Housing Starts',    unit: '%',  dl: 'HOUST' },
+  { id: 'permit',  fid: 'PERMIT',      tx: 'yoy',   sec: 'cdh', label: 'Building Permits',  unit: '%',  dl: 'PERMIT' },
+  { id: 'recprob', fid: 'RECPROUSM156N',tx:'level', sec: 'cdh', label: 'NY Fed Rec. Prob',  unit: '%',  dl: 'RECPROUSM156N' },
+];
+
+// edges: [s, t, expected_sign] — sign is just for documentation; actual sign comes from rolling correlation
+const EDGE_DEFS = [
+  // monetary policy transmission
+  ['fed','gs2','+'], ['fed','gs10','+'], ['fed','m2','-'],
+  ['gs2','curve','-'], ['gs10','curve','+'],
+  ['fed','curve','-'],
+  ['fed','mort','+'], ['gs10','mort','+'],
+  ['fed','spx','-'], ['fed','dxy','+'], ['fed','hys','+'],
+
+  // inflation pillar
+  ['cpi','corecpi','+'], ['corecpi','pce','+'], ['cpi','pce','+'],
+  ['cpi','ppi','+'], ['cpi','infx','+'],
+  ['wage','cpi','+'], ['wti','cpi','+'],
+  ['cpi','fed','+'], ['corecpi','fed','+'], ['infx','fed','+'],
+
+  // growth pillar
+  ['capu','gdp','+'], ['capu','ip','+'],
+  ['ip','gdp','+'], ['rs','gdp','+'],
+  ['gdp','nfp','+'], ['curve','gdp','+'],
+  ['savings','rs','-'],
+
+  // labor
+  ['nfp','unr','-'], ['jolt','nfp','+'], ['lfpr','unr','+'],
+  ['unr','wage','-'], ['jolt','wage','+'],
+  ['icsa','unr','+'], ['icsa','nfp','-'],
+  ['sahm','unr','+'],
+
+  // markets
+  ['dxy','wti','-'], ['vix','spx','-'],
+  ['hys','spx','-'], ['hys','vix','+'],
+  ['spx','rs','+'], ['unr','spx','-'],
+  ['nfci','spx','-'], ['nfci','hys','+'], ['nfci','vix','+'],
+
+  // credit & housing
+  ['mort','hpi','-'], ['hpi','rs','+'], ['mort','rs','-'],
+  ['mort','houst','-'], ['mort','permit','-'],
+  ['permit','houst','+'], ['permit','hpi','-'], ['houst','hpi','-'],
+  ['hys','gdp','-'],
+
+  // recession-signal nodes
+  ['sahm','recprob','+'],
+  ['curve','recprob','-'],
+  ['hys','recprob','+'],
+  ['recprob','unr','+'],
+];
+
+// ============================================================================
+// Utilities: monthly resample, alignment, correlation, cross-corr
+// ============================================================================
+
+function resampleMonthly(obs) {
+  // Last observation per calendar month, dated YYYY-MM-01.
+  if (!obs || !obs.length) return [];
+  const byMonth = new Map();
+  for (const o of obs) {
+    if (!Number.isFinite(o.value)) continue;
+    const k = String(o.date).slice(0, 7);
+    byMonth.set(k, o.value);
+  }
+  return [...byMonth.entries()]
+    .sort((a, b) => a[0].localeCompare(b[0]))
+    .map(([m, v]) => ({ date: `${m}-01`, value: v }));
+}
+
+function buildPanel(seriesMap) {
+  // Returns { months: [...YYYY-MM...], cols: { id: [val_per_month_or_NaN] } }
+  // First, monthly-resample each transformed series.
+  const perId = {};
+  const monthSet = new Set();
+  for (const n of NODES) {
+    const raw = (seriesMap[n.fid] && seriesMap[n.fid].observations) || [];
+    let monthly = resampleMonthly(raw);
+    if (n.tx === 'yoy') {
+      const yoy = applyTransform(monthly, 'yoy');
+      monthly = yoy;
+    } else if (n.tx === 'level') {
+      // already level
+    } else {
+      const t = applyTransform(monthly, n.tx);
+      monthly = t;
+    }
+    perId[n.id] = monthly;
+    monthly.forEach(o => monthSet.add(o.date));
+  }
+  const months = [...monthSet].sort();
+  const cols = {};
+  for (const id of Object.keys(perId)) {
+    const lookup = new Map(perId[id].map(o => [o.date, o.value]));
+    cols[id] = months.map(m => {
+      const v = lookup.get(m);
+      return Number.isFinite(v) ? v : NaN;
+    });
+  }
+  return { months, cols };
+}
+
+function pearson(x, y) {
+  let n = 0, sx = 0, sy = 0, sxx = 0, syy = 0, sxy = 0;
+  for (let i = 0; i < x.length; i++) {
+    const xi = x[i], yi = y[i];
+    if (!Number.isFinite(xi) || !Number.isFinite(yi)) continue;
+    n++;
+    sx += xi; sy += yi;
+    sxx += xi * xi; syy += yi * yi; sxy += xi * yi;
+  }
+  if (n < 12) return NaN;
+  const num = sxy - (sx * sy) / n;
+  const den = Math.sqrt((sxx - sx * sx / n) * (syy - sy * sy / n));
+  if (den <= 0 || !Number.isFinite(den)) return NaN;
+  return num / den;
+}
+
+function trailingCorr(x, y, n = 60) {
+  // Use last `n` aligned non-NaN pairs.
+  const pairs = [];
+  for (let i = 0; i < x.length; i++) {
+    if (Number.isFinite(x[i]) && Number.isFinite(y[i])) pairs.push([x[i], y[i]]);
+  }
+  if (pairs.length < 12) return NaN;
+  const tail = pairs.slice(-n);
+  if (tail.length < 12) return NaN;
+  return pearson(tail.map(p => p[0]), tail.map(p => p[1]));
+}
+
+function peakLag(x, y, maxLag = 12, minObs = 24) {
+  // Positive k: x leads y by k months (compare x[i] vs y[i+k]).
+  let bestK = 0, bestC = 0;
+  for (let k = -maxLag; k <= maxLag; k++) {
+    let xs, ys;
+    if (k > 0)      { xs = x.slice(0, -k); ys = y.slice(k); }
+    else if (k < 0) { xs = x.slice(-k);    ys = y.slice(0, k); }
+    else            { xs = x;              ys = y; }
+    // count valid pairs
+    let valid = 0;
+    for (let i = 0; i < xs.length; i++) {
+      if (Number.isFinite(xs[i]) && Number.isFinite(ys[i])) valid++;
+    }
+    if (valid < minObs) continue;
+    const c = pearson(xs, ys);
+    if (Number.isFinite(c) && Math.abs(c) > Math.abs(bestC)) { bestK = k; bestC = c; }
+  }
+  return { lag: bestK, corr: bestC };
+}
+
+// ============================================================================
+// Render helpers
+// ============================================================================
+
+const W = 680, H = 600, CX = W / 2, CY = H / 2;
+const SVG_NS = 'http://www.w3.org/2000/svg';
+
+function clusterAngleFor(sec) {
+  const ord = ['mon','inf','mkt','cdh','lab','grw'];
+  const i = ord.indexOf(sec);
+  return Math.PI / 2 - (i / ord.length) * 2 * Math.PI;
+}
+
+function fmtVal(v, unit) {
+  if (v == null || !Number.isFinite(v)) return '—';
+  let s;
+  if (Math.abs(v) >= 10000)      s = (v / 1000).toFixed(1) + 'k';
+  else if (Math.abs(v) >= 100)   s = v.toFixed(1);
+  else if (Math.abs(v) >= 10)    s = v.toFixed(2);
+  else                            s = v.toFixed(2);
+  if (unit === '%')  return s + '%';
+  if (unit === 'pp') return s + 'pp';
+  if (unit === 'k')  return Math.round(v).toLocaleString() + 'k';
+  return s;
+}
+function fmtPct(v) {
+  if (v == null || !Number.isFinite(v)) return '—';
+  return (v >= 0 ? '+' : '') + v.toFixed(2) + '%';
+}
+
+// ============================================================================
+// State
+// ============================================================================
+
+const state = {
+  panel: null,           // { months, cols }
+  edges: [],             // computed: { s, t, w, sign, lag, pc, rc }
+  recSignals: null,      // computeRecSignals output
+  pinned: null,          // selected node id
+  filter: { mon:1, inf:1, grw:1, lab:1, mkt:1, cdh:1 },
+  options: { window: 60, minCorr: 0.2, showLags: true },
+  layout: {},            // node positions
+  dragging: null,
+};
+
+// ============================================================================
+// Data fetch + recompute
+// ============================================================================
+
+async function loadAll() {
+  const allIds = new Set(NODES.map(n => n.fid));
+  for (const s of REC_SERIES) allIds.add(s);
+  const start = '2010-01-01'; // long enough for 120m windows; ICSA/SAHM live further back
+
+  let map;
+  try {
+    map = await fetchFred([...allIds], { start });
+  } catch (err) {
+    console.error('FRED fetch failed', err);
+    document.getElementById('net-status').textContent = 'Failed to load FRED data: ' + err.message;
+    document.getElementById('refresh-text').textContent = 'Data error';
+    document.getElementById('refresh-indicator').classList.add('error');
+    return;
+  }
+
+  // Build panel for correlations.
+  state.panel = buildPanel(map);
+
+  // Compute recession composite (uses raw obs of REC_SERIES).
+  const rawRec = {};
+  for (const id of REC_SERIES) rawRec[id] = (map[id] && map[id].observations) || [];
+  state.recSignals = computeRecSignals(rawRec);
+
+  // Cache per-node latest level + YoY for the detail panel.
+  for (const n of NODES) {
+    const raw = (map[n.fid] && map[n.fid].observations) || [];
+    const lastValid = [...raw].reverse().find(o => Number.isFinite(o.value));
+    n._latest = lastValid ? { value: lastValid.value, date: lastValid.date } : null;
+    if (n.tx === 'yoy' || n.tx === 'level') {
+      const yoy = applyTransform(raw, 'yoy');
+      const lastYoY = [...yoy].reverse().find(o => Number.isFinite(o.value));
+      n._yoy = lastYoY ? lastYoY.value : null;
+    }
+    // mark recession-signal triggered state (set from computeRecSignals matching by id)
+    // matching: sahm→SAHMCURRENT, curve→T10Y3M, hys→BAMLH0A0HYM2 (others not in the network)
+    const sig = state.recSignals.signals.find(s => {
+      if (n.id === 'sahm'  && s.id === 'sahm')  return true;
+      if (n.id === 'curve' && s.id === 'curve') return true;
+      if (n.id === 'hys'   && s.id === 'hyoas') return true;
+      return false;
+    });
+    n._triggered = sig ? sig.triggered : false;
+  }
+
+  // Recompute edges (initial pass).
+  recomputeEdges();
+  initLayout();
+  renderRecBar();
+  renderLegend();
+  renderNetwork();
+
+  document.getElementById('net-status').classList.add('hidden');
+  document.getElementById('refresh-text').textContent = 'Live · FRED';
+  document.getElementById('refresh-indicator').classList.add('live');
+  document.getElementById('last-updated').textContent = 'Computed ' + new Date().toLocaleString();
+}
+
+function recomputeEdges() {
+  const { cols } = state.panel;
+  const win = state.options.window;
+  state.edges = EDGE_DEFS.map(([s, t, expected]) => {
+    const xs = cols[s], ys = cols[t];
+    const rc = trailingCorr(xs, ys, win);
+    const pl = peakLag(xs, ys, 12, 24);
+    const signRC = Number.isFinite(rc) && rc >= 0 ? '+' : '-';
+    const signPC = pl.corr >= 0 ? '+' : '-';
+    const signAgree = signRC === signPC;
+    const showArrow = state.options.showLags && Number.isFinite(rc)
+      && Math.abs(pl.corr) >= 0.5 && Math.abs(pl.lag) >= 2 && signAgree;
+    return {
+      s, t, expected,
+      rc: Number.isFinite(rc) ? rc : null,
+      w: Number.isFinite(rc) ? Math.abs(rc) : 0,
+      sign: signRC,
+      pc: pl.corr,
+      lag: showArrow ? pl.lag : 0,
+    };
+  });
+}
+
+// ============================================================================
+// Layout (initial radial + force simulation)
+// ============================================================================
+
+function initLayout() {
+  const byCluster = {};
+  for (const n of NODES) (byCluster[n.sec] = byCluster[n.sec] || []).push(n);
+  const R = 200;
+  Object.keys(byCluster).forEach(sec => {
+    const angle = clusterAngleFor(sec);
+    const cx = CX + R * Math.cos(angle);
+    const cy = CY - R * Math.sin(angle);
+    const arr = byCluster[sec];
+    arr.forEach((n, i) => {
+      const a = (i / arr.length) * 2 * Math.PI;
+      state.layout[n.id] = {
+        x: cx + 55 * Math.cos(a),
+        y: cy + 55 * Math.sin(a),
+        vx: 0, vy: 0, fx: null, fy: null, r: 8,
+      };
+    });
+  });
+}
+
+function tick() {
+  const REPULSE = 2400, SPRING = 0.018, GRAV = 0.008, DAMP = 0.82;
+  const layoutArr = NODES.map(n => state.layout[n.id]);
+  // repulsion
+  for (let i = 0; i < layoutArr.length; i++) {
+    for (let j = i + 1; j < layoutArr.length; j++) {
+      const a = layoutArr[i], b = layoutArr[j];
+      const dx = b.x - a.x, dy = b.y - a.y;
+      const d2 = dx * dx + dy * dy + 0.01;
+      const d = Math.sqrt(d2);
+      const f = REPULSE / d2;
+      const fx = (f * dx) / d, fy = (f * dy) / d;
+      if (a.fx == null) { a.vx -= fx; a.vy -= fy; }
+      if (b.fx == null) { b.vx += fx; b.vy += fy; }
+    }
+  }
+  // spring forces from edges (use state.edges; weaker rest length for stronger correlations)
+  for (const e of state.edges) {
+    const a = state.layout[e.s], b = state.layout[e.t];
+    if (!a || !b) continue;
+    const dx = b.x - a.x, dy = b.y - a.y;
+    const d = Math.sqrt(dx * dx + dy * dy) + 0.01;
+    const rest = 70 * (0.7 + 0.6 * (1 - e.w));
+    const f = SPRING * (d - rest);
+    const fx = (f * dx) / d, fy = (f * dy) / d;
+    if (a.fx == null) { a.vx += fx; a.vy += fy; }
+    if (b.fx == null) { b.vx -= fx; b.vy -= fy; }
+  }
+  // gravity + integrate
+  for (const a of layoutArr) {
+    if (a.fx != null) { a.x = a.fx; a.y = a.fy; a.vx = 0; a.vy = 0; continue; }
+    a.vx += (CX - a.x) * GRAV;
+    a.vy += (CY - a.y) * GRAV;
+    a.vx *= DAMP; a.vy *= DAMP;
+    a.x += a.vx; a.y += a.vy;
+    const m = 26;
+    a.x = Math.max(m, Math.min(W - m, a.x));
+    a.y = Math.max(m + 12, Math.min(H - m, a.y));
+  }
+  applyTransforms();
+  state.frame++;
+  if (state.frame < 400 || state.dragging) requestAnimationFrame(tick);
+}
+
+// ============================================================================
+// SVG rendering
+// ============================================================================
+
+function renderLegend() {
+  const root = document.getElementById('net-legend');
+  root.innerHTML = '';
+  for (const [k, sec] of Object.entries(SECTORS)) {
+    const b = document.createElement('button');
+    b.className = 'net-chip';
+    b.dataset.on = '1';
+    b.dataset.sec = k;
+    b.innerHTML = `<span class="dot" style="background:${sec.color}"></span>${sec.name} <a href="${sec.page}" title="Open ${sec.name} dashboard" onclick="event.stopPropagation()">page&rarr;</a>`;
+    b.addEventListener('click', () => {
+      state.filter[k] = state.filter[k] ? 0 : 1;
+      b.dataset.on = state.filter[k];
+      applyFilter();
+    });
+    root.appendChild(b);
+  }
+}
+
+function renderNetwork() {
+  const gE = document.getElementById('edges-g');
+  const gL = document.getElementById('lags-g');
+  const gN = document.getElementById('nodes-g');
+  gE.innerHTML = ''; gL.innerHTML = ''; gN.innerHTML = '';
+
+  // degree
+  const deg = {};
+  NODES.forEach(n => deg[n.id] = 0);
+  state.edges.forEach(e => { deg[e.s]++; deg[e.t]++; });
+  state._deg = deg;
+
+  // edges
+  state.edgeEls = state.edges.map(e => {
+    const path = document.createElementNS(SVG_NS, 'path');
+    path.setAttribute('class', 'edge');
+    path.setAttribute('stroke', e.sign === '+' ? 'var(--green)' : 'var(--red)');
+    path.setAttribute('stroke-width', (0.6 + e.w * 2.4).toFixed(2));
+    path.setAttribute('opacity', (0.18 + e.w * 0.5).toFixed(2));
+    if (e.lag !== 0) {
+      path.setAttribute('marker-end', e.sign === '+' ? 'url(#arrPos)' : 'url(#arrNeg)');
+    }
+    path.dataset.s = e.s;
+    path.dataset.t = e.t;
+    path.addEventListener('click', ev => {
+      ev.stopPropagation();
+      // Edge clicks deep-link into /core/econ/compare.html (macro × macro).
+      // Only open when BOTH endpoints have a registered drilldown id;
+      // compare.html otherwise falls back to its defaults.
+      const aN = NODES.find(n => n.id === e.s);
+      const bN = NODES.find(n => n.id === e.t);
+      if (aN.dl && bN.dl && DRILLDOWN_REGISTRY.has(aN.dl) && DRILLDOWN_REGISTRY.has(bN.dl)) {
+        const u = `/core/econ/compare.html?a=${encodeURIComponent(aN.dl)}&b=${encodeURIComponent(bN.dl)}`;
+        window.open(u, '_blank', 'noopener');
+      } else {
+        // Soft signal: pin the more interesting endpoint and let the user click through manually.
+        state.pinned = e.s;
+        highlight(e.s);
+        showDetail(aN);
+      }
+    });
+    gE.appendChild(path);
+    return path;
+  });
+
+  // lag labels
+  state.lagEls = state.edges.map(e => {
+    if (e.lag === 0) return null;
+    const t = document.createElementNS(SVG_NS, 'text');
+    t.setAttribute('class', 'lagLbl');
+    t.textContent = Math.abs(e.lag) + 'm';
+    gL.appendChild(t);
+    return t;
+  });
+
+  // nodes
+  state.nodeEls = NODES.map(n => {
+    const g = document.createElementNS(SVG_NS, 'g');
+    g.setAttribute('class', 'node' + (n.recSig ? ' recsig' : '') + (n._triggered ? ' triggered' : ''));
+    g.dataset.id = n.id;
+    const r = 7 + Math.sqrt(deg[n.id] || 1) * 2.4;
+    state.layout[n.id].r = r;
+    const c = document.createElementNS(SVG_NS, 'circle');
+    c.setAttribute('r', r.toFixed(1));
+    c.setAttribute('fill', SECTORS[n.sec].color);
+    c.setAttribute('opacity', '0.92');
+    if (!n.recSig) {
+      c.setAttribute('stroke', 'var(--panel)');
+      c.setAttribute('stroke-width', '1.5');
+    }
+    const t = document.createElementNS(SVG_NS, 'text');
+    t.setAttribute('y', -(r + 5));
+    t.setAttribute('text-anchor', 'middle');
+    t.textContent = n.label;
+    g.appendChild(c); g.appendChild(t);
+
+    // pointer/click handlers
+    g.addEventListener('mousedown', ev => onNodeDown(ev, n));
+    g.addEventListener('mouseenter', () => { if (!state.pinned) highlight(n.id); });
+    g.addEventListener('mouseleave', () => { if (!state.pinned) clearHighlight(); });
+    g.addEventListener('click', ev => {
+      ev.stopPropagation();
+      if (state._wasDragged) { state._wasDragged = false; return; }
+      state.pinned = n.id;
+      highlight(n.id);
+      showDetail(n);
+    });
+
+    gN.appendChild(g);
+    return g;
+  });
+
+  state.frame = 0;
+  applyFilter();
+  applyTransforms();
+  requestAnimationFrame(tick);
+}
+
+function applyTransforms() {
+  // node positions
+  NODES.forEach((n, i) => {
+    const p = state.layout[n.id];
+    state.nodeEls[i].setAttribute('transform', `translate(${p.x.toFixed(1)},${p.y.toFixed(1)})`);
+  });
+  // edge paths
+  state.edges.forEach((e, i) => {
+    const a = state.layout[e.s], b = state.layout[e.t];
+    let from, to;
+    if (e.lag > 0)      { from = a; to = b; }
+    else if (e.lag < 0) { from = b; to = a; }
+    else                { from = a; to = b; }
+    const dx = to.x - from.x, dy = to.y - from.y;
+    const len = Math.sqrt(dx * dx + dy * dy) + 0.01;
+    const ux = dx / len, uy = dy / len;
+    const sx = from.x + ux * from.r;
+    const sy = from.y + uy * from.r;
+    const ex = to.x   - ux * (to.r + (e.lag !== 0 ? 5 : 0));
+    const ey = to.y   - uy * (to.r + (e.lag !== 0 ? 5 : 0));
+    const mx = (sx + ex) / 2, my = (sy + ey) / 2;
+    const cx = mx - (ey - sy) * 0.06;
+    const cy = my + (ex - sx) * 0.06;
+    state.edgeEls[i].setAttribute('d',
+      `M${sx.toFixed(1)} ${sy.toFixed(1)} Q ${cx.toFixed(1)} ${cy.toFixed(1)} ${ex.toFixed(1)} ${ey.toFixed(1)}`
+    );
+    if (state.lagEls[i]) {
+      const t = 0.5;
+      const lx = (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * cx + t * t * ex;
+      const ly = (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * cy + t * t * ey - 3;
+      state.lagEls[i].setAttribute('x', lx.toFixed(1));
+      state.lagEls[i].setAttribute('y', ly.toFixed(1));
+    }
+  });
+}
+
+function applyFilter() {
+  const minC = state.options.minCorr;
+  NODES.forEach((n, i) => {
+    state.nodeEls[i].classList.toggle('muted', !state.filter[n.sec]);
+  });
+  state.edges.forEach((e, i) => {
+    const ns = NODES.find(n => n.id === e.s).sec;
+    const nt = NODES.find(n => n.id === e.t).sec;
+    const visible = state.filter[ns] && state.filter[nt] && Math.abs(e.rc || 0) >= minC;
+    state.edgeEls[i].setAttribute('opacity', visible ? (0.18 + e.w * 0.5).toFixed(2) : '0.02');
+    if (state.lagEls[i]) {
+      state.lagEls[i].setAttribute('opacity', visible ? '0.9' : '0');
+    }
+  });
+}
+
+function highlight(id) {
+  const neighbors = new Set([id]);
+  state.edges.forEach((e, i) => {
+    const hot = (e.s === id || e.t === id);
+    if (hot) {
+      state.edgeEls[i].setAttribute('opacity', '1');
+      state.edgeEls[i].setAttribute('stroke-width', (1.4 + e.w * 2.4).toFixed(2));
+      neighbors.add(e.s); neighbors.add(e.t);
+      if (state.lagEls[i]) { state.lagEls[i].classList.add('hot'); state.lagEls[i].setAttribute('opacity', '1'); }
+    } else {
+      state.edgeEls[i].setAttribute('opacity', '0.04');
+      if (state.lagEls[i]) { state.lagEls[i].classList.remove('hot'); state.lagEls[i].setAttribute('opacity', '0'); }
+    }
+  });
+  NODES.forEach((n, i) => {
+    state.nodeEls[i].classList.toggle('muted', !neighbors.has(n.id) || !state.filter[n.sec]);
+  });
+}
+function clearHighlight() {
+  state.edges.forEach((e, i) => {
+    state.edgeEls[i].setAttribute('stroke-width', (0.6 + e.w * 2.4).toFixed(2));
+    if (state.lagEls[i]) state.lagEls[i].classList.remove('hot');
+  });
+  applyFilter();
+}
+
+// ============================================================================
+// Drag, click, detail panel
+// ============================================================================
+
+function svgPoint(evt) {
+  const svg = document.getElementById('net');
+  const pt = svg.createSVGPoint();
+  pt.x = evt.clientX; pt.y = evt.clientY;
+  const m = svg.getScreenCTM().inverse();
+  return pt.matrixTransform(m);
+}
+
+function onNodeDown(ev, n) {
+  ev.preventDefault();
+  state.dragging = state.layout[n.id];
+  state._dragStart = { x: ev.clientX, y: ev.clientY };
+  state._wasDragged = false;
+  document.querySelector(`.node[data-id="${n.id}"]`).classList.add('dragging');
+  const p = svgPoint(ev);
+  state.dragging.fx = p.x; state.dragging.fy = p.y;
+  requestAnimationFrame(tick);
+}
+
+window.addEventListener('mousemove', ev => {
+  if (!state.dragging) return;
+  const p = svgPoint(ev);
+  state.dragging.fx = p.x; state.dragging.fy = p.y;
+  if (state._dragStart) {
+    const dx = ev.clientX - state._dragStart.x;
+    const dy = ev.clientY - state._dragStart.y;
+    if (dx * dx + dy * dy > 9) state._wasDragged = true;
+  }
+});
+window.addEventListener('mouseup', () => {
+  if (state.dragging) {
+    state.dragging.fx = null; state.dragging.fy = null;
+    state.dragging = null;
+    document.querySelectorAll('.node.dragging').forEach(g => g.classList.remove('dragging'));
+  }
+});
+document.getElementById('net').addEventListener('click', () => {
+  state.pinned = null; clearHighlight(); resetDetail();
+});
+
+function showDetail(n) {
+  document.getElementById('nd-title').textContent = n.label;
+  document.getElementById('nd-sub').textContent = `${SECTORS[n.sec].name} · ${state._deg[n.id]} edges`;
+  document.getElementById('nd-body').style.display = 'block';
+  document.getElementById('nd-val').textContent  = n._latest ? fmtVal(n._latest.value, n.unit) : '—';
+  document.getElementById('nd-yoy').textContent  = fmtPct(n._yoy);
+  document.getElementById('nd-asof').textContent = n._latest ? n._latest.date : '—';
+  document.getElementById('nd-sec').textContent  = SECTORS[n.sec].name;
+  document.getElementById('nd-src').textContent  = n.fid;
+  document.getElementById('nd-deg').textContent  = state._deg[n.id];
+  // Drilldown CTA: link to internal indicator page if registered, else to FRED.
+  const ctaEl = document.getElementById('nd-cta-drill');
+  if (n.dl && DRILLDOWN_REGISTRY.has(n.dl)) {
+    ctaEl.setAttribute('href', `/core/econ/indicator.html?id=${encodeURIComponent(n.dl)}`);
+    ctaEl.textContent = 'Open indicator drilldown →';
+  } else {
+    ctaEl.setAttribute('href', fredUrl(n.fid));
+    ctaEl.textContent = `View on FRED (${n.fid}) →`;
+  }
+
+  // Build directional link tags.
+  const inLinks = [], outLinks = [], coLinks = [];
+  for (const e of state.edges) {
+    if (e.s === n.id) {
+      if (e.lag > 0)      outLinks.push({ e, other: e.t, lag: e.lag });
+      else if (e.lag < 0) inLinks.push({ e, other: e.t, lag: -e.lag });
+      else                coLinks.push({ e, other: e.t, lag: 0 });
+    } else if (e.t === n.id) {
+      if (e.lag > 0)      inLinks.push({ e, other: e.s, lag: e.lag });
+      else if (e.lag < 0) outLinks.push({ e, other: e.s, lag: -e.lag });
+      else                coLinks.push({ e, other: e.s, lag: 0 });
+    }
+  }
+  function chips(arr) {
+    return arr.map(it => {
+      const e = it.e, otherNode = NODES.find(nn => nn.id === it.other);
+      const cls = e.sign === '+' ? 'pos' : 'neg';
+      const corr = Number.isFinite(e.rc) ? Math.round(Math.abs(e.rc) * 100) : '—';
+      const lagStr = it.lag ? `<span class="nd-lag">·${it.lag}m</span>` : '';
+      return `<span class="nd-tag ${cls}" data-id="${otherNode.id}">${e.sign} ${otherNode.label} <span class="nd-lag">(${corr})</span>${lagStr}</span>`;
+    }).join('');
+  }
+  let html = '';
+  if (outLinks.length) html += `<span class="label">Leads &rarr;</span>${chips(outLinks)}`;
+  if (inLinks.length)  html += `<span class="label">Lags &larr;</span>${chips(inLinks)}`;
+  if (coLinks.length)  html += `<span class="label">Coincident</span>${chips(coLinks)}`;
+  if (!html) html = '<div class="nd-empty">No connections in current view.</div>';
+  document.getElementById('nd-links').innerHTML = html;
+  // wire chip clicks
+  document.getElementById('nd-links').querySelectorAll('.nd-tag').forEach(t => {
+    t.addEventListener('click', ev => {
+      ev.stopPropagation();
+      const otherId = t.dataset.id;
+      state.pinned = otherId;
+      highlight(otherId);
+      showDetail(NODES.find(nn => nn.id === otherId));
+    });
+  });
+}
+function resetDetail() {
+  document.getElementById('nd-title').textContent = 'Click a node to inspect';
+  document.getElementById('nd-sub').textContent = 'Hover highlights the neighborhood. Click a node to pin its detail; click any tag below to walk the graph.';
+  document.getElementById('nd-body').style.display = 'none';
+}
+
+// ============================================================================
+// Recession-composite bar (mirrors landing-page strip)
+// ============================================================================
+
+function renderRecBar() {
+  const triggered = state.recSignals.signals.filter(s => s.triggered).length;
+  const tier = recTierOf(triggered);
+  document.getElementById('rec-count').textContent = String(triggered);
+  const tEl = document.getElementById('rec-tier');
+  tEl.textContent = tier.label;
+  tEl.classList.remove('tier-benign','tier-low','tier-elevated','tier-high');
+  tEl.classList.add(tier.cls);
+
+  const dotsRoot = document.getElementById('rec-dots');
+  dotsRoot.innerHTML = state.recSignals.signals.map(s => {
+    return `<span class="rec-bar-dot ${s.triggered ? 'triggered' : ''}" title="${s.label}: ${s.triggered ? 'TRIGGERED' : 'OK'}"></span>`;
+  }).join('');
+
+  const latest = state.recSignals.signals.map(s => s.currentDate).filter(Boolean).sort().pop();
+  document.getElementById('rec-asof').textContent = latest ? `as-of ${latest}` : '';
+}
+
+// ============================================================================
+// Controls
+// ============================================================================
+
+document.getElementById('net-window').addEventListener('change', ev => {
+  state.options.window = parseInt(ev.target.value, 10);
+  recomputeEdges();
+  renderNetwork();
+});
+document.getElementById('net-min-corr').addEventListener('change', ev => {
+  state.options.minCorr = parseFloat(ev.target.value);
+  applyFilter();
+});
+document.getElementById('net-show-lags').addEventListener('change', ev => {
+  state.options.showLags = ev.target.value === '1';
+  recomputeEdges();
+  renderNetwork();
+});
+document.getElementById('net-reset').addEventListener('click', () => {
+  initLayout();
+  state.frame = 0;
+  requestAnimationFrame(tick);
+});
+
+// ============================================================================
+// Boot
+// ============================================================================
+
+loadAll();
+</script>
+
+</body>
+</html>

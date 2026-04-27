@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Labor Market</title>
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="../cycle/cycle.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Labor Market</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+    <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub active">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+    <a href="/core/macro/network.html" class="dd-link">Network</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
+</nav>
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">How strong &mdash; or how fast weakening &mdash; is employment?</h1>
+  <p class="cycle-subtitle">
+    Labor is the engine of consumption and the most reliable lagging cycle indicator. The Sahm Rule
+    has flagged every post-1970 US recession in real time. Five signals:
+    <a class="meth-link" href="/core/econ/indicator.html?id=UNRATE">unemployment level</a>, the
+    <a class="meth-link" href="/core/econ/indicator.html?id=SAHMCURRENT">Sahm Rule trigger</a>,
+    <a class="meth-link" href="/core/econ/indicator.html?id=IC4WSA">initial claims</a>,
+    <a class="meth-link" href="/core/econ/indicator.html?id=PAYEMS">payroll growth</a>, and
+    <a class="meth-link" href="/core/econ/indicator.html?id=CES0500000003">wage growth</a>.
+  </p>
+</section>
+
+<section class="cycle-score-section" id="labor-score-section"></section>
+
+<!-- Synthesis — moved above detail sections so the takeaway reads first -->
+<section class="cycle-section cycle-section-synthesis" id="labor-takeaway">
+  <div class="cycle-section-head">
+    <h2>So what?</h2>
+    <p class="cycle-section-sub" id="labor-takeaway-text">Loading interpretation&hellip;</p>
+  </div>
+</section>
+
+<section class="cycle-section" id="labor-unemployment">
+  <div class="cycle-section-head">
+    <h2>1. Unemployment &amp; the Sahm Rule</h2>
+    <p class="cycle-section-sub">
+      The Sahm Rule triggers when the 3-month moving average of the unemployment rate rises
+      0.5 percentage points above its trailing 12-month low. Real-time recession indicator with
+      zero false positives 1970-2023; 2024 was the first historical violation.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-unrate"></canvas></div>
+    <div class="cycle-tiles" id="tiles-unrate"></div>
+  </div>
+  <p class="cycle-note" id="note-unrate"></p>
+</section>
+
+<section class="cycle-section" id="labor-claims">
+  <div class="cycle-section-head">
+    <h2>2. Initial jobless claims (4-week MA)</h2>
+    <p class="cycle-section-sub">
+      Highest-frequency labor signal — weekly. The 4-week moving average smooths holiday/weather noise.
+      Levels above 350K = stress; below 230K = full employment range. Direction matters more than level
+      at any moment: a sustained climb of 30K+ over 6 weeks is a regime shift.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-claims"></canvas></div>
+    <div class="cycle-tiles" id="tiles-claims"></div>
+  </div>
+  <p class="cycle-note" id="note-claims"></p>
+</section>
+
+<section class="cycle-section" id="labor-wages">
+  <div class="cycle-section-head">
+    <h2>3. Payrolls &amp; wage growth</h2>
+    <p class="cycle-section-sub">
+      Payrolls 6m annualized growth captures the hiring pulse — sub-1% indicates contraction risk.
+      Wage growth (Average Hourly Earnings YoY) is the bargaining-power gauge: above 4.5% = tight
+      labor market; below 2.5% = slack. Wage growth lagging core CPI = real wages negative,
+      a consumer-stress signal.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-wages"></canvas></div>
+    <div class="cycle-tiles" id="tiles-wages"></div>
+  </div>
+  <p class="cycle-note" id="note-wages"></p>
+</section>
+
+<footer>
+  <span>Data: FRED. UNRATE / PAYEMS / CES0500000003 from BLS; IC4WSA from DOL via FRED.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./labor.js"></script>
+<script src="/core/lib/download-button.js"></script>
+<script src="/core/lib/chart-range.js"></script>
+<script src="/core/lib/theme-toggle.js"></script>
+<script type="module" src="/core/lib/tile-tooltip.js"></script>
+</body>
+</html>

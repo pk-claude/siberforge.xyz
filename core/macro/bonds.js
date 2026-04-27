@@ -663,12 +663,3 @@ init();
 document.addEventListener('themechange', () => {
   init();
 });
-  document.getElementById('last-updated').textContent = 'Last updated ' + new Date().toLocaleString();
-}
-
-init();
-
-// Re-render on theme change
-document.addEventListener('themechange', () => {
-  init();
-});

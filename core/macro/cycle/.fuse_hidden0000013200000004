@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Cycle Position</title>
+<link rel="stylesheet" href="../styles.css" />
+<link rel="stylesheet" href="./cycle.css" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <a href="/core/macro/" class="home-link" title="Back to macro dashboard">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Cycle Position</span>
+  </div>
+  <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+  <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
+  </div>
+</header>
+
+<nav class="deep-dive-nav">
+  <span class="dd-label">Macro views</span>
+  <div class="dd-group dd-group-master">
+    <a href="/core/macro/" class="dd-link dd-master">Regime</a>
+    <span class="dd-tree">›</span>
+    <a href="/core/macro/cycle/" class="dd-link dd-sub active">Cycle</a>
+    <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
+    <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
+    <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
+    <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
+    <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group">
+    <a href="/core/macro/regional/" class="dd-link">Regional</a>
+    <a href="/core/macro/backtest/" class="dd-link">Backtest</a>
+    <a href="/core/macro/research.html" class="dd-link">Pair Explorer</a>
+    <a href="/core/macro/network.html" class="dd-link">Network</a>
+  </div>
+  <span class="dd-divider"></span>
+  <div class="dd-group dd-group-tail">
+    <a href="/core/data/" class="dd-link">Data</a>
+    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button>
+  </div>
+</nav>
+
+
+<section class="cycle-intro">
+  <h1 class="cycle-title">How much runway does the current regime have?</h1>
+  <p class="cycle-subtitle">
+    The <a href="/core/macro/">main dashboard</a> tells you what regime we&rsquo;re in. This page tells you how
+    close we are to a turning point. Five leading signals: recession probability, yield curve, financial
+    conditions, credit spreads, and labor momentum. Each pairs a chart, a percentile vs. history, and a
+    clear threshold for what would change the call.
+  </p>
+</section>
+
+<!-- Composite cycle score at the top: the "so what" for the whole page -->
+<section class="cycle-score-section" id="cycle-score-section">
+  <!-- Populated by renderCycleScore() -->
+</section>
+
+<!-- Synthesis — the prose takeaway, moved up so the conclusion reads first -->
+<section class="cycle-section cycle-section-synthesis" id="cycle-synthesis">
+  <div class="cycle-section-head">
+    <h2>Synthesis &mdash; what this means for positioning</h2>
+    <p class="cycle-section-sub">The takeaway from all four signals below, distilled. Detail sections follow.</p>
+  </div>
+  <div id="synthesis-content"></div>
+</section>
+
+<!-- Section 1: Recession probability (NY Fed + Sahm Rule) -->
+<section class="cycle-section" id="cycle-recession">
+  <div class="cycle-section-head">
+    <h2>1. Leading recession signals</h2>
+    <p class="cycle-section-sub">
+      Twelve-month-ahead recession odds from the NY Fed's yield-curve model. The Sahm Rule triggers in
+      real time once the 3-month jobless-rate moving average rises 0.5pp above its trailing 12-month
+      low. Historically: Sahm has flagged every post-1970 US recession without a false positive prior
+      to 2024.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-recprob"></canvas></div>
+    <div class="cycle-tiles" id="tiles-recession"></div>
+  </div>
+  <p class="cycle-note" id="note-recession"></p>
+</section>
+
+<!-- Section 2: Yield curve -->
+<section class="cycle-section" id="cycle-curve">
+  <div class="cycle-section-head">
+    <h2>2. Yield curve — 10Y&ndash;3M and 10Y&ndash;2Y</h2>
+    <p class="cycle-section-sub">
+      The 10Y&ndash;3M spread is the NY Fed&rsquo;s preferred recession model input; 10Y&ndash;2Y is the
+      financial-press favorite. Every US recession since 1960 was preceded by a sustained 10Y&ndash;3M
+      inversion (12&ndash;18 month lead). The dangerous signal isn&rsquo;t the inversion itself; it&rsquo;s the
+      bull-steepener that follows (recession starts as the curve un-inverts).
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-curve"></canvas></div>
+    <div class="cycle-tiles" id="tiles-curve"></div>
+  </div>
+  <p class="cycle-note" id="note-curve"></p>
+</section>
+
+<!-- Section 3: Financial conditions -->
+<section class="cycle-section" id="cycle-conditions">
+  <div class="cycle-section-head">
+    <h2>3. Financial conditions — NFCI + Adjusted NFCI</h2>
+    <p class="cycle-section-sub">
+      Chicago Fed composites of ~105 risk, credit, and leverage measures. NFCI is the raw reading
+      (z-scored by construction); ANFCI strips out the part explained by current macro. The actionable
+      signal is <strong>divergence</strong>: when ANFCI tightens while NFCI is flat, conditions are
+      tightening for reasons not justified by the economy. That&rsquo;s the early warning.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-nfci"></canvas></div>
+    <div class="cycle-tiles" id="tiles-nfci"></div>
+  </div>
+  <p class="cycle-note" id="note-nfci"></p>
+</section>
+
+<!-- Section 4: Credit stress -->
+<section class="cycle-section" id="cycle-credit">
+  <div class="cycle-section-head">
+    <h2>4. Credit spreads — HY and IG OAS</h2>
+    <p class="cycle-section-sub">
+      The single best market-priced recession barometer. HY thresholds: &lt;300bp = complacent, 400&ndash;600bp
+      = normal, &gt;800bp = stress, &gt;1000bp = crisis. When HY widens while IG stays calm, stress is
+      idiosyncratic (single-name). When both widen together, stress is systemic.
+    </p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-credit"></canvas></div>
+    <div class="cycle-tiles" id="tiles-credit"></div>
+  </div>
+  <p class="cycle-note" id="note-credit"></p>
+</section>
+
+<footer>
+  <span>Data: FRED (USREC, NFCI, ANFCI, RECPROUSM156N, yield spreads, credit OAS). Pink bands on time-series = NBER recessions.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="./cycle.js"></script>
+<script src="../../li
