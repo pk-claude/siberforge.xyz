@@ -47,14 +47,14 @@ html, body {
   box-shadow: 0 1px 0 rgba(0,0,0,0.4), 0 4px 14px rgba(0,0,0,0.4);
 }
 
-.brand { display: flex; align-items: center; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 8px; }
 
 .home-link {
   color: var(--muted);
   text-decoration: none;
   font-size: 18px;
   line-height: 1;
-  padding: 2px 6px;
+  padding: 1px 4px;
   border-radius: 3px;
   transition: color .15s, background-color .15s;
 }
@@ -63,7 +63,7 @@ html, body {
 .brand .mark {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
   font-weight: 900;
   letter-spacing: -0.02em;
@@ -2691,3 +2691,14 @@ footer {
 .ai-heatmap-cell { background: linear-gradient(135deg, transparent, var(--accent)); background-size: 100% 100%; }
 
 .ai-watch { font-size: 13px; line-height: 1.7; color: var(--text); padding-left: 20px; }
+.ai-watch li { margin-bottom: 4px; }
+
+.ai-methodology { font-size: 11.5px; color: var(--muted); line-height: 1.55; margin-top: 24px; padding: 10px 14px; background: var(--panel-2); border-radius: 4px; }
+
+@media (max-width: 800px) {
+  .ai-basket-grid { grid-template-columns: repeat(2, 1fr); }
+  .ai-takeaway { grid-template-columns: 1fr; gap: 4px 0; }
+  .ai-takeaway-label { padding-top: 8px; }
+  .ai-heatmap-row { grid-template-columns: 50px repeat(8, 1fr); font-size: 9px; }
+  .ai-heatmap-cell { padding: 6px 4px; }
+}
