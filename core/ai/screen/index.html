@@ -153,8 +153,6 @@ tr.top-pick td:first-child::before{content:"★ ";color:var(--gold)}
 <header class="top">
   <div class="brand">
     <a href="/core/ai/" class="home-link" title="Back to AI section">&larr;</a>
-    
-    <img src="/siberforge-mark.png" class="brand-icon" alt="" />
     <span class="mark"><svg class="brand-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/><circle cx="100" cy="70" r="22" fill="#0a0a0a"/><circle cx="108" cy="62" r="6" fill="#ffffff"/><ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/><circle cx="220" cy="70" r="22" fill="#0a0a0a"/><circle cx="228" cy="62" r="6" fill="#ffffff"/></svg><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
     <span class="sub">Industry Scenarios</span>
   </div>
@@ -163,22 +161,26 @@ tr.top-pick td:first-child::before{content:"★ ";color:var(--gold)}
     <span id="refresh-text">Modest scenario &middot; Apr 25, 2026</span>
   </div>
 </header>
-<nav class="deep-dive-nav">
-  <span class="dd-label">AI Beneficiaries</span>
-  <div class="dd-group dd-group-master">
-    <a href="/core/ai/" class="dd-link dd-master">Overview</a>
-    <span class="dd-tree">&rsaquo;</span>
-    <a href="/core/ai/screen/" class="dd-link dd-sub active">Industry Scenarios</a>
-    <a href="/core/ai/top-5/" class="dd-link dd-sub">Top 5 Winners</a>
-  </div>
-  <span class="dd-divider"></span>
-  <div class="dd-group">
-    <a href="/core/macro/" class="dd-link">Macro &amp; Markets</a>
-    <a href="/core/econ/" class="dd-link dd-link-secondary">Indicator Library</a>
-  </div>
-  <span class="dd-divider"></span>
-  <div class="dd-group dd-group-tail">
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab active">AI Beneficiaries</a>
+    <a href="/core/supply/" class="section-tab">Supply Chain</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
     <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">AI Beneficiaries</span>
+    <a href="/core/ai/" class="dd-link">Overview</a>
+    <a href="/core/ai/screen/" class="dd-link active">Industry Scenarios</a>
+    <a href="/core/ai/top-5/" class="dd-link">Top 5 Winners</a>
+    <a href="/core/ai/hyperscalers/" class="dd-link">Hyperscalers</a>
+    <a href="/core/ai/compute/" class="dd-link">Compute &amp; semis</a>
+    <a href="/core/ai/power/" class="dd-link">Power &amp; grid</a>
+    <a href="/core/ai/adopters/" class="dd-link">Adopters</a>
   </div>
 </nav>
 <header>

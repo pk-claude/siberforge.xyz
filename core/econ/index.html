@@ -8,19 +8,35 @@
 </head>
 <body>
 
-<div class="top">
+<header class="top">
   <div class="brand">
     <a href="/" class="home-link" title="Siberforge home">&larr;</a>
     <span class="mark"><svg class="brand-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/><circle cx="100" cy="70" r="22" fill="#0a0a0a"/><circle cx="108" cy="62" r="6" fill="#ffffff"/><ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/><circle cx="220" cy="70" r="22" fill="#0a0a0a"/><circle cx="228" cy="62" r="6" fill="#ffffff"/></svg><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
     <span class="sub">Economic Indicators</span>
-    <a href="./compare.html" class="compare-link" title="Overlay two indicators">Compare &rarr;</a>
-    <a href="./recession.html" class="recession-link" title="Recession risk composite">Recession &rarr;</a>
   </div>
   <div class="status" id="status">
     <span class="dot" id="status-dot"></span>
     <span id="status-text">Loading…</span>
   </div>
-</div>
+</header>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab active">Macro</a>
+    <a href="/core/ai/" class="section-tab">AI Beneficiaries</a>
+    <a href="/core/supply/" class="section-tab">Supply Chain</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">Indicators</span>
+    <a href="/core/econ/" class="dd-link active">All 22 indicators</a>
+    <a href="/core/econ/recession.html" class="dd-link">Recession composite</a>
+    <a href="/core/econ/compare.html" class="dd-link">Compare</a>
+  </div>
+</nav>
 
 <main>
   <span class="eyebrow">Macro dashboard</span>

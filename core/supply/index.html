@@ -16,18 +16,35 @@
       <span class="mark"><svg class="brand-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/><circle cx="100" cy="70" r="22" fill="#0a0a0a"/><circle cx="108" cy="62" r="6" fill="#ffffff"/><ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/><circle cx="220" cy="70" r="22" fill="#0a0a0a"/><circle cx="228" cy="62" r="6" fill="#ffffff"/></svg><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
       <span class="sub">Supply Chain Dashboard</span>
     </div>
-    <div style="display:flex;gap:10px;align-items:center;"><div style="font-size:11px;color:var(--muted);">last refresh <span id="last-refresh-stamp">pending</span> · <a href="./data.html" style="color:var(--accent);">data &amp; downloads</a></div><button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button></div>
+    <div class="status">
+    <span id="refresh-indicator" class="dot"></span>
+    <span id="refresh-text">Initializing&hellip;</span>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
 </header>
-  <nav class="deep-dive-nav">
-    <a class="active" href="./">Overview</a>
-    <a href="./insights/">Insights</a>
-    <a href="./dc/">Distribution Center</a>
-    <a href="./dc/industrial-re.html">Industrial Real Estate</a>
-    <a href="./middle-mile/">Middle Mile</a>
-    <a href="./last-mile/">Last Mile</a>
-    <a href="./international/">International</a>
-    <a href="./data.html">Downloads</a>
-  </nav>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab">AI Beneficiaries</a>
+    <a href="/core/supply/" class="section-tab active">Supply Chain</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">Supply Chain</span>
+    <a href="/core/supply/" class="dd-link active">Overview</a>
+    <a href="/core/supply/insights/" class="dd-link">Insights</a>
+    <a href="/core/supply/dc/" class="dd-link">Distribution Center</a>
+    <a href="/core/supply/dc/industrial-re.html" class="dd-link">Industrial Real Estate</a>
+    <a href="/core/supply/middle-mile/" class="dd-link">Middle Mile</a>
+    <a href="/core/supply/last-mile/" class="dd-link">Last Mile</a>
+    <a href="/core/supply/international/" class="dd-link">International</a>
+    <a href="/core/supply/data.html" class="dd-link">Downloads</a>
+  </div>
+</nav>
   <div id="calendar-strip-host"></div>
   <div id="watch-band-host"></div>
   <div id="environment-summary-host" class="env-summary"></div>

@@ -17,16 +17,29 @@
     </div>
     <div style="display:flex;gap:10px;align-items:center;"><div style="font-size:11px;color:var(--muted);"><a href="./" style="color:var(--accent);">← overview</a></div><button id="theme-toggle" class="theme-toggle" title="Switch theme">☀</button></div>
 </header>
-  <nav class="deep-dive-nav">
-    <a href="./">Overview</a>
-    <a href="./insights/">Insights</a>
-    <a href="./dc/">Distribution Center</a>
-    <a href="./dc/industrial-re.html">Industrial Real Estate</a>
-    <a href="./middle-mile/">Middle Mile</a>
-    <a href="./last-mile/">Last Mile</a>
-    <a href="./international/">International</a>
-    <a class="active" href="./data.html">Downloads</a>
-  </nav>
+
+<nav class="deep-dive-nav two-tier">
+  <div class="section-tabs">
+    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
+    <a href="/core/macro/" class="section-tab">Macro</a>
+    <a href="/core/ai/" class="section-tab">AI Beneficiaries</a>
+    <a href="/core/supply/" class="section-tab active">Supply Chain</a>
+    <a href="/core/macro/research.html" class="section-tab">Tools</a>
+    <a href="/core/data/" class="section-tab">Reference</a>
+    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+  </div>
+  <div class="section-pages">
+    <span class="dd-label">Supply Chain</span>
+    <a href="/core/supply/" class="dd-link">Overview</a>
+    <a href="/core/supply/insights/" class="dd-link">Insights</a>
+    <a href="/core/supply/dc/" class="dd-link">Distribution Center</a>
+    <a href="/core/supply/dc/industrial-re.html" class="dd-link">Industrial Real Estate</a>
+    <a href="/core/supply/middle-mile/" class="dd-link">Middle Mile</a>
+    <a href="/core/supply/last-mile/" class="dd-link">Last Mile</a>
+    <a href="/core/supply/international/" class="dd-link">International</a>
+    <a href="/core/supply/data.html" class="dd-link active">Downloads</a>
+  </div>
+</nav>
   <div class="download-zone">
     <h1>Data &amp; Downloads</h1>
     <p style="color:var(--muted);">Every series in the dashboard, available as CSV. The full bundle includes all per-series CSVs plus snapshot.json and manifest.json. Refresh runs every Monday 06:00 UTC.</p>
