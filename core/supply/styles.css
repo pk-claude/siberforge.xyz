@@ -42,12 +42,18 @@ a:hover { color: var(--accent); }
 
 /* ---------- top bar ---------- */
 .top {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   padding: 14px 24px;
   border-bottom: 1px solid var(--line);
-  background: rgba(19, 23, 28, 0.85);
-  position: sticky; top: 0; z-index: 100;
+  background: rgba(19, 23, 28, 0.78);
   backdrop-filter: blur(14px) saturate(1.3);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  transition: box-shadow .2s var(--ease-out), background .2s var(--ease-out);
 }
 .brand { display: flex; align-items: center; gap: 8px; }
 .brand .mark {
@@ -67,8 +73,20 @@ a:hover { color: var(--accent); }
 }
 .brand .mark .siber { color: var(--text); }
 .brand .mark .forge { color: #E63946; }
-.brand .sub { color: var(--muted); font-size: 13px; }
-.home-link { color: var(--muted); padding: 1px 4px; border-radius: 3px; font-size: 18px; }
+.brand .sub {
+  color: var(--muted);
+  margin-left: 14px;
+  font-size: 13px;
+}
+.home-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 18px;
+  line-height: 1;
+  padding: 1px 4px;
+  border-radius: 3px;
+  transition: color .15s, background-color .15s;
+}
 .home-link:hover { color: var(--accent); background: var(--panel-2); }
 /* ---------- composite tile (top of overview) ---------- */
 .composite-strip {
