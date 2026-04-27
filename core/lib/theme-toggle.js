@@ -21,11 +21,9 @@
 
   function applyTheme(theme) {
     const root = document.documentElement;
-    if (theme === 'light') {
-      root.setAttribute('data-theme', 'light');
-    } else {
-      root.removeAttribute('data-theme');
-    }
+    // Always set the attribute explicitly so JS that reads
+    // getAttribute('data-theme') never returns null in dark mode.
+    root.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
     syncButtons(theme);
   }
 

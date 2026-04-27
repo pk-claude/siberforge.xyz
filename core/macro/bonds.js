@@ -7,7 +7,7 @@ import { applyTransform } from '/core/lib/transforms.js';
 
 const theme = { light: '#1a1a1a', dark: '#e8e8e8', gridLight: '#f5f5f5', gridDark: '#2a2a2a' };
 
-let currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+let currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
 document.addEventListener('themechange', (e) => { currentTheme = e.detail; });
 
 // ============== HELPERS ==============
