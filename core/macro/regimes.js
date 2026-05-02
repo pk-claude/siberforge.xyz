@@ -1,9 +1,9 @@
 // Regime classifier.
 //
-// Pure module — no DOM, no fetch. Inputs are FRED-shape arrays of
+// Pure module â€” no DOM, no fetch. Inputs are FRED-shape arrays of
 // { date: 'YYYY-MM-DD', value: number }. Output is a Map<YYYY-MM, {regime, ...}>.
 //
-// Methodology (chosen by user, see macro_dashboard_redesign.md):
+// Methodology (chosen by user, see ../../../_archive/macro_dashboard_redesign.md):
 //   X-axis (growth)    = composite z-score of three 6m-annualized growth measures:
 //                          INDPRO   (industrial production, monthly)
 //                          PAYEMS   (nonfarm payrolls, monthly)
@@ -19,14 +19,14 @@
 //   growthZ >= 0 & inflationZ <  0  -> goldilocks   (growth up, inflation cool)
 //   growthZ >= 0 & inflationZ >= 0  -> reflation    (growth up, inflation up)
 //   growthZ <  0 & inflationZ >= 0  -> stagflation  (growth down, inflation up)
-//   growthZ <  0 & inflationZ <  0  -> disinflation (growth down, inflation down — recession risk)
+//   growthZ <  0 & inflationZ <  0  -> disinflation (growth down, inflation down â€” recession risk)
 //
 // Why a TRAILING z-score window:
 //   Regime "where are we vs recent history" beats "where are we vs all of history."
 //   Inflation in the 1970s structurally swamps everything else; using a full-sample
 //   z-score makes the 2024 episode look mild. 120 months captures roughly one full
 //   cycle plus expansion, which is the right reference frame for cycle positioning.
-//   Trailing also means the historical classification is computable at the time —
+//   Trailing also means the historical classification is computable at the time â€”
 //   no look-ahead bias when a user is reading the chart.
 
 // ---------------------------------------------------------------------------
@@ -137,10 +137,10 @@ export function classifyRegime(growthZ, inflationZ) {
 // Display metadata for the four regimes. Color choices match the macro
 // dashboard's existing palette (--green/--accent/--red/--blue from styles.css).
 export const REGIMES = {
-  goldilocks:   { label: 'Goldilocks',   color: '#3ecf8e', desc: 'Growth above trend, inflation cooling',  short: 'Growth↑ Infl↓' },
-  reflation:    { label: 'Reflation',    color: '#f7a700', desc: 'Growth and inflation both above trend',  short: 'Growth↑ Infl↑' },
-  stagflation:  { label: 'Stagflation',  color: '#ef4f5a', desc: 'Growth slowing, inflation hot',          short: 'Growth↓ Infl↑' },
-  disinflation: { label: 'Disinflation', color: '#5a9cff', desc: 'Growth slowing, inflation cooling',      short: 'Growth↓ Infl↓' },
+  goldilocks:   { label: 'Goldilocks',   color: '#3ecf8e', desc: 'Growth above trend, inflation cooling',  short: 'Growthâ†‘ Inflâ†“' },
+  reflation:    { label: 'Reflation',    color: '#f7a700', desc: 'Growth and inflation both above trend',  short: 'Growthâ†‘ Inflâ†‘' },
+  stagflation:  { label: 'Stagflation',  color: '#ef4f5a', desc: 'Growth slowing, inflation hot',          short: 'Growthâ†“ Inflâ†‘' },
+  disinflation: { label: 'Disinflation', color: '#5a9cff', desc: 'Growth slowing, inflation cooling',      short: 'Growthâ†“ Inflâ†“' },
 };
 
 // ---------------------------------------------------------------------------
@@ -150,7 +150,7 @@ export const REGIMES = {
 // inputs is { cpi, indpro, payems, rrsfs } each a FRED observations array.
 // Returns Map<YYYY-MM, { regime, growthZ, inflationZ, components }>.
 //
-// `components` records how many growth z's contributed (1, 2, or 3) — useful
+// `components` records how many growth z's contributed (1, 2, or 3) â€” useful
 // for diagnostics if early-history months drop a series.
 export function buildRegimeMap({ cpi, indpro, payems, rrsfs }) {
   const cpiMonthly    = toMonthlyMap(cpi);
@@ -191,7 +191,7 @@ export function buildRegimeMap({ cpi, indpro, payems, rrsfs }) {
 }
 
 // Distribution diagnostic: { goldilocks: n, reflation: n, ... } over a regime map.
-// Used at startup to sanity-check the classification balance — wildly skewed
+// Used at startup to sanity-check the classification balance â€” wildly skewed
 // distributions (e.g., 80% in one quadrant) suggest a problem with the z-window.
 export function regimeDistribution(regimeMap) {
   const out = { goldilocks: 0, reflation: 0, stagflation: 0, disinflation: 0 };
@@ -200,7 +200,7 @@ export function regimeDistribution(regimeMap) {
 }
 
 // Smooth the "current regime" reading via majority vote over the last `window`
-// months. Used ONLY for the live headline + table-row highlight — historical
+// months. Used ONLY for the live headline + table-row highlight â€” historical
 // aggregation always uses the raw monthly classification.
 //
 // Why: a single noisy CPI or payrolls print can flip the headline regime month
