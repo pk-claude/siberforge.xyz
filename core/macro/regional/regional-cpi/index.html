@@ -9,52 +9,13 @@
 <link rel="stylesheet" href="../regional.css" />
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<link rel="stylesheet" href="/core/lib/tokens.css" />
+<link rel="stylesheet" href="/core/lib/layout.css" />
+<script src="/core/lib/theme-toggle.js"></script>
+<script src="/core/lib/nav-config.js"></script>
+<script defer src="/core/lib/layout.js"></script>
 </head>
-<body>
-<header class="top">
-  <div class="brand">
-    <a class="home-link" href="/" title="Siberforge home">⌂</a>
-    <span class="mark"><svg class="brand-eyes" viewBox="0 0 320 140" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><ellipse cx="100" cy="70" rx="60" ry="34" fill="#3EB8E0"/><circle cx="100" cy="70" r="22" fill="#0a0a0a"/><circle cx="108" cy="62" r="6" fill="#ffffff"/><ellipse cx="220" cy="70" rx="60" ry="34" fill="#E09A3E"/><circle cx="220" cy="70" r="22" fill="#0a0a0a"/><circle cx="228" cy="62" r="6" fill="#ffffff"/></svg><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
-    <span class="sub">Regional CPI Dispersion</span>
-  </div>
-  <div class="status">
-    <span id="refresh-indicator" class="dot"></span>
-    <span id="refresh-text">Initializing&hellip;</span>
-  <button id="download-data" class="download-data-btn" title="Download data used on this page">Download data</button>
-  </div>
-</header>
-
-<nav class="deep-dive-nav two-tier">
-  <div class="section-tabs">
-    <a href="/core/macro/markets.html" class="section-tab">Financials</a>
-    <a href="/core/macro/" class="section-tab active">Macro</a>
-    <a href="/core/ai/" class="section-tab">AI Beneficiaries</a>
-    <a href="/core/supply/" class="section-tab">Supply Chain</a>
-    <a href="/core/macro/research.html" class="section-tab">Tools</a>
-    <a href="/core/data/" class="section-tab">Reference</a>
-    <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
-  </div>
-  <div class="section-pages">
-    <span class="dd-label">Macro views</span>
-    <div class="dd-group dd-group-master">
-      <a href="/core/macro/" class="dd-link dd-master">Regime</a>
-      <span class="dd-tree">&rsaquo;</span>
-      <a href="/core/macro/cycle/" class="dd-link dd-sub">Cycle</a>
-      <a href="/core/macro/inflation/" class="dd-link dd-sub">Inflation</a>
-      <a href="/core/macro/housing/" class="dd-link dd-sub">Housing</a>
-      <a href="/core/macro/real-economy/" class="dd-link dd-sub">Consumer</a>
-      <a href="/core/macro/credit/" class="dd-link dd-sub">Credit</a>
-      <a href="/core/macro/labor/" class="dd-link dd-sub">Labor</a>
-    </div>
-    <span class="dd-divider"></span>
-    <div class="dd-group">
-      <a href="/core/macro/regional/" class="dd-link active">Regional</a>
-      <a href="/core/macro/geography/" class="dd-link">Geography</a>
-    </div>
-  </div>
-</nav>
-
-
+<body data-section="macro" data-sub-section="regional" data-page="regional-cpi" data-page-sub="Regional CPI" data-page-status-text="Ready">
 <nav class="reg-sub-nav">
   <span class="rsn-label">Regional pages</span>
   <a href="/core/macro/geography/" class="rsn-link">Geography</a>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Tools</title>
+<link rel="icon" href="/favicon.ico" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/core/lib/tokens.css" />
+<link rel="stylesheet" href="/core/lib/layout.css" />
+<link rel="stylesheet" href="/core/macro/styles.css" />
+<script src="/core/lib/theme-toggle.js"></script>
+<script src="/core/lib/nav-config.js"></script>
+<script defer src="/core/lib/layout.js"></script>
+<style>
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    margin-top: 20px;
+  }
+  .tool-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--r-lg);
+    padding: 18px 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color var(--t-med), transform var(--t-med) var(--ease-out);
+  }
+  .tool-card:hover {
+    border-color: var(--accent);
+    transform: translateY(-1px);
+  }
+  .tool-card h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .tool-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 12.5px;
+    line-height: 1.55;
+  }
+</style>
+</head>
+<body data-section="tools" data-page-sub="Tools">
+
+<main>
+  <span class="eyebrow">Research tools</span>
+  <h1 class="page-title">Tools</h1>
+  <p class="page-sub">
+    Cross-cutting analytical tools: pair-trade backtest scaffolding, transmission-network maps,
+    regime-conditional backtests, and a full indicator-comparison engine. Each runs against the
+    full FRED + EDGAR dataset.
+  </p>
+
+  <div class="tools-grid">
+    <a class="tool-card" href="/core/macro/research.html">
+      <h3>Pair Explorer &rarr;</h3>
+      <p>Compare any two FRED series with rolling correlation, spread, and ratio views. Useful for testing macro pair-trade hypotheses.</p>
+    </a>
+    <a class="tool-card" href="/core/macro/network.html">
+      <h3>Transmission Network &rarr;</h3>
+      <p>Force-directed graph of how macro shocks propagate across rates, credit, equities, and the real economy. Click a node to see its first-order links.</p>
+    </a>
+    <a class="tool-card" href="/core/macro/backtest/">
+      <h3>Regime Backtest &rarr;</h3>
+      <p>Backtest sector and factor returns conditional on the regime classification. Surfaces which exposures historically pay off in each cycle phase.</p>
+    </a>
+    <a class="tool-card" href="/core/econ/compare.html">
+      <h3>Compare Indicators &rarr;</h3>
+      <p>Multi-series overlay across all 22 macro indicators. Choose a transformation (level, YoY, z-score) and align by date or event.</p>
+    </a>
+  </div>
+</main>
+
+</body>
+</html>
