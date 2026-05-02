@@ -30,10 +30,10 @@ const state = {
 const $ = (id) => document.getElementById(id);
 
 function setStatus(cls, text) {
-  const dot = $('status-dot');
+  const dot = $('refresh-indicator');
   dot.classList.remove('live', 'stale', 'error');
   if (cls) dot.classList.add(cls);
-  $('status-text').textContent = text;
+  $('refresh-text').textContent = text;
 }
 
 // ============================================================================

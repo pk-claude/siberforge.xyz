@@ -86,6 +86,7 @@
       groups: [
         { links: [
           { id: 'regional-hub',    label: 'Regional overview',  href: '/core/macro/regional/',                meta: 'Hub - all regional dispersion views' },
+          { id: 'geography',       label: 'Geography',          href: '/core/macro/geography/',               meta: 'State + MSA selectors, ranked bars' },
           { id: 'regional-cpi',    label: 'CPI dispersion',     href: '/core/macro/regional/regional-cpi/',   meta: 'Region-level CPI dispersion' },
           { id: 'affordability',   label: 'Affordability',      href: '/core/macro/regional/affordability/',  meta: 'Income vs cost-of-living gap' },
           { id: 'build-buy',       label: 'Build vs Buy',       href: '/core/macro/regional/build-buy/',      meta: 'Rent vs own break-even by region' },
