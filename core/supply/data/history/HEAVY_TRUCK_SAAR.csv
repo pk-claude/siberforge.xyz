@@ -1,4 +1,4 @@
-# Heavy Truck Sales SAAR  source=fred  generated=2026-04-27T12:07:56.319Z
+# Heavy Truck Sales SAAR  source=fred  generated=2026-05-04T12:11:42.294Z
 date,value
 2010-01-01,0.224
 2010-02-01,0.207
@@ -194,4 +194,4 @@ date,value
 2025-12-01,0.392
 2026-01-01,0.389
 2026-02-01,0.376
-2026-03-01,0.342
+2026-03-01,0.367
