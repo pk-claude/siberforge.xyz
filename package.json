@@ -17,8 +17,9 @@
     "node": ">=20"
   },
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
+    "@vercel/analytics": "^2.0.1",
     "archiver": "^7.0.1",
+    "cheerio": "^1.0.0-rc.12",
     "pdfjs-dist": "^4.7.76",
     "xlsx": "^0.18.5"
   }
