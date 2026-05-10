@@ -69,6 +69,23 @@
     refresh: null,
   };
 
+  // Long-form Normalized P/E explanation. Single source so wording stays in sync
+  // across hover tooltips, the detail panel, and the page-sub paragraph.
+  const NPE_EXPLAIN =
+    'Normalized P/E (Shiller-style) divides current price by the average TTM EPS over the past ~5 years rather than current TTM or analyst forward EPS. ' +
+    'It addresses earnings cyclicality: companies in cyclical industries (semis, energy, materials, autos, banks) earn far above trend at peaks and far below at troughs. ' +
+    'Trailing/forward P/E anchors the multiple to whichever phase of the cycle you happen to be observing — making peak-cycle stocks look cheap on forward P/E and trough-cycle stocks look expensive on trailing P/E. ' +
+    'Normalized P/E flattens the cycle and gives a multiple based on through-cycle earnings, which is closer to what a long-term investor should pay for. ' +
+    'A wide gap between Normalized and Trailing/Forward (e.g. MU at ~160 vs 35 vs 7) flags that current earnings are far from trend and the stated multiple may revert as earnings revert. ' +
+    'For stable growers (MSFT, V) Normalized P/E sits close to Trailing P/E and the gap is small. ' +
+    'Method: arithmetic mean of monthly TTM EPS over the past ~5 years (loss years included honestly). The cycle tag (Peak/Above-trend/Mid-cycle/Below-trend/Trough) is the percentile rank of current EPS within that 5-year distribution.';
+
+  function escAttr(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  const NPE_TERM = (label) =>
+    `<span class="term" data-def="${escAttr(NPE_EXPLAIN)}">${label}</span>`;
+
+  const CYCLE_CLS = { 'Peak':'peak', 'Above-trend':'above', 'Mid-cycle':'mid', 'Below-trend':'below', 'Trough':'trough' };
+
   // ---------------------------------------------------------------------
   // Load all data
   // ---------------------------------------------------------------------
@@ -152,6 +169,8 @@
       case 'tpe-desc': out.sort(desc('tpe')); break;
       case 'fpe-asc':  out.sort(asc('fpe')); break;
       case 'fpe-desc': out.sort(desc('fpe')); break;
+      case 'npe-asc':  out.sort(asc('npe')); break;
+      case 'npe-desc': out.sort(desc('npe')); break;
       case 'mc-desc':  out.sort((a, b) => (b.mc || 0) - (a.mc || 0)); break;
       case 'alpha':    out.sort((a, b) => a.t.localeCompare(b.t)); break;
       case 'name':     out.sort((a, b) => (a.n || '').localeCompare(b.n || '')); break;
@@ -166,16 +185,18 @@
     const v = r[state.metric];
     const tCls = (r.tpe == null || r.tpe <= 0) ? 'r-na' : '';
     const fCls = (r.fpe == null || r.fpe <= 0) ? 'r-na' : '';
+    const nCls = (r.npe == null || r.npe <= 0) ? 'r-na' : '';
     return `<div class="row" data-t="${r.t}" style="background:${rowBgFor(v)}">
       <div class="r-tk">${r.t}</div>
       <div class="r-nm" title="${(r.n || '').replace(/"/g, '&quot;')}">${truncName(r.n, 24)}</div>
       <div class="r-tpe ${tCls}">${fmtPE(r.tpe)}</div>
       <div class="r-fpe ${fCls}">${fmtPE(r.fpe)}</div>
+      <div class="r-npe ${nCls}">${fmtPE(r.npe)}</div>
     </div>`;
   }
 
   function colHdrHTML() {
-    return `<div class="col-hdr"><div>Tkr</div><div>Company</div><div>Trail</div><div>Fwd</div></div>`;
+    return `<div class="col-hdr"><div>Tkr</div><div>Company</div><div>Trail</div><div>Fwd</div><div title="Normalized P/E (5y avg EPS)">Norm</div></div>`;
   }
 
   function render(viewKey, rows) {
@@ -248,12 +269,16 @@
     const peerHd = r.peer_kind === 'sector'
       ? 'Closest peers (same sector &mdash; no direct industry match)'
       : 'Primary peers (same industry, by mkt cap)';
+    const cycleHTML = r.cycle
+      ? `<span class="cycle-tag ${CYCLE_CLS[r.cycle] || 'unknown'}">${r.cycle}</span>`
+      : '';
     tip.innerHTML = `
-      <h4>${r.t} <span style="color:var(--muted);font-weight:400">${r.n || ''}</span></h4>
+      <h4>${r.t} <span style="color:var(--muted);font-weight:400">${r.n || ''}</span> ${cycleHTML}</h4>
       <div class="tip-meta">${r.sec} &middot; ${r.ind}</div>
       <table>
         <tr><td class="k">Trail P/E</td><td><b>${fmtPE(r.tpe)}</b></td><td class="k">Mkt Cap</td><td>${fmtB(r.mc)}</td></tr>
         <tr><td class="k">Fwd P/E</td><td><b>${fmtPE(r.fpe)}</b></td><td class="k">Price</td><td>${fmt2(r.px)}</td></tr>
+        <tr><td class="k">Norm P/E</td><td><b>${fmtPE(r.npe)}</b></td><td class="k">EPS pctile</td><td>${r.eps_pctile != null ? r.eps_pctile + '%' : '—'}</td></tr>
         <tr><td class="k">PEG</td><td>${fmt2(r.peg)}</td><td class="k">Rev Gr</td><td>${fmtPct(r.rg)}</td></tr>
       </table>
       <div class="tip-peers">
@@ -367,6 +392,57 @@
       `<tr><td class="t">${p.t}</td><td class="n">${p.n || ''}</td><td>${fmtPE(p.tpe)}</td><td>${fmtPE(p.fpe)}</td></tr>`
     ).join('');
     const peerHd = r.peer_kind === 'sector' ? 'Closest peers (same sector)' : 'Peers (same industry, by market cap)';
+    const cycleClass = CYCLE_CLS[r.cycle] || 'unknown';
+    const cycleTag = r.cycle
+      ? `<span class="cycle-tag ${cycleClass}">${r.cycle}</span>`
+      : `<span class="cycle-tag unknown">Insufficient history</span>`;
+
+    // EPS distribution bar (where current EPS sits in 5y range)
+    let epsBar = '';
+    if (r.eps_min5y != null && r.eps_max5y != null && r.eps_avg5y != null) {
+      const range = r.eps_max5y - r.eps_min5y;
+      const pos = (v) => range > 0 ? Math.max(0, Math.min(100, (v - r.eps_min5y) / range * 100)) : 50;
+      const meanPos = pos(r.eps_avg5y);
+      const curPos = r.eps_cur != null ? pos(r.eps_cur) : null;
+      epsBar = `
+        <div class="eps-bar-wrap">
+          <div class="eps-bar-row">
+            <span>5y EPS distribution</span>
+            <span>Current pctile: <b>${r.eps_pctile != null ? r.eps_pctile + '%' : '—'}</b></span>
+          </div>
+          <div class="eps-bar">
+            <div class="eps-fill" style="left:0;right:0"></div>
+            <div class="eps-mean" style="left:${meanPos}%" title="5y mean EPS"></div>
+            ${curPos != null ? `<div class="eps-cur" style="left:${curPos}%" title="Current TTM EPS"></div>` : ''}
+          </div>
+          <div class="eps-bar-foot">
+            <span>min ${fmt2(r.eps_min5y)}</span>
+            <span>mean ${fmt2(r.eps_avg5y)}</span>
+            <span>max ${fmt2(r.eps_max5y)}</span>
+          </div>
+          <div class="eps-bar-foot" style="margin-top:1px">
+            <span></span>
+            <span>current ${fmt2(r.eps_cur)} EPS</span>
+            <span></span>
+          </div>
+        </div>`;
+    }
+
+    // Cycle interpretation copy — adapts based on the spread between norm and trail
+    let interpretation = '';
+    if (r.npe != null && r.tpe != null && r.tpe > 0) {
+      const ratio = r.npe / r.tpe;
+      if (ratio >= 2.5) {
+        interpretation = `Trailing P/E (${fmtPE(r.tpe)}) is anchored to <b>peak earnings</b> well above 5y trend. Normalized P/E of <b>${fmtPE(r.npe)}</b> reflects the multiple if earnings revert toward the 5y average. Cyclical risk is high.`;
+      } else if (ratio >= 1.5) {
+        interpretation = `Current earnings sit <b>materially above</b> the 5y average. Some mean-reversion risk to the multiple if earnings normalize.`;
+      } else if (ratio >= 0.85) {
+        interpretation = `Trailing P/E and Normalized P/E are close — earnings are <b>near trend</b>. Multiple is well-anchored.`;
+      } else {
+        interpretation = `Current earnings sit <b>below</b> the 5y average. Trailing P/E (${fmtPE(r.tpe)}) overstates the multiple a long-term investor pays — Normalized P/E of <b>${fmtPE(r.npe)}</b> is more representative.`;
+      }
+    }
+
     panel.innerHTML = `
       <header>
         <div class="pn-hd">
@@ -395,6 +471,30 @@
             <div class="pc-eps">EPS (Fwd): ${fmt2(r.eps_f)}</div>
           </div>
         </div>
+
+        <h3>Cycle Position ${cycleTag}</h3>
+        <div class="cycle-block">
+          <div class="tri-row">
+            <div class="tri-card" style="border-left:3px solid ${fillFor(r.tpe)}">
+              <div class="tc-l">Trailing</div>
+              <div class="tc-v">${fmtPE(r.tpe)}</div>
+              <div class="tc-eps">EPS ${fmt2(r.eps_t)}</div>
+            </div>
+            <div class="tri-card" style="border-left:3px solid ${fillFor(r.fpe)}">
+              <div class="tc-l">Forward</div>
+              <div class="tc-v">${fmtPE(r.fpe)}</div>
+              <div class="tc-eps">EPS ${fmt2(r.eps_f)}</div>
+            </div>
+            <div class="tri-card" style="border-left:3px solid ${fillFor(r.npe)}">
+              <div class="tc-l">${NPE_TERM('Normalized')}</div>
+              <div class="tc-v">${fmtPE(r.npe)}</div>
+              <div class="tc-eps">5y avg EPS ${fmt2(r.eps_avg5y)}</div>
+            </div>
+          </div>
+          ${epsBar}
+          ${interpretation ? `<div class="cycle-explain">${interpretation}</div>` : ''}
+        </div>
+
         ${chartBlockHTML(r)}
         <h3>Valuation</h3>
         <div class="stats">

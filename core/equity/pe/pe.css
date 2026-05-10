@@ -136,17 +136,18 @@
 .sec-head .sh-stat{color:var(--muted);font-variant-numeric:tabular-nums}
 
 .col-hdr{
-  display:grid;grid-template-columns:42px 1fr 38px 38px;gap:5px;
+  display:grid;grid-template-columns:42px 1fr 34px 34px 34px;gap:4px;
   padding:3px 6px;border-bottom:1px solid var(--line);
   font-size:9px;text-transform:uppercase;letter-spacing:.4px;
   color:var(--muted);font-weight:600;
 }
 .col-hdr div:nth-child(3),
-.col-hdr div:nth-child(4){text-align:right}
+.col-hdr div:nth-child(4),
+.col-hdr div:nth-child(5){text-align:right}
 
 .row{
-  display:grid;grid-template-columns:42px 1fr 38px 38px;
-  gap:5px;align-items:center;padding:2px 6px;
+  display:grid;grid-template-columns:42px 1fr 34px 34px 34px;
+  gap:4px;align-items:center;padding:2px 6px;
   border-bottom:1px solid rgba(0,0,0,.25);
   cursor:pointer;
   font-variant-numeric:tabular-nums;line-height:1.2;
@@ -161,10 +162,11 @@
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   color:rgba(255,255,255,.92);
 }
-.row .r-tpe,.row .r-fpe{
+.row .r-tpe,.row .r-fpe,.row .r-npe{
   text-align:right;font-size:11px;font-weight:600;color:#fff;
 }
-.row .r-tpe.r-na,.row .r-fpe.r-na{color:rgba(255,255,255,.55);font-weight:400}
+.row .r-tpe.r-na,.row .r-fpe.r-na,.row .r-npe.r-na{color:rgba(255,255,255,.55);font-weight:400}
+.row .r-npe{font-style:italic;opacity:.95}  /* differentiate norm column visually */
 
 .flat .sec-head{display:none}
 .flat{break-inside:auto}
@@ -239,6 +241,39 @@
 #panel .pn-peers td{padding:4px 6px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
 #panel .pn-peers td.t{font-weight:600}
 #panel .pn-peers td.n{color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Cycle Position section in detail panel */
+.cycle-block{
+  background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r-md);padding:var(--sp-3);margin-bottom:var(--sp-4);
+}
+.cycle-tag{
+  display:inline-block;padding:3px 9px;border-radius:var(--r-sm);
+  font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+}
+.cycle-tag.peak       { background:rgba(239,79,90,0.18);  color:var(--red); }
+.cycle-tag.above      { background:rgba(214,97,42,0.20);  color:#e09b2c; }
+.cycle-tag.mid        { background:rgba(90,156,255,0.16); color:var(--blue); }
+.cycle-tag.below      { background:rgba(126,196,58,0.20); color:#7ec43a; }
+.cycle-tag.trough     { background:rgba(62,207,142,0.18); color:var(--green); }
+.cycle-tag.unknown    { background:rgba(138,148,163,0.16); color:var(--muted); }
+
+.tri-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:var(--sp-2);margin-top:var(--sp-2);margin-bottom:var(--sp-3)}
+.tri-card{background:var(--panel-2);border:1px solid var(--line);border-radius:var(--r-md);padding:var(--sp-2) var(--sp-3)}
+.tri-card .tc-l{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.tri-card .tc-v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px;color:var(--text)}
+.tri-card .tc-eps{font-size:10px;color:var(--muted);margin-top:2px}
+
+.eps-bar-wrap{margin-top:var(--sp-2);font-size:10px;color:var(--muted)}
+.eps-bar-row{display:flex;justify-content:space-between;font-size:10px;margin-bottom:3px;font-variant-numeric:tabular-nums}
+.eps-bar{position:relative;height:8px;background:var(--panel-2);border:1px solid var(--line);border-radius:4px;overflow:visible}
+.eps-bar .eps-fill{position:absolute;top:0;bottom:0;background:linear-gradient(90deg,var(--green),#7ec43a,var(--accent),var(--red));border-radius:4px;opacity:.55}
+.eps-bar .eps-mean{position:absolute;top:-2px;bottom:-2px;width:1px;background:var(--text);opacity:.7}
+.eps-bar .eps-cur{position:absolute;top:-3px;bottom:-3px;width:2px;background:#fff;box-shadow:0 0 6px rgba(255,255,255,.5)}
+.eps-bar-foot{display:flex;justify-content:space-between;font-size:9px;color:var(--muted);margin-top:3px;font-variant-numeric:tabular-nums}
+
+.cycle-explain{font-size:11px;color:var(--text);line-height:1.5;margin-top:var(--sp-2)}
+.cycle-explain b{color:var(--accent)}
 
 /* Chart */
 .chart-wrap{

@@ -113,6 +113,64 @@ function computePeers(records) {
 }
 
 // -------------------------------------------------------------------------
+// 3b) Compute Normalized P/E (Shiller-style) + cycle stats per ticker
+//     Uses the historical TTM EPS series (price / trailing-PE at each month)
+//     EXCLUDING the trailing 6 months — which are biased low for tickers
+//     whose latest fiscal year hasn't yet closed (annual data hasn't rolled).
+//     Yahoo's reported eps_t is used as the authoritative "current EPS" for
+//     percentile calculation.
+// -------------------------------------------------------------------------
+function cycleTag(p) {
+  if (p == null) return null;
+  if (p >= 85) return 'Peak';
+  if (p >= 65) return 'Above-trend';
+  if (p >= 35) return 'Mid-cycle';
+  if (p >= 15) return 'Below-trend';
+  return 'Trough';
+}
+
+function computeNormalized(records, series) {
+  for (const r of records) {
+    const s = series[r.t] || [];
+    const px = r.px;
+    if (!s.length || px == null || px <= 0) { r.npe = null; r.cycle = null; continue; }
+    // Trim last 6 months — same fix as in our seed script
+    const cut = Math.max(0, s.length - 6);
+    const epsHist = [];
+    for (let i = 0; i < cut; i++) {
+      const [, mpx, tpe] = s[i];
+      if (tpe != null && tpe > 0 && mpx) epsHist.push(mpx / tpe);
+    }
+    if (epsHist.length < 24) { r.npe = null; r.cycle = null; continue; }
+    const avg = epsHist.reduce((a, b) => a + b, 0) / epsHist.length;
+    if (avg <= 0) { r.npe = null; r.cycle = null; continue; }
+
+    // Authoritative current EPS: Yahoo's reported eps_t; fallback to series tail
+    let curEps = (r.eps_t != null && r.eps_t > 0) ? r.eps_t : null;
+    if (curEps == null) {
+      for (let i = s.length - 1; i >= 0; i--) {
+        const [, mpx, tpe] = s[i];
+        if (tpe != null && tpe > 0 && mpx) { curEps = mpx / tpe; break; }
+      }
+    }
+    if (curEps == null) { r.npe = null; r.cycle = null; continue; }
+
+    const sorted = epsHist.slice().sort((a, b) => a - b);
+    const rank = sorted.filter(e => e <= curEps).length;
+    const pctile = Math.round(1000 * rank / sorted.length) / 10;
+
+    r.npe        = Math.round((px / avg) * 100) / 100;
+    r.eps_avg5y  = Math.round(avg * 10000) / 10000;
+    r.eps_min5y  = Math.round(Math.min(...epsHist) * 10000) / 10000;
+    r.eps_max5y  = Math.round(Math.max(...epsHist) * 10000) / 10000;
+    r.eps_cur    = Math.round(curEps * 10000) / 10000;
+    r.eps_pctile = pctile;
+    r.cycle      = cycleTag(pctile);
+    r.n_months   = epsHist.length;
+  }
+}
+
+// -------------------------------------------------------------------------
 // 4) Compute monthly TTM and forward-PF P/E series per ticker
 // -------------------------------------------------------------------------
 function computeSeries(history) {
@@ -216,6 +274,11 @@ async function main() {
   const histArr = await fetchAllHistory(universe.map(u => u.ticker), 6);
   const series = computeSeries(histArr);
   console.log(`    series tickers = ${Object.keys(series).length}`);
+
+  console.log('  computing Normalized P/E + cycle stats...');
+  computeNormalized(records, series);
+  const npeCount = records.filter(r => r.npe != null).length;
+  console.log(`    normalized P/E for ${npeCount}/${records.length} tickers`);
 
   const errs = histArr.filter(h => h.err);
   if (errs.length) console.log(`    history errors: ${errs.length} (e.g. ${errs[0].t}: ${errs[0].err})`);

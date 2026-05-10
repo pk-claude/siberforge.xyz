@@ -48,12 +48,48 @@ async function main() {
   }
 
   const tickers = universe.map(u => u.t);
+  // Build a lookup of normalized-P/E inputs from the latest weekly refresh.
+  // npe is derived from 5y EPS history; only price changes day-to-day, so
+  // we re-derive npe by scaling: npe = px / eps_avg5y. cycle/eps_pctile
+  // are recomputed against the existing distribution.
+  const meta = new Map(universe.map(u => [u.t, {
+    eps_avg5y:  u.eps_avg5y,
+    eps_min5y:  u.eps_min5y,
+    eps_max5y:  u.eps_max5y,
+    eps_t_prev: u.eps_t,        // last reported EPS — used as proxy for current
+    sec:        u.sec,
+  }]));
   console.log(`  ${tickers.length} tickers`);
+
+  function cycleTag(p) {
+    if (p == null) return null;
+    if (p >= 85) return 'Peak';
+    if (p >= 65) return 'Above-trend';
+    if (p >= 35) return 'Mid-cycle';
+    if (p >= 15) return 'Below-trend';
+    return 'Trough';
+  }
 
   const results = await pMapLimit(tickers, 6, async (t) => {
     try {
       const f = await fetchFundamentals(t);
-      return { t, fpe: f.fpe, tpe: f.tpe, px: f.px, mc: f.mc, sec: f.sec };
+      const m = meta.get(t) || {};
+      const px = f.px;
+      const npe = (px && m.eps_avg5y && m.eps_avg5y > 0)
+        ? Math.round((px / m.eps_avg5y) * 100) / 100
+        : null;
+      // Use today's reported eps_t for percentile if available, otherwise carry forward
+      const curEps = (f.eps_t != null && f.eps_t > 0) ? f.eps_t : m.eps_t_prev;
+      let pctile = null, cycle = null;
+      if (curEps != null && m.eps_min5y != null && m.eps_max5y != null) {
+        // Approximate percentile: linearly interpolate within [min,max]; bounded 0..100
+        const range = m.eps_max5y - m.eps_min5y;
+        if (range > 0) {
+          pctile = Math.round(1000 * Math.max(0, Math.min(1, (curEps - m.eps_min5y) / range))) / 10;
+        }
+        cycle = cycleTag(pctile);
+      }
+      return { t, fpe: f.fpe, tpe: f.tpe, npe, px, mc: f.mc, sec: m.sec, eps_t: f.eps_t, eps_pctile: pctile, cycle };
     } catch (e) {
       return { t, err: String(e.message || e).slice(0, 80) };
     }

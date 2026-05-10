@@ -17,9 +17,10 @@
   <span class="eyebrow">Equity valuation</span>
   <h1 class="page-title">P/E Multiples &mdash; S&amp;P 500 &amp; Nasdaq-100</h1>
   <p class="page-sub">
-    Trailing and forward
-    <span class="term" data-def="Price-to-Earnings ratio. Trailing P/E uses last-twelve-months EPS; Forward P/E uses consensus next-twelve-months EPS estimates. Lower P/E means cheaper relative to earnings.">P/E</span>
-    multiples for every S&amp;P 500 and Nasdaq-100 constituent. Group by sector, sort, and click any company for detailed financials and a 5-year P/E history chart.
+    Trailing, forward, and
+    <span class="term" data-def="Normalized P/E (Shiller-style) divides current price by the average TTM EPS over the past ~5 years rather than current TTM or analyst forward EPS. It addresses earnings cyclicality: companies in cyclical industries (semis, energy, materials, autos, banks) earn far above trend at peaks and far below at troughs. Trailing/forward P/E anchors the multiple to whichever phase of the cycle you happen to be observing — making peak-cycle stocks look cheap on forward P/E and trough-cycle stocks look expensive on trailing P/E. Normalized P/E flattens the cycle and gives a multiple based on through-cycle earnings, which is closer to what a long-term investor should pay for. A wide gap between Normalized and Trailing/Forward (e.g. MU at ~160 vs 35 vs 7) flags that current earnings are far from trend and the stated multiple may revert as earnings revert. For stable growers (MSFT, V) Normalized P/E sits close to Trailing P/E and the gap is small. Method: arithmetic mean of monthly TTM EPS over the past ~5 years (loss years included honestly). The cycle tag (Peak/Above-trend/Mid-cycle/Below-trend/Trough) is the percentile rank of current EPS within that 5-year distribution.">normalized</span>
+    <span class="term" data-def="Price-to-Earnings ratio. Trailing P/E uses last-twelve-months EPS; Forward P/E uses consensus next-twelve-months EPS estimates. Normalized P/E uses the 5-year average TTM EPS (Shiller-style). Lower P/E means cheaper relative to earnings.">P/E</span>
+    multiples for every S&amp;P 500 and Nasdaq-100 constituent. Group by sector, sort, and click any company for detailed financials, cycle position, and a 5-year P/E history chart.
     <span class="term" data-def="Forward P/E shown on the dashboard is consensus analyst estimates as of the most recent refresh. The historical chart's Forward P/E line uses perfect-foresight (price divided by realized next-12-month earnings), which differs from what was published at the time.">Methodology note.</span>
   </p>
 
@@ -50,6 +51,8 @@
           <option value="fpe-desc">Forward P/E &darr;</option>
           <option value="tpe-asc">Trailing P/E &uarr;</option>
           <option value="tpe-desc">Trailing P/E &darr;</option>
+          <option value="npe-asc">Normalized P/E &uarr;</option>
+          <option value="npe-desc">Normalized P/E &darr;</option>
           <option value="mc-desc">Market cap &darr;</option>
           <option value="alpha">A &rarr; Z (ticker)</option>
           <option value="name">A &rarr; Z (name)</option>
@@ -59,6 +62,7 @@
         <select id="metric">
           <option value="tpe">Trailing P/E</option>
           <option value="fpe" selected>Forward P/E</option>
+          <option value="npe">Normalized P/E</option>
         </select>
       </label>
       <label>Cols
