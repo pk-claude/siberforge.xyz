@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "current": "2026-05-08",
+  "weeks": [
+    {
+      "weekOf": "2026-04-24",
+      "subjectTicker": "HD",
+      "subjectName": "The Home Depot",
+      "headline": "Housing demand cracks widen even as mortgage rates ease — tariff path remains the principal margin variable",
+      "publishedAt": "2026-04-24T20:00:00Z"
+    },
+    {
+      "weekOf": "2026-05-01",
+      "subjectTicker": "FND",
+      "subjectName": "Floor & Décor Holdings",
+      "headline": "Discretionary demand deteriorates as consumer sentiment collapses — Q1 comp sales decline, guidance cut signal housing-linked spending pullback",
+      "publishedAt": "2026-05-02T10:30:00Z"
+    },
+    {
+      "weekOf": "2026-05-08",
+      "subjectTicker": "COST",
+      "subjectName": "Costco Wholesale Corporation",
+      "headline": "Warehouse-club value capture accelerates against record-low UMich sentiment — April +13.0% sales beat reframes consumer-channel dispersion",
+      "publishedAt": "2026-05-08T20:00:00Z"
+    }
+  ]
+}

@@ -41,6 +41,18 @@
           { id: 'equity-hub',      label: 'Equity hub',           href: '/core/equity/',      meta: 'Top-5 AI winners deep dive' },
           { id: 'plug-overview',   label: 'Plug Power (PLUG)',    href: '/core/plug/',        meta: '6 views - cash flow, revenue, balance, liquidity, footprint' },
         ]},
+        { label: 'Valuation', links: [
+          { id: 'pe-overview',     label: 'P/E Multiples',        href: '/core/equity/pe/',   meta: 'S&P 500 + Nasdaq-100 trailing & forward P/E, sortable, with daily forward-P/E history' },
+        ]},
+      ],
+    },
+
+    'equity:pe': {
+      label: 'Equity Valuation - P/E',
+      groups: [
+        { links: [
+          { id: 'pe-overview', label: 'P/E Multiples', href: '/core/equity/pe/', meta: 'S&P 500 & Nasdaq-100, sortable & groupable, click for 5y P/E chart and detail panel' },
+        ]},
       ],
     },
 
@@ -170,7 +182,7 @@
       title: 'Equity / Markets',
       pill: 'Live',
       pages: 'equity',
-      include: ['equity:plug'],   // shows Plug pages as a sub-group
+      include: ['equity:plug', 'equity:pe'],   // splice Plug Power + P/E Multiples sub-groups
       open: true,
     },
     {

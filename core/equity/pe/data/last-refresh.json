@@ -1,0 +1,12 @@
+{
+  "refreshed_at": "2026-05-10T15:02:50.908734Z",
+  "refreshed_at_human": "Sun May 10 2026 15:02 UTC",
+  "next_refresh_at": "2026-05-17T14:00:00Z",
+  "next_refresh_at_human": "Sun May 17 2026 14:00 UTC",
+  "universe": 516,
+  "sp500": 503,
+  "nasdaq100": 101,
+  "series_count": 514,
+  "snapshot_count": 1,
+  "latest_snapshot": "2026-05-10"
+}

@@ -1,0 +1,155 @@
+{
+  "weekOf": "2026-04-24",
+  "tiles": [
+    { "id": "MORTGAGE30US", "label": "30Y Mortgage Rate", "unit": "%",       "transform": "level",   "fallback": { "value": 6.23,  "delta": "▼ 7 bps w/w · ▼ 58 bps y/y", "deltaDir": "down", "asOf": "2026-04-23 · Freddie Mac" } },
+    { "id": "HOUST",        "label": "Housing Starts",   "unit": "K SAAR",  "transform": "level",   "fallback": { "value": 1487,  "delta": "▲ 9.5% y/y (Jan)",          "deltaDir": "up",   "asOf": "Jan 2026 · Census" } },
+    { "id": "EXHOSLUSM495S","label": "Existing Home Sales","unit": "K SAAR","transform": "level",   "fallback": { "value": 3980,  "delta": "▼ 3.6% m/m · ▼ 1.0% y/y",   "deltaDir": "down", "asOf": "Mar 2026 · NAR" } },
+    { "id": "UMCSENT",      "label": "UMich Sentiment",  "unit": "",        "transform": "level",   "fallback": { "value": 91.8,  "delta": "Mar 2026 (proxy for Conf Bd)","deltaDir": "neutral","asOf": "March · UMich (Conf Bd Apr 28)" } },
+    { "id": "WPU081",       "label": "Lumber & Wood PPI","unit": "idx",     "transform": "yoy_pct", "fallback": { "value": null,  "delta": "Spot ~$580/mbf · 1-mo low", "deltaDir": "down", "asOf": "PPI: BLS · spot: CME" } }
+  ],
+  "subject": {
+    "ticker": "HD",
+    "name": "The Home Depot",
+    "sector": "Consumer Discretionary · Home Improvement Retail",
+    "rationale": "Single most macro-sensitive large-cap consumer discretionary read this week: housing-cycle indicators softened across the board (NAHB HMI -4 to 34, lowest since Sep 2025; existing home sales -3.6% m/m to 3.98M SAAR), an April 2 Section 232 proclamation modified steel/aluminum/copper tariffs effective April 6, and Lowe's FY26 guide of 7-9% sales growth versus HD's 2.5-4.5% raises a direct competitive read."
+  },
+  "items": [
+    {
+      "rank": 1,
+      "theme": "Macro & Housing",
+      "headline": "NAHB builder confidence drops 4 points to 34 in April — lowest since September 2025",
+      "source": "NAHB / Wells Fargo",
+      "date": "2026-04-15",
+      "url": "https://www.nahb.org/news-and-economics/press-releases/2026/04/builder-sentiment-posts-notable-decline-on-economic-uncertainty",
+      "soWhat": "Single-family builder sentiment fell across all four Census regions (West -5, Midwest -7). Future-sales sub-index fell 7 points; traffic of prospective buyers fell to 22. 36% of builders cut prices; 60% used sales incentives for the 13th consecutive month.",
+      "lenses": ["Demand", "Competitive", "Macro"],
+      "drilldown": "The 4-point decline is notable in magnitude — three-quarters of it came from the forward-looking 'future sales' sub-index (-7 points), suggesting builders expect softness to extend into summer rather than a one-month print. Regional dispersion matters: the Midwest and West drops are sharpest, and those regions skew more single-family-permit-heavy than the Northeast/South. Implication: Pro-side big-ticket demand tied to single-family new construction (framing lumber, millwork, HVAC rough-in, electrical) faces continued drag, consistent with HD's FY26 guidance language that housing demand pressures persist through the year. The 60%-incentives reading is consistent with builders burning through existing inventory rather than breaking ground on new spec homes — meaning channel fill for Pro decelerates even if finished-home R&R demand holds up better."
+    },
+    {
+      "rank": 2,
+      "theme": "Macro & Housing",
+      "headline": "30-year fixed mortgage rate falls to 6.23% — lowest spring level in three years",
+      "source": "Freddie Mac PMMS",
+      "date": "2026-04-23",
+      "url": "https://www.freddiemac.com/pmms",
+      "soWhat": "30-yr FRM fell 7 bps week-on-week (6.30% prior) and 58 bps below the year-ago reading of 6.81%. Freddie framed it as the lowest spring-buying-season level in three years.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "Mortgage rates remain the single most important macro input to the home-improvement demand stack. Each 50 bps move in the 30-yr rate changes affordability roughly 5%. At 6.23% and trending down, the level is incrementally supportive — but builder sentiment (item #1) suggests supply-side response is lagging, consistent with a scenario where existing-home turnover is the primary beneficiary. Existing-home sales correlate with 'move-in/move-out' project spend at home-improvement retailers (paint, flooring, appliances, kitchen/bath). Offset: affordability still gated by home prices, up 1.4% y/y per NAR (median $408,800 in March)."
+    },
+    {
+      "rank": 3,
+      "theme": "Macro & Housing",
+      "headline": "Existing-home sales fell 3.6% in March to 3.98M SAAR — first sub-4M print since fall 2025",
+      "source": "National Association of Realtors",
+      "date": "2026-04-13",
+      "url": "https://www.nar.realtor/newsroom/nar-existing-home-sales-report-shows-3-6-decrease-in-march",
+      "soWhat": "March existing-home sales slipped to 3.98M SAAR, -3.6% m/m from 4.13M and -1.0% y/y. Median price $408,800 (+1.4% y/y). Months of supply moved up to 4.1 from 3.8.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "March opens the spring selling season, so a soft number sets a worse baseline than February. The supply build (4.1 months) is the most material under-the-hood read — inventory loosening with flat-to-down sales is the signature of a market where sellers are re-engaging faster than buyers. That dynamic historically correlates with stretched days-on-market and increased concession activity, both of which drive repair/staging spend that flows to home-improvement retail via Pro flippers and DIY sellers. Watch April data (releases 2026-05-11) to confirm whether March was a noise print or the start of a spring that under-delivers versus consensus."
+    },
+    {
+      "rank": 4,
+      "theme": "Macro & Housing",
+      "headline": "Census housing starts release delayed — February and March prints land combined on April 29",
+      "source": "U.S. Census Bureau / HUD",
+      "date": "2026-04-24",
+      "url": "https://www.census.gov/construction/nrc/",
+      "soWhat": "Normal monthly release cadence has slipped: Feb data (scheduled 3/17) and March data (scheduled 4/17) consolidated into a 4/29 release. Latest on-record data remains January (1.487M SAAR).",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "A delayed-release backlog is an informational gap rather than a market event, but it materially affects how to read this week's NAHB HMI drop (item #1). Without Feb/Mar starts, we cannot confirm whether builder sentiment is leading the actual pull-back or coincident with it. Treat April 29 as the highest-materiality data event on the watchlist. A combined print below 1.4M SAAR confirms a Q1 starts deceleration; above 1.45M reads the NAHB drop as confidence softening rather than activity."
+    },
+    {
+      "rank": 5,
+      "theme": "Policy & Tariffs",
+      "headline": "Section 232 proclamation modifies steel, aluminum, copper tariffs — effective April 6",
+      "source": "Trade Compliance Resource Hub",
+      "date": "2026-04-02",
+      "url": "https://www.tradecomplianceresourcehub.com/2026/04/19/trump-2-0-tariff-tracker/",
+      "soWhat": "April 2 proclamation tightens Section 232 on steel, aluminum, and copper — simplifies derivative-product treatment to a flat (but lower) tariff and ensures tariffs reflect full imported-metal value. Direct relevance to home-improvement cost stack: appliances, HVAC, electrical, hardware SKUs carry meaningful metals content.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "The 'simplified to flat but lower' framing is the key detail. If the final product schedule validates a meaningfully lower effective rate on derivative products versus the prior content-based calculation, the proclamation is a modest net positive for appliance and HVAC cost structure — opposite of the headline framing. Need to see the final product-level rate schedule to size impact. HD's public stance that 'tariff pricing actions are mostly done' at ~3% SKU-level impact suggests management has already passed through expected cost increases; a modestly lower derivative-tariff regime could create unlevered margin benefit versus plan. Competitive read: Lowe's, with heavier big-ticket appliance mix, has similar or slightly higher exposure."
+    },
+    {
+      "rank": 6,
+      "theme": "Policy & Tariffs",
+      "headline": "Effective China tariff rate near 30% — many home-goods categories cumulatively above 100%",
+      "source": "Trade Compliance Resource Hub",
+      "date": "2026-04-22",
+      "url": "https://www.tradecomplianceresourcehub.com/2026/04/19/trump-2-0-tariff-tracker/",
+      "soWhat": "Published rates on Chinese imports range from 25% to 100%+ on specific categories. Effective average rate on Chinese imports sits near 30%; for home furnishings, kitchen appliances, and decor the cumulative stack routinely exceeds 100%.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "The 30% effective average understates a bimodal distribution — some categories near zero (domestic-sourced or allied-country), others stacked past 100%. For HD specifically, the categories with highest residual China exposure are likely small decor, select power tools, holiday/seasonal, and certain fixture sub-segments. Hardline appliances carry more Mexico/Korea exposure than China, moderating big-ticket impact. HD's disclosed >50% domestic sourcing insulates the majority of the assortment. Risk case is further escalation on residual China-exposed categories, which would test sourcing flexibility."
+    },
+    {
+      "rank": 7,
+      "theme": "Category & Supply",
+      "headline": "Lumber futures near one-month low at ~$580 per mbf as building demand weakens",
+      "source": "CME / market reports",
+      "date": "2026-04-24",
+      "url": "https://www.cmegroup.com/markets/agriculture/lumber-and-softs/lumber.quotes.html",
+      "soWhat": "Lumber futures trading in the high-$570s to mid-$580s per mbf, well below the 52-week high near $699 and closer to the low end (~$496). Reporting cites high rates and falling home construction crushing demand faster than sawmills can cut supply.",
+      "lenses": ["Category", "Margin"],
+      "drilldown": "Lumber's soft level is consistent with the NAHB HMI drop (item #1) and NAR existing-sales weakness (item #3) — coherent demand-side signal, not a supply-side oversupply shock. Lumber is cyclically leading; a sustained level under $600 historically correlates with a 1-2 quarter lag to lower framing-category comp sales at home-improvement retailers. LBM (lumber and building materials) is a low-margin, high-velocity category that signals project activity more than it drives profit. Persistently soft lumber is bearish for Pro project starts. Offset: LBM deflation can help DIY project affordability at the margin, but the Pro-heavy mix means net read is negative-neutral."
+    },
+    {
+      "rank": 8,
+      "theme": "Category & Supply",
+      "headline": "Steel and aluminum tariffs press on appliance and HVAC cost stack",
+      "source": "PBS News / AGC trade press",
+      "date": "2026-04-22",
+      "url": "https://www.pbs.org/newshour/politics/tariffs-on-lumber-appliances-set-stage-for-higher-costs-on-new-homes-and-remodeling-projects",
+      "soWhat": "Coverage of the April 2 Section 232 modifications flags cascading effects on construction costs, appliance prices, and home decor. AGC tariff-resource commentary cites material-cost pressure as a growing contributor to builder caution.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "This item is the 'so-what' for items #5 and #1 viewed together: tariff-driven cost pressure is showing up in builder confidence surveys and trade-press commentary. For HD specifically, the math is: the 3% SKU-price-impact disclosure from management is an average, not a distribution — appliance mix sits at the harder-hit end. Watch Q1 gross-margin commentary to address this directly. Gross-margin guidance of ~33.1% for FY26 is down modestly versus prior years; if Q1 prints show further erosion on appliances or installed-services, the full-year math may compress."
+    },
+    {
+      "rank": 9,
+      "theme": "Competitive",
+      "headline": "Lowe's FY26 guidance 7-9% sales growth vs HD 2.5-4.5% — supported by FBM + ADG acquisitions",
+      "source": "Yahoo Finance / TheStreet competitive coverage",
+      "date": "2026-04-15",
+      "url": "https://www.thestreet.com/retail/lowes-quietly-edges-past-home-depot-in-battle-for-shoppers",
+      "soWhat": "Lowe's is guiding 7-9% total sales growth for FY26 vs HD at 2.5-4.5%. The delta is largely acquisition-driven: Lowe's closed the $8.8B Foundation Building Materials deal in October 2025 and completed the ~$1.31B Artisan Design Group acquisition. HD's analogous move was GMS; the SRS network now spans 1,250+ locations.",
+      "lenses": ["Competitive", "Demand"],
+      "drilldown": "The optical gap in guidance is mostly inorganic — strip out FBM/ADG contributions and Lowe's organic guide is closer to HD's. However, the acquisitions position Lowe's structurally differently: FBM adds meaningful direct-to-builder distribution that HD replicates via SRS/GMS but with different gross-margin geometry. Real comparison is underlying comp-sales guide: Lowe's FY26 comp at +1.3% (from Q4 beat) vs HD's flat-to-+2% assumes similar demand environment. Watch Q1 calls for: (i) HD commentary on SRS+GMS segment disclosure to build a like-for-like Pro-distribution view against Lowe's FBM+ADG, and (ii) any SRS/GMS comp-sales metric — first clean read of HD's Pro-distribution consolidation."
+    },
+    {
+      "rank": 10,
+      "theme": "Competitive",
+      "headline": "Lowe's Mylow AI advisor + Pro loyalty relaunch vs HD warehouse-automation acquisition",
+      "source": "The Motley Fool",
+      "date": "2026-03-04",
+      "url": "https://www.fool.com/investing/2026/03/04/home-depot-vs-lowes-both-retail-giants-are-tapping/",
+      "soWhat": "Lowe's rolled out the Mylow AI shopping advisor and relaunched Pro loyalty; HD acquired a warehouse-automation firm to speed item picking. Both deploying capital into tech against different parts of the value chain — Lowe's customer-facing digital, HD supply-chain throughput.",
+      "lenses": ["Competitive", "Margin"],
+      "drilldown": "Lowe's has historically under-indexed on Pro — Mylow + Pro loyalty relaunch is an attempt to build conversion and repeat-rate tools. HD has historically owned the Pro relationship; warehouse automation addresses the other side of Pro economics (fill rate, shrink, labor leverage). Both defensible, but solving different problems. Automation capex strengthens HD's existing structural Pro advantage rather than chasing a new customer segment — quieter, lower-narrative-risk than Lowe's customer-facing AI bet, and over 2-3 years should show up in incremental margin rather than topline acceleration. Material competitive risk case: if Mylow converts DIY traffic at meaningful scale, HD's DIY comp faces a new headwind that pure Pro supply-chain investments do not address."
+    }
+  ],
+  "watchlist": [
+    {
+      "date": "Mon Apr 28",
+      "event": "Conference Board Consumer Confidence (April)",
+      "why": "March printed 91.8 (+0.8 m/m) with expectations-index commentary flagging tariff passthrough and oil-price worries. A weak April reading would validate the NAHB HMI signal on demand softening."
+    },
+    {
+      "date": "Tue Apr 29",
+      "event": "Housing Starts — Feb & March combined release (Census)",
+      "why": "Highest-materiality data event of the week. Jan was 1.487M SAAR. Print below 1.4M would confirm a Q1 decel in starts; above 1.45M reads the NAHB drop as sentiment, not activity."
+    },
+    {
+      "date": "Wed Apr 30",
+      "event": "Q1 GDP advance estimate (BEA)",
+      "why": "First look at Q1 growth. Tariff-related goods-imports distortion likely inflates the headline; focus on PCE and residential fixed investment sub-components, where home-improvement demand sits."
+    },
+    {
+      "date": "Thu May 1",
+      "event": "ISM Manufacturing PMI (April)",
+      "why": "Secondary macro read. A sustained sub-50 print continues to signal broad goods-economy softness that correlates with big-ticket deferral."
+    },
+    {
+      "date": "Fri May 2",
+      "event": "April Employment Report (BLS)",
+      "why": "Labor-market health is the main insulator against a deeper housing-turnover pullback — weakness here would compound housing-demand concerns."
+    }
+  ]
+}

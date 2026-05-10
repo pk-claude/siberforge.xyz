@@ -1,0 +1,40 @@
+name: snapshot-equity-pe
+
+on:
+  schedule:
+    - cron: '30 21 * * 1-5'  # Mon-Fri 21:30 UTC = 17:30 ET (post-close)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install deps
+        run: npm install --no-audit --no-fund
+
+      - name: Snapshot today's forward P/E
+        run: node scripts/snapshot-equity-pe.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "siberforge-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add -A core/equity/pe/snapshots core/equity/pe/data/last-refresh.json
+          if git diff --staged --quiet; then
+            echo "No changes."
+          else
+            git commit -m "data: daily equity-pe snapshot $(date -u +%F)"
+            git push
+          fi

@@ -1,0 +1,155 @@
+{
+  "weekOf": "2026-05-01",
+  "tiles": [
+    { "id": "MORTGAGE30US", "label": "30Y Mortgage Rate", "unit": "%",       "transform": "level",   "fallback": { "value": 6.30,  "delta": "▲ 7 bps w/w · ▼ 46 bps y/y", "deltaDir": "up", "asOf": "2026-04-30 · Freddie Mac" } },
+    { "id": "HOUST",        "label": "Housing Starts",   "unit": "K SAAR",  "transform": "level",   "fallback": { "value": 1502,  "delta": "▲ 10.8% m/m (Mar)",          "deltaDir": "up",   "asOf": "Mar 2026 · Census" } },
+    { "id": "EXHOSLUSM495S","label": "Existing Home Sales","unit": "K SAAR","transform": "level",   "fallback": { "value": 3980,  "delta": "▼ 3.6% m/m · ▼ 1.0% y/y",   "deltaDir": "down", "asOf": "Mar 2026 · NAR" } },
+    { "id": "UMCSENT",      "label": "UMich Sentiment",  "unit": "",        "transform": "level",   "fallback": { "value": 49.8,  "delta": "Apr 2026 (near historic low)","deltaDir": "down","asOf": "April · UMich" } },
+    { "id": "WPU081",       "label": "Lumber & Wood PPI","unit": "idx",     "transform": "yoy_pct", "fallback": { "value": null,  "delta": "Spot ~$572.53/mbf · down 4% m/o", "deltaDir": "down", "asOf": "PPI: BLS · spot: CME (May 1)" } }
+  ],
+  "subject": {
+    "ticker": "FND",
+    "name": "Floor & Décor Holdings",
+    "sector": "Consumer Discretionary · Specialty Retail · Home Improvement",
+    "rationale": "FND reported Q1 2026 earnings with comp sales decline of -3.7% and lowered full-year FY26 guidance ($4.77-4.90B vs $4.98B consensus), signaling discretionary-demand deterioration in high-ticket home improvement. Flooring and décor are directly correlated to housing turnover, remodeling activity, and consumer confidence. Rotation from last week's HD. Macro tailwinds (mortgage rates, housing starts) do not offset demand headwinds (existing-home sales weakness, sentiment collapse, discretionary deferral)."
+  },
+  "items": [
+    {
+      "rank": 1,
+      "theme": "Macro & Housing",
+      "headline": "Floor & Décor Q1 2026 earnings: comp sales -3.7%, guidance reduced to $4.77-4.90B vs $4.98B consensus",
+      "source": "Floor & Décor Investor Relations / Motley Fool",
+      "date": "2026-04-30",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/05/01/floor-decor-fnd-q1-2026-earnings-transcript/",
+      "soWhat": "Q1 revenue declined 0.7% YoY to $1.152B with comparable store sales falling 3.7%. Management now expects full-year comp sales to decline ~4%, a shift from prior guidance. Margins compressed as demand deterioration outpaced pricing actions.",
+      "lenses": ["Demand", "Category"],
+      "drilldown": "The -3.7% comp in a high-ticket flooring and décor category is a canary signal for housing-linked discretionary spending. Flooring purchase correlates with existing-home sales turnover ('move-in' remodel spend) and renovation cycles tied to housing wealth and rate environment. The revised FY26 comp guidance (-4% vs prior flat-ish) suggests management is modeling persistent consumer caution rather than demand recovery into Q2-Q3. Store-count remained flat (at ~200 locations) with new-store productivity not offsetting existing-store weakness. For the broader home-improvement sector, this reads as a demand-side brake rather than supply/availability issue — consistent with the existing-home sales weakness (March -3.6% m/m, -1.0% y/y) that would typically feed flooring replacement and refresh cycles."
+    },
+    {
+      "rank": 2,
+      "theme": "Macro & Housing",
+      "headline": "University of Michigan consumer sentiment collapses to April 49.8 — near-historic low",
+      "source": "University of Michigan Surveys of Consumers",
+      "date": "2026-04-28",
+      "url": "https://fred.stlouisfed.org/series/UMCSENT",
+      "soWhat": "UMich sentiment revised up to 49.8 in April from initial 47.6, but remains near all-time lows (pre-COVID range 85-100+). Year-ahead inflation expectations jumped to 4.7% from 3.8% — the largest one-month surge since April 2025. Sentiment declined across all demographic cohorts.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "A sub-50 print on the UMich index is a demand-intensity warning. The index's inflation-expectations sub-component spiking to 4.7% suggests consumer anxiety about real purchasing power — a headwind to big-ticket discretionary spending (appliances, flooring, kitchen/bath). The breadth of weakness (all demographics) rules out a sector-specific or income-bracket story. For discretionary retailers like FND, this sentiment level correlates with deferred purchases, longer sales cycles, and increased promotional activity to move inventory. The divergence between UMich (49.8) and the April employment report (still healthy on headline) suggests labor-market resilience is not yet offsetting inflation-driven sentiment deterioration. Watch for May jobs data and Conference Board sentiment (releases May 28) to confirm trajectory."
+    },
+    {
+      "rank": 3,
+      "theme": "Macro & Housing",
+      "headline": "Existing-home sales fell 3.6% m/m in March to 3.98M SAAR — turnover softness threatens remodel spend",
+      "source": "National Association of Realtors",
+      "date": "2026-04-13",
+      "url": "https://www.nar.realtor/newsroom/nar-existing-home-sales-report-shows-3-6-decrease-in-march",
+      "soWhat": "March existing-home sales slipped to 3.98M SAAR (-3.6% m/m from 4.13M, -1.0% y/y). Median price $408,800 (+1.4% y/y). Months of supply ticked up to 4.1 from 3.8, signaling inventory loosening.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "Existing-home turnover is the primary demand driver for flooring, tile, and home décor categories. Each basis point of turnover decline translates to fewer 'move-in' project spends (paint, flooring, kitchen/bath, appliances). March's -3.6% m/m is particularly painful because it opens spring selling season with a weak baseline. The 4.1-month supply read (up from 3.8) is the key detail: inventory loosening + flat-to-down sales = longer days-on-market and increased seller concessions. Historically, this dynamic drives 'moving-prep' spending (staging, repairs, cosmetic refresh) which flows to FND and discount décor. Paradoxically, improved affordability (mortgage rates down y/y) is not translating to transaction volume — consistent with a consumer-sentiment constraint (see item #2) rather than a rate-driven affordability wall. April existing-home sales (release date May 11) is the next key data point to confirm whether March was noise or a spring-season miss."
+    },
+    {
+      "rank": 4,
+      "theme": "Macro & Housing",
+      "headline": "Mortgage rates rise to 6.30% as of April 30 — week-on-week headwind to refinancing activity",
+      "source": "Freddie Mac PMMS",
+      "date": "2026-04-30",
+      "url": "https://www.freddiemac.com/pmms",
+      "soWhat": "30-yr fixed rate moved up 7 bps to 6.30% on Apr 30, reversing a three-week decline. Year-ago level was 6.76%, so the YTD trend remains supportive. Weekly volatility on rate path adds duration uncertainty for home-improvement purchase timing.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "The 7 bps w/w move is minor in isolation, but the direction matters for refinance activity timing. Homeowners considering rate-lock or project timing (roof, major appliances, kitchen remodel) become more rate-sensitive in the 6.2-6.4% range. The 46 bps y/y decline (from 6.76%) is supportive for new-home and refinance-driven activity, but the week's uptick suggests Fed-rate expectations may be pricing in stickier inflation than prior week (consistent with CPI and UMich data). For FND, the rate path matters less directly than it does for HD (mortgage demand → housing starts → lumbering), but rate volatility does pressure remodel-cycle timing and consumer discretionary confidence. Monitor the 10-yr yield and FOMC expectations (next meeting May 31)."
+    },
+    {
+      "rank": 5,
+      "theme": "Policy & Tariffs",
+      "headline": "Canadian softwood lumber tariff duties modified: antidumping cut 20.6%→10.7% but total duties remain ~36%",
+      "source": "Trade Compliance Resource Hub",
+      "date": "2026-04-28",
+      "url": "https://www.tradecomplianceresourcehub.com/2026/04/19/trump-2-0-tariff-tracker/",
+      "soWhat": "April 28 update: antidumping duty on Canadian softwood reduced to 10.7% from 20.6%, with countervailing duty held at 14.2%. Combined with existing 10% Section 232 tariff, total effective duties on Canadian imports remain ~35-36% once modifications take effect.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "The antidumping cut to 10.7% suggests trade negotiation progress with Canada, but the total tariff stack (Section 232 + CVD + AD) remains a structural cost headwind for lumber and building materials. For FND, lumber exposure is modest (flooring is primarily hardwood and laminate, not dimension lumber), but related tariff impacts on materials (adhesives, fasteners, packaging) are relevant. The tariff environment remains unpredictable; further escalation on China-sourced décor items (item #6) poses greater risk to FND gross margins than lumber tariffs."
+    },
+    {
+      "rank": 6,
+      "theme": "Policy & Tariffs",
+      "headline": "Inflation persistence: CPI March +0.9% m/m, 3.3% y/y — décor import costs remain under pressure",
+      "source": "U.S. Bureau of Labor Statistics",
+      "date": "2026-04-10",
+      "url": "https://www.bls.gov/news.release/cpi.nr0.htm",
+      "soWhat": "CPI headline March printed +0.9% m/m (0.3% expected), 3.3% y/y. Core CPI +0.4% m/m. Apparel and home furnishings sub-components remain sticky despite tariff pass-through activity in prior months.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "The 0.9% m/m CPI beat suggests stickier-than-expected goods inflation. Home furnishings and décor items (many China-sourced) face cumulative tariffs now exceeding 30-100%+ depending on sub-category, and import-cost pass-through remains incomplete. For FND, the inflation signal translates to: (1) already-compressed gross margins as promotional activity offsets list-price increases, (2) consumer price sensitivity (consistent with weak sentiment, item #2), and (3) sourcing challenges as higher-cost imports incentivize domestic and allied-country sourcing switches. Management's -3.7% comp and lowered guidance likely reflect the combination of tariff cost-burden and consumer demand resistance to price increases."
+    },
+    {
+      "rank": 7,
+      "theme": "Category & Supply",
+      "headline": "Lumber spot prices $572.53/mbf on May 1 — down 4% over month despite tariff and demand signals",
+      "source": "CME Group / market data",
+      "date": "2026-05-01",
+      "url": "https://www.cmegroup.com/markets/agriculture/lumber-and-softs/lumber.quotes.html",
+      "soWhat": "Lumber traded at $572.53/mbf on May 1, down 4.02% over the past month but up 4.28% y/y. The price level remains well below the 52-week high of $698.50 and closer to the 52-week low of $496. Supply glut signal despite tariff escalation.",
+      "lenses": ["Category", "Margin"],
+      "drilldown": "Soft lumber prices are a consistent demand-weakness signal across housing/building materials. The 4% 1-month decline is notable because it persists despite tariff noise and supply-side concerns — suggests demand destruction (housing starts, builder activity, residential construction) is outpacing any tariff-driven supply disruption. For FND, lumber exposure is indirect (flooring is not lumber-intensive), but the price signal validates the broader housing-sector softness visible in NAHB sentiment (April 34, down 4) and existing-home sales (March -3.6% m/m). A sustained sub-$600 level historically precedes 1-2 quarter lags in lower framing-category comps at big-box retailers. FND's category mix (hardwood, laminate, tile, décor) is more insulated than HD, but the demand signal is still material."
+    },
+    {
+      "rank": 8,
+      "theme": "Category & Supply",
+      "headline": "Home builder sentiment NAHB HMI April 34, down 4 points — lowest since September 2025",
+      "source": "NAHB / Wells Fargo",
+      "date": "2026-04-15",
+      "url": "https://www.nahb.org/news-and-economics/press-releases/2026/04/builder-sentiment-posts-notable-decline-on-economic-uncertainty",
+      "soWhat": "NAHB HMI fell 4 points to 34 in April (lowest since Sep 2025). Future-sales sub-index down 7 points. Buyer traffic fell to 22. 36% of builders cut prices; 60% used sales incentives for 13th consecutive month.",
+      "lenses": ["Demand", "Competitive"],
+      "drilldown": "Builder sentiment is a leading indicator for new construction — and new construction is a smaller but material source of flooring and décor demand (model-home updates, spec-home staging, builder-incentive packages). The 4-point HMI drop is notable because three-quarters came from the forward-sales sub-index, signaling builders expect softness to persist into summer. The 60%-incentives reading suggests inventory burn rather than new-spec starts, which depresses Pro-channel demand for raw materials. For FND, the builder-sentiment deterioration is less direct than for HD (which has meaningful Pro business), but it signals contractor and GC purchasing caution that cascades into discretionary category weakness. The April HMI reading preceded Q1 earnings reports, so it's consistent with observed comp-sales declines at discretionary retailers."
+    },
+    {
+      "rank": 9,
+      "theme": "Competitive",
+      "headline": "Target Q1 traffic improves but analyst divergence: Goldman downgrade vs. improving foot traffic",
+      "source": "Goldman Sachs / TheStreet / Target Inc.",
+      "date": "2026-04-28",
+      "url": "https://www.thestreet.com/investing/goldman-sachs-has-stark-message-on-target-stock",
+      "soWhat": "Target posted store traffic gains in Feb (+6.9%), Mar (+6.4%), and Apr-YTD (+4.8%). Goldman Sachs issued $112 price target (13.4% downside) on 4/28. Bernstein maintains Sell. Parke collection sold out in first 48 hours but consumer sentiment about the brand remains mixed.",
+      "lenses": ["Competitive", "Demand"],
+      "drilldown": "Target's traffic recovery is a bright spot in discretionary retail, but analyst divergence (upside traffic vs. downside valuation) suggests brand sentiment has not kept pace with footfall. For FND, Target is not a direct comp (apparel/home goods generalist vs. flooring specialist), but the bifurcation between traffic and sentiment is instructive: consumers are browsing more but conversion/ticket remain pressured. The Parke collection sell-out is a win for Target (limited-edition trend), but it's not indicative of base-business health. FND's comp-sales weakness (-3.7%) is more severe than Target's traffic gains suggest the category-mix should be, indicating that discretionary home categories are underperforming other discretionary segments."
+    },
+    {
+      "rank": 10,
+      "theme": "Competitive",
+      "headline": "Lowe's and Home Depot omnichannel scale advantage persists; smaller independents and specialty retail face margin pressure",
+      "source": "Industry market trends / HIRI estimates",
+      "date": "2026-04-28",
+      "url": "https://www.hiri.org/blog/navigating-home-improvement-market-insights-from-hiris-latest-size-of-market-forecast",
+      "soWhat": "Industry data confirms HD and Lowe's (combined ~$315B annual run-rate) are capturing disproportionate share of e-commerce growth, omnichannel logistics, and loyalty programs. Smaller independents and specialty retailers face margin compression and traffic pressure.",
+      "lenses": ["Competitive", "Margin"],
+      "drilldown": "FND operates with a different value proposition than big-box (specialty flooring and design-services) and is thus not in direct comp pressure with HD/Lowe's on basic products. However, the macro demand weakness (housing turnover, sentiment, builder caution) affects all home-improvement specialty players alike. FND's ability to maintain price power and margin in a softening demand environment depends on: (1) design/service differentiation vs. big-box, (2) store-count stability (FND has ~200 stores, much smaller footprint), and (3) sourcing flexibility on tariff-exposed categories. The big-box advantage (scale, procurement, logistics) is structural; FND's competitive moat is designer relationships and localized service. In a demand downturn, service-led retailers can underperform if consumers trade down to budget alternatives. Watch for any market-share signals in FND's next earnings call."
+    }
+  ],
+  "watchlist": [
+    {
+      "date": "Mon May 4",
+      "event": "ISM Services PMI (April)",
+      "why": "Complements ISM Mfg; services-sector health matters for discretionary consumer spending and employment. A sub-50 print would compound demand concerns."
+    },
+    {
+      "date": "Tue May 5",
+      "event": "Factory Orders & Durable Goods (March)",
+      "why": "Investment and industrial orders have cooled; watch for weakness in appliance/HVAC orders (upstream of retail)."
+    },
+    {
+      "date": "Wed May 6",
+      "event": "Weekly Initial Jobless Claims & Continuing Claims",
+      "why": "Labor-market weakening would validate consumer-sentiment deterioration; FND demand correlates with employment stability."
+    },
+    {
+      "date": "Thu May 7",
+      "event": "Conference Board Consumer Confidence (April)",
+      "why": "Latest read after UMich collapse (49.8). Confirms breadth of sentiment weakness and trajectory into Q2."
+    },
+    {
+      "date": "Fri May 8",
+      "event": "April Retail Sales advance estimate (Census)",
+      "why": "First read on April discretionary spending. Negative print would support FND guidance and sentiment narrative."
+    }
+  ]
+}
