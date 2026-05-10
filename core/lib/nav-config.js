@@ -182,7 +182,7 @@
       title: 'Equity / Markets',
       pill: 'Live',
       pages: 'equity',
-      include: ['equity:plug', 'equity:pe'],   // splice Plug Power + P/E Multiples sub-groups
+      include: ['equity:plug'],   // splice Plug Power sub-pages (P/E Multiples already in equity Valuation group)
       open: true,
     },
     {
