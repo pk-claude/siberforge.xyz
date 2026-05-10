@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Daily Influencers — Siberforge</title>
+<meta name="description" content="A structured intelligence brief on what moved a target name this week. Framework + live worked example, built from primary sources." />
+<link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+
+<!-- Top bar -->
+<div class="top">
+  <div class="brand">
+    <a href="/" class="home-link" title="Siberforge home" aria-label="Siberforge home">&larr;</a>
+    <span class="mark">SIBERFORGE</span>
+    <span class="sub">Daily Influencers</span>
+  </div>
+  <div class="top-right">
+    <div class="archive-picker" id="archive-picker" hidden>
+      <label class="archive-label" for="archive-select">Week:</label>
+      <select class="archive-select" id="archive-select" aria-label="Select archived week"></select>
+    </div>
+    <div class="status" id="status">
+      <span class="dot" id="status-dot"></span>
+      <span id="status-text">Loading&hellip;</span>
+    </div>
+  </div>
+</div>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero-block">
+    <span class="eyebrow">Methodology &middot; Live example</span>
+    <h1 class="page-title">Daily Influencers</h1>
+    <p class="page-sub">
+      A structured intelligence brief on what moved a target name this week. Five inference lenses
+      &mdash; demand, category, margin, competitive, macro &mdash; applied to the most macro-sensitive
+      large-cap consumer name on the calendar. Every claim cited; every macro tile pulled live from
+      <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED</a>.
+    </p>
+    <div class="hero-meta">
+      <span class="meta-pill"><span class="dot-mini"></span> 10 ranked items</span>
+      <span class="meta-pill">5 inference lenses</span>
+      <span class="meta-pill">Public sources only</span>
+    </div>
+  </section>
+
+  <!-- Five-lens framework -->
+  <section class="framework">
+    <div class="section-hdr">
+      <span class="eyebrow eyebrow-tight">Framework</span>
+      <h2>Five lenses, applied to one subject per week.</h2>
+      <p class="section-sub">
+        Each item is tagged with the lenses that actually apply &mdash; not all five every time.
+        The discipline is what separates reading the news from inferring the impact.
+      </p>
+    </div>
+
+    <div class="lens-grid">
+      <div class="lens-card lens-demand">
+        <span class="lens-tag">Demand</span>
+        <h3>Demand drivers</h3>
+        <p>Mortgage rates, housing turnover, existing home sales, consumer confidence, disposable income, employment, weather, home-equity trends. The volume side of comp.</p>
+      </div>
+      <div class="lens-card lens-category">
+        <span class="lens-tag">Category</span>
+        <h3>Category impact</h3>
+        <p>Commodity prices and end-market moves. Appliances are big-ticket, financing-sensitive. Lumber drives framing and decking. HVAC tracks weather and regulation. Seasonal tracks weather and the holiday calendar.</p>
+      </div>
+      <div class="lens-card lens-margin">
+        <span class="lens-tag">Margin</span>
+        <h3>Margin and cost</h3>
+        <p>Tariffs, freight and diesel, sourcing-country FX (CNY, MXN, INR), labor costs, SG&amp;A inflation, shrink. The unit-economics side of the print.</p>
+      </div>
+      <div class="lens-card lens-competitive">
+        <span class="lens-tag">Competitive</span>
+        <h3>Strategic / competitive</h3>
+        <p>Peer moves, channel dynamics, M&amp;A in adjacent distribution, e-commerce and last-mile, technology deployment, Pro-vs-DIY positioning relative to peers.</p>
+      </div>
+      <div class="lens-card lens-macro">
+        <span class="lens-tag">Macro</span>
+        <h3>Macro &rarr; financials</h3>
+        <p>GDP, CPI/PCE, Fed policy, the yield curve, housing wealth effect, regional dispersion, labor-market slack. The bridge from broad macro to actual financial performance.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Subject callout -->
+  <section class="subject-block">
+    <div class="subject-eyebrow">Subject &middot; Week of <span id="subject-date">April 24, 2026</span></div>
+    <div class="subject-row">
+      <div class="subject-name">
+        <h2 id="subject-title">The Home Depot <span class="ticker">(HD)</span></h2>
+        <p class="subject-sector" id="subject-sector">Consumer Discretionary &middot; Home Improvement Retail</p>
+      </div>
+      <p class="subject-rationale" id="subject-rationale">
+        Loading rationale&hellip;
+      </p>
+    </div>
+  </section>
+
+  <!-- Live macro tiles -->
+  <section class="tiles-block">
+    <div class="section-hdr">
+      <span class="eyebrow eyebrow-tight">Macro readout</span>
+      <h2>Five live indicators &mdash; the macro stack behind this week's read.</h2>
+      <p class="section-sub">
+        Pulled from the FRED API at page load. Cached at the edge for six hours; FRED publishes
+        on a fixed schedule so more-frequent polling buys nothing.
+      </p>
+    </div>
+    <div class="tiles-grid" id="tiles-grid">
+      <!-- 5 tiles rendered by influencers.js -->
+    </div>
+  </section>
+
+  <!-- Top items -->
+  <section class="items-block">
+    <div class="section-hdr">
+      <span class="eyebrow eyebrow-tight">This week's read</span>
+      <h2>Ten items that moved the read for <span id="items-subject">HD</span> this week.</h2>
+      <p class="section-sub">
+        Ranked by materiality. Tap any item to expand the deeper analysis &mdash; specific
+        category callouts, prior management commentary, directional magnitude.
+      </p>
+    </div>
+    <div class="items-content" id="items-content">
+      <!-- themed sections rendered by influencers.js -->
+    </div>
+  </section>
+
+  <!-- Watchlist -->
+  <section class="watchlist-block">
+    <div class="section-hdr">
+      <span class="eyebrow eyebrow-tight">Forward calendar</span>
+      <h2>Next five business days &mdash; what to watch.</h2>
+      <p class="section-sub">
+        Scheduled releases, policy events, and competitor earnings with a one-line read on
+        why each one matters to this week's subject.
+      </p>
+    </div>
+    <div class="watchlist-table" id="watchlist-table">
+      <!-- rendered by influencers.js -->
+    </div>
+  </section>
+
+  <!-- Methodology -->
+  <section class="methodology-block">
+    <div class="meth-hdr">
+      <span class="eyebrow eyebrow-tight">Methodology</span>
+      <h2>Editorial rules. Every claim cited.</h2>
+    </div>
+    <div class="meth-grid">
+      <div class="meth-pt">
+        <strong>Public sources only.</strong>
+        <p>Filings, press releases, government data series, primary trade press. No proprietary feeds, no insider information, no employer-endorsed views.</p>
+      </div>
+      <div class="meth-pt">
+        <strong>Citations on every quantitative claim.</strong>
+        <p>Source name and release date inline; full URL on the drill-down. If the number isn't traceable to a primary release, it isn't on the page.</p>
+      </div>
+      <div class="meth-pt">
+        <strong>Inference is hedged, not predictive.</strong>
+        <p>"Consistent with," "suggests," "a potential headwind to" &mdash; the language reflects what the data supports. No forecasts, no price targets, no trade recommendations.</p>
+      </div>
+      <div class="meth-pt">
+        <strong>Political items framed factually.</strong>
+        <p>Policy and tariff items report effective dates, covered products, and direct cost-stack implications. No partisan language; no predictions of political outcomes.</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="page-footer">
+  <span class="mark">SIBERFORGE</span>
+  <div class="meta">
+    &copy; 2026 &middot; Research from primary sources
+    <span>&middot;</span>
+    Data: FRED (St. L

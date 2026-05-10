@@ -1,0 +1,155 @@
+{
+  "weekOf": "2026-05-08",
+  "tiles": [
+    { "id": "MORTGAGE30US", "label": "30Y Mortgage Rate", "unit": "%",       "transform": "level",   "fallback": { "value": 6.37,  "delta": "▲ 7 bps w/w · ▼ 39 bps y/y", "deltaDir": "up",     "asOf": "2026-05-07 · Freddie Mac" } },
+    { "id": "HOUST",        "label": "Housing Starts",   "unit": "K SAAR",  "transform": "level",   "fallback": { "value": 1502,  "delta": "▲ 10.8% m/m (Mar)",          "deltaDir": "up",     "asOf": "Mar 2026 · Census (Apr 29)" } },
+    { "id": "EXHOSLUSM495S","label": "Existing Home Sales","unit": "K SAAR","transform": "level",   "fallback": { "value": 3980,  "delta": "▼ 3.6% m/m · ▼ 1.0% y/y",   "deltaDir": "down",   "asOf": "Mar 2026 · NAR (Apr to release May 11)" } },
+    { "id": "UMCSENT",      "label": "UMich Sentiment",  "unit": "",        "transform": "level",   "fallback": { "value": 48.2,  "delta": "▼ 1.6 pts m/m · fresh record low", "deltaDir": "down", "asOf": "May (prelim) · UMich" } },
+    { "id": "WPU081",       "label": "Lumber & Wood PPI","unit": "idx",     "transform": "yoy_pct", "fallback": { "value": null,  "delta": "Spot ~$577/mbf · ▼ 5.4% over 4 wks", "deltaDir": "down", "asOf": "PPI: BLS Mar · spot: CME (May 7)" } }
+  ],
+  "subject": {
+    "ticker": "COST",
+    "name": "Costco Wholesale Corporation",
+    "sector": "Consumer Staples · Membership Warehouse Club",
+    "rationale": "April sales +13.0% (comp +11.6%, U.S. +11.7%; +7.8% ex-fuel/FX) printed May 6 against a macro backdrop where the UMich preliminary May sentiment index hit a fresh record low at 48.2. The divergence is the most macro-sensitive consumer-channel signal of the week: warehouse-club value capture is accelerating exactly as the broader sentiment regime collapses, while Sam's Club lifted base-membership pricing to $60 effective May 1 in a parallel competitive move. Tariff regime remains in flux post-SCOTUS IEEPA strike (Feb 20) and the Section 122 10% replacement (Feb 24). Rotation from FND (week of May 1) and HD (week of Apr 24)."
+  },
+  "items": [
+    {
+      "rank": 1,
+      "theme": "Macro & Housing",
+      "headline": "Costco April sales +13.0% — U.S. comp +11.7%, total comp +11.6% with digital +18.8%",
+      "source": "Costco Wholesale Corporation",
+      "date": "2026-05-06",
+      "url": "https://investor.costco.com/news/news-details/2026/Costco-Wholesale-Corporation-Reports-April-Sales-Results/default.aspx",
+      "soWhat": "April net sales of $23.92B were up 13.0% y/y; total comparable sales rose 11.6% (U.S. 11.7%, Canada 11.5%, Other International 11.5%). Digitally-enabled sales rose 18.8%. Reported figures benefited approximately 150-200 bps from an Easter calendar shift versus the prior year.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "Stripped of fuel and foreign-exchange effects, Costco indicated total comparable sales grew approximately 7.8% in April versus 6.2% in March, with the U.S. ex-fuel/FX comp at 8.0%. The acceleration is consistent with a broader consumer trade-down read: high-frequency volume-driven club retail capturing share even as headline sentiment indices print at record-low levels (item #2). The 18.8% digital comp continues to outpace in-store and is consistent with Costco's prior-quarter commentary on app-driven traffic and same-day delivery uptake. The headline is a positive read for membership-fee renewal economics into next year, as paid-membership growth tends to lag club-traffic acceleration by one-to-two quarters."
+    },
+    {
+      "rank": 2,
+      "theme": "Macro & Housing",
+      "headline": "UMich consumer sentiment May preliminary 48.2 — fresh record low, lowest since the series' modern history",
+      "source": "University of Michigan Surveys of Consumers",
+      "date": "2026-05-08",
+      "url": "https://www.sca.isr.umich.edu/",
+      "soWhat": "May preliminary print fell 1.6 pts m/m to 48.2 from 49.8 in April. Survey commentary cited inflation concerns weighing on personal-finance and buying-conditions assessments. Year-ahead inflation-expectations sub-index has been printing well above pre-tariff baselines.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "A sub-50 print on UMich is historically rare and is structurally consistent with consumers redirecting discretionary spend toward value channels. Costco's April acceleration (item #1) is one of the cleanest reads of that dynamic this cycle — broad consumer caution coexisting with strong volume at value-oriented bulk-purchase channels. The divergence between UMich (48.2, near-record) and the Conference Board's April reading (item #4, +0.6 m/m to 92.8) reflects different sub-question weighting: UMich emphasizes inflation expectations and personal finances, the Conference Board weighs labor-market and current-conditions inputs. For Costco specifically, the income-expectations sub-component is the more directly relevant signal — high-income tier sentiment has held up better than middle-income, supporting trade-down-from-higher-end rather than purely defensive consumer behavior."
+    },
+    {
+      "rank": 3,
+      "theme": "Macro & Housing",
+      "headline": "30-year fixed mortgage rate rose 7 bps to 6.37% — first three-week back-up in months",
+      "source": "Freddie Mac PMMS",
+      "date": "2026-05-07",
+      "url": "https://www.freddiemac.com/pmms",
+      "soWhat": "Freddie Mac's PMMS 30-yr FRM moved up 7 bps w/w to 6.37%, with the year-ago reference at 6.76% (-39 bps y/y). 15-yr FRM at 5.72%, also up 8 bps w/w.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "The week-on-week back-up is small in isolation but is the second consecutive uptick after the spring lows near 6.23% in late April. Mortgage-rate path matters less to Costco's core grocery/staples comp than it does to home-improvement names, but the secondary read-through is via housing-related discretionary and durables — patio, garden, appliances, big-and-bulky furniture — which together represent a meaningful (though not majority) slice of Costco's general-merchandise mix. A sustained mortgage-rate range of 6.3-6.5% pressures move-in-related project demand, partially offsetting any benefit Costco captures from trade-down on consumables. Worth tracking against the next FOMC meeting and successor-Chair confirmation timing (item: watchlist May 15)."
+    },
+    {
+      "rank": 4,
+      "theme": "Macro & Housing",
+      "headline": "Conference Board consumer confidence April 92.8 — diverges from UMich record-low signal",
+      "source": "The Conference Board",
+      "date": "2026-04-28",
+      "url": "https://www.conference-board.org/topics/consumer-confidence/",
+      "soWhat": "Conference Board CCI rose 0.6 pts m/m to 92.8 in April, with the Present Situation Index slipping 0.3 pts to 123.8 and the Expectations Index up 1.2 pts to 72.2. Survey commentary cited oil-price volatility and Middle East developments as material concerns.",
+      "lenses": ["Demand", "Macro"],
+      "drilldown": "The Conference Board's labor-conditions-heavy methodology is producing a more constructive picture than UMich's inflation-expectations-heavy methodology (item #2). For warehouse-club retail, the labor-market signal in the Conference Board read is the more directly relevant input — Costco's customer skews toward higher-income, dual-income households whose marginal-spending decisions correlate more tightly with employment stability than with one-year-ahead inflation expectations. The 0.3-pt slip in Present Situation alongside a 1.2-pt expectations rise is consistent with consumers tolerating current conditions while feeling moderately better about the path forward. This methodology gap explains how Costco can post +13% nominal sales in a 48.2-UMich environment without the read being internally contradictory."
+    },
+    {
+      "rank": 5,
+      "theme": "Policy & Tariffs",
+      "headline": "Section 122 10% tariff regime continues post-SCOTUS IEEPA strike — replacement framework holds through summer",
+      "source": "Holland & Knight; Norton Rose Fulbright",
+      "date": "2026-02-24",
+      "url": "https://www.hklaw.com/en/insights/publications/2026/02/supreme-court-strikes-down-ieepa-tariffs",
+      "soWhat": "Following the U.S. Supreme Court's 6-3 February 20, 2026 ruling in Learning Resources, Inc. v. Trump invalidating IEEPA-based tariffs, the administration on February 24, 2026 issued 10% across-the-board tariffs under Section 122 of the Trade Act of 1974. Section 122 caps the duration at 150 days absent further action.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "The Section 122 mechanism has a built-in 150-day clock, which means the current regime sunsets approximately late July 2026 absent congressional action or a fresh statutory authority. For Costco, near-term cost structure remains broadly similar to the IEEPA period — most exposed categories (sporting goods, summer/seasonal, holiday décor, certain electronics) saw meaningful pull-forward purchasing in late 2025/early 2026 per management commentary. The most material near-term policy variable is the post-July expiration: a Section 232 broadening or a Section 301 escalation would reset the cost stack. Public commentary from Costco management has emphasized SKU-level rerouting toward Kirkland-equivalent domestic and allied-country sourcing rather than blanket pass-through pricing (item #6). IEEPA-period refunds remain unresolved as the SCOTUS opinion did not address the refund mechanism directly."
+    },
+    {
+      "rank": 6,
+      "theme": "Policy & Tariffs",
+      "headline": "Costco mitigation playbook: Kirkland sourcing rerouting, pulled-forward purchases, selective margin absorption",
+      "source": "Retail Dive; The Takeout; Kiplinger",
+      "date": "2026-04-28",
+      "url": "https://www.retaildive.com/news/costco-held-price-tariff-impacted-bananas-cfo-says/749775/",
+      "soWhat": "Per Costco's Q2 FY2026 earnings commentary (March 5, 2026), management has pulled forward sporting-goods and summer-seasonal purchases ahead of tariffs, rerouted high-tariff-exposed sourcing, and shifted Kirkland Signature production toward domestic and allied-country origin. Margin absorption applied selectively — bananas held flat as a traffic-driver staple; lower-traffic items repriced or de-listed.",
+      "lenses": ["Margin", "Category"],
+      "drilldown": "Costco's selective-absorption model is a competitive advantage in the current regime: the ~1,400-SKU steady assortment plus Kirkland private-label ratio (now estimated at 33%+ of in-club sales) gives the company unusual flexibility to swap out tariff-exposed inputs without disrupting the customer experience. Cherry tomatoes, fresh grapes, roasted seaweed, certain Kind Bars, and Kirkland lemonade have been cited in trade press as visibly repriced. The de-listing path — fewer artificial trees, fewer toy SKUs, narrower furniture and home décor mix in late 2025 — is the more material operating signal: Costco can elect to forgo categories where unit economics no longer fit the value proposition, rather than passing through margin-destructive prices. Class-action litigation related to IEEPA-period pricing remains pending."
+    },
+    {
+      "rank": 7,
+      "theme": "Category & Supply",
+      "headline": "Fuel pump comp tailwind continues — gas sales running well above prior-year levels",
+      "source": "Costco Q2 FY2026 earnings; The Motley Fool",
+      "date": "2026-04-13",
+      "url": "https://www.fool.com/investing/2026/04/13/higher-gas-prices-are-already-having-a-positive-im/",
+      "soWhat": "Per Q2 FY2026 commentary, Costco's gasoline sales rose roughly 25-30% y/y on a combination of price and volume — gallons pumped daily up ~10% versus prior year. Management indicated it has 'tried to either delay or minimize' price increases at the pump to preserve member-loyalty value.",
+      "lenses": ["Category", "Demand"],
+      "drilldown": "Fuel is a large-but-low-margin contributor to Costco's reported comp; the spread between reported and ex-fuel comp in April (~380 bps based on reported 11.6% total versus ex-fuel/FX 7.8%) is wide by historical standards and reflects continued elevated retail-gasoline pricing tied to crude-market volatility. The comp tailwind is a reporting effect more than a P&L effect — fuel margins are deliberately compressed to drive traffic into the warehouse — but the through-line matters: every fuel visit is an opportunity for in-club conversion. Daily-gallons-pumped growth of ~10% y/y is the cleaner read on member behavior, and is a leading indicator for the consumables/grocery comp that drives most of Costco's gross-profit dollars."
+    },
+    {
+      "rank": 8,
+      "theme": "Category & Supply",
+      "headline": "Lumber spot near $577/mbf — down 5.4% over four weeks despite tariff backdrop",
+      "source": "CME Group / Trading Economics",
+      "date": "2026-05-07",
+      "url": "https://www.cmegroup.com/markets/agriculture/lumber-and-softs/lumber.quotes.html",
+      "soWhat": "Front-month physical-lumber futures traded in a $561-$579 range, settling near $577/mbf on May 7. Past four weeks down 5.4%; 12-month change +1.5%. The 52-week range remains $496-$699.",
+      "lenses": ["Category", "Macro"],
+      "drilldown": "Lumber is a small direct exposure for Costco (the warehouse format does not stock dimensional framing in volume), but the price signal is one of the cleanest leading indicators on the broader durables and home-related discretionary cycle. Sustained sub-$600 lumber alongside softening builder sentiment (last week's NAHB HMI 34) is consistent with a 1-2 quarter lag to softer home-related discretionary mix at general retailers — patio sets, sheds, outdoor structures, certain furniture. For Costco the secondary read matters more than the primary: lumber softness is one of several inputs supporting the goods-deflation case, which moderates the year-ahead inflation-expectations spike captured in this week's UMich preliminary (item #2)."
+    },
+    {
+      "rank": 9,
+      "theme": "Competitive",
+      "headline": "Sam's Club lifts base-membership fee to $60 effective May 1 — first base-tier increase in nine years",
+      "source": "CNBC; Walmart corporate",
+      "date": "2026-04-01",
+      "url": "https://www.cnbc.com/2026/04/01/sam.html",
+      "soWhat": "Sam's Club raised its annual base membership fee by $10 to $60 (Plus tier $120, up from $110) effective May 1, 2026. Plus-tier Sam's Cash rewards cap raised to $750 from $500 per year. First base-tier increase since 2017.",
+      "lenses": ["Competitive", "Margin"],
+      "drilldown": "The Sam's Club fee increase narrows the price gap with Costco's $65 Gold Star and $130 Executive memberships, which were last raised in September 2024. The competitive read is two-sided: (i) Sam's parity-or-near-parity pricing reduces the price-discrimination wedge that Costco has historically used to anchor its value proposition, but (ii) Sam's Plus-tier rewards cap rising to $750 lowers Costco's relative cashback advantage at the upper-tier. For Costco, near-term U.S. renewal rate (most recently 92.1% in Q2 FY2026) is the primary metric to track for any softening; the historical pattern around prior fee actions (Costco's own September 2024 increase) saw renewal rates hold within 10 bps of trend. A wider read: paid-membership economics across the warehouse channel are gaining importance to overall-channel margin geometry, and the Sam's move signals that rationalization of the membership-fee model is industry-wide rather than Costco-specific."
+    },
+    {
+      "rank": 10,
+      "theme": "Social",
+      "headline": "Trade-down dynamic now described as structural — three in four consumers report shifting to cheaper brands",
+      "source": "NIQ Consumer Outlook 2026; Deloitte retail outlook",
+      "date": "2026-04-15",
+      "url": "https://nielseniq.com/global/en/insights/report/2025/consumer-outlook-guide-to-2026/",
+      "soWhat": "Industry survey data for 2026 indicates approximately 75% of consumers are trading down to cheaper brands, with retail-executive surveys showing nearly 70% view the trade-down behavior as a structural change rather than a temporary inflation response. Warehouse clubs cited as a +1 share-point omnishopper destination in U.S. data.",
+      "lenses": ["Demand", "Competitive"],
+      "drilldown": "The 'structural' framing is the editorially significant detail: survey research is moving away from cyclical-inflation explanations toward a permanent rebasing of consumer-channel preference. For Costco specifically, two implications follow: (i) the topline tailwind from trade-down is broader than a single price-shock cycle and should partially insulate revenue against a sentiment-driven discretionary-spend pullback, and (ii) the upgrade path from Gold Star to Executive membership becomes more important — once trading-down households convert to a paid Costco relationship, executive-tier upgrade is the highest-incremental-margin lever available to the company. Watch the Costco Q3 FY2026 earnings call (late May) for any commentary on Executive-tier penetration, which the company has historically guided in mid-40% range. Caveat: the trade-down narrative is concentrated in self-reported survey data, not yet directly observable in transaction-level scanner data with the same magnitude."
+    }
+  ],
+  "watchlist": [
+    {
+      "date": "Mon May 11",
+      "event": "NAR Existing Home Sales (April)",
+      "why": "First read on April housing turnover after March's 3.98M SAAR (-3.6% m/m). Turnover is the upstream driver of move-in-related discretionary spend that flows partially to warehouse channels via furnishings, organization, and seasonal mix."
+    },
+    {
+      "date": "Tue May 12",
+      "event": "BLS CPI (April)",
+      "why": "Headline and core inflation prints frame the next FOMC step and the UMich inflation-expectations narrative. A hot core print would extend the high-rate environment that supports the value-channel trade-down dynamic; a soft print does the opposite."
+    },
+    {
+      "date": "Wed May 13",
+      "event": "BLS PPI (April) — including WPU081 lumber & wood",
+      "why": "Wholesale-cost read directly into goods-margin geometry across mass and warehouse retail. The lumber & wood sub-index is the cleanest lead on home-related discretionary cost stack."
+    },
+    {
+      "date": "Thu May 14",
+      "event": "Census Advance Monthly Retail Sales (April)",
+      "why": "First broad public read on April retail. Warehouse-club category is reported separately within the 'general merchandise' line — read alongside Costco's already-released April number for cross-channel context."
+    },
+    {
+      "date": "Fri May 15",
+      "event": "Powell Fed Chair term ends; Empire State Manufacturing (May); Industrial Production",
+      "why": "Powell's chairmanship expires; Kevin Warsh's Senate confirmation has cleared committee (13-11) and is expected to seat before May 15. Macro-policy uncertainty premium is highest the week after a chair transition; warehouse-channel trade-down behavior tends to intensify in such periods."
+    }
+  ]
+}
