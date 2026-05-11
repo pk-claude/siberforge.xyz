@@ -1,4 +1,4 @@
-# Warehousing & Storage Employment  source=fred  generated=2026-05-04T12:11:42.282Z
+# Warehousing & Storage Employment  source=fred  generated=2026-05-11T16:17:27.212Z
 date,value
 2010-01-01,629.2
 2010-02-01,628.9
@@ -193,5 +193,6 @@ date,value
 2025-11-01,1842
 2025-12-01,1836.2
 2026-01-01,1830.4
-2026-02-01,1831.5
-2026-03-01,1830.6
+2026-02-01,1831.1
+2026-03-01,1830.2
+2026-04-01,1830.7

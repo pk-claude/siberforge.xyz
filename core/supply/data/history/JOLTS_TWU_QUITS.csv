@@ -1,4 +1,4 @@
-# JOLTS: TWU Quits Rate  source=fred  generated=2026-05-04T12:11:42.283Z
+# JOLTS: TWU Quits Rate  source=fred  generated=2026-05-11T16:17:27.213Z
 date,value
 2010-01-01,0.9
 2010-02-01,0.9
@@ -193,4 +193,5 @@ date,value
 2025-11-01,2.5
 2025-12-01,2.3
 2026-01-01,1.8
-2026-02-01,1.8
+2026-02-01,1.9
+2026-03-01,2.1

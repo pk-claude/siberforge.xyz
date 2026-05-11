@@ -1,4 +1,4 @@
-# Manufacturing Construction Spending  source=fred  generated=2026-05-04T12:11:42.289Z
+# Manufacturing Construction Spending  source=fred  generated=2026-05-11T16:17:27.219Z
 date,value
 2010-01-01,45540
 2010-02-01,45685
@@ -191,5 +191,7 @@ date,value
 2025-09-01,215586
 2025-10-01,212374
 2025-11-01,206109
-2025-12-01,200262
-2026-01-01,196166
+2025-12-01,199458
+2026-01-01,195326
+2026-02-01,192168
+2026-03-01,190071

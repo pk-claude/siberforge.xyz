@@ -1,4 +1,4 @@
-# Trade & Transp/Warehouse Avg Hourly Earnings  source=fred  generated=2026-05-04T12:11:42.281Z
+# Trade & Transp/Warehouse Avg Hourly Earnings  source=fred  generated=2026-05-11T16:17:27.211Z
 date,value
 2010-01-01,19.05
 2010-02-01,19.11
@@ -193,5 +193,6 @@ date,value
 2025-11-01,30.87
 2025-12-01,30.69
 2026-01-01,30.84
-2026-02-01,30.91
-2026-03-01,31.14
+2026-02-01,30.85
+2026-03-01,31.05
+2026-04-01,31.02

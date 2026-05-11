@@ -1,4 +1,4 @@
-# Truck Transportation Employment  source=fred  generated=2026-05-04T12:11:42.292Z
+# Truck Transportation Employment  source=fred  generated=2026-05-11T16:17:27.222Z
 date,value
 2010-01-01,1238.2
 2010-02-01,1236.4
@@ -193,5 +193,6 @@ date,value
 2025-11-01,1467.8
 2025-12-01,1467.2
 2026-01-01,1465.6
-2026-02-01,1464.9
-2026-03-01,1464.1
+2026-02-01,1465.1
+2026-03-01,1465.3
+2026-04-01,1469.6
