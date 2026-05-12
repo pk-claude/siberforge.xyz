@@ -3,7 +3,7 @@
     "period": "2015-Q1",
     "year": 2015,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2015",
+    "months": "Jan–Mar 2015",
     "qend": "2015-03-31",
     "cfo": -13644836,
     "cfi": -229459,
@@ -19,15 +19,15 @@
         "val": -11051821
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -8323925
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 7357314
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -3160055
       },
       {
@@ -61,15 +61,15 @@
         "val": -11051821
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -8323925
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 7357314
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -3160055
       },
       {
@@ -81,7 +81,7 @@
         "val": 1697130
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 901606
       },
       {
@@ -114,7 +114,7 @@
     "period": "2015-Q2",
     "year": 2015,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2015",
+    "months": "Apr–Jun 2015",
     "qend": "2015-06-30",
     "cfo": -10610164,
     "cfi": -1156541,
@@ -134,7 +134,7 @@
         "val": -8444277
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 4752925
       },
       {
@@ -142,7 +142,7 @@
         "val": -2436000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 2015055
       },
       {
@@ -172,7 +172,7 @@
         "val": -8444277
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 4752925
       },
       {
@@ -180,7 +180,7 @@
         "val": -2436000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 2015055
       },
       {
@@ -188,7 +188,7 @@
         "val": 1737870
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 795686
       },
       {
@@ -196,7 +196,7 @@
         "val": 493806
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -413606
       },
       {
@@ -221,7 +221,7 @@
     "period": "2015-Q3",
     "year": 2015,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2015",
+    "months": "Jul–Sep 2015",
     "qend": "2015-09-30",
     "cfo": -13041000,
     "cfi": 295000,
@@ -241,15 +241,15 @@
         "val": -10213000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 7639000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 6470000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 5107000
       },
       {
@@ -287,15 +287,15 @@
         "val": -10213000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 7639000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 6470000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 5107000
       },
       {
@@ -303,7 +303,7 @@
         "val": 2400000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -1852000
       },
       {
@@ -340,7 +340,7 @@
     "period": "2015-Q4",
     "year": 2015,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2015",
+    "months": "Oct–Dec 2015",
     "qend": "2015-12-31",
     "cfo": -9978000,
     "cfi": -933000,
@@ -364,11 +364,11 @@
         "val": -13344000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 4102000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 3529000
       },
       {
@@ -414,11 +414,11 @@
         "val": -13344000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 4102000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 3529000
       },
       {
@@ -426,11 +426,11 @@
         "val": 1982000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 1889000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 950000
       },
       {
@@ -471,7 +471,7 @@
     "period": "2016-Q1",
     "year": 2016,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2016",
+    "months": "Jan–Mar 2016",
     "qend": "2016-03-31",
     "cfo": -6916000,
     "cfi": -13636000,
@@ -483,7 +483,7 @@
     "fcf": -8805000,
     "cfo_drivers_top": [
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -11966000
       },
       {
@@ -491,7 +491,7 @@
         "val": -11754000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 6398000
       },
       {
@@ -499,7 +499,7 @@
         "val": 3218000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 2423000
       },
       {
@@ -533,7 +533,7 @@
     ],
     "cfo_drivers_all": [
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -11966000
       },
       {
@@ -541,7 +541,7 @@
         "val": -11754000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 6398000
       },
       {
@@ -549,7 +549,7 @@
         "val": 3218000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 2423000
       },
       {
@@ -557,7 +557,7 @@
         "val": 2217000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 1832000
       },
       {
@@ -598,7 +598,7 @@
     "period": "2016-Q2",
     "year": 2016,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2016",
+    "months": "Apr–Jun 2016",
     "qend": "2016-06-30",
     "cfo": -8845000,
     "cfi": -15206000,
@@ -614,11 +614,11 @@
         "val": -13128000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -4222000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 4154000
       },
       {
@@ -626,7 +626,7 @@
         "val": 2160000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 1993000
       },
       {
@@ -664,11 +664,11 @@
         "val": -13128000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -4222000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 4154000
       },
       {
@@ -676,7 +676,7 @@
         "val": 2160000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 1993000
       },
       {
@@ -688,7 +688,7 @@
         "val": 957000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 724000
       },
       {
@@ -725,7 +725,7 @@
     "period": "2016-Q3",
     "year": 2016,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2016",
+    "months": "Jul–Sep 2016",
     "qend": "2016-09-30",
     "cfo": -13908000,
     "cfi": -16296000,
@@ -753,11 +753,11 @@
         "val": 1384000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 993000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 927000
       }
     ],
@@ -799,19 +799,19 @@
         "val": 1384000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 993000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 927000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 866000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -671000
       },
       {
@@ -844,7 +844,7 @@
     "period": "2016-Q4",
     "year": 2016,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2016",
+    "months": "Oct–Dec 2016",
     "qend": "2016-12-31",
     "cfo": 33000,
     "cfi": -12937000,
@@ -868,11 +868,11 @@
         "val": -7719000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -5854000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 3268000
       },
       {
@@ -926,11 +926,11 @@
         "val": -7719000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -5854000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 3268000
       },
       {
@@ -942,7 +942,7 @@
         "val": 1738000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 284000
       },
       {
@@ -987,7 +987,7 @@
     "period": "2017-Q1",
     "year": 2017,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2017",
+    "months": "Jan–Mar 2017",
     "qend": "2017-03-31",
     "cfo": -23859000,
     "cfi": -9639000,
@@ -1003,7 +1003,7 @@
         "val": -24039000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -7584000
       },
       {
@@ -1011,11 +1011,11 @@
         "val": 5961000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -5021000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 3786000
       },
       {
@@ -1045,7 +1045,7 @@
         "val": -24039000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -7584000
       },
       {
@@ -1053,11 +1053,11 @@
         "val": 5961000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -5021000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 3786000
       },
       {
@@ -1069,7 +1069,7 @@
         "val": 2002000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -1569000
       },
       {
@@ -1098,7 +1098,7 @@
     "period": "2017-Q2",
     "year": 2017,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2017",
+    "months": "Apr–Jun 2017",
     "qend": "2017-06-30",
     "cfo": -34476000,
     "cfi": -10906000,
@@ -1118,11 +1118,11 @@
         "val": -16199000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 8977000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 8366000
       },
       {
@@ -1176,11 +1176,11 @@
         "val": -16199000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 8977000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 8366000
       },
       {
@@ -1192,11 +1192,11 @@
         "val": 2181000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 1503000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 838000
       },
       {
@@ -1241,7 +1241,7 @@
     "period": "2017-Q3",
     "year": 2017,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2017",
+    "months": "Jul–Sep 2017",
     "qend": "2017-09-30",
     "cfo": -22959000,
     "cfi": -7746000,
@@ -1261,11 +1261,11 @@
         "val": -40549000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 37601000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 13270000
       },
       {
@@ -1315,11 +1315,11 @@
         "val": -40549000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 37601000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 13270000
       },
       {
@@ -1331,11 +1331,11 @@
         "val": 2413000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 1984000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 656000
       },
       {
@@ -1376,7 +1376,7 @@
     "period": "2017-Q4",
     "year": 2017,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2017",
+    "months": "Oct–Dec 2017",
     "qend": "2017-12-31",
     "cfo": 21112000,
     "cfi": -16072000,
@@ -1392,7 +1392,7 @@
         "val": 53489000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -37538000
       },
       {
@@ -1404,11 +1404,11 @@
         "val": 7144000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 4906000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 4089000
       }
     ],
@@ -1442,7 +1442,7 @@
         "val": 53489000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -37538000
       },
       {
@@ -1454,15 +1454,15 @@
         "val": 7144000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 4906000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 4089000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 3546000
       },
       {
@@ -1511,7 +1511,7 @@
     "period": "2018-Q1",
     "year": 2018,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2018",
+    "months": "Jan–Mar 2018",
     "qend": "2018-03-31",
     "cfo": -24028000,
     "cfi": -4303000,
@@ -1531,7 +1531,7 @@
         "val": -15046000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 7655000
       },
       {
@@ -1543,7 +1543,7 @@
         "val": 2780000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -2066000
       }
     ],
@@ -1581,7 +1581,7 @@
         "val": -15046000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 7655000
       },
       {
@@ -1593,7 +1593,7 @@
         "val": 2780000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -2066000
       },
       {
@@ -1601,11 +1601,11 @@
         "val": 2005000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -1428000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -1376000
       },
       {
@@ -1642,7 +1642,7 @@
     "period": "2018-Q2",
     "year": 2018,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2018",
+    "months": "Apr–Jun 2018",
     "qend": "2018-06-30",
     "cfo": -21151000,
     "cfi": -12057000,
@@ -1658,15 +1658,15 @@
         "val": -25868000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 8523000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -5060000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -4619000
       },
       {
@@ -1712,15 +1712,15 @@
         "val": -25868000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 8523000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -5060000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -4619000
       },
       {
@@ -1740,7 +1740,7 @@
         "val": -942000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -180000
       },
       {
@@ -1781,7 +1781,7 @@
     "period": "2018-Q3",
     "year": 2018,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2018",
+    "months": "Jul–Sep 2018",
     "qend": "2018-09-30",
     "cfo": 3537000,
     "cfi": -1168000,
@@ -1801,11 +1801,11 @@
         "val": -15565000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -6788000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -6066000
       },
       {
@@ -1851,11 +1851,11 @@
         "val": -15565000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -6788000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -6066000
       },
       {
@@ -1871,7 +1871,7 @@
         "val": 2064000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -924000
       },
       {
@@ -1879,7 +1879,7 @@
         "val": 746000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 284000
       },
       {
@@ -1916,7 +1916,7 @@
     "period": "2018-Q4",
     "year": 2018,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2018",
+    "months": "Oct–Dec 2018",
     "qend": "2018-12-31",
     "cfo": -15975000,
     "cfi": -2044000,
@@ -1944,11 +1944,11 @@
         "val": -9249000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -6487000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 5926000
       }
     ],
@@ -1998,11 +1998,11 @@
         "val": -9249000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -6487000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 5926000
       },
       {
@@ -2010,15 +2010,15 @@
         "val": 5345000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -5305000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 5008000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -2657000
       },
       {
@@ -2034,7 +2034,7 @@
         "val": 880000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 353000
       },
       {
@@ -2075,7 +2075,7 @@
     "period": "2019-Q1",
     "year": 2019,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2019",
+    "months": "Jan–Mar 2019",
     "qend": "2019-03-31",
     "cfo": -36263000,
     "cfi": -2274000,
@@ -2095,11 +2095,11 @@
         "val": -17639000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 17564000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -4978000
       },
       {
@@ -2107,7 +2107,7 @@
         "val": 2819000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -2781000
       }
     ],
@@ -2153,11 +2153,11 @@
         "val": -17639000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 17564000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -4978000
       },
       {
@@ -2165,7 +2165,7 @@
         "val": 2819000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -2781000
       },
       {
@@ -2177,11 +2177,11 @@
         "val": 2497000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -2372000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -1018000
       },
       {
@@ -2193,7 +2193,7 @@
         "val": 307000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -193000
       },
       {
@@ -2238,7 +2238,7 @@
     "period": "2019-Q2",
     "year": 2019,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2019",
+    "months": "Apr–Jun 2019",
     "qend": "2019-06-30",
     "cfo": -12225000,
     "cfi": -4042000,
@@ -2258,15 +2258,15 @@
         "val": -8604000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 7716000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -4870000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 4013000
       },
       {
@@ -2324,15 +2324,15 @@
         "val": -8604000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 7716000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -4870000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 4013000
       },
       {
@@ -2348,11 +2348,11 @@
         "val": 1637000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 1478000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -851000
       },
       {
@@ -2360,7 +2360,7 @@
         "val": 600000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -292000
       },
       {
@@ -2417,7 +2417,7 @@
     "period": "2019-Q3",
     "year": 2019,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2019",
+    "months": "Jul–Sep 2019",
     "qend": "2019-09-30",
     "cfo": -3313000,
     "cfi": -2655000,
@@ -2433,11 +2433,11 @@
         "val": -21229000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 12061000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 7411000
       },
       {
@@ -2495,11 +2495,11 @@
         "val": -21229000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 12061000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 7411000
       },
       {
@@ -2515,11 +2515,11 @@
         "val": 2804000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -1854000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -887000
       },
       {
@@ -2572,7 +2572,7 @@
     "period": "2019-Q4",
     "year": 2019,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2019",
+    "months": "Oct–Dec 2019",
     "qend": "2019-12-31",
     "cfo": 279000,
     "cfi": -5273000,
@@ -2600,11 +2600,11 @@
         "val": -9336000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -8932000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 8537000
       }
     ],
@@ -2666,19 +2666,19 @@
         "val": -9336000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -8932000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 8537000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -8210000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 6586000
       },
       {
@@ -2690,7 +2690,7 @@
         "val": 2963000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 1056000
       },
       {
@@ -2702,7 +2702,7 @@
         "val": 394000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -339000
       },
       {
@@ -2755,7 +2755,7 @@
     "period": "2020-Q1",
     "year": 2020,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2020",
+    "months": "Jan–Mar 2020",
     "qend": "2020-03-31",
     "cfo": -60015000,
     "cfi": -6355000,
@@ -2775,15 +2775,15 @@
         "val": -37479000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 20581000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 10794000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -7330000
       },
       {
@@ -2833,15 +2833,15 @@
         "val": -37479000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 20581000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 10794000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -7330000
       },
       {
@@ -2853,7 +2853,7 @@
         "val": 3045000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -2933000
       },
       {
@@ -2861,11 +2861,11 @@
         "val": 2850000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -1649000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -1011000
       },
       {
@@ -2910,7 +2910,7 @@
     "period": "2020-Q2",
     "year": 2020,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2020",
+    "months": "Apr–Jun 2020",
     "qend": "2020-06-30",
     "cfo": -51232000,
     "cfi": -50196000,
@@ -2926,11 +2926,11 @@
         "val": -81114000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 19404000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 17402000
       },
       {
@@ -2942,7 +2942,7 @@
         "val": -8656000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 7632000
       }
     ],
@@ -2988,11 +2988,11 @@
         "val": -81114000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 19404000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 17402000
       },
       {
@@ -3004,7 +3004,7 @@
         "val": -8656000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 7632000
       },
       {
@@ -3016,7 +3016,7 @@
         "val": 2933000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 1023000
       },
       {
@@ -3065,7 +3065,7 @@
     "period": "2020-Q3",
     "year": 2020,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2020",
+    "months": "Jul–Sep 2020",
     "qend": "2020-09-30",
     "cfo": -45663000,
     "cfi": -15164000,
@@ -3077,7 +3077,7 @@
     "fcf": -51919000,
     "cfo_drivers_top": [
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 67611000
       },
       {
@@ -3093,11 +3093,11 @@
         "val": -38000000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -31397000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 31049000
       }
     ],
@@ -3143,7 +3143,7 @@
     ],
     "cfo_drivers_all": [
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 67611000
       },
       {
@@ -3159,23 +3159,23 @@
         "val": -38000000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -31397000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 31049000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 19735000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 8452000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -6861000
       },
       {
@@ -3240,7 +3240,7 @@
     "period": "2020-Q4",
     "year": 2020,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2020",
+    "months": "Oct–Dec 2020",
     "qend": "2020-12-31",
     "cfo": 1434000,
     "cfi": -23619000,
@@ -3260,7 +3260,7 @@
         "val": -510641000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -70303000
       },
       {
@@ -3318,7 +3318,7 @@
         "val": -510641000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -70303000
       },
       {
@@ -3334,11 +3334,11 @@
         "val": -23507000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 16132000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 13445000
       },
       {
@@ -3354,11 +3354,11 @@
         "val": 6400000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -6160000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 5671000
       },
       {
@@ -3370,7 +3370,7 @@
         "val": -4464000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -2496000
       },
       {
@@ -3419,7 +3419,7 @@
     "period": "2021-Q1",
     "year": 2021,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2021",
+    "months": "Jan–Mar 2021",
     "qend": "2021-03-31",
     "cfo": -117099000,
     "cfi": -418379000,
@@ -3439,11 +3439,11 @@
         "val": -60746000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 46791000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -23516000
       },
       {
@@ -3501,11 +3501,11 @@
         "val": -60746000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 46791000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -23516000
       },
       {
@@ -3521,11 +3521,11 @@
         "val": 5514000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 4641000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": 3388000
       },
       {
@@ -3533,7 +3533,7 @@
         "val": 1485000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 1180000
       },
       {
@@ -3545,7 +3545,7 @@
         "val": 364000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -109000
       }
     ],
@@ -3590,7 +3590,7 @@
     "period": "2021-Q2",
     "year": 2021,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2021",
+    "months": "Apr–Jun 2021",
     "qend": "2021-06-30",
     "cfo": -129536000,
     "cfi": -986838000,
@@ -3610,19 +3610,19 @@
         "val": -99634000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 48427000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 27563000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 23797000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -20768000
       }
     ],
@@ -3672,23 +3672,23 @@
         "val": -99634000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 48427000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 27563000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 23797000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -20768000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 18326000
       },
       {
@@ -3704,7 +3704,7 @@
         "val": 6694000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 5460000
       },
       {
@@ -3761,7 +3761,7 @@
     "period": "2021-Q3",
     "year": 2021,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2021",
+    "months": "Jul–Sep 2021",
     "qend": "2021-09-30",
     "cfo": -101866000,
     "cfi": 390923000,
@@ -3781,15 +3781,15 @@
         "val": -82523000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 41011000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 24945000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -21930000
       },
       {
@@ -3847,15 +3847,15 @@
         "val": -82523000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 41011000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 24945000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -21930000
       },
       {
@@ -3863,7 +3863,7 @@
         "val": -20427000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 19840000
       },
       {
@@ -3883,11 +3883,11 @@
         "val": 6178000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 5498000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 2265000
       },
       {
@@ -3948,7 +3948,7 @@
     "period": "2021-Q4",
     "year": 2021,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2021",
+    "months": "Oct–Dec 2021",
     "qend": "2021-12-31",
     "cfo": -9675000,
     "cfi": -726597000,
@@ -3968,11 +3968,11 @@
         "val": -192914000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -67495000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -61728000
       },
       {
@@ -4042,11 +4042,11 @@
         "val": -192914000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -67495000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -61728000
       },
       {
@@ -4074,7 +4074,7 @@
         "val": 8895000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 8363000
       },
       {
@@ -4082,7 +4082,7 @@
         "val": 4997000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -4084000
       },
       {
@@ -4090,7 +4090,7 @@
         "val": -3968000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 3927000
       },
       {
@@ -4102,7 +4102,7 @@
         "val": 2158000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 1703000
       },
       {
@@ -4167,7 +4167,7 @@
     "period": "2022-Q1",
     "year": 2022,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2022",
+    "months": "Jan–Mar 2022",
     "qend": "2022-03-31",
     "cfo": -209919000,
     "cfi": 273914000,
@@ -4187,7 +4187,7 @@
         "val": -117922000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 63702000
       },
       {
@@ -4199,7 +4199,7 @@
         "val": 43386000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -36170000
       }
     ],
@@ -4261,7 +4261,7 @@
         "val": -117922000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 63702000
       },
       {
@@ -4273,19 +4273,19 @@
         "val": 43386000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -36170000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": 27905000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 27107000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -25096000
       },
       {
@@ -4362,7 +4362,7 @@
     "period": "2022-Q2",
     "year": 2022,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2022",
+    "months": "Apr–Jun 2022",
     "qend": "2022-06-30",
     "cfo": -195194000,
     "cfi": -8547000,
@@ -4382,11 +4382,11 @@
         "val": -173296000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 95743000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 63759000
       },
       {
@@ -4452,11 +4452,11 @@
         "val": -173296000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 95743000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 63759000
       },
       {
@@ -4468,11 +4468,11 @@
         "val": 44859000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": 27480000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 24547000
       },
       {
@@ -4488,7 +4488,7 @@
         "val": -5066000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 4180000
       },
       {
@@ -4500,7 +4500,7 @@
         "val": 1068000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 430000
       }
     ],
@@ -4553,7 +4553,7 @@
     "period": "2022-Q3",
     "year": 2022,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2022",
+    "months": "Jul–Sep 2022",
     "qend": "2022-09-30",
     "cfo": -116936000,
     "cfi": -286016000,
@@ -4573,15 +4573,15 @@
         "val": -160361000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 86325000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 74289000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -61440000
       },
       {
@@ -4639,15 +4639,15 @@
         "val": -160361000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 86325000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 74289000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -61440000
       },
       {
@@ -4655,11 +4655,11 @@
         "val": 46739000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 33970000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 31003000
       },
       {
@@ -4671,7 +4671,7 @@
         "val": 8997000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 6641000
       },
       {
@@ -4736,7 +4736,7 @@
     "period": "2022-Q4",
     "year": 2022,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2022",
+    "months": "Oct–Dec 2022",
     "qend": "2022-12-31",
     "cfo": -306574000,
     "cfi": -658721000,
@@ -4756,7 +4756,7 @@
         "val": -223465000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 117939000
       },
       {
@@ -4768,7 +4768,7 @@
         "val": 44643000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -40753000
       }
     ],
@@ -4826,7 +4826,7 @@
         "val": -223465000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 117939000
       },
       {
@@ -4838,7 +4838,7 @@
         "val": 44643000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -40753000
       },
       {
@@ -4846,15 +4846,15 @@
         "val": -35737000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 32488000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 28940000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -24494000
       },
       {
@@ -4870,7 +4870,7 @@
         "val": 10201000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 9864000
       },
       {
@@ -4951,7 +4951,7 @@
     "period": "2023-Q1",
     "year": 2023,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2023",
+    "months": "Jan–Mar 2023",
     "qend": "2023-03-31",
     "cfo": -276919000,
     "cfi": 95796000,
@@ -4971,7 +4971,7 @@
         "val": -206561000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 129572000
       },
       {
@@ -4983,7 +4983,7 @@
         "val": 43302000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 14677000
       }
     ],
@@ -5041,7 +5041,7 @@
         "val": -206561000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 129572000
       },
       {
@@ -5053,11 +5053,11 @@
         "val": 43302000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 14677000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 13821000
       },
       {
@@ -5065,7 +5065,7 @@
         "val": 9789000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": 9748000
       },
       {
@@ -5077,7 +5077,7 @@
         "val": 6981000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 5522000
       },
       {
@@ -5093,7 +5093,7 @@
         "val": 2009000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -1730000
       },
       {
@@ -5154,7 +5154,7 @@
     "period": "2023-Q2",
     "year": 2023,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2023",
+    "months": "Apr–Jun 2023",
     "qend": "2023-06-30",
     "cfo": -348092000,
     "cfi": 509691000,
@@ -5174,11 +5174,11 @@
         "val": -236398000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 140135000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 89821000
       },
       {
@@ -5186,7 +5186,7 @@
         "val": 39918000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -31586000
       }
     ],
@@ -5244,11 +5244,11 @@
         "val": -236398000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 140135000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 89821000
       },
       {
@@ -5256,7 +5256,7 @@
         "val": 39918000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -31586000
       },
       {
@@ -5268,11 +5268,11 @@
         "val": 15308000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -14700000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -14541000
       },
       {
@@ -5288,7 +5288,7 @@
         "val": 9751000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 9130000
       },
       {
@@ -5361,7 +5361,7 @@
     "period": "2023-Q3",
     "year": 2023,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2023",
+    "months": "Jul–Sep 2023",
     "qend": "2023-09-30",
     "cfo": -238908000,
     "cfi": -144999000,
@@ -5385,11 +5385,11 @@
         "val": 281178000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 142030000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -53406000
       },
       {
@@ -5451,11 +5451,11 @@
         "val": 281178000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 142030000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -53406000
       },
       {
@@ -5471,7 +5471,7 @@
         "val": 22129000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 21941000
       },
       {
@@ -5479,11 +5479,11 @@
         "val": 16544000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 15601000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 15233000
       },
       {
@@ -5499,7 +5499,7 @@
         "val": 2239000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -1861000
       },
       {
@@ -5556,7 +5556,7 @@
     "period": "2023-Q4",
     "year": 2023,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2023",
+    "months": "Oct–Dec 2023",
     "qend": "2023-12-31",
     "cfo": -242651000,
     "cfi": 267564000,
@@ -5588,7 +5588,7 @@
         "val": -103372000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 88083000
       }
     ],
@@ -5654,7 +5654,7 @@
         "val": -103372000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 88083000
       },
       {
@@ -5662,11 +5662,11 @@
         "val": 59853000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -38972000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -34705000
       },
       {
@@ -5702,11 +5702,11 @@
         "val": 3708000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -3106000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 1218000
       },
       {
@@ -5714,7 +5714,7 @@
         "val": 514000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 501000
       },
       {
@@ -5767,7 +5767,7 @@
     "period": "2024-Q1",
     "year": 2024,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2024",
+    "months": "Jan–Mar 2024",
     "qend": "2024-03-31",
     "cfo": -167728000,
     "cfi": -120584000,
@@ -5783,7 +5783,7 @@
         "val": -295776000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -96436000
       },
       {
@@ -5799,7 +5799,7 @@
         "val": 39675000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 38312000
       }
     ],
@@ -5849,7 +5849,7 @@
         "val": -295776000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -96436000
       },
       {
@@ -5865,15 +5865,15 @@
         "val": 39675000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 38312000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -32500000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 25755000
       },
       {
@@ -5885,7 +5885,7 @@
         "val": 15111000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 14496000
       },
       {
@@ -5913,7 +5913,7 @@
         "val": -1447000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -1356000
       },
       {
@@ -5966,7 +5966,7 @@
     "period": "2024-Q2",
     "year": 2024,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2024",
+    "months": "Apr–Jun 2024",
     "qend": "2024-06-30",
     "cfo": -254738000,
     "cfi": -148074000,
@@ -5986,15 +5986,15 @@
         "val": -60825000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -41573000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 41175000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -26387000
       },
       {
@@ -6052,15 +6052,15 @@
         "val": -60825000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -41573000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 41175000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -26387000
       },
       {
@@ -6084,7 +6084,7 @@
         "val": 13684000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -9956000
       },
       {
@@ -6092,7 +6092,7 @@
         "val": -7240000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 6368000
       },
       {
@@ -6100,7 +6100,7 @@
         "val": 4709000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 4253000
       },
       {
@@ -6161,7 +6161,7 @@
     "period": "2024-Q3",
     "year": 2024,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2024",
+    "months": "Jul–Sep 2024",
     "qend": "2024-09-30",
     "cfo": -174936000,
     "cfi": -89871000,
@@ -6177,7 +6177,7 @@
         "val": -211168000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -53972000
       },
       {
@@ -6185,7 +6185,7 @@
         "val": 52824000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -42793000
       },
       {
@@ -6235,7 +6235,7 @@
         "val": -211168000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -53972000
       },
       {
@@ -6243,7 +6243,7 @@
         "val": 52824000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -42793000
       },
       {
@@ -6255,11 +6255,11 @@
         "val": 24107000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -22786000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 21971000
       },
       {
@@ -6271,11 +6271,11 @@
         "val": 14409000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -13365000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 11952000
       },
       {
@@ -6340,7 +6340,7 @@
     "period": "2024-Q4",
     "year": 2024,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2024",
+    "months": "Oct–Dec 2024",
     "qend": "2024-12-31",
     "cfo": -131241000,
     "cfi": -43835000,
@@ -6442,7 +6442,7 @@
         "val": 104212000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -98423000
       },
       {
@@ -6454,11 +6454,11 @@
         "val": 30372000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -30281000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 20394000
       },
       {
@@ -6466,15 +6466,15 @@
         "val": 18083000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -12356000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -11660000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": 10751000
       },
       {
@@ -6563,7 +6563,7 @@
     "period": "2025-Q1",
     "year": 2025,
     "quarter": 1,
-    "months": "Jan\u2013Mar 2025",
+    "months": "Jan–Mar 2025",
     "qend": "2025-03-31",
     "cfo": -105568000,
     "cfi": -46573000,
@@ -6579,7 +6579,7 @@
         "val": -196656000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 47578000
       },
       {
@@ -6587,7 +6587,7 @@
         "val": 40804000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -40576000
       },
       {
@@ -6595,7 +6595,7 @@
         "val": 27360000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -21697000
       }
     ],
@@ -6637,7 +6637,7 @@
         "val": -196656000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 47578000
       },
       {
@@ -6645,7 +6645,7 @@
         "val": 40804000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -40576000
       },
       {
@@ -6653,15 +6653,15 @@
         "val": 27360000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -21697000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": 18357000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -12251000
       },
       {
@@ -6697,7 +6697,7 @@
         "val": 2007000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -580000
       },
       {
@@ -6742,7 +6742,7 @@
     "period": "2025-Q2",
     "year": 2025,
     "quarter": 2,
-    "months": "Apr\u2013Jun 2025",
+    "months": "Apr–Jun 2025",
     "qend": "2025-06-30",
     "cfo": -191810000,
     "cfi": -40743000,
@@ -6762,7 +6762,7 @@
         "val": 131384000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -51655000
       },
       {
@@ -6770,11 +6770,11 @@
         "val": -45850000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -34713000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -33241000
       }
     ],
@@ -6824,7 +6824,7 @@
         "val": 131384000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": -51655000
       },
       {
@@ -6832,11 +6832,11 @@
         "val": -45850000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -34713000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -33241000
       },
       {
@@ -6860,7 +6860,7 @@
         "val": 12776000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 5790000
       },
       {
@@ -6876,11 +6876,11 @@
         "val": 2001000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -1578000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": -1115000
       },
       {
@@ -6937,7 +6937,7 @@
     "period": "2025-Q3",
     "year": 2025,
     "quarter": 3,
-    "months": "Jul\u2013Sep 2025",
+    "months": "Jul–Sep 2025",
     "qend": "2025-09-30",
     "cfo": -89814000,
     "cfi": -30392000,
@@ -6953,7 +6953,7 @@
         "val": -361869000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 84727000
       },
       {
@@ -6969,7 +6969,7 @@
         "val": 41733000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -25421000
       }
     ],
@@ -7015,7 +7015,7 @@
         "val": -361869000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 84727000
       },
       {
@@ -7031,11 +7031,11 @@
         "val": 41733000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -25421000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -16165000
       },
       {
@@ -7047,7 +7047,7 @@
         "val": 12237000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 10134000
       },
       {
@@ -7067,7 +7067,7 @@
         "val": -3262000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": -2041000
       },
       {
@@ -7079,7 +7079,7 @@
         "val": -1435000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": -1264000
       },
       {
@@ -7136,7 +7136,7 @@
     "period": "2025-Q4",
     "year": 2025,
     "quarter": 4,
-    "months": "Oct\u2013Dec 2025",
+    "months": "Oct–Dec 2025",
     "qend": "2025-12-31",
     "cfo": -148643000,
     "cfi": -21300000,
@@ -7246,7 +7246,7 @@
         "val": 42500000
       },
       {
-        "name": "\u0394 Contract asset",
+        "name": "Δ Contract asset",
         "val": 38070000
       },
       {
@@ -7254,15 +7254,15 @@
         "val": 22374000
       },
       {
-        "name": "\u0394 Contract liability",
+        "name": "Δ Contract liability",
         "val": -21321000
       },
       {
-        "name": "\u0394 Accounts receivable",
+        "name": "Δ Accounts receivable",
         "val": 21221000
       },
       {
-        "name": "\u0394 Inventory",
+        "name": "Δ Inventory",
         "val": -19373000
       },
       {
@@ -7286,7 +7286,7 @@
         "val": -10370000
       },
       {
-        "name": "\u0394 Prepaid & other assets",
+        "name": "Δ Prepaid & other assets",
         "val": 6778000
       },
       {
@@ -7298,7 +7298,7 @@
         "val": -3579000
       },
       {
-        "name": "\u0394 Accounts payable & accrued",
+        "name": "Δ Accounts payable & accrued",
         "val": 3028000
       },
       {
@@ -7384,6 +7384,209 @@
       {
         "name": "Minority/JV proceeds",
         "val": 255000
+      }
+    ]
+  },
+  {
+    "period": "2026-Q1",
+    "year": 2026,
+    "quarter": 1,
+    "months": "Jan–Mar 2026",
+    "qend": "2026-03-31",
+    "cfo": -150041000,
+    "cfi": -8481000,
+    "cff": -31742000,
+    "capex": -2407000,
+    "net": -145351000,
+    "cash_basic": 223189000,
+    "cash_total": 802014000,
+    "fcf": -152448000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -246037000
+      },
+      {
+        "name": "Fair value adj. of convertible debt",
+        "val": 70782000
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": 54640000
+      },
+      {
+        "name": "Δ Accounts payable & accrued",
+        "val": -43343000
+      },
+      {
+        "name": "Δ Accounts receivable",
+        "val": 25853000
+      },
+      {
+        "name": "Operating lease payments",
+        "val": -17523000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Equipment on lease",
+        "val": -5707000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2407000
+      },
+      {
+        "name": "Other",
+        "val": -367000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Finance obligations & lease principal",
+        "val": -29419000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -2330000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -346000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -246037000
+      },
+      {
+        "name": "Fair value adj. of convertible debt",
+        "val": 70782000
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": 54640000
+      },
+      {
+        "name": "Δ Accounts payable & accrued",
+        "val": -43343000
+      },
+      {
+        "name": "Δ Accounts receivable",
+        "val": 25853000
+      },
+      {
+        "name": "Operating lease payments",
+        "val": -17523000
+      },
+      {
+        "name": "Loss contingency accrual",
+        "val": -14685000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 13938000
+      },
+      {
+        "name": "Δ Prepaid & other assets",
+        "val": -9337000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 7271000
+      },
+      {
+        "name": "Δ Inventory",
+        "val": -6860000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 6312000
+      },
+      {
+        "name": "Provision for common stock warrants",
+        "val": 4561000
+      },
+      {
+        "name": "Impairment: long-lived assets",
+        "val": 3856000
+      },
+      {
+        "name": "Provision for doubtful accounts",
+        "val": 2394000
+      },
+      {
+        "name": "Δ Contract liability",
+        "val": -2356000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -1918000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": -1805000
+      },
+      {
+        "name": "Δ Contract asset",
+        "val": 1561000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 997000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 908000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": 470000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 280000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Equipment on lease",
+        "val": -5707000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -2407000
+      },
+      {
+        "name": "Other",
+        "val": -367000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Finance obligations & lease principal",
+        "val": -29419000
+      },
+      {
+        "name": "Contingent consideration payment",
+        "val": -2330000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -346000
+      },
+      {
+        "name": "Tax withholding on SBC",
+        "val": -37000
+      },
+      {
+        "name": "Option exercises",
+        "val": 90000
+      },
+      {
+        "name": "Minority/JV proceeds",
+        "val": 300000
       }
     ]
   }

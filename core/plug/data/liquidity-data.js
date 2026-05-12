@@ -1,5 +1,8 @@
 /* liquidity-data.js — Plug Power liquidity-options model.
-   Data sourced from FY2025 10-K (filed 2026-03-02) and EDGAR XBRL companyfacts.
+   Sources:
+     - FY2025 10-K (filed 2026-03-02) and EDGAR XBRL companyfacts (capital structure)
+     - Q1 2026 press release (filed 2026-05-11): refreshed cash, warrant FV,
+       asset-monetization status; added St. Gabriel ITC monetization.
 
    Exports three globals:
      window.PLUG_LIQUIDITY_SHARES_OUT  — common shares outstanding (millions).
@@ -7,7 +10,7 @@
      window.PLUG_LIQUIDITY_DEPS        — shared constraints across those options.
 */
 
-window.PLUG_LIQUIDITY_SHARES_OUT = 1394.0;
+window.PLUG_LIQUIDITY_SHARES_OUT = 1394.7;  // Mar 31, 2026: 1,395,643,390 issued – 987,495 treasury
 
 /* --------- Liquidity options data model --------- */
 window.PLUG_LIQUIDITY_OPTIONS = [
@@ -23,7 +26,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Months (drip)",
     primaryDep: "share_price",
     deps: ["Share price", "Auth headroom", "Daily trading volume"],
-    body: "B. Riley + Yorkville agents. Plug directs sales into open market at prevailing prices. $55.9M used in FY25 at $1.62 avg. Terminates Aug 15, 2027.",
+    body: "B. Riley + Yorkville agents. Plug directs sales into open market at prevailing prices. $55.9M used in FY25 at $1.62 avg; no Q1 2026 usage. Terminates Aug 15, 2027.",
     scenarioType: "atm"
   },
   {
@@ -38,7 +41,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Months (drip, $10M/day cap)",
     primaryDep: "share_price",
     deps: ["Share price", "Auth headroom", "$10M/day cap"],
-    body: "Standby Equity Purchase Agreement with Yorkville. Plug has the right (not obligation) to direct Yorkville to buy up to $10M per trading day. Expires Feb 10, 2027. No shares sold in FY25.",
+    body: "Standby Equity Purchase Agreement with Yorkville. Plug has the right (not obligation) to direct Yorkville to buy up to $10M per trading day. Expires Feb 10, 2027. No shares sold in FY25 or Q1 2026.",
     scenarioType: "atm"
   },
   {
@@ -53,7 +56,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Feb 2026 – Mar 2028",
     primaryDep: "share_price_7_75",
     deps: ["Stock > $7.75", "Holder election", "No Change-of-Control"],
-    body: "185,430,464 warrants @ $7.75 strike. Issued Oct 2025 as part of warrant-exercise inducement. Liability-classified ($52.3M fair value at FY25 end) due to Change-of-Control Cash Election under ASC 815. Exercisable Feb 28, 2026 through Mar 20, 2028.",
+    body: "185,430,464 warrants @ $7.75 strike. Issued Oct 2025 as part of warrant-exercise inducement. Liability-classified due to Change-of-Control Cash Election under ASC 815; fair value stepped up from $52.3M (FY25) to $107.0M at Mar 31, 2026 on stock-price escalation. Exercisable since Feb 28, 2026 through Mar 20, 2028; no exercises through Q1 2026.",
     scenarioType: "warrant", strike: 7.75, shares: 185.43
   },
   {
@@ -68,7 +71,22 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "By Jun 30, 2026",
     primaryDep: "closing",
     deps: ["Closing conditions", "Sphere removal"],
-    body: "Definitive agreement Feb 24, 2026 to sell real property and assets in Alabama, NY (Genesee County). Purchase price range $132.5M–$142.0M depending on closing timing and whether hydrogen storage spheres are removed.",
+    body: "Definitive agreement Feb 24, 2026 to sell real property and assets in Alabama, NY (Genesee County). Purchase price range $132.5M–$142.0M depending on closing timing and whether hydrogen storage spheres are removed. Q1 2026 update (May 11, 2026 press release): first transaction at ~$142M expected to close in June 2026.",
+    scenarioType: "none"
+  },
+  {
+    id: "itc",
+    name: "St. Gabriel ITC Sale",
+    type: "Tax-credit monetization",
+    statusKey: "committed", statusLabel: "Committed",
+    cap: 39.2,
+    controller: "Pending closing",
+    dilutive: false,
+    interest: 0,
+    horizon: "By end of May 2026",
+    primaryDep: "closing",
+    deps: ["Closing conditions", "Credit buyer"],
+    body: "Q1 2026 update (May 11, 2026 press release): expected sale of an investment tax credit tied to the St. Gabriel, LA joint-venture hydrogen liquefier for $39.2M, targeted to close by end of May 2026. Non-dilutive, one-time cash inflow.",
     scenarioType: "none"
   },
   {
@@ -98,7 +116,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Transaction-by-transaction",
     primaryDep: "market_access",
     deps: ["Customer pipeline", "FI appetite", "Restricted cash build"],
-    body: "Historic source of ~$200–400M per year. Each deal ties up restricted cash ($352.3M at FY25 end) and creates ongoing lease obligations. Net cash released depends on collateral haircut.",
+    body: "Historic source of ~$200–400M per year. Each deal ties up restricted cash (~$326M S/LB collateral est. at Mar 31, 2026; $352.3M at FY25 end) and creates ongoing lease obligations. Net cash released depends on collateral haircut.",
     scenarioType: "none"
   },
   {
@@ -128,7 +146,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Quarters",
     primaryDep: "execution",
     deps: ["Inventory sell-through", "AR collection", "Demand"],
-    body: "Inventory stands at $521.0M (199.8 DIO). Each 10% drawdown releases ~$52M of cash. DSO already compressed from 91 → 69 days in FY25. DIO reduction is the primary remaining lever.",
+    body: "Inventory $516.2M at Mar 31, 2026 (~203 DIO TTM). Each 10% drawdown releases ~$52M of cash. DSO compressed from 91 → 69 (FY25) → 53 days (Q1'26 TTM); DIO held roughly flat. DIO reduction is the primary remaining lever.",
     scenarioType: "none"
   },
   {
@@ -164,7 +182,7 @@ window.PLUG_LIQUIDITY_DEPS = [
     levers: ["ATM", "SEPA", "$7.75 Warrants", "Convertible-note conversion"],
     atRisk: 944.1 + 1000 + 1437.1 + 431.0,
     statusKey: "green", statusLabel: "1.6B unissued",
-    note: "Shareholders doubled authorization to 3.0B on Feb 12, 2026. 1,394M issued leaves ~1,606M unissued, enough to cover ATM+SEPA+Warrants at current prices."
+    note: "Shareholders doubled authorization to 3.0B on Feb 12, 2026. 1,395.6M issued at Mar 31, 2026 leaves ~1,604M unissued, enough to cover ATM+SEPA+Warrants at current prices."
   },
   {
     id: "federal_policy",
@@ -185,10 +203,10 @@ window.PLUG_LIQUIDITY_DEPS = [
   {
     id: "counterparty",
     name: "Counterparty / holder decision",
-    levers: ["$7.75 Warrants", "WNY Sale"],
-    atRisk: 1437.1 + 137.25,
+    levers: ["$7.75 Warrants", "WNY Sale", "St. Gabriel ITC"],
+    atRisk: 1437.1 + 137.25 + 39.2,
     statusKey: "yellow", statusLabel: "Holder-controlled",
-    note: "Warrant exercise is at holder discretion (Plug cannot compel). WNY sale depends on closing conditions and sphere removal."
+    note: "Warrant exercise is at holder discretion (Plug cannot compel). WNY sale ($142M) targeted to close June 2026. St. Gabriel ITC sale ($39.2M) targeted by end of May 2026."
   },
   {
     id: "execution",
