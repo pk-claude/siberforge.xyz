@@ -77,7 +77,12 @@ async function init() {
 
   const cfOrder = ['cfo', 'cfi', 'cff', 'fcf', 'capex', 'net'];
   const cashOrder = ['cash_total', 'cash_basic'];
-  const enabled = { cfo: true, cfi: true, cff: true, fcf: false, capex: false, net: false, cash_total: true, cash_basic: false };
+  // Read initial enabled state from the HTML checkboxes so the chart matches
+  // the rendered control state on first paint.
+  const enabled = { cfo: false, cfi: false, cff: false, fcf: false, capex: false, net: false, cash_total: false, cash_basic: false };
+  document.querySelectorAll('#cf-toggles input, #cash-toggles input').forEach(cb => {
+    if (cb.dataset.s in enabled) enabled[cb.dataset.s] = !!cb.checked;
+  });
   let mode = 'group';
 
   // pre-build hover text
