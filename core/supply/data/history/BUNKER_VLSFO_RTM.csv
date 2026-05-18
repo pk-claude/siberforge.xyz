@@ -1,6 +1,7 @@
-# VLSFO Bunker — Rotterdam  source=scrape:shipbunker  generated=2026-05-11T16:17:35.460Z
+# VLSFO Bunker — Rotterdam  source=scrape:shipbunker  generated=2026-05-18T16:43:22.446Z
 date,value
 2026-04-26,717
 2026-04-27,717
 2026-05-04,787.5
 2026-05-11,791.5
+2026-05-18,771

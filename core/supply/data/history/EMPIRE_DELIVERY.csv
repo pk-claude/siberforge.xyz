@@ -1,4 +1,4 @@
-# Empire State Mfg Delivery Time  source=fred  generated=2026-05-11T16:17:27.233Z
+# Empire State Mfg Delivery Time  source=fred  generated=2026-05-18T16:43:13.136Z
 date,value
 2010-01-01,6.7
 2010-02-01,-6.9
@@ -196,3 +196,4 @@ date,value
 2026-02-01,4
 2026-03-01,13.7
 2026-04-01,12.1
+2026-05-01,20.4
