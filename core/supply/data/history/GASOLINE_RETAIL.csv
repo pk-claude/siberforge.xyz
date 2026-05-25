@@ -1,4 +1,4 @@
-# Gasoline Retail Price (US Avg)  source=eia  generated=2026-05-18T16:43:14.467Z
+# Gasoline Retail Price (US Avg)  source=eia  generated=2026-05-25T09:53:19.913Z
 date,value
 1990-08-20,1.191
 1990-08-27,1.245
@@ -1865,3 +1865,4 @@ date,value
 2026-04-27,4.123
 2026-05-04,4.452
 2026-05-11,4.5
+2026-05-18,4.49
