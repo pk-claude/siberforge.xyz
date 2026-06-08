@@ -1,4 +1,4 @@
-# JOLTS: TWU Layoffs Rate  source=fred  generated=2026-06-01T11:14:33.844Z
+# JOLTS: TWU Layoffs Rate  source=fred  generated=2026-06-08T10:21:55.822Z
 date,value
 2010-01-01,1.5
 2010-02-01,0.9
@@ -194,4 +194,5 @@ date,value
 2025-12-01,4
 2026-01-01,5.3
 2026-02-01,1
-2026-03-01,1.2
+2026-03-01,1.4
+2026-04-01,1.2
