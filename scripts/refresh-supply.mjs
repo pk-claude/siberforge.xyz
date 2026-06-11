@@ -117,7 +117,7 @@ async function main() {
   await computeDerivedSeries(INDICATORS, manifest, dryRun);
 
   const snapshot = await buildSnapshot({ dataDir: DATA_DIR, indicators: INDICATORS, manifest });
-  if (!dryRun) await writeSnapshot(SNAPSHOT_PATH, snapshot);
+  if (!dryRun) await writeSnapshot(SNAPSHOT_PATH, snapshot, INDICATORS);
   if (!dryRun) await writeManifest(MANIFEST_PATH, manifest);
 
   // Insights
@@ -257,6 +257,7 @@ async function writeBundle() {
     out.on('error', reject);
     archive.directory(HISTORY_DIR, 'history');
     archive.file(SNAPSHOT_PATH, { name: 'snapshot.json' });
+    archive.file(path.join(DATA_DIR, 'history.json'), { name: 'history.json' });
     archive.file(MANIFEST_PATH, { name: 'manifest.json' });
     archive.finalize();
   });

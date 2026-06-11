@@ -623,3 +623,13 @@ main {
   padding: 36px 32px;
   display: flex;
   flex-direction: column;
+/* Stale-data note (shown when the newest weekly brief is >14 days old) */
+.stale-note {
+  margin-top: 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--line, #333);
+  border-left: 3px solid #d97706;
+  border-radius: 6px;
+  color: var(--muted-2, #999);
+  font-size: 13px;
+}

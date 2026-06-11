@@ -40,6 +40,7 @@
           { id: 'single-name-hub', label: 'Single-name research', href: '/core/single-name/', meta: 'All single-name deep dives' },
           { id: 'equity-hub',      label: 'Equity hub',           href: '/core/equity/',      meta: 'Top-5 AI winners deep dive' },
           { id: 'plug-overview',   label: 'Plug Power (PLUG)',    href: '/core/plug/',        meta: '6 views - cash flow, revenue, balance, liquidity, footprint' },
+          { id: 'influencers',     label: 'Daily Influencers',    href: '/core/influencers/', meta: 'Weekly brief - the macro forces moving one subject name' },
         ]},
         { label: 'Valuation', links: [
           { id: 'pe-overview',     label: 'P/E Multiples',        href: '/core/equity/pe/',   meta: 'S&P 500 + Nasdaq-100 trailing & forward P/E, sortable, with daily forward-P/E history' },

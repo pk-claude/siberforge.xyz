@@ -192,7 +192,7 @@ function renderTile(parent, ind) {
   const accent = CATEGORIES[ind.category]?.accent || '#5a9cff';
 
   if (data && data.lastValue != null) {
-    const deltas = computeDeltas(data.history, ind.freq, ind.longTermNormYears);
+    const deltas = data.deltas || computeDeltas(data.history, ind.freq, ind.longTermNormYears);
     const yoyClass = ind.direction === 'lower_better'
       ? (deltas?.vsLastYear < 0 ? 'pos' : deltas?.vsLastYear > 0 ? 'neg' : '')
       : ind.direction === 'higher_better'
@@ -209,13 +209,16 @@ function renderTile(parent, ind) {
     `;
     const sparkHolder = document.createElement('div');
     tile.appendChild(sparkHolder);
-    renderSpark(sparkHolder, data.history, { stroke: accent });
+    renderSpark(sparkHolder, data.spark || data.history, { stroke: accent });
 
     const sourceInfo = MANIFEST?.sources?.[ind.source];
-    if (sourceInfo?.stale || sourceInfo?.staleDays > 14) {
+    const sourceFailing = sourceInfo && sourceInfo.errorCount > 0 && !sourceInfo.successCount;
+    if (sourceInfo?.stale || sourceInfo?.staleDays > 14 || sourceFailing) {
       const badge = document.createElement('div');
       badge.className = 'stale-badge';
-      badge.textContent = `stale ${sourceInfo.staleDays}d`;
+      badge.textContent = sourceFailing
+        ? 'source failing'
+        : `stale ${sourceInfo.staleDays}d`;
       tile.appendChild(badge);
     }
 
@@ -255,7 +258,7 @@ function renderOverview() {
         <div><div class="label">SC Pressure</div><div class="value">${fmtZ(v)}</div><div class="regime ${regime.toLowerCase()}">${regime} · ${data.lastDate}</div></div>
         <div id="composite-spark"></div>
         <div class="why">${escape(ind.whyMatters)}</div>`;
-      renderSpark(document.getElementById('composite-spark'), data.history, { stroke: '#f7a700', width: 360, height: 80 });
+      renderSpark(document.getElementById('composite-spark'), data.spark || data.history, { stroke: '#f7a700', width: 360, height: 80 });
     }
   }
 
@@ -320,7 +323,7 @@ function renderDownloadZone() {
   }
 }
 
-function renderDrillPage() {
+async function renderDrillPage() {
   const params = new URLSearchParams(window.location.search);
   const id = params.get('id');
   const ind = INDICATORS_BY_ID[id];
@@ -328,7 +331,12 @@ function renderDrillPage() {
   const root = document.getElementById('drill-root');
   if (!root) return;
   if (!ind) { root.innerHTML = `<h1>Unknown metric: ${escape(id)}</h1>`; return; }
-  const deltas = data ? computeDeltas(data.history, ind.freq, ind.longTermNormYears) : null;
+  // schemaVersion 2: snapshot.json no longer carries full history -- fetch it.
+  if (data && !data.history) {
+    const hist = await fetch(`${pathPrefix()}data/history.json`).then(r => r.json()).catch(() => null);
+    data.history = (hist && hist[id]) || data.spark || [];
+  }
+  const deltas = data ? (data.deltas || computeDeltas(data.history, ind.freq, ind.longTermNormYears)) : null;
   const insight = (getInsights()?.all || []).find(f => f.id === id);
   const tickerInfo = TICKER_INFO[id];
 
@@ -429,16 +437,40 @@ function renderInsightsPageWrapper() {
 
 // ============================ Boot ============================
 function populateLastRefresh() {
-  const el = document.getElementById('last-refresh-stamp');
-  if (el && SNAPSHOT && SNAPSHOT.generatedAt) {
+  // Shared chrome (layout.js) renders #refresh-text / #refresh-indicator.
+  // Without this the header chip says "Initializing..." forever.
+  const txt = document.getElementById('refresh-text');
+  const dot = document.getElementById('refresh-indicator');
+  if (txt && SNAPSHOT && SNAPSHOT.generatedAt) {
     const d = new Date(SNAPSHOT.generatedAt);
-    el.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    txt.textContent = 'Data: ' + d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    if (dot) dot.classList.add('live');
+  } else if (txt && !SNAPSHOT) {
+    txt.textContent = 'Data unavailable';
   }
+}
+
+// Aggregate data-health banner: name the sources that failed their last
+// scrape instead of silently showing their last good values.
+function renderDataHealth() {
+  if (!MANIFEST || !MANIFEST.sources) return;
+  const failing = Object.entries(MANIFEST.sources)
+    .filter(([, src]) => src.errorCount > 0 && !src.successCount)
+    .map(([name]) => name.replace(/^scrape:/, '').toUpperCase());
+  if (!failing.length) return;
+  const main = document.querySelector('main') || document.body;
+  const div = document.createElement('div');
+  div.className = 'data-health-warn';
+  div.textContent = failing.length + ' source' + (failing.length > 1 ? 's' : '') +
+    ' failed the last refresh: ' + failing.join(', ') +
+    '. Affected tiles show their last good values and are marked "source failing".';
+  main.insertBefore(div, main.firstChild);
 }
 
 async function main() {
   await Promise.all([loadData(), loadV2()]);
   populateLastRefresh();
+  renderDataHealth();
   const page = document.body.dataset.page;
   if (page === 'overview')          renderOverview();
   else if (page === 'category')     renderCategoryPage(document.body.dataset.category);

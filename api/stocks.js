@@ -180,6 +180,12 @@ export default async function handler(req, res) {
   if (!symbols.length) {
     return res.status(400).json({ error: 'no valid symbols supplied' });
   }
+  // Cap fan-out: each symbol becomes an upstream API call. Largest legit
+  // dashboard request is ~12 symbols; 30 leaves headroom without letting a
+  // single request burn the Finnhub free-tier 60/min quota.
+  if (symbols.length > 30) {
+    return res.status(400).json({ error: `too many symbols (${symbols.length} > 30)` });
+  }
 
   try {
     if (mode === 'quote') {

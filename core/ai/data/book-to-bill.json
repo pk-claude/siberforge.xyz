@@ -1,12 +1,36 @@
 {
-  "updated": "2025-04-26",
-  "source": "company filings, manually extracted from earnings calls and 10-Q",
-  "data": [
-    { "symbol": "NVDA", "ratio": 1.42 },
-    { "symbol": "AMD", "ratio": 1.18 },
-    { "symbol": "AVGO", "ratio": 1.31 },
-    { "symbol": "TSM", "ratio": 1.09 },
-    { "symbol": "ASML", "ratio": 0.96 },
-    { "symbol": "MU", "ratio": 1.22 }
-  ]
+ "updated": "2026-06-10",
+ "source": "Company filings and earnings calls. Most names do not report bookings; ratio shown only where computable or management-cited.",
+ "data": [
+  {
+   "symbol": "NVDA",
+   "ratio": null,
+   "basis": "Not disclosed. May 2026 call: >$1T cumulative Blackwell+Rubin revenue visibility through CY2027; supply constrained through Vera Rubin."
+  },
+  {
+   "symbol": "AMD",
+   "ratio": null,
+   "basis": "Not disclosed. May 2026 call: AI demand 'sky high'; tens of $B data-center AI revenue expected in 2027."
+  },
+  {
+   "symbol": "AVGO",
+   "ratio": 2.8,
+   "basis": "AI semis only: ~$30B AI bookings vs $10.8B AI revenue shipped, Q2 FY26 (Jun 2026). Not company-wide."
+  },
+  {
+   "symbol": "TSM",
+   "ratio": null,
+   "basis": "Not disclosed. Apr 2026 call: CoWoS and leading-edge capacity effectively sold out through 2027."
+  },
+  {
+   "symbol": "ASML",
+   "ratio": 1.36,
+   "basis": "Net bookings EUR 13.2B / sales EUR 9.7B, Q4 2025 - the final print: ASML discontinued quarterly bookings disclosure in 2026."
+  },
+  {
+   "symbol": "MU",
+   "ratio": null,
+   "basis": "Not disclosed. Mar 2026: CY2026 HBM sold out; customers receiving ~50-67% of requested volume."
+  }
+ ]
 }

@@ -24,6 +24,22 @@ async function boot() {
 
   setupArchivePicker(manifest, weekToLoad);
 
+  // Surface staleness: this is a manually produced weekly brief. If the
+  // newest week is more than 14 days old, say so instead of looking current.
+  if (manifest?.current) {
+    const ageDays = Math.floor((Date.now() - new Date(manifest.current + 'T12:00:00Z')) / 86400000);
+    if (ageDays > 14) {
+      const hero = document.querySelector('.hero-block');
+      if (hero) {
+        const note = document.createElement('p');
+        note.className = 'stale-note';
+        note.textContent = 'Note: the latest brief is the week of ' + manifest.current +
+          ' (' + ageDays + ' days ago). No newer edition has been published.';
+        hero.appendChild(note);
+      }
+    }
+  }
+
   const data = await loadBrief(weekToLoad);
 
   renderSubject(data);

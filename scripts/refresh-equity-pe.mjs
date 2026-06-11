@@ -283,6 +283,21 @@ async function main() {
   const errs = histArr.filter(h => h.err);
   if (errs.length) console.log(`    history errors: ${errs.length} (e.g. ${errs[0].t}: ${errs[0].err})`);
 
+  // --- Sanity guards: never overwrite good data with a broken run. -------
+  // June 2026: Yahoo flipped on crumb enforcement and this script silently
+  // wrote 516 err records and an empty series.json. Fail loudly instead.
+  const fundErrs = records.filter(r => r.err).length;
+  const seriesCount = Object.keys(series).length;
+  if (fundErrs > records.length * 0.3) {
+    console.error(`[refresh-equity-pe] ABORT: ${fundErrs}/${records.length} fundamentals failed; not writing output.`);
+    console.error(`  first error: ${records.find(r => r.err)?.err}`);
+    process.exit(1);
+  }
+  if (seriesCount < records.length * 0.5) {
+    console.error(`[refresh-equity-pe] ABORT: only ${seriesCount} P/E series for ${records.length} tickers; not writing output.`);
+    process.exit(1);
+  }
+
   // Compute next-Sunday 14:00 UTC (skipping today if today is Sunday)
   const now = new Date();
   const next = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 14, 0, 0));

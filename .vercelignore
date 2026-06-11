@@ -1,0 +1,12 @@
+# Excluded from the Vercel deployment (stay in git, never served).
+.github/
+docs/
+deploys/
+branding/
+scripts/
+README.md
+*.ps1
+*.bak
+*.backup
+index.html.bak*
+node_modules/

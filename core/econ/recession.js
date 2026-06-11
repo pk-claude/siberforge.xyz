@@ -26,6 +26,7 @@ import {
   SERIES,
   HISTORY_START,
   NBER_RECESSIONS,
+  recessionRangesFromUsrec,
   tierOf,
   computeSignals,
   compositeOverTime,
@@ -72,10 +73,16 @@ function escapeHtml(s) {
 // ============================================================================
 // Fetching
 // ============================================================================
+// Recession shading ranges: derived from USREC at load time, with the
+// hardcoded NBER list as fallback (offline / fetch failure).
+let recessionRanges = NBER_RECESSIONS;
+
 async function fetchAll() {
-  const map = await fetchFred(SERIES, { start: HISTORY_START });
+  const map = await fetchFred([...SERIES, 'USREC'], { start: HISTORY_START });
   const out = {};
   for (const id of SERIES) out[id] = (map[id] && map[id].observations) || [];
+  const usrec = recessionRangesFromUsrec((map.USREC && map.USREC.observations) || []);
+  if (usrec.length) recessionRanges = usrec;
   return out;
 }
 
@@ -216,7 +223,7 @@ function shadeNberRecessions(u) {
 
   ctx.save();
   ctx.fillStyle = 'rgba(148, 163, 184, 0.12)';
-  for (const [pk, tr] of NBER_RECESSIONS) {
+  for (const [pk, tr] of recessionRanges) {
     const xStart = dateToTs(`${pk}-01`);
     const xEnd   = dateToTs(`${tr}-28`);
     const px1 = u.valToPos(xStart, 'x', true);

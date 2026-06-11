@@ -99,6 +99,14 @@ async function main() {
   const err = results.filter(r => r.err);
   console.log(`  ok=${ok.length} err=${err.length}`);
 
+  // Sanity guard: don't commit an empty/near-empty snapshot (June 2026:
+  // Yahoo crumb enforcement produced n:0 snapshots for days, silently).
+  if (ok.length < tickers.length * 0.7) {
+    console.error(`[snapshot-equity-pe] ABORT: only ${ok.length}/${tickers.length} tickers fetched; not writing snapshot.`);
+    console.error(`  first error: ${err[0]?.err}`);
+    process.exit(1);
+  }
+
   const snapshot = {
     date: day,
     captured_at: new Date().toISOString(),

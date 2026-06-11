@@ -228,6 +228,14 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   const dryRun = process.argv.includes('--dry-run');
   const snapshotRaw = await fs.readFile(SNAPSHOT_PATH, 'utf8');
   const snapshot = JSON.parse(snapshotRaw);
+  // schemaVersion 2: snapshot.json is lean; full history lives in history.json.
+  if (snapshot.schemaVersion >= 2) {
+    const histRaw = await fs.readFile(path.join(DATA_DIR, 'history.json'), 'utf8');
+    const hist = JSON.parse(histRaw);
+    for (const [id, series] of Object.entries(snapshot.series || {})) {
+      series.history = hist[id] || series.spark || [];
+    }
+  }
   const { INDICATORS } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/indicators.js')).toString());
   const { RELEASE_CADENCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/cadence.js')).toString());
   const cal = await buildCalendar({ snapshot, indicators: INDICATORS, cadenceMap: RELEASE_CADENCE, dryRun });

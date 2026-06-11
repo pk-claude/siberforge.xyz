@@ -21,12 +21,12 @@ const COMPUTE_BASKET_SYMBOLS = ['NVDA', 'AMD', 'AVGO', 'TSM', 'ASML', 'MU'];
 
 // Book-to-bill ratios (v3: externalized to JSON for easier updates)
 let BOOK_TO_BILL = [
-  { name: 'NVDA', value: 1.42 },
-  { name: 'AMD', value: 1.18 },
-  { name: 'AVGO', value: 1.31 },
-  { name: 'TSM', value: 1.09 },
-  { name: 'ASML', value: 0.96 },
-  { name: 'MU', value: 1.22 }
+  { name: 'NVDA', value: null, basis: 'Not disclosed' },
+  { name: 'AMD',  value: null, basis: 'Not disclosed' },
+  { name: 'AVGO', value: 2.8,  basis: 'AI semis only, Q2 FY26' },
+  { name: 'TSM',  value: null, basis: 'Not disclosed' },
+  { name: 'ASML', value: 1.36, basis: 'Q4 2025 - final bookings print' },
+  { name: 'MU',   value: null, basis: 'Not disclosed' }
 ];
 let BTB_UPDATED = null;
 
@@ -252,7 +252,7 @@ function renderBookToBillChart() {
     ctx.parentElement.parentElement.appendChild(updatedEl);
   }
   
-  const colors = BOOK_TO_BILL.map(d => d.value >= 1.0 ? '#2ecc71' : '#e74c3c');
+  const colors = BOOK_TO_BILL.map(d => d.value == null ? '#6b7280' : (d.value >= 1.0 ? '#2ecc71' : '#e74c3c'));
   
   new Chart(ctx.getContext('2d'), {
     type: 'bar',
@@ -275,9 +275,10 @@ function renderBookToBillChart() {
         tooltip: {
           callbacks: {
             label: (ctx) => {
-              const v = ctx.raw;
-              const suffix = v >= 1.0 ? ' (backlog growing)' : ' (backlog shrinking)';
-              return v.toFixed(2) + suffix;
+              const d = BOOK_TO_BILL[ctx.dataIndex] || {};
+              if (d.value == null) return d.basis || 'Not disclosed';
+              const suffix = d.value >= 1.0 ? ' (backlog growing)' : ' (backlog shrinking)';
+              return d.value.toFixed(2) + suffix + (d.basis ? ' - ' + d.basis : '');
             }
           }
         }
@@ -285,7 +286,7 @@ function renderBookToBillChart() {
       scales: {
         y: {
           beginAtZero: true,
-          max: 1.6,
+          max: Math.max(1.6, ...BOOK_TO_BILL.map(d => d.value || 0)) + 0.2,
           ticks: { stepSize: 0.2 }
         }
       }
@@ -377,7 +378,7 @@ async function fetchBookToBillData() {
     if (!res.ok) return;
     const json = await res.json();
     if (Array.isArray(json.data)) {
-      BOOK_TO_BILL = json.data.map(d => ({ name: d.symbol, value: d.ratio }));
+      BOOK_TO_BILL = json.data.map(d => ({ name: d.symbol, value: d.ratio, basis: d.basis || null }));
       BTB_UPDATED = json.updated || null;
     }
   } catch (err) {
@@ -445,7 +446,7 @@ function buildTakeaway(liveData) {
   }
   
   return `
-    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">AI compute revenue across the basket grew approximately +${basketYoY}% YoY in ${latestQ}, ${streakLanguage}. Book-to-bill stays above 1.0 across NVDA, AMD, AVGO.</span></div>
+    <div class="ai-takeaway-row"><span class="ai-takeaway-label">Where it stands</span><span class="ai-takeaway-text">AI compute revenue across the basket grew approximately +${basketYoY}% YoY in ${latestQ}, ${streakLanguage}. Bookings disclosures are thin: AVGO cited ~2.8x AI-only book-to-bill (Q2 FY26); ASML discontinued the metric; the rest give only supply-constraint commentary.</span></div>
     <div class="ai-takeaway-row"><span class="ai-takeaway-label">What it means</span><span class="ai-takeaway-text">Capex cycle still feeding through. NVDA data-center revenue is the cleanest read; AVGO custom-silicon ramp is the second derivative.</span></div>
     <div class="ai-takeaway-row"><span class="ai-takeaway-label">Why it matters</span><span class="ai-takeaway-text">Largest single-purpose capex print in history is flowing through these names. Slowing here is the first leading signal that hyperscaler capex is decelerating.</span></div>
     <div class="ai-takeaway-row ai-takeaway-row-action"><span class="ai-takeaway-label">Action</span><span class="ai-takeaway-text">${actionText}</span></div>

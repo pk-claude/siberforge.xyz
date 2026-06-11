@@ -28,7 +28,7 @@ export const SIGNALS = [
     direction: 'above',          // trigger when value >= threshold
     axisMin: -0.5,
     axisMax: 3.0,
-    description: 'UNRATE 3mo avg − its 12mo prior min. Trigger ≥ 0.50.',
+    description: 'UNRATE 3mo avg − its 12mo prior min. Trigger ≥ 0.50. Caveat: triggered mid-2024 with no recession following — its first false positive since 1970.',
   },
   {
     id: 'curve',
@@ -96,6 +96,26 @@ export const NBER_RECESSIONS = [
   ['2007-12', '2009-06'],
   ['2020-02', '2020-04'],
 ];
+
+// Derive [peak_month, trough_month] ranges from FRED USREC observations
+// (value 1 = recession month). Lets new NBER declarations show up without a
+// code change; NBER_RECESSIONS above stays as the offline fallback.
+export function recessionRangesFromUsrec(obs) {
+  const ranges = [];
+  let start = null, prev = null;
+  for (const o of obs || []) {
+    const ym = String(o.date).slice(0, 7);
+    if (o.value >= 1) {
+      if (start === null) start = ym;
+      prev = ym;
+    } else if (start !== null) {
+      ranges.push([start, prev]);
+      start = null;
+    }
+  }
+  if (start !== null) ranges.push([start, prev]);
+  return ranges;
+}
 
 // Tier thresholds
 export function tierOf(count) {

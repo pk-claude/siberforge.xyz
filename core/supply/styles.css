@@ -729,3 +729,14 @@ a:hover { color: var(--accent); }
   .deep-dive-nav.two-tier .section-pages { padding: 8px 12px; }
 }
 
+
+/* Aggregate data-health warning (failing scrape sources) */
+.data-health-warn {
+  margin: 10px 0 14px;
+  padding: 8px 12px;
+  border: 1px solid var(--line, #333);
+  border-left: 3px solid #d97706;
+  border-radius: 6px;
+  color: var(--muted-2, #999);
+  font-size: 12.5px;
+}
