@@ -335,3 +335,15 @@ main {
 :root[data-theme="light"] .eyebrow {
   background: rgba(181, 103, 0, 0.14);
 }
+
+/* Screen-reader-only utility (page h1 on dashboard pages whose visible
+   title lives in the shared header chrome) */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

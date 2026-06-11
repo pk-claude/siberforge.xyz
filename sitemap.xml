@@ -12,8 +12,8 @@
   <url><loc>https://www.siberforge.xyz/core/econ/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/econ/compare.html</loc></url>
   <url><loc>https://www.siberforge.xyz/core/econ/recession.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/core/equity/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/equity/pe/</loc></url>
+  <url><loc>https://www.siberforge.xyz/core/influencers/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/macro/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/macro/backtest/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/macro/bonds.html</loc></url>
@@ -52,5 +52,4 @@
   <url><loc>https://www.siberforge.xyz/core/supply/last-mile/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/supply/middle-mile/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/tools/</loc></url>
-  <url><loc>https://www.siberforge.xyz/core/influencers/</loc></url>
 </urlset>

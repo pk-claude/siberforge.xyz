@@ -633,3 +633,9 @@ main {
   color: var(--muted-2, #999);
   font-size: 13px;
 }
+
+/* Compact section links in the top bar (page is otherwise a dead end) */
+.top-nav { display: inline-flex; gap: 14px; margin-left: 22px; }
+.top-nav a { color: var(--muted-2, #8b93a7); font-size: 12.5px; text-decoration: none; letter-spacing: 0.2px; }
+.top-nav a:hover { color: var(--text, #e6edf6); }
+@media (max-width: 700px) { .top-nav { display: none; } }

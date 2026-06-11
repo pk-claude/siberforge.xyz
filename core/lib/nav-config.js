@@ -19,7 +19,7 @@
   'use strict';
 
   const SECTIONS = [
-    { id: 'equity',    label: 'Equity / Markets', href: '/core/single-name/' },
+    { id: 'equity',    label: 'Equity / Markets', href: '/core/macro/markets.html' },
     { id: 'macro',     label: 'Macro',            href: '/core/macro/' },
     { id: 'ai',        label: 'AI',               href: '/core/ai/' },
     { id: 'supply',    label: 'Supply Chain',     href: '/core/supply/' },
@@ -38,21 +38,11 @@
         ]},
         { label: 'Single-name', links: [
           { id: 'single-name-hub', label: 'Single-name research', href: '/core/single-name/', meta: 'All single-name deep dives' },
-          { id: 'equity-hub',      label: 'Equity hub',           href: '/core/equity/',      meta: 'Top-5 AI winners deep dive' },
           { id: 'plug-overview',   label: 'Plug Power (PLUG)',    href: '/core/plug/',        meta: '6 views - cash flow, revenue, balance, liquidity, footprint' },
           { id: 'influencers',     label: 'Daily Influencers',    href: '/core/influencers/', meta: 'Weekly brief - the macro forces moving one subject name' },
         ]},
         { label: 'Valuation', links: [
           { id: 'pe-overview',     label: 'P/E Multiples',        href: '/core/equity/pe/',   meta: 'S&P 500 + Nasdaq-100 trailing & forward P/E, sortable, with daily forward-P/E history' },
-        ]},
-      ],
-    },
-
-    'equity:pe': {
-      label: 'Equity Valuation - P/E',
-      groups: [
-        { links: [
-          { id: 'pe-overview', label: 'P/E Multiples', href: '/core/equity/pe/', meta: 'S&P 500 & Nasdaq-100, sortable & groupable, click for 5y P/E chart and detail panel' },
         ]},
       ],
     },
@@ -83,11 +73,11 @@
           { id: 'credit',    label: 'Credit',    href: '/core/macro/credit/',    sub: true, meta: 'Spreads, default rates, loan growth' },
           { id: 'labor',     label: 'Labor',     href: '/core/macro/labor/',     sub: true, meta: 'Payrolls, wages, participation' },
         ]},
-        { links: [
+        { label: 'Regional', links: [
           { id: 'regional',   label: 'Regional',   href: '/core/macro/regional/',  meta: 'All regional dispersion views' },
           { id: 'geography',  label: 'Geography',  href: '/core/macro/geography/', meta: 'State + MSA selectors, ranked bars' },
         ]},
-        { links: [
+        { label: 'Indicators & risk', links: [
           { id: 'indicators', label: 'All 22 indicators', href: '/core/econ/',          meta: 'Card grid - latest, YoY, percentile, sparkline, live' },
           { id: 'recession',  label: 'Recession composite', href: '/core/econ/recession.html', meta: '5-signal model: Sahm, 10Y-3M, HY OAS, UNRATE, NFP' },
         ]},
@@ -131,7 +121,7 @@
     supply: {
       label: 'Supply Chain',
       groups: [
-        { links: [
+        { label: 'Dashboards', links: [
           { id: 'supply-overview',     label: 'Overview & SC Pressure', href: '/core/supply/',                 meta: '4-quadrant headline - z-score blend' },
           { id: 'supply-insights',     label: 'Insights',               href: '/core/supply/insights/',        meta: 'Curated weekly read on what moved' },
           { id: 'supply-dc',           label: 'Distribution Center',    href: '/core/supply/dc/',              meta: 'Wages, packaging, equipment, inventories' },
@@ -140,7 +130,7 @@
           { id: 'supply-last',         label: 'Last Mile',              href: '/core/supply/last-mile/',       meta: 'Couriers, USPS volume, e-commerce share' },
           { id: 'supply-international',label: 'International / Sourcing', href: '/core/supply/international/', meta: 'GSCPI, WCI, SCFI, FBX, BDI, ports, bunker' },
         ]},
-        { links: [
+        { label: 'Data', links: [
           { id: 'supply-downloads',    label: 'Downloads (CSV + zip)',  href: '/core/supply/data.html',        meta: 'All series, full history', sub: true },
         ]},
       ],
@@ -218,6 +208,12 @@
       id: 'tools',
       title: 'Tools',
       pages: 'tools',
+      open: false,
+    },
+    {
+      id: 'reference',
+      title: 'Reference',
+      pages: 'reference',
       open: false,
     },
   ];
