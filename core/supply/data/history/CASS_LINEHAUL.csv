@@ -1,4 +1,4 @@
-# Cass Truckload Linehaul Index  source=scrape:cass  generated=2026-06-08T10:22:01.307Z
+# Cass Truckload Linehaul Index  source=scrape:cass  generated=2026-06-15T11:49:55.899Z
 date,value
 2005-01-01,100
 2005-02-01,100.52
@@ -256,3 +256,4 @@ date,value
 2026-02-01,146.3
 2026-03-01,145.6
 2026-04-01,150.2
+2026-05-01,150.8
