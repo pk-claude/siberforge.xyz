@@ -1,4 +1,4 @@
-# Manufacturing Inventories  source=fred  generated=2026-06-15T11:49:52.441Z
+# Manufacturing Inventories  source=fred  generated=2026-06-22T11:38:49.585Z
 date,value
 2010-01-01,505695
 2010-02-01,510367
@@ -194,4 +194,5 @@ date,value
 2025-12-01,949081
 2026-01-01,949640
 2026-02-01,950428
-2026-03-01,956272
+2026-03-01,956676
+2026-04-01,959125

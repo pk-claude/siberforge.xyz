@@ -1,4 +1,4 @@
-# Philly Fed Mfg Delivery Time  source=fred  generated=2026-06-15T11:49:52.453Z
+# Philly Fed Mfg Delivery Time  source=fred  generated=2026-06-22T11:38:49.601Z
 date,value
 2010-01-01,4.5
 2010-02-01,-3.9
@@ -197,3 +197,4 @@ date,value
 2026-03-01,18.9
 2026-04-01,1.7
 2026-05-01,-10.4
+2026-06-01,-2.6
