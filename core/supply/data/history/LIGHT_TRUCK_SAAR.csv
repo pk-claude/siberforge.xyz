@@ -1,4 +1,4 @@
-# Light Trucks SAAR  source=fred  generated=2026-06-22T11:38:49.596Z
+# Light Trucks SAAR  source=fred  generated=2026-06-29T10:27:18.938Z
 date,value
 2010-01-01,5.252
 2010-02-01,5.011
@@ -196,4 +196,4 @@ date,value
 2026-02-01,12.951
 2026-03-01,13.534
 2026-04-01,13.319
-2026-05-01,13.428
+2026-05-01,13.427

@@ -1,4 +1,4 @@
-# Industrial Electricity Rate (US)  source=eia  generated=2026-06-22T11:38:50.521Z
+# Industrial Electricity Rate (US)  source=eia  generated=2026-06-29T10:27:20.323Z
 date,value
 2001-01-01,4.73
 2001-02-01,4.8
@@ -303,3 +303,4 @@ date,value
 2026-01-01,9.29
 2026-02-01,8.95
 2026-03-01,8.58
+2026-04-01,8.66

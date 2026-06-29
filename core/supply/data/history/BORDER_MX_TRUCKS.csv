@@ -1,4 +1,4 @@
-# US-Mexico Border Truck Crossings  source=scrape:bts-borders  generated=2026-06-22T11:38:58.706Z
+# US-Mexico Border Truck Crossings  source=scrape:bts-borders  generated=2026-06-29T10:27:27.178Z
 date,value
 1996-01-01,255.176
 1996-02-01,258.334
@@ -364,3 +364,4 @@ date,value
 2026-02-01,613.842
 2026-03-01,674.389
 2026-04-01,645.972
+2026-05-01,636.462
