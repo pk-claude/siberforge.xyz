@@ -217,3 +217,10 @@
 .status-pill.green  { background: #dcfce7; color: #15803d; }
 .status-pill.yellow { background: #fff5dc; color: #c47f00; }
 .status-pill.red    { background: #fee2e2; color: #b91c1c; }
+
+/* Mobile: scenario column must shrink; table scrolls inside its box */
+@media (max-width: 700px) {
+  .scn-wrap > * { min-width: 0; }
+  .scn-ctrl, .scn-output { min-width: 0; }
+  .scn-output { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

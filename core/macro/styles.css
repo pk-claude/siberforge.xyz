@@ -616,8 +616,9 @@ footer {
 }
 
 @media (max-width: 700px) {
-  .controls { gap: 10px; }
-  .control select { min-width: 140px; }
+  .controls { gap: 10px; padding: 12px; }
+  .control { flex: 1 1 100%; min-width: 0; }
+  .control select { min-width: 0; width: 100%; max-width: 100%; }
   .chart-wrap { height: 340px; }
 }
 
@@ -961,6 +962,10 @@ footer {
 @media (max-width: 1000px) {
   .ticker-headline { grid-template-columns: 1fr; gap: 12px; }
   .ticker-grid     { grid-template-columns: 1fr; }
+}
+@media (max-width: 700px) {
+  .ticker-grid { padding: 12px 12px 20px; gap: 12px; }
+  .ticker-holdings, .ticker-news { overflow-x: auto; padding: 12px; }
 }
 
 /* ========================================================================= */
@@ -2702,3 +2707,7 @@ footer {
   .ai-heatmap-row { grid-template-columns: 50px repeat(8, 1fr); font-size: 9px; }
   .ai-heatmap-cell { padding: 6px 4px; }
 }
+
+/* Mobile: AI basket sparkline canvases must not force grid column width */
+.ai-basket-tile { min-width: 0; }
+.ai-basket-tile-spark canvas { width: 100% !important; height: 100% !important; }

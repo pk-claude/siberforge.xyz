@@ -42,28 +42,28 @@ const CATALOG = {
   // Nuclear generation, US total — monthly
   NUCLEAR_GEN_US: {
     path: '/electricity/electric-power-operational-data/data',
-    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['NUC'] },
+    facets: { sectorid: ['99'], location: ['US'], fueltypeid: ['NUC'] },
     freq: 'monthly',
     value: 'generation',
   },
   // Renewable generation, US total — monthly
   RENEWABLE_GEN_US: {
     path: '/electricity/electric-power-operational-data/data',
-    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['REN'] },
+    facets: { sectorid: ['99'], location: ['US'], fueltypeid: ['REN'] },
     freq: 'monthly',
     value: 'generation',
   },
   // Natural gas generation, US total — monthly
   GAS_GEN_US: {
     path: '/electricity/electric-power-operational-data/data',
-    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['NG'] },
+    facets: { sectorid: ['99'], location: ['US'], fueltypeid: ['NG'] },
     freq: 'monthly',
     value: 'generation',
   },
   // Coal generation, US total — monthly
   COAL_GEN_US: {
     path: '/electricity/electric-power-operational-data/data',
-    facets: { sectorid: ['99'], stateid: ['US'], fueltypeid: ['COW'] },
+    facets: { sectorid: ['99'], location: ['US'], fueltypeid: ['COW'] },
     freq: 'monthly',
     value: 'generation',
   },

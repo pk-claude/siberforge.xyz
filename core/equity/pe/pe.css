@@ -292,3 +292,10 @@
 @media print{
   #panel,#tip,#scrim,.cs-tabs,.cs-controls{display:none!important}
 }
+
+/* Mobile: controls shrink, rows truncate names */
+@media (max-width: 700px) {
+  .cs-controls input { min-width: 0; flex: 1 1 120px; }
+  .cs-controls select { max-width: 100%; }
+  .cols-wrap.c3,.cols-wrap.c4,.cols-wrap.c5,.cols-wrap.c6{column-count:1}
+}

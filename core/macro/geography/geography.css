@@ -268,3 +268,9 @@
   font-weight: 700;
   margin-bottom: 3px;
 }
+
+/* Mobile: metro select shrinks to fit */
+@media (max-width: 700px) {
+  .geo-controls .control-group { flex-wrap: wrap; max-width: 100%; }
+  .geo-controls select { min-width: 0; flex: 1 1 auto; max-width: 100%; }
+}

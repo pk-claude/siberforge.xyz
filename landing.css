@@ -944,3 +944,47 @@ body.landing-page.editorial .ed-copyright {
 body.landing-page.editorial .ed-hub .leaf:not(.sub)::before {
   content: ''; flex: 0 0 10px; height: 0; display: block;
 }
+
+
+/* ===================== MOBILE (iPhone-width) ===================== */
+@media (max-width: 640px) {
+  body.landing-page.editorial {
+    --ed-sec-pad: 56px;
+    --ed-side-pad: 16px;
+  }
+
+  /* Nav: tighter brand + controls so the fixed bar fits 390px */
+  body.landing-page.editorial .ed-nav { padding: 12px var(--ed-side-pad); }
+  body.landing-page.editorial .ed-brand { gap: 8px; font-size: 15px; }
+  body.landing-page.editorial .ed-eyes-mini { width: 34px; height: 16px; flex: 0 0 auto; }
+  body.landing-page.editorial .ed-nav-right { gap: 10px; }
+  body.landing-page.editorial .ed-nav-cta { padding: 6px 12px; font-size: 13px; }
+
+  /* Live ribbon tiles: tighter padding, let label/delta wrap instead of bleeding */
+  body.landing-page.editorial .mini-tile { padding: 14px; }
+  body.landing-page.editorial .mini-tile-head { flex-wrap: wrap; gap: 2px 8px; }
+  body.landing-page.editorial .mini-tile-value { font-size: 26px; }
+
+  /* Strip cards */
+  body.landing-page.editorial .rec-strip,
+  body.landing-page.editorial .ind-strip { padding: 18px 16px; }
+  body.landing-page.editorial .rec-dots { gap: 6px; }
+  body.landing-page.editorial .rec-dot-item { font-size: 9.5px; overflow-wrap: anywhere; }
+  body.landing-page.editorial .ind-tier { min-width: 0; }
+
+  /* Hub controls: search on its own row, buttons below */
+  body.landing-page.editorial .ed-hub .hub-controls { flex-wrap: wrap; }
+  body.landing-page.editorial .ed-hub .hub-search { flex: 1 1 100%; min-width: 0; }
+
+  /* Hub leaves: allow meta to wrap under the name */
+  body.landing-page.editorial .ed-hub .leaf { flex-wrap: wrap; row-gap: 2px; }
+  body.landing-page.editorial .ed-hub .leaf-name,
+  body.landing-page.editorial .ed-hub .leaf.sub .leaf-name { min-width: 0; }
+
+  /* Themes + about spacing */
+  body.landing-page.editorial .ed-theme { padding: 24px 18px; }
+  body.landing-page.editorial .ed-stat-row { gap: 28px; flex-wrap: wrap; }
+
+  /* Subscribe form stacks */
+  body.landing-page.editorial .ed-sub-form { flex-direction: column; }
+}

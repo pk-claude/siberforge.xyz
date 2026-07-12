@@ -147,3 +147,8 @@ td.bt-best::after {
 @media (max-width: 800px) {
   .bt-chart-wrap { height: 300px; }
 }
+
+/* Mobile: regime table scrolls horizontally */
+@media (max-width: 700px) {
+  .bt-regime-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

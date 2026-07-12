@@ -256,3 +256,8 @@
   padding: 9px 12px;
 }
 .md-notes strong { color: var(--accent); }
+
+/* Mobile: wide regional tables scroll horizontally */
+@media (max-width: 700px) {
+  .reg-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

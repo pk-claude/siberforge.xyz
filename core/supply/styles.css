@@ -740,3 +740,8 @@ a:hover { color: var(--accent); }
   color: var(--muted-2, #999);
   font-size: 12.5px;
 }
+
+/* Mobile: insights + download tables scroll horizontally */
+@media (max-width: 700px) {
+  .insights-table, #download-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

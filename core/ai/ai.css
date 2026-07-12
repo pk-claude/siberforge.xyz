@@ -68,3 +68,8 @@
 @media (max-width: 640px) {
   .brand-icon { width: 20px; height: 20px; }
 }
+
+/* Mobile: AI data tables scroll horizontally inside the page */
+@media (max-width: 700px) {
+  table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+}

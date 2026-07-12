@@ -45,6 +45,34 @@ async function fetchSP500() {
 }
 
 async function fetchNDX() {
+  // Wikipedia removed the components table from the Nasdaq-100 article
+  // (observed July 2026), so we use Nasdaq's own list API instead.
+  // Falls back to the old Wikipedia table parse if the API shape changes.
+  try {
+    const raw = await fetchWithRetry('https://api.nasdaq.com/api/quote/list-type/nasdaq100',
+      { headers: { 'User-Agent': 'Mozilla/5.0', 'Accept': 'application/json' } });
+    const json = typeof raw === 'string' ? JSON.parse(raw) : raw;
+    const rows = (json?.data?.data?.rows || [])
+      .map(r => ({
+        ticker: String(r.symbol || '').trim().replace(/\./g, '-'),
+        name: String(r.companyName || '')
+          .replace(/ Common (Stock|Shares).*$/i, '')
+          .replace(/ Class [A-C].*$/i, '')
+          .replace(/ Ordinary Shares.*$/i, '')
+          .replace(/ Depositary Shares.*$/i, '')
+          .trim(),
+      }))
+      .filter(r => r.ticker);
+    if (rows.length >= 80 && rows.length < 130) return rows;
+    console.warn(`  fetchNDX: nasdaq API returned ${rows.length} rows, falling back to Wikipedia`);
+  } catch (err) {
+    console.warn(`  fetchNDX: nasdaq API failed (${err.message}), falling back to Wikipedia`);
+  }
+  return await fetchNDXWikipedia();
+}
+
+async function fetchNDXWikipedia() {
+
   const html = await fetchWithRetry('https://en.wikipedia.org/wiki/Nasdaq-100',
     { headers: { 'User-Agent': 'siberforge-bot' } });
   const $ = cheerio.load(html);
