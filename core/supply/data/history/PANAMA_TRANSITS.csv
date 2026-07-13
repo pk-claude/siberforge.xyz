@@ -1,4 +1,4 @@
-# Panama Canal Monthly Transits  source=scrape:imf-portwatch  generated=2026-07-06T10:01:29.233Z
+# Panama Canal Monthly Transits  source=scrape:imf-portwatch  generated=2026-07-13T08:54:17.358Z
 date,value
 2019-01-01,969
 2019-02-01,871
@@ -89,4 +89,4 @@ date,value
 2026-03-01,1048
 2026-04-01,1036
 2026-05-01,1064
-2026-06-01,827
+2026-06-01,887
