@@ -1,4 +1,4 @@
-# VLSFO Bunker — Singapore  source=scrape:shipbunker  generated=2026-07-13T08:54:14.951Z
+# VLSFO Bunker — Singapore  source=scrape:shipbunker  generated=2026-07-20T08:44:32.656Z
 date,value
 2026-04-26,755
 2026-04-27,755
@@ -13,3 +13,4 @@ date,value
 2026-06-29,712.5
 2026-07-06,663.5
 2026-07-13,676
+2026-07-20,769.5
