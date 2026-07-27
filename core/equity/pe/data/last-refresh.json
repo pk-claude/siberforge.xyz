@@ -7,5 +7,6 @@
   "sp500": 503,
   "nasdaq100": 0,
   "series_count": 500,
-  "snapshot_count": 33
+  "snapshot_count": 34,
+  "latest_snapshot": "2026-07-27"
 }
