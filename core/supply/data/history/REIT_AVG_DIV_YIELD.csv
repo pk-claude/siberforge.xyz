@@ -1,4 +1,4 @@
-# Industrial REIT Avg Dividend Yield  source=yahoo  generated=2026-07-20T08:44:30.176Z
+# Industrial REIT Avg Dividend Yield  source=yahoo  generated=2026-07-27T09:35:41.327Z
 date,value
 2021-09-29,0.574
 2021-09-30,0.574
@@ -1204,3 +1204,8 @@ date,value
 2026-07-15,3.385
 2026-07-16,3.215
 2026-07-17,3.225
+2026-07-20,3.254
+2026-07-21,3.236
+2026-07-22,3.294
+2026-07-23,3.343
+2026-07-24,3.257

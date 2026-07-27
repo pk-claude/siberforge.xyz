@@ -5,7 +5,7 @@
       "seriesCount": 43,
       "successCount": 43,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:25.752Z",
+      "lastSuccess": "2026-07-27T09:35:37.438Z",
       "staleDays": 0,
       "stale": false
     },
@@ -13,7 +13,7 @@
       "seriesCount": 3,
       "successCount": 3,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:27.130Z",
+      "lastSuccess": "2026-07-27T09:35:38.728Z",
       "staleDays": 0,
       "stale": false
     },
@@ -21,7 +21,7 @@
       "seriesCount": 14,
       "successCount": 14,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:30.189Z",
+      "lastSuccess": "2026-07-27T09:35:41.336Z",
       "staleDays": 0,
       "stale": false
     },
@@ -29,7 +29,7 @@
       "seriesCount": 3,
       "successCount": 3,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:30.689Z",
+      "lastSuccess": "2026-07-27T09:35:41.835Z",
       "staleDays": 0,
       "stale": false
     },
@@ -57,7 +57,7 @@
       "seriesCount": 1,
       "successCount": 1,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:31.671Z",
+      "lastSuccess": "2026-07-27T09:35:43.064Z",
       "staleDays": 0,
       "stale": false
     },
@@ -75,7 +75,7 @@
       "seriesCount": 1,
       "successCount": 1,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:32.306Z",
+      "lastSuccess": "2026-07-27T09:35:43.776Z",
       "staleDays": 0,
       "stale": false
     },
@@ -88,7 +88,7 @@
       "seriesCount": 2,
       "successCount": 2,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:32.657Z",
+      "lastSuccess": "2026-07-27T09:35:44.342Z",
       "staleDays": 0,
       "stale": false
     },
@@ -101,7 +101,7 @@
       "seriesCount": 1,
       "successCount": 1,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:35.102Z",
+      "lastSuccess": "2026-07-27T09:35:46.287Z",
       "staleDays": 0,
       "stale": false
     },
@@ -124,7 +124,7 @@
       "seriesCount": 1,
       "successCount": 1,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:35.105Z",
+      "lastSuccess": "2026-07-27T09:35:46.289Z",
       "staleDays": 0,
       "stale": false
     },
@@ -132,7 +132,7 @@
       "seriesCount": 5,
       "successCount": 5,
       "errorCount": 0,
-      "lastSuccess": "2026-07-20T08:44:33.656Z",
+      "lastSuccess": "2026-07-27T09:35:45.574Z",
       "staleDays": 0,
       "stale": false
     }
@@ -140,147 +140,147 @@
   "series": {
     "WAREHOUSE_AHE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.728Z",
+      "lastFetchAt": "2026-07-27T09:35:37.418Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.728Z"
+      "lastSuccess": "2026-07-27T09:35:37.418Z"
     },
     "WAREHOUSE_EMP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.728Z",
+      "lastFetchAt": "2026-07-27T09:35:37.420Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.728Z"
+      "lastSuccess": "2026-07-27T09:35:37.420Z"
     },
     "JOLTS_TWU_OPENINGS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.729Z",
+      "lastFetchAt": "2026-07-27T09:35:37.422Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.729Z"
+      "lastSuccess": "2026-07-27T09:35:37.422Z"
     },
     "JOLTS_TWU_QUITS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.729Z",
+      "lastFetchAt": "2026-07-27T09:35:37.423Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.729Z"
+      "lastSuccess": "2026-07-27T09:35:37.423Z"
     },
     "JOLTS_TWU_LAYOFFS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.730Z",
+      "lastFetchAt": "2026-07-27T09:35:37.423Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.730Z"
+      "lastSuccess": "2026-07-27T09:35:37.423Z"
     },
     "PPI_CORRUGATED": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.730Z",
+      "lastFetchAt": "2026-07-27T09:35:37.424Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.730Z"
+      "lastSuccess": "2026-07-27T09:35:37.424Z"
     },
     "PPI_PALLETS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.731Z",
+      "lastFetchAt": "2026-07-27T09:35:37.425Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.731Z"
+      "lastSuccess": "2026-07-27T09:35:37.425Z"
     },
     "PPI_MAT_HANDLING": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.732Z",
+      "lastFetchAt": "2026-07-27T09:35:37.426Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.732Z"
+      "lastSuccess": "2026-07-27T09:35:37.426Z"
     },
     "PPI_WAREHOUSE_SVCS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.732Z",
+      "lastFetchAt": "2026-07-27T09:35:37.426Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.732Z"
+      "lastSuccess": "2026-07-27T09:35:37.426Z"
     },
     "INVENTORIES_TO_SALES": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.733Z",
+      "lastFetchAt": "2026-07-27T09:35:37.427Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.733Z"
+      "lastSuccess": "2026-07-27T09:35:37.427Z"
     },
     "INV_MFG": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.733Z",
+      "lastFetchAt": "2026-07-27T09:35:37.427Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.733Z"
+      "lastSuccess": "2026-07-27T09:35:37.427Z"
     },
     "INV_RETAIL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.734Z",
+      "lastFetchAt": "2026-07-27T09:35:37.428Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.734Z"
+      "lastSuccess": "2026-07-27T09:35:37.428Z"
     },
     "INV_WHOLESALE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.734Z",
+      "lastFetchAt": "2026-07-27T09:35:37.428Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.734Z"
+      "lastSuccess": "2026-07-27T09:35:37.428Z"
     },
     "CONSTR_PRIVATE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.735Z",
+      "lastFetchAt": "2026-07-27T09:35:37.428Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.735Z"
+      "lastSuccess": "2026-07-27T09:35:37.428Z"
     },
     "CONSTR_MANUF": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.735Z",
+      "lastFetchAt": "2026-07-27T09:35:37.429Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.735Z"
+      "lastSuccess": "2026-07-27T09:35:37.429Z"
     },
     "CRE_DELINQ": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.736Z",
+      "lastFetchAt": "2026-07-27T09:35:37.429Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.736Z"
+      "lastSuccess": "2026-07-27T09:35:37.429Z"
     },
     "CRE_PRICES": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.736Z",
+      "lastFetchAt": "2026-07-27T09:35:37.429Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.736Z"
+      "lastSuccess": "2026-07-27T09:35:37.429Z"
     },
     "MFG_CAPACITY_UTIL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.737Z",
+      "lastFetchAt": "2026-07-27T09:35:37.430Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.737Z"
+      "lastSuccess": "2026-07-27T09:35:37.430Z"
     },
     "ATA_TONNAGE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.739Z",
+      "lastFetchAt": "2026-07-27T09:35:37.431Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.739Z"
+      "lastSuccess": "2026-07-27T09:35:37.431Z"
     },
     "TRUCKING_EMP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.739Z",
+      "lastFetchAt": "2026-07-27T09:35:37.431Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.739Z"
+      "lastSuccess": "2026-07-27T09:35:37.431Z"
     },
     "TSI_FREIGHT": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.741Z",
+      "lastFetchAt": "2026-07-27T09:35:37.432Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.741Z"
+      "lastSuccess": "2026-07-27T09:35:37.432Z"
     },
     "HEAVY_TRUCK_SAAR": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.742Z",
+      "lastFetchAt": "2026-07-27T09:35:37.432Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.742Z"
+      "lastSuccess": "2026-07-27T09:35:37.432Z"
     },
     "PPI_LONGHAUL_TL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.742Z",
+      "lastFetchAt": "2026-07-27T09:35:37.432Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.742Z"
+      "lastSuccess": "2026-07-27T09:35:37.432Z"
     },
     "COURIER_EMP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.743Z",
+      "lastFetchAt": "2026-07-27T09:35:37.433Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.743Z"
+      "lastSuccess": "2026-07-27T09:35:37.433Z"
     },
     "LOCAL_TRUCK_EMP": {
       "ok": false,
@@ -289,63 +289,63 @@
     },
     "ECOM_SHARE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.744Z",
+      "lastFetchAt": "2026-07-27T09:35:37.433Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.744Z"
+      "lastSuccess": "2026-07-27T09:35:37.433Z"
     },
     "ECOM_SALES": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.744Z",
+      "lastFetchAt": "2026-07-27T09:35:37.433Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.744Z"
+      "lastSuccess": "2026-07-27T09:35:37.433Z"
     },
     "RETAIL_EMP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.745Z",
+      "lastFetchAt": "2026-07-27T09:35:37.434Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.745Z"
+      "lastSuccess": "2026-07-27T09:35:37.434Z"
     },
     "LIGHT_TRUCK_SAAR": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.745Z",
+      "lastFetchAt": "2026-07-27T09:35:37.434Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.745Z"
+      "lastSuccess": "2026-07-27T09:35:37.434Z"
     },
     "GASREG": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.746Z",
+      "lastFetchAt": "2026-07-27T09:35:37.434Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.746Z"
+      "lastSuccess": "2026-07-27T09:35:37.434Z"
     },
     "PPI_COURIERS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.746Z",
+      "lastFetchAt": "2026-07-27T09:35:37.435Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.746Z"
+      "lastSuccess": "2026-07-27T09:35:37.435Z"
     },
     "PPI_LOCAL_TRUCKING": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.747Z",
+      "lastFetchAt": "2026-07-27T09:35:37.435Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.747Z"
+      "lastSuccess": "2026-07-27T09:35:37.435Z"
     },
     "US_IMPORTS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.747Z",
+      "lastFetchAt": "2026-07-27T09:35:37.435Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.747Z"
+      "lastSuccess": "2026-07-27T09:35:37.435Z"
     },
     "US_EXPORTS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.748Z",
+      "lastFetchAt": "2026-07-27T09:35:37.435Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.748Z"
+      "lastSuccess": "2026-07-27T09:35:37.435Z"
     },
     "TWD_BROAD": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.750Z",
+      "lastFetchAt": "2026-07-27T09:35:37.437Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.750Z"
+      "lastSuccess": "2026-07-27T09:35:37.437Z"
     },
     "AIR_FREIGHT": {
       "ok": false,
@@ -354,51 +354,51 @@
     },
     "ELEC_INDUSTRIAL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:27.128Z",
+      "lastFetchAt": "2026-07-27T09:35:38.715Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:27.128Z"
+      "lastSuccess": "2026-07-27T09:35:38.715Z"
     },
     "DIESEL_RETAIL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:27.129Z",
+      "lastFetchAt": "2026-07-27T09:35:38.715Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:27.129Z"
+      "lastSuccess": "2026-07-27T09:35:38.715Z"
     },
     "GASOLINE_RETAIL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:27.130Z",
+      "lastFetchAt": "2026-07-27T09:35:38.728Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:27.130Z"
+      "lastSuccess": "2026-07-27T09:35:38.728Z"
     },
     "REIT_INDUSTRIAL_BASKET": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.175Z",
+      "lastFetchAt": "2026-07-27T09:35:41.327Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.175Z"
+      "lastSuccess": "2026-07-27T09:35:41.327Z"
     },
     "REIT_AVG_DIV_YIELD": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.176Z",
+      "lastFetchAt": "2026-07-27T09:35:41.327Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.176Z"
+      "lastSuccess": "2026-07-27T09:35:41.327Z"
     },
     "CASS_SHIPMENTS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.688Z",
+      "lastFetchAt": "2026-07-27T09:35:41.834Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.688Z"
+      "lastSuccess": "2026-07-27T09:35:41.834Z"
     },
     "CASS_EXPENDITURES": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.689Z",
+      "lastFetchAt": "2026-07-27T09:35:41.835Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.689Z"
+      "lastSuccess": "2026-07-27T09:35:41.835Z"
     },
     "CASS_LINEHAUL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.689Z",
+      "lastFetchAt": "2026-07-27T09:35:41.835Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.689Z"
+      "lastSuccess": "2026-07-27T09:35:41.835Z"
     },
     "DAT_VAN_SPOT": {
       "ok": false,
@@ -417,15 +417,15 @@
     },
     "AAR_CARLOADS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.740Z",
+      "lastFetchAt": "2026-07-27T09:35:37.431Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.740Z"
+      "lastSuccess": "2026-07-27T09:35:37.431Z"
     },
     "AAR_INTERMODAL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.740Z",
+      "lastFetchAt": "2026-07-27T09:35:37.432Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.740Z"
+      "lastSuccess": "2026-07-27T09:35:37.432Z"
     },
     "CLASS8_ORDERS": {
       "ok": false,
@@ -434,19 +434,19 @@
     },
     "USPS_FIRST_CLASS": {
       "ok": false,
-      "lastFetchAt": "2026-07-20T08:44:31.403Z",
+      "lastFetchAt": "2026-07-27T09:35:42.540Z",
       "error": "USPS scraper: no prior history; layout-fragile, awaiting parser refinement"
     },
     "USPS_PACKAGES": {
       "ok": false,
-      "lastFetchAt": "2026-07-20T08:44:31.403Z",
+      "lastFetchAt": "2026-07-27T09:35:42.540Z",
       "error": "USPS scraper: no prior history; layout-fragile, awaiting parser refinement"
     },
     "GSCPI": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:31.671Z",
+      "lastFetchAt": "2026-07-27T09:35:43.064Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:31.671Z"
+      "lastSuccess": "2026-07-27T09:35:43.064Z"
     },
     "WCI_COMPOSITE": {
       "ok": false,
@@ -470,9 +470,9 @@
     },
     "FBX_GLOBAL": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:32.306Z",
+      "lastFetchAt": "2026-07-27T09:35:43.776Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:32.306Z"
+      "lastSuccess": "2026-07-27T09:35:43.776Z"
     },
     "BDI": {
       "ok": false,
@@ -481,190 +481,190 @@
     },
     "BUNKER_VLSFO_SIN": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:32.656Z",
+      "lastFetchAt": "2026-07-27T09:35:44.342Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:32.656Z"
+      "lastSuccess": "2026-07-27T09:35:44.342Z"
     },
     "BUNKER_VLSFO_RTM": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:32.657Z",
+      "lastFetchAt": "2026-07-27T09:35:44.342Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:32.657Z"
+      "lastSuccess": "2026-07-27T09:35:44.342Z"
     },
     "PORT_LA_TEU": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:33.654Z",
+      "lastFetchAt": "2026-07-27T09:35:45.573Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:33.654Z"
+      "lastSuccess": "2026-07-27T09:35:45.573Z"
     },
     "PORT_LB_TEU": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:33.655Z",
+      "lastFetchAt": "2026-07-27T09:35:45.574Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:33.655Z"
+      "lastSuccess": "2026-07-27T09:35:45.574Z"
     },
     "PORT_NYNJ_TEU": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:33.655Z",
+      "lastFetchAt": "2026-07-27T09:35:45.574Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:33.655Z"
+      "lastSuccess": "2026-07-27T09:35:45.574Z"
     },
     "WAREHOUSE_AHE_YOY": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:35.108Z",
+      "lastFetchAt": "2026-07-27T09:35:46.290Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:35.108Z"
+      "lastSuccess": "2026-07-27T09:35:46.290Z"
     },
     "REIT_YIELD_SPREAD_10Y": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:35.114Z",
+      "lastFetchAt": "2026-07-27T09:35:46.296Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:35.114Z"
+      "lastSuccess": "2026-07-27T09:35:46.296Z"
     },
     "SCP_COMPOSITE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:35.132Z",
+      "lastFetchAt": "2026-07-27T09:35:46.309Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:35.132Z"
+      "lastSuccess": "2026-07-27T09:35:46.309Z"
     },
     "TRANSPORT_SUPPORT_EMP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.743Z",
+      "lastFetchAt": "2026-07-27T09:35:37.433Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.743Z"
+      "lastSuccess": "2026-07-27T09:35:37.433Z"
     },
     "AIR_TRANSP_EMP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.750Z",
+      "lastFetchAt": "2026-07-27T09:35:37.437Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.750Z"
+      "lastSuccess": "2026-07-27T09:35:37.437Z"
     },
     "EMPIRE_DELIVERY": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.751Z",
+      "lastFetchAt": "2026-07-27T09:35:37.437Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.751Z"
+      "lastSuccess": "2026-07-27T09:35:37.437Z"
     },
     "PHILLY_DELIVERY": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.751Z",
+      "lastFetchAt": "2026-07-27T09:35:37.437Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.751Z"
+      "lastSuccess": "2026-07-27T09:35:37.437Z"
     },
     "DALLAS_DELIVERY": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.752Z",
+      "lastFetchAt": "2026-07-27T09:35:37.438Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.752Z"
+      "lastSuccess": "2026-07-27T09:35:37.438Z"
     },
     "PPI_PULP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.752Z",
+      "lastFetchAt": "2026-07-27T09:35:37.438Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.752Z"
+      "lastSuccess": "2026-07-27T09:35:37.438Z"
     },
     "PLD": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.177Z",
+      "lastFetchAt": "2026-07-27T09:35:41.328Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.177Z"
+      "lastSuccess": "2026-07-27T09:35:41.328Z"
     },
     "REXR": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.179Z",
+      "lastFetchAt": "2026-07-27T09:35:41.329Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.179Z"
+      "lastSuccess": "2026-07-27T09:35:41.329Z"
     },
     "FR": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.180Z",
+      "lastFetchAt": "2026-07-27T09:35:41.330Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.180Z"
+      "lastSuccess": "2026-07-27T09:35:41.330Z"
     },
     "STAG": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.181Z",
+      "lastFetchAt": "2026-07-27T09:35:41.331Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.181Z"
+      "lastSuccess": "2026-07-27T09:35:41.331Z"
     },
     "EGP": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.182Z",
+      "lastFetchAt": "2026-07-27T09:35:41.332Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.182Z"
+      "lastSuccess": "2026-07-27T09:35:41.332Z"
     },
     "TRNO": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.184Z",
+      "lastFetchAt": "2026-07-27T09:35:41.333Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.184Z"
+      "lastSuccess": "2026-07-27T09:35:41.333Z"
     },
     "COLD": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.185Z",
+      "lastFetchAt": "2026-07-27T09:35:41.333Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.185Z"
+      "lastSuccess": "2026-07-27T09:35:41.333Z"
     },
     "LINE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.185Z",
+      "lastFetchAt": "2026-07-27T09:35:41.334Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.185Z"
+      "lastSuccess": "2026-07-27T09:35:41.334Z"
     },
     "PSA": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.186Z",
+      "lastFetchAt": "2026-07-27T09:35:41.334Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.186Z"
+      "lastSuccess": "2026-07-27T09:35:41.334Z"
     },
     "EXR": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.187Z",
+      "lastFetchAt": "2026-07-27T09:35:41.335Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.187Z"
+      "lastSuccess": "2026-07-27T09:35:41.335Z"
     },
     "CUBE": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.188Z",
+      "lastFetchAt": "2026-07-27T09:35:41.336Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.188Z"
+      "lastSuccess": "2026-07-27T09:35:41.336Z"
     },
     "BORDER_MX_TRUCKS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:35.102Z",
+      "lastFetchAt": "2026-07-27T09:35:46.287Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:35.102Z"
+      "lastSuccess": "2026-07-27T09:35:46.287Z"
     },
     "SUEZ_TRANSITS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:33.656Z",
+      "lastFetchAt": "2026-07-27T09:35:45.574Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:33.656Z"
+      "lastSuccess": "2026-07-27T09:35:45.574Z"
     },
     "PANAMA_TRANSITS": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:33.656Z",
+      "lastFetchAt": "2026-07-27T09:35:45.574Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:33.656Z"
+      "lastSuccess": "2026-07-27T09:35:45.574Z"
     },
     "EU_ETS_CARBON": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:30.189Z",
+      "lastFetchAt": "2026-07-27T09:35:41.336Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:30.189Z"
+      "lastSuccess": "2026-07-27T09:35:41.336Z"
     },
     "RESHORING_COUNT": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:35.105Z",
+      "lastFetchAt": "2026-07-27T09:35:46.289Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:35.105Z"
+      "lastSuccess": "2026-07-27T09:35:46.289Z"
     },
     "DGS10": {
       "ok": true,
-      "lastFetchAt": "2026-07-20T08:44:25.738Z",
+      "lastFetchAt": "2026-07-27T09:35:37.430Z",
       "error": null,
-      "lastSuccess": "2026-07-20T08:44:25.738Z"
+      "lastSuccess": "2026-07-27T09:35:37.430Z"
     }
   },
-  "generatedAt": "2026-07-20T08:44:35.213Z"
+  "generatedAt": "2026-07-27T09:35:46.360Z"
 }
