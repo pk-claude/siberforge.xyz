@@ -113,7 +113,7 @@ html, body {
 
 /* ==========================================================================
    Two-tier deep-dive nav (.sf-nav)
-   Tier 1: section-tabs (Equity / Macro / AI / Supply Chain / Tools / Reference)
+   Tier 1: section-tabs (Markets / Macro / Regional / AI / Supply Chain / Tools & Data)
    Tier 2: section-pages — sub-pages within active section
    ========================================================================== */
 .sf-nav {
@@ -352,4 +352,294 @@ main {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+/* ==========================================================================
+   Tab dropdown menus
+   Every top tab exposes its full contents on hover/focus, so you can see
+   what is inside another section without leaving the page you are on.
+   Suppressed below 800px, where the second-tier row already wraps into view.
+   ========================================================================== */
+.sf-tab-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.sf-tab-menu {
+  position: absolute;
+  top: 100%;
+  left: -14px;
+  margin-top: 7px;
+  min-width: 290px;
+  max-width: 380px;
+  padding: 10px 0;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  z-index: 400;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: opacity var(--t-med) var(--ease-out),
+              transform var(--t-med) var(--ease-out),
+              visibility var(--t-med);
+}
+.sf-tab-wrap:hover .sf-tab-menu,
+.sf-tab-wrap:focus-within .sf-tab-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.sf-menu-group + .sf-menu-group {
+  margin-top: 6px;
+  padding-top: 6px;
+  border-top: 1px solid var(--line);
+}
+.sf-menu-heading {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 4px 16px 5px;
+}
+.sf-menu-link {
+  display: block;
+  padding: 6px 16px;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: background-color var(--t-fast), border-color var(--t-fast);
+}
+.sf-menu-link:hover {
+  background: var(--panel-2);
+  border-left-color: var(--accent);
+}
+.sf-menu-name {
+  display: block;
+  color: var(--text);
+  font-size: 12.5px;
+  font-weight: 600;
+}
+.sf-menu-meta {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.4;
+  margin-top: 1px;
+}
+
+/* ==========================================================================
+   Breadcrumbs
+   ========================================================================== */
+.sf-crumbs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 8px 24px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  font-size: 11.5px;
+}
+.sf-crumb {
+  color: var(--muted);
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: var(--r-sm);
+  transition: color var(--t-fast), background-color var(--t-fast);
+}
+a.sf-crumb:hover {
+  color: var(--text);
+  background: var(--panel-2);
+}
+.sf-crumb--current {
+  color: var(--text);
+  font-weight: 600;
+}
+.sf-crumb-sep {
+  color: var(--line);
+  padding: 0 2px;
+}
+
+/* ==========================================================================
+   Global search -- header button + overlay
+   ========================================================================== */
+.sf-search-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 12px;
+  padding: 4px 9px;
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: border-color var(--t-med), color var(--t-med);
+}
+.sf-search-btn:hover { border-color: var(--accent); color: var(--text); }
+.sf-search-icon { font-size: 12px; line-height: 1; }
+.sf-search-btn kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 0 4px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  color: var(--muted);
+}
+
+body.sf-search-open { overflow: hidden; }
+
+.sf-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(4, 6, 9, 0.68);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 12vh 20px 20px;
+}
+.sf-search-overlay[hidden] { display: none; }
+:root[data-theme="light"] .sf-search-overlay { background: rgba(30, 38, 48, 0.4); }
+
+.sf-search-panel {
+  width: 100%;
+  max-width: 640px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+.sf-search-input {
+  width: 100%;
+  padding: 16px 18px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--text);
+  font-family: inherit;
+  font-size: 15px;
+}
+.sf-search-input:focus { outline: none; }
+.sf-search-input::placeholder { color: var(--muted); }
+
+.sf-search-results {
+  max-height: 52vh;
+  overflow-y: auto;
+}
+.sf-search-hit {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  grid-template-areas: "section label" "section meta";
+  gap: 0 12px;
+  padding: 9px 18px;
+  text-decoration: none;
+  border-left: 2px solid transparent;
+}
+.sf-search-hit.active,
+.sf-search-hit:hover {
+  background: var(--panel-2);
+  border-left-color: var(--accent);
+}
+.sf-hit-section {
+  grid-area: section;
+  align-self: center;
+  color: var(--muted);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1.1px;
+  text-transform: uppercase;
+  text-align: right;
+}
+.sf-hit-label { grid-area: label; color: var(--text); font-size: 13px; font-weight: 600; }
+.sf-hit-meta  { grid-area: meta;  color: var(--muted); font-size: 11px; line-height: 1.4; }
+.sf-search-empty { padding: 20px 18px; color: var(--muted); font-size: 12.5px; }
+
+.sf-search-foot {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 9px 18px;
+  border-top: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--muted);
+  font-size: 10.5px;
+}
+.sf-search-foot kbd {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 0 4px;
+  margin-right: 3px;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.sf-search-foot a { margin-left: auto; color: var(--accent); text-decoration: none; }
+.sf-search-foot a:hover { text-decoration: underline; }
+
+/* ==========================================================================
+   Hub child lists -- appended to section landings (data-page-hub="true")
+   so the path down never depends on the nav row alone.
+   ========================================================================== */
+.sf-hub-children {
+  margin: 40px 0 8px;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.sf-hub-title {
+  margin: 0 0 16px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  color: var(--text);
+}
+.sf-hub-group + .sf-hub-group { margin-top: 20px; }
+.sf-hub-heading {
+  margin: 0 0 8px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sf-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 10px;
+}
+.sf-hub-card {
+  display: block;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  text-decoration: none;
+  transition: border-color var(--t-med), transform var(--t-med) var(--ease-out);
+}
+.sf-hub-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+.sf-hub-name { display: block; color: var(--text); font-size: 13px; font-weight: 600; }
+.sf-hub-meta { display: block; color: var(--muted); font-size: 11.5px; line-height: 1.45; margin-top: 3px; }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+@media (max-width: 800px) {
+  .sf-tab-menu { display: none; }
+  .sf-crumbs { padding: 7px 12px; font-size: 11px; }
+  .sf-search-text { display: none; }
+  .sf-search-btn kbd { display: none; }
+  .sf-search-btn { margin-right: 8px; padding: 4px 7px; }
+  .sf-search-overlay { padding: 6vh 12px 12px; }
+  .sf-search-hit {
+    grid-template-columns: 1fr;
+    grid-template-areas: "section" "label" "meta";
+  }
+  .sf-hit-section { text-align: left; }
+  .sf-hub-grid { grid-template-columns: 1fr; }
 }

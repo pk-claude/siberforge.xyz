@@ -1,9 +1,12 @@
-// landing-hub.js -- renders the landing-page "Every view." cat-grid from
-// SIBERFORGE_NAV.LANDING_HUB. Single source of truth shared with the top
-// nav so adding a page anywhere shows up here automatically.
+// landing-hub.js -- renders every navigational surface on the landing page
+// from SIBERFORGE_NAV, so the home page and the interior nav cannot drift
+// into two different taxonomies:
 //
-// Insertion target: <div class="cat-grid" id="hub-cat-grid"></div>
-// Search input id:   hub-search
+//   #ed-nav-sections  top bar section links      <- SECTIONS
+//   #ed-theme-grid    numbered "Themes" cards    <- SECTIONS (label + blurb)
+//   #hub-cat-grid     "Every view." tree         <- LANDING_HUB + PAGES
+//
+// Search input id:     hub-search
 // Expand/collapse ids: hub-expand, hub-collapse
 
 (function () {
@@ -158,7 +161,26 @@
     if (expand)   expand.addEventListener('click',   function () { cats.forEach(function (c) { c.classList.remove('collapsed'); }); });
     if (collapse) collapse.addEventListener('click', function () { cats.forEach(function (c) { c.classList.add('collapsed'); }); });
 
-    const search = document.getElementById('hub-search');
+    const jump = document.getElementById('ed-search-jump');
+    const searchBox = document.getElementById('hub-search');
+    if (jump && searchBox) {
+      jump.addEventListener('click', function (e) {
+        e.preventDefault();
+        searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function () { searchBox.focus(); }, 320);
+      });
+    }
+    document.addEventListener('keydown', function (e) {
+      const tag = (e.target.tagName || '').toLowerCase();
+      const typing = tag === 'input' || tag === 'textarea' || e.target.isContentEditable;
+      if (e.key === '/' && !typing && searchBox) {
+        e.preventDefault();
+        searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(function () { searchBox.focus(); }, 320);
+      }
+    });
+
+    const search = searchBox;
     if (search) {
       search.addEventListener('input', function () {
         const q = search.value.toLowerCase().trim();
@@ -174,22 +196,54 @@
     }
   }
 
+  // ------------------------------------------------------------------
+  // Top bar section links -- same labels, same order as the interior tabs.
+  // ------------------------------------------------------------------
+  function renderTopNav(SECTIONS) {
+    const host = document.getElementById('ed-nav-sections');
+    if (!host) return;
+    host.innerHTML = SECTIONS.map(function (s) {
+      return '<a href="' + escape(s.href) + '" class="ed-nav-link">' + escape(s.label) + '</a>';
+    }).join('');
+  }
+
+  // ------------------------------------------------------------------
+  // "Themes" grid -- one numbered card per section, in section order.
+  // ------------------------------------------------------------------
+  function renderThemes(SECTIONS) {
+    const host = document.getElementById('ed-theme-grid');
+    if (!host) return;
+    host.innerHTML = SECTIONS.map(function (s, i) {
+      const num = String(i + 1);
+      return '<a href="' + escape(s.href) + '" class="ed-theme">' +
+        '<div class="ed-num">' + (num.length < 2 ? '0' + num : num) + '</div>' +
+        '<div class="ed-name">' + escape(s.label) + '</div>' +
+        '<div class="ed-desc">' + escape(s.blurb || '') + '</div>' +
+      '</a>';
+    }).join('');
+  }
+
   function render() {
-    const target = document.getElementById('hub-cat-grid');
-    if (!target) return;
     const cfg = window.SIBERFORGE_NAV;
     if (!cfg || !cfg.LANDING_HUB) return;
+
+    renderTopNav(cfg.SECTIONS);
+    renderThemes(cfg.SECTIONS);
+
+    const target = document.getElementById('hub-cat-grid');
+    if (!target) return;
 
     target.innerHTML = cfg.LANDING_HUB.map(function (c) {
       return renderCard(c, cfg.PAGES);
     }).join('');
 
-    // Update the search placeholder count
+    // Update the search placeholder and the section sub-line with the real
+    // count, so the copy can never disagree with the config.
+    const total = totalDashboards(cfg.PAGES, cfg.LANDING_HUB);
     const search = document.getElementById('hub-search');
-    if (search) {
-      const total = totalDashboards(cfg.PAGES, cfg.LANDING_HUB);
-      search.placeholder = 'Search ' + total + '+ dashboards...';
-    }
+    if (search) search.placeholder = 'Search ' + total + ' dashboards...';
+    const totalEl = document.getElementById('hub-total');
+    if (totalEl) totalEl.textContent = total + ' views';
 
     wireSearchAndToggle();
   }

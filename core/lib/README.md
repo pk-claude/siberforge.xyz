@@ -12,12 +12,64 @@ Modules consumed by every macro/deep-dive page. Keep these dependency-free
 | `csv-export.js`         | ES module    | `downloadCSV`, `downloadJSON`, `seriesToCSV`, `tableToCSV` |
 | `download-button.js`    | classic JS   | Universal click handler for every page's "Download data" button |
 | `fred-client.js`        | ES module    | FRED API client with the catalog passthrough |
+| `landing-hub.js`        | classic JS   | Renders the landing top bar, Themes grid and "Every view." tree from `nav-config.js` |
+| `layout.css`            | CSS          | Header, two-tier nav, tab menus, breadcrumbs, search overlay, hub child lists |
+| `layout.js`             | classic JS   | Injects the shared chrome on every dashboard page: header, nav, breadcrumbs, global search |
+| `nav-config.js`         | classic JS   | **Single source of truth for navigation.** Sections, pages, landing hub, flat search index |
 | `metric-context.js`     | ES module    | Curated educational content + citations for each metric (the tooltip catalog) |
 | `plotly-theme.js`       | ES module    | Plotly theme defaults |
 | `theme-toggle.js`       | classic JS   | Light/dark theme switcher with localStorage persistence |
+| `tokens.css`            | CSS          | Design tokens (colors, type, spacing, radii, z-layers), light + dark |
 | `tile-tooltip.js`       | ES module    | Auto-attaching hover/click popup that reads metric-context |
 | `transforms.js`         | ES module    | yoy_pct, mom_pct, level — series transforms |
 | `ui.js`                 | ES module    | Shared UI helpers |
+
+## Navigation — one config, six sections
+
+`nav-config.js` is the only place the site's structure is written down. It feeds
+the interior tab row, the tab dropdown menus, the breadcrumbs, the global search,
+the landing page top bar, the landing Themes grid, the landing hub tree, the A-Z
+index at `/core/`, and `sitemap.xml`. Nothing else defines structure. If a page is
+not in `nav-config.js`, it does not exist as far as the site is concerned.
+
+The six sections are fixed: **Markets, Macro, Regional, AI, Supply Chain,
+Tools & Data**. Section *ids* are frozen (`equity`, `tools`) even where the label
+has moved on, because renaming an id means touching `data-section` on every page
+in that section.
+
+### Adding a page
+
+1. Add a link to the right `PAGES` group in `nav-config.js` with a unique `id`,
+   an `href`, and a one-line `meta` (the `meta` is what people read in search
+   results, hub cards and dropdowns — write it for a stranger).
+2. Set the page's body attributes so it can locate itself:
+
+   ```html
+   <body data-section="macro" data-page="cycle" data-page-sub="Cycle Position">
+   ```
+
+3. `node scripts/gen-sitemap.mjs` — regenerates `sitemap.xml` from the config.
+4. `node scripts/audit-nav.mjs` — must print 0 errors before you deploy.
+
+### Body attribute contract
+
+| Attribute               | Required | Meaning |
+|-------------------------|----------|---------|
+| `data-section`          | yes      | Top-level tab id, must exist in `SECTIONS` |
+| `data-page`             | yes*     | Link id inside that section's `PAGES` entry — this is what highlights |
+| `data-sub-section`      | no       | Selects `PAGES["section:sub"]` for deep sub-trees (PLUG) |
+| `data-page-parent`      | yes*     | For drill-downs that are not nav entries (`indicator.html`, `metric.html`): the link id to highlight and breadcrumb back to |
+| `data-page-sub`         | no       | Subtitle in the header, and the final breadcrumb on drill-downs |
+| `data-page-hub`         | no       | `"true"` appends an auto-generated list of every view in the section |
+| `data-page-status[-text]` | no     | Status dot and label |
+| `data-page-download`    | no       | `"true"` renders the Download data button |
+| `data-view`             | no       | Supply-chain render mode only (`overview`/`category`/…). **Not** a nav attribute |
+
+\* one of `data-page` or `data-page-parent`.
+
+**Never put two `data-page` attributes on one body tag.** HTML keeps the first
+and silently drops the rest; that is exactly how the entire Supply Chain section
+lost its active-state highlight. `audit-nav.mjs` fails the build on duplicates.
 
 ## Tile tooltips — adding a new metric
 

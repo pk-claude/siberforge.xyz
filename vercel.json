@@ -5,6 +5,20 @@
       "maxDuration": 10
     }
   },
+  "redirects": [
+    { "source": "/markets",  "destination": "/core/macro/markets.html", "permanent": true },
+    { "source": "/macro",    "destination": "/core/macro/",             "permanent": true },
+    { "source": "/regional", "destination": "/core/macro/regional/",    "permanent": true },
+    { "source": "/ai",       "destination": "/core/ai/",                "permanent": true },
+    { "source": "/supply",   "destination": "/core/supply/",            "permanent": true },
+    { "source": "/tools",    "destination": "/core/tools/",             "permanent": true },
+    { "source": "/data",     "destination": "/core/data/",              "permanent": true },
+    { "source": "/index",    "destination": "/core/",                   "permanent": true },
+    { "source": "/plug",     "destination": "/core/plug/",              "permanent": true },
+    { "source": "/pe",       "destination": "/core/equity/pe/",         "permanent": true },
+    { "source": "/reference","destination": "/core/tools/",             "permanent": true },
+    { "source": "/core/equity", "destination": "/core/macro/markets.html", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

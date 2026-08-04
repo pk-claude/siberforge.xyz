@@ -471,7 +471,8 @@ async function main() {
   await Promise.all([loadData(), loadV2()]);
   populateLastRefresh();
   renderDataHealth();
-  const page = document.body.dataset.page;
+  // data-view (not data-page) -- data-page is reserved for nav-config link ids.
+  const page = document.body.dataset.view;
   if (page === 'overview')          renderOverview();
   else if (page === 'category')     renderCategoryPage(document.body.dataset.category);
   else if (page === 'industrial-re') renderIndustrialRePage();

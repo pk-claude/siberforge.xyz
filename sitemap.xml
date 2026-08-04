@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.siberforge.xyz/</loc></url>
+  <url><loc>https://www.siberforge.xyz/core/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/ai/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/ai/adopters/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/ai/compute/</loc></url>
@@ -13,7 +14,6 @@
   <url><loc>https://www.siberforge.xyz/core/econ/compare.html</loc></url>
   <url><loc>https://www.siberforge.xyz/core/econ/recession.html</loc></url>
   <url><loc>https://www.siberforge.xyz/core/equity/pe/</loc></url>
-  <url><loc>https://www.siberforge.xyz/core/influencers/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/macro/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/macro/backtest/</loc></url>
   <url><loc>https://www.siberforge.xyz/core/macro/bonds.html</loc></url>

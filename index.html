@@ -15,7 +15,7 @@
 <meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://www.siberforge.xyz/siberforge-og.png" />
-<meta name="description" content="Financial analysis with a personality. Live macro signals + 45 dashboards reconstructed from SEC EDGAR filings and FRED series. Every line traceable." />
+<meta name="description" content="Financial analysis with a personality. Live macro signals + 51 dashboards reconstructed from SEC EDGAR filings and FRED series. Every line traceable." />
 <link rel="preconnect" href="https://rsms.me/" />
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <link rel="stylesheet" href="/core/lib/tokens.css" />
@@ -39,13 +39,10 @@
     <span class="ed-brand-text"><span class="siber">SIBER</span><span class="forge">FORGE</span></span>
   </a>
   <div class="ed-nav-right">
-    <a href="/core/macro/markets.html" class="ed-nav-link">Equity / Markets</a>
-    <a href="/core/macro/" class="ed-nav-link">Macro</a>
-    <a href="/core/macro/regional/" class="ed-nav-link">Regional</a>
-    <a href="/core/ai/" class="ed-nav-link">AI</a>
-    <a href="/core/supply/" class="ed-nav-link">Supply</a>
-    <a href="/core/macro/research.html" class="ed-nav-link">Tools</a>
+    <!-- Section links rendered from SIBERFORGE_NAV.SECTIONS by landing-hub.js -->
+    <span id="ed-nav-sections" class="ed-nav-sections"></span>
     <a href="#about" class="ed-nav-link">About</a>
+    <a href="#hub" id="ed-search-jump" class="ed-nav-link">Search <kbd class="ed-kbd">/</kbd></a>
     <a href="#subscribe" class="ed-nav-cta">Subscribe</a>
     <span class="ed-status">
       <span id="refresh-indicator" class="dot"></span>
@@ -159,45 +156,8 @@
     <div class="ed-eyebrow">Themes</div>
     <h2>What we&rsquo;re tracking.</h2>
   </div>
-  <div class="ed-theme-grid">
-    <a href="/core/macro/markets.html" class="ed-theme">
-      <div class="ed-num">01</div>
-      <div class="ed-name">Equity / Markets</div>
-      <div class="ed-desc">Equity markets and the bond complex. Sector flows, yield curve, term structure, credit spreads.</div>
-    </a>
-    <a href="/core/macro/" class="ed-theme">
-      <div class="ed-num">02</div>
-      <div class="ed-name">Macro (National)</div>
-      <div class="ed-desc">Regime, cycle, inflation, housing, consumer, credit, labor. The full national macro stack.</div>
-    </a>
-    <a href="/core/macro/regional/" class="ed-theme">
-      <div class="ed-num">03</div>
-      <div class="ed-name">Macro (Regional)</div>
-      <div class="ed-desc">CPI dispersion, build vs buy, channel mix, migration, demographics, affordability, climate risk.</div>
-    </a>
-    <a href="/core/ai/" class="ed-theme">
-      <div class="ed-num">04</div>
-      <div class="ed-name">AI Focus</div>
-      <div class="ed-desc">160 companies &times; 8 industries &times; 4 scenarios. Top-5 deep dive on the modest-scenario picks.</div>
-    </a>
-    <a href="/core/supply/" class="ed-theme">
-      <div class="ed-num">05</div>
-      <div class="ed-name">Supply Chain Data</div>
-      <div class="ed-desc">SC Pressure composite + ~50 metrics across DC, middle-mile, last-mile, international.</div>
-    </a>
-    <a href="/core/macro/research.html" class="ed-theme">
-      <div class="ed-num">06</div>
-      <div class="ed-name">Tools</div>
-      <div class="ed-desc">Pair explorer, transmission network, backtest, comparison, geography. Cross-cutting analytics.</div>
-    </a>
-
-    <a href="/core/influencers/" class="ed-theme">
-      <div class="ed-num">07</div>
-      <div class="ed-name">Daily Influencers</div>
-      <div class="ed-desc">Weekly five-lens brief on the most macro-sensitive consumer name. Tiles, ranked items, watchlist; methodology plus a live worked example.</div>
-    </a>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-  </div>
+  <!-- Rendered from SIBERFORGE_NAV.SECTIONS by landing-hub.js -->
+  <div class="ed-theme-grid" id="ed-theme-grid"></div>
 </section>
 
 <!-- ==================== HUB (full collapsible tree) ==================== -->
@@ -205,6 +165,7 @@
   <div class="ed-section-head">
     <div class="ed-eyebrow">Dashboards</div>
     <h2>Every view.</h2>
+    <p class="ed-hub-sub">Search all <span id="hub-total">&mdash;</span>, or browse the tree. Same six sections you get inside.</p>
   </div>
 
   <div class="hub-controls">

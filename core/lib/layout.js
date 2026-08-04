@@ -1,4 +1,5 @@
-// layout.js -- renders the shared header + two-tier nav from nav-config.js.
+// layout.js -- renders the shared header + two-tier nav + breadcrumbs + global
+// search from nav-config.js.
 //
 // Each page declares its identity in <body>:
 //   <body data-section="macro" data-page="cycle">
@@ -8,12 +9,19 @@
 // Recognized data attrs:
 //   data-section          Required. Top-level tab id (matches SECTIONS[].id).
 //   data-sub-section      Optional. Picks PAGES["section:sub"] entry instead of
-//                         PAGES["section"]. Used for deep sub-trees (Plug, regional).
+//                         PAGES["section"]. Used for deep sub-trees (Plug).
 //   data-page             Optional. The active link id within section pages.
-//   data-page-sub         Optional. Subtitle shown next to brand mark in header.
+//                         MUST match a link id in PAGES or nothing highlights.
+//   data-page-parent      Optional. For drill-down pages that are not nav
+//                         entries themselves (indicator.html, metric.html):
+//                         the link id to highlight and crumb back to.
+//   data-page-sub         Optional. Subtitle shown next to brand mark in header
+//                         and used as the final breadcrumb on drill-downs.
 //   data-page-status      Optional. "live" | "ready" | "error".
 //   data-page-status-text Optional. Override status text default.
 //   data-page-download    Optional. "true" to include #download-data button.
+//   data-page-hub         Optional. "true" to append an auto-generated list of
+//                         every view in this section at the end of <main>.
 
 (function () {
   'use strict';
@@ -21,7 +29,7 @@
   function $(sel, root) { return (root || document).querySelector(sel); }
 
   function escape(s) {
-    return String(s)
+    return String(s == null ? '' : s)
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -42,6 +50,9 @@
     );
   }
 
+  // --------------------------------------------------------------------
+  // Header
+  // --------------------------------------------------------------------
   function buildHeader(opts) {
     const sub = opts.pageSub ? '<span class="sf-sub">' + escape(opts.pageSub) + '</span>' : '';
     const statusClass = opts.status === 'live' ? 'live' : (opts.status === 'error' ? 'error' : '');
@@ -59,6 +70,9 @@
           '</span>' + sub +
         '</div>' +
         '<div class="sf-status status">' +
+          '<button id="sf-search-open" class="sf-search-btn" title="Search all dashboards (press /)" aria-label="Search all dashboards">' +
+            '<span class="sf-search-icon">&#9906;</span><span class="sf-search-text">Search</span><kbd>/</kbd>' +
+          '</button>' +
           '<span id="refresh-indicator" class="sf-dot dot ' + statusClass + '"></span>' +
           '<span id="refresh-text">' + escape(statusText) + '</span>' +
           downloadBtn +
@@ -67,13 +81,44 @@
     );
   }
 
+  // --------------------------------------------------------------------
+  // Tab dropdown menu -- lets you see any section's contents without
+  // leaving the page you are on.
+  // --------------------------------------------------------------------
+  function buildTabMenu(sectionId) {
+    const cfg = window.SIBERFORGE_NAV;
+    const entry = cfg.PAGES[sectionId];
+    if (!entry) return '';
+
+    const groups = entry.groups.map(function (g) {
+      const heading = g.label
+        ? '<div class="sf-menu-heading">' + escape(g.label) + '</div>'
+        : '';
+      const links = g.links.map(function (l) {
+        return '<a class="sf-menu-link" href="' + escape(l.href) + '">' +
+          '<span class="sf-menu-name">' + escape(l.label) + '</span>' +
+          (l.meta ? '<span class="sf-menu-meta">' + escape(l.meta) + '</span>' : '') +
+        '</a>';
+      }).join('');
+      return '<div class="sf-menu-group">' + heading + links + '</div>';
+    }).join('');
+
+    return '<div class="sf-tab-menu" role="menu">' + groups + '</div>';
+  }
+
+  // --------------------------------------------------------------------
+  // Two-tier nav
+  // --------------------------------------------------------------------
   function buildNav(activeSection, pagesKey, activePage) {
     const cfg = window.SIBERFORGE_NAV;
     if (!cfg) return '';
 
     const tabs = cfg.SECTIONS.map(function (s) {
       const active = s.id === activeSection ? ' active' : '';
-      return '<a href="' + s.href + '" class="sf-nav-tab' + active + '">' + escape(s.label) + '</a>';
+      return '<span class="sf-tab-wrap">' +
+        '<a href="' + s.href + '" class="sf-nav-tab' + active + '">' + escape(s.label) + '</a>' +
+        buildTabMenu(s.id) +
+      '</span>';
     }).join('');
 
     const pages = cfg.PAGES[pagesKey];
@@ -126,6 +171,220 @@
     );
   }
 
+  // --------------------------------------------------------------------
+  // Breadcrumbs -- Home > Section > [sub-tree] > Page
+  // --------------------------------------------------------------------
+  function findLink(pagesKey, pageId) {
+    const cfg = window.SIBERFORGE_NAV;
+    const entry = cfg.PAGES[pagesKey];
+    if (!entry || !pageId) return null;
+    for (let i = 0; i < entry.groups.length; i++) {
+      const links = entry.groups[i].links;
+      for (let j = 0; j < links.length; j++) {
+        if (links[j].id === pageId) return links[j];
+      }
+    }
+    return null;
+  }
+
+  function buildCrumbs(opts) {
+    const cfg = window.SIBERFORGE_NAV;
+    if (!cfg) return '';
+
+    const section = cfg.SECTIONS.filter(function (s) { return s.id === opts.section; })[0];
+    if (!section) return '';
+
+    const crumbs = [{ label: 'Home', href: '/' }, { label: section.label, href: section.href }];
+
+    // Sub-tree crumb (e.g. Markets > Plug Power - PLUG)
+    if (opts.subSection) {
+      const sub = cfg.PAGES[opts.section + ':' + opts.subSection];
+      if (sub && sub.label) {
+        const subFirst = sub.groups[0] && sub.groups[0].links[0];
+        crumbs.push({ label: sub.label, href: subFirst ? subFirst.href : null });
+      }
+    }
+
+    // The page itself, or its parent + a leaf crumb for drill-downs.
+    // A link that IS the section landing is skipped: "Macro > Regime" when
+    // Regime is /core/macro/ just repeats the crumb before it.
+    const isSectionLanding = function (link) {
+      return link && link.href === section.href;
+    };
+    const parent = opts.pageParent ? findLink(opts.pagesKey, opts.pageParent) : null;
+    if (parent) {
+      if (!isSectionLanding(parent)) crumbs.push({ label: parent.label, href: parent.href });
+      if (opts.pageSub) crumbs.push({ label: opts.pageSub, href: null });
+    } else {
+      const link = findLink(opts.pagesKey, opts.page);
+      if (link && !isSectionLanding(link)) crumbs.push({ label: link.label, href: null });
+      else if (!link && opts.pageSub) crumbs.push({ label: opts.pageSub, href: null });
+    }
+
+    // A single "Home > Section" trail on a section landing adds nothing.
+    if (crumbs.length < 3) return '';
+
+    const html = crumbs.map(function (c, i) {
+      const last = i === crumbs.length - 1;
+      const sep = i > 0 ? '<span class="sf-crumb-sep">&rsaquo;</span>' : '';
+      const body = (c.href && !last)
+        ? '<a class="sf-crumb" href="' + escape(c.href) + '">' + escape(c.label) + '</a>'
+        : '<span class="sf-crumb sf-crumb--current"' + (last ? ' aria-current="page"' : '') + '>' + escape(c.label) + '</span>';
+      return sep + body;
+    }).join('');
+
+    return '<nav class="sf-crumbs" aria-label="Breadcrumb">' + html + '</nav>';
+  }
+
+  // --------------------------------------------------------------------
+  // Global search overlay -- every view on the site, from any page.
+  // --------------------------------------------------------------------
+  function buildSearch() {
+    return (
+      '<div class="sf-search-overlay" id="sf-search-overlay" hidden>' +
+        '<div class="sf-search-panel" role="dialog" aria-modal="true" aria-label="Search dashboards">' +
+          '<input class="sf-search-input" id="sf-search-input" type="text" autocomplete="off" ' +
+            'placeholder="Search every view..." aria-label="Search every view" />' +
+          '<div class="sf-search-results" id="sf-search-results"></div>' +
+          '<div class="sf-search-foot">' +
+            '<span><kbd>&uarr;</kbd><kbd>&darr;</kbd> move</span>' +
+            '<span><kbd>Enter</kbd> open</span>' +
+            '<span><kbd>Esc</kbd> close</span>' +
+            '<a href="/core/">Full A-Z index</a>' +
+          '</div>' +
+        '</div>' +
+      '</div>'
+    );
+  }
+
+  function wireSearch() {
+    const cfg = window.SIBERFORGE_NAV;
+    const overlay = document.getElementById('sf-search-overlay');
+    const input = document.getElementById('sf-search-input');
+    const results = document.getElementById('sf-search-results');
+    const openBtn = document.getElementById('sf-search-open');
+    if (!cfg || !overlay || !input || !results) return;
+
+    const items = cfg.index();
+    let active = 0;
+
+    function score(item, q) {
+      const label = item.label.toLowerCase();
+      const meta = (item.meta + ' ' + item.section + ' ' + item.group).toLowerCase();
+      if (label === q) return 0;
+      if (label.indexOf(q) === 0) return 1;
+      if (label.indexOf(q) !== -1) return 2;
+      if (meta.indexOf(q) !== -1) return 3;
+      return -1;
+    }
+
+    function render(q) {
+      let list;
+      if (!q) {
+        list = items.slice(0, 12);
+      } else {
+        list = items
+          .map(function (it) { return { it: it, s: score(it, q) }; })
+          .filter(function (r) { return r.s >= 0; })
+          .sort(function (a, b) { return a.s - b.s; })
+          .slice(0, 40)
+          .map(function (r) { return r.it; });
+      }
+      active = 0;
+      if (!list.length) {
+        results.innerHTML = '<div class="sf-search-empty">No view matches "' + escape(q) + '".</div>';
+        return;
+      }
+      results.innerHTML = list.map(function (it, i) {
+        return '<a class="sf-search-hit' + (i === 0 ? ' active' : '') + '" href="' + escape(it.href) + '">' +
+          '<span class="sf-hit-section">' + escape(it.section) + '</span>' +
+          '<span class="sf-hit-label">' + escape(it.label) + '</span>' +
+          '<span class="sf-hit-meta">' + escape(it.meta) + '</span>' +
+        '</a>';
+      }).join('');
+    }
+
+    function move(delta) {
+      const hits = results.querySelectorAll('.sf-search-hit');
+      if (!hits.length) return;
+      hits[active].classList.remove('active');
+      active = (active + delta + hits.length) % hits.length;
+      hits[active].classList.add('active');
+      hits[active].scrollIntoView({ block: 'nearest' });
+    }
+
+    function open() {
+      overlay.hidden = false;
+      document.body.classList.add('sf-search-open');
+      input.value = '';
+      render('');
+      input.focus();
+    }
+    function close() {
+      overlay.hidden = true;
+      document.body.classList.remove('sf-search-open');
+    }
+
+    if (openBtn) openBtn.addEventListener('click', open);
+    input.addEventListener('input', function () { render(input.value.toLowerCase().trim()); });
+
+    overlay.addEventListener('click', function (e) {
+      if (e.target === overlay) close();
+    });
+
+    document.addEventListener('keydown', function (e) {
+      const tag = (e.target.tagName || '').toLowerCase();
+      const typing = tag === 'input' || tag === 'textarea' || tag === 'select' || e.target.isContentEditable;
+      if (overlay.hidden) {
+        if (e.key === '/' && !typing) { e.preventDefault(); open(); }
+        if (e.key === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); open(); }
+        return;
+      }
+      if (e.key === 'Escape') { e.preventDefault(); close(); return; }
+      if (e.key === 'ArrowDown') { e.preventDefault(); move(1); return; }
+      if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); return; }
+      if (e.key === 'Enter') {
+        const hit = results.querySelector('.sf-search-hit.active');
+        if (hit) { e.preventDefault(); window.location.href = hit.getAttribute('href'); }
+      }
+    });
+  }
+
+  // --------------------------------------------------------------------
+  // Hub child list -- section landings enumerate their own children so the
+  // path down does not depend on the nav row alone.
+  // --------------------------------------------------------------------
+  function renderHubChildren(pagesKey, activePage) {
+    const cfg = window.SIBERFORGE_NAV;
+    const entry = cfg && cfg.PAGES[pagesKey];
+    if (!entry) return;
+    const host = document.querySelector('main') || document.body;
+
+    const groups = entry.groups.map(function (g) {
+      const heading = g.label
+        ? '<h3 class="sf-hub-heading">' + escape(g.label) + '</h3>'
+        : '';
+      const cards = g.links.filter(function (l) {
+        return l.id !== activePage;
+      }).map(function (l) {
+        return '<a class="sf-hub-card" href="' + escape(l.href) + '">' +
+          '<span class="sf-hub-name">' + escape(l.label) + ' &rarr;</span>' +
+          (l.meta ? '<span class="sf-hub-meta">' + escape(l.meta) + '</span>' : '') +
+        '</a>';
+      }).join('');
+      if (!cards) return '';
+      return '<div class="sf-hub-group">' + heading + '<div class="sf-hub-grid">' + cards + '</div></div>';
+    }).join('');
+
+    if (!groups) return;
+
+    const wrap = document.createElement('section');
+    wrap.className = 'sf-hub-children';
+    wrap.innerHTML = '<h2 class="sf-hub-title">Everything in ' + escape(entry.label) + '</h2>' + groups;
+    host.appendChild(wrap);
+  }
+
+  // --------------------------------------------------------------------
   function wireScroll() {
     const top = $('.sf-top');
     if (!top) return;
@@ -140,17 +399,22 @@
   function render() {
     const body = document.body;
     if (!body) return;
+    // The landing page renders its own editorial chrome (see landing-hub.js)
+    // and carries its own full-tree search, so it opts out entirely.
     if (body.classList.contains('landing-page')) return;
 
     const section = body.dataset.section || '';
     const subSection = body.dataset.subSection || '';
     const page = body.dataset.page || '';
+    const pageParent = body.dataset.pageParent || '';
     const pageSub = body.dataset.pageSub || '';
     const status = body.dataset.pageStatus || '';
     const statusText = body.dataset.pageStatusText || '';
     const download = body.dataset.pageDownload === 'true';
+    const isHub = body.dataset.pageHub === 'true';
 
     const pagesKey = subSection ? section + ':' + subSection : section;
+    const activePage = page || pageParent;
 
     const headerHtml = buildHeader({
       pageSub: pageSub,
@@ -158,27 +422,42 @@
       statusText: statusText,
       download: download
     });
-    const navHtml = buildNav(section, pagesKey, page);
+    const navHtml = buildNav(section, pagesKey, activePage);
+    const crumbHtml = buildCrumbs({
+      section: section,
+      subSection: subSection,
+      pagesKey: pagesKey,
+      page: page,
+      pageParent: pageParent,
+      pageSub: pageSub
+    });
 
     // Remove any legacy or pre-existing injected header/nav.
     document.querySelectorAll('body > header.top, body > header.sf-top').forEach(function (el) {
       el.remove();
     });
-    document.querySelectorAll('body > nav.deep-dive-nav, body > nav.sf-nav').forEach(function (el) {
+    document.querySelectorAll('body > nav.deep-dive-nav, body > nav.sf-nav, body > nav.sf-crumbs').forEach(function (el) {
       el.remove();
     });
 
-    // Build a temporary fragment, then insert header first, nav second
+    // Build a temporary fragment, then insert header, nav, crumbs in order
     // at the very top of body (before any existing content).
     const tmp = document.createElement('div');
-    tmp.innerHTML = headerHtml + navHtml;
+    tmp.innerHTML = headerHtml + navHtml + crumbHtml + buildSearch();
     const newHeader = tmp.querySelector('header.sf-top');
     const newNav = tmp.querySelector('nav.sf-nav');
+    const newCrumbs = tmp.querySelector('nav.sf-crumbs');
+    const newSearch = tmp.querySelector('.sf-search-overlay');
 
+    if (newCrumbs) body.insertBefore(newCrumbs, body.firstChild);
     if (newNav)    body.insertBefore(newNav, body.firstChild);
     if (newHeader) body.insertBefore(newHeader, body.firstChild);
+    if (newSearch) body.appendChild(newSearch);
+
+    if (isHub) renderHubChildren(pagesKey, activePage);
 
     wireScroll();
+    wireSearch();
   }
 
   if (document.readyState === 'loading') {

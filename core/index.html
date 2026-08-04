@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; A-Z index of every view</title>
+<meta name="description" content="Every dashboard, tool and data view on Siberforge, listed alphabetically with its section." />
+<link rel="canonical" href="https://www.siberforge.xyz/core/" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preconnect" href="https://rsms.me/" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/core/lib/tokens.css" />
+<link rel="stylesheet" href="/core/lib/layout.css" />
+<script src="/core/lib/theme-toggle.js"></script>
+<script src="/core/lib/nav-config.js"></script>
+<script defer src="/core/lib/layout.js"></script>
+<style>
+  main { padding: 24px; max-width: 1100px; }
+  .idx-controls { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin: 18px 0 6px; }
+  .idx-filter {
+    flex: 1 1 320px; max-width: 460px;
+    padding: 9px 12px;
+    background: var(--panel); color: var(--text);
+    border: 1px solid var(--line); border-radius: var(--r-md);
+    font-family: inherit; font-size: 13px;
+  }
+  .idx-filter:focus { outline: none; border-color: var(--accent); }
+  .idx-count { color: var(--muted); font-size: 12px; }
+  .idx-sections { display: flex; gap: 6px; flex-wrap: wrap; }
+  .idx-chip {
+    padding: 4px 10px; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--panel); color: var(--muted);
+    font-size: 11px; font-weight: 600; cursor: pointer;
+    transition: border-color var(--t-med), color var(--t-med);
+  }
+  .idx-chip:hover { color: var(--text); }
+  .idx-chip.active { border-color: var(--accent); color: var(--accent); }
+
+  .idx-letter { margin: 26px 0 8px; display: flex; align-items: center; gap: 10px; }
+  .idx-letter span {
+    font-size: 12px; font-weight: 800; letter-spacing: 1.5px;
+    color: var(--accent); text-transform: uppercase;
+  }
+  .idx-letter::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+  .idx-row {
+    display: grid;
+    grid-template-columns: minmax(180px, 260px) 1fr 130px;
+    gap: 12px; align-items: baseline;
+    padding: 7px 8px;
+    border-radius: var(--r-md);
+    text-decoration: none;
+  }
+  .idx-row:hover { background: var(--panel); }
+  .idx-name { color: var(--text); font-size: 13.5px; font-weight: 600; }
+  .idx-meta { color: var(--muted); font-size: 12px; line-height: 1.45; }
+  .idx-sec  { color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: 1.1px; text-transform: uppercase; text-align: right; }
+  .idx-empty { color: var(--muted); padding: 24px 8px; }
+  @media (max-width: 700px) {
+    .idx-row { grid-template-columns: 1fr; gap: 2px; }
+    .idx-sec { text-align: left; }
+  }
+</style>
+</head>
+<body data-section="tools" data-page="site-index" data-page-sub="A-Z Index" data-page-status-text="Ready">
+
+<main>
+  <span class="eyebrow">Index</span>
+  <h1 class="page-title">Every view, A to Z</h1>
+  <p class="page-sub">
+    The flat list. Every dashboard, tool and data view on the site in one alphabetical
+    run, with the section it belongs to. Use it when you know what you are looking for
+    but not where it lives &mdash; or to check whether something already exists.
+  </p>
+
+  <div class="idx-controls">
+    <input class="idx-filter" id="idx-filter" type="text" placeholder="Filter by name or description..." aria-label="Filter views" />
+    <span class="idx-count" id="idx-count"></span>
+  </div>
+  <div class="idx-sections" id="idx-sections"></div>
+
+  <div id="idx-list"></div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var cfg = window.SIBERFORGE_NAV;
+  if (!cfg) return;
+
+  var ALL = cfg.index().slice().sort(function (a, b) {
+    return a.label.toLowerCase().localeCompare(b.label.toLowerCase());
+  });
+  var activeSection = '';
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function renderChips() {
+    var host = document.getElementById('idx-sections');
+    var chips = ['<button class="idx-chip' + (activeSection ? '' : ' active') + '" data-sec="">All sections</button>'];
+    cfg.SECTIONS.forEach(function (s) {
+      chips.push('<button class="idx-chip' + (activeSection === s.id ? ' active' : '') +
+        '" data-sec="' + esc(s.id) + '">' + esc(s.label) + '</button>');
+    });
+    host.innerHTML = chips.join('');
+    host.querySelectorAll('.idx-chip').forEach(function (b) {
+      b.addEventListener('click', function () {
+        activeSection = b.dataset.sec;
+        renderChips();
+        renderList();
+      });
+    });
+  }
+
+  function renderList() {
+    var q = (document.getElementById('idx-filter').value || '').toLowerCase().trim();
+    var list = ALL.filter(function (it) {
+      if (activeSection && it.sectionId !== activeSection) return false;
+      if (!q) return true;
+      return (it.label + ' ' + it.meta + ' ' + it.section + ' ' + it.group).toLowerCase().indexOf(q) !== -1;
+    });
+
+    document.getElementById('idx-count').textContent =
+      list.length + (list.length === 1 ? ' view' : ' views') +
+      (list.length === ALL.length ? '' : ' of ' + ALL.length);
+
+    if (!list.length) {
+      document.getElementById('idx-list').innerHTML =
+        '<div class="idx-empty">Nothing matches that. Try a shorter word, or clear the section filter.</div>';
+      return;
+    }
+
+    var html = '';
+    var letter = '';
+    list.forEach(function (it) {
+      var first = it.label.charAt(0).toUpperCase();
+      if (!/[A-Z]/.test(first)) first = '#';
+      if (first !== letter) {
+        letter = first;
+        html += '<div class="idx-letter"><span>' + esc(letter) + '</span></div>';
+      }
+      html += '<a class="idx-row" href="' + esc(it.href) + '">' +
+        '<span class="idx-name">' + esc(it.label) + '</span>' +
+        '<span class="idx-meta">' + esc(it.meta) + '</span>' +
+        '<span class="idx-sec">' + esc(it.section) + '</span>' +
+      '</a>';
+    });
+    document.getElementById('idx-list').innerHTML = html;
+  }
+
+  document.getElementById('idx-filter').addEventListener('input', renderList);
+  renderChips();
+  renderList();
+})();
+</script>
+
+</body>
+</html>
