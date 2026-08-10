@@ -1,4 +1,4 @@
-# Diesel Retail Price (US Avg)  source=eia  generated=2026-08-03T09:28:13.245Z
+# Diesel Retail Price (US Avg)  source=eia  generated=2026-08-10T07:15:28.160Z
 date,value
 1994-03-21,1.106
 1994-03-28,1.107
@@ -1689,3 +1689,4 @@ date,value
 2026-07-13,4.796
 2026-07-20,5.134
 2026-07-27,5.313
+2026-08-03,5.348
