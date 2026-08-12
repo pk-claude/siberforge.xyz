@@ -6,40 +6,118 @@
     }
   },
   "redirects": [
-    { "source": "/markets",  "destination": "/core/macro/markets.html", "permanent": true },
-    { "source": "/macro",    "destination": "/core/macro/",             "permanent": true },
-    { "source": "/regional", "destination": "/core/macro/regional/",    "permanent": true },
-    { "source": "/ai",       "destination": "/core/ai/",                "permanent": true },
-    { "source": "/supply",   "destination": "/core/supply/",            "permanent": true },
-    { "source": "/tools",    "destination": "/core/tools/",             "permanent": true },
-    { "source": "/data",     "destination": "/core/data/",              "permanent": true },
-    { "source": "/index",    "destination": "/core/",                   "permanent": true },
-    { "source": "/plug",     "destination": "/core/plug/",              "permanent": true },
-    { "source": "/pe",       "destination": "/core/equity/pe/",         "permanent": true },
-    { "source": "/reference","destination": "/core/tools/",             "permanent": true },
-    { "source": "/core/equity", "destination": "/core/macro/markets.html", "permanent": true }
+    {
+      "source": "/markets",
+      "destination": "/core/macro/markets.html",
+      "permanent": true
+    },
+    {
+      "source": "/macro",
+      "destination": "/core/macro/",
+      "permanent": true
+    },
+    {
+      "source": "/regional",
+      "destination": "/core/macro/regional/",
+      "permanent": true
+    },
+    {
+      "source": "/ai",
+      "destination": "/core/ai/",
+      "permanent": true
+    },
+    {
+      "source": "/supply",
+      "destination": "/core/supply/",
+      "permanent": true
+    },
+    {
+      "source": "/tools",
+      "destination": "/core/tools/",
+      "permanent": true
+    },
+    {
+      "source": "/data",
+      "destination": "/core/data/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/core/",
+      "permanent": true
+    },
+    {
+      "source": "/plug",
+      "destination": "/core/plug/",
+      "permanent": true
+    },
+    {
+      "source": "/pe",
+      "destination": "/core/equity/pe/",
+      "permanent": true
+    },
+    {
+      "source": "/reference",
+      "destination": "/core/tools/",
+      "permanent": true
+    },
+    {
+      "source": "/core/equity",
+      "destination": "/core/macro/markets.html",
+      "permanent": true
+    }
   ],
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" },
-        { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.plot.ly; style-src 'self' 'unsafe-inline' https://rsms.me https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://rsms.me https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://cdn.jsdelivr.net https://cdn.plot.ly; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.plot.ly; style-src 'self' 'unsafe-inline' https://rsms.me https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://rsms.me https://fonts.gstatic.com data:; img-src 'self' data: blob:; connect-src 'self' https://cdn.jsdelivr.net https://cdn.plot.ly; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        }
       ]
     },
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=600" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=600"
+        }
       ]
     },
     {
-      "source": "/(.*)\\.(css|js|mjs|png|ico|svg|woff2)",
+      "source": "/(.*)\\.(png|ico|svg|woff2)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=3600, stale-while-revalidate=86400" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js|mjs)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, stale-while-revalidate=3600"
+        }
       ]
     }
   ]
