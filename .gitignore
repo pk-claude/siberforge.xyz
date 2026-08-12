@@ -42,3 +42,4 @@ branding/*.tmp.html
 __pycache__/
 *.pyc
 *.tmp.py
+COMMIT-MSG.txt
