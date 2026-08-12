@@ -1,0 +1,89 @@
+{
+  "asOf": "2026-08-11",
+  "oneLiner": "The AI compute monopoly-in-practice: ~92% of revenue is data center, growing 85%+ with 75% gross margins, priced at a below-market forward multiple that assumes sharp deceleration.",
+  "thesis": [
+    "CUDA plus full-system integration (GPU + Vera CPU + NVLink + racks) remains the deepest lock-in in semis; the annual Hopper-Blackwell-Rubin cadence keeps rivals aiming at a moving target.",
+    "Hyperscaler capex is estimated around $725B in 2026 (vs ~$410B in 2025) with ~$1T projected for 2027; NVDA captures the largest single share of that spend.",
+    "Forward P/E of ~22-24x is below the trailing multiple and below the 30-40x band of 2023-2025: the market is already pricing sharp deceleration, so the debate is about duration of the capex cycle, not the multiple.",
+    "China is effectively a free option: H200 licenses exist (~$10B approved) but Beijing has blocked purchases; current numbers embed roughly zero China revenue."
+  ],
+  "latestQuarter": {
+    "label": "Q1 FY2027 (ended Apr 26, 2026; reported May 20, 2026)",
+    "points": [
+      "Revenue $81.6B, +85% YoY, +20% QoQ (~$2.8B above Street); Data Center $75.2B, +92% YoY.",
+      "GAAP gross margin 74.9%; operating margin 65.6% (operating income $53.5B, +147% YoY).",
+      "GAAP diluted EPS $2.39 (+214% YoY); non-GAAP $1.87 (now includes stock comp).",
+      "Guide: Q2 FY2027 revenue $91.0B plus or minus 2%, gross margin ~75%. Dividend raised to $0.25/q; $80B added to buyback.",
+      "Edge Computing segment (Gaming + ProViz + Auto) $6.4B, ~8% of revenue, +29% YoY."
+    ]
+  },
+  "segments": [
+    "Data Center ~92% of revenue ($75.2B in Q1 FY27): Blackwell/GB300 is the volume platform; Rubin layers in H2 2026.",
+    "Edge Computing ~8% ($6.4B): Gaming $3.7B (+47%), Professional Visualization $1.3B, Automotive $604M (+6%)."
+  ],
+  "competitive": [
+    "AMD MI400 series narrows the hardware gap but trails on software ecosystem.",
+    "Custom ASICs are the most credible threat: Broadcom (Google TPU, Meta MTIA, OpenAI), Marvell (Trainium, Maia) take share-of-wallet at the largest, most concentrated buyers.",
+    "Cerebras (CBRS) IPO'd May 2026 with a 750MW OpenAI deal: small revenue but a validated wafer-scale inference alternative.",
+    "Hyperscaler in-house silicon (TPU v7, Trainium 3, Maia 2) grows faster than merchant GPUs in 2026 (TrendForce: +45% vs +16%)."
+  ],
+  "moat": "CUDA and the surrounding software stack, compounded by full-system integration competitors must replicate across six-plus co-designed chips, an annual platform cadence, and a 350+-factory supply chain ramped for Rubin.",
+  "risks": [
+    "Customer concentration: three direct customers were 21%, 17% and 16% of Q1 FY27 revenue (54% combined).",
+    "AI capex cycle: any hyperscaler digestion pause hits NVDA disproportionately; 2027 capex guidance this fall is the swing factor.",
+    "China effectively zero: H200 licensed but unbought; Blackwell-derivative China status unclear.",
+    "Custom silicon substitution at precisely the three concentrated customers.",
+    "Power constraints: US data center power demand projected ~66GW in 2027 vs ~31GW in 2026.",
+    "Rubin execution: first shipments Q3 2026, volume Q4 2026; slippage hits FY2028 estimates."
+  ],
+  "catalysts": [
+    "Q2 FY2027 earnings Aug 26, 2026 (guide $91B).",
+    "Rubin first shipments Q3 2026; volume ramp Q4 2026 (Microsoft, AWS, Google Cloud, CoreWeave named early adopters).",
+    "Hyperscaler 2027 capex guidance through fall 2026.",
+    "Any China H200 shipment unlock."
+  ],
+  "pricedIn": "At ~$218, implied forward EPS is roughly $9-10 (22-24x forward vs ~32x trailing). Paying a market-plus multiple for 85% growth means steep deceleration is already the base case. Key debates: durability of $725B-to-$1T hyperscaler capex, revenue quality given 54% three-customer concentration, and whether China is a free option or permanently stranded.",
+  "scenarios": {
+    "bear": "2027 hyperscaler capex flattens as AI ROI questions bite; custom ASICs take incremental inference share; China stays zero; growth decelerates to teens by FY2028, gross margin slips below 70%; multiple de-rates toward high-teens on cyclical reclassification.",
+    "base": "Rubin ramps on schedule H2 2026; hyperscaler capex grows into 2027 (~$1T); Data Center revenue +35-45% in FY2028 at ~75% gross margin; China negligible; stock compounds roughly with earnings at a low-20s forward multiple.",
+    "bull": "Rubin's ~5x uplift accelerates replacement cycles; agentic inference demand scales faster than training; China unlock adds a low-double-digit revenue layer; FY2028 estimates rise materially and the multiple re-rates toward high-20s/30s."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "r": 0.1,
+    "gT": 0.03,
+    "years": 10,
+    "bear": {
+      "g": 0.1
+    },
+    "base": {
+      "g": 0.3
+    },
+    "bull": {
+      "g": 0.5
+    },
+    "note": "Growth presets are year-1 rates that fade to terminal: base (30% fading) roughly matches the ~18% constant growth the reverse DCF says is priced in."
+  },
+  "sources": [
+    {
+      "label": "NVIDIA Q1 FY2027 press release",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+    },
+    {
+      "label": "NVIDIA 10-Q Q1 FY2027 (SEC)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001045810/000104581026000052/nvda-20260426.htm"
+    },
+    {
+      "label": "CNBC: H200 China licenses",
+      "url": "https://www.cnbc.com/2026/05/14/us-clears-h200-chip-sales-to-10-china-firms-as-nvidia-ceo-looks-for-breakthrough.html"
+    },
+    {
+      "label": "Rubin launch timeline",
+      "url": "https://wccftech.com/nvidia-confirms-vera-rubin-launch-in-q3-volume-ramp-q4-blackwell-continues-to-see-massive-demand/"
+    },
+    {
+      "label": "Goldman Sachs: AI build-out tracking",
+      "url": "https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out"
+    }
+  ]
+}

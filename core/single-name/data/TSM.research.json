@@ -1,0 +1,89 @@
+{
+  "asOf": "2026-08-11",
+  "oneLiner": "The sole enabler of leading-edge AI silicon: every major accelerator is fabbed here, N2 is sold out through 2026, and the old geopolitical discount has largely compressed out of the multiple.",
+  "thesis": [
+    "Effective monopoly at 2nm-class: N2 entered high-volume manufacturing Dec 2025, fully allocated through 2026, targeting ~100K wafers/month by year-end; Intel 18A yields lag to 2027 and Samsung SF2 struggles with GAA.",
+    "HPC (the AI complex: NVDA, AMD, Broadcom ASICs, Apple compute) is now 66% of revenue and growing 20% QoQ.",
+    "2026 revenue growth guided to slightly above 40% YoY in USD with 65-67% gross margins despite overseas-fab dilution.",
+    "Advanced packaging (CoWoS) is a second bottleneck TSMC controls; customer PDK/IP ecosystems make leading-edge defection a multi-year, high-risk project."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (Apr-Jun; reported Jul 16, 2026)",
+    "points": [
+      "Revenue $40.2B, +36% YoY, +12% QoQ, high end of guidance.",
+      "Gross margin 67.7% (above guide); operating margin 60.3%; ADR EPS $4.31, +77% YoY.",
+      "Guide: Q3 revenue $44.6-45.8B, gross margin 65-67%; FY2026 growth raised to slightly above 40%.",
+      "Node mix: N5 33%, N3 30%, N7 11%, N2 3% (first material quarter); 7nm-and-below = 77% of wafer revenue.",
+      "Platform mix: HPC 66%, Smartphone 22% (-4% QoQ), IoT 5%, Automotive 4%."
+    ]
+  },
+  "segments": [
+    "HPC 66% of revenue: AI accelerators, custom ASICs, Apple silicon compute.",
+    "Smartphone 22%: fall 2026 iPhone silicon on N2 is the next leg.",
+    "IoT 5%, Automotive 4%."
+  ],
+  "competitive": [
+    "Intel 18A reached HVM late 2025 but Intel concedes world-class yields only by 2027, limiting external foundry wins.",
+    "Samsung SF2 prioritizing GAA yield recovery over leapfrogging.",
+    "Reported N2 pricing ~$30K/wafer with capacity booked to 2028 (trade press, unverified).",
+    "Practically every leading AI accelerator (NVIDIA, AMD, Google TPU, Trainium, Cerebras) is fabbed at TSMC."
+  ],
+  "moat": "Process leadership plus yield/scale economics, advanced-packaging control, and a customer ecosystem (PDKs, IP, design services) that makes defection a multi-year project. N2 sold out through 2026 before it ramped.",
+  "risks": [
+    "Geopolitics: leading-edge concentration in Taiwan remains the structural discount driver.",
+    "AI capex cyclicality: at 66% HPC, a hyperscaler digestion year hits far harder than prior cycles.",
+    "Customer concentration: Apple historically ~25% of revenue, NVIDIA rising fast.",
+    "Margin dilution: record $52-56B capex including Arizona, Japan, Dresden; management guides gross margin down to 65-67%.",
+    "Currency: NTD appreciation compresses reported margins (USD revenue, NTD costs).",
+    "Smartphone softness: 22% of revenue declined 4% QoQ."
+  ],
+  "catalysts": [
+    "Q3 2026 results ~Oct 15, 2026.",
+    "N2 ramp to ~100K wpm by end-2026; N2P/A16 progression in 2027.",
+    "2027 capex framing on the October call.",
+    "NVIDIA Rubin volume ramp (Q4 2026) flows through TSMC N3/N2 and packaging.",
+    "Apple fall 2026 iPhone on N2."
+  ],
+  "pricedIn": "Trailing ~35x and forward ~24-26x are well above TSM's own decade norm (mid-teens to 20x forward): the Taiwan discount has largely compressed out after the stock roughly doubled in a year. The multiple embeds 40%+ 2026 growth plus a decent 2027. Debate: are 60%+ operating margins peak-cycle artifacts, and does an AI capex pause turn a structural re-rating back into a cyclical one? The 5% fall after a record Q2 shows expectations are full.",
+  "scenarios": {
+    "bear": "Hyperscaler capex digests in 2027 just as record capacity lands; HPC growth stalls; overseas costs and NTD strength pull gross margin to high-50s; multiple mean-reverts toward ~18x forward on renewed geopolitical pricing.",
+    "base": "2026 closes at 40%+ growth as guided; N2 ramps to ~100K wpm at premium pricing; 2027 slower but healthy; gross margin holds mid-60s; stock tracks earnings at low-to-mid-20s forward.",
+    "bull": "N2 pricing power plus a monopoly-like leading edge while rivals slip; accelerator unit growth compounds through Rubin/MI400/custom ASIC ramps all fabbed here; margins hold at records and the market pays a sustained premium for the sole enabler of the AI build-out."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.105,
+    "gT": 0.035,
+    "years": 10,
+    "bear": {
+      "g": 0.05
+    },
+    "base": {
+      "g": 0.14
+    },
+    "bull": {
+      "g": 0.24
+    },
+    "note": "Valuation basis is forward earnings, not FCF: TTM FCF is structurally depressed by the record $52-56B capex program, which would make an FCF-DCF read absurdly demanding."
+  },
+  "notes": "Statement history shown is 4 years (Yahoo) because TSMC files 20-F/6-K rather than 10-K/10-Q; figures converted from TWD at spot. FCF here is capex-heavy: valuation lab base case uses normalized growth off a depressed FCF base.",
+  "sources": [
+    {
+      "label": "TSMC Q2 2026 earnings release (SEC 6-K)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000451/a2q26e_withguidancexfinal.htm"
+    },
+    {
+      "label": "TSMC press release",
+      "url": "https://pr.tsmc.com/english/news/3326"
+    },
+    {
+      "label": "N2 100K wafers target",
+      "url": "https://www.techpowerup.com/351326/tsmc-targets-100-000-n2-wafers-per-month-by-the-end-of-2026"
+    },
+    {
+      "label": "2nm supply landscape",
+      "url": "https://semiwiki.com/semiconductor-manufacturers/tsmc/367081-global-2nm-supply-crunch-tsmc-leads-as-intel-18a-samsung-and-rapidus-race-to-compete/"
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+{
+  "asOf": "2026-08-11",
+  "oneLiner": "Search still compounding 17% while Cloud grows 82%, wrapped in a $195-205B capex program and antitrust appeals; ~22x forward is the cheapest of the AI mega-caps.",
+  "thesis": [
+    "Distribution is the moat: ~91% global search share, 2.5B monthly AI Overviews users, Gemini app 950M+ MAU. AI disruption fear persists but Search revenue accelerated to +17%.",
+    "Cloud is a second franchise: $24.8B in Q2 (+82%) at ~35% segment margin, gaining share on AWS/Azure with TPUs plus Gemini frontier models.",
+    "Earnings quality caveat: Q2 GAAP EPS $9.11 included ~$99B of equity-stake marks (Anthropic to $124.3B, SpaceX); core EPS ~$2.85.",
+    "Capex is the swing factor: FY2026 guide raised to $195-205B with more growth flagged for 2027; the market debits it against the multiple until AI revenue proves out."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 22, 2026)",
+    "points": [
+      "Revenue $119.8B, +24% YoY (beat); operating income $40.8B, +30%; operating margin 34% (+2pp).",
+      "Google Services $94.5B (+15%); Search ~$63.3B (+17%); YouTube ads $11.1B (+13%); subscriptions/platforms/devices $12.9B.",
+      "Cloud $24.8B (+82%); Cloud operating income $8.8B vs $2.8B a year ago.",
+      "GAAP EPS $9.11 incl. ~$99B equity gains (Anthropic, SpaceX); ex-gains ~$2.85 vs $2.89 consensus.",
+      "FY2026 capex raised to $195-205B; stock fell ~5% after hours on the hike."
+    ]
+  },
+  "segments": [
+    "Search ~53% of revenue; Cloud ~21% (now solidly profitable); YouTube ads ~9%; subscriptions/devices ~11%; Other Bets <1% (-$1.8B operating loss).",
+    "Gemini monetization: AI Mode >1B MAU; AI Overviews carry ads; AI Pro $19.99/mo, AI Ultra $249.99/mo; Gemini subscription revenue ~$1.2B in 2025 with ads reportedly coming in 2026."
+  ],
+  "competitive": [
+    "ChatGPT ~900M weekly actives / ~1B app MAU; agentic browsers (Atlas, Comet) attack the Chrome funnel; Perplexity ~45M MAU.",
+    "Cloud share (Synergy Q1 2026): AWS 28%, Azure 21%, Google 14%, but GCP grew 82% vs Azure ~40%, AWS +28%.",
+    "Antitrust: search remedies finalized Dec 2025 (data sharing, 1-year default deal caps, no Chrome divestiture); Google appealed, DOJ cross-appealed seeking Chrome divestiture; DC Circuit late 2026/early 2027. Ad tech remedies (Brinkema) still pending as of Aug 2026."
+  ],
+  "moat": "Search distribution at ~91% share, the Chrome/Android funnel, and the largest AI distribution surface in the world; Cloud adds TPU/Gemini infrastructure advantage; the $124B Anthropic stake is optionality on rivals' success.",
+  "risks": [
+    "Capex escalation: $195-205B in 2026, rising 2027; depreciation and FCF compression if AI revenue lags.",
+    "Antitrust tail risk: DOJ cross-appeal keeps Chrome divestiture and Apple-deal termination alive; data-sharing remedies already arm rivals.",
+    "Ad tech: forced AdX/DFP divestiture remains possible.",
+    "AI query substitution normalizing 'asking a bot' over searching.",
+    "Earnings quality: $6.26 of Q2's $9.11 EPS was investment marks that can reverse.",
+    "1-year cap on default deals injects annual Apple renewal risk."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings late Oct 2026.",
+    "Brinkema ad tech remedies ruling (pending).",
+    "DC Circuit oral arguments late 2026/early 2027.",
+    "Possible Gemini in-app ads launch; 2027 capex framing at year-end."
+  ],
+  "pricedIn": "~22x forward sits mid-range of the historical 18-24x band despite 24% growth: cheap vs Mag-7 AI peers, reflecting capex and antitrust discounts. Debate: is $200B capex offensive reinvestment justified by 82% Cloud growth, or margin-destroying overbuild; and does AI substitution eventually crack a Search engine that is still growing 17%?",
+  "scenarios": {
+    "bear": "Capex tops $205B and rises again while Cloud decelerates into a capacity glut; depreciation crushes margins; AI Overviews cannibalize paid clicks; DC Circuit reinstates structural remedies; Anthropic marks reverse. Mid-teens multiple on lower core EPS.",
+    "base": "Search grows low-double-digits with AI Overviews monetizing near parity; Cloud compounds 40-60%; appeals delay structural change through 2027; low-20s forward P/E on mid-teens core EPS growth grinds the stock higher with capex-headline volatility.",
+    "bull": "Cloud sustains 60%+ with margin expansion; capex proves supply-constrained, not speculative; Gemini layers ads and subscriptions into a second multi-tens-of-billions stream; courts uphold narrow remedies; re-rating toward 26-28x."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.095,
+    "gT": 0.035,
+    "years": 10,
+    "bear": {
+      "g": 0.04
+    },
+    "base": {
+      "g": 0.12
+    },
+    "bull": {
+      "g": 0.2
+    },
+    "note": "Valuation basis is forward earnings: TTM FCF is crushed by the $195-205B capex program and TTM GAAP earnings are inflated by ~$99B of Anthropic/SpaceX marks, so forward EPS is the cleanest anchor."
+  },
+  "sources": [
+    {
+      "label": "Alphabet Q2 2026 earnings release",
+      "url": "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q2/2026q2-alphabet-earnings-release.pdf"
+    },
+    {
+      "label": "CNBC Q2 2026 coverage",
+      "url": "https://www.cnbc.com/2026/07/22/google-earnings-q2-goog-live-updates.html"
+    },
+    {
+      "label": "Search remedies finalized",
+      "url": "https://www.cnbc.com/2025/12/05/judge-finalize-remedies-in-google-antitrust-case.html"
+    },
+    {
+      "label": "Ad tech remedy phase",
+      "url": "https://digiday.com/marketing/googles-ad-tech-antitrust-remedy-phase-explained-doj-wants-googles-offerings-and-where-the-judge-might-land/"
+    },
+    {
+      "label": "Anthropic stake analysis",
+      "url": "https://startupfortune.com/alphabets-124-billion-anthropic-stake-reshapes-how-investors-should-read-googles-earnings/"
+    }
+  ]
+}

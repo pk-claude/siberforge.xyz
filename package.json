@@ -10,8 +10,11 @@
     "refresh-supply": "node scripts/refresh-supply.mjs",
     "refresh-supply-dry": "node scripts/refresh-supply.mjs --dry-run",
     "refresh-equity-pe": "node scripts/refresh-equity-pe.mjs",
+    "refresh-single-name": "node scripts/refresh-single-name.mjs",
     "refresh-equity-pe-dry": "node scripts/refresh-equity-pe.mjs --dry-run",
-    "snapshot-equity-pe": "node scripts/snapshot-equity-pe.mjs"
+    "snapshot-equity-pe": "node scripts/snapshot-equity-pe.mjs",
+    "test": "node scripts/test/run-all.mjs",
+    "check": "node scripts/audit-nav.mjs && node scripts/check-links.mjs && node scripts/test/run-all.mjs"
   },
   "engines": {
     "node": ">=20"
@@ -19,7 +22,9 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "archiver": "^7.0.1",
-    "pdfjs-dist": "^4.7.76",
     "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "jsdom": "^25.0.1"
   }
 }

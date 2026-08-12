@@ -51,11 +51,28 @@
           { id: 'ticker',  label: 'Ticker',           href: '/core/macro/ticker.html',  meta: 'Quick lookup across the macro series universe' },
         ]},
         { label: 'Single-name', links: [
-          { id: 'single-name-hub', label: 'Single-name research', href: '/core/single-name/', meta: 'All single-name deep dives' },
+          { id: 'single-name-hub', label: 'Single-name research', href: '/core/single-name/', meta: '9 deep dives live: valuation lab, EDGAR fundamentals, peer comps' },
           { id: 'plug-overview',   label: 'Plug Power (PLUG)',    href: '/core/plug/',        meta: '6 views - cash flow, revenue, balance, liquidity, footprint' },
         ]},
         { label: 'Valuation', links: [
           { id: 'pe-overview',     label: 'P/E Multiples',        href: '/core/equity/pe/',   meta: 'S&P 500 + Nasdaq-100 trailing & forward P/E, sortable, with daily forward-P/E history' },
+        ]},
+      ],
+    },
+
+    'equity:single': {
+      label: 'Single-Name Research',
+      groups: [
+        { links: [
+          { id: 'single-name-hub', label: 'All names',        href: '/core/single-name/',       meta: 'Hub - 9 live, 29 pipeline' },
+          { id: 'sn-nvda',  label: 'NVIDIA (NVDA)',    href: '/core/single-name/nvda/',  meta: 'AI compute monopoly, reverse DCF' },
+          { id: 'sn-tsm',   label: 'TSMC (TSM)',       href: '/core/single-name/tsm/',   meta: 'N2 monopoly, foundry comps' },
+          { id: 'sn-mu',    label: 'Micron (MU)',      href: '/core/single-name/mu/',    meta: 'Peak-cycle memory at 6x forward' },
+          { id: 'sn-avgo',  label: 'Broadcom (AVGO)',  href: '/core/single-name/avgo/',  meta: 'Custom-ASIC arms dealer' },
+          { id: 'sn-googl', label: 'Alphabet (GOOGL)', href: '/core/single-name/googl/', meta: 'Search through the AI transition' },
+          { id: 'sn-pltr',  label: 'Palantir (PLTR)',  href: '/core/single-name/pltr/',  meta: 'Best metrics, richest multiple' },
+          { id: 'sn-crwv',  label: 'CoreWeave (CRWV)', href: '/core/single-name/crwv/',  meta: 'Leveraged AI capex, $104B backlog' },
+          { id: 'sn-cbrs',  label: 'Cerebras (CBRS)',  href: '/core/single-name/cbrs/',  meta: 'Wafer-scale inference, post-IPO' },
         ]},
       ],
     },
@@ -157,7 +174,7 @@
         ]},
         { label: 'Data', links: [
           { id: 'data-catalog',     label: 'Data Catalog',          href: '/core/data/',            meta: 'All series with FRED IDs, transforms, refresh cadence' },
-          { id: 'supply-downloads', label: 'Supply data downloads', href: '/core/supply/data.html', meta: 'All supply-chain series, full history, CSV + zip' },
+          { id: 'supply-downloads', label: 'Supply Chain CSV export', href: '/core/supply/data.html', meta: 'Bulk CSV + zip of the ~50 supply-chain series only (the catalog above covers every series on the site)' },
           { id: 'site-index',       label: 'A-Z index',             href: '/core/',                 meta: 'Every view on the site, alphabetical' },
         ]},
       ],
@@ -177,6 +194,126 @@
     { id: 'supply',   title: 'Supply Chain', pill: 'Weekly', pages: 'supply',   open: false },
     { id: 'tools',    title: 'Tools & Data',                 pages: 'tools',    open: false },
   ];
+
+  // ----------------------------------------------------------------------
+  // KEYWORDS -- what a reader actually types.
+  //
+  // Search used to match only link labels and the short `meta` blurb, so
+  // "unemployment", "mortgage", "gdp", "case-shiller" and "p/e ratio" all
+  // returned nothing: the site knew the page as "Labor" or "Housing". These
+  // are the metric names, tickers and series IDs behind each view. Kept in
+  // one map rather than sprinkled through PAGES so adding a synonym is a
+  // one-line change and never touches the nav structure.
+  // ----------------------------------------------------------------------
+  const KEYWORDS = {
+    markets:        ['s&p 500', 'spx', 'nasdaq', 'sector rotation', 'sector returns', 'equity', 'stocks', 'breadth', 'vix', 'volatility'],
+    bonds:          ['yield curve', 'treasury', '10 year', '2s10s', '10y3m', 'term premium', 'duration', 'ig', 'high yield', 'hy oas', 'credit spread', 'move index', 'interest rates', 'rates', 'fed funds', 'bond yields'],
+    ticker:         ['symbol lookup', 'series lookup', 'quote', 'search series'],
+    'single-name-hub': ['company', 'single stock', 'deep dive', 'fundamentals'],
+    'plug-overview':['plug power', 'plug', 'hydrogen', 'fuel cell', 'green hydrogen'],
+    'sn-nvda':  ['nvidia', 'nvda', 'gpu', 'ai chips', 'blackwell', 'rubin', 'cuda'],
+    'sn-tsm':   ['tsmc', 'tsm', 'taiwan semiconductor', 'foundry', 'n2', '2nm'],
+    'sn-mu':    ['micron', 'mu', 'memory', 'dram', 'hbm', 'nand'],
+    'sn-avgo':  ['broadcom', 'avgo', 'asic', 'custom silicon', 'vmware', 'tomahawk'],
+    'sn-googl': ['alphabet', 'google', 'googl', 'search', 'gemini', 'youtube', 'gcp'],
+    'sn-pltr':  ['palantir', 'pltr', 'aip', 'foundry software', 'defense software'],
+    'sn-crwv':  ['coreweave', 'crwv', 'neocloud', 'gpu cloud', 'ai infrastructure'],
+    'sn-cbrs':  ['cerebras', 'cbrs', 'wafer scale', 'inference', 'wse'],
+    'plug-cashflow':['cash flow', 'cfo', 'capex', 'free cash flow', 'burn rate'],
+    'plug-revenue': ['revenue', 'segment', 'top line', 'sales'],
+    'plug-balance': ['balance sheet', 'assets', 'liabilities', 'working capital', 'debt'],
+    'plug-liquidity':['liquidity', 'cash runway', 'dilution', 'credit line', 'going concern'],
+    'plug-map':     ['facilities', 'plants', 'footprint', 'production sites'],
+    'pe-overview':  ['p/e', 'p/e ratio', 'pe ratio', 'price to earnings', 'valuation', 'multiple', 'forward pe', 'trailing pe', 'earnings yield', 'cape', 'shiller'],
+
+    regime:         ['regime', 'macro regime', 'business cycle', 'composite score', 'risk on', 'risk off'],
+    cycle:          ['recession', 'recession risk', 'sahm rule', 'yield curve inversion', 'nfci', 'financial conditions', 'slowdown', 'downturn'],
+    inflation:      ['cpi', 'inflation', 'pce', 'core cpi', 'sticky cpi', 'shelter', 'breakeven', '5y5y', 'prices', 'deflation', 'disinflation'],
+    housing:        ['housing', 'mortgage', 'mortgage rate', 'home prices', 'case-shiller', 'housing starts', 'permits', 'existing home sales', 'nahb', 'affordability', 'rent'],
+    consumer:       ['consumer', 'retail sales', 'consumer spending', 'pce', 'savings rate', 'sentiment', 'credit card', 'delinquency', 'real income'],
+    credit:         ['credit', 'spreads', 'hy oas', 'ig oas', 'default rate', 'loan growth', 'bank lending', 'sloos'],
+    labor:          ['unemployment', 'jobs', 'jobs report', 'payrolls', 'nonfarm payrolls', 'nfp', 'wages', 'average hourly earnings', 'participation', 'jolts', 'claims', 'quits'],
+    indicators:     ['indicators', 'gdp', 'ism', 'pmi', 'industrial production', 'all series', 'dashboard', 'economic data'],
+    recession:      ['recession', 'recession probability', 'sahm', 'inversion', 'nber', 'hard landing', 'soft landing'],
+
+    'regional-hub': ['regional', 'states', 'metro', 'msa', 'dispersion', 'geography'],
+    geography:      ['state', 'msa', 'metro area', 'map', 'by state', 'regional ranking'],
+    'regional-cpi': ['regional cpi', 'cpi by region', 'local inflation', 'metro inflation'],
+    affordability:  ['affordability', 'cost of living', 'income vs cost', 'housing affordability'],
+    'build-buy':    ['rent vs buy', 'build vs buy', 'breakeven', 'own vs rent'],
+    'channel-mix':  ['ecommerce', 'e-commerce', 'online retail', 'in-store', 'channel shift'],
+    'climate-risk': ['climate', 'physical risk', 'hurricane', 'wildfire', 'flood', 'insurance'],
+    demographics:   ['population', 'demographics', 'age', 'household formation', 'births'],
+    migration:      ['migration', 'moving', 'domestic migration', 'net inflow', 'population flows'],
+
+    'ai-hub':          ['ai', 'artificial intelligence', 'ai beneficiaries', 'scenarios'],
+    'ai-compute':      ['nvda', 'nvidia', 'amd', 'avgo', 'broadcom', 'semis', 'semiconductors', 'gpu', 'accelerators', 'custom silicon'],
+    'ai-hyperscalers': ['msft', 'microsoft', 'googl', 'google', 'meta', 'amzn', 'amazon', 'capex', 'cloud', 'hyperscaler'],
+    'ai-power':        ['power', 'electricity', 'utilities', 'grid', 'datacenter power', 'ipp', 'nuclear', 'load growth'],
+    'ai-adopters':     ['software', 'saas', 'adopters', 'productivity', 'second derivative'],
+    'ai-screen':       ['screen', 'stock screen', 'industry screen', '160 companies', 'scenarios'],
+    'ai-top-5':        ['top 5', 'picks', 'meta', 'cdns', 'cadence', 'avgo', 'snps', 'synopsys', 'msft'],
+
+    'supply-overview':     ['supply chain', 'sc pressure', 'logistics', 'freight'],
+    'supply-insights':     ['insights', 'weekly read', 'what moved', 'commentary'],
+    'supply-dc':           ['distribution center', 'warehouse', 'inventories', 'packaging', 'warehouse wages'],
+    'supply-industrial':   ['industrial real estate', 'warehouse construction', 'reit', 'cap rate', 'industrial re'],
+    'supply-middle':       ['trucking', 'diesel', 'cass', 'freight index', 'ata tonnage', 'intermodal', 'rail', 'dat', 'spot rates'],
+    'supply-last':         ['last mile', 'ups', 'fedex', 'usps', 'parcel', 'delivery', 'couriers'],
+    'supply-international':['gscpi', 'wci', 'scfi', 'fbx', 'bdi', 'container rates', 'ports', 'ocean freight', 'bunker', 'shipping'],
+    'supply-downloads':    ['csv', 'download', 'export', 'raw data', 'supply data'],
+
+    'tools-hub':     ['tools', 'analytics', 'utilities'],
+    'pair-explorer': ['correlation', 'regression', 'scatter', 'two series', 'relationship'],
+    network:         ['network', 'correlation map', 'lead lag', 'transmission'],
+    backtest:        ['backtest', 'rotation', 'strategy', 'walk forward', 'sector rotation', 'spy', '60/40'],
+    compare:         ['compare', 'side by side', 'two indicators', 'overlay'],
+    'data-catalog':  ['data catalog', 'fred', 'series id', 'sources', 'methodology', 'transforms', 'dictionary'],
+    'site-index':    ['index', 'a-z', 'sitemap', 'all pages', 'everything'],
+  };
+
+  // ----------------------------------------------------------------------
+  // RELATED -- curated cross-section jumps, keyed by link id.
+  //
+  // The nav can only move a reader inside the section they are already in.
+  // These are the edges the nav structurally cannot express. Kept short and
+  // hand-picked on purpose: an auto-generated "related" block is link spam.
+  // ----------------------------------------------------------------------
+  const RELATED = {
+    inflation:      ['regional-cpi', 'labor', 'indicators'],
+    'regional-cpi': ['inflation', 'affordability', 'geography'],
+    housing:        ['build-buy', 'affordability', 'supply-industrial'],
+    'build-buy':    ['housing', 'affordability', 'migration'],
+    affordability:  ['housing', 'regional-cpi', 'demographics'],
+    labor:          ['cycle', 'consumer', 'recession'],
+    consumer:       ['channel-mix', 'labor', 'supply-last'],
+    'channel-mix':  ['consumer', 'supply-last', 'supply-dc'],
+    credit:         ['bonds', 'cycle', 'recession'],
+    bonds:          ['credit', 'cycle', 'markets'],
+    cycle:          ['recession', 'credit', 'labor'],
+    recession:      ['cycle', 'regime', 'backtest'],
+    regime:         ['backtest', 'cycle', 'markets'],
+    markets:        ['bonds', 'pe-overview', 'regime'],
+    'pe-overview':  ['markets', 'ai-screen', 'data-catalog'],
+    migration:      ['demographics', 'affordability', 'build-buy'],
+    demographics:   ['migration', 'housing', 'labor'],
+    geography:      ['regional-cpi', 'affordability', 'climate-risk'],
+    'climate-risk': ['geography', 'affordability', 'supply-industrial'],
+    'supply-dc':    ['supply-industrial', 'channel-mix', 'housing'],
+    'supply-industrial': ['supply-dc', 'housing', 'markets'],
+    'supply-middle':['supply-international', 'supply-last', 'consumer'],
+    'supply-last':  ['channel-mix', 'supply-middle', 'consumer'],
+    'supply-international': ['supply-middle', 'markets', 'inflation'],
+    'ai-compute':   ['ai-power', 'ai-hyperscalers', 'pe-overview'],
+    'ai-power':     ['ai-compute', 'supply-industrial', 'ai-hyperscalers'],
+    'ai-hyperscalers': ['ai-compute', 'ai-adopters', 'pe-overview'],
+    'ai-adopters':  ['ai-hyperscalers', 'ai-screen', 'pe-overview'],
+    backtest:       ['regime', 'recession', 'compare'],
+    'pair-explorer':['network', 'compare', 'data-catalog'],
+    network:        ['pair-explorer', 'regime', 'compare'],
+    compare:        ['indicators', 'pair-explorer', 'data-catalog'],
+    indicators:     ['compare', 'data-catalog', 'regime'],
+  };
 
   // ----------------------------------------------------------------------
   // Flat index of every unique view. Used by global search, the A-Z index
@@ -202,6 +339,8 @@
               label: l.label,
               href: l.href,
               meta: l.meta || '',
+              keywords: KEYWORDS[l.id] || [],
+              related: RELATED[l.id] || [],
               group: g.label || entry.label || '',
               section: s.label,
               sectionId: s.id,
@@ -218,6 +357,8 @@
     SECTIONS: SECTIONS,
     PAGES: PAGES,
     LANDING_HUB: LANDING_HUB,
+    KEYWORDS: KEYWORDS,
+    RELATED: RELATED,
     index: buildIndex,
   };
 })();

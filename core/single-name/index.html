@@ -8,8 +8,8 @@
 <link rel="icon" type="image/png" href="/siberforge-mark.png" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="Siberforge — Research from primary sources" />
-<meta property="og:description" content="Analyst-grade research reconstructed from SEC EDGAR filings and FRED series. Every line item ties back to a filing or a series." />
+<meta property="og:title" content="Siberforge — Single-Name Research" />
+<meta property="og:description" content="Deep dives on individual names: EDGAR-reconstructed fundamentals, reverse DCF and scenario valuation, peer comps, written theses. 9 names live." />
 <meta property="og:image" content="https://siberforge.xyz/siberforge-og.png" />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:image" content="https://siberforge.xyz/siberforge-og.png" />
@@ -22,43 +22,105 @@
 <script src="/core/lib/theme-toggle.js"></script>
 <script src="/core/lib/nav-config.js"></script>
 <script defer src="/core/lib/layout.js"></script>
+<style>
+.sn-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:var(--sp-3);margin:var(--sp-4) 0}
+.sn-pipe{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin:var(--sp-3) 0 var(--sp-5)}
+.sn-pipe span{font-family:var(--font-mono);font-size:var(--fs-sm);color:var(--muted);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r-sm);padding:4px 10px}
+.ov-card h2{font-size:var(--fs-lg)}
+</style>
 </head>
 <body data-section="equity" data-page="single-name-hub" data-page-sub="Single-Name Research" data-page-status-text="Ready">
 
 <main class="ai-overview">
   <section class="overview-hero">
     <h1>Single-Name Research</h1>
-    <p class="overview-lede">Deep dives on individual public companies, reconstructed from <strong>SEC EDGAR XBRL filings</strong> rather than vendor databases. Quarterly fundamentals rebuilt by differencing YTD 10-Q filings, restatements preserved, footnotes surfaced inline. Currently 1 name shipped; pipeline below.</p>
+    <p class="overview-lede">Deep dives on individual names built for investment decisions: fundamentals reconstructed from <strong>SEC EDGAR XBRL filings</strong> (deep annual history, standalone quarters via YTD differencing), an interactive <strong>valuation lab</strong> (reverse DCF, scenario DCF, revenue-path mode for pre-FCF names), live peer comps, and a written thesis with bear/base/bull scenarios. 9 names live, 29 in the pipeline.</p>
   </section>
 
-  <section class="overview-cards">
-    <a class="ov-card" href="/core/plug/">
-      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">PLUG &middot; 44 quarters &middot; 2015-2025</span></div>
-      <h2>Plug Power (PLUG)</h2>
-      <p>Quarterly cash flow 2015-2025 from EDGAR XBRL: interactive CFO / CFI / CFF drivers, balance-sheet health, liquidity dependencies, US production footprint, and revenue by product line. Restatements (2021 Amazon/Walmart warrant reclass) preserved with both vintages selectable.</p>
-      <p class="ov-cta">Open the deep dive <span class="arrow">&rarr;</span></p>
+  <section class="overview-cards sn-grid">
+    <a class="ov-card" href="/core/single-name/nvda/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; AI infra</span></div>
+      <h2>NVIDIA (NVDA)</h2>
+      <p>The AI compute monopoly at a below-market forward multiple. 19 years of EDGAR history, reverse DCF, ASIC-threat peer set.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
     </a>
-    <div class="ov-card" style="opacity:0.55;cursor:default">
-      <div class="ov-card-meta"><span class="tag" style="background:var(--panel-2);color:var(--muted)">Pipeline</span><span class="ov-count">Coming next</span></div>
-      <h2>More single-name deep dives</h2>
-      <p>The PLUG playbook (CFO/CFI/CFF reconstruction, restatement handling, footnote surfacing, dilution math) is reusable for any single-name. Likely next adds: a high-dilution growth story to stress-test the cash-runway tooling, a multi-segment industrial to test segment-level XBRL parsing.</p>
-      <p class="ov-cta" style="color:var(--muted)">Suggest a name &middot; pavkarab4@gmail.com</p>
+    <a class="ov-card" href="/core/single-name/tsm/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; AI infra</span></div>
+      <h2>TSMC (TSM)</h2>
+      <p>Sole enabler of leading-edge AI silicon; N2 sold out through 2026. Foundry peer set, geopolitical-discount debate.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/single-name/mu/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; Memory</span></div>
+      <h2>Micron (MU)</h2>
+      <p>85% gross margins at a 6x forward P/E: cheapest large cap in tech or a cycle-top trap. 18 years of cycle history charted.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/single-name/avgo/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; AI infra</span></div>
+      <h2>Broadcom (AVGO)</h2>
+      <p>The custom-ASIC arms dealer: $73B AI backlog, &gt;$100B FY27 target, VMware cash flows. Custom-silicon peer set.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/single-name/googl/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; Mega-cap</span></div>
+      <h2>Alphabet (GOOGL)</h2>
+      <p>Search +17% through the AI transition, Cloud +82%, $200B capex, antitrust appeals. Cheapest of the AI mega-caps.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/single-name/pltr/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; Software</span></div>
+      <h2>Palantir (PLTR)</h2>
+      <p>Rule of 40 = 155 at ~50x forward sales. The reverse DCF shows exactly what a decade of perfection costs.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/single-name/crwv/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; Neocloud</span></div>
+      <h2>CoreWeave (CRWV)</h2>
+      <p>$104B take-or-pay backlog vs ~11% cost of debt and negative FCF. Revenue-path valuation lab for the leveraged AI bet.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/single-name/cbrs/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">Tier 1 &middot; AI silicon</span></div>
+      <h2>Cerebras (CBRS)</h2>
+      <p>Wafer-scale inference, the $10B OpenAI deal, 86% UAE revenue concentration, ~55x sales. Q2 lands Aug 12.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+    <a class="ov-card" href="/core/plug/">
+      <div class="ov-card-meta"><span class="tag">Live</span><span class="ov-count">44 quarters &middot; 2015-2025</span></div>
+      <h2>Plug Power (PLUG)</h2>
+      <p>The original deep dive: quarterly cash flow from EDGAR XBRL, balance-sheet health, liquidity, restatements preserved.</p>
+      <p class="ov-cta">Open <span class="arrow">&rarr;</span></p>
+    </a>
+  </section>
+
+  <section class="meth-block">
+    <h3>Pipeline &mdash; same template, next in line</h3>
+    <div class="sn-pipe">
+      <span>AAPL</span><span>AMAT</span><span>AMD</span><span>AMZN</span><span>BE</span>
+      <span>CAT</span><span>CVX</span><span>EQY*</span><span>HOVR</span><span>IBM</span>
+      <span>INTC</span><span>IONQ</span><span>META</span><span>MRLN</span><span>MRVL</span>
+      <span>MSFT</span><span>NBIS</span><span>ORCL</span><span>QBTS</span><span>QS</span>
+      <span>RGTI</span><span>RIVN</span><span>SMCI</span><span>SNDK</span><span>SOFI</span>
+      <span>SPCX</span><span>TSLA</span><span>VST</span><span>XLK</span>
     </div>
+    <p style="color:var(--muted);font-size:var(--fs-sm)">*EQY ticker unconfirmed &mdash; the only exact match is a Toronto-listed ETF. ETFs (XLK) get a holdings/performance variant of the template rather than EDGAR fundamentals.</p>
   </section>
 
   <section class="meth-block">
     <h3>Methodology</h3>
     <ul>
-      <li><strong>Source:</strong> SEC EDGAR XBRL API. No Bloomberg, no consensus, no aggregators &mdash; the number on screen is the number in the filing.</li>
-      <li><strong>YTD &rarr; standalone:</strong> Quarterly cash flow series rebuilt by differencing YTD 10-Q filings, the same way an analyst would manually, automated across decades.</li>
-      <li><strong>Restatements preserved:</strong> Pre-restatement and post-restatement filings both kept; the chart knows which year came from which vintage.</li>
-      <li><strong>Footnotes surfaced inline:</strong> Dotted-underlined accounting terms show their definition on hover where they appear, not buried in a glossary.</li>
+      <li><strong>Fundamentals:</strong> SEC EDGAR XBRL companyfacts. Annual history from 10-K filings (up to ~19 years); standalone quarters rebuilt by differencing YTD 10-Q filings; restatements resolved to the latest filing vintage. Yahoo Finance fills recent quarters, foreign filers, and market data.</li>
+      <li><strong>Valuation lab:</strong> reverse DCF (what growth is priced in), scenario DCF with fading growth, and a revenue-path mode for pre-FCF names. Presets tie to the written bear/base/bull scenarios; every input is draggable.</li>
+      <li><strong>Peer comps:</strong> live multiples for a hand-picked peer group per name, refreshed with the same pipeline, USD-normalized.</li>
+      <li><strong>Research layer:</strong> thesis, moat, risks, catalysts, and what's-priced-in, written per name with dated sources. Each page shows its as-of date &mdash; ask for a refresh after earnings.</li>
     </ul>
   </section>
 </main>
 
 <footer>
-  <span>Data: SEC EDGAR XBRL filings. Quarterly series rebuilt from YTD 10-Q differencing. Not investment advice.</span>
+  <span>Data: SEC EDGAR XBRL filings + Yahoo Finance. Not investment advice.</span>
   <span id="last-updated">2026</span>
 </footer>
 

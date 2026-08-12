@@ -1,0 +1,89 @@
+{
+  "asOf": "2026-08-11",
+  "oneLiner": "Arguably the best operating metrics in software (Rule of 40 = 155, +93% growth at $8B scale) attached to the most expensive multiple in large-cap software (~50x forward sales).",
+  "thesis": [
+    "AIP is winning the enterprise agentic-AI land grab: US commercial +149% YoY with 157% net dollar retention and accelerating sequential growth.",
+    "Government is an annuity with upside: $10B/10-year Army Enterprise Agreement, NATO Maven purchases, NGC2 and Golden Dome positioning; US government +90% YoY.",
+    "Ontology layer creates deep switching costs: data, logic, and actions bound into operational workflows; NDR is the evidence.",
+    "Margins already elite: 62% adjusted operating margin, $4.5-4.7B FCF guided for FY2026; the entire question is what multiple to pay."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Aug 3, 2026)",
+    "points": [
+      "Revenue $1.94B, +93% YoY (consensus ~$1.80B); adjusted EPS $0.41.",
+      "Adjusted operating margin 62%; GAAP operating margin 47%; GAAP net margin 55% (incl. SpaceX marks).",
+      "Government $990M (+79%), US government $809M (+90%); US commercial $764M (+149% YoY, +28% seq).",
+      "Net dollar retention 157%, up 700bps sequentially.",
+      "Guide raised: FY2026 revenue $8.15B (+82%); US commercial >$3.42B (+134%); adjusted FCF $4.5-4.7B; Q3 ~$2.16B."
+    ]
+  },
+  "segments": [
+    "Government ~51% of revenue: Army EA, NATO Maven, allied defense.",
+    "Commercial ~49%, with US commercial (+149%) the growth engine on AIP adoption."
+  ],
+  "competitive": [
+    "Enterprise AI platforms: Databricks, Snowflake Cortex, Microsoft Fabric target the same data/AI budgets.",
+    "Defense tech: Anduril is partner and rival (joint $100M Army NGC2 win Jul 2026; Golden Dome co-development with Scale AI and SpaceX).",
+    "Big-3 consultancies compete for AI-implementation budgets; Palantir's forward-deployed model positions it as software, not billable hours.",
+    "C3.ai has faded as a serious threat."
+  ],
+  "moat": "The ontology layer binding an institution's data, logic, and actions creates switching costs once operational workflows run through Foundry/AIP. In government: decades of accreditations, classified deployments, and contract vehicles newcomers cannot replicate quickly.",
+  "risks": [
+    "Valuation: ~67x trailing EV/S is 150% above its own 10-year median; any growth wobble is severely punished.",
+    "Insider selling: Karp sold ~$54M in May 2026; insiders sold >$250M in late 2025; 34 sells, 0 buys in five years.",
+    "Government dependency: ~51% of revenue tied to US/allied budgets; a CR or budget fight hits the biggest segment.",
+    "Law of large numbers: +93% on an $8B base is unprecedented; 2027 comps get brutal.",
+    "Anduril tension could cap Palantir's share of next-gen defense programs.",
+    "SBC keeps GAAP margins (47%) well below adjusted (62%)."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings ~early Nov 2026.",
+    "US federal fiscal year-end Sept 30 award flow.",
+    "Army NGC2 next-phase decision (~mid-2027).",
+    "Golden Dome milestones; further NATO/allied Maven expansions."
+  ],
+  "pricedIn": "~82x forward earnings, ~50x forward sales. To justify it: hold 60%+ growth for years at ~60% adjusted margins, growing $8.15B toward ~$25B+ by 2029-2030, which brings EV/S toward ~17x on out-year sales. Bulls: Q2's +93% proves the AI-operating-system thesis. Bears: even perfection is fully paid for at ~$420B.",
+  "scenarios": {
+    "bear": "US commercial growth halves as AIP pilots saturate and Databricks/Snowflake/Fabric win mainstream; a 2027 budget impasse freezes government; NDR fades to 120%. Growth of 'only' 40% forces the multiple from ~50x toward 15-20x forward sales: a 50-60% derating even with rising earnings.",
+    "base": "FY2026 lands at $8.15B (+82%); 2027 decelerates to 45-60% at ~60% adjusted margins and $4.5B+ FCF; multiple compresses gradually as earnings grow into it; stock oscillates in the established $130-210 range with earnings-driven spikes.",
+    "bull": "AI agents in production become the enterprise standard with AIP the category winner; US commercial sustains >100% into 2027; Golden Dome and NGC2 convert into multi-billion production programs; revenue triples by 2028-29 and growth outruns multiple compression."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "r": 0.105,
+    "gT": 0.04,
+    "years": 10,
+    "bear": {
+      "g": 0.25
+    },
+    "base": {
+      "g": 0.45
+    },
+    "bull": {
+      "g": 0.65
+    },
+    "note": "Even the bear preset needs 25% year-1 FCF growth; the reverse DCF shows ~30%+ constant growth for a decade is priced in. That asymmetry is the entire PLTR debate."
+  },
+  "sources": [
+    {
+      "label": "Palantir Q2 2026 release",
+      "url": "https://www.businesswire.com/news/home/20260802523449/en/"
+    },
+    {
+      "label": "CNBC Q2 2026 coverage",
+      "url": "https://www.cnbc.com/2026/08/03/palantir-pltr-earnings-q2-2026.html"
+    },
+    {
+      "label": "Army NGC2 award",
+      "url": "https://finance.yahoo.com/news/palantir-pltr-wins-100m-u-054043546.html"
+    },
+    {
+      "label": "EV/Revenue history",
+      "url": "https://www.gurufocus.com/term/enterprise-value-to-revenue/PLTR"
+    },
+    {
+      "label": "Insider selling",
+      "url": "https://www.benzinga.com/trading-ideas/insider-trades/25/11/48995589/"
+    }
+  ]
+}

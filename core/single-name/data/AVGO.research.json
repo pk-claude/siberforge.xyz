@@ -1,0 +1,88 @@
+{
+  "asOf": "2026-08-11",
+  "oneLiner": "The custom-ASIC arms dealer: $73B AI backlog, FY2026 AI revenue guided to ~$56B (+180%), FY2027 target above $100B, with VMware cash flows funding the ride.",
+  "thesis": [
+    "Only vendor combining leading-edge XPU co-design (serdes, packaging, 2nm roadmap) with the Ethernet AI-networking franchise (Tomahawk): the default partner for hyperscaler silicon.",
+    "Disclosed/reported custom-ASIC customers: Google (TPU, 7 generations), Meta (MTIA), OpenAI (10GW deal, first deployments H2 2026), Anthropic (1GW scaling to 3GW), with Apple and ByteDance reported among unnamed customers.",
+    "Custom ASICs outgrowing merchant GPUs in 2026 (TrendForce: +45% vs +16%); Broadcom holds ~55-60% of the co-design market.",
+    "Infrastructure software (VMware, ~32% of revenue) throws off sticky high-margin cash: 77% gross margin, 46% FCF margin company-wide."
+  ],
+  "latestQuarter": {
+    "label": "Q2 FY2026 (ended May 3, 2026; reported Jun 3, 2026)",
+    "points": [
+      "Revenue $22.2B, +48% YoY: semis $15.0B (+79%), software $7.2B (+9%).",
+      "AI semiconductor revenue $10.8B, +143% YoY (networking ~40% of it).",
+      "Non-GAAP gross margin 77.1%; record ~67% operating margin; EPS $2.44; FCF $10.3B (46% of revenue).",
+      "Guide: Q3 revenue ~$29.4B with AI semis ~$16B (below ~$17.2B consensus; stock fell ~12%).",
+      "FY2026 AI revenue raised to ~$56B (+180%); FY2027 '>$100B' reiterated; $73B AI backlog."
+    ]
+  },
+  "segments": [
+    "Semiconductor solutions ~68%: custom AI accelerators/XPUs, Tomahawk AI networking, wireless, broadband, storage.",
+    "Infrastructure software ~32%: VMware, mainframe, security. AI run-rate exiting FY2026 near ~$50B annualized."
+  ],
+  "competitive": [
+    "NVDA merchant silicon is the pricing umbrella; ASIC adoption erodes its share at the margin.",
+    "Marvell (~15% of custom co-design) architects Trainium and Maia; Apr 2026 reports of Google-Marvell talks on inference chips show sockets are contestable.",
+    "VMware alternatives (Nutanix, Proxmox, hyperscaler-native) gaining pilot interest amid the pricing revolt; EU investigation underway."
+  ],
+  "moat": "Multi-year, multi-gigawatt co-design contracts and a $73B AI backlog institutionalize the hyperscaler relationships; serdes/packaging IP plus Ethernet networking is a package no rival matches. VMware's installed base sustains pricing power despite the backlash.",
+  "risks": [
+    "Expectation risk: the >$100B FY2027 target leaves no room for slippage; a $1.2B guide miss cost 12% in a day.",
+    "Customer concentration: a handful of hyperscalers drive AI revenue; multi-sourcing (Google-Marvell) is live.",
+    "Margin mix: management flagged pressure from lower-margin custom accelerators.",
+    "VMware backlash: renewals at ~5x prior cost documented, AT&T suit, EU probe; software only +9% YoY.",
+    "OpenAI/Anthropic gigawatt commitments depend on their funding and power buildout timelines.",
+    "China/tariff exposure in classic semis."
+  ],
+  "catalysts": [
+    "Q3 FY2026 earnings Sept 2, 2026: the $16B AI quarter and FY27 reaffirmation.",
+    "OpenAI first custom-accelerator deployments H2 2026.",
+    "New unnamed XPU customer disclosures; next-gen Tomahawk ramps.",
+    "December Q4 report as first read on the FY27 $100B trajectory."
+  ],
+  "pricedIn": "~$415 is ~16% below the high; ~65x trailing, ~22-26x forward. No longer priced for perfection but still elevated vs pre-VMware history. Debate: is the $73B backlog and $100B FY27 guide bankable (making ~22x cheap for 40-60% growth), or do concentration, Marvell encroachment, and accelerator margin dilution cap the multiple?",
+  "scenarios": {
+    "bear": "AI guidance misses compound: a hyperscaler dual-sources, OpenAI slips past H2 2026, accelerator mix drags margins, EU forces VMware concessions; FY27 lands well under $100B and the stock revisits the low-$300s/high-$200s.",
+    "base": "FY2026 AI lands ~$56B, FY27 tracks to roughly $100B on Google/Meta/OpenAI/Anthropic ramps; software grinds high-single-digit; EPS compounds 30%+; stock grinds toward the high-$400s as quarters de-risk the backlog.",
+    "bull": "FY27 AI exceeds $100B with new customers confirmed; Ethernet scale-up wins expand networking share; VMware stabilizes; re-rates on ~$50B+ annual FCF as the second pillar of AI silicon."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "r": 0.1,
+    "gT": 0.03,
+    "years": 10,
+    "bear": {
+      "g": 0.12
+    },
+    "base": {
+      "g": 0.35
+    },
+    "bull": {
+      "g": 0.5
+    },
+    "note": "FCF is compounding fast (Q2 FY26 FCF $10.3B vs $36.5B TTM); base preset (35% year-1, fading) tracks the >$100B FY27 AI revenue path."
+  },
+  "sources": [
+    {
+      "label": "Broadcom Q2 FY2026 press release",
+      "url": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-second-quarter-fiscal-year-2026-financial"
+    },
+    {
+      "label": "CNBC Q2 FY2026 coverage",
+      "url": "https://www.cnbc.com/2026/06/03/broadcom-avgo-earnings-report-q2-2026.html"
+    },
+    {
+      "label": "Custom ASIC landscape",
+      "url": "https://www.tomshardware.com/tech-industry/semiconductors/custom-ai-asics-examined-from-broadcom-to-mtia"
+    },
+    {
+      "label": "Google-Marvell talks",
+      "url": "https://www.cnbc.com/2026/04/20/marvell-stock-google-custom-ai-chips.html"
+    },
+    {
+      "label": "VMware pricing/EU probe",
+      "url": "https://www.techradar.com/pro/broadcom-backs-down-on-vmware-pricing-rules-as-eu-begins-investigation-following-complaints"
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "asOf": "2026-08-11",
+  "oneLiner": "Peak-cycle memory printing 85% gross margins on an AI-driven DRAM/HBM shortage, at a 5-6x forward P/E that is either the cheapest large cap in tech or a classic cycle-top value trap.",
+  "thesis": [
+    "One of three companies able to manufacture leading-edge DRAM at scale; HBM4 qualified into NVIDIA-class platforms with >$1B already shipped.",
+    "HBM fully sold out for calendar 2026 under multi-year fixed-price contracts; management can fill only half to two-thirds of demand and sees the HBM TAM crossing $100B in 2027.",
+    "Q3 FY2026 revenue $41.5B (vs $9.3B a year earlier) with 85% gross margin and $18.3B quarterly FCF: earnings power without precedent in memory history.",
+    "The whole question is durability: fixed-price HBM converts cyclical pricing into quasi-backlog, but conventional DRAM spot is up 90%+ QoQ, which never lasts."
+  ],
+  "latestQuarter": {
+    "label": "Q3 FY2026 (ended May 28, 2026; reported Jun 24, 2026)",
+    "points": [
+      "Revenue $41.46B, ~+346% YoY; GAAP gross margin 84.6%; operating margin 80.4%.",
+      "Non-GAAP EPS $25.11 vs ~$20.49 consensus; adjusted FCF $18.3B.",
+      "Guide: Q4 FY2026 revenue $50.0B plus or minus $1B, gross margin ~86%, EPS $31.00 plus or minus $1.",
+      "DRAM $31.3B (76% of revenue); cloud memory BU $13.8B; ~$100B of long-term customer agreements referenced.",
+      "HBM sold out for 2026; >$1B HBM4 shipped; targets HBM share equal to overall DRAM share."
+    ]
+  },
+  "segments": [
+    "DRAM ~76% of revenue, NAND ~24%. By BU: cloud memory $13.8B, core data center $11.5B, mobile/client $11.5B, auto/embedded $4.6B.",
+    "HBM is the strategic prize: HBM4 ramping now, HBM4E in 2027."
+  ],
+  "competitive": [
+    "HBM share contested: SK Hynix leads (~55-62% in 2026 trackers); sources conflict on whether Micron has overtaken Samsung (high-teens to ~20% vs 5-10% depending on tracker).",
+    "NVIDIA's provisional HBM4 allocation: SK Hynix mid-50s%, Samsung mid-20s%, Micron ~20%.",
+    "NAND: fifth place (~11% share) behind Samsung, SK Hynix, Kioxia, Sandisk.",
+    "CXMT (China) hit 7.6% of global DRAM in Q1 2026 and IPO'd at ~$85B; not yet at the leading edge."
+  ],
+  "moat": "Leading-edge DRAM process capability (1-beta/1-gamma), HBM4 qualification into the dominant AI platform, and multi-year fixed-price contracts that convert spot pricing into backlog. Breadth across HBM, LPDDR, DDR5 and QLC NAND lets wafers chase the highest return.",
+  "risks": [
+    "Peak-cycle earnings: 85% gross margins are unprecedented and mean-reverting; conventional DRAM contract prices rose 90-95% QoQ in Q1 2026.",
+    "Supply response: Samsung and SK Hynix capacity additions land into 2027.",
+    "CXMT share gains (7.6% and rising), possible second Beijing fab, reports of Apple testing CXMT chips.",
+    "HBM4 execution vs SK Hynix's allocation lead.",
+    "Stock already fell >30% from late-June peak on exactly these fears.",
+    "NAND structurally weak at ~11% share."
+  ],
+  "catalysts": [
+    "Q4 FY2026 earnings Sept 29, 2026 (guide: $50B revenue, $31 EPS).",
+    "HBM4 multi-customer qualifications through H2 2026; HBM4E volume in 2027.",
+    "Calendar-2027 HBM contract/pricing announcements.",
+    "CXMT capacity news flow."
+  ],
+  "pricedIn": "Forward P/E ~5.6-6.0 vs ~30 industry median; the market refuses to capitalize peak earnings. Up ~667% in 52 weeks yet >30% off the high. Debate: single-digit multiple on peak EPS (cycle top, CXMT looming) vs a structural AI-memory shortage with sold-out fixed-price HBM making this cycle's earnings more durable than any before.",
+  "scenarios": {
+    "bear": "FY2026 is the peak: DRAM pricing rolls over in 2027 as competitor capacity lands, CXMT floods conventional DRAM, margins compress toward the 50s, EPS halves, and the stock de-rates the way every prior memory cycle ended.",
+    "base": "Q4 hits ~$50B/$31 EPS; calendar-2027 HBM is largely pre-sold at firm prices, cushioning a moderating conventional curve; earnings plateau rather than collapse; the stock holds a trillion-dollar-class cap with cycle-headline volatility.",
+    "bull": "HBM TAM crosses $100B in 2027 with tightness beyond; Micron holds ~20%+ share into HBM4/HBM4E; NAND scarcity adds a second leg; the 5-6x multiple re-rates toward 8-10x as the market accepts a structurally higher earnings floor."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.11,
+    "gT": 0.02,
+    "years": 7,
+    "bear": {
+      "g": -0.18
+    },
+    "base": {
+      "g": -0.05
+    },
+    "bull": {
+      "g": 0.08
+    },
+    "note": "Basis is forward earnings: at ~5.6x forward P/E the market is pricing a memory downcycle, and the reverse DCF quantifies the implied annual earnings decline. Bear = deep downcycle (prior cycles saw EPS halve-plus); bull = the structural-shortage case where earnings hold and grow."
+  },
+  "sources": [
+    {
+      "label": "Micron Q3 FY2026 press release",
+      "url": "https://www.globenewswire.com/news-release/2026/06/24/3317151/14450/en/micron-technology-inc-reports-record-results-for-the-third-quarter-of-fiscal-2026.html"
+    },
+    {
+      "label": "Counterpoint: DRAM/HBM share",
+      "url": "https://counterpointresearch.com/en/insights/global-dram-and-hbm-market-share"
+    },
+    {
+      "label": "CXMT IPO",
+      "url": "https://www.fool.com/investing/2026/07/26/an-85-billion-chinese-dram-rival-starts-trading-mo/"
+    },
+    {
+      "label": "Memory cycle debate",
+      "url": "https://www.uncoveralpha.com/p/every-memory-cycle-ends-the-same"
+    }
+  ]
+}
