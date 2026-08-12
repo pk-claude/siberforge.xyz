@@ -13,6 +13,25 @@
 
 export const CATALOG_AS_OF = '2025-Q2';
 
+// Quarters since CATALOG_AS_OF, computed at read time. The prose in `context`
+// below is a fixed reference frame ("drifted to ~-0.5 by Q4 2024"); the number
+// it sits next to on the tile is live. When those two drift far apart the
+// context stops helping and starts misleading, so the tooltip says how far
+// behind it is rather than printing a review date the reader has to date-math.
+export function catalogAgeQuarters(asOf = CATALOG_AS_OF, now = new Date()) {
+  const m = /^(\d{4})-Q([1-4])$/.exec(asOf);
+  if (!m) return null;
+  const y = Number(m[1]);
+  const q = Number(m[2]);
+  const nowQ = Math.floor(now.getUTCMonth() / 3) + 1;
+  return (now.getUTCFullYear() - y) * 4 + (nowQ - q);
+}
+
+// Anything beyond this is flagged in the UI. The repo's own stated policy in
+// core/lib/README.md is a quarterly review cadence; two quarters is one full
+// miss plus grace.
+export const CATALOG_STALE_AFTER_QUARTERS = 2;
+
 export const METRIC_CONTEXT = {
 
   // =========================== LABOR ===========================

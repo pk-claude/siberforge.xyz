@@ -6,6 +6,8 @@
 // We filter to consolidated figures (unit='USD') and quarterly/annual reports (10-Q or 10-K).
 // Instant facts (period end on a single date) are separate from duration facts (period spanning multiple dates).
 
+import { guard } from './_guard.js';
+
 const EDGAR_BASE = 'https://data.sec.gov/api/xbrl/companyfacts';
 const EDGAR_USER_AGENT = 'Siberforge dashboard contact@siberforge.xyz';
 
@@ -96,11 +98,13 @@ async function fetchCompanyFacts(ticker, concepts, index) {
 }
 
 export default async function handler(req, res) {
-  // CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  if (req.method === 'OPTIONS') return res.status(200).end();
+  // Same-origin policy + best-effort rate limit. See api/_guard.js.
+  if (guard(req, res, { limit: 30 })) return;
+
+  // Was: Access-Control-Allow-Origin '*', which made this a free, publicly
+  // callable SEC EDGAR proxy any site could hotlink. SEC enforces fair use by
+  // IP, so sustained third-party abuse would get Siberforge's own outbound
+  // address throttled and break the AI pages for everyone. Now same-origin.
 
   try {
     const company = req.query.company?.toUpperCase?.();

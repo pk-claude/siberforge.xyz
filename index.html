@@ -43,13 +43,19 @@
     <span id="ed-nav-sections" class="ed-nav-sections"></span>
     <a href="#about" class="ed-nav-link">About</a>
     <a href="#hub" id="ed-search-jump" class="ed-nav-link">Search <kbd class="ed-kbd">/</kbd></a>
-    <a href="#subscribe" class="ed-nav-cta">Subscribe</a>
+    <a href="#subscribe" class="ed-nav-link ed-nav-link--always">Subscribe</a>
+    <!-- The one styled CTA points at the product, not at a mailing-list form
+         that is explicitly not wired up yet. -->
+    <a href="#hub" class="ed-nav-cta">Explore dashboards</a>
     <span class="ed-status">
       <span id="refresh-indicator" class="dot"></span>
       <span id="refresh-text">Live &middot; FRED + EDGAR</span>
     </span>
     <button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>
+    <button id="ed-menu-btn" class="ed-menu-btn" aria-expanded="false" aria-controls="ed-menu">Menu</button>
   </div>
+  <!-- Populated from SIBERFORGE_NAV.SECTIONS by landing-hub.js -->
+  <nav id="ed-menu" class="ed-menu" aria-label="Sections" hidden></nav>
 </header>
 
 <main class="landing-main">

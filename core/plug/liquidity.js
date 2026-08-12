@@ -145,6 +145,8 @@
     sepa: "Share price",
     warr: "Share price + holder",
     wny: "Closing conditions",
+    graham: "Closing conditions",
+    itc: "Closing conditions",
     doe: "Federal policy",
     sl:  "Market access",
     conv:"Market access",
@@ -175,12 +177,15 @@
     if (i < 0) { nodeNames.push(name); nodeColors.push(color); i = nodeNames.length - 1; }
     return i;
   }
-  OPTIONS.forEach(o => { idx(o.name, C.black); nodeValues[o.name] = o.cap; });
-  Object.values(depByOption).forEach(d => { idx(d, C.muted); if (!(d in nodeValues)) nodeValues[d] = 0; });
-  Object.values(tierByDep).forEach(t => { idx(t, tierColor[t] || C.muted); if (!(t in nodeValues)) nodeValues[t] = 0; });
+  // Zero-cap levers (e.g. the terminated DOE loan) are excluded from the
+  // Sankey — they stay visible in the Options Detail cards above.
+  const SANKEY_OPTIONS = OPTIONS.filter(o => o.cap > 0);
+  SANKEY_OPTIONS.forEach(o => { idx(o.name, C.black); nodeValues[o.name] = o.cap; });
+  SANKEY_OPTIONS.forEach(o => { const d = depByOption[o.id]; idx(d, C.muted); if (!(d in nodeValues)) nodeValues[d] = 0; });
+  SANKEY_OPTIONS.forEach(o => { const t = tierByDep[depByOption[o.id]]; idx(t, tierColor[t] || C.muted); if (!(t in nodeValues)) nodeValues[t] = 0; });
 
   const src = [], tgt = [], val = [], lbl = [];
-  OPTIONS.forEach(o => {
+  SANKEY_OPTIONS.forEach(o => {
     const dep = depByOption[o.id];
     const tier = tierByDep[dep];
     src.push(idx(o.name, C.black));

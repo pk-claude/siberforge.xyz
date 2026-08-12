@@ -23,8 +23,14 @@
     const root = document.documentElement;
     // Always set the attribute explicitly so JS that reads
     // getAttribute('data-theme') never returns null in dark mode.
-    root.setAttribute('data-theme', theme === 'light' ? 'light' : 'dark');
+    const next = theme === 'light' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
     syncButtons(theme);
+    // Anything that paints its own colours (canvas charts, in particular)
+    // cannot see a CSS variable change. Tell it.
+    try {
+      document.dispatchEvent(new CustomEvent('siberforge:themechange', { detail: { theme: next } }));
+    } catch (_) {}
   }
 
   // Read pref before paint to avoid FOUC.

@@ -52,7 +52,7 @@
         ]},
         { label: 'Single-name', links: [
           { id: 'single-name-hub', label: 'Single-name research', href: '/core/single-name/', meta: '9 deep dives live: valuation lab, EDGAR fundamentals, peer comps' },
-          { id: 'plug-overview',   label: 'Plug Power (PLUG)',    href: '/core/plug/',        meta: '6 views - cash flow, revenue, balance, liquidity, footprint' },
+          { id: 'plug-overview',   label: 'Plug Power (PLUG)',    href: '/core/plug/',        meta: '7 views - P&L, cash flow, revenue, balance, liquidity, footprint' },
         ]},
         { label: 'Valuation', links: [
           { id: 'pe-overview',     label: 'P/E Multiples',        href: '/core/equity/pe/',   meta: 'S&P 500 + Nasdaq-100 trailing & forward P/E, sortable, with daily forward-P/E history' },
@@ -82,7 +82,8 @@
       groups: [
         { links: [
           { id: 'plug-overview',  label: 'Section overview',         href: '/core/plug/',              meta: 'PLUG landing' },
-          { id: 'plug-cashflow',  label: 'Quarterly cash flow',      href: '/core/plug/cashflow.html', meta: 'CFO/CFI/CFF/Cash drivers, 2015-2025 EDGAR XBRL' },
+          { id: 'plug-pnl',       label: 'P&L / path to EBITDAS',    href: '/core/plug/pnl.html',      meta: 'Quarterly margins, opex, breakeven trend' },
+          { id: 'plug-cashflow',  label: 'Quarterly cash flow',      href: '/core/plug/cashflow.html', meta: 'CFO/CFI/CFF/Cash drivers, 2015-2026 EDGAR XBRL' },
           { id: 'plug-revenue',   label: 'Revenue & segment',        href: '/core/plug/revenue.html',  meta: 'Top-line decomposition by segment' },
           { id: 'plug-balance',   label: 'Balance-sheet health',     href: '/core/plug/balance.html',  meta: 'Assets, liabilities, working capital trend' },
           { id: 'plug-liquidity', label: 'Liquidity options',        href: '/core/plug/liquidity.html',meta: 'Cash runway, credit lines, dilution paths' },
@@ -219,6 +220,7 @@
     'sn-pltr':  ['palantir', 'pltr', 'aip', 'foundry software', 'defense software'],
     'sn-crwv':  ['coreweave', 'crwv', 'neocloud', 'gpu cloud', 'ai infrastructure'],
     'sn-cbrs':  ['cerebras', 'cbrs', 'wafer scale', 'inference', 'wse'],
+    'plug-pnl':     ['margin', 'gross margin', 'ebitdas', 'breakeven', 'opex', 'income statement', 'profitability'],
     'plug-cashflow':['cash flow', 'cfo', 'capex', 'free cash flow', 'burn rate'],
     'plug-revenue': ['revenue', 'segment', 'top line', 'sales'],
     'plug-balance': ['balance sheet', 'assets', 'liabilities', 'working capital', 'debt'],

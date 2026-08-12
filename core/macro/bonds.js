@@ -67,6 +67,24 @@ function rollingYieldVol(dates, yields) {
 
 // ============== SECTION: YIELD CURVE ==============
 
+
+// Dual-axis charts auto-scale each axis independently and neither starts at
+// zero, so how much the two lines appear to converge or diverge is a property
+// of the axis ranges Chart.js happened to pick, not of the data. Say so under
+// the chart rather than letting the shape imply a relationship.
+function axisCaveat(canvasId, text) {
+  const c = document.getElementById(canvasId);
+  if (!c) return;
+  // The chart wrapper has a fixed height; put the note after it, not inside.
+  const wrap = c.parentElement;
+  if (!wrap || !wrap.parentElement) return;
+  if (wrap.nextElementSibling && wrap.nextElementSibling.classList.contains('axis-caveat')) return;
+  const p = document.createElement('p');
+  p.className = 'axis-caveat';
+  p.textContent = text;
+  wrap.parentElement.insertBefore(p, wrap.nextSibling);
+}
+
 async function renderYieldCurve() {
   try {
     const twoMonthsAgo = new Date();
@@ -358,7 +376,10 @@ async function renderCreditSpreads() {
       dataMap[id] = (payload.observations || []).map(o => ({ date: o.date, value: parseFloat(o.value) })).filter(o => !isNaN(o.value)).sort((a, b) => new Date(a.date) - new Date(b.date));
     }
 
-    // Chart: IG and HY with recession shading
+    // Chart: IG and HY OAS on independent right/left axes.
+    // NOTE: there is no recession shading here. An earlier comment claimed
+    // there was; it was never implemented and the claim was removed rather
+    // than left to mislead the next reader of this file.
     const ctx = document.getElementById('cs-chart').getContext('2d');
     const igData = dataMap['BAMLC0A0CM'] || [];
     const hyData = dataMap['BAMLH0A0HYM2'] || [];
@@ -401,6 +422,10 @@ async function renderCreditSpreads() {
         }
       }
     });
+    axisCaveat('cs-chart',
+      'Independent axes, neither zeroed: IG is read on the left scale and HY on the right. ' +
+      'The visual gap between the two lines is not a spread and their apparent co-movement is an artefact of the two ranges. ' +
+      'Compare each line against its own history, not against the other.');
 
     // Regime classifier on HY OAS
     const hyLatest = hyData.length > 0 ? hyData[hyData.length - 1].value : null;
@@ -500,6 +525,9 @@ async function renderCrossAssetVol() {
         }
       }
     });
+    axisCaveat('cav-chart',
+      'Independent axes in different units (VIX points on the left, bps on the right), neither zeroed. ' +
+      'Crossings and gaps between the two lines carry no meaning; only each line\'s own trend does.');
 
     // Ratio
     const ratioEl = document.getElementById('cav-ratio');
@@ -664,7 +692,7 @@ async function init() {
   ]);
 
   document.getElementById('refresh-text').textContent = 'Updated ' + new Date().toLocaleTimeString();
-  document.getElementById('last-updated').textContent = 'Last updated ' + new Date().toLocaleString();
+  document.getElementById('last-updated').textContent = 'Fetched ' + new Date().toLocaleString() + ' \u2014 series carry their own observation dates';
 }
 
 init();

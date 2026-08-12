@@ -3,6 +3,8 @@
 //
 // Returns { series: [...], errors: [...] } shape mirroring /api/fred.
 
+import { guard } from './_guard.js';
+
 const EIA_BASE = 'https://api.eia.gov/v2';
 
 // Whitelisted EIA queries. Each entry maps a stable internal id to:
@@ -124,6 +126,9 @@ function normalizeDate(period, freq) {
 }
 
 export default async function handler(req, res) {
+  // Same-origin policy + best-effort rate limit. See api/_guard.js.
+  if (guard(req, res, { limit: 40 })) return;
+
   const key = process.env.EIA_API_KEY;
   if (!key) return res.status(500).json({ error: 'EIA_API_KEY not configured on server' });
 

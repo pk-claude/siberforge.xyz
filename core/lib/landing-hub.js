@@ -205,6 +205,45 @@
     host.innerHTML = SECTIONS.map(function (s) {
       return '<a href="' + escape(s.href) + '" class="ed-nav-link">' + escape(s.label) + '</a>';
     }).join('');
+    renderMobileMenu(SECTIONS);
+  }
+
+  // ------------------------------------------------------------------
+  // Mobile menu. Below 880px the section links are hidden, which used to
+  // leave a phone visitor with a header containing a logo and nothing to
+  // click -- every route into the site sat below a 100vh hero. This is the
+  // same six sections behind a toggle.
+  // ------------------------------------------------------------------
+  function renderMobileMenu(SECTIONS) {
+    const panel = document.getElementById('ed-menu');
+    const btn = document.getElementById('ed-menu-btn');
+    if (!panel || !btn) return;
+
+    panel.innerHTML = SECTIONS.map(function (s) {
+      return '<a href="' + escape(s.href) + '" class="ed-menu-link">' +
+        '<span class="ed-menu-name">' + escape(s.label) + '</span>' +
+        '<span class="ed-menu-blurb">' + escape((s.blurb || '').split('.')[0]) + '</span>' +
+      '</a>';
+    }).join('') +
+      '<a href="#hub" class="ed-menu-link ed-menu-link--alt"><span class="ed-menu-name">Every view (A-Z)</span></a>' +
+      '<a href="#about" class="ed-menu-link ed-menu-link--alt"><span class="ed-menu-name">About</span></a>';
+
+    function setOpen(open) {
+      panel.hidden = !open;
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      btn.textContent = open ? 'Close' : 'Menu';
+    }
+
+    btn.addEventListener('click', function () {
+      setOpen(panel.hidden);
+    });
+    panel.addEventListener('click', function (e) {
+      if (e.target.closest('a')) setOpen(false);
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { setOpen(false); btn.focus(); }
+    });
+    setOpen(false);
   }
 
   // ------------------------------------------------------------------

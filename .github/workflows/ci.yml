@@ -1,0 +1,60 @@
+# The site deploys straight to production on push to main with no gate. This
+# is the gate. It is deliberately cheap -- no bundler, no test framework --
+# and only catches the class of failure that actually ships: a syntax error,
+# a nav entry pointing at a file that does not exist, or a dead internal link.
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Syntax-check every JS/MJS file
+        run: |
+          set -e
+          fail=0
+          files=$(find api core scripts -name '*.js' -o -name '*.mjs' | grep -v node_modules)
+          for f in $files; do
+            if ! node --check "$f" 2>/tmp/err; then
+              echo "::error file=$f::$(head -3 /tmp/err | tr '\n' ' ')"
+              fail=1
+            fi
+          done
+          echo "checked $(echo "$files" | wc -l) files"
+          exit $fail
+
+      - name: Validate JSON config
+        run: |
+          set -e
+          for f in vercel.json package.json; do
+            node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" && echo "ok $f"
+          done
+
+      - name: Install dev deps (jsdom, for the DOM tests)
+        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+
+      - name: Nav + sitemap audit
+        run: node scripts/audit-nav.mjs
+
+      - name: Internal link check
+        run: node scripts/check-links.mjs
+
+      - name: Test suite
+        run: node scripts/test/run-all.mjs

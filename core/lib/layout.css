@@ -235,7 +235,7 @@ html, body {
 }
 .sf-nav-link--master.active {
   background: var(--accent);
-  color: #13171c;
+  color: var(--on-accent);
   border-color: var(--accent);
 }
 .sf-nav-tree {
@@ -528,6 +528,11 @@ body.sf-search-open { overflow: hidden; }
   font-size: 15px;
 }
 .sf-search-input:focus { outline: none; }
+.sf-search-input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -3px;
+  border-radius: 2px;
+}
 .sf-search-input::placeholder { color: var(--muted); }
 
 .sf-search-results {
@@ -643,3 +648,189 @@ body.sf-search-open { overflow: hidden; }
   .sf-hit-section { text-align: left; }
   .sf-hub-grid { grid-template-columns: 1fr; }
 }
+
+/* ==========================================================================
+   Skip link -- first tab stop on every page.
+   ========================================================================== */
+.sf-skip {
+  position: absolute;
+  left: 8px;
+  top: -60px;
+  z-index: calc(var(--z-modal) + 1);
+  padding: 10px 16px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  border-radius: var(--r-md);
+  text-decoration: none;
+  transition: top var(--t-fast) var(--ease-out);
+}
+.sf-skip:focus { top: 8px; }
+
+/* ==========================================================================
+   Freshness pills (SF_FRESH.badge). Age is measured against the wall clock.
+   ========================================================================== */
+.sf-fresh {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  vertical-align: middle;
+  border: 1px solid transparent;
+  cursor: help;
+}
+.sf-fresh--fresh   { color: var(--green);  border-color: var(--green);  background: transparent; }
+.sf-fresh--aging   { color: var(--stale);  border-color: var(--stale);  background: var(--stale-bg); }
+.sf-fresh--stale   { color: var(--red);    border-color: var(--red);    background: transparent; }
+.sf-fresh--unknown { color: var(--muted);  border-color: var(--line);   background: transparent; }
+
+/* Page-level staleness / archive banner. Deliberately loud: this is the
+   site admitting something rather than hiding it. */
+.sf-notice {
+  margin: 0 0 var(--sp-4);
+  padding: 12px 16px;
+  border: 1px solid var(--stale);
+  border-left-width: 4px;
+  border-radius: var(--r-md);
+  background: var(--stale-bg);
+  color: var(--text);
+  font-size: var(--fs-sm);
+  line-height: 1.55;
+}
+.sf-notice strong {
+  display: block;
+  color: var(--stale);
+  font-size: var(--fs-xs);
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.sf-notice--archived { border-color: var(--red); }
+.sf-notice--archived strong { color: var(--red); }
+.sf-notice a { color: var(--accent); }
+
+/* Methodology disclosure -- collapsed by default, one click to the anchors. */
+.sf-method {
+  margin: var(--sp-4) 0 0;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--panel);
+  font-size: var(--fs-xs);
+}
+.sf-method > summary {
+  cursor: pointer;
+  padding: 8px 12px;
+  color: var(--muted);
+  font-weight: 600;
+  list-style: none;
+}
+.sf-method > summary::-webkit-details-marker { display: none; }
+.sf-method > summary::before { content: '\203A '; color: var(--accent); font-weight: 800; }
+.sf-method[open] > summary::before { content: '\2304 '; }
+.sf-method > summary:hover { color: var(--text); }
+.sf-method-body { padding: 0 12px 12px; color: var(--muted); line-height: 1.6; }
+.sf-method-body table { width: 100%; border-collapse: collapse; margin-top: 6px; }
+.sf-method-body th,
+.sf-method-body td { text-align: left; padding: 3px 8px 3px 0; border-bottom: 1px solid var(--line); }
+.sf-method-body th { color: var(--text); font-weight: 600; }
+.sf-method-body code { font-family: var(--font-mono); color: var(--text); }
+
+/* ==========================================================================
+   "See also" -- curated cross-section links on leaf pages.
+   ========================================================================== */
+.sf-seealso {
+  margin: var(--sp-8) auto 0;
+  padding: var(--sp-4) 0 0;
+  border-top: 1px solid var(--line);
+}
+.sf-seealso-title {
+  margin: 0 0 var(--sp-3);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sf-seealso-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sp-2);
+}
+.sf-seealso-card {
+  display: block;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--panel);
+  text-decoration: none;
+  transition: border-color var(--t-med);
+}
+.sf-seealso-card:hover { border-color: var(--accent); }
+.sf-seealso-name { display: block; color: var(--text); font-size: 12.5px; font-weight: 600; }
+.sf-seealso-meta { display: block; color: var(--muted); font-size: 11px; line-height: 1.45; margin-top: 2px; }
+.sf-seealso-where {
+  display: inline-block;
+  margin-bottom: 3px;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Mobile: collapse the second-tier nav behind a toggle instead of letting it
+   wrap into a permanent multi-row band above the fold.
+   ========================================================================== */
+.sf-nav-more {
+  display: none;
+  width: 100%;
+  margin: 0;
+  padding: 7px 12px;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-align: left;
+  cursor: pointer;
+}
+.sf-nav-more:hover { color: var(--text); }
+.sf-nav-more-caret { color: var(--accent); }
+
+@media (max-width: 800px) {
+  .sf-nav-more { display: block; }
+  .sf-nav-pages { display: none; }
+  .sf-nav[data-pages-open="true"] .sf-nav-pages { display: flex; }
+  /* Touch targets: WCAG 2.5.8 wants >= 24px; these computed to ~22px. */
+  .theme-toggle,
+  .sf-search-btn { padding: 7px 10px; min-height: 32px; }
+  .sf-seealso-grid { grid-template-columns: 1fr; }
+}
+
+/* Chart honesty note -- printed under dual-axis charts. */
+.axis-caveat {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  font-style: italic;
+  max-width: 82ch;
+}
+
+/* Backtest: net-of-cost rows, visually separated from the gross block. */
+.bt-net-row td { border-top: 1px solid var(--accent); color: var(--text); }
+.bt-net-row td:first-child { color: var(--accent); font-weight: 600; }
+
+/* Tooltip: narrative context lagging the live value. */
+.tt-asof-warn { color: var(--stale); font-weight: 600; cursor: help; }

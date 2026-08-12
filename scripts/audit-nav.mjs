@@ -28,6 +28,14 @@ const EXCUSED = new Set([
   'core/influencers/index.html',   // Home Depot work, deliberately unlisted
 ]);
 
+// Pages that load layout.js purely for the header + global search and are
+// deliberately outside the taxonomy. 404 is the only one: it has no section
+// because it is not in a section -- claiming one would highlight a tab the
+// visitor never chose.
+const CHROME_ONLY = new Set([
+  '404.html',
+]);
+
 const src = readFileSync(join(ROOT, 'core/lib/nav-config.js'), 'utf8');
 const win = {};
 new Function('window', src)(win);
@@ -86,6 +94,7 @@ for (const rel of files) {
   const page = get('data-page');
   const parent = get('data-page-parent');
 
+  if (CHROME_ONLY.has(rel)) continue;
   if (!section) { errors.push(`${rel}: missing data-section`); continue; }
   if (!sectionIds.has(section)) { errors.push(`${rel}: data-section="${section}" is not a SECTIONS id`); continue; }
 

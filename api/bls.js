@@ -3,6 +3,8 @@
 //
 // Returns { series: [...], errors: [...] } shape mirroring /api/fred.
 
+import { guard } from './_guard.js';
+
 const BLS_BASE = 'https://api.bls.gov/publicAPI/v2/timeseries/data/';
 
 // Whitelist of permitted BLS series IDs.
@@ -87,6 +89,9 @@ function blsDate(year, period, _periodName) {
 }
 
 export default async function handler(req, res) {
+  // Same-origin policy + best-effort rate limit. See api/_guard.js.
+  if (guard(req, res, { limit: 40 })) return;
+
   const key = process.env.BLS_API_KEY; // optional; without key, BLS limits to 25 req/day per IP
 
   const seriesParam = (req.query.series || '').trim();

@@ -1438,7 +1438,7 @@ async function rerenderActive() {
   renderRegression(macro, closes);
   renderOverlay(macro, closes);
 
-  if (el('last-updated')) el('last-updated').textContent = `Series updated ${new Date().toLocaleString()}`;
+  if (el('last-updated')) el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
   setStatus('live', 'Live — prices refresh every 60s');
 }
 

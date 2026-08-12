@@ -105,7 +105,7 @@ async function main() {
       return;
     }
     renderChart();
-    el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
+    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
     const partial = loaded < STATES.length;
     setStatus(partial ? 'stale' : 'live', partial ? `Partial: ${loaded}/${STATES.length}` : 'Live');
   } catch (err) {

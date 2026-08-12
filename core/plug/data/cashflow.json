@@ -7589,5 +7589,220 @@
         "val": 300000
       }
     ]
+  },
+  {
+    "period": "2026-Q2",
+    "year": 2026,
+    "quarter": 2,
+    "months": "Apr–Jun 2026",
+    "qend": "2026-06-30",
+    "cfo": -94064000,
+    "cfi": 289000,
+    "cff": -36178000,
+    "capex": -6304000,
+    "net": -61295000,
+    "cash_basic": 161894000,
+    "cash_total": 671528000,
+    "fcf": -100368000,
+    "cfo_drivers_top": [
+      {
+        "name": "Net loss",
+        "val": -190102000
+      },
+      {
+        "name": "Fair value adj. of convertible debt",
+        "val": 74235000
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": 29291000
+      },
+      {
+        "name": "Recovery on service contracts",
+        "val": -20490000
+      },
+      {
+        "name": "Impairment",
+        "val": 19365000
+      },
+      {
+        "name": "Δ Accounts receivable",
+        "val": -19350000
+      }
+    ],
+    "cfi_drivers_top": [
+      {
+        "name": "Proceeds from sale of investment tax credit",
+        "val": 36148000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -24357000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -6304000
+      },
+      {
+        "name": "Investments in non-consolidated entities",
+        "val": -6233000
+      },
+      {
+        "name": "Proceeds from sale of PP&E",
+        "val": 1035000
+      }
+    ],
+    "cff_drivers_top": [
+      {
+        "name": "Finance obligations & lease principal",
+        "val": -18369000
+      },
+      {
+        "name": "Distributions to non-controlling interest",
+        "val": -16474000
+      },
+      {
+        "name": "Repay convertible debt (7.00% 2026 notes)",
+        "val": -2413000
+      },
+      {
+        "name": "Other",
+        "val": 1424000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -346000
+      }
+    ],
+    "cfo_drivers_all": [
+      {
+        "name": "Net loss",
+        "val": -190102000
+      },
+      {
+        "name": "Fair value adj. of convertible debt",
+        "val": 74235000
+      },
+      {
+        "name": "Fair value adj. of warrants",
+        "val": 29291000
+      },
+      {
+        "name": "Recovery on service contracts",
+        "val": -20490000
+      },
+      {
+        "name": "Impairment",
+        "val": 19365000
+      },
+      {
+        "name": "Δ Accounts receivable",
+        "val": -19350000
+      },
+      {
+        "name": "Provision for common stock warrants",
+        "val": 14389000
+      },
+      {
+        "name": "Operating lease payments",
+        "val": -14196000
+      },
+      {
+        "name": "Share-based compensation",
+        "val": 12950000
+      },
+      {
+        "name": "Δ Deferred revenue & contract liability",
+        "val": -11554000
+      },
+      {
+        "name": "Δ Inventory",
+        "val": 10390000
+      },
+      {
+        "name": "Δ Contract assets",
+        "val": -8503000
+      },
+      {
+        "name": "Inventory write-down",
+        "val": 7895000
+      },
+      {
+        "name": "Depreciation & amortization",
+        "val": 6559000
+      },
+      {
+        "name": "Δ Accounts payable & accrued",
+        "val": -6051000
+      },
+      {
+        "name": "Δ Prepaid & other assets",
+        "val": -1852000
+      },
+      {
+        "name": "Amortization of financing costs",
+        "val": 1084000
+      },
+      {
+        "name": "Amortization of intangibles",
+        "val": 914000
+      },
+      {
+        "name": "Loss from equity-method investees",
+        "val": 675000
+      },
+      {
+        "name": "Change in contingent consideration",
+        "val": 197000
+      },
+      {
+        "name": "Loss (gain) on debt extinguishment",
+        "val": 90000
+      }
+    ],
+    "cfi_drivers_all": [
+      {
+        "name": "Proceeds from sale of investment tax credit",
+        "val": 36148000
+      },
+      {
+        "name": "Equipment on lease",
+        "val": -24357000
+      },
+      {
+        "name": "CapEx (PP&E)",
+        "val": -6304000
+      },
+      {
+        "name": "Investments in non-consolidated entities",
+        "val": -6233000
+      },
+      {
+        "name": "Proceeds from sale of PP&E",
+        "val": 1035000
+      }
+    ],
+    "cff_drivers_all": [
+      {
+        "name": "Finance obligations & lease principal",
+        "val": -18369000
+      },
+      {
+        "name": "Distributions to non-controlling interest",
+        "val": -16474000
+      },
+      {
+        "name": "Repay convertible debt (7.00% 2026 notes)",
+        "val": -2413000
+      },
+      {
+        "name": "Other",
+        "val": 1424000
+      },
+      {
+        "name": "Repay long-term debt",
+        "val": -346000
+      }
+    ]
   }
 ]

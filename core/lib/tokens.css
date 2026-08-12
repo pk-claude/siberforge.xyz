@@ -19,6 +19,17 @@
   --red:       #ef4f5a;
   --blue:      #5a9cff;
 
+  /* Accent surfaces. --accent-bg is a tinted panel that accent-coloured text
+     sits on; --on-accent is the text colour for text sitting ON --accent.
+     Both must be defined per theme or one of the pair goes unreadable when
+     the other flips (this was a real 1.85:1 failure on the Plug pages). */
+  --accent-bg:  #2a1f00;
+  --on-accent:  #13171c;
+
+  /* Freshness states -- used by freshness.js badges. */
+  --stale:      #d98324;
+  --stale-bg:   #2a1f00;
+
   /* Brand colors (used in inline SVG marks) */
   --brand-red:   #E63946;
   --brand-ice:   #3EB8E0;
@@ -73,10 +84,18 @@
   --line:     #d8dee5;
   --text:     #1a2028;
   --muted:    #5a6470;
-  --accent:   #b56700;
-  --green:    #1f8a55;
+  /* Darkened from #b56700 / #1f8a55: both failed WCAG AA body text (4.06:1
+     and 4.12:1 on --bg). Now 5.03:1 and 5.21:1. */
+  --accent:   #a05a00;
+  --green:    #17784a;
   --red:      #c4283c;
   --blue:     #1f5fc4;
+
+  --accent-bg:  #fff5dc;
+  --on-accent:  #ffffff;
+
+  --stale:      #8a4f00;
+  --stale-bg:   #fdf3e0;
 
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.10);

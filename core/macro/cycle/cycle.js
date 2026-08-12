@@ -7,6 +7,8 @@
 // top aggregates the individual signals into a single 0-100 risk gauge.
 
 // ---------- state ----------
+import { renderMethodology } from '/core/lib/composite-scores.js';
+
 const state = {
   series: {},          // id -> raw observations [{date, value}, ...]
   recessionRanges: [], // [{start, end}, ...] derived from USREC
@@ -621,10 +623,17 @@ function renderCycleScore() {
       <div class="cs-signals">
         <div class="cs-signals-title">Component readings</div>
         ${signalBars}
-        <div class="cs-weights-note">Weights: NY Fed prob 25% · Sahm 25% · HY OAS 20% · Curve 15% · NFCI 15%.</div>
+        <div class="cs-weights-note">Weights: NY Fed prob 25% · Sahm 25% · HY OAS 20% · Curve 15% · NFCI 15%.<br>
+          This is a weighted continuous score. The
+          <a href="/core/econ/recession.html">5-signal recession model</a> counts
+          binary triggers instead and can read differently; near a threshold, a
+          signal contributes here and not there.</div>
       </div>
     </div>
   `;
+  // The weights were already visible; the 0-100 anchors behind each signal
+  // were not. A reader cannot argue with a mapping they cannot see.
+  renderMethodology(tgt, 'cycle');
 }
 
 // ---------- synthesis ----------
@@ -671,7 +680,7 @@ async function main() {
     renderCreditSection();
     renderSynthesis();
 
-    el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
+    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
     setStatus('live', 'Live');
   } catch (err) {
     console.error(err);

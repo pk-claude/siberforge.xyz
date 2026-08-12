@@ -1,8 +1,10 @@
 /* liquidity-data.js — Plug Power liquidity-options model.
    Sources:
      - FY2025 10-K (filed 2026-03-02) and EDGAR XBRL companyfacts (capital structure)
-     - Q1 2026 press release (filed 2026-05-11): refreshed cash, warrant FV,
-       asset-monetization status; added St. Gabriel ITC monetization.
+     - Q2 2026 10-Q (filed 2026-08-10): cash, warrant FV, ATM/SEPA status,
+       restricted-cash detail, DOE termination (subsequent event Aug 4, 2026)
+     - Q2 2026 press release (Aug 10, 2026) and Jul 13, 2026 Stream 8-K:
+       Graham TX sale + New York Gateway staged closing; $275M monetization target.
 
    Exports three globals:
      window.PLUG_LIQUIDITY_SHARES_OUT  — common shares outstanding (millions).
@@ -10,7 +12,7 @@
      window.PLUG_LIQUIDITY_DEPS        — shared constraints across those options.
 */
 
-window.PLUG_LIQUIDITY_SHARES_OUT = 1394.7;  // Mar 31, 2026: 1,395,643,390 issued – 987,495 treasury
+window.PLUG_LIQUIDITY_SHARES_OUT = 1396.9;  // Jun 30, 2026: 1,397,924,047 issued – 1,025,649 treasury
 
 /* --------- Liquidity options data model --------- */
 window.PLUG_LIQUIDITY_OPTIONS = [
@@ -26,7 +28,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Months (drip)",
     primaryDep: "share_price",
     deps: ["Share price", "Auth headroom", "Daily trading volume"],
-    body: "B. Riley + Yorkville agents. Plug directs sales into open market at prevailing prices. $55.9M used in FY25 at $1.62 avg; no Q1 2026 usage. Terminates Aug 15, 2027.",
+    body: "B. Riley + Yorkville agents. Plug directs sales into open market at prevailing prices. $55.9M used in FY25 at $1.62 avg; zero usage in H1 2026 — burn has been funded from cash and asset sales instead. Terminates Aug 15, 2027.",
     scenarioType: "atm"
   },
   {
@@ -40,8 +42,8 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     interest: 0,
     horizon: "Months (drip, $10M/day cap)",
     primaryDep: "share_price",
-    deps: ["Share price", "Auth headroom", "$10M/day cap"],
-    body: "Standby Equity Purchase Agreement with Yorkville. Plug has the right (not obligation) to direct Yorkville to buy up to $10M per trading day. Expires Feb 10, 2027. No shares sold in FY25 or Q1 2026.",
+    deps: ["Share price", "Auth headroom", "$10M/day cap", "Expires Feb 2027"],
+    body: "Standby Equity Purchase Agreement with Yorkville. Plug has the right (not obligation) to direct Yorkville to buy up to $10M per trading day. No shares sold through Q2 2026. Expires Feb 10, 2027 — the clock is now inside 7 months, so unused capacity lapses first among the equity levers.",
     scenarioType: "atm"
   },
   {
@@ -56,52 +58,67 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Feb 2026 – Mar 2028",
     primaryDep: "share_price_7_75",
     deps: ["Stock > $7.75", "Holder election", "No Change-of-Control"],
-    body: "185,430,464 warrants @ $7.75 strike. Issued Oct 2025 as part of warrant-exercise inducement. Liability-classified due to Change-of-Control Cash Election under ASC 815; fair value stepped up from $52.3M (FY25) to $107.0M at Mar 31, 2026 on stock-price escalation. Exercisable since Feb 28, 2026 through Mar 20, 2028; no exercises through Q1 2026.",
+    body: "185,430,464 warrants @ $7.75 strike. Issued Oct 2025 as part of warrant-exercise inducement. Liability-classified due to Change-of-Control Cash Election under ASC 815; fair value stepped up again from $107.0M (Mar 31) to $136.3M at Jun 30, 2026 (stock $2.71). Exercisable through Mar 20, 2028; no exercises through Q2 2026 — deep out-of-the-money at current prices.",
     scenarioType: "warrant", strike: 7.75, shares: 185.43
   },
   {
     id: "wny",
-    name: "WNY Land Sale (Stream US Data Centers)",
+    name: "NY Gateway Staged Closing (Stream)",
     type: "Asset sale",
-    statusKey: "committed", statusLabel: "Committed",
-    cap: 137.25,  // midpoint
+    statusKey: "committed", statusLabel: "Committed — staged",
+    cap: 142.0,
+    controller: "Pending closings",
+    dilutive: false,
+    interest: 0,
+    horizon: "Staged, outside date Mar 31, 2027",
+    primaryDep: "closing",
+    deps: ["Interim & final closings", "Stream execution"],
+    body: "Genesee County, NY plant sale to Stream US Data Centers (agreement Feb 24, 2026). The June 2026 single closing slipped; a Jul 9, 2026 amendment restructured it as a staged closing with the price fixed at $142.0M and the outside date moved to Mar 31, 2027. ~$6.5M deposit plus interest released to Plug in July; a further $10M deposits at the interim real-property closing. Amounts received credit against the price.",
+    scenarioType: "none"
+  },
+  {
+    id: "graham",
+    name: "Graham TX Project Sale (Stream)",
+    type: "Asset sale",
+    statusKey: "committed", statusLabel: "Committed — $40M received",
+    cap: 76.5,  // $50M base + up to $26.5M earnout
     controller: "Pending closing",
     dilutive: false,
     interest: 0,
-    horizon: "By Jun 30, 2026",
+    horizon: "Outside date Mar 31, 2027",
     primaryDep: "closing",
-    deps: ["Closing conditions", "Sphere removal"],
-    body: "Definitive agreement Feb 24, 2026 to sell real property and assets in Alabama, NY (Genesee County). Purchase price range $132.5M–$142.0M depending on closing timing and whether hydrogen storage spheres are removed. Q1 2026 update (May 11, 2026 press release): first transaction at ~$142M expected to close in June 2026.",
+    deps: ["Final closing", "Earnout vs 164 MW reference"],
+    body: "Sale of the never-built Graham, TX green-H2 project site to Stream US Data Centers (PSA Jul 2026): $50M base price plus an earnout up to $26.5M tied to a 164 MW reference capacity. High-voltage infrastructure closed Aug 7, 2026 for $40M — non-refundable, credited against the price; $10M more sits in deposit escrow. Part of the $275M data-center asset-monetization initiative (~$52M collected program-to-date through Aug 2026).",
     scenarioType: "none"
   },
   {
     id: "itc",
     name: "St. Gabriel ITC Sale",
     type: "Tax-credit monetization",
-    statusKey: "committed", statusLabel: "Committed",
+    statusKey: "committed", statusLabel: "Closed Q2 2026",
     cap: 39.2,
-    controller: "Pending closing",
+    controller: "Closed",
     dilutive: false,
     interest: 0,
-    horizon: "By end of May 2026",
+    horizon: "Done",
     primaryDep: "closing",
-    deps: ["Closing conditions", "Credit buyer"],
-    body: "Q1 2026 update (May 11, 2026 press release): expected sale of an investment tax credit tied to the St. Gabriel, LA joint-venture hydrogen liquefier for $39.2M, targeted to close by end of May 2026. Non-dilutive, one-time cash inflow.",
+    deps: ["Closed"],
+    body: "Closed in Q2 2026: investment tax credit on the St. Gabriel, LA JV liquefier sold for $39.2M gross ($36.1M net of $3.1M fees, received in CFI). Caveat on the consolidated view: the Hidrogenii JV distributed $16.5M to each member, so Olin's Niloco took $16.5M out via financing activities — net new cash to Plug shareholders was roughly $20M, not $39M.",
     scenarioType: "none"
   },
   {
     id: "doe",
     name: "DOE Loan Guarantee",
     type: "Debt",
-    statusKey: "suspended", statusLabel: "Suspended",
-    cap: 1660.0,
-    controller: "DOE + US admin policy",
+    statusKey: "suspended", statusLabel: "Terminated Aug 2026",
+    cap: 0.0,
+    controller: "None — terminated",
     dilutive: false,
-    interest: 0.05, // ~Treasury+ (estimated)
-    horizon: "Uncertain",
+    interest: 0,
+    horizon: "Dead",
     primaryDep: "federal_policy",
-    deps: ["DOE reframe", "Federal clean-energy policy", "Project reallocation"],
-    body: "Finalized Jan 16, 2025 for up to $1.66B via Federal Financing Bank. Plug suspended activities Nov 7, 2025 pending DOE discussions to reframe the scope. $13.2M capitalized fees charged off. Outcome uncertain.",
+    deps: ["Terminated by DOE"],
+    body: "Finalized Jan 16, 2025 for up to $1.66B via Federal Financing Bank; Plug suspended activities Nov 7, 2025 and charged off $13.2M of fees. On Aug 4, 2026 DOE exercised its termination right because the first advance had not occurred by the longstop date — termination is automatic and self-executing after a 10-business-day notice period. The $1.66B is gone; the NY and TX sites it was to fund are being sold to Stream instead.",
     scenarioType: "none"
   },
   {
@@ -116,7 +133,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Transaction-by-transaction",
     primaryDep: "market_access",
     deps: ["Customer pipeline", "FI appetite", "Restricted cash build"],
-    body: "Historic source of ~$200–400M per year. Each deal ties up restricted cash (~$326M S/LB collateral est. at Mar 31, 2026; $352.3M at FY25 end) and creates ongoing lease obligations. Net cash released depends on collateral haircut.",
+    body: "Historic source of ~$200–400M per year. Each deal ties up restricted cash ($279.2M S/LB collateral at Jun 30, 2026 per the Q2 10-Q, down from $352.3M at FY25 end as leases run off) and creates ongoing lease obligations. Net cash released depends on collateral haircut.",
     scenarioType: "none"
   },
   {
@@ -131,7 +148,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "3–6 months",
     primaryDep: "market_access",
     deps: ["Credit-market access", "Indenture covenants", "Dilution appetite"],
-    body: "Nov 2025 precedent: issued $431.3M 6.75% notes due 2033 at ~3x book-runner coverage. Further capacity depends on Plug's ability to price attractively; each tranche adds interest expense and convert-dilution overhang.",
+    body: "Nov 2025 precedent: issued $431.3M 6.75% notes due 2033 at ~3x book-runner coverage. Those notes are fair-value accounted and now carried at $578.0M — the $145M H1 2026 FV loss tracks the stock's rise, a reminder that convert capacity prices off equity upside. Further tranches add interest expense and convert-dilution overhang.",
     scenarioType: "none"
   },
   {
@@ -146,14 +163,14 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Quarters",
     primaryDep: "execution",
     deps: ["Inventory sell-through", "AR collection", "Demand"],
-    body: "Inventory $516.2M at Mar 31, 2026 (~203 DIO TTM). Each 10% drawdown releases ~$52M of cash. DSO compressed from 91 → 69 (FY25) → 53 days (Q1'26 TTM); DIO held roughly flat. DIO reduction is the primary remaining lever.",
+    body: "Inventory $493.4M at Jun 30, 2026 (~204 DIO TTM) — down $27.5M from year-end but still the biggest trapped-cash pool; each 10% drawdown releases ~$49M. DSO re-widened to ~62 days (from 53 at Q1) as AR rebuilt with the revenue ramp. DIO reduction remains the primary lever.",
     scenarioType: "none"
   },
   {
     id: "opex",
     name: "Cost Reductions (Project Quantum Leap)",
     type: "Operating",
-    statusKey: "internal", statusLabel: "In progress",
+    statusKey: "internal", statusLabel: "Delivering",
     cap: 100.0, // illustrative annualized
     controller: "Plug management",
     dilutive: false,
@@ -161,7 +178,7 @@ window.PLUG_LIQUIDITY_OPTIONS = [
     horizon: "Quarters",
     primaryDep: "execution",
     deps: ["Workforce reductions", "Footprint realignment", "Vendor renegotiation"],
-    body: "2025 Restructuring Plan announced March 2025. Completed during Q4 2025. Targets: workforce reduction, manufacturing footprint realignment, organizational streamlining. Preserves cash rather than generating it.",
+    body: "2025 Restructuring Plan completed during Q4 2025. Now visible in the P&L: Q2 2026 opex of $62.4M vs $123.5M a year earlier (~50% lower, flattered by a $39.7M one-time recovery of previously impaired assets — underlying decline nearer 20%). Preserves cash rather than generating it.",
     scenarioType: "none"
   }
 ];
@@ -173,8 +190,8 @@ window.PLUG_LIQUIDITY_DEPS = [
     name: "Share price level",
     levers: ["ATM", "SEPA", "$7.75 Warrants", "Additional converts"],
     atRisk: 944.1 + 1000 + 1437.1 + 500, // if low
-    statusKey: "yellow", statusLabel: "At risk at <$2",
-    note: "Drives ATM/SEPA proceeds per share and determines whether $7.75 Warrants are in-the-money. Sub-$2 share price caps all four."
+    statusKey: "yellow", statusLabel: "$2.71 at Jun 30",
+    note: "Drives ATM/SEPA proceeds per share and determines whether $7.75 Warrants are in-the-money. At $2.71 the equity programs are usable (at ~2x the FY25 ATM price) but the warrants remain far out-of-the-money."
   },
   {
     id: "auth_headroom",
@@ -182,15 +199,15 @@ window.PLUG_LIQUIDITY_DEPS = [
     levers: ["ATM", "SEPA", "$7.75 Warrants", "Convertible-note conversion"],
     atRisk: 944.1 + 1000 + 1437.1 + 431.0,
     statusKey: "green", statusLabel: "1.6B unissued",
-    note: "Shareholders doubled authorization to 3.0B on Feb 12, 2026. 1,395.6M issued at Mar 31, 2026 leaves ~1,604M unissued, enough to cover ATM+SEPA+Warrants at current prices."
+    note: "Shareholders doubled authorization to 3.0B on Feb 12, 2026. 1,397.9M issued at Jun 30, 2026 leaves ~1,602M unissued, enough to cover ATM+SEPA+Warrants at current prices."
   },
   {
     id: "federal_policy",
     name: "DOE / federal energy policy",
     levers: ["DOE Loan"],
-    atRisk: 1660.0,
-    statusKey: "red", statusLabel: "Suspended",
-    note: "Activities suspended Nov 2025 pending discussions to reframe scope under new administration priorities. Outcome uncertain."
+    atRisk: 0.0,
+    statusKey: "red", statusLabel: "Terminated",
+    note: "Resolved against Plug: DOE exercised its termination right Aug 4, 2026 (first advance missed the longstop date). The $1.66B facility is dead and federal-policy risk no longer gates any live lever — the monetization pivot replaced it with counterparty risk on Stream."
   },
   {
     id: "market_access",
@@ -203,17 +220,17 @@ window.PLUG_LIQUIDITY_DEPS = [
   {
     id: "counterparty",
     name: "Counterparty / holder decision",
-    levers: ["$7.75 Warrants", "WNY Sale", "St. Gabriel ITC"],
-    atRisk: 1437.1 + 137.25 + 39.2,
-    statusKey: "yellow", statusLabel: "Holder-controlled",
-    note: "Warrant exercise is at holder discretion (Plug cannot compel). WNY sale ($142M) targeted to close June 2026. St. Gabriel ITC sale ($39.2M) targeted by end of May 2026."
+    levers: ["$7.75 Warrants", "NY Gateway", "Graham TX"],
+    atRisk: 1437.1 + 142.0 + 76.5,
+    statusKey: "yellow", statusLabel: "Stream-dependent",
+    note: "Warrant exercise is at holder discretion (Plug cannot compel). Both asset sales now depend on a single buyer — Stream US Data Centers — with outside dates of Mar 31, 2027. Mitigant: ~$46.5M received to date is non-refundable or released."
   },
   {
     id: "execution",
     name: "Internal operational execution",
     levers: ["Working-capital release", "Cost reductions"],
     atRisk: 150 + 100,
-    statusKey: "green", statusLabel: "In-flight",
-    note: "Project Quantum Leap completed Q4 2025. DIO/DSO already improving. Further inventory drawdown and demand-linked."
+    statusKey: "green", statusLabel: "Delivering",
+    note: "Quantum Leap savings visible in the P&L (Q2 opex ~50% lower YoY). Inventory down $27.5M since year-end; further release is demand-linked."
   }
 ];

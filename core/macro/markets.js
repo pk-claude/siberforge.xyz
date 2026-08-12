@@ -422,7 +422,7 @@ async function renderDrilldown(symbol) {
     await Promise.all([loadHistory(), loadHoldingsQuotes(), loadNews()]);
     renderChart();
     renderHoldings();
-    el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
+    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
     setStatus('live', 'Live');
   } catch (err) {
     console.error(err);

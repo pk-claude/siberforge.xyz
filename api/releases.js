@@ -6,6 +6,8 @@
 // Edge-cached 6h. FRED publishes release dates 4–6 weeks ahead; polling more
 // often buys nothing.
 
+import { guard } from './_guard.js';
+
 const FRED_RELEASES_URL = 'https://api.stlouisfed.org/fred/releases/dates';
 
 // Release IDs we surface on the dashboard → display metadata.
@@ -49,6 +51,9 @@ function daysBetween(from, to) {
 }
 
 export default async function handler(req, res) {
+  // Same-origin policy + best-effort rate limit. See api/_guard.js.
+  if (guard(req, res, { limit: 40 })) return;
+
   const key = process.env.FRED_API_KEY;
   if (!key) {
     return res.status(500).json({ error: 'FRED_API_KEY not configured on server' });

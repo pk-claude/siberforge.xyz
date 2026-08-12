@@ -196,7 +196,7 @@ async function main() {
     el('dl-all-fred').addEventListener('click', downloadAllFred);
     el('dl-snapshot').addEventListener('click', downloadSnapshotBundle);
     el('dl-catalog').addEventListener('click', downloadCatalog);
-    el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
+    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

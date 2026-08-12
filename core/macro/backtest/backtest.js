@@ -143,13 +143,27 @@ function runBacktest() {
     return { error: 'Insufficient overlap between regime data and price history.' };
   }
 
+  // Transaction costs.
+  //
+  // A monthly-rebalanced, 3-of-11-sector rotation trades far more than SPY
+  // buy-and-hold. Reporting its gross return next to its turnover, and then
+  // declaring an "edge", asks the reader to do the netting in their head and
+  // hope the answer survives. 5bp per one-way trade is a conservative all-in
+  // figure for liquid sector ETFs (commission-free, spread + impact only).
+  // Turnover below is already the one-way figure (sum of |dw| / 2), so the
+  // round-trip cost of a rebalance is 2 x turnover x COST_ONE_WAY.
+  const COST_ONE_WAY = 0.0005;
+
   // Strategy state
   let stratValue = 100;
+  let stratValueNet = 100;
   let benchSpy = 100;
   let benchSf = 100;
   let prevWeights = {};
   const stratReturns = [], spyReturns = [], sfReturns = [];
+  const stratReturnsNet = [];
   const stratValues = [], spyValues = [], sfValues = [];
+  const stratValuesNet = [];
   const dates = [];
   const regimes = [];
   const turnoverMonthly = [];
@@ -189,10 +203,16 @@ function runBacktest() {
     for (const k of allKeys) {
       turnover += Math.abs((weights[k] || 0) - (prevWeights[k] || 0));
     }
-    turnoverMonthly.push(turnover / 2);
+    const oneWayTurnover = turnover / 2;
+    turnoverMonthly.push(oneWayTurnover);
     prevWeights = weights;
 
+    // Cost is charged at the rebalance, i.e. against the month just entered.
+    const cost = 2 * oneWayTurnover * COST_ONE_WAY;
+    const stratRNet = stratR - cost;
+
     stratValue *= (1 + stratR);
+    stratValueNet *= (1 + stratRNet);
     benchSpy   *= (1 + spyR);
     benchSf    *= (1 + sfR);
 
@@ -201,9 +221,11 @@ function runBacktest() {
     dates.push(holdYm);
     regimes.push(info.regime);
     stratReturns.push(stratR);
+    stratReturnsNet.push(stratRNet);
     spyReturns.push(spyR);
     sfReturns.push(sfR);
     stratValues.push(stratValue);
+    stratValuesNet.push(stratValueNet);
     spyValues.push(benchSpy);
     sfValues.push(benchSf);
   }
@@ -211,6 +233,8 @@ function runBacktest() {
   return {
     dates, regimes,
     strategy:    { name: 'Regime Rotation', returns: stratReturns, values: stratValues, color: '#f7a700' },
+    strategyNet: { name: 'Regime Rotation (net of costs)', returns: stratReturnsNet, values: stratValuesNet, color: '#d98324' },
+    costOneWay:  COST_ONE_WAY,
     spy:         { name: 'SPY (buy-hold)',  returns: spyReturns,   values: spyValues,   color: '#5a9cff' },
     sixtyForty:  { name: '60/40',           returns: sfReturns,    values: sfValues,    color: '#3ecf8e' },
     turnoverMonthly,
@@ -290,7 +314,7 @@ function renderEquityCurve(result) {
   });
 }
 
-function renderMetricsTable(stratM, spyM, sfM, totalTurnover) {
+function renderMetricsTable(stratM, spyM, sfM, totalTurnover, stratNetM, costOneWay) {
   const rows = [
     ['CAGR',                stratM, spyM, sfM, m => m ? `${(m.cagr * 100).toFixed(2)}%` : '—', 'higher'],
     ['Annualized vol',      stratM, spyM, sfM, m => m ? `${(m.annVol * 100).toFixed(1)}%` : '—', 'lower'],
@@ -347,6 +371,19 @@ function renderMetricsTable(stratM, spyM, sfM, totalTurnover) {
           <td>~0% (buy-hold)</td>
           <td>~30% (monthly rebal.)</td>
         </tr>
+        ${stratNetM ? `
+        <tr class="bt-net-row">
+          <td>CAGR net of costs</td>
+          <td class="bt-strat-col"><b>${(stratNetM.cagr * 100).toFixed(2)}%</b></td>
+          <td>${(spyM.cagr * 100).toFixed(2)}%</td>
+          <td>${(sfM.cagr * 100).toFixed(2)}%</td>
+        </tr>
+        <tr class="bt-net-row">
+          <td>Sharpe net of costs</td>
+          <td class="bt-strat-col"><b>${stratNetM.sharpe.toFixed(2)}</b></td>
+          <td>${spyM.sharpe.toFixed(2)}</td>
+          <td>${sfM.sharpe.toFixed(2)}</td>
+        </tr>` : ''}
       </tbody>
     </table>
     <p class="bt-table-note">
@@ -354,6 +391,15 @@ function renderMetricsTable(stratM, spyM, sfM, totalTurnover) {
       closer-to-zero is better. <strong>Best in each row highlighted.</strong> Hit rate at 50% means
       the strategy beat SPY in the same fraction of months it lost — meaningfully above 55% is
       where consistent edge lives.
+    </p>
+    <p class="bt-table-note">
+      <strong>Costs:</strong> every row above except the two marked "net of costs" is gross.
+      The net rows charge ${((costOneWay || 0) * 10000).toFixed(0)}bp per one-way trade against the
+      strategy's actual monthly turnover — a conservative all-in estimate for liquid sector ETFs
+      (spread plus impact; commissions assumed zero). Benchmarks are shown gross, which flatters
+      them by less than it flatters the strategy: SPY buy-and-hold trades almost never, the
+      strategy turns over ${(totalTurnover * 12 * 100).toFixed(0)}% a year. Taxes are not modelled,
+      and they would widen the same gap in the same direction.
     </p>
   `;
   el('bt-metrics-table').innerHTML = html;
@@ -483,11 +529,14 @@ function renderRegimeBreakdown(result) {
 
 // ---------- verdict hero ----------
 
-function renderVerdict(stratM, spyM, sfM) {
+// stratM here is the NET series. The verdict a reader acts on has to be the
+// one they could actually have earned, not the one before trading costs.
+function renderVerdict(stratM, spyM, sfM, stratGrossM, costOneWay) {
   const tgt = el('bt-verdict-section');
   if (!tgt || !stratM || !spyM) return;
   const cagrEdge = (stratM.cagr - spyM.cagr) * 100;
   const sharpeEdge = stratM.sharpe - spyM.sharpe;
+  const grossEdge = stratGrossM ? (stratGrossM.cagr - spyM.cagr) * 100 : null;
 
   let verdictColor = '#5a9cff';
   let verdictLabel = 'Inconclusive';
@@ -501,12 +550,12 @@ function renderVerdict(stratM, spyM, sfM) {
         <div class="cs-score-label">VERDICT &middot; ${stratM.months} MONTHS</div>
         <div class="cs-score-value" style="font-size:38px">${cagrEdge >= 0 ? '+' : ''}${cagrEdge.toFixed(2)}<span class="cs-score-scale">pp/yr</span></div>
         <div class="cs-score-phase" style="color:${verdictColor}">${verdictLabel}</div>
-        <div class="cs-score-desc">Regime Rotation strategy CAGR minus SPY CAGR over the backtest window.</div>
+        <div class="cs-score-desc">Regime Rotation CAGR <b>net of trading costs</b> minus SPY CAGR over the backtest window.${grossEdge != null ? ` Gross of costs it would read ${grossEdge >= 0 ? '+' : ''}${grossEdge.toFixed(2)}pp.` : ''}</div>
       </div>
       <div class="cs-signals">
         <div class="cs-signals-title">Headline numbers</div>
         <div class="cs-signal">
-          <div class="cs-signal-name">Strategy CAGR</div>
+          <div class="cs-signal-name">Strategy CAGR (net)</div>
           <div class="cs-signal-bar"><div class="cs-signal-fill" style="width:${Math.min(100, Math.max(0, stratM.cagr * 500))}%;background:${verdictColor}"></div></div>
           <div class="cs-signal-value">${(stratM.cagr * 100).toFixed(2)}%</div>
         </div>
@@ -525,7 +574,7 @@ function renderVerdict(stratM, spyM, sfM) {
           <div class="cs-signal-bar"><div class="cs-signal-fill" style="width:${Math.min(100, Math.max(0, (Math.abs(spyM.maxDd) - Math.abs(stratM.maxDd)) * 200 + 50))}%;background:${verdictColor}"></div></div>
           <div class="cs-signal-value">${((Math.abs(spyM.maxDd) - Math.abs(stratM.maxDd)) * 100).toFixed(1)}pp better</div>
         </div>
-        <div class="cs-weights-note">All metrics use walk-forward decisions (no look-ahead). Backtest window: ${stratM.months} months, ~${(stratM.months / 12).toFixed(1)} years.</div>
+        <div class="cs-weights-note">All metrics use walk-forward decisions (no look-ahead) and are net of ${((costOneWay || 0) * 10000).toFixed(0)}bp per one-way trade. Backtest window: ${stratM.months} months, ~${(stratM.months / 12).toFixed(1)} years. Taxes are not modelled.</div>
       </div>
     </div>
   `;
@@ -546,17 +595,18 @@ async function main() {
     state.results = result;
 
     const stratM = metrics(result.strategy, result.spy);
+    const stratNetM = metrics(result.strategyNet, result.spy);
     const spyM   = metrics(result.spy,      result.spy);
     const sfM    = metrics(result.sixtyForty, result.spy);
     const avgTurnover = result.turnoverMonthly.reduce((s, x) => s + x, 0) / Math.max(1, result.turnoverMonthly.length);
 
-    renderVerdict(stratM, spyM, sfM);
+    renderVerdict(stratNetM, spyM, sfM, stratM, result.costOneWay);
     renderEquityCurve(result);
-    renderMetricsTable(stratM, spyM, sfM, avgTurnover);
+    renderMetricsTable(stratM, spyM, sfM, avgTurnover, stratNetM, result.costOneWay);
     renderExcessChart(result);
     renderRegimeBreakdown(result);
 
-    el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
+    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
     setStatus('live', 'Live');
   } catch (err) {
     console.error(err);

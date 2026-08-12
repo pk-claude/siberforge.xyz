@@ -38,15 +38,16 @@
   outline-offset: -2px;
 }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/core/lib/chart-theme.js"></script>
 <link rel="stylesheet" href="/core/lib/tokens.css" />
 <link rel="stylesheet" href="/core/lib/layout.css" />
 <script src="/core/lib/theme-toggle.js"></script>
 <script src="/core/lib/nav-config.js"></script>
 <script defer src="/core/lib/layout.js"></script>
 </head>
-<body data-section="equity" data-page="markets" data-page-sub="Markets" data-page-status-text="Initializing…">
+<body data-section="equity" data-page="markets" data-page-hub="true" data-page-sub="Markets" data-page-status-text="Initializing…">
 
 <div class="markets-banner-head">
   <div>
@@ -106,12 +107,12 @@
 
   <section class="ticker-grid">
     <div class="ticker-holdings">
-      <h3>Top Holdings <span class="t-as-of" id="t-holdings-asof"></span></h3>
+      <h2>Top Holdings <span class="t-as-of" id="t-holdings-asof"></span></h2>
       <div id="t-holdings-table"></div>
       <p class="t-holdings-note" id="t-holdings-note"></p>
     </div>
     <div class="ticker-news">
-      <h3>News &amp; Drivers <span class="t-as-of" id="t-news-asof"></span></h3>
+      <h2>News &amp; Drivers <span class="t-as-of" id="t-news-asof"></span></h2>
       <div id="t-news-list"></div>
     </div>
   </section>

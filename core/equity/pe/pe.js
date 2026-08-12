@@ -78,7 +78,8 @@
     'Normalized P/E flattens the cycle and gives a multiple based on through-cycle earnings, which is closer to what a long-term investor should pay for. ' +
     'A wide gap between Normalized and Trailing/Forward (e.g. MU at ~160 vs 35 vs 7) flags that current earnings are far from trend and the stated multiple may revert as earnings revert. ' +
     'For stable growers (MSFT, V) Normalized P/E sits close to Trailing P/E and the gap is small. ' +
-    'Method: arithmetic mean of monthly TTM EPS over the past ~5 years (loss years included honestly). The cycle tag (Peak/Above-trend/Mid-cycle/Below-trend/Trough) is the percentile rank of current EPS within that 5-year distribution.';
+    'Method: arithmetic mean of monthly TTM EPS over the past ~5 years (loss years included honestly). The cycle tag (Peak/Above-trend/Mid-cycle/Below-trend/Trough) is the percentile rank of current EPS within that 5-year distribution. ' +
+    'Two caveats worth stating plainly. (1) Survivorship: the universe is rebuilt each run from CURRENT S&P 500 / Nasdaq-100 membership, and each name\'s 5-year history is its own. Companies removed over that window (acquired, delisted, dropped in distress) contribute nothing, so sector-level normalized multiples describe the survivors, not the membership the sector actually lived through. Fixing this requires historical index-constituent data, which is paid. (2) Sector medians are computed over positive-earnings names only; loss-makers are excluded rather than ranked, which biases sector medians low. The count of excluded names is shown next to each sector median.';
 
   function escAttr(s) { return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
   const NPE_TERM = (label) =>
@@ -120,11 +121,36 @@
     const ndx = state.data.filter(d => d.ndx).length;
     const fetched = r.refreshed_at_human || r.refreshed_at || 'unknown';
     const next = r.next_refresh_at_human || 'next Sunday 14:00 UTC';
-    const snapCount = r.snapshot_count != null ? r.snapshot_count : '?';
+    const snapCount = r.snapshot_count != null ? r.snapshot_count : 0;
+
+    // The badge used to be the literal string "LIVE", printed regardless of
+    // how old the file was. It is now derived from refreshed_at against the
+    // wall clock: a stalled pipeline has to say so.
+    const fresh = window.SF_FRESH
+      ? window.SF_FRESH.assess(r.refreshed_at, 'weekly')
+      : null;
+    const badge = fresh
+      ? window.SF_FRESH.badge(fresh)
+      : '<span class="sf-fresh sf-fresh--unknown">AGE UNKNOWN</span>';
+    const warn = fresh && fresh.level !== 'fresh'
+      ? `<div class="sf-notice" role="status">
+           <strong>Stale data</strong>
+           ${window.SF_FRESH.note(fresh, 'The multiples below')}
+           Prices and multiples are as of ${fetched}, not today.
+         </div>`
+      : '';
+
+    // Snapshot history: report what is actually on disk, including the case
+    // where the daily job has not produced a file in a long time.
+    const snapNote = snapCount === 0
+      ? 'no snapshot files on disk'
+      : `${snapCount} snapshot${snapCount === 1 ? '' : 's'} on file` +
+        (r.snapshot_first && r.snapshot_last ? ` (${r.snapshot_first} to ${r.snapshot_last})` : '');
 
     wrap.innerHTML = `
+      ${warn}
       <div class="rb-row">
-        <span class="rb-pill rb-pill--ok">LIVE</span>
+        ${badge}
         <span class="rb-text">Last refresh: <b>${fetched}</b></span>
       </div>
       <div class="rb-row">
@@ -134,7 +160,7 @@
       </div>
       <div class="rb-row">
         <span class="rb-pill">DAILY SNAPSHOT</span>
-        <span class="rb-text">${snapCount} snapshot${snapCount === 1 ? '' : 's'} on file</span>
+        <span class="rb-text">${snapNote}</span>
         <span class="rb-meta">(weekdays 21:30 UTC)</span>
       </div>
       <div class="rb-row" style="margin-left:auto">
@@ -226,11 +252,17 @@
         const median = peVals.length
           ? peVals.slice().sort((a, b) => a - b)[Math.floor(peVals.length / 2)]
           : null;
+        // A median over positive P/Es only is biased low versus the sector:
+        // every loss-making name is dropped, not ranked. Say how many.
+        const dropped = items.length - peVals.length;
+        const medNote = dropped > 0
+          ? ` <span class="sh-caveat" title="Median is computed over positive-earnings names only. ${dropped} of ${items.length} companies in this sector have no positive ${state.metric === 'tpe' ? 'trailing' : 'forward'} earnings and are excluded, which biases the sector median low.">ex-${dropped}</span>`
+          : '';
         const totalMc = items.reduce((s, r) => s + (r.mc || 0), 0);
         html += `<div class="sec-block">
           <div class="sec-head">
             <span class="sh-name">${sec} &middot; ${items.length}</span>
-            <span class="sh-stat">Med ${state.metric === 'tpe' ? 'trail' : 'fwd'} ${fmtPE(median)} &middot; ${fmtB(totalMc)}</span>
+            <span class="sh-stat">Med ${state.metric === 'tpe' ? 'trail' : 'fwd'} ${fmtPE(median)}${medNote} &middot; ${fmtB(totalMc)}</span>
           </div>
           ${items.map(rowHTML).join('')}
         </div>`;

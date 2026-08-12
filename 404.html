@@ -10,6 +10,8 @@
 <link rel="stylesheet" href="/core/lib/tokens.css" />
 <link rel="stylesheet" href="/core/lib/layout.css" />
 <script src="/core/lib/theme-toggle.js"></script>
+<script defer src="/core/lib/nav-config.js"></script>
+<script defer src="/core/lib/layout.js"></script>
 <style>
   .nf-wrap {
     min-height: 70vh;
@@ -46,13 +48,59 @@
     font-size: 14px;
   }
   .nf-home:hover { border-color: var(--accent); }
+  .nf-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .nf-hint { margin-top: 18px; font-size: 12px; color: var(--muted); }
+  .nf-hint kbd {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 1px 5px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+  }
+  .nf-sections {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 26px;
+    max-width: 620px;
+  }
+  .nf-sections a {
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+  }
+  .nf-sections a:hover { border-color: var(--accent); color: var(--text); }
 </style>
 </head>
 <body>
-<main class="nf-wrap">
+<main class="nf-wrap" id="sf-main">
   <h1 class="nf-code">404</h1>
   <p class="nf-msg">This page doesn't exist. The scent trail went cold.</p>
-  <a class="nf-home" href="/">Back to the hub</a>
+  <div class="nf-actions">
+    <a class="nf-home" href="/">Back to the hub</a>
+    <a class="nf-home" href="/core/">Full A-Z index</a>
+  </div>
+  <p class="nf-hint">Or press <kbd>/</kbd> to search every view on the site.</p>
+  <!-- Populated from nav-config so it can never drift from the real taxonomy. -->
+  <nav class="nf-sections" id="nf-sections" aria-label="Site sections"></nav>
 </main>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var cfg = window.SIBERFORGE_NAV;
+    var host = document.getElementById('nf-sections');
+    if (!cfg || !host) return;
+    host.innerHTML = cfg.SECTIONS.map(function (s) {
+      return '<a href="' + s.href + '">' + s.label + '</a>';
+    }).join('');
+  });
+</script>
 </body>
 </html>

@@ -15,6 +15,8 @@
 // symbol that matches a basic alphanumeric/dot/dash pattern. No PII or
 // expensive endpoints are exposed by either Finnhub call so this is safe.
 
+import { guard } from './_guard.js';
+
 const FINN_BASE  = 'https://finnhub.io/api/v1';
 const YAHOO_BASE = 'https://query1.finance.yahoo.com/v8/finance/chart';
 
@@ -163,6 +165,9 @@ async function finnhubFinancials(symbol, key) {
 
 
 export default async function handler(req, res) {
+  // Same-origin policy + best-effort rate limit. See api/_guard.js.
+  if (guard(req, res, { limit: 90 })) return;
+
   const mode = req.query.mode || 'quote';
 
   // catalog returns the curated TICKERS list (used to populate the quote strip).

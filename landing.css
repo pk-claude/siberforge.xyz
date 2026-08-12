@@ -1020,3 +1020,86 @@ body.landing-page.editorial .ed-hub-sub {
   body.landing-page.editorial #ed-search-jump { display: inline-block; }
   body.landing-page.editorial #ed-search-jump .ed-kbd { display: none; }
 }
+
+/* ===================== MOBILE MENU =====================
+   Below 880px the six section links collapse out of the header. Before this
+   existed, that left a phone visitor with a logo and a theme toggle, with
+   every route into the site sitting below a 100vh hero. */
+body.landing-page.editorial .ed-menu-btn {
+  display: none;
+  padding: 8px 14px;
+  background: transparent;
+  border: 1px solid var(--ed-rule-strong);
+  border-radius: 4px;
+  color: var(--ed-ink);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  min-height: 36px;
+}
+body.landing-page.editorial .ed-menu-btn:hover { border-color: var(--ed-accent, currentColor); }
+
+body.landing-page.editorial .ed-menu {
+  display: none;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px var(--ed-side-pad) 14px;
+  border-top: 1px solid var(--ed-rule);
+  background: var(--ed-bg);
+  max-height: 70vh;
+  overflow-y: auto;
+}
+body.landing-page.editorial .ed-menu[hidden] { display: none; }
+body.landing-page.editorial .ed-menu-link {
+  display: block;
+  padding: 11px 4px;
+  border-bottom: 1px solid var(--ed-rule);
+  text-decoration: none;
+  min-height: 44px;
+}
+body.landing-page.editorial .ed-menu-link:last-child { border-bottom: 0; }
+body.landing-page.editorial .ed-menu-name {
+  display: block;
+  color: var(--ed-ink);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+body.landing-page.editorial .ed-menu-blurb {
+  display: block;
+  margin-top: 2px;
+  color: var(--ed-ink-muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+body.landing-page.editorial .ed-menu-link--alt .ed-menu-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ed-ink-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 880px) {
+  body.landing-page.editorial .ed-nav { flex-wrap: wrap; }
+  body.landing-page.editorial .ed-menu-btn { display: inline-block; }
+  body.landing-page.editorial .ed-menu:not([hidden]) { display: flex; flex-basis: 100%; }
+  /* Subscribe collapses with the rest; the CTA and Search stay reachable. */
+  body.landing-page.editorial .ed-nav-link--always { display: none; }
+  body.landing-page.editorial .ed-nav-cta { display: inline-block; }
+  /* The hero was a full viewport of brand before any navigable content.
+     Cap it so the themes grid is one short scroll away, not two. */
+  body.landing-page.editorial .ed-hero {
+    min-height: auto;
+    padding: 96px var(--ed-side-pad) 56px;
+    gap: 36px;
+  }
+}
+@media (max-width: 640px) {
+  body.landing-page.editorial .ed-hero { padding: 88px var(--ed-side-pad) 44px; gap: 28px; }
+  body.landing-page.editorial .ed-nav-cta { font-size: 12px; padding: 7px 11px; }
+  body.landing-page.editorial .ed-menu-btn { padding: 7px 11px; font-size: 11px; }
+}

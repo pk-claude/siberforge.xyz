@@ -156,16 +156,26 @@
       }).join('');
 
       pagesHtml =
-        '<div class="sf-nav-pages">' +
+        '<div class="sf-nav-pages" id="sf-nav-pages">' +
           labelHtml + groupsHtml +
         '</div>';
     }
+
+    // Below 800px the second tier is collapsed behind this button instead of
+    // wrapping into a permanent multi-row band that eats the fold.
+    const moreBtn = pagesHtml
+      ? '<button type="button" id="sf-nav-more" class="sf-nav-more" aria-expanded="false" aria-controls="sf-nav-pages">' +
+          '<span class="sf-nav-more-caret">&rsaquo;</span> ' +
+          escape(pages && pages.label ? pages.label : 'Section pages') +
+        '</button>'
+      : '';
 
     return (
       '<nav class="sf-nav">' +
         '<div class="sf-nav-tabs">' + tabs +
           '<button id="theme-toggle" class="theme-toggle" title="Switch theme">&#9728;</button>' +
         '</div>' +
+        moreBtn +
         pagesHtml +
       '</nav>'
     );
@@ -197,19 +207,26 @@
     const crumbs = [{ label: 'Home', href: '/' }, { label: section.label, href: section.href }];
 
     // Sub-tree crumb (e.g. Markets > Plug Power - PLUG)
+    let subLandingHref = null;
     if (opts.subSection) {
       const sub = cfg.PAGES[opts.section + ':' + opts.subSection];
       if (sub && sub.label) {
         const subFirst = sub.groups[0] && sub.groups[0].links[0];
-        crumbs.push({ label: sub.label, href: subFirst ? subFirst.href : null });
+        subLandingHref = subFirst ? subFirst.href : null;
+        crumbs.push({ label: sub.label, href: subLandingHref });
       }
     }
 
     // The page itself, or its parent + a leaf crumb for drill-downs.
     // A link that IS the section landing is skipped: "Macro > Regime" when
     // Regime is /core/macro/ just repeats the crumb before it.
+    // The same applies one level down: on /core/plug/ the sub-tree crumb and
+    // the page crumb both resolve to /core/plug/, which produced
+    // "Markets > Plug Power - PLUG > Section overview" with the last two
+    // pointing at the identical URL.
     const isSectionLanding = function (link) {
-      return link && link.href === section.href;
+      if (!link) return false;
+      return link.href === section.href || link.href === subLandingHref;
     };
     const parent = opts.pageParent ? findLink(opts.pagesKey, opts.pageParent) : null;
     if (parent) {
@@ -268,13 +285,18 @@
     const items = cfg.index();
     let active = 0;
 
+    // Search had to be told the answer in its own words: "Labor", not
+    // "unemployment". keywords[] carries the metric names a reader actually
+    // types. Matching a keyword ranks above matching prose in meta.
     function score(item, q) {
       const label = item.label.toLowerCase();
+      const keywords = (item.keywords || []).join(' ').toLowerCase();
       const meta = (item.meta + ' ' + item.section + ' ' + item.group).toLowerCase();
       if (label === q) return 0;
       if (label.indexOf(q) === 0) return 1;
       if (label.indexOf(q) !== -1) return 2;
-      if (meta.indexOf(q) !== -1) return 3;
+      if (keywords.indexOf(q) !== -1) return 3;
+      if (meta.indexOf(q) !== -1) return 4;
       return -1;
     }
 
@@ -313,7 +335,10 @@
       hits[active].scrollIntoView({ block: 'nearest' });
     }
 
+    let lastFocus = null;
+
     function open() {
+      lastFocus = document.activeElement;
       overlay.hidden = false;
       document.body.classList.add('sf-search-open');
       input.value = '';
@@ -323,6 +348,30 @@
     function close() {
       overlay.hidden = true;
       document.body.classList.remove('sf-search-open');
+      // Put the keyboard user back where they were, not at the top of the
+      // document.
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+      lastFocus = null;
+    }
+
+    // Keep Tab inside the dialog while it is open -- it is aria-modal, so
+    // letting focus walk into the page behind it is a lie to the AT.
+    function trapTab(e) {
+      const panel = overlay.querySelector('.sf-search-panel');
+      if (!panel) return;
+      const focusables = panel.querySelectorAll(
+        'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusables.length) { e.preventDefault(); return; }
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
     }
 
     if (openBtn) openBtn.addEventListener('click', open);
@@ -340,6 +389,7 @@
         if (e.key === 'k' && (e.metaKey || e.ctrlKey)) { e.preventDefault(); open(); }
         return;
       }
+      if (e.key === 'Tab') { trapTab(e); return; }
       if (e.key === 'Escape') { e.preventDefault(); close(); return; }
       if (e.key === 'ArrowDown') { e.preventDefault(); move(1); return; }
       if (e.key === 'ArrowUp') { e.preventDefault(); move(-1); return; }
@@ -385,6 +435,135 @@
   }
 
   // --------------------------------------------------------------------
+  // "See also" -- curated cross-section links. The nav can only ever move a
+  // reader within the section they are already in; these are the jumps the
+  // nav structurally cannot make (Inflation -> regional CPI dispersion).
+  // --------------------------------------------------------------------
+  function renderSeeAlso(pagesKey, activePage) {
+    const cfg = window.SIBERFORGE_NAV;
+    if (!cfg || !activePage) return;
+    const related = (cfg.RELATED && cfg.RELATED[activePage]) || [];
+    if (!related.length) return;
+
+    const index = cfg.index();
+    const byId = Object.create(null);
+    index.forEach(function (it) { byId[it.id] = it; });
+
+    const cards = related.map(function (id) {
+      const it = byId[id];
+      if (!it) return '';
+      return '<a class="sf-seealso-card" href="' + escape(it.href) + '">' +
+        '<span class="sf-seealso-where">' + escape(it.section) + '</span>' +
+        '<span class="sf-seealso-name">' + escape(it.label) + ' &rarr;</span>' +
+        (it.meta ? '<span class="sf-seealso-meta">' + escape(it.meta) + '</span>' : '') +
+      '</a>';
+    }).join('');
+    if (!cards) return;
+
+    const host = document.querySelector('main') || document.body;
+    const wrap = document.createElement('section');
+    wrap.className = 'sf-seealso';
+    wrap.innerHTML = '<h2 class="sf-seealso-title">See also</h2>' +
+                     '<div class="sf-seealso-grid">' + cards + '</div>';
+    host.appendChild(wrap);
+  }
+
+  // --------------------------------------------------------------------
+  // Accessibility scaffolding applied at runtime so it lands on all ~55
+  // pages without editing 55 files (and cannot drift back out of sync).
+  //   - a main landmark, resolved from <main> or the first content block
+  //   - a skip link as the first tab stop
+  //   - an accessible name on every chart canvas, taken from its heading
+  //   - scope="col" on header cells that never got one
+  // --------------------------------------------------------------------
+  function resolveMain() {
+    let main = document.querySelector('main');
+    if (!main) {
+      // First element after the injected chrome that is a plausible content
+      // container. Deliberately conservative: only <section>/<div>.
+      const kids = Array.prototype.slice.call(document.body.children);
+      for (let i = 0; i < kids.length; i++) {
+        const el = kids[i];
+        const tag = el.tagName.toLowerCase();
+        if (tag !== 'section' && tag !== 'div') continue;
+        if (el.classList.contains('sf-search-overlay')) continue;
+        if (el.closest('header, nav')) continue;
+        main = el;
+        break;
+      }
+    }
+    if (!main) return null;
+    if (main.tagName.toLowerCase() !== 'main') main.setAttribute('role', 'main');
+    if (!main.id) main.id = 'sf-main';
+    if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+    return main;
+  }
+
+  function addSkipLink(mainId) {
+    if (document.querySelector('.sf-skip')) return;
+    const a = document.createElement('a');
+    a.className = 'sf-skip';
+    a.href = '#' + mainId;
+    a.textContent = 'Skip to content';
+    document.body.insertBefore(a, document.body.firstChild);
+  }
+
+  function labelCharts() {
+    const canvases = document.querySelectorAll('canvas:not([aria-label]):not([role="presentation"])');
+    Array.prototype.forEach.call(canvases, function (c) {
+      // Nearest preceding heading, walking up through wrappers.
+      let name = '';
+      let node = c;
+      while (node && node !== document.body && !name) {
+        let sib = node.previousElementSibling;
+        while (sib && !name) {
+          if (/^h[1-6]$/i.test(sib.tagName)) name = sib.textContent.trim();
+          else {
+            const h = sib.querySelector && sib.querySelector('h1,h2,h3,h4,h5,h6');
+            if (h && sib.contains(c) === false) name = h.textContent.trim();
+          }
+          sib = sib.previousElementSibling;
+        }
+        node = node.parentElement;
+      }
+      if (!name) name = c.id ? c.id.replace(/[-_]+/g, ' ') : 'Chart';
+      c.setAttribute('role', 'img');
+      c.setAttribute('aria-label', name.replace(/\s+/g, ' ').slice(0, 140) + ' (chart)');
+    });
+  }
+
+  function scopeTableHeaders() {
+    const ths = document.querySelectorAll('th:not([scope])');
+    Array.prototype.forEach.call(ths, function (th) {
+      const inHead = !!th.closest('thead');
+      th.setAttribute('scope', inHead ? 'col' : (th.parentElement && th.parentElement.firstElementChild === th ? 'row' : 'col'));
+    });
+  }
+
+  function applyA11y() {
+    const main = resolveMain();
+    if (main) addSkipLink(main.id);
+    labelCharts();
+    scopeTableHeaders();
+    // Charts and tables are usually painted after fetch; re-run once the
+    // page has had a chance to render them.
+    window.setTimeout(function () { labelCharts(); scopeTableHeaders(); }, 2500);
+  }
+
+  // --------------------------------------------------------------------
+  function wireNavToggle() {
+    const btn = document.getElementById('sf-nav-more');
+    const nav = document.querySelector('nav.sf-nav');
+    if (!btn || !nav) return;
+    btn.addEventListener('click', function () {
+      const open = nav.getAttribute('data-pages-open') === 'true';
+      nav.setAttribute('data-pages-open', open ? 'false' : 'true');
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      const caret = btn.querySelector('.sf-nav-more-caret');
+      if (caret) caret.innerHTML = open ? '&rsaquo;' : '&#8964;';
+    });
+  }
+
   function wireScroll() {
     const top = $('.sf-top');
     if (!top) return;
@@ -455,9 +634,12 @@
     if (newSearch) body.appendChild(newSearch);
 
     if (isHub) renderHubChildren(pagesKey, activePage);
+    renderSeeAlso(pagesKey, activePage);
 
     wireScroll();
     wireSearch();
+    wireNavToggle();
+    applyA11y();
   }
 
   if (document.readyState === 'loading') {

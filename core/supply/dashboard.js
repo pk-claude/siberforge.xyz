@@ -452,6 +452,32 @@ function populateLastRefresh() {
 
 // Aggregate data-health banner: name the sources that failed their last
 // scrape instead of silently showing their last good values.
+// Pipeline age, measured against the wall clock.
+//
+// The per-source "stale" flags are computed relative to the manifest's own
+// generatedAt. That is fine while the pipeline runs, and useless when it
+// stops: if nothing has refreshed since June, every series is equally old
+// relative to the June manifest and every one of them self-reports fresh.
+// This banner is the only check that catches a dead pipeline.
+function renderPipelineAge() {
+  const stamp = MANIFEST?.generatedAt || SNAPSHOT?.generatedAt;
+  const fresh = window.SF_FRESH ? window.SF_FRESH.assess(stamp, 'weekly') : null;
+  if (!fresh || fresh.level === 'fresh') return;
+
+  const host = document.querySelector('main') || document.body;
+  const div = document.createElement('div');
+  div.className = 'sf-notice';
+  div.setAttribute('role', 'status');
+  div.innerHTML =
+    '<strong>Pipeline has not run</strong>' +
+    'The weekly supply-chain refresh last completed ' +
+    (fresh.at ? fresh.at.toISOString().slice(0, 10) : 'at an unknown date') +
+    ', ' + fresh.days + ' days ago. Every value on this page is from that run. ' +
+    'Per-source freshness badges are measured against that snapshot, so they ' +
+    'cannot tell you the snapshot itself is old -- this banner can.';
+  host.insertBefore(div, host.firstChild);
+}
+
 function renderDataHealth() {
   if (!MANIFEST || !MANIFEST.sources) return;
   const failing = Object.entries(MANIFEST.sources)
@@ -470,6 +496,7 @@ function renderDataHealth() {
 async function main() {
   await Promise.all([loadData(), loadV2()]);
   populateLastRefresh();
+  renderPipelineAge();
   renderDataHealth();
   // data-view (not data-page) -- data-page is reserved for nav-config link ids.
   const page = document.body.dataset.view;

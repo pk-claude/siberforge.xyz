@@ -1,6 +1,8 @@
 // Vercel serverless function: proxies FRED API with server-side key.
 // Returns { series: [...], errors: [...] } with allSettled partial-failure tolerance.
 
+import { guard } from './_guard.js';
+
 const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
 const CATALOG = {
@@ -218,6 +220,9 @@ const MSA_RE   = /^(ATNHPIUS\d{5}Q|LAUMT\d+|LAUMT.*A|MSACSR.*)$/;
 const CPI_RE   = /^CUU[RS]A?\d{3,4}SA[A-Z0-9]+$/;
 
 export default async function handler(req, res) {
+  // Same-origin policy + best-effort rate limit. See api/_guard.js.
+  if (guard(req, res, { limit: 90 })) return;
+
   const key = process.env.FRED_API_KEY;
   if (!key) return res.status(500).json({ error: 'FRED_API_KEY not configured on server' });
 

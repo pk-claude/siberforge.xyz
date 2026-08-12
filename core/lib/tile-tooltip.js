@@ -15,7 +15,7 @@
 //     press ESC to dismiss. Also fixes mobile/touch-only devices that have
 //     no hover.
 
-import { getMetricContext, CATALOG_AS_OF } from '/core/lib/metric-context.js';
+import { getMetricContext, CATALOG_AS_OF, catalogAgeQuarters, CATALOG_STALE_AFTER_QUARTERS } from '/core/lib/metric-context.js';
 
 (function () {
   // Build the popup element once.
@@ -52,9 +52,18 @@ import { getMetricContext, CATALOG_AS_OF } from '/core/lib/metric-context.js';
       ${entry.context ? `<div class="tt-section tt-context"><span class="tt-key">Recent context</span>${entry.context}</div>` : ''}
       ${entry.thresholds ? `<div class="tt-section tt-thresholds"><span class="tt-key">Thresholds</span>${entry.thresholds}</div>` : ''}
       ${linksHtml ? `<div class="tt-links"><span class="tt-key">Sources &amp; further reading</span>${linksHtml}</div>` : ''}
-      <div class="tt-asof">Context reviewed: ${CATALOG_AS_OF}</div>
+      <div class="tt-asof">Context reviewed: ${CATALOG_AS_OF}${contextAgeNote()}</div>
       ${opts.pinned ? `<div class="tt-pin-hint">Click outside or press ESC to close</div>` : ''}
     `;
+  }
+
+
+  // The live number on the tile is current; the prose beside it is not, unless
+  // someone has run the quarterly review. Say which.
+  function contextAgeNote() {
+    const q = catalogAgeQuarters();
+    if (q == null || q <= CATALOG_STALE_AFTER_QUARTERS) return '';
+    return ` <span class="tt-asof-warn" title="The narrative context on this tile was last reviewed ${CATALOG_AS_OF}. The value shown is live. Calibrate the thresholds against current data before relying on the prose.">&mdash; ${q} quarters behind the live value</span>`;
   }
 
   function position(e) {

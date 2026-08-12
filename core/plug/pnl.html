@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Plug Power &middot; Path to EBITDAS</title>
+<link rel="stylesheet" href="./styles.css" />
+<link rel="stylesheet" href="./balance.css" />
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js" charset="utf-8"></script>
+<link rel="stylesheet" href="/core/lib/tokens.css" />
+<link rel="stylesheet" href="/core/lib/layout.css" />
+<script src="/core/lib/theme-toggle.js"></script>
+<script src="/core/lib/nav-config.js"></script>
+<script defer src="/core/lib/layout.js"></script>
+</head>
+<body data-section="equity" data-sub-section="plug" data-page="plug-pnl" data-page-sub="Plug Power - P&L" data-page-status-text="Ready">
+
+<main>
+  <span class="eyebrow">Income statement</span>
+  <h1 class="page-title">Plug Power (PLUG) — P&amp;L Turnaround &amp; Path to EBITDAS</h1>
+  <p class="page-sub">
+    Quarterly income statement, Q1 2024 through Q2 2026, from 10-Q/10-K filings and the Q2 2026 release. The other views in this section track survival — cash, liquidity, dilution. This one tracks the question that decides whether survival was worth it: is the operating business approaching breakeven? Gross margin has marched from (132)% in Q1 2024 to (0.9)% in Q2 2026, and management targets positive
+    <span class="term" data-def="Plug's non-GAAP profitability measure: Earnings Before Interest, Taxes, Depreciation, Amortization, and Share-based expense. Adds back roughly $20M per quarter of D&A and stock comp to operating results (H1 2026 run-rate). The company declines to reconcile the forward target to GAAP net loss.">EBITDAS</span>
+    in Q4 2026.
+  </p>
+
+  <!-- Panel 1: Headline & revenue/GM chart -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Q2 2026 Scorecard</h2>
+      <span class="panel-sub">Reported Aug 10, 2026</span>
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi">
+        <div class="kpi-lbl">Gross margin</div>
+        <div class="kpi-val">(0.9)%</div>
+        <div class="kpi-delta pos">vs (30.7)% Q2'25 and (13.2)% Q1'26</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Revenue</div>
+        <div class="kpi-val">$178.3M</div>
+        <div class="kpi-delta pos">+9% sequential, +2% YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Operating expenses</div>
+        <div class="kpi-val">$62.4M</div>
+        <div class="kpi-sub">~50% below Q2'25 — flattered by a $39.7M one-time recovery</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">FY2026 revenue guidance</div>
+        <div class="kpi-val">+15–16%</div>
+        <div class="kpi-sub">Raised Aug 10 from the 13–15% given on the Q1 call</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">GenDrive deployments</div>
+        <div class="kpi-val">1,666</div>
+        <div class="kpi-sub">+125% YoY (739 in Q2'25); 20,000+ unit refresh pipeline over 3 years</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-lbl">Adjusted EPS</div>
+        <div class="kpi-val">($0.07)</div>
+        <div class="kpi-sub">vs ($0.18) Q2'25; GAAP ($0.14) vs ($0.20)</div>
+      </div>
+    </div>
+
+    <div class="chart-title">Quarterly revenue by segment, with total gross margin %</div>
+    <div id="chart-pnl-rev" class="chart-md"></div>
+
+    <div class="note">
+      <strong>Reading the chart.</strong> The margin line is the story: five of the last six quarters improved sequentially, and the two that broke the pattern (Q3'25, and the Q4'24 trough) were driven by inventory and equipment-cost charges, not demand. Revenue mix is shifting under the surface — equipment was 57% of revenue in Q1'24 and is 46% in Q2'26, while recurring streams (services, PPA, fuel) grew from 41% to 54%. Guidance math implies a steep second half: 15–16% FY growth on $709.9M of FY25 revenue means ~$475–480M in H2 vs $341.8M in H1 — management attributes this to the historically second-half-weighted cadence and the commercial backlog (Orica 50 MW FID, Carlton Barrow 30 MW, Hy2gen 275 MW FEED).
+    </div>
+  </section>
+
+  <!-- Panel 2: Segment margins -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Gross Margin by Segment</h2>
+      <span class="panel-sub">Where the improvement is coming from</span>
+    </div>
+
+    <div id="chart-pnl-gm" class="chart-md"></div>
+
+    <div class="note">
+      <strong>Three different stories.</strong> <em>Equipment</em> swung from (98)% (Q1'24) to +1.9% — the mix shifted away from loss-leading electrolyzer/cryogenic deliveries and Q4'24/Q3'25 absorbed the inventory writedowns that made old quarters look worse. <em>Services</em> (shown ex-provision) reached +27% in Q2'26, the margin management cites — reliability gains raised units-per-technician, and the expanding GenDrive installed base (76,000+ units) turns each refresh cycle into aftermarket revenue. <em>Fuel</em> remains the structural loss-maker at (48)%, though halved from (91)% a year ago on plant utilization (Georgia/Tennessee/Louisiana network, ~40 TPD). <em>PPA</em> at (30)% improves slowly as older, mispriced contracts roll off.
+      <br><br>
+      <em>Methodology.</em> Services margin excludes the "provision for loss contracts" line — a reserve true-up for future-period contracts that has recently been a large <em>benefit</em> ($15.7M released in Q2'26 alone). Including it would show services at +80%, which flatters current-period economics; excluding it may still understate historical losses. The provision path is visible in the table below.
+    </div>
+  </section>
+
+  <!-- Panel 3: Opex -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Operating-Expense Discipline</h2>
+      <span class="panel-sub">Core opex (R&amp;D + SG&amp;A + restructuring) — impairments shown separately in the table</span>
+    </div>
+
+    <div id="chart-pnl-opex" class="chart-md"></div>
+
+    <div class="note">
+      <strong>The halving, audited.</strong> Reported Q2'26 opex of $62.4M is ~50% below Q2'25's $123.5M — but $19.4M of impairment sits in that figure, and more importantly the quarter benefited from a $39.7M "recovery of previously impaired assets" (disclosed in the adjusted-EPS reconciliation; the GAAP line it sits in is not disclosed — the $40.9M sequential drop in SG&amp;A to $29.3M strongly suggests SG&amp;A, which would put underlying SG&amp;A near $69M, our inference). On that basis the underlying opex decline is roughly 20% YoY, not 50% — still real (Project Quantum Leap completed Q4'25: workforce, footprint, vendor renegotiation), but the headline overstates it. Kitchen-sink impairments remain a Q4 tradition: $940.9M in Q4'24, $666.3M in Q4'25, mostly against the hydrogen build-out.
+    </div>
+  </section>
+
+  <!-- Panel 4: Path to breakeven -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Distance to Breakeven</h2>
+      <span class="panel-sub">Core operating loss — gross profit less R&amp;D and SG&amp;A</span>
+    </div>
+
+    <div id="chart-pnl-oploss" class="chart-md"></div>
+
+    <div class="note">
+      <strong>What Q4'26 EBITDAS-positive requires.</strong> Core operating loss (ex impairment, restructuring, contingent consideration) narrowed from $262M in Q1'24 to $44M in Q2'26. EBITDAS adds back D&amp;A and stock comp — about $20M per quarter at the H1'26 run rate — so the implied EBITDAS gap in Q2 was roughly $24M... before crediting back the $39.7M one-time recovery, which would swing the underlying gap to ~$64M. Closing that by Q4 leans on three levers moving together: the guided H2 revenue ramp (~$240M+/quarter vs $178M in Q2), continued gross-margin gains (Q4'25 already printed +2.4% on $225M of revenue — seasonally strong quarters do clear zero), and service/fuel scale effects. The target is plausible on a seasonally-strong Q4 with the revenue guide intact; it is not yet a run-rate statement.
+    </div>
+  </section>
+
+  <!-- Panel 5: Data table -->
+  <section class="panel">
+    <div class="panel-hdr">
+      <h2>Quarterly Detail</h2>
+      <span class="panel-sub">US$ millions except percentages; losses in parentheses</span>
+    </div>
+
+    <div class="tbl-wrap">
+      <table class="data" id="pnl-table">
+        <thead>
+          <tr>
+            <th>Quarter</th>
+            <th>Revenue</th>
+            <th>Gross margin</th>
+            <th>R&amp;D + SG&amp;A</th>
+            <th>Impair / restr / CC</th>
+            <th>Core op loss</th>
+            <th>Operating loss</th>
+            <th>Net loss (Plug)</th>
+          </tr>
+        </thead>
+        <tbody id="pnl-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="note">
+      <em>Methodology note.</em> Q1–Q3 figures are standalone-quarter columns from the respective 10-Qs; Q4 columns are derived as FY (10-K) minus nine-month YTD, so Q4 absorbs any full-year reclassifications — the Q4'25 services-revenue figure ($41.5M vs $19.7M in Q3'25) partly reflects a 10-K reclassification rather than pure sequential growth, and Q4 carries the annual kitchen-sink impairments. Net loss (Plug) is net loss attributable to Plug Power Inc.; it includes large non-cash fair-value swings on the 2033 convertible notes and $7.75 warrants ($103.5M combined loss in Q2'26) that sit below the operating line.
+    </div>
+  </section>
+
+</main>
+
+<footer>&copy; Siberforge · Data via SEC EDGAR (10-Qs, 10-Ks) and Plug Power Q2 2026 release (Aug 10, 2026) · Plotly.js under MIT license</footer>
+
+<script src="../lib/plotly-theme.js"></script>
+<script src="./data/pnl-data.js"></script>
+<script src="./pnl.js"></script>
+<script src="../lib/ui.js"></script>
+<script src="./ui.js"></script>
+</body>
+</html>

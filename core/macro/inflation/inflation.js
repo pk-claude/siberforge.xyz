@@ -7,6 +7,8 @@
 // Same visual pattern as the cycle page: composite score hero, 4 analytical
 // sections with charts + tiles + interpretation, synthesis.
 
+import { renderMethodology } from '/core/lib/composite-scores.js';
+
 const state = {
   series: {},
   recessionRanges: [],
@@ -555,6 +557,9 @@ function renderPersistenceScore() {
       </div>
     </div>
   `;
+  // The weights were already visible; the 0-100 anchors behind each signal
+  // were not. A reader cannot argue with a mapping they cannot see.
+  renderMethodology(tgt, 'inflation');
 }
 
 // ---------- Synthesis ----------
@@ -601,7 +606,7 @@ async function main() {
     renderWagesSection();
     renderSynthesis();
 
-    el('last-updated').textContent = `Updated ${new Date().toLocaleString()}`;
+    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
     setStatus('live', 'Live');
   } catch (err) {
     console.error(err);

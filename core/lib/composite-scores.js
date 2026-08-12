@@ -303,6 +303,82 @@ export function computeLaborScore(data, cutoff = null) {
 }
 
 // Phase labels per score range. Different bucketing per composite type.
+// ---------------------------------------------------------------------------
+// METHODOLOGY -- the anchors, stated.
+//
+// Every signal below is mapped to 0-100 by a hand-chosen linear stretch, not
+// by a z-score against its own history. That is a real limitation and it is
+// worth naming: an anchor like "HY OAS 200bp scores 0, 1200bp scores 100" is
+// a judgement, not a statistic, and the composite is only comparable across
+// time to the extent those judgements stay fixed. They are fixed -- they live
+// in code and are printed here -- but a reader is entitled to disagree with
+// them, which they cannot do if the anchors are invisible.
+//
+// Direction is always "higher score = more of the risk the panel is named
+// for": a high cycle score means more recession risk, a high labor score
+// means a weaker labour market.
+//
+// This table is rendered on the dashboards by renderMethodology() below. If
+// you change an anchor in the code, change it here in the same commit.
+// ---------------------------------------------------------------------------
+export const METHODOLOGY = {
+  cycle: {
+    title: 'Cycle Risk Composite',
+    scale: 'Higher = more recession risk.',
+    signals: [
+      { name: 'NY Fed recession prob', weight: 0.25, anchor: 'prob x 1.5, capped at 100. 67% probability or above scores 100.' },
+      { name: 'Sahm Rule',             weight: 0.25, anchor: '0.00pp scores 0, 0.50pp (the classic trigger) scores 100.' },
+      { name: '10Y-3M curve',          weight: 0.15, anchor: '+200bp scores 0, 0bp scores 50, -200bp scores 100. Linear in bps.' },
+      { name: 'NFCI',                  weight: 0.15, anchor: '-1.0 (loose) scores 0, 0.0 (neutral) scores 50, +1.0 (tight) scores 100.' },
+      { name: 'HY OAS',                weight: 0.20, anchor: '200bp scores 0, 1200bp scores 100. Linear in bps.' },
+    ],
+  },
+  inflation: {
+    title: 'Inflation Persistence Composite',
+    scale: 'Higher = stickier / more persistent inflation.',
+    signals: [
+      { name: 'Sticky CPI',      weight: 0.30, anchor: '2% YoY scores 0, 6% scores 100.' },
+      { name: '5y5y forward',    weight: 0.20, anchor: '2% scores 0, 3.5% scores 100.' },
+      { name: 'Core CPI 6m ann.', weight: 0.20, anchor: '2% scores 0, 6% scores 100.' },
+      { name: 'Wage growth',     weight: 0.15, anchor: '3% scores 0, 6% scores 100.' },
+      { name: 'Shelter CPI',     weight: 0.15, anchor: '3% scores 0, 8% scores 100.' },
+    ],
+  },
+  general: {
+    caveat:
+      'All anchors are fixed judgements, not distributional statistics. A z-score ' +
+      'against a rolling window would be more defensible and is the intended ' +
+      'direction of travel; it is not implemented here because changing the mapping ' +
+      'moves every historical score and would require recalibrating the phase ' +
+      'thresholds (Early Expansion / Slowdown / Contraction and their equivalents) ' +
+      'that read off it. Until then: treat the score as an ordinal summary of the ' +
+      'signals listed, not as a cardinal probability.',
+  },
+};
+
+// Renders a collapsed <details> disclosure. Call with a host element and a
+// key from METHODOLOGY.
+export function renderMethodology(host, kind) {
+  if (!host) return;
+  const m = METHODOLOGY[kind];
+  if (!m) return;
+  const rows = m.signals.map(function (s) {
+    return '<tr><th>' + s.name + '</th><td>' + (s.weight * 100).toFixed(0) + '%</td><td>' + s.anchor + '</td></tr>';
+  }).join('');
+  const el = document.createElement('details');
+  el.className = 'sf-method';
+  el.innerHTML =
+    '<summary>How this score is built</summary>' +
+    '<div class="sf-method-body">' +
+      '<p>' + m.scale + ' Each signal is mapped to 0-100 by the fixed anchors below, then weighted.</p>' +
+      '<table><thead><tr><th>Signal</th><th>Weight</th><th>Anchors</th></tr></thead><tbody>' +
+      rows +
+      '</tbody></table>' +
+      '<p style="margin-top:8px">' + METHODOLOGY.general.caveat + '</p>' +
+    '</div>';
+  host.appendChild(el);
+}
+
 export function phaseFor(kind, score) {
   if (score == null) return { label: '—', color: '#8a94a3' };
   if (kind === 'cycle') {

@@ -25,7 +25,7 @@
 
   /* ---------- PANEL 1: CASH COMPOSITION DONUT ---------- */
   // Color mapping lives here (display concern), not in the data file.
-  const SLICE_COLORS = [C.cyan, C.orange, C.purple, C.amber];
+  const SLICE_COLORS = [C.cyan, C.orange, C.purple, C.amber, C.green];
   const cashSlices = D.cashSlices.map((s, i) => ({ ...s, color: SLICE_COLORS[i] }));
   Plotly.newPlot("chart-cash", [{
     type: "pie", hole: 0.55,
@@ -166,7 +166,7 @@
   const H = D.headroom;
   const barCategory = ["Share<br>authorization", "Potential<br>share increases"];
   Plotly.newPlot("chart-headroom", [
-    { type: "bar", orientation: "h", name: "Issued (Feb 2026)",
+    { type: "bar", orientation: "h", name: "Issued (Jun 2026)",
       x: [H.issued, null], y: barCategory, marker: { color: C.black },
       hovertemplate: "Issued: %{x:,.0f}M shares<extra></extra>" },
     { type: "bar", orientation: "h", name: "Authorized but unissued",
@@ -177,10 +177,10 @@
       hovertemplate: "$7.75 Warrants: %{x:,.0f}M shares<br>(strike $7.75, exp 2028)<extra></extra>" },
     { type: "bar", orientation: "h", name: "ATM remaining ($944M)",
       x: [null, H.atmShares], y: barCategory, marker: { color: C.purple },
-      hovertemplate: "ATM: ~%{x:,.0f}M shares at $1.62<br>(i.e., FY25 avg sale price)<extra></extra>" },
+      hovertemplate: "ATM: ~%{x:,.0f}M shares at $2.71<br>(Jun 30, 2026 close)<extra></extra>" },
     { type: "bar", orientation: "h", name: "SEPA ($1.0B)",
       x: [null, H.sepaShares], y: barCategory, marker: { color: C.orange },
-      hovertemplate: "SEPA: ~%{x:,.0f}M shares at $1.62<extra></extra>" },
+      hovertemplate: "SEPA: ~%{x:,.0f}M shares at $2.71<extra></extra>" },
   ], {
     ...baseLayout,
     barmode: "stack",

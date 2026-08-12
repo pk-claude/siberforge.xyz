@@ -10,8 +10,9 @@
        ring (optional bool — red divesting-marker ring) }
 
    Alabama, NY (WNY) is included even though it is no longer in the FY25
-   Properties list, because the Feb 24, 2026 definitive sale agreement
-   brings it back into reader scope.
+   Properties list, because the Stream US Data Centers sale agreement
+   brings it back into reader scope. Graham, TX (never-built green-H2
+   site, sold to Stream Jul-Aug 2026) is included for the same reason.
 */
 window.PLUG_MAP_SITES = [
   // H2 production (operational / JV / divesting)
@@ -49,7 +50,17 @@ window.PLUG_MAP_SITES = [
     tpd: 45, tpdSrc: "NY State press release, 2021",
     capex: 290, capexLbl: "$290M announced",
     capexNote: "Gov. Cuomo announced $290M investment at groundbreaking (Dec 2021). Local reporting later cited $232M actual capital deployed. Figure includes a 450 MW electric substation at STAMP that transfers to Stream DC under the sale.",
-    note: "Feb 24, 2026 definitive agreement to sell to Stream US Data Centers for $132.5M–$142M. Expected close by Jun 30, 2026. Not in FY25 Item 2 Properties — held-for-sale classification. Was billed as largest green-H2 plant in N. America.",
+    note: "Sale to Stream US Data Centers restructured Jul 9, 2026 as a staged closing: price fixed at $142.0M, outside date Mar 31, 2027; ~$6.5M deposit released to Plug Jul 2026, $10M more due at the interim real-property closing. Not in FY25 Item 2 Properties — held-for-sale. Was billed as largest green-H2 plant in N. America.",
+    ring: true
+  },
+  {
+    city: "Graham", state: "TX", lat: 33.1071, lon: -98.5895,
+    fn: "H2 production", status: "Divesting",
+    sqft: 0, ownership: "Own — pending sale",
+    tpd: null, tpdSrc: null,
+    capex: null, capexLbl: "Not disclosed",
+    capexNote: "Never-built green-H2 site (\"Limestone\") contemplated under the terminated $1.66B DOE loan. Land, interconnection and high-voltage infrastructure only; no plant construction.",
+    note: "Never built. Sold to Stream US Data Centers (PSA Jul 2026): $50M base + earnout up to $26.5M vs 164 MW reference capacity. High-voltage infrastructure closed Aug 7, 2026 for $40M (non-refundable); outside date for the rest Mar 31, 2027.",
     ring: true
   },
 

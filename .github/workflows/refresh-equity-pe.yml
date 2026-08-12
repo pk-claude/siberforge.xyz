@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   refresh:
@@ -22,7 +23,7 @@ jobs:
           node-version: '20'
 
       - name: Install deps
-        run: npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
 
       - name: Refresh equity P/E data
         run: node scripts/refresh-equity-pe.mjs
@@ -38,3 +39,43 @@ jobs:
             git commit -m "data: weekly equity-pe refresh $(date -u +%F)"
             git push
           fi
+
+      # A scheduled data pipeline that fails quietly is worse than one that
+      # does not exist: the site keeps serving the last good values as if they
+      # were current. GitHub's default is an email that is easy to miss, so
+      # file a real issue -- it is visible, it is dated, and it stays open
+      # until someone closes it.
+      - name: Open an issue on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const title = `Pipeline failure: ${{ github.workflow }}`;
+            const body = [
+              `Workflow **${{ github.workflow }}** failed on ${new Date().toISOString()}.`,
+              '',
+              `Run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}`,
+              '',
+              'While this is broken the dashboards fed by it keep showing their',
+              'last successful values. The freshness banners on the affected',
+              'pages measure age against the wall clock, so they will say so,',
+              'but nothing will refresh until this is fixed.',
+            ].join('\n');
+            const existing = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'pipeline-failure',
+            });
+            const match = existing.data.find(i => i.title === title);
+            if (match) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner, repo: context.repo.repo,
+                issue_number: match.number, body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner, repo: context.repo.repo,
+                title, body, labels: ['pipeline-failure'],
+              });
+            }

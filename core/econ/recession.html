@@ -93,6 +93,21 @@
     <div class="info-panel methodology-panel">
       <h2>Methodology</h2>
       <div id="methodology-body">
+        <p class="method-crossref">
+          <strong>This is not the site's only recession read, and the two can disagree.</strong>
+          The model below counts five binary triggers and reports a tier
+          (Benign / Low / Elevated / High). The
+          <a href="/core/macro/cycle/">Cycle Risk Composite</a> instead maps five
+          partly different signals onto a continuous 0-100 scale and weights them
+          (NY Fed probability 25%, Sahm 25%, HY OAS 20%, curve 15%, NFCI 15%).
+          A signal sitting just short of its trigger contributes nothing here and
+          contributes proportionally there, so two triggers fired can coincide
+          with a mid-range composite. That is the design working, not a bug:
+          the count answers "how many things have actually broken?" and the
+          composite answers "how stretched is the whole complex?". When they
+          diverge, the gap is where the signals are clustered near their
+          thresholds -- worth looking at directly rather than averaging away.
+        </p>
         <p>
           Each signal is binary: triggered or not. Thresholds are drawn from
           professional consensus (cited per signal), not tuned to fit history.

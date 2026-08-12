@@ -41,3 +41,4 @@ branding/*.tmp.html
 # Python pycache
 __pycache__/
 *.pyc
+*.tmp.py
