@@ -82,5 +82,35 @@
       "label": "Memory cycle debate",
       "url": "https://www.uncoveralpha.com/p/every-memory-cycle-ends-the-same"
     }
-  ]
+  ],
+  "guide": {
+    "label": "Q4 FY26 guide",
+    "val": "$50.0B \u00b1$1B",
+    "sub": "GM ~86% \u00b7 EPS $31.00 \u00b1$1",
+    "tone": "accent"
+  },
+  "latestProse": "Q3 FY2026 (ended May 28; reported Jun 24). Revenue $41.46B vs $9.30B a year earlier (+346%); GAAP gross margin 84.6%, operating margin 80.4% (operating income $33.7B). Non-GAAP EPS $25.11 vs ~$20.49 consensus; adjusted FCF $18.3B in the quarter. DRAM $31.3B = 76% of revenue; cloud memory BU $13.8B. HBM sold out for calendar 2026; more than $1B of HBM4 already shipped.",
+  "guidanceProse": "Q4 FY2026 guide: revenue $50.0B plus or minus $1B, gross margin ~86%, EPS $31.00 plus or minus $1 on ~1.15B shares. Management says it can fill only half to two-thirds of HBM demand and sees the HBM TAM crossing $100B in 2027; ~$100B of long-term agreements referenced. The market pays ~5.6x forward earnings for this - pricing the cycle's end, not the run-rate.",
+  "bullCharts": {
+    "1": [
+      "revQ"
+    ],
+    "2": [
+      "gmA"
+    ],
+    "0": [
+      "niQ"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "revYoyA"
+    ],
+    "1": [
+      "capexA"
+    ],
+    "4": [
+      "priceH"
+    ]
+  }
 }

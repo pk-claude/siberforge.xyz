@@ -85,5 +85,32 @@
       "label": "2nm supply landscape",
       "url": "https://semiwiki.com/semiconductor-manufacturers/tsmc/367081-global-2nm-supply-crunch-tsmc-leads-as-intel-18a-samsung-and-rapidus-race-to-compete/"
     }
-  ]
+  ],
+  "guide": {
+    "label": "FY2026 outlook",
+    "val": "+40%+ YoY (USD)",
+    "sub": "Q3 guide $44.6-45.8B \u00b7 GM 65-67%",
+    "tone": "accent"
+  },
+  "latestProse": "Q2 2026 (reported Jul 16). Revenue $40.2B (+36% YoY, +12% QoQ), high end of guidance. Gross margin 67.7% (+150bp QoQ, above guide), operating margin 60.3%; ADR EPS $4.31 (+77%). Platform mix: HPC 66% of revenue (+20% QoQ), smartphone 22% (-4% QoQ). Node mix: N5 33%, N3 30%, N2 3% - the first material N2 quarter; 77% of wafer revenue is 7nm-and-below.",
+  "guidanceProse": "Q3 guide $44.6-45.8B, gross margin 65-67%, operating margin 56-58%; FY2026 growth raised to 'slightly above 40%' in USD. Capex at the top of $52-56B. The margin guide-down reflects overseas-fab dilution plus NTD strength - the bear's favorite line item. N2 targets ~100K wafers/month by year-end; capacity reportedly booked to 2028.",
+  "bullCharts": {
+    "0": [
+      "gmA"
+    ],
+    "1": [
+      "revQ"
+    ],
+    "2": [
+      "revYoyA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "priceH"
+    ],
+    "3": [
+      "omA"
+    ]
+  }
 }

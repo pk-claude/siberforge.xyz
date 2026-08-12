@@ -30,8 +30,11 @@ async function testTicker(T) {
   const html = window.document.getElementById('sn-root').innerHTML;
   const has = (s) => html.includes(s);
   const checks = {
-    hero: has('sn-hero'), stats: has('sn-stats'), scenarios: has('sn-scen'),
-    charts: has('<svg'), lab: has('lab-panel'), peers: has('peer-tbl'),
+    header: has('tk-header'), kpis: has('kpi-grid'),
+    bullbear: has('thesis-box bull') && has('thesis-box bear'),
+    trends: has('trends-grid') && has('chart-block'),
+    scenarioToggle: has('period-btn'),
+    lab: has('lab-panel'), peers: has('peer-tbl'),
     research: has('Research notes'), sources: has('sn-sources'),
   };
   const rdOut = window.document.getElementById('rd-out') || window.document.getElementById('rv-out');

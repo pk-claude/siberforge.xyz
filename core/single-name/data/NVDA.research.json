@@ -85,5 +85,32 @@
       "label": "Goldman Sachs: AI build-out tracking",
       "url": "https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out"
     }
-  ]
+  ],
+  "guide": {
+    "label": "Q2 FY27 rev guide",
+    "val": "$91.0B \u00b12%",
+    "sub": "GM ~75% \u00b7 reports Aug 26",
+    "tone": "accent"
+  },
+  "latestProse": "Q1 FY2027 (ended Apr 26, 2026; reported May 20). Revenue $81.6B beat by ~$2.8B, +85% YoY and +20% QoQ; Data Center $75.2B (+92%) is ~92% of the company. GAAP gross margin 74.9%, operating margin 65.6% (operating income $53.5B, +147% YoY). GAAP EPS $2.39 (+214%). Dividend raised to $0.25/q, $80B added to the buyback. The quarter's most important disclosure: three direct customers were 21%, 17% and 16% of revenue - 54% combined.",
+  "guidanceProse": "Q2 FY2027 guide: revenue $91.0B plus or minus 2%, gross margin ~75% - another +12% sequential step. Rubin first shipments Q3 2026, volume ramp Q4. China: H200 licensed (~$10B approved, 25% revenue share to the US government) but Beijing has blocked purchases - guidance embeds roughly zero China revenue, making it a free option.",
+  "bullCharts": {
+    "0": [
+      "gmA"
+    ],
+    "1": [
+      "revQ"
+    ],
+    "2": [
+      "peerFpe"
+    ]
+  },
+  "bearCharts": {
+    "1": [
+      "revYoyA"
+    ],
+    "3": [
+      "peerRg"
+    ]
+  }
 }

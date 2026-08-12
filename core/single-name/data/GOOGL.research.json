@@ -85,5 +85,32 @@
       "label": "Anthropic stake analysis",
       "url": "https://startupfortune.com/alphabets-124-billion-anthropic-stake-reshapes-how-investors-should-read-googles-earnings/"
     }
-  ]
+  ],
+  "guide": {
+    "label": "FY26 capex guide",
+    "val": "$195-205B",
+    "sub": "raised from $180-190B \u00b7 more in 2027",
+    "tone": "warn"
+  },
+  "latestProse": "Q2 2026 (reported Jul 22). Revenue $119.8B +24% (beat); operating income $40.8B (+30%), margin 34% (+2pts). Search $63.3B (+17%), YouTube ads $11.1B (+13%), Cloud $24.8B (+82%) with $8.8B segment profit vs $2.8B a year ago. GAAP EPS $9.11 - but ~$99B of Anthropic/SpaceX equity marks sit inside it; core EPS ~$2.85 vs $2.89 consensus.",
+  "guidanceProse": "FY2026 capex raised to $195-205B (from $180-190B) with further growth flagged for 2027 - the stock fell ~5% on the hike. Antitrust overhang: search remedies under appeal (the DOJ cross-appeal keeps Chrome divestiture alive; DC Circuit arguments late 2026/early 2027) and ad-tech remedies still pending.",
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "1": [
+      "revYoyA"
+    ],
+    "3": [
+      "capexA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "capexPctA"
+    ],
+    "4": [
+      "niQ"
+    ]
+  }
 }

@@ -85,5 +85,32 @@
       "label": "Insider selling",
       "url": "https://www.benzinga.com/trading-ideas/insider-trades/25/11/48995589/"
     }
-  ]
+  ],
+  "guide": {
+    "label": "FY26 rev guide",
+    "val": "$8.15B (+82%)",
+    "sub": "US comm >$3.42B \u00b7 FCF $4.5-4.7B",
+    "tone": "accent"
+  },
+  "latestProse": "Q2 2026 (reported Aug 3). Revenue $1.94B +93% (consensus ~$1.80B); adjusted operating margin 62%, GAAP operating margin 47%. US commercial $764M, +149% YoY and +28% sequential; US government $809M, +90%. Net dollar retention 157%, up 700bp sequentially. Rule of 40 score: 155.",
+  "guidanceProse": "FY2026 raised to $8.15B (+82%); US commercial guided above $3.42B (+134%); adjusted FCF $4.5-4.7B; Q3 ~$2.16B. At ~50x forward sales the guide has to keep being beaten, not merely met - every quarter is a referendum on the multiple.",
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "1": [
+      "revA"
+    ],
+    "3": [
+      "omA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "peerEvS"
+    ],
+    "3": [
+      "revYoyA"
+    ]
+  }
 }

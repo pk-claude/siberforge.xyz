@@ -91,5 +91,26 @@
       "label": "Lockup structure",
       "url": "https://seekingalpha.com/article/4905797-cerebras-ipo-lockup-comes-fast"
     }
-  ]
+  ],
+  "guide": {
+    "label": "FY26 rev guide",
+    "val": "$855-865M",
+    "sub": "capacity-constrained \u00b7 Q2 core ~$194M",
+    "tone": "accent"
+  },
+  "latestProse": "Q1 FY2026 (reported Jun 23; Q2 due Aug 12). Revenue $193.4M +94% YoY: hardware $111.6M (+60%), cloud/services $82.8M (+178%). Core non-GAAP operating loss -$3.5M (-2% margin); GAAP net loss $14.0M. FY2025 revenue was 86% UAE-concentrated: MBZUAI 62%, G42 24%.",
+  "guidanceProse": "Q2 core revenue guided ~$194M (+88%); FY2026 $855-865M, explicitly capacity-constrained. The ramp story is the $10B/750MW OpenAI deal plus AWS Bedrock deployment. Near-term overhang: ~28M Class A shares come out of lockup two trading days after the Q2 print (mid-August).",
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "2": [
+      "revA"
+    ]
+  },
+  "bearCharts": {
+    "5": [
+      "priceH"
+    ]
+  }
 }

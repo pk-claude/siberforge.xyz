@@ -43,3 +43,4 @@ __pycache__/
 *.pyc
 *.tmp.py
 COMMIT-MSG.txt
+scripts/*-tmp.mjs

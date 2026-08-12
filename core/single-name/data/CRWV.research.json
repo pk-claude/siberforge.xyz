@@ -90,5 +90,29 @@
       "label": "Core Scientific deal terminated",
       "url": "https://www.datacenterdynamics.com/en/news/coreweave-core-scientific-deal-ended/"
     }
-  ]
+  ],
+  "guide": {
+    "label": "FY26 rev guide",
+    "val": "$12.4-13.2B",
+    "sub": "capex $31-35B \u00b7 Q3 $3.4-3.6B",
+    "tone": "warn"
+  },
+  "latestProse": "Q2 2026 (reported Aug 11). Revenue $2.58B +112% YoY, +24% QoQ (beat); adjusted operating income $128M (5% margin) against interest expense of $640M; GAAP net loss $626M; FCF roughly -$5.7B in the quarter. Revenue backlog $104.2B (+246%): OpenAI ~$22.4B, Meta ~$35B implied, a new Anthropic agreement, $6B Jane Street. Stock jumped ~13% after hours.",
+  "guidanceProse": "FY2026 raised to $12.4-13.2B revenue with $960M-1.15B adjusted operating income; Q3 $3.4-3.6B (+158% at midpoint). FY2026 capex $31-35B, debt-funded - the equity is a spread between an ~11% cost of debt and contracted returns on GPUs that depreciate faster than the loans amortize.",
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "1": [
+      "revA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "fcfQ"
+    ],
+    "2": [
+      "capexA"
+    ]
+  }
 }

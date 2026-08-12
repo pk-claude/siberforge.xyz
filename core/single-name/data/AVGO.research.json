@@ -84,5 +84,32 @@
       "label": "VMware pricing/EU probe",
       "url": "https://www.techradar.com/pro/broadcom-backs-down-on-vmware-pricing-rules-as-eu-begins-investigation-following-complaints"
     }
-  ]
+  ],
+  "guide": {
+    "label": "FY26 AI revenue",
+    "val": "~$56B (+180%)",
+    "sub": "FY27 target >$100B \u00b7 Q3 AI ~$16B",
+    "tone": "accent"
+  },
+  "latestProse": "Q2 FY2026 (ended May 3; reported Jun 3). Revenue $22.2B +48% YoY: semiconductors $15.0B (+79%), infrastructure software $7.2B (+9%). AI semiconductor revenue $10.8B (+143%), roughly 40% of it networking. Non-GAAP gross margin 77.1%, record ~67% operating margin, EPS $2.44, FCF $10.3B - 46% of revenue.",
+  "guidanceProse": "Q3 guide ~$29.4B with AI semis ~$16B - below the ~$17.2B consensus; the stock fell 12% on the print. FY2026 AI revenue raised to ~$56B (+180%); FY2027 '>$100B' reiterated against a $73B AI backlog. OpenAI's first custom-accelerator deployments target H2 2026.",
+  "bullCharts": {
+    "1": [
+      "revQ"
+    ],
+    "2": [
+      "revYoyA"
+    ],
+    "3": [
+      "fcfA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "priceH"
+    ],
+    "2": [
+      "gmA"
+    ]
+  }
 }
