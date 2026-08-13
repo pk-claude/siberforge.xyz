@@ -6,7 +6,10 @@ import fs from 'node:fs';
 
 const snjs = fs.readFileSync('core/single-name/sn.js', 'utf8');
 const TICKERS = ['NVDA', 'TSM', 'MU', 'AVGO', 'GOOGL', 'PLTR', 'CRWV', 'CBRS',
-  'META', 'MSFT', 'AAPL', 'AMZN', 'AMD', 'INTC', 'MRVL', 'AMAT', 'SMCI', 'SNDK'];
+  'META', 'MSFT', 'AAPL', 'AMZN', 'AMD', 'INTC', 'MRVL', 'AMAT', 'SMCI', 'SNDK',
+  'IONQ', 'QBTS', 'RGTI', 'QS', 'HOVR', 'MRLN', 'NBIS', 'SPCX', 'BE', 'RIVN',
+  'SOFI', 'TSLA', 'VST', 'CAT', 'CVX', 'IBM', 'ORCL'];
+const ETFS = ['XLK', 'EWY'];
 let fails = 0;
 
 async function testTicker(T) {
@@ -48,6 +51,34 @@ async function testTicker(T) {
   else console.log(`PASS  ${T} | ${rdOut.textContent.slice(0, 52)}`);
 }
 
+async function testEtf(T) {
+  const dom = new JSDOM(`<!DOCTYPE html><html><body data-ticker="${T}"><main id="sn-root"></main></body></html>`,
+    { runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://x.test/' });
+  const { window } = dom;
+  window.fetch = async (url) => {
+    const m = String(url).match(/\/core\/single-name\/data\/(.+)$/);
+    if (m && fs.existsSync('core/single-name/data/' + m[1]))
+      return { ok: true, json: async () => JSON.parse(fs.readFileSync('core/single-name/data/' + m[1], 'utf8')) };
+    return { ok: false, json: async () => null };
+  };
+  const errors = [];
+  window.addEventListener('error', e => errors.push(e.message));
+  window.eval(snjs);
+  window.document.dispatchEvent(new window.Event('DOMContentLoaded', { bubbles: true }));
+  await new Promise(r => setTimeout(r, 300));
+  const html = window.document.getElementById('sn-root').innerHTML;
+  const has = (s) => html.includes(s);
+  const checks = {
+    header: has('tk-header'), kpis: has('kpi-grid'), composition: has('Composition'),
+    holdings: has('kpi-compare-row'), research: has('Research notes'),
+    noJsErrors: errors.length === 0,
+  };
+  const bad = Object.entries(checks).filter(([, v]) => !v).map(([k]) => k);
+  if (bad.length) { fails++; console.log(`FAIL  ${T} (ETF): ${bad.join(', ')}${errors.length ? ' | ' + errors.join('; ') : ''}`); }
+  else console.log(`PASS  ${T} (ETF)`);
+}
+
 for (const t of TICKERS) await testTicker(t);
+for (const t of ETFS) await testEtf(t);
 console.log(fails ? `${fails} single-name render failure(s)` : 'All single-name pages render.');
 process.exit(fails ? 1 : 0);

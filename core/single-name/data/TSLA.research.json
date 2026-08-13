@@ -1,0 +1,93 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "A $1.3 trillion market cap resting on a 1.4% operating margin: record deliveries now fund an AI story -- robotaxi, FSD subscriptions, Optimus -- that the P&L has not validated, and the forward multiple prices that story as near-certain.",
+  "thesis": [
+    "Volume is back but profit is gone. Q2 2026 (reported Jul 22, 2026) delivered a record 480,126 vehicles (+25% YoY) and record $28.24B revenue (+26%), yet operating income fell 57% to $398M as opex jumped 47% to $4.35B on AI infrastructure, R&D and stock comp.",
+    "FSD has become a real subscription business. Active subscriptions hit 1.48M by June 2026 after Tesla moved to a $99/month subscription-only model in early 2026; attach on new North American deliveries passed 55%, and Musk's pay package is explicitly tied to reaching 10M subscribers.",
+    "Robotaxi is expanding in name, not in fleet. Austin metro-wide unsupervised coverage arrived in June 2026 with only about 20 active vehicles; Dallas and Houston sit at roughly 3 and 6 since April, and Musk has gated the real ramp on the FSD v15 rewrite in late 2026 to early 2027 -- while Waymo runs 577 vehicles in Texas.",
+    "Energy is the quietly excellent business with a margin wobble. Q2 2026 deployments hit 13.5 GWh (+40% YoY, second-best quarter ever), but energy gross margin fell from 39.5% to 20.4% on warranty adjustments and non-repeating tariff benefits.",
+    "Governance is now a valuation input. Shareholders approved a roughly $1T pay package on Nov 6, 2025 (about 75% in favor, path to ~29% ownership), and Tesla invested $2B in Musk's xAI -- the AI narrative and the CEO's personal empire are formally intertwined."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 22, 2026)",
+    "points": [
+      "Revenue $28.24B, +26% YoY (record); automotive $20.5B (+23%); services and other $4.58B (+50%, record gross profit)",
+      "Deliveries 480,126, +25% YoY -- a Q2 record",
+      "Non-GAAP EPS $0.33 vs $0.54 consensus, a roughly 39% miss",
+      "Operating income $398M, -57% YoY; operating margin 1.4% vs 4.1%; opex +47% to $4.35B on AI buildout, R&D, stock comp",
+      "Free cash flow -$1.09B vs +$1.44B in Q1 2026",
+      "Energy storage 13.5 GWh deployed (+40% YoY, +53% QoQ); energy gross margin 20.4% vs 39.5% a year earlier"
+    ]
+  },
+  "latestProse": "The Q2 2026 print separated Tesla's two identities. The car company performed: record 480,126 deliveries, record $28.24B revenue, services compounding at 50%. The margin structure did not: $398M of operating income on that revenue is a 1.4% margin, as $4.35B of opex (up 47%) flowed into AI compute, Optimus R&D and stock comp, and free cash flow swung to -$1.09B from +$1.44B in Q1. Energy delivered 13.5 GWh but gave back margin (20.4% vs 39.5%) on warranty charges and expiring tariff benefits. FSD subscriptions reaching 1.48M at $99/month is the genuinely new bright datapoint. The disclosure that matters most: opex growth is now structurally outrunning gross profit growth -- Tesla is spending like the AI future is certain while pricing its cars like the EV present is desperate.",
+  "guidanceProse": "Tesla gives no formal guidance, which is itself the tell. Around the Jul 22, 2026 report, management pointed to the FSD v15 rewrite as the gate for scaling robotaxi beyond roughly 30 unsupervised vehicles across Texas, kept the seven-metro expansion ambition announced for 1H 2026 even though fleet counts have not followed, and confirmed Model S/X wind-down to free Fremont capacity for Optimus -- whose output Musk now concedes will be 'extremely slow at first.' Capex and opex keep rising on AI infrastructure with no committed revenue timeline attached. The implicit guidance: accept negative free cash flow and a 1.4% operating margin now in exchange for robotaxi and Optimus economics later, on dates that have consistently slipped.",
+  "guide": {
+    "label": "FY26 outlook",
+    "val": "No formal guidance",
+    "sub": "Robotaxi scale gated on FSD v15 (late 2026+); opex +47% YoY on AI buildout; FCF negative in Q2",
+    "tone": "warn"
+  },
+  "segments": [
+    "Automotive: $20.5B in Q2 2026 (+23% YoY), roughly 73% of revenue; record volume on thin post-price-cut, post-US-credit margins; Model S/X discontinued in 2026 to free capacity for Optimus",
+    "Energy generation and storage: 13.5 GWh deployed in Q2 2026 (+40% YoY), second-best quarter ever, but gross margin roughly halved to 20.4% on warranty and tariff items",
+    "Services and other: $4.58B in Q2 2026 (+50% YoY) with record gross profit -- supercharging, insurance, and the 1.48M-subscriber FSD base at $99/month (about $65M/month recurring)"
+  ],
+  "competitive": [
+    "BYDDY: the real global rival -- out-produces Tesla in BEVs, wins on cost, and expands everywhere Tesla is politically unwelcome; BYD now sets world EV prices, not Tesla",
+    "Waymo: 577 vehicles in Texas vs Tesla's roughly 42 total there; deployed-fleet autonomy leadership is Waymo's by an order of magnitude, whatever the camera-vs-lidar cost argument promises later",
+    "RIVN: R2 at about $45K attacks Model Y's core segment with a fresher brand among US buyers alienated by Musk; small today, but its Jul 2026 conversion data is real",
+    "GM and F: retrenched from EV overinvestment through 2025, easing price pressure -- but their hybrid pivots absorb exactly the post-credit demand Tesla needs",
+    "xAI and the AI labs: for the AI-narrative share of the valuation, Tesla competes for compute, talent and capital with pure AI companies -- including, awkwardly, Musk's own xAI, which Tesla funded with $2B"
+  ],
+  "moat": "The Supercharger network, manufacturing scale, and a multi-million-vehicle fleet feeding driving data remain genuine advantages, and a 55% FSD attach rate shows software pricing power rivals lack. But the car moat is eroding: BYD beats Tesla on cost, and the brand now repels a measurable slice of Western buyers. The AI-era moat -- robotaxi and Optimus -- is asserted rather than demonstrated: about 20 unsupervised cars in Austin and zero robots doing useful work are not yet a moat.",
+  "risks": [
+    "The multiple: roughly 140-190x forward earnings (Aug 2026) prices robotaxi and Optimus success as near-certain; an AI-timeline slip hurts the stock more than any delivery miss",
+    "Robotaxi scaling fails or stays sub-economic: the unsupervised fleet has been stuck around 30 vehicles across Texas since spring 2026 while Waymo compounds; FSD v15 is another bet-the-narrative rewrite",
+    "Margin structure: 1.4% operating margin (Q2 2026) leaves no cushion, and opex +47% YoY is committed spend against uncommitted revenue",
+    "Optimus execution: every production timeline since 2022 has slipped; Musk conceded in Jan 2026 that zero robots were doing useful work after projecting 10,000 built in 2025",
+    "Key-man and governance: the $1T pay package, the ~29% ownership path, and Tesla's $2B xAI investment make conflicts structural; Musk-driven brand backlash still suppresses demand in Europe",
+    "Post-credit US demand plus BYD price pressure could force another price-cut cycle just as free cash flow has turned negative"
+  ],
+  "catalysts": [
+    "Early Oct 2026: Q3 deliveries -- does record volume hold without US credit pull-forward",
+    "Late Oct 2026: Q3 earnings -- whether FCF stays negative and opex growth moderates",
+    "Late 2026 (guided): FSD v15 release, the stated gate for scaling robotaxi beyond ~30 vehicles",
+    "2H 2026: Optimus V3 reveal, repeatedly delayed through 2026 -- first hard evidence of a production design",
+    "Through 2H 2026: seven-metro robotaxi expansion -- fleet counts, not geofence maps, are the number to watch"
+  ],
+  "pricedIn": "At a $1.31T market cap (Aug 11, 2026) and roughly 140-190x forward earnings on about $2.23 of expected EPS, the car business -- record deliveries and all -- justifies perhaps a tenth of the price at peer multiples. Everything else is capitalized narrative: a robotaxi network currently numbering about 30 driverless cars, a humanoid robot with zero units doing useful work, and an FSD subscription line running about $65M a month. The market is pricing near-certain success in at least two of robotaxi, Optimus, and energy at scale. Not priced: failure of the v15 rewrite, Waymo running away with autonomy, or any scenario where Tesla is mostly a 1.4%-margin car company. The reverse DCF below makes the implied growth explicit.",
+  "scenarios": {
+    "bear": "The v15 rewrite underwhelms, robotaxi stays a sub-scale demo through 2027, and Optimus slips again. Meanwhile the car business fights BYD and post-credit demand with price cuts, pinning operating margin near zero and keeping FCF negative as AI capex continues. The narrative multiple compresses toward growth-auto reality -- even 60x forward earnings implies a stock down well over half. Governance noise around the pay package and xAI accelerates the derating. Tesla remains a formidable company; the stock halves anyway.",
+    "base": "Deliveries grow modestly, energy compounds at 30-40%, and FSD subscriptions pass 2M in 2027, giving Tesla a genuine multi-billion-dollar software line. Robotaxi scales to low thousands of vehicles across several metros by end-2027 -- meaningful proof, immaterial revenue. Margins trough in 2026 and recover as AI spend growth moderates. The stock oscillates violently with the narrative but broadly holds its range: the multiple slowly compresses while earnings slowly catch up. Dead money with swings; the option value stays priced in.",
+    "bull": "FSD v15 works: interventions fall enough that Tesla scales robotaxi to tens of thousands of vehicles across seven-plus metros in 2027 at software margins, while 55%+ attach converts the fleet into recurring revenue approaching a $10B run-rate. Energy sustains 40% growth, Optimus ships first paid units in 2027, and the $8.5T market-cap milestones in Musk's package start reading like a roadmap. Earnings inflect from about $2 toward $10+ by 2029, and the multiple never has to compress."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.11,
+    "gT": 0.035,
+    "years": 10,
+    "bear": {"g": 0.08},
+    "base": {"g": 0.18},
+    "bull": {"g": 0.30},
+    "note": "fwdEps basis because trailing earnings are depressed by the AI spend cycle and the market is explicitly paying for the future: with forward EPS around $2.23 and the stock at roughly 140-190x that number (Aug 2026), the reverse DCF shows the enormous implied growth at TSLA's forward multiple -- on the order of 30% compounded for a decade just to justify the current price. That implied bar IS the analysis: even the bull case barely clears it."
+  },
+  "bullCharts": {
+    "0": ["revQ", "revYoyA"]
+  },
+  "bearCharts": {
+    "0": ["peerFpe"],
+    "2": ["omA", "fcfQ"]
+  },
+  "sources": [
+    {"label": "CNBC: Tesla Q2 2026 earnings report (Jul 22, 2026)", "url": "https://www.cnbc.com/2026/07/22/tesla-tsla-q2-2026-earnings-report.html"},
+    {"label": "Electrek: Tesla Q2 2026 financial results", "url": "https://electrek.co/2026/07/22/tesla-tsla-q2-2026-financial-results/"},
+    {"label": "electrive: Q2 2026 -- record deliveries, profits under pressure", "url": "https://www.electrive.com/2026/07/23/q2-financial-results-tesla-posts-record-deliveries-as-profits-come-under-pressure/"},
+    {"label": "pv magazine: Tesla 13.5 GWh storage deployments in Q2 2026", "url": "https://pv-magazine-usa.com/2026/07/02/tesla-announces-13-5-gwh-energy-storage-deployments-in-q2-sets-july-earnings-date/"},
+    {"label": "Electrek: Robotaxi covers Austin metro with ~20 vehicles (Jun 2026)", "url": "https://electrek.co/2026/06/03/tesla-robotaxi-expands-entire-austin-metro-only-20-vehicles/"},
+    {"label": "EVwire: FSD hits 1.48M subs, 55%+ NA attach (Q2 2026)", "url": "https://evwire.com/p/tesla-fsd-record-attach-rate-q2-2026"},
+    {"label": "NPR: Shareholders approve $1T Musk pay package (Nov 6, 2025)", "url": "https://npr.org/2025/11/06/nx-s1-5596440/tesla-musk-2025-trillion-dollar-compensation-vote"},
+    {"label": "Motley Fool: Tesla at 140x forward earnings (Aug 4, 2026)", "url": "https://www.fool.com/investing/2026/08/04/tesla-trades-at-140-times-forward-earnings-heres-w/"},
+    {"label": "Electrek: Optimus production at Fremont, Model S/X line (Apr 2026)", "url": "https://electrek.co/2026/04/22/tesla-optimus-production-fremont-model-sx-line/"}
+  ]
+}

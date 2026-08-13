@@ -1,0 +1,74 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "The AI buildout's industrial arm: a record $20.5B quarter, a $72B backlog nearly doubled YoY on data-center power demand, and 21.9% adjusted margins - now priced above 30x forward earnings for what history says is a cyclical.",
+  "thesis": [
+    "AI power demand turned Caterpillar's steadiest segment into its growth engine. In Q2 2026 (reported Aug 4), power generation sales rose 29% - sales to users up 72% - on data-center gensets and turbines, and backlog hit a record $72B, up 92% YoY.",
+    "The first $20B quarter in company history, with record profitability. Q2 2026 revenue of $20.5B rose 24% on $3.1B of volume and $595M of price; adjusted EPS of $8.17 beat consensus by roughly $1.98 and adjusted operating margin expanded 430bp to 21.9%.",
+    "All three primary segments are firing, not just the AI story. Construction Industries grew 35% to $8.35B on North American infrastructure and rental fleet loading, Resource Industries 20% to $4.65B on mining re-equipment, and Power & Energy 17% to roughly $8.2B.",
+    "Tariffs are a contained, quantified headwind. Management narrowed the 2026 net tariff cost to about $2.2B (from $2.2-2.6B) on Aug 4, and price realization plus volume more than absorbed it - though Construction margins still took a 340bp hit in Q2.",
+    "The cyclical question is the whole debate. At 30x+ forward earnings versus a historical mid-teens multiple, the market is treating the $72B backlog as a multi-year power annuity; only 59% of it ships within 12 months, which is either visibility or hostage-to-AI-capex risk."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Aug 4, 2026)",
+    "points": [
+      "Revenue $20.543B, +24% YoY - first $20B+ quarter in company history ($3.1B higher volume, $595M price realization)",
+      "Adjusted EPS $8.17 vs $4.72, +73% YoY and ~$1.98 above consensus; GAAP EPS $7.77 vs $4.62",
+      "Adjusted operating margin 21.9% vs 17.6% a year ago; GAAP operating margin 20.9% vs 17.3%",
+      "Construction Industries $8.346B (+35%), Resource Industries $4.648B (+20%), Power & Energy ~$8.2B (+17%, power generation +29%)",
+      "Backlog record $72B, up $9B sequentially and ~92% YoY; 59% expected to ship within 12 months",
+      "Enterprise operating cash flow $4.4B; $1.5B buybacks plus $0.7B dividends deployed; enterprise cash $6.7B"
+    ]
+  },
+  "latestProse": "Caterpillar's Q2 2026 was the first $20 billion quarter in company history: sales of $20.5B rose 24% on $3.1B of volume and $595M of price. Adjusted EPS of $8.17 beat consensus by about $1.98, and adjusted operating margin expanded 430bp to 21.9%. Construction Industries grew 35% to $8.3B, Resource Industries 20% to $4.6B, and Power & Energy 17% to roughly $8.2B, with power generation up 29% on data-center demand. Enterprise operating cash flow was $4.4B, and $2.2B went to buybacks and dividends. The disclosure that matters most: backlog jumped $9B sequentially to a record $72B, up 92% YoY - and only 59% of it ships within 12 months, meaning customers are reserving multi-year power capacity into 2027-28, which is either unprecedented visibility or unprecedented exposure to a single capex theme.",
+  "guidanceProse": "Management raised full-year 2026 sales and revenue growth to the mid-to-high teens, above its April view, implying roughly $78-80B against 2025's $67.6B. Services revenue is now expected to grow faster than previously guided, and capex holds at $3.5B to fund capacity expansion in large engines and turbines. The tariff estimate narrowed to roughly $2.2B for 2026 (from $2.2-2.6B), with Q2 segment margin impacts of 340bp in Construction Industries, 260bp in Resource Industries, and 90bp in Power & Energy. One flagged headwind: a more typical Construction Industries dealer inventory drawdown of over $1B is expected in Q4, after a $400M build in Q2.",
+  "guide": {"label": "FY2026 sales growth guide", "val": "Mid-to-high teens", "sub": "Raised Aug 4 from April view; tariff cost narrowed to ~$2.2B; capex held at $3.5B", "tone": "accent"},
+  "segments": [
+    "Power & Energy (formerly Energy & Transportation): ~$8.2B in Q2 2026, +17% YoY, roughly 40% of segment sales - power generation +29% and sales to users +72% on data-center gensets and Solar Turbines",
+    "Construction Industries: $8.35B, +35% YoY, roughly 41% - North American infrastructure and dealer rental fleet loading; dealer inventory +$400M in Q2",
+    "Resource Industries: $4.65B, +20% YoY, roughly 23% - mining re-equipment demand, copper-led",
+    "Financial Products: roughly $1B of quarterly revenues (unverified exact), financing dealer and customer purchases"
+  ],
+  "competitive": [
+    "Cummins (CMI): the closest fight in data-center power - both are effectively sold out on large gensets; CAT's breadth across reciprocating engines plus Solar Turbines is the differentiator",
+    "Deere (DE): different end-market mix (ag-heavy) in a softer 2026 cycle; the divergence in multiples is the market paying for CAT's power exposure",
+    "Honeywell (HON): quality-industrial peer on capital allocation and multiple, not products; its portfolio breakup contrasts with CAT's integrated dealer-and-iron model",
+    "Komatsu: the global number two in construction and mining equipment; competes on price and currency, not on power generation scale",
+    "Generac, Rolls-Royce (mtu), Wartsila: power rivals chasing the same data-center backlog, none with CAT's installed-base services annuity"
+  ],
+  "moat": "The dealer network is the moat: the largest independent global dealer organization locks in parts, service, and financing over a machine population measured in decades, turning services into an annuity on installed iron. In power, Caterpillar's large-engine and turbine manufacturing base plus a multi-year backlog form a capacity moat rivals cannot quickly replicate; tariffs, ironically, raise the cost of any challenger importing against it.",
+  "risks": [
+    "Order-cycle reversal: the 92% YoY backlog surge is concentrated in one theme - if hyperscaler capex pauses, backlog math runs in reverse via pushouts and cancellations",
+    "Valuation: 30x+ forward earnings on record 21.9% margins is double the historical cyclical multiple; both the E and the multiple can compress together",
+    "Tariffs: ~$2.2B net cost in 2026 with Construction margins hit 340bp in Q2; policy remains volatile and price offsets may not repeat in a softer demand tape",
+    "Dealer inventory: the Q2 $400M Construction build flatters wholesale versus retail; management already guides a >$1B Q4 destock",
+    "Capacity expansion into a possible peak: $3.5B capex and multi-year large-engine expansion create absorption risk if 2027-28 demand disappoints",
+    "Macro cyclicality: China construction remains weak, mining capex follows commodity prices, and high rates still gate broader non-residential construction"
+  ],
+  "catalysts": [
+    "Late Oct 2026 (expected): Q3 2026 earnings - backlog conversion rate and any order-rate deceleration are the tell",
+    "Q4 2026: guided Construction Industries dealer destock of over $1B tests underlying retail demand",
+    "Oct-Nov 2026: hyperscaler capex updates from MSFT, META, GOOGL, AMZN quarterly prints - the demand signal for the power backlog",
+    "Late Jan 2027 (expected): FY2026 results and initial 2027 guidance - first read on whether mid-to-high-teens growth annualizes"
+  ],
+  "pricedIn": "At roughly $838 (Aug 10, 2026), CAT is up more than 60% YTD and trades above 30x forward earnings - about double its historical mid-teens cyclical multiple - even after July's pullback from the June 30 all-time high near $1,063. The market is pricing the $72B backlog as a durable, multi-year power annuity: data-center gensets and turbines as structural growth rather than a cycle. What is not priced: order digestion. If AI capex pauses, the 92% YoY order surge becomes pushouts and cancellations, and a 30x multiple on 21.9% peak margins compresses on both axes. The 9-10% post-earnings jump on Aug 4 says the market currently believes the annuity interpretation.",
+  "scenarios": {
+    "bear": "Data-center power orders pause in 2027 as hyperscaler capex digests; backlog converts, then shrinks, and part of the 92% order surge cancels. Construction rolls over as the guided Q4 dealer destock (over $1B) extends into 2027, tariffs stay a $2B+ annual cost, and adjusted margins fall from 21.9% toward the mid-teens. EPS declines and the multiple compresses from 30x+ toward the historical mid-to-high teens - a classic late-cycle industrial de-rating.",
+    "base": "The $72B backlog converts steadily through 2027-28: FY26 sales grow mid-to-high teens to roughly $78-80B, then moderate to mid-single digits as power generation stays tight and construction normalizes. Adjusted margins hold near 20% as price offsets roughly $2.2B of tariffs, services compound faster than equipment, capex stays at $3.5B, and buybacks continue. The stock grinds with earnings while the multiple settles toward the mid-20s.",
+    "bull": "Grid scarcity persists into the 2030s and Power & Energy becomes a structural growth franchise: large-engine and turbine capacity expansions sell out years forward, power generation compounds 20%+ off the current base, and backlog keeps setting records. Mining re-equips on copper demand while U.S. infrastructure supports construction. Margins hold above 21% at scale, EPS compounds mid-teens, and the market keeps paying 30x+ for the AI trade's indispensable industrial arm."
+  },
+  "valPresets": {"mode": "fcf", "r": 0.095, "gT": 0.025, "years": 10,
+    "bear": {"g": -0.03}, "base": {"g": 0.05}, "bull": {"g": 0.09},
+    "note": "Base-year FCF is cyclically elevated (record margins, backlog conversion), so presets are deliberately modest and fade to a 2.5% terminal. Bear models a post-boom FCF decline, base a GDP-plus glide, bull a sustained power-scarcity ramp. At 30x+ forward, the reverse DCF asks how much of the $72B backlog must annuitize to justify the price."},
+  "bullCharts": {"0": ["revQ", "omA"]},
+  "bearCharts": {"0": ["revYoyA", "peerFpe"]},
+  "sources": [
+    {"label": "Caterpillar - Q2 2026 results press release (Aug 4, 2026)", "url": "https://www.caterpillar.com/en/news/corporate-press-releases/h/2q26-results-caterpillar-inc.html"},
+    {"label": "Caterpillar - 2Q 2026 earnings release PDF", "url": "https://www.caterpillar.com/content/dam/caterpillarDotCom/releases/2q26/2q26-caterpillar-inc-financial-results.pdf"},
+    {"label": "Caterpillar 10-Q, quarter ended June 30, 2026 (SEC)", "url": "https://www.sec.gov/Archives/edgar/data/0000018230/000001823026000046/cat-20260630.htm"},
+    {"label": "Investing.com - CAT Q2 2026 slides: record $20.5B revenue, backlog soars", "url": "https://www.investing.com/news/company-news/caterpillar-q2-2026-slides-record-205b-revenue-backlog-soars-93CH-4835057"},
+    {"label": "StockStory - CAT Q2 deep dive: demand, capacity expansion, backlog", "url": "https://stockstory.org/us/stocks/nyse/cat/news/earnings-call/cat-q2-deep-dive-robust-demand-capacity-expansion-and-growing-backlog-lead-the-quarter"},
+    {"label": "Motley Fool - Caterpillar Q2 2026 earnings call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/11/caterpillar-cat-q2-2026-earnings-call-transcript/"},
+    {"label": "TIKR - Caterpillar stock up over 60% in 2026, valuation analysis", "url": "https://www.tikr.com/blog/caterpillar-stock-is-up-over-60-in-2026-heres-where-cat-could-go"},
+    {"label": "TradingView - CAT Q2 2026 10-Q summary (revenue $20.543B, EPS $7.77)", "url": "https://www.tradingview.com/news/tradingview:80dca2067beaa:0-caterpillar-inc-q2-2026-revenue-20-543b-eps-7-77-10-q-summary/"}
+  ]
+}

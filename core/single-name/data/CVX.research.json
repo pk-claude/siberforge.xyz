@@ -1,0 +1,74 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "A war-premium windfall meets a volume machine: record 4.07 MMBOED production, $12B of quarterly earnings, Hess synergies 50% above plan, and a record debt paydown - with the stock priced for Brent in the $70s-80s, not the $100+ that produced the quarter.",
+  "thesis": [
+    "The Hess deal is paying off faster than promised. Chevron delivered $1.5B of annual run-rate synergies within one year of the July 2025 close - 50% above the initial target - and legacy Hess assets added 275 MBOED of Guyana barrels YoY in Q2 2026, with FCF from those assets roughly double the incremental dividend cost.",
+    "Production is at all-time records with growth still coming. Q2 2026 output of 4,070 MBOED rose 20% YoY, U.S. production set a record at 2,077 MBOED, the Permian has held above 1 MMBOED for five straight quarters, and Tengiz added 170 MBOED sequentially as the 3GP debottleneck lifts capacity from 260 to 320 kbd.",
+    "The Q2 windfall was banked, not spent. With Brent near or above $100 for much of the quarter after the late-February Iran conflict, Chevron earned $12.1B, generated $18.1B of FCF, and cut total debt by a record $8.4B - net debt/CFFO fell to 0.6x, reloading the balance sheet for the next downcycle.",
+    "Capex discipline held even at $100 oil. The 2026 organic budget of $18-19B (set Dec 3, 2025) sits at the low end of the reduced $18-21B long-term range, Permian spend runs below $3.5B with capex per barrel down about 25%, and the $3B structural cost-reduction run-rate landed six months early.",
+    "The oil-deck question is the whole debate. Brent has round-tripped from a $115 April peak to under $70 in mid-June to about $88 in mid-August 2026; normalized FCF - not the Q2 print - determines whether the $1.78 dividend plus a ~$12.5B annualized buyback pace compounds or gets cut."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 31, 2026)",
+    "points": [
+      "Earnings $12.1B, diluted EPS $6.11 vs $1.45 in Q2 2025; adjusted earnings $12.0B ($6.06) vs ~$5.11 consensus - best quarter in at least six years",
+      "Production record 4,070 MBOED, +20% YoY (3,396 prior year); U.S. record 2,077 MBOED; Permian above 1 MMBOED for a fifth straight quarter",
+      "Sales and other operating revenues $67.2B vs $44.4B a year ago; ROCE 21%",
+      "FCF $18.1B (adjusted FCF $15.4B); results included $1.4B of favorable timing effects; capex $4.5B",
+      "Total debt cut by a record $8.4B; net debt $28.5B, net debt ratio 13.1%, net debt/CFFO 0.6x",
+      "Returned $6.6B to shareholders: $3.5B dividends plus $3.1B buybacks; Hess synergies at $1.5B run-rate, 50% above target"
+    ]
+  },
+  "latestProse": "Chevron's Q2 2026 was its best quarter in at least six years: earnings of $12.1B ($6.11 diluted; adjusted $12.0B, $6.06) more than quadrupled YoY as Brent traded near or above $100 for much of the quarter after the Iran conflict disrupted Middle East flows. Production hit a record 4,070 MBOED, up 20%, on legacy Hess barrels (Guyana +275 MBOED YoY), Tengiz (+170 MBOED sequentially), and record U.S. output of 2,077 MBOED. Free cash flow reached $18.1B, total debt fell a record $8.4B, and ROCE hit 21%. The disclosure that matters most: results included $1.4B of favorable timing effects plus a large working-capital tailwind - adjusted FCF was $15.4B, not $18.1B, and the run-rate at high-$80s Brent is materially below the headline print.",
+  "guidanceProse": "Chevron gives no formal EPS guidance; the framework is volumes, capex, and returns. The 2026 organic capex budget holds at $18-19B plus $1.3-1.7B of affiliate capex - the low end of the $18-21B long-term range - and management reiterates 2-3% annual production growth through 2030. The $3B structural cost-reduction run-rate arrived six months early, with $3-4B targeted by end-2026, and Hess synergies reached $1.5B, 50% above plan. The quarterly dividend is $1.78 (payable Sep 10, 2026), and buybacks ran $3.1B in Q2 - roughly $12.5B annualized - comfortably funded at current prices with net debt/CFFO at just 0.6x after the record paydown.",
+  "guide": {"label": "FY2026 capex budget", "val": "$18-19B organic", "sub": "Plus $1.3-1.7B affiliate; low end of the $18-21B long-term range - discipline held even through $100 oil", "tone": "accent"},
+  "segments": [
+    "Upstream (the earnings engine, large majority of profit): record 4,070 MBOED in Q2 2026 - U.S. 2,077 MBOED (Permian above 1 MMBOED five straight quarters, Gulf of America growing), international 1,993 MBOED (Tengiz +170 MBOED QoQ, Guyana +275 MBOED YoY at 30% of Stabroek)",
+    "Downstream: higher refined-product margins were a meaningful Q2 earnings contributor as cracks widened with crude; provides partial cushion when crude falls",
+    "Group revenue: sales and other operating revenues of $67.2B in Q2 2026 vs $44.4B a year earlier, driven by price and 20% higher volumes"
+  ],
+  "competitive": [
+    "ExxonMobil (XOM): operates Stabroek with 45% - Chevron's Guyana growth rides Exxon's execution; both printed windfall Q2 2026 results on the Iran-driven price spike",
+    "ConocoPhillips (COP): the pure-play E&P comparator on FCF yield and shale efficiency, but with no downstream cushion in a falling-crude tape",
+    "Shell (SHEL): European supermajor at a persistent valuation discount; Chevron's U.S. listing, Guyana stake, and dividend record command the premium multiple",
+    "OPEC+ spare capacity is the real competitor: its supply response to $100 oil - and to the reopened Strait of Hormuz - decides whether 2026's windfall pricing repeats"
+  ],
+  "moat": "Scale, integration, and a reloaded resource base: 30% of Stabroek (the best conventional oil discovery in a generation, heading toward 1.2 MMBD gross capacity), an expanded Tengiz position, and advantaged Permian acreage give Chevron decades of low-breakeven barrels. A 13.1% net debt ratio and nearly four decades of consecutive dividend increases let it invest and repurchase countercyclically when leveraged rivals retreat.",
+  "risks": [
+    "Oil-price normalization: Q2 was earned at $100+ Brent; the deck is already back to the high-$80s and touched sub-$70 in mid-June - a settled $60s tape would more than halve upstream FCF",
+    "Earnings quality: $1.4B of favorable timing effects and working-capital tailwinds inflated the Q2 print; the underlying run-rate is meaningfully lower",
+    "Kazakhstan chokepoint: Tengiz barrels exit almost entirely via the CPC pipeline through Russia - a single, geopolitically exposed export route for a now-larger cash generator",
+    "Non-operator risk in Guyana: Chevron holds 30% but ExxonMobil controls pace, cost, and the Uaru startup schedule",
+    "Buyback pro-cyclicality: history (2020) shows repurchases are the first lever cut when the deck falls; the dividend is protected first",
+    "Demand destruction and policy: a $100-oil episode accelerates substitution, OPEC+ can lean into share, and long-run transition pressure weighs on terminal value"
+  ],
+  "catalysts": [
+    "Aug 19 / Sep 10, 2026: ex-dividend and payment of the $1.78 quarterly dividend",
+    "Late Oct 2026 (expected): Q3 2026 earnings - first full quarter at post-spike prices tests the true FCF run-rate",
+    "Q4 2026: Uaru startup (Errea Wittu FPSO, ~250 kbd) - Guyana gross capacity approaches 1.2 MMBD before year-end",
+    "Dec 2026 (expected): 2027 capex budget announcement - the discipline signal at whatever the price deck is by then",
+    "End-2026: deadline for the $3-4B structural cost reduction target ($3B run-rate already achieved)"
+  ],
+  "pricedIn": "At roughly $187 (early Aug 2026), CVX is up 29% YTD but sits about 13% below its March 30 all-time high of $214.71, with a ~3.6% dividend yield on a $373B market cap. The market is explicitly not annualizing Q2: the stock is priced as if Brent settles into the $70s-80s, not the $100+ that produced $12B of quarterly earnings. What is priced: Guyana and Tengiz volume growth, $18-19B capex discipline, and a low-teens-billion sustainable buyback. What is debated: whether the war premium fully unwinds - mid-June's sub-$70 dip showed the speed - or whether a structurally short market (the IEA sees a 1.8 mb/d shortfall this quarter) keeps realized prices, and buybacks, above what the current multiple implies.",
+  "scenarios": {
+    "bear": "The Middle East conflict de-escalates, the Hormuz risk premium unwinds fully, and OPEC+ leans into market share: Brent settles in the $60-65 range through 2027. Upstream earnings compress, Q2 2026 proves to be the cycle top, and buybacks are cut toward the low end as Chevron protects the dividend and balance sheet. The stock de-rates toward its yield floor while net debt drifts back up funding Guyana and Kazakhstan commitments.",
+    "base": "Brent averages $75-90 through 2027 as a tight market offsets gradual de-escalation. Uaru starts up in Q4 2026 and pushes Guyana gross capacity toward 1.2 MMBD, Tengiz runs at expanded rates, and the Permian holds above 1 MMBOED on still-falling capex per barrel. Adjusted FCF runs in the mid-$20s billions annually, funding the $1.78 dividend, roughly $12-15B of buybacks, and further debt paydown; the stock grinds back toward the March high.",
+    "bull": "Supply stays structurally short - the IEA's 1.8 mb/d deficit persists and Brent holds $90-110 - while Chevron layers 2-3% annual volume growth on top: Guyana at 1.2 MMBD gross, Tengiz debottlenecked to 320 kbd, Permian efficiency still improving. FCF sustains near Q2's adjusted pace, buybacks scale toward $20B a year, debt keeps falling, and CVX re-rates above the $215 high as the market pays for growth plus yield."
+  },
+  "valPresets": {"mode": "fcf", "r": 0.09, "gT": 0.025, "years": 10,
+    "bear": {"g": -0.06}, "base": {"g": 0.02}, "bull": {"g": 0.06},
+    "note": "Calibrate off normalized FCF (roughly mid-$20s billions at $75-85 Brent with Hess and TCO at full run-rate), not Q2 2026's $18.1B windfall quarter. Bear's negative growth is an oil-price path ($60s Brent), not operational failure; bull layers 2-3% volume growth on a $90+ deck. Fade to a 2.5% terminal - generous for a hydrocarbon business, which is the honest tension in the model."},
+  "bullCharts": {"0": ["fcfA", "capexA"]},
+  "bearCharts": {"0": ["revYoyA", "capexPctA"]},
+  "sources": [
+    {"label": "Business Wire - Chevron Reports Second Quarter 2026 Results (Jul 31, 2026)", "url": "https://www.businesswire.com/news/home/20260731221759/en/Chevron-Reports-Second-Quarter-2026-Results"},
+    {"label": "Chevron IR - Q2 2026 results release", "url": "https://chevroncorp.gcs-web.com/news-releases/news-release-details/chevron-reports-second-quarter-2026-results"},
+    {"label": "Investing.com - CVX Q2 2026 slides: production records, Hess synergies", "url": "https://www.investing.com/news/company-news/chevron-q2-2026-slides-production-records-hess-synergies-ahead-93CH-4829036"},
+    {"label": "Motley Fool - Chevron Q2 2026 earnings call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/03/chevron-cvx-q2-2026-earnings-call-transcript/"},
+    {"label": "CNBC - Exxon and Chevron profits surge on Iran-war oil prices (Jul 31, 2026)", "url": "https://www.cnbc.com/2026/07/31/exxon-xom-chevron-cvx-q2-earnings.html"},
+    {"label": "Chevron - 2026 capex budget of $18-19B (Dec 3, 2025)", "url": "https://www.chevron.com/newsroom/2025/q4/chevron-announces-2026-capex-budget-of-18-to-19-billion"},
+    {"label": "EIA Short-Term Energy Outlook - 2026 oil market and Hormuz disruption", "url": "https://www.eia.gov/outlooks/steo/"},
+    {"label": "Investing.com analysis - Chevron's record earnings and the falling price deck", "url": "https://ca.investing.com/analysis/chevrons-record-earnings-expose-the-risk-of-a-falling-oil-price-deck-200626827"},
+    {"label": "Brazil Energy Insight - Guyana nears 1 MMBD as Uaru start-up approaches (Jul 21, 2026)", "url": "https://brazilenergyinsight.com/2026/07/21/guyana-closes-in-on-one-million-barrels-per-day-as-uaru-start-up-approaches/"}
+  ]
+}

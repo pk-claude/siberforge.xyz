@@ -1,0 +1,56 @@
+{
+  "asOf": "2026-08-13",
+  "etf": true,
+  "oneLiner": "A leveraged bet on the AI memory supercycle wrapped in a governance-reform story -- Samsung and SK Hynix are nearly half the fund, and 2026 has been their year.",
+  "thesis": [
+    "The purest large-fund exposure to the memory supercycle. As of July 7, 2026, SK Hynix (24.7%) and Samsung Electronics (22.7%) were a combined ~47% of EWY, and DRAM prices are expected to surge 150-200% in 2026 -- a historic pricing regime driven by AI's HBM and server-memory demand.",
+    "Earnings are exploding, not just multiples. SK Hynix posted a record 37.6T won quarterly profit with a 76% operating margin and HBM/DRAM/NAND capacity essentially sold out through 2026 (Q2 2026 reports); Samsung guided Q2 2026 operating profit roughly 19x higher year over year (~89T won as reported).",
+    "The Korea discount is finally being attacked with law, not slogans. The third Commercial Code amendment, promulgated March 6, 2026, mandates treasury share cancellation, expands directors' fiduciary duties to shareholders, and imposes cumulative voting at large listed companies -- structural follow-through on the 2024 Value-up program.",
+    "Momentum with institutional validation: the KOSPI broke 5,500 for the first time in February 2026, the Value-up Index is up over 130% since its September 2024 launch, and foreign participation has roughly doubled.",
+    "Even after a ~65% YTD run, the anchor holding screens cheap: SK Hynix traded under 4x next-year earnings in early August 2026, leaving room if the cycle holds."
+  ],
+  "profile": {
+    "expenseRatio": "0.59%",
+    "aum": "$25B (July 2026; sources ranged $24.5-25.2B)",
+    "topHoldingsNote": "SK Hynix (24.7%) and Samsung Electronics (22.7%) were about 47% of assets as of July 7, 2026 -- effectively a memory duopoly trade with a diversified Korea tail."
+  },
+  "holdingsContext": [
+    "SK Hynix (24.7%, Jul 7, 2026): the world's dominant HBM supplier with a 58% HBM share in Q1 2026; record 37.6T won quarterly profit, 76% operating margin, and capacity sold out through 2026. Its ADR-free, KRX-only listing makes EWY a primary US access vehicle.",
+    "Samsung Electronics (22.7%): memory ASPs jumped about 146% in Q1 2026 versus the 2025 average; Q2 2026 operating profit guided ~19x higher YoY. Optionality from HBM4 qualification with Nvidia, foundry, and devices -- plus it is the biggest single Value-up/treasury-cancellation story in Korea.",
+    "The memory trade IS the fund: with ~47% in two names, EWY behaves like a leveraged DRAM/HBM position; TrendForce (May 18, 2026) flagged Samsung ASPs +146% and SK Hynix DRAM +mid-60% in Q1 2026 alone.",
+    "The tail -- financials (KB, Shinhan), Hyundai, Celltrion, Naver and other chaebol names (current individual weights unverified) -- is the main beneficiary of Commercial Code governance reform and dividend-payout pressure.",
+    "Currency is part of the position: EWY is unhedged, and the won sat near 1,415/USD in early August 2026, still down about 6% in 2026 despite the equity rally -- FX has been a drag on dollar returns, and any won recovery is incremental upside."
+  ],
+  "risks": [
+    "Two-stock concentration: ~47% in Samsung plus SK Hynix (Jul 7, 2026) means a memory-cycle turn overwhelms everything else in the fund.",
+    "Peak-cycle risk: after 150-200% DRAM price surges, a 2027 supply response is the classic follow-on; trough multiples on peak earnings (Hynix under 4x forward) have historically marked memory tops, and EWY has drawn down 40%+ in prior downcycles.",
+    "Unhedged won: down about 6% in 2026 with MSCI citing lack of offshore deliverability; renewed dollar strength or BOK policy surprises directly erode US-dollar returns.",
+    "Reform disappointment: MSCI declined even to watchlist Korea for developed-market status in its June 23, 2026 review; if Commercial Code enforcement stalls or politics shift, the Korea discount reasserts itself.",
+    "Geopolitics and trade: North Korea escalation risk plus US export-control and tariff policy touching Korean chipmakers' China operations and sales.",
+    "Crowding: a +65% YTD country fund hitting 52-week highs is a consensus momentum trade; foreign flows that doubled on the way up can reverse fast."
+  ],
+  "catalysts": [
+    "Aug 26, 2026: Nvidia Q2 FY2027 earnings -- direct read-through to HBM order books at SK Hynix and Samsung.",
+    "Late Oct 2026: Samsung and SK Hynix Q3 2026 results with 2027 capex and contract-pricing commentary -- the key test of supercycle duration.",
+    "H2 2026: phased implementation of the March 6, 2026 Commercial Code amendments (mandatory treasury share cancellation, cumulative voting at firms above KRW 2T assets) plus continued Value-up disclosures.",
+    "H2 2026 BOK meetings: first rate hike since 2023 is in play, with implications for the won and financials.",
+    "June 2027: next MSCI market classification review -- another shot at the developed-market watchlist after the June 2026 snub."
+  ],
+  "pricedIn": "EWY was up roughly 65% YTD as of August 6, 2026, among the best major country funds, after the KOSPI broke 5,500 in February and memory pricing went vertical -- DRAM expected up 150-200% for 2026, Samsung Q1 ASPs up ~146%. The paradox: the largest holding still screens cheap, with SK Hynix under 4x next-year earnings in early August despite a 76% operating margin and capacity sold out through 2026. The debate is whether that multiple is a value gap closing via Value-up reform and the March 2026 Commercial Code amendments, or a classic peak-cycle trap where the trough multiple marks the earnings top. MSCI's June 2026 refusal to watchlist Korea keeps the discount argument alive, and the unhedged won, still down ~6% YTD, has muted dollar returns.",
+  "scenarios": {
+    "bear": "The memory cycle turns. Aggressive 2027 capacity additions and slowing AI server orders roll DRAM pricing over; Hynix and Samsung estimates collapse from record levels and the sub-4x multiple proves to have been the top signal. Foreign flows reverse, the won weakens past 1,450, and reform momentum stalls politically. EWY gives back 35-45%, consistent with prior memory downcycles amplified by today's two-stock concentration.",
+    "base": "Prices plateau at high levels. HBM4 ramps for next-generation accelerators keep Hynix and Samsung profits near records through 2027, while Commercial Code implementation grinds forward with treasury-share cancellations and rising payouts. EWY consolidates its 65% YTD gain with another 10-20% upside over twelve months, the won holds 1,350-1,450, and the fund's tail of banks and chaebols slowly re-rates on governance follow-through.",
+    "bull": "The supercycle extends and the discount closes together. HBM4/HBM4E pricing steps up again, Samsung wins meaningful Nvidia HBM qualification, and sold-out 2027 capacity locks in another record year. Commercial Code enforcement plus a June 2027 MSCI watchlist nod drive re-rating toward developed-market multiples, and a recovering won adds FX return for unhedged holders. EWY compounds another 30-50% as global allocators close structural Korea underweights."
+  },
+  "sources": [
+    {"label": "iShares - EWY fund page", "url": "https://www.ishares.com/us/products/239681/ishares-msci-south-korea-capped-etf"},
+    {"label": "iShares - EWY fact sheet (June 30, 2026)", "url": "https://www.ishares.com/us/literature/fact-sheet/ewy-ishares-msci-south-korea-etf-fund-fact-sheet-en-us.pdf"},
+    {"label": "ETF.com - EWY as proxy for Korea's AI memory boom", "url": "https://www.etf.com/sections/features/ewy-becomes-proxy-koreas-ai-memory-boom"},
+    {"label": "TrendForce - Q1 2026 memory price surge (May 18, 2026)", "url": "https://www.trendforce.com/news/2026/05/18/news-memory-supercycle-drives-1q26-price-surge-samsung-flags-146-asp-jump-sk-hynix-sees-mid-60-dram-gains/"},
+    {"label": "Motley Fool - SK Hynix under 4x forward earnings (Aug 6, 2026)", "url": "https://www.fool.com/investing/2026/08/06/sk-hynix-supplies-more-than-half-the-worlds-hbm-me/"},
+    {"label": "Global Law Experts - Korean Commercial Code third amendment (Mar 6, 2026)", "url": "https://globallawexperts.com/corporate-governance-reform-south-korea/"},
+    {"label": "AMRO - Value-up program and Korea discount (Feb 2026)", "url": "https://amro-asia.org/narrowing-the-korea-discount-stock-market-reform-via-corporate-value-up"},
+    {"label": "Asia Business Daily - MSCI June 2026 review outcome", "url": "https://www.asiae.co.kr/en/article/2026062407374289583"},
+    {"label": "Bloomberg - won at 1,414/USD (Aug 6, 2026)", "url": "https://www.bloomberg.com/news/articles/2026-08-06/krw-usd-korean-won-rises-to-highest-since-october-on-exporters-dollar-sales"}
+  ]
+}

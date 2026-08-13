@@ -51,6 +51,7 @@
       const a = Math.abs(v);
       return (v < 0 ? '-$' : '$') + (a >= 100 ? a.toFixed(0) : a.toFixed(1)) + 'B';
     }
+    if (fmt === 'px') return '$' + v.toFixed(2);
     return String(Math.round(v * 100) / 100);
   }
   function cagr(v0, v1, n) {
@@ -159,7 +160,7 @@
         scales: {
           x: { ticks: { color: C.ink2, font: { size: 9 }, autoSkip: false, maxRotation: 0 }, grid: { display: false } },
           y: { ticks: { color: C.ink2, font: { size: 9 },
-                callback: v => metric.fmt === '%' ? v + '%' : '$' + v + 'B' },
+                callback: v => metric.fmt === '%' ? v + '%' : metric.fmt === 'px' ? '$' + v : '$' + v + 'B' },
                grid: { color: hexa(C.line, 0.6) } },
         },
       },
@@ -409,6 +410,104 @@
     } catch (e) {}
   }
 
+  // ---------------- ETF variant ----------------
+  function renderEtf(root, D, R) {
+    const S = D.snapshot || {};
+    const prices = D.prices || [];
+    const last = prices.length ? prices[prices.length - 1][1] : null;
+    const back = (m) => prices.length > m ? prices[prices.length - 1 - m][1] : null;
+    const cagrN = (m, yrs) => {
+      const b = back(m);
+      return (b && last) ? Math.pow(last / b, 1 / yrs) - 1 : null;
+    };
+    const r1 = (back(12) && last) ? last / back(12) - 1 : null;
+
+    let h = '<section class="sn-sec">'
+      + '<div class="tk-header"><span class="tk">' + esc(D.ticker) + '</span>'
+      + '<span class="nm">' + esc(D.name) + ' &middot; ETF</span>'
+      + '<span class="price" id="q-px">' + fmtPx(S.px) + '</span>'
+      + '<span class="change">52w ' + fmtPx(S.l52) + ' - ' + fmtPx(S.h52) + '</span></div>';
+    if (R.oneLiner) h += '<p class="sn-lede">' + esc(R.oneLiner) + '</p>';
+
+    h += '<div class="kpi-grid">'
+      + '<div class="kpi"><div class="lbl">Net assets</div><div class="val">' + fmtB(S.netAssets) + '</div></div>'
+      + '<div class="kpi"><div class="lbl">Expense ratio</div><div class="val">' + (S.expenseRatio != null ? (S.expenseRatio * 100).toFixed(2) + '%' : '—') + '</div></div>'
+      + '<div class="kpi"><div class="lbl">Yield</div><div class="val">' + fmtPct(S.yield) + '</div></div>'
+      + '<div class="kpi"><div class="lbl">1y return</div><div class="val ' + (r1 >= 0 ? '' : 'warn') + '">' + fmtPct(r1, 0) + '</div></div>'
+      + '<div class="kpi"><div class="lbl">3y CAGR</div><div class="val">' + fmtPct(cagrN(36, 3), 0) + '</div></div>'
+      + '<div class="kpi"><div class="lbl">5y CAGR</div><div class="val">' + fmtPct(cagrN(60, 5), 0) + '</div></div>'
+      + '<div class="kpi"><div class="lbl">Holdings P/E</div><div class="val">' + fmtX(S.pe) + '</div></div>'
+      + '</div>';
+    if (R.profile && R.profile.topHoldingsNote) h += '<p class="sn-note">' + esc(R.profile.topHoldingsNote) + '</p>';
+    h += '</section>';
+
+    // holdings + sectors
+    h += '<section class="sn-sec"><h2>Composition</h2><div class="col-2"><div>'
+      + '<h3>Top holdings</h3><div class="kpi-compare" style="border-top:none;padding-top:0">';
+    const maxH = Math.max(...(S.holdings || []).map(x => x.pct || 0), 0.001);
+    for (const hd of S.holdings || []) {
+      h += '<div class="kpi-compare-row" style="grid-template-columns:64px 1fr 56px">'
+        + '<span class="kpi-compare-tk">' + esc(hd.t || '') + '</span>'
+        + '<span class="kpi-compare-bar" style="height:8px"><span class="kpi-compare-fill" style="width:' + Math.max(2, (hd.pct || 0) / maxH * 100).toFixed(0) + '%"></span></span>'
+        + '<span class="kpi-compare-val">' + ((hd.pct || 0) * 100).toFixed(1) + '%</span></div>';
+    }
+    h += '</div></div><div><h3>Sector weights</h3><div class="kpi-compare" style="border-top:none;padding-top:0">';
+    const secs = (S.sectors || []).filter(x => x.pct > 0.001).sort((a, b) => b.pct - a.pct);
+    const maxS = Math.max(...secs.map(x => x.pct), 0.001);
+    for (const sw of secs) {
+      const nm = sw.name.replace(/_/g, ' ');
+      h += '<div class="kpi-compare-row" style="grid-template-columns:130px 1fr 56px">'
+        + '<span class="kpi-compare-tk">' + esc(nm) + '</span>'
+        + '<span class="kpi-compare-bar" style="height:8px"><span class="kpi-compare-fill" style="width:' + Math.max(2, sw.pct / maxS * 100).toFixed(0) + '%"></span></span>'
+        + '<span class="kpi-compare-val">' + (sw.pct * 100).toFixed(1) + '%</span></div>';
+    }
+    h += '</div></div></div>';
+    if (R.holdingsContext && R.holdingsContext.length) {
+      h += '<h3>What drives the basket</h3><ul class="sn-ul" style="list-style:disc;padding-left:1.2em">'
+        + R.holdingsContext.map(x => '<li style="margin-bottom:8px">' + esc(x) + '</li>').join('') + '</ul>';
+    }
+    h += '</section>';
+
+    // price chart
+    if (prices.length > 12) {
+      h += '<section class="sn-sec"><h2>Price, 6 years</h2>'
+        + '<div class="chart-block"><div class="chart-canvas-wrap" style="height:240px"><canvas id="etf-px"></canvas></div></div></section>';
+    }
+
+    // research
+    h += '<section class="sn-sec"><h2>Research notes</h2>'
+      + '<p class="sn-asof">Written ' + esc(R.asOf || D.asOf) + '. Ask for a refresh after major moves.</p>'
+      + '<div class="col-2">';
+    if (R.thesis) h += '<div class="thesis-box bull"><h4>Why own it</h4><ul>' + R.thesis.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>';
+    if (R.risks) h += '<div class="thesis-box bear"><h4>Risks</h4><ul>' + R.risks.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>';
+    h += '</div>';
+    if (R.catalysts && R.catalysts.length) h += '<div class="thesis-box cat"><h4>Catalysts</h4><ul>' + R.catalysts.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul></div>';
+    if (R.pricedIn) h += '<p><strong>What is priced in:</strong> ' + esc(R.pricedIn) + '</p>';
+    if (R.scenarios) {
+      h += '<h3>Scenario narratives</h3>'
+        + '<div class="thesis-box bear"><h4>Bear</h4><p>' + esc(R.scenarios.bear) + '</p></div>'
+        + '<div class="thesis-box"><h4>Base</h4><p>' + esc(R.scenarios.base) + '</p></div>'
+        + '<div class="thesis-box bull"><h4>Bull</h4><p>' + esc(R.scenarios.bull) + '</p></div>';
+    }
+    if (R.sources && R.sources.length) {
+      h += '<h3>Key sources</h3><ul class="sn-sources">' + R.sources.map(x =>
+        '<li><a href="' + esc(x.url) + '" target="_blank" rel="noopener">' + esc(x.label) + '</a></li>').join('') + '</ul>';
+    }
+    h += '</section>';
+    root.innerHTML = h;
+
+    const pc = $('etf-px');
+    if (pc && window.Chart && prices.length > 12) {
+      trendChart(pc, { type: 'line', fmt: 'px', title: 'Price',
+        vals: prices.map(x => x[1]) }, prices.length - 1, prices.map(x => x[0]));
+    }
+    // live quote
+    fetch('/api/stocks?mode=quote&symbols=' + D.ticker).then(r => r.ok ? r.json() : null).then(qj => {
+      const row = qj && qj.quotes && qj.quotes[0];
+      if (row && row.price) $('q-px').textContent = fmtPx(row.price);
+    }).catch(() => {});
+  }
+
   async function boot() {
     const root = $('sn-root');
     try {
@@ -421,6 +520,7 @@
       return;
     }
     R = R || {};
+    if (D.etf) { renderEtf(root, D, R); return; }
     ANN = shapeAnnual(D);
     const S = D.snapshot || {};
     const px = S.px, mc = S.mc, ev = S.ev || mc;

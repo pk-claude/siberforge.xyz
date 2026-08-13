@@ -1,0 +1,90 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "Post-crash IBM: the worst day in company history (Jul 14, 2026, -25.2%) reset the bar to 4-5% growth, while quantum-advantage claims, a ~$15.7B FCF guide and a dividend paid since 1916 hold the floor.",
+  "thesis": [
+    "The worst day in IBM's history reset the bar. The July 14, 2026 preannouncement cut the stock 25.2% to $217.05 -- roughly $67B of market cap, a bigger one-day fall than October 1987 -- after clients shifted late-June capex toward supply-constrained servers, storage and memory and large deals slipped. The July 22 print (revenue +1%, operating EPS $2.93) confirmed the damage but not a broken model.",
+    "Software growth is now bought, not grown. Q2 2026 software rose 5% but organic revenue was flat; HashiCorp (closed Feb 2025) and Confluent (closed Mar 17, 2026 for $11.6B) supplied the growth, and $10.5B of 2026 acquisition spend took cash down $6.3B YTD to $8.2B against $62.0B of debt.",
+    "The z17 cycle is peaking and the compare crushed the quarter. IBM Z fell 42% in Q2 2026 lapping the June 2025 z17 launch, yet management says the cycle tracks near 130% program-to-program -- the best in reported history -- and Distributed Infrastructure (+37%) exited with a record ~$500M backlog.",
+    "Quantum is IBM's real 2026 narrative. On July 30, 2026 IBM announced quantum-advantage demonstrations with the University of Chicago and Qedma; the Anderon pure-play quantum foundry LOI with the Commerce Department (May 2026, $1B CHIPS incentives plus $1B IBM cash) and a >$10B five-year quantum budget back the 2029 Starling fault-tolerant target.",
+    "Free cash flow and the dividend are the ballast. FY26 FCF is still guided up about $1B to roughly $15.7B (on 2025's $14.7B) despite the revenue cut, and the $1.69 quarterly dividend -- raised April 2026, the 31st consecutive annual increase, paid every year since 1916 -- yields about 2.9% at $236."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 22, 2026)",
+    "points": [
+      "Revenue $17.16B, +1% y/y, below ~$17.6B consensus; operating EPS $2.93 (+5%) vs $2.97 expected; GAAP EPS $2.27 (-2%)",
+      "Software $7.76B +5% (organic flat): Red Hat +11%, Data +19%, Automation +4%, Transaction Processing -8%; software ARR $24.6B, +8%",
+      "Consulting $5.33B flat (+1% cc); signings +6%, second straight quarter of growth; gen AI ~50% of signings and >30% of backlog",
+      "Infrastructure $3.84B -7%: IBM Z -42% lapping the z17 launch; Distributed Infrastructure +37% with record ~$500M backlog; Power/Storage grew at a record pace",
+      "Q2 free cash flow $2.5B, down $0.3B y/y; 1H FCF $4.8B, flat; operating pre-tax margin 19.2%, +30bps despite the revenue shortfall",
+      "Dividend $1.69/share declared (record Aug 10, payable Sep 10, 2026); $1.6B paid in dividends in Q2, $3.2B in 1H"
+    ]
+  },
+  "latestProse": "IBM pre-announced the miss on July 14 and the stock fell 25.2% -- its worst day on record, eclipsing October 1987 -- so the July 22 print confirmed rather than surprised: revenue of $17.16B grew just 1%, operating EPS of $2.93 rose 5%, and free cash flow of $2.5B fell $0.3B. Management blamed a late-June shift of client capex toward supply-constrained servers, storage and memory that stalled large software and mainframe deals. IBM Z fell 42% lapping the z17 launch while Distributed Infrastructure rose 37% with a record $500M backlog; Consulting was flat again even as gen AI reached half of signings. The disclosure that matters most: Software's 5% growth was entirely acquired -- organic software revenue was flat -- and management now calls the low end of its cut guidance the base case.",
+  "guidanceProse": "Full-year 2026 constant-currency revenue growth was cut on July 22 to 4-5% from 'more than 5%' set in January, and CFO Kavanaugh explicitly called the low end the base case. Software was rebased to 6-8% growth, Consulting to low-to-mid single digits, while Infrastructure commentary leaned constructive on record Distributed Infrastructure backlog and secured supply. Free cash flow guidance was maintained: up about $1B year over year, implying roughly $15.7B on 2025's $14.7B, driven by adjusted EBITDA and accelerated productivity against cash-tax, capex and interest headwinds. Management now expects improved pre-tax margin expansion for the year; currency is expected to be neutral. The credibility question is whether the slipped deals close in H2.",
+  "guide": {
+    "label": "FY26 guide (cut Jul 22, 2026)",
+    "val": "+4-5% cc revenue; FCF +~$1B (~$15.7B)",
+    "sub": "was 5%+; low end of the range is management's stated base case",
+    "tone": "accent"
+  },
+  "segments": [
+    "Software: $7.8B in Q2 2026, 45% of revenue -- Red Hat/hybrid cloud, automation, data (incl. Confluent), transaction processing; ~80% recurring, ARR $24.6B",
+    "Consulting: $5.3B, 31% of revenue -- strategy and technology plus intelligent operations; gen AI now >30% of backlog",
+    "Infrastructure: $3.8B, 22% of revenue -- IBM Z mainframe (z17 cycle), Power and Storage distributed infrastructure",
+    "Financing: $0.2B, ~1% of revenue -- captive financing with an 80% investment-grade receivables book"
+  ],
+  "competitive": [
+    "MSFT and ORCL sit on the winning side of the budget rotation IBM described: enterprise AI spend is flowing to hyperscaler infrastructure and model platforms, squeezing middleware and transactional software budgets.",
+    "ACN read-across: discretionary consulting remains soft industry-wide; IBM Consulting was flat in Q2 2026, but gen AI at ~50% of signings and 6% signings growth compares respectably with peers.",
+    "HPE and Dell were near-term beneficiaries of the late-June server/storage/memory scramble that hurt IBM software -- though IBM's own Distributed Infrastructure (+37%, record ~$500M backlog) captured part of it.",
+    "Red Hat vs Broadcom/VMware: virtualization displacement has driven about $680M of OpenShift-related contracts since early 2024; OpenShift ARR is $2.2B, and Red Hat growth accelerated to 11% in Q2 2026.",
+    "In quantum, IDC ranked IBM first of eleven vendors in 2026 on ecosystem readiness and on-time roadmap delivery, ahead of the Google/Quantinuum/IonQ field."
+  ],
+  "moat": "Incumbency is the moat: IBM Z carries over 70% of the world's transaction value across roughly 140 million installed MIPS, and management sees no evidence of clients migrating off the platform. About 80% of software revenue is recurring, anchored by Red Hat's open-source position and deep enterprise switching costs. The record -- consecutive quarterly dividends since 1916 and 31 straight annual increases -- reflects durable cash generation, though the moat monetizes slow growth rather than fast.",
+  "risks": [
+    "Execution: management admitted it 'fell short' in Q2 2026 -- large deals slipped in late June and the go-to-market overhaul (thousands of added accounts, Forward Deployed Engineers) is untested.",
+    "Structural AI crowd-out: if enterprise budgets keep rotating to AI infrastructure, IBM's software and mainframe-linked transactional revenue face a multi-year headwind, not a one-quarter blip.",
+    "Organic growth is flat in software: the acquisition treadmill ($11.6B Confluent, HashiCorp before it) has pushed goodwill to $74.6B and cash down $6.3B YTD; integration or impairment stumbles would expose it.",
+    "Consulting stagnation: revenue flat for a second year running, and gen AI deflates services pricing even as it fills the backlog.",
+    "Quantum outlay: >$10B committed over five years against a 2029 Starling fault-tolerance milestone; any slip deflates the narrative premium while the spend still lands in FCF.",
+    "Balance sheet and cadence: $62B debt, higher interest expense, and a heavily H2-weighted FCF target (1H was only $4.8B of a ~$15.7B year)."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings (late Oct 2026): do the slipped deals close, and does software organic growth reappear against the 6-8% full-year path?",
+    "Quantum follow-through after the Jul 30, 2026 advantage demonstrations with UChicago and Qedma: commercial quantum bookings and Nighthawk/Kookaburra milestones through late 2026.",
+    "Lightwell ramp: $1M/year open-source security subscriptions launched July 2026 with 7,500+ patched package versions in the first two weeks; first adoption metrics due with Q3 results.",
+    "Anderon quantum foundry: converting the May 2026 letter of intent with the Commerce Department ($1B CHIPS incentives, $1B IBM cash) into a definitive agreement.",
+    "Dividend declaration and capital-allocation update (Oct 2026) after the $10.5B YTD acquisition outlay."
+  ],
+  "pricedIn": "At about $236 (Aug 12, 2026 close), IBM has retraced part of the crash: shares hit an all-time high of $326.88 on June 2, 2026, collapsed 25.2% to $217.05 on the July 14 warning -- roughly $67B of market cap, the worst day on record -- and bottomed near $199. The ~$225B market cap is roughly 14x the ~$15.7B FY26 free-cash-flow guide with a 2.9% dividend yield; the average analyst target is about $244. Priced in: a mainframe trough, flat organic software, and the low end of guidance. Not priced in: a successful go-to-market reset, Lightwell monetization, or quantum -- where the July 30 advantage claims and the Anderon foundry are still valued as a science project rather than a revenue line.",
+  "scenarios": {
+    "bear": "The late-June capex shift proves structural: AI infrastructure crowds out software budgets for years, the slipped deals never close, and organic software growth stays near zero while IBM keeps buying growth at premium multiples. Consulting stagnates as gen AI deflates services pricing faster than it adds signings. The z17 tailwind fades with no successor cycle until 2028 (unverified), FCF stalls near $15B as quantum absorbs $10B+ toward a 2029 payoff that slips, and the stock re-rates toward 11-12x FCF, roughly $175-195.",
+    "base": "Revenue grows about 4% cc in 2026 -- the low end management itself calls the base case -- with software at 6-7%, consulting in low single digits, and FCF near the $15.7B guide. The go-to-market expansion beyond the Fortune 1000 slowly lifts organic growth into 2027; Confluent and HashiCorp integrate on plan; the dividend keeps inching up. Shares oscillate around $220-260, roughly 14-16x FCF, while investors wait for proof that Q2 was an execution stumble, not secular erosion.",
+    "bull": "Slipped deals close in H2 2026, Q3 shows organic software growth back at mid single digits, and 2027 returns to 5%+ cc growth with FCF approaching $17B. Lightwell scales into a $1M-a-year security annuity on an accelerating vulnerability-discovery cycle, Distributed Infrastructure compounds off its record backlog, and quantum flips from cost to catalyst as post-advantage bookings and the Anderon foundry crystallize a credible revenue line by 2028. The multiple recovers to 18-20x FCF and the stock revisits $300+."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "r": 0.09,
+    "gT": 0.025,
+    "years": 10,
+    "bear": {"g": 0.005},
+    "base": {"g": 0.035},
+    "bull": {"g": 0.06},
+    "note": "IBM is a steady FCF generator (~$15.7B guided for 2026 off $14.7B in 2025); calibrate modest growth presets"
+  },
+  "bullCharts": {"0": ["fcfA", "gmA", "peerGm"]},
+  "bearCharts": {"0": ["revYoyA", "revQ", "peerRg"]},
+  "sources": [
+    {"label": "IBM Q2 2026 press release (Jul 22, 2026)", "url": "https://newsroom.ibm.com/2026-07-22-IBM-RELEASES-SECOND-QUARTER-RESULTS"},
+    {"label": "IBM 2Q26 earnings prepared remarks (PDF)", "url": "https://www-api.ibm.com/adobe/assets/urn:aaid:aem:023c55fc-8c53-428f-a5cf-42cb35bb78db/original/as/ibm-2q-26-earnings-prepared-remarks.pdf"},
+    {"label": "CNBC: IBM warns Q2 fell short, stock craters 25% (Jul 14, 2026)", "url": "https://www.cnbc.com/2026/07/14/ibm-warns-second-quarter-earnings-fell-short-of-expectations.html"},
+    {"label": "CNBC: IBM Q2 2026 earnings report (Jul 22, 2026)", "url": "https://www.cnbc.com/2026/07/22/ibm-q2-earnings-report-2026.html"},
+    {"label": "Reuters/Yahoo: IBM warns AI boom squeezing software budgets", "url": "https://finance.yahoo.com/markets/stocks/articles/ibm-expects-second-quarter-revenue-111029599.html"},
+    {"label": "IBM Q4 2025 results: FY25 FCF $14.7B, original 2026 guide (Jan 28, 2026)", "url": "https://newsroom.ibm.com/2026-01-28-IBM-RELEASES-FOURTH-QUARTER-RESULTS"},
+    {"label": "IBM completes Confluent acquisition (Mar 17, 2026)", "url": "https://newsroom.ibm.com/2026-03-17-ibm-completes-acquisition-of-confluent,-making-real-time-data-the-engine-of-enterprise-ai-and-agents"},
+    {"label": "IBM and University of Chicago demonstrate quantum advantage (Jul 30, 2026)", "url": "https://newsroom.ibm.com/2026-07-30-ibm-and-the-university-of-chicago-demonstrate-quantum-advantage,-establishing-trusted-quantum-computation-on-logical-circuits"},
+    {"label": "Tom's Hardware: IBM Nighthawk 120-qubit processor, 2029 fault-tolerance track (Nov 2025)", "url": "https://www.tomshardware.com/tech-industry/semiconductors/ibm-unveils-new-120-qubit-processor-and-software-stack"},
+    {"label": "StockAnalysis: IBM price $235.98 (Aug 12, 2026 close)", "url": "https://stockanalysis.com/stocks/ibm/"},
+    {"label": "IBM Q1 2026 results and dividend raise to $1.69 (Apr 22, 2026)", "url": "https://newsroom.ibm.com/2026-04-22-IBM-RELEASES-FIRST-QUARTER-RESULTS"}
+  ]
+}

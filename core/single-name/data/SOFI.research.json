@@ -1,0 +1,85 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "A 15.8M-member digital bank compounding revenue at 40%-plus with a capital-light loan platform bolted on, now fighting a short-seller narrative while trading near 30x this year's earnings guide.",
+  "thesis": [
+    "The flywheel is spinning faster, not slower. Q2 2026 (reported Jul 29, 2026) delivered a record 1.1M net new members, taking the base to 15.8M (up 35% YoY) and products held to 24.4M, with net revenue of $1.22B up 43% YoY.",
+    "The loan platform business converts credit demand into fee income without balance-sheet risk. In Q2 2026 it generated $143.3M of adjusted net revenue on $3.1B of personal loans originated for third parties, and was expanded during the quarter to SMB loans plus a new loan-purchase partner.",
+    "Bank charter economics keep improving. Deposits reached $45.5B in Q2 2026, funding a record $14.8B origination quarter at lower cost than warehouse lines, while the personal-loan net charge-off rate fell to 2.62% (3.7% excluding delinquent loan sales, down 70bp QoQ).",
+    "Crypto and the tech platform are near-free options at the current price. SoFi Crypto and the SoFiUSD stablecoin launched in Q2 2026, and Galileo/Technisys were rebranded as SoFi Technology Solutions spanning four platform businesses for enterprise clients.",
+    "The Muddy Waters overhang is a sentiment problem, not (so far) an evidence problem. The Mar 17, 2026 short report alleged roughly 90% adjusted-EBITDA inflation and $312M of unrecorded debt; SoFi rebutted the same day, and two subsequent record quarters have not corroborated the claims."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 29, 2026)",
+    "points": [
+      "Net revenue $1.22B, up 43% YoY from $854.9M; net income $156.6M; diluted EPS $0.12",
+      "Members 15.8M, up 35% YoY with a record 1.1M added in the quarter; products held 24.4M",
+      "Record loan originations of $14.8B across personal, student, and home loans; deposits grew to $45.5B",
+      "Loan platform business: $143.3M of adjusted net revenue on $3.1B of personal loans originated for third parties",
+      "Interchange revenue $44M, up 67% YoY, on over $28B of annualized spend across Money and credit card",
+      "Personal-loan net charge-offs 2.62% (3.7% ex delinquent-loan sales, down 70bp QoQ); 90-day delinquency 0.40%, down 7bp QoQ"
+    ]
+  },
+  "latestProse": "SoFi's Q2 2026, reported Jul 29, 2026, was a record on nearly every line: $1.22B of net revenue (up 43% YoY), $156.6M of net income, 1.1M net new members, and $14.8B of originations. Growth quality improved too: fee-based streams (loan platform, interchange up 67%, brokerage) are outgrowing the lending book, and credit moved the right way, with personal-loan charge-offs down to 2.62% and 90-day delinquencies at 0.40%, against recent-vintage cumulative losses of 4.68% versus a 7-8% tolerance. Yet the stock sold off double digits on the print as heavy reinvestment spending and lingering post-Muddy-Waters skepticism overwhelmed the beat. The disclosure that matters most: $3.1B of personal loans originated for third parties produced $143.3M of essentially capital-free revenue, the clearest evidence SoFi can grow lending revenue without growing balance-sheet risk.",
+  "guidanceProse": "Management raised full-year 2026 guidance alongside Q2: adjusted net revenue of $4.75B to $4.85B, or 32%-35% growth, up from a prior 30% growth outlook, while holding adjusted EBITDA at approximately $1.6B and adjusted EPS at roughly $0.60. The read: revenue upside is being deliberately reinvested in crypto, SMB lending, and the rebranded technology platform rather than dropped to the bottom line, which is why the EPS guide did not move. Watch whether the loan platform business, now annualizing well above $500M of revenue, gets a standalone outlook at Q3, and whether the 7-8% maximum cumulative-loss tolerance on personal loans survives a softening labor market.",
+  "guide": {
+    "label": "FY26 adj net revenue",
+    "val": "$4.75-4.85B",
+    "sub": "raised from 30% growth to 32-35%; EBITDA ~$1.6B and EPS ~$0.60 held flat as upside is reinvested",
+    "tone": "accent"
+  },
+  "segments": [
+    "Lending: personal, student, and home loans, now supplemented by the fee-based loan platform business ($3.1B of third-party volume in Q2 2026) that monetizes demand SoFi does not want on its balance sheet",
+    "Financial Services: SoFi Money, Invest, credit card, and the newly launched SoFi Crypto and SoFiUSD stablecoin; interchange revenue up 67% YoY in Q2 2026 on $28B-plus annualized spend",
+    "Technology Platform: Galileo and Technisys, rebranded in 2026 as SoFi Technology Solutions, selling banking infrastructure across four platform businesses to enterprise clients"
+  ],
+  "competitive": [
+    "HOOD: overlapping brokerage and crypto ambitions with a stronger trading franchise, but no bank charter or lending engine; SOFI monetizes deposits while HOOD monetizes activity",
+    "LC: the closest loan platform comparable; LendingClub also holds a bank charter but has a fraction of SoFi's member growth and brand reach",
+    "NU: the global benchmark for digital-bank economics at scale; Nu's efficiency and ROE run ahead, but SoFi commands the US-native premium",
+    "ALLY: the value-bank comp bears use; Ally trades at a high-single-digit forward P/E versus SOFI near 30x, framing how much growth SOFI must deliver to justify the gap",
+    "Big-bank digital offerings (Chase and peers) remain the long-run threat to SoFi's customer acquisition cost advantage"
+  ],
+  "moat": "SoFi's moat is a bank charter plus a product breadth no fintech peer matches, which lowers funding costs and raises switching costs as members add products (24.4M products across 15.8M members). It is not a pricing moat: personal lending is commoditized and the tech platform competes with well-funded issuer-processors. The durable advantage is cross-buy-driven customer acquisition cost, which is real but younger than a full credit cycle.",
+  "risks": [
+    "Credit cycle: personal-loan losses are pristine today (2.62% NCO in Q2 2026), but the book has grown fastest into a late-cycle consumer, and the 7-8% cumulative-loss tolerance leaves less headroom than headline rates suggest",
+    "Muddy Waters follow-through (report dated Mar 17, 2026): even if the claims of roughly 90% EBITDA inflation and $312M of unrecorded debt are wrong, prolonged regulatory or legal noise caps the multiple",
+    "Rate cuts compress net interest margin on the $45.5B deposit base faster than loan yields reprice",
+    "Loan platform concentration: third-party demand for personal loans can evaporate in a credit or funding-market shock, as 2022-23 demonstrated across the sector",
+    "Valuation: roughly 30x forward earnings versus a 10.5x credit-services industry median (GuruFocus, Aug 3, 2026) means execution must stay flawless",
+    "Crypto re-entry adds regulatory surface area (stablecoin rules, state licensing) for modest near-term revenue"
+  ],
+  "catalysts": [
+    "Q3 2026 earnings (expected late Oct 2026, date unverified): first full quarter of SoFi Crypto, SoFiUSD, and SMB loan platform contribution",
+    "FOMC decisions (next meeting Sept 2026): rate cuts pressure NIM but boost origination volumes and loan-sale execution",
+    "Any regulatory or legal resolution of the Muddy Waters allegations (report Mar 17, 2026; SoFi rebuttal same day)",
+    "Q2 2026 10-Q detail (filed Aug 2026) on loan platform partner commitments and delinquent-loan-sale accounting, the exact area the short report attacked"
+  ],
+  "pricedIn": "At roughly $18.40 (Aug 2026, market cap $23.7B), SOFI trades near 30x the $0.60 FY26 EPS guide and roughly 25x consensus forward estimates: a large premium to any bank (ALLY at high single digits) but inexpensive against 35% member growth if that growth persists. The market is paying for continued 30%-plus revenue growth and steady margin expansion, but it is not paying much for the loan platform business as a standalone fee franchise, nor for crypto or the tech platform. It is also embedding a clear Muddy Waters discount: the stock was down roughly a third year-to-date at the time of the March report despite record results. Consensus sits at Hold with a $19.87 average target, essentially at the money.",
+  "scenarios": {
+    "bear": "The consumer cracks in 2027 and personal-loan losses migrate toward the 7-8% tolerance ceiling; third-party loan buyers pull back, shrinking the fee stream just as rate cuts compress NIM. The Muddy Waters allegations draw a formal SEC inquiry, injecting restatement risk into the multiple. Revenue growth decelerates to the teens, the FY26 EPS guide proves a two-year peak, and the stock de-rates toward bank multiples: 12-15x depressed earnings implies high single digits to about $10.",
+    "base": "SoFi hits the raised FY26 guide (roughly $4.8B revenue, $0.60 EPS) and compounds EPS 15-20% annually as fee revenue mixes higher and the charter keeps funding costs down. Credit normalizes but stays inside tolerance; short-seller noise fades without regulatory action. The multiple settles in the mid-20s on forward earnings as growth moderates, producing a low-to-mid-$20s stock over 12-18 months: respectable, but demanding patience given the premium already paid.",
+    "bull": "Cross-buy accelerates and the loan platform scales toward $700M-1B of annual capital-light revenue; SoFiUSD and crypto meaningfully lift Financial Services monetization by 2027. EPS beats the $0.60 guide in 2026 and approaches $1.00 by 2028 on compounding operating leverage. The Muddy Waters thesis is definitively discredited, short interest unwinds, and the market pays a fintech multiple (35x-plus) on rising estimates: a $30-35 stock, with the tech platform an unpriced call option."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.11,
+    "gT": 0.035,
+    "years": 10,
+    "bear": {"g": 0.08},
+    "base": {"g": 0.17},
+    "bull": {"g": 0.25},
+    "note": "forward-earnings basis because FCF is not a meaningful metric for a bank balance sheet"
+  },
+  "bullCharts": {"0": ["revQ", "niQ"]},
+  "bearCharts": {"0": ["priceH", "peerFpe"]},
+  "sources": [
+    {"label": "SoFi Q2 2026 earnings release (Businesswire, Jul 29, 2026)", "url": "https://www.businesswire.com/news/home/20260729569583/en/SoFi-Reports-Second-Quarter-2026-with-Record-Net-Revenue-of-%241.2-Billion-Record-Member-and-Product-Growth-Net-Income-of-%24157-Million"},
+    {"label": "SoFi Q2 2026 earnings call transcript (company PDF)", "url": "https://s27.q4cdn.com/749715820/files/doc_financials/2026/q2/SoFi-2Q-2026-Earnings-Transcript_FINAL.pdf"},
+    {"label": "SoFi Q2 2026 8-K earnings release (SEC)", "url": "https://www.sec.gov/Archives/edgar/data/0001818874/000181887426000050/a2026q2earningsrelease.htm"},
+    {"label": "Muddy Waters short report on SOFI (Mar 17, 2026)", "url": "https://muddywatersresearch.com/research/2026/mw-short-0317/"},
+    {"label": "SoFi response to short seller report", "url": "https://investors.sofi.com/news/news-details/2026/SoFi-Responds-to-Inaccurate-Short-Seller-Report/default.aspx"},
+    {"label": "SOFI statistics and valuation (stockanalysis.com)", "url": "https://stockanalysis.com/stocks/sofi/statistics/"},
+    {"label": "SOFI Q2 2026 earnings call highlights (Yahoo Finance)", "url": "https://finance.yahoo.com/markets/stocks/articles/sofi-technologies-inc-sofi-q2-190126097.html"}
+  ]
+}

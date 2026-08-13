@@ -1,0 +1,115 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "A ~$3.9B option on solid-state batteries going commercial: four top-10 OEMs and standout safety data, against zero GAAP revenue, a $64M-per-quarter EBITDA burn, and a PowerCo program just capped at $75.4M.",
+  "thesis": [
+    "Four of the top-10 global automakers are now engaged. Honda signed a multi-year partnership June 18, 2026 after one of the most rigorous evaluations of QS technology to date, joining VW's PowerCo and two other OEMs under joint development agreements; cells also shipped to an additional automotive OEM in Q2 2026.",
+    "The Eagle Line is finally ramping. Core tools ran above 90% uptime in Q2 2026 with productivity metrics on target; management aims to double cell output in H2 2026, with customer sample shipments accelerating across all three business verticals.",
+    "The licensing model is genuinely capital-light. FY2026 capex guidance was cut to $27-37M (July 2026) while $859M of liquidity against a $250-275M adjusted EBITDA loss guide gives roughly three years of runway before new equity is needed.",
+    "New verticals widen the funnel beyond autos. QSDC targets AI data center 800V rack power via ODM engagements, and QSAS shipped QSE-5 cells to a major American defense prime (Q2 2026); the anode-free design sidesteps China-sourced graphite entirely.",
+    "Safety is the wedge. Larger-scale Q2 2026 abuse testing -- nail penetration, external short circuit, thermal stability to 300C -- replicated earlier prototype results; the ceramic separator is nonflammable, a claim silicon-anode and liquid-electrolyte rivals cannot make."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 22, 2026)",
+    "points": [
+      "GAAP net loss $98.2M ($0.16/share); operating expenses $106.1M; adjusted EBITDA loss $64.2M, in line with guidance.",
+      "Customer billings $10.8M in Q2; $21.8M through H1 2026, already ahead of FY2025's $19.5M. GAAP revenue remains essentially zero -- billings are a non-GAAP invoicing metric.",
+      "Liquidity $859.0M ($132.9M cash + $726.1M marketable securities), down from ~$970.8M at Dec 31, 2025.",
+      "Operating cash use $56.7M in Q2 ($116.3M in H1); capex just $4.6M; FY26 capex guide lowered to $27-37M.",
+      "Weighted shares 617.1M, +9.9% YoY (Q2 2025: 561.7M).",
+      "$10.4M cash received from PowerCo under the amended collaboration agreement (July 16, 2026; program now capped at $75.4M aggregate)."
+    ]
+  },
+  "latestProse": "Q2 2026 (reported July 22): GAAP net loss $98.2M on $106.1M of opex; adjusted EBITDA loss $64.2M, in line. Customer billings of $10.8M brought H1 to $21.8M, already above all of FY2025 ($19.5M), though GAAP revenue remains essentially nil. Liquidity ended at $859.0M with Q2 operating cash use of $56.7M and capex of only $4.6M. The Honda partnership (June 18) added a fourth top-10 OEM, the Eagle Line hit >90% core-tool uptime with output set to double in H2, and QSAS shipped QSE-5 cells to a US defense prime. The disclosure that matters most: the July 16 PowerCo amendment, which swapped open-ended cost reimbursement for delivery-and-validation milestones over the next two years and capped total program payments at $75.4M including amounts already paid.",
+  "guidanceProse": "FY2026 guidance: adjusted EBITDA loss of $250-275M reiterated; capex cut to $27-37M on capital discipline. There is no revenue guidance -- QS is pre-revenue at scale, and even customer billings carry a company disclaimer about quarter-to-quarter lumpiness. The central debate is what the amended PowerCo deal means: bulls note milestone payments tied to cell delivery and validation over the next two years keep VW on a defined path toward the IP License Agreement and its royalty prepayment; bears note $75.4M all-in is a rounding error against a $250M+ annual burn and looks like scope reduction. Second debate: whether QSDC/QSAS diversification is a real market or a narrative bridge while automotive validation grinds.",
+  "guide": {
+    "label": "FY26 guide",
+    "val": "Adj EBITDA loss $250-275M",
+    "sub": "capex cut to $27-37M | $859M liquidity",
+    "tone": "accent"
+  },
+  "segments": [
+    "QSEV (electric vehicles): PowerCo/VW licensing (prospective 40 GWh, expandable to 80 GWh annually), Honda partnership, and two other top-10 OEM joint development programs.",
+    "QSDC (AI data centers): battery solutions for 800V DC rack architectures via ODM design engagements; vertical stood up in Q2 2026 under ex-MediaTek executive Shahar Noy.",
+    "QSAS (aerospace/defense): QSE-5 cells shipped to a major US defense prime in Q2 2026; pitch is energy density, safety, and a China-free anode supply chain."
+  ],
+  "competitive": [
+    "In-house OEM and Asian incumbent programs are the real competition: Toyota, Samsung SDI, and CATL are all driving sulfide-based solid-state toward late-decade production; if they industrialize first, licensing QS technology loses urgency.",
+    "Enovix (ENVX): silicon-anode cells already shipping commercially into smartphones from Fab2 in Malaysia -- nearer-term revenue with a similar energy-density pitch, but a flammable liquid electrolyte; QS's safety data is the counter.",
+    "Solid Power (SLDP): the closest business-model comp -- sulfide electrolyte plus licensing deals with SK On and BMW A-sample lines -- trading at a small fraction of QS's market cap, framing the premium QS must justify.",
+    "Tesla (TSLA) and CATL keep bending the conventional cost curve (4680, LFP, fast-charge chemistries). QSE-5's energy-density and safety edge must beat a $/kWh target that falls every year it stays pre-commercial."
+  ],
+  "moat": "The ceramic separator plus anode-free lithium-metal architecture is protected by a deep patent estate and now backed by unusually strong third-party validation: four top-10 OEMs and replicated abuse-test safety data. What is unproven is everything industrial: Cobra separator yield at gigawatt-hour scale, cost per kWh versus falling lithium-ion prices, and whether B-sample cells survive automotive qualification into a production commitment. No customer has committed to mass production, and the PowerCo IP license -- the moat's monetization -- remains unsigned.",
+  "risks": [
+    "The PowerCo amendment caps the program at $75.4M all-in. The July 16, 2026 restructuring replaced cost reimbursement with two years of delivery-and-validation milestones -- external funding covers well under half a year of burn, and the IP License Agreement remains unsigned.",
+    "There is no GAAP revenue. Customer billings ($10.8M in Q2 2026) are an invoicing metric the company itself warns is lumpy and not a substitute for revenue; commercial product revenue at scale is still years out.",
+    "Runway forces a raise before the payoff. $859M of liquidity against a $250-275M FY26 adjusted EBITDA loss guide is roughly three years; weighted shares already rose ~10% YoY, and QS has issued equity repeatedly since 2023.",
+    "Validation timelines have slipped before. QS went public in 2020 targeting mid-decade production; amended PowerCo milestones now run roughly through mid-2028 just for cell delivery and validation, with high-volume manufacturing later still.",
+    "Rival chemistries can close the gap. Toyota, Samsung SDI, and CATL sulfide solid-state programs target late-decade production while LFP and silicon-anode incumbents keep cutting $/kWh -- the premium QSE-5 must justify shrinks annually.",
+    "The market already voted on the quarter. QS fell roughly 31% in July 2026 into and after the print, with the Street reading the PowerCo restructuring as de-scoping rather than deepened commitment."
+  ],
+  "catalysts": [
+    "H2 2026: Eagle Line output doubling and a step-up in customer sample shipments across QSEV/QSDC/QSAS.",
+    "PowerCo delivery-and-validation milestone payments over the next two years (amendment dated July 16, 2026; up to $75.4M aggregate).",
+    "Q3 2026 results (~late Oct 2026): billings cadence and any B-sample validation disclosures.",
+    "First QSDC data-center design win or QSAS defense program award (2026-2027).",
+    "Entry into the IP License Agreement with PowerCo and the associated royalty prepayment -- the single biggest de-risking event; timing undefined."
+  ],
+  "pricedIn": "At about $6.30 (early Aug 2026), market cap is roughly $3.9B on 617M shares; net of $859M liquidity, EV is near $3.0B. Conventional multiples do not apply: GAAP revenue is nil and even billings annualize to only ~$43M, so the market is underwriting outcomes, not results. What is implied: QSE-5 completes validation, PowerCo signs the IP license, and royalties eventually flow across EV plus data-center and defense verticals -- effectively a modest probability on a very large licensing business. The debate: bulls see four top-10 OEMs and Honda's June 2026 endorsement as accumulating proof; bears see the 31% July drawdown, a capped PowerCo program, and three years of cash as a countdown clock.",
+  "scenarios": {
+    "bear": "B-sample validation slips again, PowerCo milestones stretch, and the IP license stays unsigned through 2027. QSDC and QSAS produce demos but no contracts, billings stagnate around $40M a year, and QS returns to the equity market in 2028 with the stock weak -- heavy dilution at low prices. The stock trades toward liquidity value, $2-3, as the market concludes solid-state arrives via Toyota and CATL rather than via licensing.",
+    "base": "The Eagle Line doubles output in H2 2026, PowerCo milestones pay on schedule through 2027-28, and Honda plus one more OEM deepen their programs. The IP license lands around 2028, triggering the royalty prepayment and a licensing framework; first gigawatt-hour-scale production follows early next decade. QS raises once more at tolerable dilution. The stock oscillates roughly $5-12 on milestone news -- still an option, but one whose strike keeps getting closer.",
+    "bull": "Safety plus energy density win a data-center or defense design commitment in 2027 -- revenue arrives years before automotive SOP. PowerCo signs the IP license with its royalty prepayment, Honda converts toward a licensing structure, and Cobra's larger-format separators unlock premium cell formats. Billings compound past $150M by 2028 while the licensing model holds capex under $40M a year. The market re-rates QS as an IP royalty company: $15-20."
+  },
+  "valPresets": {
+    "mode": "revenue",
+    "r": 0.15,
+    "gT": 0.04,
+    "years": 8,
+    "bear": {
+      "revCagr": 0.15,
+      "fcfMargin": 0,
+      "exit": 3
+    },
+    "base": {
+      "revCagr": 0.45,
+      "fcfMargin": 0.3,
+      "exit": 12
+    },
+    "bull": {
+      "revCagr": 0.65,
+      "fcfMargin": 0.45,
+      "exit": 18
+    },
+    "note": "QS is pre-revenue at scale -- GAAP product revenue is nil, so 'revenue' here means licensing/prototype customer billings (~$43M annualized run-rate as of Q2 2026). Revenue mode compounds that base into prospective royalty streams; margins reflect an IP-licensing model, not cell manufacturing. Base (~45% CAGR to ~$780M by 2034) approximates a signed PowerCo license plus one additional licensee; bear is essentially liquidity value."
+  },
+  "bullCharts": {
+    "0": ["peerEvS"],
+    "2": ["capexA", "fcfQ"]
+  },
+  "bearCharts": {
+    "1": ["revQ"],
+    "5": ["priceH"]
+  },
+  "sources": [
+    {
+      "label": "QS Q2 2026 shareholder letter (SEC 8-K EX-99.1, Jul 22, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1811414/000119312526312423/qs-ex99_1.htm"
+    },
+    {
+      "label": "QS Q2 2026 press release (IR)",
+      "url": "https://ir.quantumscape.com/news-releases/news-release-details/quantumscape-reports-second-quarter-2026-business-and-financial"
+    },
+    {
+      "label": "SEC 8-K: PowerCo collaboration agreement amendment (Jul 16, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001811414/000119312526312381/qs-20260716.htm"
+    },
+    {
+      "label": "StockTitan: PowerCo deal revised, up to $75.4M in milestones",
+      "url": "https://www.stocktitan.net/sec-filings/QS/8-k-quantum-scape-corp-reports-material-event-b2819f0f2dec.html"
+    },
+    {
+      "label": "StockAnalysis.com: QS price and market cap",
+      "url": "https://stockanalysis.com/stocks/qs/"
+    }
+  ]
+}

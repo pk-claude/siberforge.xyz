@@ -17,7 +17,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fetchFundamentals, fetchMonthlyHistory, fetchEpsHistory } from './sources/yahoo-equity-pe.mjs';
-import { fetchStatements, fetchFxPerUsd } from './sources/yahoo-single-name.mjs';
+import { fetchStatements, fetchFxPerUsd, fetchEtfProfile } from './sources/yahoo-single-name.mjs';
 import { cikForTicker, fetchCompanyFacts, annualSeries, quarterlySeries, instantSeries, CONCEPTS, INSTANT_CONCEPTS, sleep } from './sources/edgar-facts.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
@@ -43,7 +43,26 @@ const TIER1 = [
   { t: 'AMAT',  edgar: true,  peers: ['LRCX', 'KLAC', 'ASML'] },
   { t: 'SMCI',  edgar: true,  peers: ['DELL', 'HPE', 'NVDA'] },
   { t: 'SNDK',  edgar: true,  peers: ['MU', 'WDC', 'STX', '000660.KS'] },
+  { t: 'IONQ',  edgar: true,  peers: ['QBTS', 'RGTI', 'IBM'] },
+  { t: 'QBTS',  edgar: true,  peers: ['IONQ', 'RGTI', 'IBM'] },
+  { t: 'RGTI',  edgar: true,  peers: ['IONQ', 'QBTS', 'IBM'] },
+  { t: 'QS',    edgar: true,  peers: ['ENVX', 'SLDP', 'TSLA'] },
+  { t: 'HOVR',  edgar: true,  peers: ['JOBY', 'ACHR', 'EH'] },
+  { t: 'MRLN',  edgar: true,  peers: ['KTOS', 'AVAV', 'JOBY'] },
+  { t: 'NBIS',  edgar: false, peers: ['CRWV', 'ORCL', 'MSFT', 'IREN'] },
+  { t: 'SPCX',  edgar: true,  peers: ['RKLB', 'ASTS', 'LMT'] },
+  { t: 'BE',    edgar: true,  peers: ['PLUG', 'FCEL', 'GEV'] },
+  { t: 'RIVN',  edgar: true,  peers: ['TSLA', 'GM', 'F', 'LCID'] },
+  { t: 'SOFI',  edgar: true,  peers: ['HOOD', 'LC', 'NU', 'ALLY'] },
+  { t: 'TSLA',  edgar: true,  peers: ['RIVN', 'GM', 'F', 'BYDDY'] },
+  { t: 'VST',   edgar: true,  peers: ['CEG', 'NRG', 'TLN'] },
+  { t: 'CAT',   edgar: true,  peers: ['DE', 'CMI', 'HON'] },
+  { t: 'CVX',   edgar: true,  peers: ['XOM', 'COP', 'SHEL'] },
+  { t: 'IBM',   edgar: true,  peers: ['MSFT', 'ORCL', 'ACN', 'HPE'] },
+  { t: 'ORCL',  edgar: true,  peers: ['MSFT', 'AMZN', 'GOOGL', 'SAP'] },
 ];
+
+const ETFS = ['XLK', 'EWY'];
 
 const argT = process.argv.find(a => a.startsWith('--tickers='));
 const ONLY = argT ? argT.split('=')[1].split(',').map(s => s.trim().toUpperCase()) : null;
@@ -255,6 +274,27 @@ async function main() {
       await fs.writeFile(file, JSON.stringify(doc));
       console.log(`  [${T}] wrote ${file} (annual=${annual.length}y quarterly=${quarterly.length}q)`);
     }
+  }
+
+  // ---- ETFs: holdings/profile/performance variant ----
+  for (const T of ETFS) {
+    if (ONLY && !ONLY.includes(T)) continue;
+    console.log(`[${T}] fetching (ETF)...`);
+    try {
+      const [prof, prices] = await Promise.all([
+        fetchEtfProfile(T),
+        fetchMonthlyHistory(T, 6),
+      ]);
+      const doc = {
+        ticker: T, etf: true, name: prof.name, asOf: new Date().toISOString().slice(0, 10),
+        snapshot: prof, prices,
+        sources: ['Yahoo Finance quoteSummary (topHoldings/fundProfile) / chart'],
+      };
+      if (!DRY) {
+        await fs.writeFile(path.join(OUT, `${T}.json`), JSON.stringify(doc));
+        console.log(`  [${T}] wrote ETF doc (holdings=${(prof.holdings || []).length})`);
+      }
+    } catch (e) { console.error(`  [${T}] ETF fetch failed: ${e.message}`); }
   }
 
   if (!DRY) {

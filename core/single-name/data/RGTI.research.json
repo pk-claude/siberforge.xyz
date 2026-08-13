@@ -1,0 +1,120 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "A ~$6B bet that superconducting qubits reach ~1,000 qubits at 99.9% fidelity within three years: $541M of cash and a $100M CHIPS Act LOI buy time, but revenue is still $5M a quarter.",
+  "thesis": [
+    "The balance sheet buys the roadmap time. $541.3M in cash, equivalents and investments with zero debt at June 30, 2026; H1 2026 operating cash use of $32.0M means the treasury funds many years of R&D without forced dilution.",
+    "The Cepheus roadmap has delivered on schedule so far. The 36-qubit multichip system shipped mid-2025, and Cepheus-1-108Q now runs ~99.9% median single-qubit and ~99.1% median two-qubit fidelity at ~60ns gate speeds (Aug 2026); the stated three-year target is ~1,000 qubits at ~99.9% two-qubit fidelity.",
+    "Government demand is turning into real revenue. Q2 2026 revenue of $5.1M (+185% YoY) on Novera QPU and full-system sales; a 108-qubit system for India's C-DAC, a 36-qubit machine deployed at the UK's NQCC, and an Aug 2026 letter of intent with the Commerce Department for up to $100M of CHIPS Act funding over three years.",
+    "Superconducting speed is the physics bet. Gate speeds of 50-70ns are roughly 10,000x faster than trapped-ion and ~100x faster than neutral-atom systems; if error correction eventually makes all modalities usable, throughput wins.",
+    "Partners derisk manufacturing and distribution. Quanta Computer collaboration with a $35M equity placement (2025), HPE hybrid quantum-classical integration including the TangleLab testbed (2026), and a planned up-to-$100M UK buildout."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Aug 6, 2026)",
+    "points": [
+      "Revenue $5.1M, +185% YoY (Q2 2025: $1.8M) and ~17% QoQ; H1 2026 revenue $9.5M vs $3.3M.",
+      "Gross profit $2.2M, ~43% margin vs ~31% a year ago on richer system mix.",
+      "Operating loss $28.1M; GAAP net loss $52.6M ($0.16/sh) swollen by non-cash warrant/earn-out revaluations; non-GAAP net loss $16.0M ($0.05/sh) vs $13.3M.",
+      "Cash, equivalents and investments $541.3M, no debt; H1 operating cash use $32.0M.",
+      "Shares outstanding 333.7M at June 30, 2026 vs 298.3M weighted a year ago (~12% YoY dilution).",
+      "Signed LOI with US Dept of Commerce for up to $100M in CHIPS Act funding over three years."
+    ]
+  },
+  "latestProse": "Q2 2026 (reported Aug 6): revenue $5.1M, up 185% YoY and ~17% sequentially, on Novera QPU shipments and recognition of announced system orders; H1 revenue $9.5M vs $3.3M. Gross margin improved to ~43% from ~31%. Operating loss was $28.1M; the $52.6M GAAP net loss was inflated by non-cash warrant and earn-out revaluations -- non-GAAP net loss was $16.0M. Cash and investments ended at $541.3M with no debt; H1 operating cash use was $32.0M. Shares outstanding reached 333.7M, up ~12% YoY on ATM issuance and the 2025 Quanta placement. Alongside the print: a 9-qubit Novera deployment to Pittsburgh Supercomputing Center's TangleLab with HPE. The disclosure that matters most: the letter of intent with the Commerce Department for up to $100M of CHIPS Act funding over three years -- non-binding, but a signal Washington wants a domestic superconducting champion.",
+  "guidanceProse": "Rigetti gives no formal revenue guidance; the guide is the roadmap: roughly 1,000 qubits, ~99.9% median two-qubit fidelity, and sub-50ns gate speeds within about three years, with Cepheus-1-108Q (99.1% two-qubit, ~60ns) as the current proof point. Management flags coherence time as the binding constraint. The central debate is sequencing: bears note $5M quarters cannot justify a ~$6B valuation unless quantum advantage arrives on schedule; bulls argue the $541M treasury, the CHIPS LOI, and government system orders (C-DAC, NQCC, TangleLab) let Rigetti survive to the error-corrected era without existential dilution. Watch whether the LOI converts to a definitive award and whether fidelity holds as qubit counts scale.",
+  "guide": {
+    "label": "No formal guide -- roadmap",
+    "val": "~1,000 qubits / ~99.9% in ~3 yrs",
+    "sub": "CHIPS LOI up to $100M | $541M cash, no debt",
+    "tone": "accent"
+  },
+  "segments": [
+    "On-premises systems: 9-qubit Novera QPUs through Cepheus 36Q-108Q full-stack systems for national labs and quantum centers (C-DAC India 108Q, UK NQCC 36Q); now the bulk of revenue.",
+    "Development contracts and government programs: AFRL work, DARPA Quantum Benchmarking Initiative (Stage A selection, 2025), and other agency awards.",
+    "Cloud QCaaS access via partners; small and not the strategic focus."
+  ],
+  "competitive": [
+    "IonQ (trapped ion): Q2 2026 revenue $80.1M (+287% YoY) with FY26 guidance of $280-290M -- roughly 15x Rigetti's scale, and acquiring across the stack (SkyWater foundry deal closed Aug 2026). Rigetti's counter is physics: 50-70ns superconducting gates vs far slower trapped-ion operations.",
+    "IBM: the superconducting incumbent with an in-house fab, the Nighthawk/Starling roadmap toward large-scale fault tolerance by 2029, and enterprise distribution Rigetti cannot match. Rigetti competes by selling on-prem systems IBM will not.",
+    "D-Wave (QBTS): Q2 2026 revenue $3.1M, roughly flat -- annealing serves a different problem class, but it competes for the same speculative capital.",
+    "Google Quantum AI: Willow (Dec 2024) validated superconducting error correction but Google does not sell hardware; its results set the technical bar Rigetti is judged against.",
+    "IQM (IPO'd Aug 2026): direct competitor in on-prem superconducting systems for research institutions, especially in Europe."
+  ],
+  "moat": "Rigetti's edge is credible full-stack superconducting engineering at merchant scale: chiplet architecture, its own Fab-1, and fidelity within striking distance of IBM on systems it will actually sell you. That is rarer than it sounds, but it is not yet a moat: quantum advantage is undemonstrated, switching costs are nil while workloads are experimental, and IBM and Google outspend Rigetti by orders of magnitude on the same modality. The entire commercial thesis -- that anyone pays recurring money for these machines before error correction matures -- is unproven.",
+  "risks": [
+    "Commercial quantum advantage does not exist yet. Every dollar of Q2 2026's $5.1M revenue came from governments, labs, and research institutions buying experimentation capacity, not enterprises buying answers.",
+    "Dilution is the funding model. Shares outstanding rose ~12% YoY to 333.7M by June 2026 via ATM issuance and placements; the treasury lasts years, but management has shown it will sell stock into strength.",
+    "Revenue is lumpy single-order risk. The step-up to $5.1M in Q2 2026 leans on a handful of system sales (C-DAC 108Q, Novera units); one slipped delivery swings a quarter by double-digit percentages.",
+    "IBM and Google outspend Rigetti on the same qubit modality by orders of magnitude. IBM's 2029 fault-tolerance roadmap and Google's Willow results (Dec 2024) define the frontier; Rigetti is drafting, not leading.",
+    "The CHIPS LOI is a letter, not a check. The up-to-$100M Commerce framework (Aug 2026) is non-binding and milestone-gated; failure to convert would knock out a pillar of the bull case.",
+    "Valuation leaves no room for slippage. A ~$6B market cap against a ~$20M revenue run-rate means the stock trades on roadmap credibility; 2024-2025 showed 40-60% drawdowns can arrive on sentiment alone."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings (~early Nov 2026): system-order backlog and whether gross margin holds above 40%.",
+    "CHIPS Act LOI conversion into a definitive funding agreement (H2 2026 - 2027).",
+    "Next Cepheus-generation launch and roadmap checkpoints toward 99.9% two-qubit fidelity (2026-2027).",
+    "C-DAC India 108-qubit delivery and the HPE/PSC TangleLab Novera deployment (H2 2026).",
+    "DARPA Quantum Benchmarking Initiative stage decisions (2026-2027)."
+  ],
+  "pricedIn": "At roughly $18 (Aug 12 close $18.09), market cap is about $6.0B on 333.7M shares; net of $541M cash, EV is ~$5.5B. Against a ~$20.6M annualized revenue run-rate that is roughly 270x sales -- versus IonQ at $80M quarterly revenue and a $280-290M FY26 guide. What is priced in: Rigetti hitting the 1,000-qubit/99.9% roadmap, converting the CHIPS LOI, and emerging as one of two or three superconducting survivors alongside IBM and Google. The debate is whether gate-speed physics plus best-in-class merchant fidelity wins share against IonQ's revenue machine and IBM's scale, or whether RGTI remains a well-funded research house whose ATM keeps grinding holders. A single roadmap slip likely compresses the multiple violently.",
+  "scenarios": {
+    "bear": "Quantum advantage stays perpetually three years away. Fidelity gains stall as qubit counts rise, the CHIPS LOI never converts to a definitive award, and system sales stay lumpy at $20-30M a year against $60M+ of annual non-GAAP burn. IonQ consolidates commercial demand while IBM owns the superconducting narrative. The ATM keeps running, share count grinds higher, and the stock re-rates toward cash plus a modest technology premium -- $3-6, a 65-80% drawdown.",
+    "base": "Rigetti executes the roadmap roughly on schedule: next-generation Cepheus systems ship with rising fidelity, a CHIPS award lands in some form, and government/research demand lifts revenue toward $50-100M by 2028 with gross margin above 40%. Dilution continues but slows. No commercial quantum advantage yet, so the stock trades as a funded call option, oscillating with quantum sentiment in a wide $10-25 band; holders are paid in optionality rather than cash flow.",
+    "bull": "Fidelity crosses 99.9% two-qubit on a several-hundred-qubit chiplet system by 2027, early error-corrected demonstrations showcase superconducting speed, and CHIPS plus UK funding make Rigetti the West's merchant superconducting supplier. On-prem systems ramp to dozens per year; revenue scales past $150M by 2029 with hardware-refresh economics. The $541M treasury means none of it requires dilutive capital, and the stock breaks decisively above prior highs -- $35+."
+  },
+  "valPresets": {
+    "mode": "revenue",
+    "r": 0.15,
+    "gT": 0.04,
+    "years": 8,
+    "bear": {
+      "revCagr": 0.25,
+      "fcfMargin": 0.05,
+      "exit": 8
+    },
+    "base": {
+      "revCagr": 0.5,
+      "fcfMargin": 0.2,
+      "exit": 15
+    },
+    "bull": {
+      "revCagr": 0.7,
+      "fcfMargin": 0.3,
+      "exit": 25
+    },
+    "note": "FCF is deeply negative and will stay so; revenue mode compounds the ~$20M annualized run-rate (Q2 2026 x4). Base (50% CAGR) reaches ~$500M by 2034 -- roughly what a durable government/HPC franchise supports; bull requires demonstrated quantum advantage and merchant scale. The $541M net cash cushions the downside but is small against a ~$6B market cap."
+  },
+  "bullCharts": {
+    "0": ["fcfQ"],
+    "2": ["revQ", "revYoyA"]
+  },
+  "bearCharts": {
+    "3": ["peerEvS"],
+    "5": ["priceH"]
+  },
+  "sources": [
+    {
+      "label": "StockTitan: Rigetti Q2 2026 results ($5.1M rev, $52.6M GAAP loss, $541.3M cash)",
+      "url": "https://www.stocktitan.net/news/RGTI/rigetti-computing-reports-second-quarter-2026-financial-i812eesegntu.html"
+    },
+    {
+      "label": "Quantum Computing Report: RGTI Q2 2026, +185% YoY, $100M CHIPS LOI, HPE partnership",
+      "url": "https://quantumcomputingreport.com/rigetti-computing-reports-q2-2026-financial-results-revenue-up-185-yoy-100m-chips-act-loi-and-hpe-supercomputing-partnership/"
+    },
+    {
+      "label": "Seeking Alpha: Rigetti dips after mixed Q2 results (Aug 2026)",
+      "url": "https://seekingalpha.com/news/4628243-rigetti-dips-after-reporting-mixed-q2-financial-results"
+    },
+    {
+      "label": "DCD: Q2 2026 quantum earnings roundup (D-Wave, IonQ, Rigetti, IQM IPO)",
+      "url": "https://www.datacenterdynamics.com/en/news/quantum-earnings-q2-2026-d-wave-ionq-and-rigetti-publish-financial-results-alongside-newly-ipo-ed-iqm-quantum-computers/"
+    },
+    {
+      "label": "BigGo Finance: IonQ Q2 2026 ($80.1M rev, FY guide $280-290M)",
+      "url": "https://finance.biggo.com/news/US_IONQ_2026-08-05"
+    },
+    {
+      "label": "StockAnalysis.com: RGTI price and market cap",
+      "url": "https://stockanalysis.com/stocks/rgti/"
+    }
+  ]
+}

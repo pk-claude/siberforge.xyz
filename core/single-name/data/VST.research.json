@@ -1,0 +1,123 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "The cheap way to own the AI power trade: an integrated ~41 GW fleet growing EBITDA 31%, 20-year nuclear PPAs with Amazon and Meta, an ~8% FCF yield, and a ~30% smaller share count -- at roughly 16x forward earnings versus ~25x for Constellation.",
+  "thesis": [
+    "Hyperscalers are signing 20-year checks against Vistra's nuclear fleet. AWS contracted 1,200 MW from Comanche Peak (announced Sep 2025; deliveries from Q4 2027, ramping to full by 2032) and Meta signed PPAs for 2,609 MW of PJM nuclear on Jan 9, 2026 -- including 433 MW of uprates at Perry, Davis-Besse, and Beaver Valley, the largest corporate-backed nuclear uprates in the US.",
+    "Earnings power is compounding before those deals even start. Q2 2026 Ongoing Operations Adjusted EBITDA rose 31% to $1,767M (reported Aug 7, 2026), and the 2027 midpoint opportunity of $7.4-7.8B excludes Cogentrix and the Meta PPAs entirely.",
+    "The integrated model de-risks the ramp. As of Aug 3, 2026, roughly 100% of expected 2026 generation, ~94% of 2027, and ~72% of 2028 was hedged, while the TXU-led retail book ($773M of Q2 EBITDA) cushions wholesale swings in both directions.",
+    "Capital returns are structural, not episodic. ~$6.5B repurchased since Nov 2021 has cut the share count ~30% to ~336M; ~$1.2B of authorization remains, targeted for completion by year-end 2027, on top of a $0.23 quarterly dividend.",
+    "Growth is stacking, not speculative. The $4B, ~5.5 GW Cogentrix gas acquisition (announced Jan 5, 2026) is FERC-approved; Helix Digital Infrastructure launched Aug 7, 2026 with NVIDIA, KKR, and Kuwait Investment Authority, with Vistra committing up to $1B as preferred power provider; two Permian Basin gas units and new solar are in construction."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Aug 7, 2026)",
+    "points": [
+      "Ongoing Operations Adjusted EBITDA $1,767M, +31% YoY (vs $1,349M); H1 2026 $3,261M vs $2,589M.",
+      "GAAP net income $305M (vs $327M), absorbing a $472M unrealized loss on hedges that settle in future years.",
+      "Segments: Retail $773M (vs $756M), Texas $311M (vs $142M), East $642M (vs $418M), West $68M (vs $49M).",
+      "Reaffirmed FY26 guidance: Adjusted EBITDA $6.8-7.6B, Adjusted FCF before Growth $3.925-4.725B.",
+      "H1 buybacks $709M; ~336M shares out (-30% since Nov 2021); total liquidity ~$6.3B at Jun 30.",
+      "Hedged ~100% of 2026, ~94% of 2027, ~72% of 2028 expected generation as of Aug 3, 2026; 97%+ commercial availability through Texas/PJM heat events."
+    ]
+  },
+  "latestProse": "Q2 2026: Ongoing Operations Adjusted EBITDA of $1,767M rose 31% on higher realized energy and capacity prices plus a first full quarter from the Lotus gas plants; every generation segment improved (Texas $311M vs $142M, East $642M vs $418M) while Retail held at $773M. GAAP net income of $305M absorbed a $472M unrealized loss on hedges settling in future years. The fleet ran at 97%-plus commercial availability through Texas and PJM heat waves, liquidity stood at $6.3B, and H1 buybacks totaled $709M. The disclosure that matters most: as of Aug 3 Vistra had sold roughly 100% of expected 2026 generation, ~94% of 2027, and ~72% of 2028 -- meaning the $7.4-7.8B 2027 EBITDA opportunity is substantially locked in before Cogentrix or Meta contribute a dollar.",
+  "guidanceProse": "Management reaffirmed 2026 Ongoing Operations Adjusted EBITDA of $6.8-7.6B and Adjusted FCF before Growth of $3.925-4.725B -- roughly 60% EBITDA-to-cash conversion. The previously disclosed 2027 EBITDA midpoint opportunity of $7.4-7.8B was reiterated and, critically, excludes both the pending $4B Cogentrix acquisition (FERC-approved, ~5.5 GW of gas across PJM, ISO-NE, and ERCOT) and the Meta nuclear PPAs, part of which begin contributing in 2027. Formal 2027 guidance arrives with Q3 results in November; the remaining ~$1.2B buyback is expected complete no later than year-end 2027.",
+  "guide": {
+    "label": "FY26 EBITDA guide (reaffirmed)",
+    "val": "$6.8-7.6B",
+    "sub": "FCFbG $3.9-4.7B | 2027 opp $7.4-7.8B",
+    "tone": "accent"
+  },
+  "segments": [
+    "Generation: ~41 GW across ERCOT, PJM, ISO-NE, MISO, and CAISO -- gas, ~6.4 GW of nuclear (Comanche Peak plus Perry, Davis-Besse, Beaver Valley), coal, solar, and storage; pro forma ~46 GW with Cogentrix's ~5,500 MW.",
+    "Retail: roughly 5 million customers led by TXU Energy in Texas; $773M of Q2 2026 EBITDA -- the natural hedge that stabilizes results when wholesale softens.",
+    "Asset Closure: legacy coal retirement drag (-$23M EBITDA in Q2 2026), excluded from ongoing-operations guidance."
+  ],
+  "competitive": [
+    "CEG (~25x forward EPS): the premium nuclear pure-play with the largest fleet; Vistra offers comparable data-center optionality at ~16x forward earnings.",
+    "TLN (~15x): AWS Susquehanna anchor deal and concentrated PJM torque, but no retail hedge and a much smaller fleet.",
+    "NRG (~16-18x): retail-heavy with a GE Vernova turbine JV for new gas; the least nuclear exposure of the four.",
+    "Vistra is the only one pairing a Texas nuclear PPA (AWS, 1,200 MW) with PJM nuclear uprate PPAs (Meta, 2,609 MW incl 433 MW of uprates) on top of an integrated retail book.",
+    "Scarcity logic: new turbines are sold out into 2028-29 and new nuclear is a 2030s story, so existing dispatchable fleets carry scarcity value while AI load compounds. (Peer multiples approximate, Aug 2026.)"
+  ],
+  "moat": "The assets, not the brand, are the moat: licensed nuclear units and sited gas plants with interconnects in supply-short markets cannot be replicated this decade, and 20-year hyperscaler PPAs are converting that scarcity into contracted cash flow. The TXU retail book adds a genuine hedge most IPPs lack. But at its core this is a commodity power producer -- if supply catches up with demand, the scarcity premium and the multiple both fade.",
+  "risks": [
+    "Open 2028: ~28% of expected 2028 output is unhedged; if data-center demand disappoints or new supply (gas, behind-the-meter, batteries) arrives faster, the curve rolls down and the 2027-28 earnings story with it.",
+    "Regulatory and political: PJM capacity auction interventions, ERCOT market redesign, FERC co-location rules, and consumer backlash against data-center-driven power bills.",
+    "M&A and leverage: the $4B Cogentrix deal closes near a cyclical high in capacity prices, layered on Lotus and Energy Harbor integration.",
+    "Nuclear concentration: an extended outage at Comanche Peak or the PJM units would hit both the PPAs and guidance; the 433 MW of Meta uprates carry NRC and execution risk out to 2031-2034.",
+    "GAAP noise: a $472M unrealized hedge loss in Q2 2026 alone; headline net income will keep whipsawing with mark-to-market.",
+    "Legacy liabilities: Moss Landing battery-fire remediation and coal closure costs linger in Asset Closure and adjustments."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings (early Nov 2026): formal 2027 guidance initiation versus the $7.4-7.8B opportunity.",
+    "Cogentrix close expected H2 2026 (FERC approval disclosed Aug 7, 2026).",
+    "Meta PPA deliveries commence late 2026; full operating deliveries by year-end 2027; AWS Comanche Peak deliveries begin Q4 2027.",
+    "Helix Digital Infrastructure: first campus and site announcements with NVIDIA, KKR, and KIA (2026-2027).",
+    "Permian Basin gas units and Oak Hill 2 / Pulaski solar construction milestones through 2027."
+  ],
+  "pricedIn": "At about $164 (roughly $55B market cap on ~336M shares, mid-Aug 2026), Vistra trades near 16x forward earnings and about an 8% FY2026 FCFbG yield at the ~$4.3B midpoint -- versus roughly 25x at Constellation, ~15x at Talen, and 16-18x at NRG. The market is paying for the reaffirmed guide, the buyback, and most of 2027 given hedge levels. Not obviously priced: Cogentrix accretion into tight PJM and ISO-NE capacity markets, Meta PPA economics from late 2026, Helix optionality with NVIDIA and KKR, and any additional co-location or gas-fleet PPAs. The persistent discount to CEG reflects perceived commodity exposure; every long-dated PPA signed chips away at that argument.",
+  "scenarios": {
+    "bear": "Data-center load growth disappoints; PJM and ERCOT forward curves fade as new gas and behind-the-meter supply arrives; 2028 opens only ~72% hedged into weaker prices. A political response to consumer bills caps capacity revenues, Cogentrix proves top-of-cycle at $4B, and EBITDA drifts back toward $6B by 2028. With GAAP earnings noisy from hedge marks, the multiple compresses toward 10-12x and the stock revisits $110-130.",
+    "base": "2026 lands within the $6.8-7.6B range and 2027 comes in near the $7.4-7.8B opportunity plus Cogentrix and early Meta contributions -- call it $8B-plus. FCFbG runs above $4B annually, the remaining $1.2B buyback completes by 2027, and the share count grinds lower. AWS deliveries begin Q4 2027 on schedule. The stock earns a modest re-rate toward 17-18x as contracted mix rises: $190-220 over 12-18 months, plus dividends.",
+    "bull": "AI load materializes faster than supply and ERCOT plus PJM stay tight into 2028-2030. Helix scales into multi-GW campuses with Vistra as preferred power provider, additional hyperscaler PPAs land at Comanche Peak and the gas fleet, and 2028 EBITDA pushes toward $9B. Nuclear uprates deliver high-margin megawatts at a fraction of new-build cost. The CEG valuation gap halves -- 20x-plus on higher earnings -- implying $250-plus."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "r": 0.09,
+    "gT": 0.025,
+    "years": 10,
+    "bear": {
+      "g": 0.0
+    },
+    "base": {
+      "g": 0.055
+    },
+    "bull": {
+      "g": 0.1
+    },
+    "note": "Anchored to FY26 Ongoing FCFbG guidance of $3.925-4.725B (~$4.3B midpoint) against a ~$55B market cap. Year-1 growth fades to 2.5% terminal: bear 0% (hedges roll into softer 2028 curves), base 5.5% (2027 opportunity of $7.4-7.8B plus Cogentrix and Meta layering in), bull 10% (Helix plus incremental data-center PPAs repricing the out-years)."
+  },
+  "bullCharts": {
+    "1": [
+      "revQ",
+      "niA"
+    ],
+    "3": [
+      "fcfA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "priceH"
+    ],
+    "4": [
+      "niQ"
+    ]
+  },
+  "sources": [
+    {
+      "label": "Vistra Q2 2026 results (Aug 7, 2026)",
+      "url": "https://investor.vistracorp.com/2026-08-07-Vistra-Reports-Second-Quarter-2026-Results"
+    },
+    {
+      "label": "Q2 2026 release (PRNewswire)",
+      "url": "https://www.prnewswire.com/news-releases/vistra-reports-second-quarter-2026-results-302845874.html"
+    },
+    {
+      "label": "Vistra-Meta nuclear agreements (Jan 9, 2026)",
+      "url": "https://investor.vistracorp.com/2026-01-09-Vistra-and-Meta-Announce-Agreements-to-Support-Nuclear-Plants-in-PJM-and-Add-New-Nuclear-Generation-to-the-Grid"
+    },
+    {
+      "label": "AWS Comanche Peak 20-year PPA",
+      "url": "https://www.power-eng.com/nuclear/vistra-secures-long-term-nuclear-ppa-from-comanche-peak-nuclear-plant/"
+    },
+    {
+      "label": "Cogentrix $4B / 5.5 GW acquisition (POWER)",
+      "url": "https://www.powermag.com/vistra-to-bolster-gas-fired-fleet-by-5-5-gw-with-4b-cogentrix-acquisition/"
+    },
+    {
+      "label": "Meta-Vistra deal analysis (ANS, Jan 12, 2026)",
+      "url": "https://www.ans.org/news/2026-01-12/article-7668/the-metavistra-deal-a-closer-look/"
+    }
+  ]
+}

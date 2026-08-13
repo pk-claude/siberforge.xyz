@@ -1,0 +1,128 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "The quantum pure-play with actual revenue: 287% growth, a $2B war chest and a foundry roll-up, priced at roughly 55x sales in a sector that has already halved once on a single comment.",
+  "thesis": [
+    "Hypergrowth with receipts. Q2 2026 revenue of $80.1M grew 287% YoY, beat consensus by roughly 20%, and marked the fifth consecutive record quarter after Q1 2026 grew 755%. Full-year guidance has been raised twice in 2026, from $225-245M in February to $280-290M in August.",
+    "A war chest no pure-play peer can match. Cash, equivalents and investments were $3.0B at June 30, 2026, roughly $2.0B pro forma after the $1.8B SkyWater close on July 31 - the residue of $3.0B in Heights Capital-led raises in July and October 2025. IonQ can outspend QBTS, RGTI and the newly listed entrants combined.",
+    "The technical roadmap keeps arriving early. AQ64 was reached on the Tempo system in September 2025, three months ahead of plan, with 99.99% two-qubit fidelity; management says it has made major strides toward a 256-qubit machine in 2026 and has published error-correction results on its own hardware.",
+    "Vertical integration is a genuine strategy shift. Oxford Ionics ($1.075B, closed September 2025), SkyWater Technology ($1.8B, closed July 2026) and Nexus Photonics give IonQ chip design, integrated photonics and a US foundry - a full-stack merchant-supplier position in the allied quantum ecosystem.",
+    "Backlog underwrites the guide. Remaining performance obligations hit $470M in Q1 2026, up 554% YoY, and the mix is broadening: roughly 60% of Q2 2026 revenue was commercial enterprise, about 50% international, and about 25% came from multi-product customers."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Aug 5, 2026)",
+    "points": [
+      "Revenue $80.1M, +287% YoY, roughly 20% above consensus; fifth straight record quarter.",
+      "GAAP net loss $1,867.7M, of which about $1.6B was non-cash mark-to-market on the Heights Capital warrants; adjusted EBITDA loss $120.3M ($95.6M excluding SkyWater commercial-relationship costs).",
+      "Cash, equivalents and investments $3.0B at June 30; roughly $2.0B pro forma after the $1.8B SkyWater acquisition closed July 31, 2026.",
+      "Mix: about 50% international, about 60% commercial enterprise, about 25% multi-product customers.",
+      "FY26 standalone revenue guidance raised to $280-290M (from $260-270M in May), with roughly 100% organic growth; excludes any SkyWater contribution.",
+      "In-quarter strategic moves: Nexus Photonics acquired, new partnerships with Anduril and Sandia National Laboratories."
+    ]
+  },
+  "latestProse": "Q2 2026, reported August 5: revenue of $80.1M grew 287% YoY, beat consensus by roughly 20%, and made a fifth consecutive record quarter. The headline GAAP net loss of $1.87B is mostly optics - about $1.6B was non-cash mark-to-market on the Heights Capital warrants - but the operating reality is still heavy: adjusted EBITDA loss of $120.3M, or $95.6M excluding SkyWater-related commercial costs. Cash stood at $3.0B at June 30, roughly $2.0B pro forma after the $1.8B SkyWater close on July 31. Mix improved: about 50% international, 60% commercial enterprise, 25% multi-product. Standalone FY26 guidance rose to $280-290M with roughly 100% organic growth claimed. The disclosure that matters most: adjusted EBITDA burn is now annualizing near $480M, so the $2.0B war chest funds about four years unless gross profit scales materially faster.",
+  "guidanceProse": "FY26 guidance went to $280-290M standalone, the second raise this year (February: $225-245M; May: $260-270M), with management claiming roughly 100% organic growth and explicitly excluding SkyWater, which consolidates from Q3. The central debate is revenue quality: how much is durable QCaaS and networking versus lumpy government and national-lab system deals, and how much growth was effectively purchased through acquisitions. Bulls point to $470M of remaining performance obligations (Q1 2026, +554% YoY) as the bridge; bears note the guide implies second-half deceleration from Q2's $80M run rate.",
+  "guide": {
+    "label": "FY26 rev guide (standalone)",
+    "val": "$280-290M",
+    "sub": "raised from $260-270M; ~100% organic; excludes SkyWater",
+    "tone": "accent"
+  },
+  "segments": [
+    "Quantum computing: Forte/Tempo system sales plus QCaaS through the major clouds - about 25% of Q2 2026 revenue came from multi-product customers.",
+    "Quantum networking and security: ID Quantique, Qubitekk and now Nexus Photonics chip-scale lasers and optical subsystems aimed at data-center-scale quantum networking.",
+    "Foundry (consolidates from Q3 2026): SkyWater Technology, a US pure-play chip foundry (roughly $300M-plus historical annual revenue, unverified), positioned as a quantum photonics foundry offering."
+  ],
+  "competitive": [
+    "D-Wave (QBTS): $3.1M Q2 2026 revenue, annealing-first with a new gate-model program - 26x smaller than IonQ by quarterly revenue yet valued at about $7.7B.",
+    "Rigetti (RGTI): $5.1M Q2 2026 revenue, $28.1M operating loss; superconducting gate-model; signed an LOI with the US Department of Commerce for up to $100M in exchange for a non-controlling equity stake.",
+    "IBM: the gate-model scale benchmark, targeting the fault-tolerant Starling system for 2029; IonQ's September 2025 AQ64 claim was explicitly benchmarked against IBM machines.",
+    "The public comp set exploded in 2026: IQM (26 systems sold, 17 delivered, EUR 102M backlog) listed in July, Quantinuum and Infleqtion reported debut results in August, and Google opened early access to its 105-qubit Willow chip in March 2026."
+  ],
+  "moat": "IonQ has the deepest balance sheet and broadest commercial traction among quantum pure-plays, plus differentiated trapped-ion fidelity (99.99% two-qubit) and now its own foundry. But nobody, IonQ included, has demonstrated commercially valuable quantum advantage; today's revenue is early-adopter systems, cloud access and networking gear, not proven end-market pull. The moat is capital, roadmap velocity and vertical integration - not a defensible installed base.",
+  "risks": [
+    "The multiple prices in flawless execution. Roughly 55x EV to standalone FY26 guidance leaves no room for a slipped government deal or missed milestone, in a sector that halved in a day on Jensen Huang's January 2025 comments.",
+    "Dilution is structural. The two Heights Capital deals (July and October 2025) sold about 39M shares plus roughly 79M warrants, many struck at $99.88; the $1.6B Q2 2026 warrant remeasurement loss shows the size of the overhang, and it grows with every rally.",
+    "The roll-up is untested. Six-plus acquisitions since 2024 (Oxford Ionics, SkyWater, Nexus Photonics, Vector Atomic, ID Quantique and others) must be integrated simultaneously; SkyWater is a low-margin foundry that transforms the income statement and could blur the growth story.",
+    "Burn is accelerating with ambition. Adjusted EBITDA loss was $120.3M in Q2 2026 alone, annualizing near $480M, versus $95.6M excluding SkyWater costs - spending is scaling faster than gross profit.",
+    "Revenue quality is debatable. Growth leans on lumpy system deals with governments and national labs, and skeptics argue part of the organic-growth claim was purchased via acquisitions; the standalone guide implies H2 deceleration from Q2's run rate.",
+    "Trapped ions may not win. IBM (fault-tolerant Starling targeted for 2029), Google (Willow early access, March 2026) and superconducting and neutral-atom rivals scale qubit counts faster; if ion gate-speed limits bind before error-corrected utility arrives, the roadmap premium evaporates."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings, early November 2026 - first quarter consolidating SkyWater.",
+    "256-qubit system demonstration targeted by end-2026 on the Oxford Ionics EQC roadmap.",
+    "Quantum photonics foundry product announcements with SkyWater and Nexus Photonics, H2 2026.",
+    "US Department of Commerce $2B quantum program awards finalize through H2 2026 (IonQ participation unverified).",
+    "Peer prints: Quantinuum (Aug 11) and Infleqtion (Aug 12) debut public reports reset sector comps."
+  ],
+  "pricedIn": "At $43.44 (August 11, 2026) IonQ's market cap is around $17.6B (sources quote $14.9-17.6B on differing share counts), or roughly $15.6B EV net of about $2.0B pro forma cash. That is about 55x the $285M midpoint of standalone FY26 guidance - and the stock still sits 59% below its 52-week high near $106. The price implies quantum computing becomes a real multi-billion-dollar product category this decade with IonQ as the vertically integrated western champion. The key debate: whether 287% growth against $470M of RPO justifies a 50x-plus sales multiple, or whether this is the fastest-growing line item inside a hype cycle that has already halved once.",
+  "scenarios": {
+    "bear": "A quantum-winter narrative returns: a high-profile technical disappointment or government budget slippage stalls bookings, FY27 growth decelerates below 50%, and SkyWater's low-margin foundry revenue muddies the story. The roughly 79M outstanding Heights warrants cap every rally while adjusted EBITDA burn runs near $500M a year. The multiple compresses from about 55x toward 10-15x sales and the stock revisits the mid-teens, with cash runway becoming the dominant question.",
+    "base": "FY26 lands inside the $280-290M standalone guide and 2027 grows 60-80% on Tempo deployments, networking revenue and a first full year of SkyWater consolidation. Burn stays heavy but the $2.0B balance sheet absorbs it without emergency issuance beyond warrant exercises. The multiple compresses gradually as revenue grows into it; the stock chops in a wide $35-65 band, tracking quantum sentiment, RPO prints and the 256-qubit milestone timeline.",
+    "bull": "The 256-qubit demonstration lands by end-2026 with error-correction results that convert into data-center-scale orders through 2027. SkyWater makes IonQ the merchant foundry for the allied quantum ecosystem, revenue tracks toward $1B by 2028 with gross margins holding above 50%, and warrant exercises at $99.88 become a funding source rather than an overhang. The stock takes out its roughly $106 high on the combination of growth and scarcity value."
+  },
+  "valPresets": {
+    "mode": "revenue",
+    "r": 0.14,
+    "gT": 0.04,
+    "years": 8,
+    "bear": {
+      "revCagr": 0.2,
+      "fcfMargin": 0.05,
+      "exit": 4
+    },
+    "base": {
+      "revCagr": 0.4,
+      "fcfMargin": 0.15,
+      "exit": 8
+    },
+    "bull": {
+      "revCagr": 0.55,
+      "fcfMargin": 0.25,
+      "exit": 12
+    },
+    "note": "Deeply unprofitable ($120.3M adjusted EBITDA loss in Q2 2026 alone), so revenue mode with a horizon FCF margin and exit multiple is the only defensible frame. Presets compound the $285M FY26 standalone guide midpoint; at roughly 55x EV/sales the base case (40% CAGR for 8 years to about $4B revenue) lands near today's EV - the market already pays for the base case, so the equity argument rests on the bull path."
+  },
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "4": [
+      "revA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "peerEvS",
+      "priceH"
+    ],
+    "3": [
+      "fcfQ"
+    ]
+  },
+  "sources": [
+    {
+      "label": "IonQ Q2 2026 results (press release)",
+      "url": "https://www.ionq.com/news/ionq-announces-record-second-quarter-2026-revenues-growing-287-yoy"
+    },
+    {
+      "label": "Quantum Computing Report: IonQ Q2 2026",
+      "url": "https://quantumcomputingreport.com/ionq-reports-record-q2-2026-financial-results-revenue-soars-287-to-80-1m-full-year-guidance-raised-to-290m/"
+    },
+    {
+      "label": "DCD: Quantum earnings Q2 2026 roundup",
+      "url": "https://www.datacenterdynamics.com/en/news/quantum-earnings-q2-2026-d-wave-ionq-and-rigetti-publish-financial-results-alongside-newly-ipo-ed-iqm-quantum-computers/"
+    },
+    {
+      "label": "IonQ $2.0B equity offering (Oct 2025)",
+      "url": "https://investors.ionq.com/news/news-details/2025/IonQ-Announces-Pricing-of-2-0-Billion-Equity-Offering/default.aspx"
+    },
+    {
+      "label": "HPCwire: AQ64 on Tempo ahead of schedule",
+      "url": "https://www.hpcwire.com/off-the-wire/ionq-reaches-aq-64-benchmark-on-tempo-system-ahead-of-schedule/"
+    },
+    {
+      "label": "Motley Fool: IonQ Q2 2026 call transcript",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/08/12/ionq-ionq-q2-2026-earnings-call-transcript/"
+    }
+  ]
+}

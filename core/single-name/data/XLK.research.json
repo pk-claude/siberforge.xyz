@@ -1,0 +1,54 @@
+{
+  "asOf": "2026-08-13",
+  "etf": true,
+  "oneLiner": "The cheapest pure-play on US mega-cap tech has quietly become a semiconductor-heavy AI infrastructure bet, with cap rules that spread the concentration just enough to matter.",
+  "thesis": [
+    "One-stop mega-cap tech beta at near-zero cost. At a 0.08% expense ratio and roughly $123B AUM (Aug 2026), XLK is the largest and cheapest way to own the S&P 500 information technology sector in a single ticker.",
+    "The fund is now an AI infrastructure vehicle, not a gadget fund. As of Aug 7, 2026 NVDA was the top holding at 14.5%, with Broadcom (5.4%), AMD (4.0%) and the semi-equipment tier (AMAT 2.4%, LRCX 2.4%) pushing chips past software and hardware as the sector's center of gravity -- a complete inversion of the Apple/Microsoft-dominated pre-2023 sector.",
+    "Cap rules turned from bug to feature in 2026. A May 20, 2026 analysis showed XLK beating uncapped rival FTEC by about 2.5 points YTD because its concentration caps redistribute weight from the capped giants into second-tier semis, which led the market in 2026.",
+    "Earnings, not just multiple, drove the move. Hyperscaler AI capex estimated at $775-800B for 2026 flows directly into the revenue lines of XLK's largest holdings, and sector forward multiples were pegged around 10% below their 5-year average after the early-2026 correction.",
+    "Structural index history matters: the June 2024 rebalance that lifted Nvidia toward a 20% cap while demoting Apple marked the AI era's formal takeover of the sector's weighting scheme; weights have reshuffled among NVDA, AAPL and MSFT at quarterly rebalances since."
+  ],
+  "profile": {
+    "expenseRatio": "0.08%",
+    "aum": "$123B (Aug 2026; sources ranged $121-125B)",
+    "topHoldingsNote": "NVDA 14.5%, AAPL 12.3%, MSFT 9.9% as of Aug 7, 2026 -- top three about 39% and top ten about 61% of the 76-stock portfolio, with S&P capping rules limiting any single name to roughly the mid-teens."
+  },
+  "holdingsContext": [
+    "Nvidia (14.5%, Aug 7, 2026): the fund's engine; reports Q2 FY2027 earnings Aug 26, 2026 with data-center demand and 2027 visibility the whole sector's swing factor.",
+    "Apple (12.3%) and Microsoft (9.9%): the capped former co-leaders. Apple has lagged the AI narrative; Microsoft is both a top AI capex spender and the clearest software monetizer via Azure -- their relative weights flip at quarterly rebalances under the cap rules.",
+    "Broadcom (5.4%) and AMD (4.0%): custom AI silicon and the merchant-accelerator challenger; both are direct beneficiaries of hyperscalers diversifying away from single-vendor GPU dependence.",
+    "Semi-equipment tier -- Applied Materials (2.4%) and Lam Research (2.4%): the 2026 leadership trade, riding the global fab and memory capacity buildout; XLK's cap-rule redistribution overweights this tier versus uncapped tech funds.",
+    "What XLK does NOT own: Alphabet, Amazon, Meta and Tesla sit in Communication Services and Consumer Discretionary, so a large share of the AI trade lives outside this fund -- XLK is infrastructure-and-platforms, not the whole AI complex."
+  ],
+  "risks": [
+    "Concentration: top 10 holdings were about 61% of assets (Aug 7, 2026); a de-rating in NVDA alone moves the fund more than most single sectors ever could.",
+    "AI capex sustainability: by mid-2026 the debate shifted from whether demand is real to the financial mechanics -- hyperscalers depreciating AI hardware over 5-6 years against a 2-3 year economic life, and circular vendor-financing arrangements.",
+    "Cycle risk in the new semi tilt: memory and equipment exposure makes XLK more cyclical than its old software/hardware profile; a 2027 capex digestion year hits current leadership hardest.",
+    "Cap-rule mechanics cut both ways: quarterly rebalances force selling of the biggest winners; in a renewed mega-cap melt-up XLK would lag uncapped peers just as it led in 2026.",
+    "Rate sensitivity: long-duration growth multiples remain hostage to the Fed path; sector still trades at a premium to the S&P 500.",
+    "China/export-control policy: incremental restrictions on AI chip sales, or retaliation, directly hit NVDA, AMD, AVGO and the equipment names."
+  ],
+  "catalysts": [
+    "Aug 26, 2026: Nvidia Q2 FY2027 earnings -- the sector's single biggest print; guidance breadth matters more than the beat.",
+    "Sep 15-16, 2026: FOMC meeting; the rate path sets the discount-rate backdrop for the sector's premium multiple.",
+    "Mid-Sep 2026 (and December): quarterly Technology Select Sector Index rebalances -- cap rules can force multi-billion-dollar weight shifts among NVDA, AAPL and MSFT.",
+    "Late Oct - early Nov 2026: hyperscaler Q3 earnings with first hard 2027 capex guidance -- the key test for the $775-800B buildout thesis.",
+    "December 2026: annual index reconstitution and any GICS classification changes affecting sector membership."
+  ],
+  "pricedIn": "XLK was up about 16% YTD as of July 29, 2026, on top of the 2023-25 AI run, with AUM around $123B. The basket trades at a high-20s forward P/E; a mid-2026 analysis put tech roughly 10% below its 5-year average forward multiple after the early-2026 correction, so valuation is rich versus the market but off cycle extremes. The core debate is AI capex durability: $775-800B of 2026 hyperscaler buildout underpins semi earnings, while skeptics attack depreciation schedules (5-6 year book life versus 2-3 year economic life) and vendor-financing circularity. The 2026 twist is that XLK's cap rules redistributed weight into semi-equipment names, its alpha source versus uncapped peers -- that edge persists only while second-tier semis lead.",
+  "scenarios": {
+    "bear": "AI capex peaks. Hyperscaler 2027 guidance disappoints in late-October prints, depreciation and financing concerns crack the semi trade, and NVDA, AVGO and AMD de-rate hard. With top-ten holdings above 60% of assets there is nowhere to hide inside the fund; a 25-35% drawdown akin to 2022 follows if the sector's forward multiple reverts toward market parity while estimates fall. Cap rules soften nothing on the way down.",
+    "base": "The buildout grinds on. Nvidia beats on Aug 26 but guidance upside narrows; equipment and memory-adjacent names keep leadership while software lags on AI-disruption fears. XLK compounds at low-double digits over the next year, roughly tracking earnings growth, with periodic 10% air pockets around capex headlines. Quarterly cap-rule rebalances keep reshuffling NVDA, AAPL and MSFT weights without changing the fund's semi-heavy character.",
+    "bull": "AI monetization broadens beyond infrastructure: agent and inference revenue shows up in software and services results, hyperscalers raise 2027 capex again in October guidance, and the sector re-rates back toward its 5-year average multiple and beyond. The semi-equipment overweight keeps XLK ahead of uncapped rivals for a second straight year, and the fund posts another 25-30% twelve-month run as flows chase the largest, cheapest sector vehicle."
+  },
+  "sources": [
+    {"label": "stockanalysis.com - XLK holdings (Aug 7, 2026)", "url": "https://stockanalysis.com/etf/xlk/holdings/"},
+    {"label": "SSGA - XLK fund page", "url": "https://www.ssga.com/us/en/intermediary/etfs/state-street-technology-select-sector-spdr-etf-xlk"},
+    {"label": "24/7 Wall St - XLK cap-limit edge over FTEC (May 20, 2026)", "url": "https://247wallst.com/investing/2026/05/20/xlks-quiet-edge-over-ftec-comes-from-a-cap-limit-most-investors-never-notice/"},
+    {"label": "CNBC - June 2024 rebalance, Nvidia to ~20% / Apple demoted", "url": "https://www.cnbc.com/2024/06/17/nvidia-to-get-20percent-weighting-and-billions-in-investor-demand-while-apple-demoted-in-major-tech-fund.html"},
+    {"label": "AL Capital - AI capex cycle 2026 ($775-800B hyperscaler buildout)", "url": "https://alcapitaladvisory.com/research/intelligence/ai-infrastructure.html"},
+    {"label": "Intellectia - Nvidia Q2 FY27 earnings date (Aug 26, 2026)", "url": "https://intellectia.ai/blog/nvda-stock-earnings-august-2026"},
+    {"label": "ETF Database - XLK profile", "url": "https://etfdb.com/etf/XLK/"}
+  ]
+}

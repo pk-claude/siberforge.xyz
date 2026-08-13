@@ -1,0 +1,126 @@
+{
+  "asOf": "2026-08-13",
+  "oneLiner": "The time-to-power trade in its purest form: fuel cells for AI data centers drove revenue up 166%, a genuine profitability inflection, and gigawatt-scale frameworks with Oracle and AEP -- priced at ~17x forward sales, so conversion cadence is everything.",
+  "thesis": [
+    "AI data centers turned fuel cells into baseload infrastructure. AEP finalized a 20-year offtake reported at $2.65B for up to 1 GW in January 2026, anchored by a ~900 MW Wyoming data-center campus (deal terms per press reports). Oracle followed on Apr 14, 2026 with a master agreement for up to 2.8 GW, with an initial 1.2 GW already contracted and Project Jupiter in New Mexico underway.",
+    "The profitability inflection arrived in Q2 2026. GAAP operating income swung to $182.2M on 33.4% gross margin (reported Jul 28, 2026), operating cash flow turned positive at $226.4M, and FY26 guidance implies $800-900M of non-GAAP operating income.",
+    "Capacity is the constraint, and it doubles this year. Fremont is expanding from a 1 GW to 2 GW annual run-rate by end-2026 (~$100M, on schedule as of Jul 2026) with the site expandable toward 5 GW; $2.69B of cash after the late-2025 convertible raise funds the buildout.",
+    "Brookfield removes the customer's capex barrier. The financing framework for Bloom-powered AI infrastructure was expanded fivefold from $5B to $25B on Jul 1, 2026, letting customers buy power-as-a-service instead of owning the equipment.",
+    "Hydrogen is a free option. Bloom's solid oxide platform runs in reverse as an electrolyzer (SOEC); revenue is negligible today, but it is the same factory and stack if green hydrogen economics ever arrive."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported Jul 28, 2026)",
+    "points": [
+      "Revenue $1,065.4M, +165.5% YoY (vs $401.2M) -- first quarter above $1B; product revenue $935.4M, +215.4%.",
+      "GAAP gross margin 33.4% (+668 bps YoY); non-GAAP gross margin 34.3% (+604 bps).",
+      "GAAP operating income $182.2M vs a $3.5M loss; adjusted EBITDA $253.4M vs $41.2M.",
+      "GAAP diluted EPS $0.62 vs $(0.18); non-GAAP diluted EPS $0.78 vs $0.10; net income to common $196.3M.",
+      "Operating cash flow +$226.4M vs -$213.1M a year ago; cash and restricted cash $2,688.5M vs recourse debt $2,470.7M.",
+      "Deferred revenue and customer deposits $327.1M vs $101.0M at year-end 2025 -- customers prepaying."
+    ]
+  },
+  "latestProse": "Q2 2026 was Bloom's first billion-dollar quarter: revenue of $1,065.4M rose 165.5% on product revenue up 215%, GAAP gross margin hit 33.4%, and operating income swung to $182.2M from a small loss. Non-GAAP EPS was $0.78 versus $0.10 a year ago; adjusted EBITDA reached $253.4M versus $41.2M. Operating cash flow turned positive at $226.4M against a $213.1M burn in Q2 2025, leaving $2.69B of cash against $2.47B of recourse debt, and management raised full-year guidance for the second time this year. The disclosure that matters most: deferred revenue and customer deposits jumped to $327M from $101M at year-end 2025 -- AI data-center customers are now prepaying Bloom, funding its own working capital while it doubles manufacturing capacity.",
+  "guidanceProse": "FY2026 guidance was raised to revenue of $3.9-4.2B (from $3.4-3.8B in April; roughly 100% growth over 2025's ~$2.0B), non-GAAP gross margin of about 34%, non-GAAP operating income of $800-900M, and non-GAAP EPS of $2.55-2.85. The constraint is capacity, not demand: the Fremont line doubles to 2 GW by year-end and management says the expansion is on schedule and on budget. Watch conversion of the Oracle (up to 2.8 GW) and AEP (up to 1 GW) frameworks into firm orders -- guidance assumes execution, not new mega-deals.",
+  "guide": {
+    "label": "FY26 rev guide (raised)",
+    "val": "$3.9-4.2B",
+    "sub": "GM ~34% | non-GAAP EPS $2.55-2.85",
+    "tone": "accent"
+  },
+  "segments": [
+    "Product: fuel-cell Energy Servers -- $935.4M in Q2 2026 (~88% of revenue, +215% YoY), sold to data centers, utilities, and C&I customers.",
+    "Service, installation, and electricity: recurring O&M on the installed base plus electricity sales; service profitability has historically lagged product and is the margin swing factor.",
+    "Electrolyzer (SOEC): high-efficiency solid oxide units sharing the fuel-cell platform; negligible revenue today, pure optionality on green hydrogen."
+  ],
+  "competitive": [
+    "PLUG (PEM fuel cells, hydrogen): deeply unprofitable with its DOE loan support terminated; a cautionary comp on hydrogen economics, not a real competitor for data-center baseload.",
+    "FCEL: subscale, restructuring, no meaningful data-center traction; Bloom is the only SOFC maker operating at gigawatt scale.",
+    "GEV is the real competitor: gas turbines are cheaper per MW at scale, but slots are effectively sold out into 2028-29 -- Bloom sells time-to-power in months, not years.",
+    "Bridge power from recip engines (Caterpillar, Cummins) and, longer term, faster grid interconnection and SMRs compete for the same load.",
+    "On ~17x forward sales Bloom is priced like a tech platform; GEV trades far cheaper on sales, while PLUG and FCEL are option-value stocks (multiples approximate, Aug 2026)."
+  ],
+  "moat": "A decade of solid-oxide manufacturing learning gives Bloom the only at-scale SOFC platform, and 30-plus-point gross margins suggest real cost-curve advantage. But there is no patent wall against turbines, engines, or an eventually faster grid -- the moat today is time-to-power and a bankable delivery record. If interconnection queues shorten and turbine capacity catches up by 2028, the pricing premium erodes.",
+  "risks": [
+    "Valuation: ~$70B market cap is ~17x FY26 guided revenue and ~75x forward non-GAAP EPS; the stock swung 11%+ on earnings day alone, so any growth wobble gets amplified.",
+    "'Up to' is not backlog: Oracle (2.8 GW) and AEP (1 GW) are frameworks; only ~1.2 GW of the Oracle MSA was contracted as of Apr 2026. Conversion cadence is the whole story.",
+    "Competition normalizes: GEV turbine capacity expands and interconnection queues shorten toward 2028-29, eroding the time-to-power premium that justifies Bloom's pricing.",
+    "Natural gas dependence: Energy Servers run predominantly on natural gas; sustained gas price spikes or adverse carbon rules dent both economics and the clean-power narrative.",
+    "Execution and concentration: doubling Fremont capacity while doubling revenue; related-party (SK ecoplant) revenue was $373.3M in Q1 2026 -- a lumpy channel.",
+    "Policy: tax-credit and tariff shifts remain swing factors for customer economics; the FY26 EPS guide leans on a favorable credit backdrop."
+  ],
+  "catalysts": [
+    "Q3 2026 earnings (~late Oct 2026): Oracle MSA conversion and whether ~34% gross margin holds at higher volume.",
+    "Fremont 2 GW expansion completion by end-2026 (on schedule and on budget as of Jul 2026).",
+    "Oracle Project Jupiter (New Mexico) deployments and further tranches under the 2.8 GW MSA through 2027.",
+    "Brookfield $25B framework: first funded project announcements expected H2 2026.",
+    "AEP follow-on orders beyond the initial ~1 GW agreement; any new hyperscaler framework."
+  ],
+  "pricedIn": "At roughly $210 and a ~$70B market cap (early Aug 2026), Bloom trades near 17x FY2026 guided revenue and roughly 75-80x the $2.70 midpoint of FY2026 non-GAAP EPS. That embeds years of hypergrowth: full conversion of the Oracle and AEP frameworks, capacity scaling past 2 GW toward Fremont's 5 GW potential, and mid-30s gross margins holding as volume doubles. What is not priced: hydrogen electrolyzer revenue (essentially zero today) and the Brookfield $25B framework converting into a repeatable annuity. What is priced and fragile: the assumption that gas turbines stay sold out and grid queues stay long through 2028 -- the entire premium rests on scarcity of alternatives.",
+  "scenarios": {
+    "bear": "AI capex digests in 2027; GEV and the turbine supply chain add capacity, interconnects speed up, and bridge-power premiums compress. Oracle and AEP take far less than the 'up to' volumes, growth decelerates to 20-30% off a $4B base, and gross margin slips below 30% on pricing pressure. At 30-40x a lower EPS path the stock retraces toward $60-90 -- still a good company, but a brutal de-rating from 17x sales.",
+    "base": "FY2026 lands near the $4.05B midpoint with ~34% gross margin and non-GAAP EPS of $2.55-2.85; the 2 GW Fremont expansion completes on schedule and 2027 revenue grows 30-45% as Oracle's initial 1.2 GW deploys and AEP follow-ons land. Margins hold as scale offsets pricing. The stock compounds with earnings rather than re-rating -- call it $200-260 -- with violent swings around each deal headline and quarter.",
+    "bull": "Time-to-power stays the binding constraint through 2028. Oracle converts most of its 2.8 GW, AEP expands beyond 1 GW, another hyperscaler signs, and Brookfield's $25B framework becomes a repeatable power-as-a-service engine. Capacity heads toward 3-5 GW, 2027-28 revenue compounds 50%+, EPS approaches $5 by 2028, and hydrogen SOEC adds a second act. Growth multiples hold and the stock pushes past $300."
+  },
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.12,
+    "gT": 0.03,
+    "years": 10,
+    "bear": {
+      "g": 0.08
+    },
+    "base": {
+      "g": 0.2
+    },
+    "bull": {
+      "g": 0.32
+    },
+    "note": "TTM FCF is unrepresentative: Q2 2026 was the first strongly positive OCF quarter (+$226M) and capex is elevated while Fremont doubles to 2 GW, so the DCF anchors on forward non-GAAP EPS (FY26 guide $2.55-2.85). Year-1 growth fades to 3% terminal: bear 8%, base 20%, bull 32%, tracking the scenario revenue paths."
+  },
+  "bullCharts": {
+    "0": [
+      "revQ",
+      "revYoyA"
+    ],
+    "1": [
+      "gmA",
+      "omA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "peerEvS",
+      "peerFpe"
+    ],
+    "4": [
+      "fcfQ"
+    ]
+  },
+  "sources": [
+    {
+      "label": "Bloom Q2 2026 results (Jul 28, 2026)",
+      "url": "https://investor.bloomenergy.com/press-releases/press-release-details/2026/Bloom-Energy-Reports-Record-Second-Quarter-2026-Financial-Results-and-Raises-Full-Year-2026-Guidance/default.aspx"
+    },
+    {
+      "label": "Q2 2026 8-K summary (StockTitan)",
+      "url": "https://www.stocktitan.net/sec-filings/BE/8-k-bloom-energy-corp-reports-material-event-11a3a4a289c4.html"
+    },
+    {
+      "label": "Oracle up to 2.8 GW partnership (Apr 14, 2026)",
+      "url": "https://www.businesswire.com/news/home/20260414697111/en/Bloom-Energy-and-Oracle-Expand-Strategic-Partnership-to-Deploy-up-to-2.8-GW-to-Accelerate-AI-Infrastructure-Build-Out"
+    },
+    {
+      "label": "Brookfield framework expanded to $25B (Jul 2026)",
+      "url": "https://www.power-eng.com/onsite-power/brookfield-bloom-energy-expand-partnership-to-25-billion-framework-for-onsite-data-center-power/"
+    },
+    {
+      "label": "2 GW capacity on track (Utility Dive)",
+      "url": "https://www.utilitydive.com/news/bloom-energy-says-its-on-track-for-2-gw-annual-production-capacity/804291/"
+    },
+    {
+      "label": "AEP deal and AI power context (CNBC, Jan 2026)",
+      "url": "https://www.cnbc.com/2026/01/11/bloom-energy-ai-data-center-power-stock-bubble.html"
+    }
+  ]
+}

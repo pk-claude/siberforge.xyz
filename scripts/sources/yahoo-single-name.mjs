@@ -63,3 +63,56 @@ export async function fetchFxPerUsd(code) {
   const closes = (r?.indicators?.quote?.[0]?.close || []).filter(Number.isFinite);
   return closes.length ? closes[closes.length - 1] : null;
 }
+
+// ---- ETF profile: holdings, sector weights, expenses (needs cookie+crumb) ----
+let _sess = null;
+async function etfSession(force) {
+  if (_sess && !force) return _sess;
+  const res = await fetch('https://fc.yahoo.com', { headers: { 'User-Agent': UA }, redirect: 'manual' }).catch(() => null);
+  const cookie = (res?.headers?.getSetCookie?.() || []).map(c => c.split(';')[0]).join('; ');
+  if (!cookie) throw new Error('Yahoo: no session cookie');
+  const cr = await fetch('https://query2.finance.yahoo.com/v1/test/getcrumb', { headers: { 'User-Agent': UA, Cookie: cookie } });
+  const crumb = (await cr.text()).trim();
+  if (!cr.ok || !crumb || crumb.includes('<')) throw new Error('Yahoo: crumb failed');
+  _sess = { cookie, crumb };
+  return _sess;
+}
+
+export async function fetchEtfProfile(ticker) {
+  const MODS = 'topHoldings,fundProfile,summaryDetail,defaultKeyStatistics,price';
+  let json = null;
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const s = await etfSession(attempt > 0);
+    const url = `https://query2.finance.yahoo.com/v10/finance/quoteSummary/${encodeURIComponent(ticker)}?modules=${MODS}&crumb=${encodeURIComponent(s.crumb)}`;
+    try {
+      json = await fetchWithRetry(url, { expectJson: true, tries: 3, headers: { 'User-Agent': UA, Cookie: s.cookie } });
+      break;
+    } catch (e) {
+      if (attempt === 0 && /401|Invalid Crumb/i.test(String(e.message))) continue;
+      throw e;
+    }
+  }
+  const r = json?.quoteSummary?.result?.[0];
+  if (!r) throw new Error(`no quoteSummary for ${ticker}`);
+  const th = r.topHoldings || {}, fp = r.fundProfile || {}, sd = r.summaryDetail || {},
+        ks = r.defaultKeyStatistics || {}, pr = r.price || {};
+  const num = (x) => (x == null ? null : (typeof x === 'object' ? (x.raw ?? null) : Number(x)));
+  return {
+    name: pr.longName || pr.shortName || ticker,
+    px: num(pr.regularMarketPrice),
+    netAssets: num(sd.totalAssets) ?? num(ks.totalAssets),
+    expenseRatio: num(fp.feesExpensesInvestment?.annualReportExpenseRatio),
+    yield: num(sd.yield),
+    ytd: num(ks.ytdReturn) ?? num(th.equityHoldings?.ytdReturn),
+    h52: num(sd.fiftyTwoWeekHigh), l52: num(sd.fiftyTwoWeekLow),
+    holdings: (th.holdings || []).map(h => ({
+      t: h.symbol, n: h.holdingName, pct: num(h.holdingPercent),
+    })),
+    sectors: (th.sectorWeightings || []).map(sw => {
+      const k = Object.keys(sw)[0];
+      return { name: k, pct: num(sw[k]) };
+    }).filter(x => x.pct != null),
+    pe: num(th.equityHoldings?.priceToEarnings),
+    pb: num(th.equityHoldings?.priceToBook),
+  };
+}
