@@ -33,6 +33,16 @@ const TIER1 = [
   { t: 'PLTR',  edgar: true,  peers: ['SNOW', 'NOW', 'DDOG', 'CRM'] },
   { t: 'CRWV',  edgar: true,  peers: ['NBIS', 'ORCL', 'MSFT', 'IREN'] },
   { t: 'CBRS',  edgar: true,  peers: ['NVDA', 'AMD', 'MRVL', 'INTC'] },
+  { t: 'META',  edgar: true,  peers: ['GOOGL', 'MSFT', 'AMZN', 'AAPL'] },
+  { t: 'MSFT',  edgar: true,  peers: ['GOOGL', 'AMZN', 'META', 'ORCL'] },
+  { t: 'AAPL',  edgar: true,  peers: ['MSFT', 'GOOGL', 'AMZN', 'META'] },
+  { t: 'AMZN',  edgar: true,  peers: ['MSFT', 'GOOGL', 'META', 'WMT'] },
+  { t: 'AMD',   edgar: true,  peers: ['NVDA', 'INTC', 'AVGO', 'MRVL'] },
+  { t: 'INTC',  edgar: true,  peers: ['AMD', 'NVDA', 'TSM', 'MU'] },
+  { t: 'MRVL',  edgar: true,  peers: ['AVGO', 'NVDA', 'AMD', 'INTC'] },
+  { t: 'AMAT',  edgar: true,  peers: ['LRCX', 'KLAC', 'ASML'] },
+  { t: 'SMCI',  edgar: true,  peers: ['DELL', 'HPE', 'NVDA'] },
+  { t: 'SNDK',  edgar: true,  peers: ['MU', 'WDC', 'STX', '000660.KS'] },
 ];
 
 const argT = process.argv.find(a => a.startsWith('--tickers='));

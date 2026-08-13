@@ -5,7 +5,8 @@ import { JSDOM } from 'jsdom';
 import fs from 'node:fs';
 
 const snjs = fs.readFileSync('core/single-name/sn.js', 'utf8');
-const TICKERS = ['NVDA', 'TSM', 'MU', 'AVGO', 'GOOGL', 'PLTR', 'CRWV', 'CBRS'];
+const TICKERS = ['NVDA', 'TSM', 'MU', 'AVGO', 'GOOGL', 'PLTR', 'CRWV', 'CBRS',
+  'META', 'MSFT', 'AAPL', 'AMZN', 'AMD', 'INTC', 'MRVL', 'AMAT', 'SMCI', 'SNDK'];
 let fails = 0;
 
 async function testTicker(T) {

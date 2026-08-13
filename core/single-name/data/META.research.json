@@ -1,0 +1,70 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "A 27%-growth ad franchise valued like a value stock because the market doubts the $130-145B superintelligence capex bet will earn a return.",
+  "thesis": [
+    "Ad machine still accelerating. Q2 2026 ad revenue rose 27% YoY to $59.4B with impressions +14% and price per ad +12% - AI is lifting volume and pricing simultaneously.",
+    "AI monetization is already revenue. Advantage+ reached a $75B annualized run-rate and 9M small businesses use Meta's AI ad-creative tools.",
+    "Unmatched distribution. 3.60B people use a Meta app daily, giving any new AI product instant global scale; FoA other revenue crossed $1B/quarter (+73% YoY) on WhatsApp paid messaging and subscriptions.",
+    "Superintelligence optionality. Muse Spark (April 2026) is MSL's first frontier model, now distributed via public API; Zuckerberg says compute demand far exceeds supply, implying monetization options beyond ads.",
+    "Valuation already derated. ~17x forward earnings, below its 5-year average and second-cheapest Mag 7; median street target $800."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported July 29, 2026)",
+    "points": [
+      "Revenue $60.8B, +28% YoY (+27% cc); advertising $59.4B, +27%",
+      "EPS $6.18, -13% YoY - first consensus miss in seven quarters; net income $15.85B, -14%",
+      "Costs +55% to $42.0B on $2.4B legal charges and $1.18B severance (8,000 May 2026 layoffs); operating margin 31% vs 43%",
+      "Reality Labs: $431M revenue, $4.62B operating loss; Family of Apps operating income $23.4B",
+      "Capex $31.1B; free cash flow fell ~91% to $784M",
+      "3.60B daily active people; impressions +14%, price per ad +12%"
+    ]
+  },
+  "latestProse": "Q2 2026 revenue was $60.8B, +28% YoY, with ads at $59.4B (+27%) on impressions +14% and pricing +12%. Operating margin compressed to 31% from 43% as expenses jumped 55% to $42.0B - including $2.4B of unspecified legal accruals and $1.18B severance from ~8,000 AI-pivot layoffs - and EPS fell 13% to $6.18, the first miss in seven quarters. Reality Labs lost $4.62B on $431M revenue; FoA earned $23.4B. The disclosure that matters most: capex of $31.1B drove free cash flow down ~91% to $784M - the AI buildout is consuming nearly all cash generation.",
+  "guidanceProse": "Q3 2026 revenue is guided to $61-64B. Full-year 2026 capex guidance was raised at the low end to $130-145B (from $125-145B), with another ramp signaled for 2027 (2027 range unverified). The debate: bulls say verified AI ad returns (Advantage+ $75B run-rate) fund the buildout; bears see FCF near zero, a 2027 depreciation wave, and a Superintelligence Labs program whose payback is unproven.",
+  "guide": {"label": "2026 capex guide", "val": "$130-145B", "sub": "low end raised $5B in July; Q2 free cash flow just $784M", "tone": "warn"},
+  "segments": [
+    "Advertising: $59.4B, ~98% of Q2 revenue (+27% YoY)",
+    "Family of Apps: $60.4B revenue (99.3% of total), $23.4B operating income; other revenue >$1B (+73%) on WhatsApp paid messaging/subscriptions",
+    "Reality Labs: $431M (~0.7%), -$4.62B operating loss; pivoting from Quest VR toward AI glasses"
+  ],
+  "competitive": [
+    "Digital ads: duopoly with Google; Amazon scaling retail media; TikTok remains the engagement rival for Reels (current share splits unverified)",
+    "AI assistants: Meta AI's captive distribution vs ChatGPT and Gemini; Muse Spark and the 'Avocado' frontier project target GPT-6/Claude-class rivals",
+    "Open models: shift from open Llama to a hybrid/closed strategy cedes some open-weights leadership",
+    "Wearables: Ray-Ban Meta smart glasses lead consumer AI hardware"
+  ],
+  "moat": "3.6B daily users and the deepest commercial-intent dataset outside Google feed self-reinforcing ad-targeting models rivals cannot replicate at scale. Advantage+'s $75B run-rate shows the AI flywheel converting into pricing power, and ~$60B/quarter of revenue funds a compute arms race few can match.",
+  "risks": [
+    "Capex crushes free cash flow. $130-145B of 2026 capex took Q2 FCF to $784M (-91%); the depreciation wave hits 2027 margins.",
+    "Cost discipline broke. Expenses +55%, margins -12pts, first EPS miss in seven quarters.",
+    "Regulatory pincer. FTC is appealing its November 2025 monopolization loss (Instagram/WhatsApp breakup risk revived); a multistate youth-safety trial opened in Oakland in August 2026 with reported penalty demands up to $1.4T; EU DSA preliminary findings on minors carry fines of up to 6% of global revenue.",
+    "Superintelligence execution risk. MSL reorg churn, 8,000 layoffs and mercenary talent costs; Muse Spark must reach frontier parity or the spend is stranded.",
+    "Reality Labs still burns $4.6B/quarter, with the VR retreat producing write-downs, not savings.",
+    "Concentration: ~98% of revenue is advertising - an ad-market downturn hits everything at once."
+  ],
+  "catalysts": [
+    "Aug 2026: multistate youth-safety trial underway in federal court, Oakland",
+    "Sept 23-24, 2026: Meta Connect, Menlo Park - new smart glasses teased",
+    "Late Oct 2026: Q3 2026 earnings - next capex/FCF read",
+    "Through 2026-27: FTC appeal briefing at the D.C. Circuit; EU DSA final decision on minors"
+  ],
+  "pricedIn": "At $599.12 (Aug 11, 2026), META trades ~20-22x trailing and ~17x forward consensus - below its 5-year average forward multiple and second-cheapest Mag 7 after Alphabet; median analyst target is $800. The price capitalizes the ad business and assigns little or negative value to AI/RL spend. The Aug 2026 debate: is the FCF trough a transitory investment cycle, as Advantage+'s run-rate suggests, or a structurally lower-return, capital-intensive Meta?",
+  "scenarios": {
+    "bear": "Ad growth decelerates toward mid-teens into 2027 while depreciation from $130B+ capex compresses margins further, and legal outcomes (youth-safety verdict, EU fines, FTC appeal) add multi-billion charges. EPS stagnates, the multiple holds ~15x: stock $450-500.",
+    "base": "Ads keep compounding ~20%+, margins trough in 2027 then recover as WhatsApp, API and AI ad revenue scale and capex peaks as a share of revenue. FCF inflects, the multiple re-rates toward ~20x forward: $650-720.",
+    "bull": "Muse Spark reaches frontier parity, compute monetization and business agents open non-ad revenue, and glasses hit a consumer inflection at Connect while ads grow >25%. META re-rates as an AI platform at 25x+, clearing the $800 target toward $900+."
+  },
+  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.095, "gT": 0.035, "years": 10,
+    "bear": {"g": 0.02}, "base": {"g": 0.12}, "bull": {"g": 0.22},
+    "note": "Basis is forward earnings: TTM FCF is crushed by the $130-145B capex program (Q2 FCF $784M), so an FCF-DCF would misread the investment cycle as value destruction."},
+  "bullCharts": {"0": ["revQ"], "1": ["revA"], "4": ["peerFpe"]},
+  "bearCharts": {"0": ["capexA"], "1": ["omA"]},
+  "sources": [
+    {"label": "Meta IR - Q2 2026 press release", "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Second-Quarter-2026-Results/default.aspx"},
+    {"label": "StockTitan - Meta Q2 2026 recap", "url": "https://www.stocktitan.net/news/META/meta-reports-second-quarter-2026-hkjfhayj8l0v.html"},
+    {"label": "CNBC - Reality Labs Q2 2026 loss", "url": "https://www.cnbc.com/2026/07/29/metas-reality-labs-lost-over-4point6-billion-in-second-quarter.html"},
+    {"label": "Variety - $2.4B legal charge", "url": "https://variety.com/2026/digital/news/meta-q2-2026-earnings-results-legal-proceedings-charge-1236823577/"},
+    {"label": "Motley Fool - META forward P/E", "url": "https://www.fool.com/investing/2026/08/02/meta-trades-at-a-forward-pe-of-17-below-its-5-year/"},
+    {"label": "FTC - appeal of Meta monopolization ruling", "url": "https://www.ftc.gov/news-events/news/press-releases/2026/01/ftc-appeals-ruling-meta-monopolization-case"}
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "A post-scandal AI-server pure play that just doubled its gross margin and guided FY2027 revenue roughly 26% above Street, yet trades near 11x forward earnings because the market does not fully trust the margins, the customers, or the controls.",
+  "thesis": [
+    "The margin inflection finally showed up. Q4 FY2026 GAAP gross margin hit 17.5% versus 9.9% in Q3 FY26 and guidance of 8.2-8.4%, on favorable customer and product mix; non-GAAP EPS of $1.70 beat consensus $0.71 by 139%.",
+    "FY2027 guidance towers over consensus. Management guided $65-72B revenue versus Street ~$54.4B, backed by more than $60B of new orders received in Q4 alone and a record backlog.",
+    "Rack-scale liquid-cooling leadership into the Rubin cycle. DCBBS blueprints for NVIDIA Vera Rubin NVL72/NVL144 and DLC-2 direct liquid cooling (up to 362kW per rack) keep Supermicro first-to-market as DLC becomes mandatory at Rubin power densities.",
+    "The customer base is broadening. Nine customers each generated over $1B of revenue in FY2026, up from four in FY2025.",
+    "US-based manufacturing is a strategic asset. San Jose HQ, R&D and expanded domestic rack-scale capacity fit the onshoring policy environment and hyperscaler speed requirements."
+  ],
+  "latestQuarter": {
+    "label": "Q4 FY2026 (reported Aug 11, 2026)",
+    "points": [
+      "Revenue $11.12B, up ~92% YoY; below consensus $11.73B and near the low end of guidance",
+      "GAAP gross margin 17.5% vs 9.9% in Q3 FY26 and 9.5% in Q4 FY25; guidance had been 8.2-8.4%",
+      "GAAP diluted EPS $1.62; non-GAAP EPS $1.70 vs consensus $0.71",
+      "FY2026: revenue $39.1B (+78% YoY), non-GAAP EPS $3.63 (+76%)",
+      "New orders exceeded $60B in the quarter; nine customers over $1B in FY26",
+      "Guided Q1 FY27 revenue $14.5-15.5B and FY27 $65-72B vs ~$54.4B consensus"
+    ]
+  },
+  "latestProse": "Q4 FY2026 (ended June 30, 2026, reported August 11) delivered revenue of $11.12B, up ~92% YoY, a slight miss versus the $11.73B consensus - but the story was margin: GAAP gross margin of 17.5% versus 9.9% in Q3 and its own 8.2-8.4% guide, driving GAAP EPS of $1.62 and non-GAAP EPS of $1.70 against a $0.71 estimate. Full-year FY2026 revenue was $39.1B (+78%) with non-GAAP EPS of $3.63. The disclosure that matters most: over $60B of new orders in a single quarter and nine $1B-plus customers (vs four in FY25) - evidence the backlog, not the quarter, now defines the stock.",
+  "guidanceProse": "Management guided Q1 FY2027 revenue to $14.5-15.5B and full-year FY2027 to $65-72B, nearly 30% above the ~$54.4B consensus, implying revenue roughly at Dell's ISG scale within a year. The debate is whether Q4's 17.5% gross margin was a mix-driven spike (a few rich rack-scale deals) or a durable step-change; BofA and Goldman stayed cautious on margin sustainability even while the Street raised targets. Explicit FY27 margin guidance: unverified.",
+  "guide": {"label": "FY2027 revenue guide", "val": "$65-72B", "sub": "vs ~$54.4B consensus; Q1 FY27 guided $14.5-15.5B", "tone": "accent"},
+  "segments": [
+    "Server and storage systems are the overwhelming majority of revenue, subsystems/accessories the small remainder",
+    "AI/GPU rack-scale platforms are the growth engine; management has cited AI platforms as the large majority of revenue",
+    "Concentration: in Q3 FY26 one datacenter customer was 27% of revenue; nine customers each exceeded $1B for FY2026"
+  ],
+  "competitive": [
+    "Dell (ISG) and HPE bundle AI servers with services and financing and drove the price competition that held SMCI gross margin near 9-10% through FY25; Q4's 17.5% reflects mix, not a truce",
+    "ODMs (Quanta, Wiwynn, Foxconn) serve hyperscalers directly at thin margins and cap pricing on the biggest deals",
+    "NVIDIA allocation is the real gatekeeper: Supermicro ships GB300 at volume and has announced Vera Rubin NVL72/NVL144 support with DCBBS blueprints scaling 5MW to 1GW",
+    "Differentiators are time-to-market cadence, building-block architecture, DLC-2 cooling scale, and US manufacturing"
+  ],
+  "moat": "There is little structural moat in assembling x86/GPU servers; Dell, HPE and ODMs can replicate most of the portfolio, which is why gross margin historically sat near 10%. Supermicro's edge is speed - first-to-market on each NVIDIA generation - plus rack-scale DLC integration at volume. That is a lead measured in quarters, not years.",
+  "risks": [
+    "Margin mean reversion. A gross margin that doubled in one quarter on customer mix can halve the same way; guidance credibility rests on repeating it, and top analysts openly doubt it.",
+    "The governance overhang is not resolved. Material weaknesses in internal controls remained unremediated as of March 31, 2026, BDO issued an adverse ICFR opinion on FY2024, DOJ/SEC document subpoenas remain outstanding, and a March 19, 2026 DOJ indictment charged two employees and a contractor over alleged export-control violations (company not charged).",
+    "Customer concentration and order quality. One customer was 27% of Q3 FY26 revenue; the $60B order book is only as good as hyperscaler follow-through.",
+    "Competition and allocation. Any shift in NVIDIA allocation toward Dell, HPE or ODMs on the Rubin ramp directly hits the FY27 guide.",
+    "Working capital strain. Funding $65-72B of revenue requires massive inventory and receivables build, with dilution or debt risk if cash conversion lags.",
+    "Blackwell-to-Rubin transition air pocket. Customers pausing GB300 purchases ahead of Vera Rubin could create an inventory-heavy dead quarter."
+  ],
+  "catalysts": [
+    "Late Aug 2026: FY2026 10-K filing - ICFR opinion, remediation progress, concentration disclosure",
+    "Early Nov 2026: Q1 FY2027 earnings",
+    "2H CY2026 into CY2027: Vera Rubin NVL72/NVL144 volume shipments",
+    "No set timetable: conclusion of the independent board investigation"
+  ],
+  "pricedIn": "The stock jumped 17.6% to $37.15 on Aug 12, 2026 after the print, and the forward P/E sits near 11x - far below AI-hardware peers. The price implies the market discounts both the $65-72B guide and the 17.5% margin: taking guidance at face value with even 14-15% gross margins would make the stock cheap outright. The debate is binary - durable margin regime plus real backlog versus a mix-driven one-off from a company with unremediated material weaknesses.",
+  "scenarios": {
+    "bear": "Gross margin reverts toward 10-12% as the mix normalizes and Dell/HPE/ODM price pressure returns, FY27 revenue lands nearer $55B, and the investigation or a delayed 10-K reignites the accounting discount; EPS stalls near $4 and the multiple compresses toward 8x - low $30s or below.",
+    "base": "Revenue lands in the lower half of the $65-72B guide with gross margins settling in the 12-14% range, non-GAAP EPS in the $5-6 area for FY27, filings stay current and the investigation closes without company charges; at 10-12x the stock grinds toward the $55-70 range.",
+    "bull": "Rubin-cycle DLC leadership and enterprise mix keep gross margins at 15%+, revenue reaches the $70B+ end, EPS approaches $7-8, and governance normalization re-rates the multiple toward 14-16x - a roughly $100+ stock."
+  },
+  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.12, "gT": 0.025, "years": 8,
+    "bear": {"g": -0.05}, "base": {"g": 0.12}, "bull": {"g": 0.28},
+    "note": "Basis is forward earnings: FCF whipsaws with working-capital swings in a pass-through hardware model. The 12% discount rate carries the governance overhang; at ~11x forward, the reverse DCF shows how little growth is priced."},
+  "bullCharts": {"0": ["gmA"], "1": ["revQ"]},
+  "bearCharts": {"0": ["omA"], "4": ["fcfQ"]},
+  "sources": [
+    {"label": "Supermicro IR - Q4/FY2026 results", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Announces-Fourth-Quarter-and-Full-Fiscal-Year-2026-Financial-Results/default.aspx"},
+    {"label": "Q4 FY2026 preliminary business update", "url": "https://www.businesswire.com/news/home/20260721109492/en/Supermicro-Provides-Fourth-Quarter-of-Fiscal-Year-2026-Preliminary-Business-Update"},
+    {"label": "Seeking Alpha - Q4 FY2026 call transcript", "url": "https://seekingalpha.com/article/4935037-super-micro-computer-inc-smci-q4-2026-earnings-call-transcript"},
+    {"label": "24/7 Wall St - Q4 2026 recap", "url": "https://247wallst.com/cards/super-micro-computer-inc-q4-2026-earnings-smci-01kzs75ekjmv562kq4bvhmapqq"},
+    {"label": "Supermicro IR - board investigation update", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Provides-Update-on-Investigation-by-Independent-Board-Directors/default.aspx"},
+    {"label": "CFO Dive - internal control scrutiny", "url": "https://www.cfodive.com/news/super-micros-protracted-internal-control-repairs-draw-scrutiny-accounting/821042/"}
+  ]
+}

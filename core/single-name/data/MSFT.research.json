@@ -1,0 +1,70 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "The cleanest AI monetization print among hyperscalers - Azure past $100B and Copilot inflecting - at a premium multiple that assumes the capex stays pre-sold.",
+  "thesis": [
+    "Azure is a $100B business still accelerating. +43% YoY in Q4 FY26 and +41% for the full fiscal year - the fastest-growing of the big three clouds.",
+    "Contracted demand de-risks the buildout. Commercial RPO of $678B, +84% YoY - still +25% excluding OpenAI commitments.",
+    "Copilot hit an inflection. Paid seats passed 30M (from ~20M in Q3 FY26), net adds more than doubled QoQ and Copilot revenue accelerated >60% QoQ - at only ~6.5% penetration of a ~464M-seat M365 commercial base.",
+    "OpenAI economics crystallized. An uncapped 27% stake worth ~$228B at OpenAI's $852B March 2026 valuation, plus $24.1B of FY26 revenue from OpenAI itself.",
+    "Margins expanding through the buildout. FY26 revenue +18% to $331.8B, operating income +21% to $155.2B, net income +31%, headcount -2%."
+  ],
+  "latestQuarter": {
+    "label": "Q4 FY2026, June-end (reported July 29, 2026)",
+    "points": [
+      "Revenue $90.0B, +18% YoY (+17% cc), vs ~$87.6B consensus",
+      "GAAP EPS $4.81 (+32%); non-GAAP $4.74 vs ~$4.24 expected; includes $3.2B Anthropic investment gain",
+      "Azure +43%; Microsoft Cloud $59.3B (+27%); Intelligent Cloud $39.3B (+32%), Productivity $37.8B (+14%), More Personal Computing $12.9B (-4%)",
+      "Commercial RPO $678B, +84% YoY (+25% ex-OpenAI)",
+      "Capex $41B in the quarter; FY26 capex $115.9B; FCF $19.6B, down YoY",
+      "M365 Copilot >30M paid seats; GitHub Copilot 50M users; stock +7-8% on the print"
+    ]
+  },
+  "latestProse": "Q4 FY26 (ended June 30, 2026): revenue $90.0B, +18% YoY; GAAP net income $35.8B, +31%; EPS $4.81 GAAP / $4.74 non-GAAP vs ~$4.24 expected. Azure grew 43% and crossed $100B in annual revenue (+41% for FY26); Microsoft Cloud hit $59.3B (+27%), ~90% of it from customers outside frontier-model companies. Intelligent Cloud ($39.3B, +32%) overtook Productivity ($37.8B, +14%); More Personal Computing fell 4%. FY26 closed at $331.8B revenue with $133.7B net income. The disclosure that matters most: commercial RPO of $678B (+84%) - while Microsoft pointedly declined to refresh April's $37B AI run-rate figure.",
+  "guidanceProse": "Q1 FY27 guide: revenue $89.85-90.95B (+16-17%), Intelligent Cloud $40.95-41.25B, capex over $50B. FY27 capex was guided only qualitatively - it 'will grow year-over-year' - and the widely quoted $255-260B FY27 figure is an analyst preview, not company guidance. The headline debate is the accounting change: extending data-center/office useful life from 15 to 25 years shifts future finance leases to operating leases, trimming the reported CY2026 capex plan to ~$175B from ~$190B with, per CFO Hood, no change in actual spend - better optics, identical buildout.",
+  "guide": {"label": "Q1 FY27 capex guide", "val": ">$50B", "sub": "FY27 capex to grow YoY; CY26 plan ~$175B after lease reclassification", "tone": "warn"},
+  "segments": [
+    "Q4 FY26 mix: Intelligent Cloud $39.3B (44% of revenue, +32%); Productivity & Business Processes $37.8B (42%, +14%); More Personal Computing $12.9B (14%, -4%)",
+    "Microsoft Cloud: $59.3B in Q4 (+27%); $214B+ for FY26",
+    "Azure: first $100B+ year, +41% in FY26"
+  ],
+  "competitive": [
+    "Cloud infrastructure share (Q1 2026): AWS ~30%, Azure ~25%, Google Cloud ~13% - Azure growing fastest of the three (43% vs AWS ~19%)",
+    "Copilot vs Google Workspace/Gemini in productivity AI; GitHub Copilot (50M users) vs Cursor and other AI coding tools",
+    "OpenAI is simultaneously partner, tenant, investee and rival - exclusivity and revenue-share economics restructured October 2025 and April 2026",
+    "Anthropic partnership hedges model dependency ($3.2B investment gain booked in Q4)"
+  ],
+  "moat": "Enterprise distribution: ~464M M365 commercial seats, identity/Teams lock-in, and compliance-grade trust let Microsoft attach AI to workflows it already owns. $678B of contracted RPO plus a capacity base that added 88 data centers in FY26 gives demand visibility and scale economics only AWS can rival.",
+  "risks": [
+    "Free cash flow compression. FY26 capex was $115.9B with Q1 FY27 guided above $50B; Q4 FCF was just $19.6B, down YoY.",
+    "Accounting optics invite scrutiny. The 15-to-25-year useful-life extension cuts reported capex ~$15B and defers depreciation - bears read it as earnings-quality erosion timed to the spend peak.",
+    "OpenAI concentration and circularity. $24.1B of FY26 revenue from one loss-making customer; RPO grows 84% with OpenAI but 25% without.",
+    "Copilot could stall at shallow penetration - ~6.5% of the installed base three years after launch; GitHub's June 2026 shift to usage-based billing flatters the >60% QoQ growth.",
+    "Azure law of large numbers plus power/GPU constraints as Microsoft tries to double capacity in two years.",
+    "Valuation leaves little slack. ~24-25x forward with a slightly negative trailing-year return shows the multiple derates quickly on AI-capex anxiety."
+  ],
+  "catalysts": [
+    "Late Oct 2026: FY27 Q1 earnings - first print under the new capex accounting",
+    "Sept-Dec 2026: unified Copilot 'super app' (including Code) promised to ship this quarter, per Nadella",
+    "Nov 17-20, 2026: Microsoft Ignite, San Francisco",
+    "Ongoing 2026-27: OpenAI compute and valuation milestones flowing into RPO and equity-method results"
+  ],
+  "pricedIn": "MSFT trades around $500-505 (Aug 2026; ~$3.74T market cap), roughly 24-25x forward consensus - a premium to Meta and Alphabet but below its 52-week high of $553.72, with a slightly negative trailing-year return after a spring AI-capex derating and a 7-8% post-earnings rebound. The price embeds durable ~40% Azure growth and rising Copilot attach. The Aug 2026 debate: does $678B of RPO make the capex effectively pre-sold, or do OpenAI circularity and lease-reclass optics overstate the quality of that visibility?",
+  "scenarios": {
+    "bear": "AI demand digests: Azure decelerates toward 30%, Copilot adds slow, and OpenAI strains under its compute obligations, turning RPO visibility into concentration risk. Depreciation catches up, EPS growth slows to single digits and the multiple contracts to ~20x: $400-430.",
+    "base": "Azure sustains high-30s growth on contracted backlog, Copilot seats keep compounding, and FCF troughs then recovers as the capex curve flattens; EPS grows mid-teens. The multiple holds ~24-25x: $550-600 over 12 months.",
+    "bull": "Copilot penetration triples toward 20% of the M365 base, the super app consolidates AI usage, Azure holds 40%+ toward a $150B year, and the ~$228B OpenAI stake plus Anthropic exposure earn explicit sum-of-parts credit: $650+."
+  },
+  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.095, "gT": 0.035, "years": 10,
+    "bear": {"g": 0.06}, "base": {"g": 0.14}, "bull": {"g": 0.22},
+    "note": "Basis is forward earnings: FY26 capex of $115.9B compresses FCF well below earnings power, and the useful-life accounting change further muddies cash-flow comparability."},
+  "bullCharts": {"0": ["revQ"], "2": ["revA"]},
+  "bearCharts": {"0": ["fcfA"], "4": ["revYoyA"]},
+  "sources": [
+    {"label": "Microsoft IR - FY26 Q4 press release", "url": "https://www.microsoft.com/en-us/investor/earnings/fy-2026-q4/press-release-webcast"},
+    {"label": "CNBC - Microsoft Q4 FY2026 earnings", "url": "https://www.cnbc.com/2026/07/29/microsoft-msft-q4-earnings-report-2026.html"},
+    {"label": "Digital Applied - FY26 Q4 fact-check", "url": "https://www.digitalapplied.com/blog/microsoft-fy26-q4-earnings-copilot-arr"},
+    {"label": "CNBC - OpenAI/Microsoft revenue-share cap", "url": "https://www.cnbc.com/2026/04/27/openai-microsoft-partnership-revenue-cap.html"},
+    {"label": "Neowin - $24.1B FY26 revenue from OpenAI (10-K)", "url": "https://www.neowin.net/news/microsoft-reveals-it-generated-241-billion-in-revenue-from-openai-in-fiscal-2026/"},
+    {"label": "GuruFocus - MSFT forward P/E", "url": "https://www.gurufocus.com/term/forward-pe-ratio/MSFT"}
+  ]
+}

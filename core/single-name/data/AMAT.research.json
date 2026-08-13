@@ -1,0 +1,71 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "The broadest semiconductor equipment franchise riding a record AI-driven WFE cycle into tonight's Q3 print, re-rated from a ~20x cyclical to a ~36x forward secular growth story.",
+  "thesis": [
+    "AI capex is inflecting AMAT's growth. Management raised its calendar-2026 semiconductor equipment growth outlook to 30%+ (from 20%+ in February), with advanced packaging revenue guided to grow 50%+.",
+    "Guidance implies a step-change. The Q3 FY26 guide of $8.95B came in roughly $860M above the then-consensus $8.09B, with EPS guided to $3.36 vs $2.88 expected.",
+    "Leverage to GAA and HBM. Materials-engineering intensity rises with gate-all-around transistors, backside power, and HBM stacking; Q2 DRAM systems revenue hit a record $1.7B (+18% YoY), and EPIC partnerships span TSMC, Samsung, SK hynix, and Micron.",
+    "Services compound quietly. AGS grew 17% YoY to $1.665B in Q2 FY26 with 29.2% operating margin, a recurring-revenue ballast on a massive installed base.",
+    "Industry tailwind has legs. SEMI forecasts WFE up ~23% to ~$143.9B in 2026 and up a further ~22% in 2027."
+  ],
+  "latestQuarter": {
+    "label": "Q2 FY2026 (reported May 14, 2026; Q3 FY2026 due Aug 13, 2026)",
+    "points": [
+      "Record revenue $7.91B, +11% YoY",
+      "Non-GAAP EPS record $2.86, +20% YoY; GAAP EPS $3.51 (includes tax benefits)",
+      "Non-GAAP gross margin 50.0% (+80bps YoY); non-GAAP operating margin 32.1%",
+      "Semiconductor Systems $5.965B; record DRAM revenue $1.7B; AGS $1.665B (+17%)",
+      "Free cash flow only $210M, -80% YoY, on deliberate inventory/build-plan increase",
+      "China was 27% of sales; $252.5M BIS export settlement announced Feb 11, 2026"
+    ]
+  },
+  "latestProse": "Q2 FY26 (ended Apr 26, 2026) revenue was a record $7.91B, +11% YoY, with non-GAAP gross margin at 50.0%, operating margin 32.1%, and record non-GAAP EPS of $2.86 (+20%); GAAP EPS of $3.51 was inflated by a tax benefit. Semiconductor Systems did $5.965B (foundry/logic 67%, DRAM 29%, flash 4% of systems), AGS $1.665B (+17%), Display $280M. The disclosure that mattered: Dickerson raised the CY26 equipment growth outlook to 30%+, while free cash flow collapsed 80% to $210M as AMAT built inventory ahead of the ramp.",
+  "guidanceProse": "Q3 FY26 guidance: revenue $8.95B plus or minus $500M and non-GAAP EPS $3.36 plus or minus $0.20, far above pre-guide consensus ($8.09B / $2.88). Management expects CY26 semi equipment growth of 30%+ and packaging growth of 50%+, with China and global ICAPS flat to slightly higher. The headline debate into the Aug 13 print: whether Q4 guidance confirms sustained acceleration into CY27, and whether China (27% of sales) stays insulated after the suspended BIS affiliates rule (once flagged as a ~$600-710M FY26 hit) and the pending MATCH Act.",
+  "guide": {"label": "Q3 FY26 revenue guide", "val": "$8.95B +/-$500M", "sub": "~$860M above consensus at guide; EPS $3.36; results Aug 13, 2026", "tone": "accent"},
+  "segments": [
+    "Semiconductor Systems: $5.965B, ~75% of Q2 FY26 revenue (foundry/logic 67%, DRAM 29%, flash 4% of segment)",
+    "Applied Global Services: $1.665B, ~21% of revenue, +17% YoY",
+    "Display/Other: $280M, ~4%; by region: Taiwan 27%, China 27%, Korea 20%"
+  ],
+  "competitive": [
+    "Lam Research: closest rival in deposition/etch, heavier memory/NAND mix",
+    "ASML: litho monopoly captures a growing WFE share; complementary rather than head-on",
+    "KLA: process-control leader; Tokyo Electron competes across deposition/etch/clean",
+    "AMAT is the largest process-equipment maker by revenue with the broadest portfolio",
+    "In advanced packaging, Besi/ASMPT compete in bonding; AMAT is acquiring ASMPT NEXX ($120M, May 2026)"
+  ],
+  "moat": "Breadth is the moat: AMAT touches more materials-engineering steps than any rival, and integrated platforms plus co-optimized process flows raise switching costs at GAA/backside-power/HBM inflections. A massive installed base feeds AGS recurring revenue at 29% operating margins, and the EPIC Center embeds AMAT in customers' next-node R&D.",
+  "risks": [
+    "This is still a cyclical. WFE booms invert; SEMI's own 2027-28 deceleration path and any AI capex digestion would compress both estimates and the multiple.",
+    "China/export-control overhang. China is 27% of sales; the $252.5M BIS penalty is settled, but the suspended affiliates rule could return and the MATCH Act would restrict DUV servicing.",
+    "Valuation reset risk. ~51x trailing earnings is a decade-high multiple for AMAT, roughly 160% above its historical average.",
+    "Cash conversion deteriorated. FCF fell 80% YoY on inventory build; if orders slip, working capital unwinds painfully.",
+    "Customer concentration. Spending hinges on a handful of buyers (TSMC, Samsung, SK hynix, Micron); a single capex pause is material.",
+    "NAND and ICAPS are flat. Flash is just 4% of systems revenue, so growth rests narrowly on leading-edge logic, DRAM/HBM, and packaging."
+  ],
+  "catalysts": [
+    "Aug 13, 2026: Q3 FY26 results and Q4 guide",
+    "Nov 2026: Q4 FY26 results with initial CY2027 commentary",
+    "H2 2026: MATCH Act progress; any reinstatement of the BIS affiliates rule",
+    "Late 2026: SEMI year-end WFE forecast update (2027 currently seen +~22%)"
+  ],
+  "pricedIn": "At $548.15 (Aug 12 close, +4.3% into earnings; ~$435B market cap), AMAT trades at ~51.6x trailing and ~35.8x forward earnings - a record trailing multiple versus a historical average near 20x - yet sits ~26% below its July peak of $739.67. Consensus target is ~$633 (Strong Buy). The market has re-rated AMAT from cyclical to AI-secular; the debate is whether 30%+ CY26 growth extends into CY27 (SEMI says WFE +~22%) or marks a cycle peak with China risk attached.",
+  "scenarios": {
+    "bear": "Q4 guidance disappoints or CY27 WFE flattens as AI capex digests; China restrictions return, clipping the 27% China mix. EPS estimates stall and the multiple mean-reverts toward mid-20s; stock retraces toward $380-420.",
+    "base": "Q3 lands near the $8.95B guide with EPS ~$3.36, Q4 confirms momentum, and FY26 finishes with equipment growth of 30%+. The stock recovers toward the ~$633 consensus target as CY27 WFE growth gets penciled in.",
+    "bull": "Beat-and-raise plus a strong CY27 WFE outlook (leading-edge logic, HBM/DRAM, packaging +50% compounding) drives estimates toward the bullish targets; stock retests the $700-740 highs."
+  },
+  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.10, "gT": 0.025, "years": 10,
+    "bear": {"g": 0.0}, "base": {"g": 0.12}, "bull": {"g": 0.22},
+    "note": "Basis is forward earnings: TTM FCF is artificially depressed (down 80%) by a deliberate pre-ramp inventory build, which would make an FCF-DCF read as far more expensive than the business is."},
+  "bullCharts": {"0": ["revA"], "4": ["revYoyA"]},
+  "bearCharts": {"2": ["priceH"], "3": ["fcfQ"]},
+  "sources": [
+    {"label": "Applied Materials Q2 FY2026 results", "url": "https://www.globenewswire.com/news-release/2026/05/14/3295316/0/en/applied-materials-announces-second-quarter-2026-results.html"},
+    {"label": "TrendForce: AMAT CY26 outlook", "url": "https://www.trendforce.com/news/2026/05/15/news-applied-materials-sees-over-30-equipment-growth-50-packaging-surge-in-2026-china-remains-top-market-in-2qfy26/"},
+    {"label": "BIS: $252.5M export penalty", "url": "https://www.bis.gov/press-release/applied-materials-pay-252-million-penalty-bis-illegally-exporting-semiconductor-manufacturing-equipment"},
+    {"label": "AMAT Q3 FY2026 report date", "url": "https://www.globenewswire.com/news-release/2026/07/23/3332037/0/en/Applied-Materials-to-Report-Fiscal-Third-Quarter-2026-Results-on-Aug-13-2026.html"},
+    {"label": "SEMI equipment forecast", "url": "https://www.semi.org/en/semi-press-release/global-semiconductor-equipment-sales-forecast-to-reach-a-record-229-billion-dollars-in-2028-semi-reports"},
+    {"label": "StockAnalysis.com AMAT statistics", "url": "https://stockanalysis.com/stocks/amat/"}
+  ]
+}

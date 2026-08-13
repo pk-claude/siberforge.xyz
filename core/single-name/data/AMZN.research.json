@@ -1,0 +1,71 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "An AI-infrastructure land grab hitting escape velocity - AWS reaccelerated to 37% growth with a $496B backlog and record margins - funded by $220B of capex that keeps the free-cash-flow and earnings-quality debates wide open.",
+  "thesis": [
+    "AWS has decisively reaccelerated. Q2 revenue of $42.2B grew 36.7% YoY - the fastest in 18 quarters and the fifth straight quarter of acceleration - with a $169B annualized run-rate and a $496B backlog of contracted, not-yet-recognized work.",
+    "Custom silicon is becoming a second franchise. Trainium3 UltraServers went GA in December 2025; Anthropic has committed over $100B across ten years to AWS with up to 5GW of capacity, ~1GW of Trainium3 targeted online by end-2026. Jassy says AI and chips businesses each exceed $25B run-rates.",
+    "The margin structure keeps improving. Q2 operating income rose 43% to $27.5B (13.7% margin vs 11.4%), AWS margin hit 39% (up ~650bps YoY), and $19.8B of advertising (+26%) is among the highest-margin revenue at scale anywhere.",
+    "Retail still compounds. North America grew 16% to $116.2B at a 7.9% margin; International grew 15% - the 'low-margin retailer' framing understates a logistics network operating at record efficiency.",
+    "Embedded optionality: the Anthropic stake produced a $53.4B pre-tax mark in Q2 alone, and Amazon Leo satellite broadband is entering commercial service."
+  ],
+  "latestQuarter": {
+    "label": "Q2 2026 (reported July 30, 2026)",
+    "points": [
+      "Net sales $200.6B, +20% YoY - first $200B+ quarter, vs ~$196B consensus",
+      "AWS $42.2B, +36.7% (fastest in 18 quarters); 39% operating margin; backlog $496B",
+      "Operating income $27.5B, +43%; operating margin 13.7% vs 11.4% a year ago",
+      "EPS $5.75 (net income $62.65B), including $53.4B pre-tax non-operating gain, primarily Anthropic",
+      "Advertising $19.8B, +26%; North America $116.2B, +16%, 7.9% margin",
+      "Q2 capex $53.1B; full-year 2026 capex guide raised to ~$220B"
+    ]
+  },
+  "latestProse": "Q2 2026 (reported July 30) was Amazon's first $200B quarter: net sales of $200.6B (+20%) beat consensus, operating income jumped 43% to $27.5B (13.7% margin), and AWS grew 36.7% to $42.2B at a 39% operating margin - up roughly 650bps YoY - with a $496B backlog. Advertising rose 26% to $19.8B; North America grew 16% at a 7.9% margin. Headline EPS of $5.75 obliterated the ~$1.81 estimate, but the disclosure that matters most: $53.4B of pre-tax non-operating income, primarily the mark-up of the Anthropic stake, drove the bulk of the beat - operating results were strong, but the EPS figure is not an operating number.",
+  "guidanceProse": "For Q3 2026 Amazon guided net sales of $197-202B and operating income of $22.5-26.5B (vs $17.4B in Q3 2025). The bigger guide was capex: full-year 2026 spending raised from ~$200B to ~$220B, which Jassy attributed to soaring memory-chip prices, while declining to detail funding. Bulls see the $496B AWS backlog as pre-sold demand justifying the buildout; bears see memory-cost inflation eroding returns, near-term free cash flow going deeply negative, and the risk that AI capacity is being built faster than monetization outside a handful of anchor customers.",
+  "guide": {"label": "FY2026 capex", "val": "~$220B", "sub": "Raised from ~$200B on memory-chip cost inflation; mostly AI/cloud infrastructure", "tone": "warn"},
+  "segments": [
+    "North America ~58% of Q2 revenue ($116.2B, +16%, 7.9% margin); International ~21% ($42.2B, +15%)",
+    "AWS ~21% of revenue ($42.2B) but ~60% of operating income ($16.6B of $27.5B)",
+    "Advertising $19.8B (+26%) reported within the geographic segments - the profit mix-shifter"
+  ],
+  "competitive": [
+    "Cloud: Microsoft Azure and Google Cloud remain the share threats, but AWS's reacceleration to 37% closes the growth-gap narrative",
+    "AI silicon: Trainium3 vs Nvidia GPUs - Anthropic co-designs with Annapurna Labs",
+    "Retail: Walmart's e-commerce push is the main rival; Amazon's fulfillment density keeps share",
+    "Satellite: Amazon Leo enters a market Starlink dominates by thousands of satellites",
+    "Advertising: #3 behind Google and Meta, growing faster than both off first-party purchase data"
+  ],
+  "moat": "Prime plus the densest fulfillment network in Western retail creates a two-sided lock-in no rival has replicated. AWS adds enormous switching costs, a $496B contracted backlog, and increasingly proprietary silicon (Trainium, Graviton), while advertising monetizes first-party purchase intent that Google and Meta cannot see.",
+  "risks": [
+    "Capex swallows cash flow. ~$220B of 2026 spending ($53.1B in Q2 alone) pressures free cash flow, and management declined to specify funding.",
+    "Earnings quality and circularity. $53.4B of the Q2 profit was a non-operating Anthropic mark; Amazon is investing billions in the customer anchoring its Trainium demand - a vendor-financing loop that flatters both sides while it lasts.",
+    "Input-cost inflation. The capex raise was driven by memory prices, not more capacity - the same dollars now buy less compute, compressing infrastructure ROI.",
+    "Retail remains thin-margin and cyclical. A 7.9% North America margin leaves little cushion if the consumer weakens.",
+    "Leo/Kuiper is far behind. The constellation sits well short of the FCC's 1,618-satellite July 2026 milestone; Amazon has requested a two-year extension while Starlink extends its lead.",
+    "Regulatory overhang persists across marketplace practices and deepening AI partnerships."
+  ],
+  "catalysts": [
+    "Late Oct 2026: Q3 2026 earnings - AWS growth durability and capex/FCF trajectory",
+    "2H 2026: Amazon Leo commercial launch and FCC ruling on the deadline extension",
+    "End-2026: ~1GW of Trainium3-powered compute online for Anthropic",
+    "Early Dec 2026: AWS re:Invent - Trainium4 roadmap"
+  ],
+  "pricedIn": "At $278.09 (Aug 10, 2026), AMZN trades around 26-31x forward earnings - the trailing ~22x is artificially low because TTM EPS includes the one-time Anthropic gain. The multiple sits well below Amazon's own 10-year average, reflecting how operating income (up 43%) has outgrown the stock. The price implies AWS sustains mid-30s growth with ~39% margins. The key debate: whether $220B of capex - increasingly inflated by memory costs - earns its cost of capital, and how much of the AI demand signal is circular (Anthropic committing $100B+ to AWS while Amazon funds Anthropic).",
+  "scenarios": {
+    "bear": "AI infrastructure demand cools or consolidates around fewer labs; the Anthropic loop unwinds; memory-cost inflation and $220B capex crush free cash flow with sub-par returns; NA retail margin stalls; Leo becomes a write-off risk. Multiple compresses toward 20x on lower estimates.",
+    "base": "AWS grows 30%+ through 2027 as the $496B backlog converts; AWS margins hold high-30s; ads compound ~20%+; retail margins grind higher; capex peaks as a percentage of sales in 2026 and FCF inflects in 2027. Stock compounds with operating income at a mid-to-high-20s forward multiple.",
+    "bull": "Trainium3/4 breaks Nvidia dependence, structurally raising AWS margins while chips become a >$25B external business; AI demand stays supply-constrained for years; Leo reaches commercial scale; earnings power re-rates the stock well above $300."
+  },
+  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.10, "gT": 0.035, "years": 10,
+    "bear": {"g": 0.06}, "base": {"g": 0.16}, "bull": {"g": 0.26},
+    "note": "Basis is forward earnings: FCF is deeply distorted by ~$220B of capex, and trailing GAAP earnings carry the one-time $53.4B Anthropic mark - forward EPS is the cleanest anchor available."},
+  "bullCharts": {"0": ["revQ"], "2": ["omA"]},
+  "bearCharts": {"0": ["capexA"], "3": ["omA"]},
+  "sources": [
+    {"label": "Amazon - Q2 2026 earnings release", "url": "https://www.aboutamazon.com/news/company-news/amazon-earnings-q2-2026-report"},
+    {"label": "CNBC - Amazon Q2 2026 earnings", "url": "https://www.cnbc.com/2026/07/30/amazon-amzn-q2-earnings-report-2026.html"},
+    {"label": "Investing.com - Q2 2026 call transcript", "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-amazon-tops-q2-2026-estimates-as-aws-growth-accelerates-93CH-4826442"},
+    {"label": "Anthropic - expanded AWS collaboration", "url": "https://www.anthropic.com/news/anthropic-amazon-compute"},
+    {"label": "TNW - Amazon Leo mid-2026 launch", "url": "https://thenextweb.com/news/amazon-leo-satellite-internet-mid-2026"},
+    {"label": "Motley Fool - Q2 2026 call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/amazon-amzn-q2-2026-earnings-call-transcript/"}
+  ]
+}

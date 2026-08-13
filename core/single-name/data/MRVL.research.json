@@ -1,0 +1,71 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "The clear No. 2 custom AI silicon and optical interconnect franchise, with accelerating revenue and a potential Google win, priced at a premium that assumes it keeps its sockets.",
+  "thesis": [
+    "AI demand is accelerating, not decelerating. Q1 FY27 revenue rose 28% YoY to a record $2.418B, Q2 was guided to $2.7B (+35% YoY), and management says growth accelerates each quarter of FY27.",
+    "Custom XPU pipeline is broadening. Custom silicon is expected to more than double in FY28 on a new tier-1 XPU ramp plus 10+ XPU-attach programs, on top of AWS Trainium and Microsoft Maia work.",
+    "Electro-optics is a second growth engine. Interconnect revenue is now expected to grow 70%+ in FY27 (raised from 50%) on 800G/1.6T optics, 51.2T switching, and DCI modules.",
+    "Celestial AI adds a scale-up optics option. The $3.25B Photonic Fabric acquisition (closed Feb 2, 2026) targets a ~$500M annual run-rate exiting FY28, ~$1B exiting FY29.",
+    "Google optionality. April 2026 reports (The Information) put Marvell in talks on two Google inference chips, with design finalization targeted for 2027 and ~2M units discussed."
+  ],
+  "latestQuarter": {
+    "label": "Q1 FY2027 (reported May 27, 2026)",
+    "points": [
+      "Record revenue $2.418B, +28% YoY, $18M above guide midpoint",
+      "Data center revenue record $1.83B, +27% YoY, 76% of total",
+      "Non-GAAP EPS $0.80; GAAP EPS just $0.04 ($34.5M GAAP net income)",
+      "Non-GAAP gross margin 58.9%; GAAP 52.1%",
+      "Record operating cash flow of $638.8M",
+      "Closed Celestial AI ($3.25B) and XConn CXL-switch acquisitions in February"
+    ]
+  },
+  "latestProse": "Q1 FY27 (April-end) revenue was a record $2.418B, +28% YoY and above guidance, with data center at $1.83B (+27% YoY, 76% of revenue) and communications/other at $585.1M (+29%). Non-GAAP gross margin was 58.9%, non-GAAP EPS $0.80; GAAP EPS was only $0.04 on acquisition-related and SBC charges. The disclosure that matters most: management called AI bookings 'exceptional' and significantly raised both FY27 and FY28 revenue expectations, citing 1.6T optics, custom XPU/XPU-attach, and scale-up optical (NPO/CPO) demand.",
+  "guidanceProse": "Q2 FY27 guide: revenue $2.70B plus or minus 5% (midpoint +35% YoY), non-GAAP gross margin 58.25-59.25%, non-GAAP EPS $0.93. Call commentary lifted FY27 revenue expectations to roughly $11.5B and the FY28 target to about $16.5B, with data center growing ~50% in FY27 and ~55% in FY28 and a longer-term custom silicon target above $10B by FY29 (management targets, not formal guidance). The debate: whether these targets survive disputed analyst claims (SemiAnalysis, Benchmark) that Trainium 3/4 back-end work shifted to Alchip - unconfirmed by Marvell or Amazon.",
+  "guide": {"label": "Q2 FY27 revenue guide", "val": "$2.70B +/-5%", "sub": "Midpoint +35% YoY; non-GAAP EPS $0.93; reports Aug 27, 2026", "tone": "accent"},
+  "segments": [
+    "Data center: $1.83B, 76% of Q1 FY27 revenue, +27% YoY (custom compute, electro-optics, switching, storage)",
+    "Communications and other: $585.1M, 24% of revenue, +29% YoY",
+    "Within data center, interconnect guided +70%+ in FY27; custom silicon to more than double in FY28"
+  ],
+  "competitive": [
+    "Broadcom: dominant custom-ASIC rival (~$21B 2026 AI revenue est.; Google TPU deal through 2031); Marvell holds ~20-25% of custom ASIC design share",
+    "Alchip/MediaTek: lower-cost back-end design challengers; alleged Trainium 3/4 wins are the key bear claim",
+    "Nvidia: merchant-silicon gravity plus NVLink Fusion ecosystem shapes hyperscaler make-vs-buy",
+    "Astera Labs/Credo: niche connectivity competitors; Marvell leads PAM4 optical DSPs",
+    "Customer set: AWS (Trainium), Microsoft (Maia), Meta, Google (Axion CPU) across 18 reported design wins"
+  ],
+  "moat": "Deep multi-generation co-design relationships with hyperscalers, leading PAM4 optical DSP and 224G SerDes IP, and now Celestial's Photonic Fabric plus XConn CXL switching give Marvell a full electrical-plus-optical interconnect stack few can match. Switching costs on in-flight XPU programs are high, though the alleged Trainium loss shows the moat is per-socket, not permanent.",
+  "risks": [
+    "Socket churn. Reported (unconfirmed) loss of AWS Trainium 3/4 back-end work to Alchip triggered a December 2025 downgrade; custom ASIC wins are contestable every generation.",
+    "Extreme concentration. Data center is 76% of revenue, dominated by a handful of hyperscalers; one program cancellation moves the model.",
+    "Thin GAAP economics. GAAP EPS of $0.04 vs $0.80 non-GAAP shows heavy SBC, amortization, and acquisition costs; Celestial adds ~27M shares plus up to $2.25B earnouts.",
+    "Google may not convert. Talks were early-stage with no signed contract; Broadcom and MediaTek are incumbents.",
+    "High-beta AI trade. Beta 2.25; the stock fell ~34% from its June peak ($329.88) in the July AI selloff.",
+    "Margin mix. Custom silicon carries below-corporate gross margins, capping margin expansion as it scales."
+  ],
+  "catalysts": [
+    "Aug 27, 2026: Q2 FY27 results ($2.7B guide) and FY27/FY28 updates",
+    "Oct 6, 2026: Investor Day - custom pipeline and Celestial detail expected",
+    "H2 2026: potential Google inference-chip decision",
+    "Through 2026: Trainium 3 volume ramp and Maia 200 progress; 1.6T optics ramp"
+  ],
+  "pricedIn": "At $217.08 (Aug 12; ~$190B market cap), MRVL trades at ~75x trailing and ~48x forward earnings, down ~34% from its June record $329.88 after the July AI-trade pullback. Consensus is Strong Buy with a ~$257 target. The price already embeds the raised ~$11.5B FY27 outlook; the debate is whether the $16.5B FY28 target and $10B+ FY29 custom ambition are credible given contested Trainium sockets - bulls see a cheap call on a Google win, bears see Broadcom-style pricing without Broadcom-style contract visibility.",
+  "scenarios": {
+    "bear": "Trainium/Maia share losses are confirmed and Google talks lapse; custom growth stalls in FY28, AI capex digests, and FY28 revenue lands nearer $13B. Forward multiple compresses toward 30x on cut estimates; stock revisits the $120-140 area.",
+    "base": "FY27 delivers ~$11.5B (+~40%) with quarterly acceleration; tier-1 XPU and 1.6T optics ramp on schedule, FY28 approaches the $16.5B target. Stock grinds back toward the $257 consensus target as Aug 27 results and the Oct 6 Investor Day de-risk the roadmap.",
+    "bull": "A signed Google inference program plus retained AWS/Microsoft sockets validate a $10B+ custom business by FY29; Celestial wins scale-up optical sockets. Estimates move materially higher and the stock retests and exceeds the $330 high."
+  },
+  "valPresets": {"mode": "fcf", "r": 0.105, "gT": 0.03, "years": 10,
+    "bear": {"g": 0.10}, "base": {"g": 0.30}, "bull": {"g": 0.50},
+    "note": "FCF basis works here (record operating cash flow, modest capex), but note GAAP earnings are a fraction of non-GAAP - SBC is a real cost the DCF ignores."},
+  "bullCharts": {"0": ["revQ"], "2": ["revA"]},
+  "bearCharts": {"4": ["priceH"], "5": ["gmA"]},
+  "sources": [
+    {"label": "Marvell Q1 FY2027 press release", "url": "https://www.businesswire.com/news/home/20260527144543/en/Marvell-Technology-Inc.-Reports-First-Quarter-of-Fiscal-Year-2027-Financial-Results"},
+    {"label": "Q1 FY2027 earnings call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/05/27/marvell-mrvl-q1-2027-earnings-transcript/"},
+    {"label": "The Information: Google inference-chip talks", "url": "https://www.theinformation.com/articles/google-talks-marvell-build-new-ai-chips-inference"},
+    {"label": "Marvell completes Celestial AI acquisition", "url": "https://investor.marvell.com/news-events/press-releases/detail/1005/marvell-completes-acquisition-of-celestial-ai"},
+    {"label": "Tom's Hardware: Custom AI ASIC state of play", "url": "https://www.tomshardware.com/tech-industry/semiconductors/custom-ai-asics-examined-from-broadcom-to-mtia"},
+    {"label": "StockAnalysis.com MRVL statistics", "url": "https://stockanalysis.com/stocks/mrvl/"}
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "asOf": "2026-08-12",
+  "oneLiner": "A supply-capped supercycle: record iPhone demand, a Gemini-powered Siri reboot, and 50% gross margins collide with Apple's inability to source enough advanced-node silicon to meet it, at roughly 31-34x forward earnings.",
+  "thesis": [
+    "The iPhone cycle is real and demand-led. FQ3 iPhone revenue hit a June-quarter record $54.3B, up 22% YoY, with records in every geographic segment; management says demand exceeds supply heading into the iPhone 18 launch.",
+    "The Siri overhaul finally shipped its answer to the AI-laggard critique. At WWDC on June 8, 2026, Apple unveiled a rebuilt Siri AI that routes hard reasoning to Google's Gemini models under a multi-year deal, with a standalone app, chat history, and cross-app actions.",
+    "The tariff overhang reversed into a tailwind. The Supreme Court's Feb 20, 2026 ruling struck down the IEEPA reciprocal tariffs; refunds added roughly 2 points to FQ3 gross margin and $0.11 to EPS, and the India production shift cuts structural exposure.",
+    "Record profitability with a fatter mix. FQ3 gross margin of 50.1% and Services at ~28% of revenue underpin 29% EPS growth on 16% revenue growth.",
+    "Capital returns remain unmatched: a fresh $100B buyback authorized April 30, 2026, dividend raised 4%, ~$45B returned in 1H FY26 - while megacap peers divert cash to AI capex."
+  ],
+  "latestQuarter": {
+    "label": "Q3 FY2026 (reported July 30, 2026)",
+    "points": [
+      "Revenue $109.4B, +16% YoY, an all-time June-quarter record; GAAP EPS $2.02, +29% (includes $0.11 favorable tariff-refund impact)",
+      "iPhone $54.3B, +22% YoY; Services $30.7B, +12.1%, below ~$31.2B consensus",
+      "Gross margin 50.1%, including ~2pp benefit from tariff refunds",
+      "Greater China $18.8B vs ~$19.6B consensus - a miss despite YoY growth",
+      "Mac $10.4B, +28.7%; iPad $6.2B, -5.9%; Wearables $7.9B, +6.5%",
+      "Installed base topped 2.5B active devices; shares fell ~6% after hours on guidance"
+    ]
+  },
+  "latestProse": "Apple's June quarter (FQ3 FY26, ended June 27) delivered $109.4B in revenue, +16.4% YoY, with GAAP EPS of $2.02 (+29%) and net income of $29.8B. iPhone led at $54.3B (+22%, June-quarter records in every geography), Mac grew 28.7% to $10.4B, while iPad fell 5.9%. Services grew 12.1% to a record $30.7B but missed consensus, and Greater China's $18.8B came in below the ~$19.6B expected. Gross margin reached 50.1%, but the disclosure that matters most: roughly 2 points of that margin and $0.11 of EPS came from one-time IEEPA tariff refunds after the Supreme Court struck the tariffs down in February 2026 - flattering optics that won't repeat.",
+  "guidanceProse": "Apple guided September-quarter revenue growth of 9-11% YoY, below the ~12% LSEG consensus, sending shares down more than 6% after hours. Management blamed an FX headwind and a significant sequential increase in supply constraints - specifically availability of advanced nodes for Apple silicon - hitting iPhone, Mac, and iPad. The debate: bulls say constrained demand is deferred, not lost, into the iPhone 18 cycle; bears note TSMC's C.C. Wei has warned AI chip supply will lag demand 'for years,' making this a structural cap, not a one-quarter blip.",
+  "guide": {"label": "FQ4 revenue growth guide", "val": "+9-11% YoY", "sub": "Below ~12% consensus; supply-constrained (advanced nodes), not demand-constrained", "tone": "warn"},
+  "segments": [
+    "iPhone ~50% of FQ3 revenue ($54.3B of $109.4B), the cycle engine",
+    "Services ~28% ($30.7B), the margin engine, now growing ~12%",
+    "Mac ~9.5% ($10.4B), Wearables/Home/Accessories ~7.2% ($7.9B), iPad ~5.7% ($6.2B)"
+  ],
+  "competitive": [
+    "Google: simultaneously AI supplier (Gemini powers Siri AI) and rival (Pixel/Android) - an unprecedented coopetition",
+    "Samsung: premium Android flagship and foldable rival; Apple retains pricing power at the high end",
+    "Huawei: pressures China share, where Apple's $18.8B missed consensus",
+    "TSMC allocation vs Nvidia-led AI demand is now a de facto competitive front for 2nm capacity"
+  ],
+  "moat": "An installed base above 2.5 billion active devices with deep ecosystem lock-in (App Store, iCloud, iMessage, silicon-software integration) drives industry-best hardware margins and a $120B+ annualized Services attach. Custom silicon and first-claim (though now contested) access to TSMC's leading nodes sustain a multi-year performance lead.",
+  "risks": [
+    "Supply constraints cap the supercycle. The below-consensus FQ4 guide, worsening Mac supply, and TSMC's warning that advanced-node scarcity will persist 'for years' mean Apple may be unable to convert record demand into revenue for multiple quarters.",
+    "Apple rents its AI brain from a rival. Siri AI's dependence on Google Gemini concedes the frontier-model layer and invites antitrust scrutiny of yet another Apple-Google arrangement.",
+    "China remains fragile. Greater China missed consensus at $18.8B amid Huawei's resurgence.",
+    "Services is decelerating. The $30.7B print missed estimates, and App Store economics plus the Google search-payment arrangement face ongoing regulatory attack.",
+    "Margin quality: the tariff refund is one-time. Strip ~2pp of gross margin and $0.11 of EPS and the beat narrows; new tariff mechanisms remain a live policy risk.",
+    "Valuation leaves little slack. At ~$302 and ~31-34x forward earnings, a supply-shortened iPhone 18 cycle or Siri AI stumble triggers de-rating."
+  ],
+  "catalysts": [
+    "Sept 9, 2026 (rumored): iPhone 18 event - A20/A20 Pro on TSMC N2 (2nm), C2 modem",
+    "Fall 2026: consumer rollout of Gemini-powered Siri AI with the new OS cycle",
+    "Late Oct 2026: FQ4 FY26 earnings - first read on iPhone 18 supply/demand and holiday guide",
+    "Dec 2026 quarter: holiday quarter tests whether constrained supply defers or destroys demand"
+  ],
+  "pricedIn": "At $302.06 (Aug 12, 2026), AAPL trades at roughly 31-34x forward earnings - at the top of its historical range and a premium to its mid-20s norm. The price embeds a multi-year iPhone 18 supercycle, Services reacceleration, and successful Siri AI adoption. The key debate: whether growth is genuinely supply-capped (bullish - demand deferred into FY27 at record margins) or whether the 9-11% guide, Services miss, China miss, and one-time tariff-refund margin boost mean the run-rate is weaker than the 16%-growth headline suggests.",
+  "scenarios": {
+    "bear": "Supply constraints persist through FY27, capping revenue growth mid-single digits; Siri AI underwhelms against native Gemini/ChatGPT; China erodes on Huawei share gains; Services slows below 10% as regulators clip App Store and TAC economics. Ex-refund margins compress and the multiple de-rates toward the mid-20s.",
+    "base": "The iPhone 18 (2nm) cycle lands well; constrained FQ4 demand largely defers into the December and March quarters; Services grows low-double-digits; gross margin holds near 47-48% ex-refunds; buybacks compound EPS. Stock grinds higher with earnings at ~30x.",
+    "bull": "Siri AI drives the first true AI upgrade supercycle across a 2.5B-device base while supply catches up in FY27; Services reaccelerates; India shift plus tariff relief structurally lifts margins; China stabilizes. Multiple holds 32x+ on materially higher FY27 estimates."
+  },
+  "valPresets": {"mode": "fcf", "r": 0.095, "gT": 0.03, "years": 10,
+    "bear": {"g": 0.0}, "base": {"g": 0.08}, "bull": {"g": 0.16},
+    "note": "Apple still converts earnings to cash (no capex distortion), so FCF is the honest basis. At ~31x forward, even the base preset implies limited upside - which is the point of owning the reverse DCF."},
+  "bullCharts": {"0": ["revQ"], "3": ["gmA"]},
+  "bearCharts": {"3": ["revYoyA"], "5": ["peerFpe"]},
+  "sources": [
+    {"label": "Apple Newsroom - Q3 FY26 results", "url": "https://www.apple.com/newsroom/2026/07/apple-reports-third-quarter-results/"},
+    {"label": "CNBC - Apple Q3 2026 earnings", "url": "https://www.cnbc.com/2026/07/30/apple-earnings-live-updates.html"},
+    {"label": "MacRumors - Apple 3Q 2026 earnings", "url": "https://www.macrumors.com/2026/07/30/apple-3q-2026-earnings/"},
+    {"label": "CNBC - Apple picks Google Gemini for AI Siri", "url": "https://www.cnbc.com/2026/01/12/apple-google-ai-siri-gemini.html"},
+    {"label": "AppleInsider - $100B buyback", "url": "https://appleinsider.com/articles/26/04/30/record-quarter-leads-to-new-100b-share-buyback-increased-dividend"},
+    {"label": "AppleInsider - iPhone 18 Pro rumors (2nm A20)", "url": "https://appleinsider.com/articles/26/08/07/iphone-18-pro-rumor-roundup-2nm-a20-chip-c2-modem-under-display-face-id"}
+  ]
+}
