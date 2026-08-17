@@ -1,4 +1,4 @@
-# PPI: Long-Distance General Freight TL  source=fred  generated=2026-08-10T07:15:26.816Z
+# PPI: Long-Distance General Freight TL  source=fred  generated=2026-08-17T06:37:12.621Z
 date,value
 2010-01-01,110.8
 2010-02-01,111
@@ -197,4 +197,5 @@ date,value
 2026-03-01,191.312
 2026-04-01,200.982
 2026-05-01,203.944
-2026-06-01,204.622
+2026-06-01,198.057
+2026-07-01,195.575
