@@ -1,4 +1,4 @@
-# E-commerce % of Retail Sales  source=fred  generated=2026-08-17T06:37:12.623Z
+# E-commerce % of Retail Sales  source=fred  generated=2026-08-24T06:39:57.623Z
 date,value
 2010-01-01,4.2
 2010-04-01,4.4
@@ -64,4 +64,5 @@ date,value
 2025-04-01,16.3
 2025-07-01,16.4
 2025-10-01,16.7
-2026-01-01,16.9
+2026-01-01,17
+2026-04-01,17.1

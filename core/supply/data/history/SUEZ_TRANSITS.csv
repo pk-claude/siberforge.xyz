@@ -1,4 +1,4 @@
-# Suez Canal Monthly Transits  source=scrape:imf-portwatch  generated=2026-08-17T06:37:36.794Z
+# Suez Canal Monthly Transits  source=scrape:imf-portwatch  generated=2026-08-24T06:40:06.558Z
 date,value
 2019-01-01,1541
 2019-02-01,1414
@@ -46,7 +46,7 @@ date,value
 2022-08-01,2215
 2022-09-01,2079
 2022-10-01,2194
-2022-11-01,2150
+2022-11-01,2149
 2022-12-01,2244
 2023-01-01,2202
 2023-02-01,1955
