@@ -1,5 +1,5 @@
 {
- "updated": "2026-06-10",
+ "updated": "2026-08-26",
  "source": "NVDA press releases / 10-Q segment revenue (fiscal quarters; FY ends late Jan). Note: from Q1 FY27 NVIDIA reports Data Center + Edge Computing separately; share shown is DC/total.",
  "data": [
   {
@@ -71,6 +71,11 @@
    "quarter": "Q1'27",
    "dc_share": 92,
    "other_share": 8
+  },
+  {
+   "quarter": "Q2'27",
+   "dc_share": 93,
+   "other_share": 7
   }
  ]
 }

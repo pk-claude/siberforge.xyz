@@ -1,10 +1,11 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "The largest IPO in history: a $1.9T rocket, Starlink and AI-compute conglomerate growing 92% while outspending everyone at $18B of capex per quarter.",
+  "asOf": "2026-08-17",
+  "oneLiner": "The largest IPO in history: a $1.9T rocket, Starlink and AI-compute conglomerate growing 92% while outspending everyone at $18B of capex per quarter - now with Nvidia's $21B stake on the register and lockup supply grinding against institutional accumulation.",
   "thesis": [
     "Starlink is the cash engine and it is still doubling. Q2 2026 (reported August 4, 2026) Starlink revenue was $4.29B, up 66% YoY, with 12 million subscribers at June 30, exactly double a year earlier and up 1.7 million in the quarter.",
     "AI compute became the second act almost overnight. xAI merged into SpaceX in February 2026; Anthropic signed $1.25B per month through May 2029 for exclusive access to Colossus 1 in Memphis (May 6, 2026), and Google signed roughly $920M per month (June 5, 2026), together about $26B of annualized contracted revenue.",
-    "Launch is a near-monopoly with compounding cadence. SpaceX flew 78 missions in H1 2026 (17 customer, 61 internal) with a mean gap under three days, a scale no rival approaches.",
+    "Institutional sponsorship is now on the tape. The Aug 14, 2026 13F round revealed Nvidia holding 122.8M shares (~$21B at June 30, converted from its xAI Series E position in the February merger) and Darsana Capital building a 101M-share stake - validation from the supplier that knows the compute book best.",
+    "Launch is a near-monopoly with compounding cadence. SpaceX flew 78 missions in H1 2026 with a mean gap under three days, and on Aug 15, 2026 flew two Falcon 9 missions just 38 minutes apart, breaking its own 65-minute record.",
     "The government moat keeps deepening. At least $7B of Pentagon awards in 2026 year-to-date, including $1.6B for Golden Dome and $2.29B for a military data network; cumulative identified Starshield contracts exceed $9.3B on a $185B program.",
     "Starship is the option embedded in the multiple. Flight 13 (July 28, 2026) hit all objectives, at least eight 2026 flights are planned, and up to five uncrewed Starships target the November-December 2026 Mars window -- odds Musk himself puts at 50/50."
   ],
@@ -19,8 +20,8 @@
       "Stock fell as much as 8% after hours on capex; the Aug 6, 2026 lockup tranche then freed 911.5M insider shares"
     ]
   },
-  "latestProse": "SpaceX's first report as a public company, on August 4, 2026, showed revenue of $7.81 billion, up 92% year over year and about $880 million ahead of consensus. Starlink contributed $4.29 billion, up 66%, ending June with 12 million subscribers, double a year earlier. Net loss narrowed to $541 million from roughly $1.0 billion, and adjusted EBITDA reached $3.5 billion, up 191%. But capex hit $18.37 billion for the quarter versus roughly $13.2 billion expected, the stock fell as much as 8% after hours, and it then slid below its $135 IPO price as the August 6 lockup tranche freed 911.5 million shares. The disclosure that matters most: $15.83 billion of quarterly capex went to AI infrastructure -- the rocket company is now spending like a hyperscaler before proving hyperscaler returns.",
-  "guidanceProse": "SpaceX gave no formal revenue or capex guidance in its first public release, which is itself a signal. CFO commentary implied full-year 2026 capex could approach $65 billion, more than triple the roughly $20.7 billion spent in 2025, driven by Colossus data center expansion and Starship. The central debate: whether the ~$26 billion of annualized Anthropic and Google compute contracts proves AI infrastructure is a durable second profit engine, or whether SpaceX is levering Starlink cash flow into a commodity GPU business at the top of the cycle, with Starship and Mars absorbing whatever capital is left.",
+  "latestProse": "SpaceX's first report as a public company, on August 4, 2026, showed revenue of $7.81 billion, up 92% year over year and about $880 million ahead of consensus. Starlink contributed $4.29 billion, up 66%, ending June with 12 million subscribers, double a year earlier. Net loss narrowed to $541 million from roughly $1.0 billion, and adjusted EBITDA reached $3.5 billion, up 191%. But capex hit $18.37 billion for the quarter versus roughly $13.2 billion expected, the stock fell as much as 8% after hours, and it then slid below its $135 IPO price as the August 6 lockup tranche freed 911.5 million shares. Since then the tape has churned: shares recovered to touch $150, faded back to close at $140 on Aug 14 under lockup-driven float expansion, then rebounded about 6% on Aug 17 as the 13F round showed Nvidia (122.8M shares, ~$21B) and Darsana Capital (101M shares) on the register. The disclosure that matters most: $15.83 billion of quarterly capex went to AI infrastructure -- the rocket company is now spending like a hyperscaler before proving hyperscaler returns.",
+  "guidanceProse": "SpaceX gave no formal revenue or capex guidance in its first public release, which is itself a signal. CFO commentary implied full-year 2026 capex could approach $65 billion, more than triple the roughly $20.7 billion spent in 2025, driven by Colossus data center expansion and Starship. The central debate: whether the ~$26 billion of annualized Anthropic and Google compute contracts proves AI infrastructure is a durable second profit engine, or whether SpaceX is levering Starlink cash flow into a commodity GPU business at the top of the cycle, with Starship and Mars absorbing whatever capital is left. Nvidia's $21 billion equity position cuts both ways in that debate: committed supplier alignment for the bulls, one more strand of AI-trade circularity for the bears.",
   "guide": {
     "label": "FY26 capex (implied)",
     "val": "~$65B",
@@ -30,21 +31,21 @@
   "segments": [
     "Starlink and Starshield: $4.29B of Q2 2026 revenue (about 55% of total), 12M subscribers; Starshield is the classified government constellation with $9.3B-plus of cumulative identified contracts",
     "AI compute (ex-xAI, merged February 2026): Colossus 1 in Memphis with 220,000-plus GPUs on 300MW; Anthropic and Google contracts total ~$26B annualized, with Colossus 2 capacity building",
-    "Launch and Starship: 78 launches in H1 2026 with near-monopoly Falcon economics; Starship R&D drove a $542M space-segment operating loss in Q2 2026"
+    "Launch and Starship: 78 launches in H1 2026 with near-monopoly Falcon economics (including a record 38-minute gap between two orbital launches on Aug 15, 2026); Starship R&D drove a $542M space-segment operating loss in Q2 2026"
   ],
   "competitive": [
     "Rocket Lab (RKLB): the only credible small/medium-lift challenger; Neutron aims at Falcon 9's reusable niche but at a fraction of SpaceX's cadence",
     "AST SpaceMobile (ASTS): carrier-partnered direct-to-device rival contesting the phone-connectivity layer of Starlink's TAM",
     "Lockheed Martin (LMT) / ULA and Blue Origin: national-security launch incumbents; SpaceX still won the bulk of 2026 Space Force awards, but Golden Dome procurement is politically contestable",
     "Amazon Kuiper: the funded broadband constellation threat to Starlink's consumer growth, still years behind on deployed capacity",
-    "CoreWeave (CRWV) and the hyperscalers: on AI compute, SpaceX is effectively a new neocloud whose $920M-a-month Google deal competes with every GPU landlord"
+    "CoreWeave (CRWV) and the hyperscalers: on AI compute, SpaceX is effectively a new neocloud whose $920M-a-month Google deal competes with every GPU landlord - though Nvidia's OpenAI Ohio backstop (Aug 17) shows the supplier seeding rival capacity too"
   ],
   "moat": "The launch moat is real: reusable Falcon economics, a sub-three-day cadence and vertical integration no competitor matches this decade, plus a Starlink scale advantage reinforced by owning its own launch capacity. The AI compute business has no comparable moat -- it rents GPUs like every neocloud, and its two anchor contracts expire or renew around 2029. Starshield's classified relationships are sticky but politically exposed. Net: one deep moat, one shallow one, and a valuation that prices both as deep.",
   "risks": [
     "Capex escalation: ~$65B implied for FY26 versus $20.7B in 2025; free cash flow deeply negative at unprecedented scale, raising future financing needs despite the $75B IPO raise",
-    "Lockup overhang: staged releases through 2026 -- 911.5M shares on Aug 6, ~7% tranches through October, ~28% after Q3 earnings, final 180-day release December 8, 2026",
+    "Lockup overhang: staged releases through 2026 -- 911.5M shares on Aug 6, ~7% tranches through October, ~28% after Q3 earnings, final 180-day release December 8, 2026; the mid-August fade from $150 to $140 shows the float expansion binding",
     "Compute customer concentration: Anthropic ($1.25B/month, ends May 2029) and Google ($920M/month) are effectively the entire ~$26B AI compute book",
-    "Key-man and governance: Musk's 6.4B shares (locked until June 12, 2027), cross-company entanglements with Tesla and the xAI heritage, and founder-controlled voting",
+    "Key-man and governance: Musk's 6.4B shares (locked until June 12, 2027), cross-company entanglements with Tesla and the xAI heritage, and founder-controlled voting; Nvidia's stake adds supplier-shareholder entanglement",
     "Starship program risk: Block 3 unproven at scale, Mars window attempt is 50/50, and a public failure would hit both the narrative and the multiple",
     "Political and regulatory exposure: Golden Dome and Starshield depend on administration priorities; FCC spectrum and international licensing constrain Starlink growth"
   ],
@@ -53,9 +54,10 @@
     "Staged lockup releases: tranches through October 2026, ~28% after Q3 earnings, final release December 8, 2026",
     "Mars launch window November-December 2026: up to five uncrewed Starships attempted (Musk: 50/50 odds)",
     "Starship flights 14-16 expected H2 2026, including first Block 3 operational payload missions",
-    "Golden Dome award decisions through late 2026 on the $185B program architecture"
+    "Golden Dome award decisions through late 2026 on the $185B program architecture",
+    "Further 13F/ownership disclosures as the shareholder base institutionalizes post-lockup"
   ],
-  "pricedIn": "At $139.05 (August 12, 2026), just above the $135 IPO price and well off the $225.64 post-IPO high, SpaceX's market cap is roughly $1.93 trillion. Annualizing Q2 revenue gives about $31 billion, so the stock trades near 60x run-rate sales; even crediting the full $26 billion of annualized compute contracts plus Starlink and launch growth, an exit-2026 run-rate near $45-50 billion still implies roughly 40x. That multiple prices in Starship succeeding, Starlink reaching 25 million-plus subscribers, and AI compute scaling profitably beyond two customers. The key debate is whether a company spending $18 billion a quarter deserves a software multiple, with staged lockups releasing supply into December 8, 2026.",
+  "pricedIn": "At $140 (August 14, 2026 close, with a ~6% rebound on Aug 17), just above the $135 IPO price and well off the $225.64 post-IPO high, SpaceX's market cap is roughly $1.94 trillion. Annualizing Q2 revenue gives about $31 billion, so the stock trades near 60x run-rate sales; even crediting the full $26 billion of annualized compute contracts plus Starlink and launch growth, an exit-2026 run-rate near $45-50 billion still implies roughly 40x. That multiple prices in Starship succeeding, Starlink reaching 25 million-plus subscribers, and AI compute scaling profitably beyond two customers. Nvidia's $21B disclosed stake and Darsana's 101M shares supply the bull case with sponsorship; the staged lockups releasing supply into December 8, 2026 supply the bear case with sellers. The key debate is unchanged: whether a company spending $18 billion a quarter deserves a software multiple.",
   "scenarios": {
     "bear": "Capex outruns proof. AI compute economics disappoint as Anthropic or Google decline to extend beyond 2029, Starship's Mars attempt slips past the window or fails publicly, and Amazon Kuiper plus direct-to-device rivals slow Starlink net adds. Revenue still compounds near 20%, but $60 billion-plus annual capex forces new financing below the IPO price while lockups through December 8, 2026 add share supply. The multiple compresses toward 5x sales and the stock loses more than half its value.",
     "base": "Starlink grinds toward 18-20 million subscribers by late 2027, the compute contracts run at the full ~$26 billion annualized rate from Q3 2026, and launch stays a near-monopoly at 150-plus flights a year. Revenue compounds roughly 32%, adjusted EBITDA scales, but heavy capex keeps free cash flow negative into 2028. At a 7-8x exit sales multiple the discounted value lands below today's $1.9 trillion, so the base case implies a flat-to-lower stock until Starship revenue turns tangible.",
@@ -76,12 +78,12 @@
   "sources": [
     {"label": "Forbes: SPCX debuts at $150 after largest IPO ever (Jun 12, 2026)", "url": "https://www.forbes.com/sites/tylerroush/2026/06/12/spacex-opens-at-150-surging-17-after-largest-ipo-ever-live-updates/"},
     {"label": "CNBC: SpaceX Q2 2026 earnings live updates (Aug 4, 2026)", "url": "https://www.cnbc.com/2026/08/04/spacex-spcx-earnings-live-updates-q2-2026.html"},
-    {"label": "Fortune: revenue surges 92% to $7.8B (Aug 4, 2026)", "url": "https://fortune.com/2026/08/04/spacex-revenue-surges-92-to-7-8-billion-blowing-past-wall-street-expectations-by-nearly-1-billion/"},
-    {"label": "TechCrunch: Anthropic and Google compute deals, Starlink growth (Aug 4, 2026)", "url": "https://techcrunch.com/2026/08/04/spacex-doubles-revenues-on-anthropic-and-google-compute-deals-starlink-growth/"},
+    {"label": "Bloomberg: Nvidia 13F shows $21B SpaceX stake (Aug 14, 2026)", "url": "https://www.bloomberg.com/news/articles/2026-08-14/nvidia-has-21-billion-spacex-stake-30-billion-in-intel-shares"},
+    {"label": "TradingKey: SPCX Aug 14 pullback and 13F flows", "url": "https://www.tradingkey.com/news/market-movers/262108656-market-movers-spcx-20260814"},
+    {"label": "24/7 Wall St: SpaceX rebounds 6% Monday Aug 17", "url": "https://247wallst.com/investing/2026/08/17/spacex-rebounds-6-on-monday-as-nebius-and-coreweave-look-to-rebound-from-morning-drops/"},
     {"label": "CNBC: Google to pay SpaceX $920M a month for xAI compute (Jun 5, 2026)", "url": "https://www.cnbc.com/2026/06/05/google-to-pay-spacex-920-million-a-month-for-xai-compute-capacity.html"},
     {"label": "SEC EDGAR: SpaceX Q2 2026 earnings release exhibit", "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/earningsreleaseq22608042.htm"},
     {"label": "SpaceNews: $2.29B Space Force military data network contract", "url": "https://spacenews.com/spacex-wins-2-29-billion-space-force-contract-for-military-data-network/"},
-    {"label": "CNBC: SPCX closes back above $135 IPO price (Aug 10, 2026)", "url": "https://www.cnbc.com/2026/08/10/spacex-spcx-stock-ipo-price.html"},
     {"label": "Yahoo Finance: Aug 6 lockup frees 911.5M insider shares", "url": "https://finance.yahoo.com/markets/stocks/articles/spacexs-lockup-expires-aug-6-080500494.html"},
     {"label": "CompaniesMarketCap: SpaceX market capitalization", "url": "https://companiesmarketcap.com/spacex/marketcap/"}
   ]

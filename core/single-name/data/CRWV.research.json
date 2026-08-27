@@ -1,16 +1,16 @@
 {
-  "asOf": "2026-08-11",
+  "asOf": "2026-08-25",
   "oneLiner": "A leveraged call option on AI capex: $104B take-or-pay backlog and 112% growth against $20B+ of ~11% debt, deeply negative FCF, and GPUs that depreciate faster than the loans amortize.",
   "thesis": [
-    "Backlog is the story: $104.2B (+246% YoY) of committed, largely take-or-pay contracts - OpenAI ~$22.4B, Meta ~$35B implied, new Anthropic agreement, $6B Jane Street; NVIDIA provides a $6.3B capacity backstop through 2032.",
+    "Backlog is the story: $104.2B (+246% YoY) of committed, largely take-or-pay contracts - OpenAI ~$22.4B, Meta ~$35B implied, new Anthropic agreement, $6B Jane Street - extended Aug 20, 2026 by a multiyear, multibillion-dollar Hudson River Trading expansion built on NVIDIA Vera Rubin NVL72; NVIDIA provides a $6.3B capacity backstop through 2032.",
     "Speed and NVIDIA allocation priority are the edge: first to deploy new generations at scale (Vera Rubin ships Q3 2026; 120K Blackwell Ultra GPUs planned in a UK data center by end-2026).",
     "The model only works if contract pricing holds through renewal cycles and capital markets stay open: Q2 interest expense ($640M) was 5x adjusted operating income ($128M).",
     "Diversification is improving (Microsoft was ~67% of FY2025 revenue; Meta, Anthropic, Jane Street added since) but the top two were still 65% of Q1 2026 revenue."
   ],
   "latestQuarter": {
-    "label": "Q2 2026 (reported Aug 11, 2026 - after close today)",
+    "label": "Q2 2026 (reported Aug 11, 2026)",
     "points": [
-      "Revenue $2.58B, +112% YoY, +24% QoQ (beat); stock jumped ~13% after hours.",
+      "Revenue $2.58B, +112% YoY, +24% QoQ (beat); stock jumped ~13% after hours, then round-tripped the entire pop within a week.",
       "Adjusted operating income $128M (5% margin); GAAP net loss $626M; interest expense $640M.",
       "FCF roughly negative $5.7B in the quarter; FY2026 capex guide $31-35B.",
       "Revenue backlog $104.2B, +246% YoY.",
@@ -24,7 +24,8 @@
   "competitive": [
     "Hyperscalers (AWS, Azure, GCP, OCI) plus neoclouds: Nebius, Crusoe, Lambda, RunPod.",
     "On-demand H100 pricing has fragmented (~$1.49-6.98/hr across providers); CEO says Blackwell/Vera Rubin contract pricing is setting new highs while prior-gen holds.",
-    "Neocloud industry revenue exceeded $25B in 2025; customers (Microsoft, Meta) are also building their own capacity."
+    "Neocloud industry revenue exceeded $25B in 2025; customers (Microsoft, Meta) are also building their own capacity.",
+    "New public supply is coming: Nvidia-backed Nscale is reportedly targeting a U.S. IPO of up to $3B as early as September 2026, claiming ~$51B of contracted revenue - a direct comp that will price the neocloud model in public markets (per Bloomberg/TipRanks, Aug 2026)."
   ],
   "moat": "Scale, NVIDIA allocation priority, and $104B of contracted take-or-pay revenue - not technology. GPUs are a commodity every competitor can buy; the edge is deployment speed, financing access, and switching friction inside multi-year contracts.",
   "risks": [
@@ -33,15 +34,16 @@
     "GPU depreciation/obsolescence: 6-year depreciation vs ~3-year product cycles; residual-value risk on prior-gen fleets.",
     "Renewal/repricing risk when initial terms expire into a lower spot market.",
     "Negative FCF (-$5.7B in Q2 alone) requires continuous capital-market access; credit tightening is existential.",
-    "Kerrisdale-style critiques: circular financing dynamics with NVIDIA flatter demand."
+    "Kerrisdale-style critiques: circular financing dynamics with NVIDIA flatter demand.",
+    "Post-earnings technicals: insider selling drove a ~12% single-day drop on Aug 18 and kept the stock under pressure; market cap fell to ~$47B by Aug 24 despite the beat, the HRT win and a Truist target raise to $165."
   ],
   "catalysts": [
     "Q3 2026 earnings ~Nov 2026.",
     "Vera Rubin shipments beginning Q3 2026; UK 120K-GPU deployment by end-2026.",
-    "Further mega-contract announcements; refinancing/DDTL draws.",
+    "Further mega-contract announcements (Hudson River Trading, Aug 20, was the template: existing customer since Mar 2026 expanding to a multiyear, multibillion commitment); refinancing/DDTL draws.",
     "Hyperscaler 2027 capex guidance as demand proxy."
   ],
-  "pricedIn": "At ~$50B market cap plus $30B+ net debt, EV is roughly $80B+ vs ~$12.8B FY2026 guided revenue: ~6x EV/revenue on hypergrowth, ~24x EV/EBITDA. Bulls see the backlog making the equity a leveraged call on AI capex with visibility through 2030+. Bears argue returns on capital never clear an ~11% cost of debt.",
+  "pricedIn": "At ~$47B market cap (Aug 24, 2026) plus $30B+ net debt, EV is roughly $77-80B vs ~$12.8B FY2026 guided revenue: ~6x EV/revenue on hypergrowth, ~24x EV/EBITDA. The Q2 beat, the raised FY guide and the Aug 20 Hudson River Trading multibillion expansion could not hold the post-earnings pop - insider selling took the stock down ~12% on Aug 18 alone, and Nscale's planned IPO adds competing paper. Bulls see the backlog making the equity a leveraged call on AI capex with visibility through 2030+; bears argue returns on capital never clear an ~11% cost of debt, and note that the people closest to the model are sellers.",
   "scenarios": {
     "bear": "AI capex decelerates in 2027, spot GPU prices slide, a major customer fails to fund commitments; backlog converts slowly, prior-gen fleets get written down, refinancing $20B+ against negative FCF forces dilution or asset sales; equity de-rates toward 2-3x sales ($40-60).",
     "base": "FY2026 lands near guidance (~$12.8B revenue, ~$1B adjusted operating income); backlog converts on schedule; interest stabilizes with scale; diversification reduces single-customer risk; stock trades with AI sentiment around 5-7x forward sales (~$100-140).",
@@ -89,6 +91,14 @@
     {
       "label": "Core Scientific deal terminated",
       "url": "https://www.datacenterdynamics.com/en/news/coreweave-core-scientific-deal-ended/"
+    },
+    {
+      "label": "Hudson River Trading multiyear AI deal on Vera Rubin NVL72 (CoreWeave newsroom, Aug 20, 2026)",
+      "url": "https://www.coreweave.com/news/hudson-river-trading-to-build-next-gen-research-platform-powered-by-nvidia-vera-rubin-nvl72-on-coreweave-cloud"
+    },
+    {
+      "label": "TipRanks: neoclouds fall on Nscale IPO reports; CRWV ~$47B cap, insider selling (Aug 24, 2026)",
+      "url": "https://www.tipranks.com/news/neocloud-stocks-crwv-nbis-and-iren-are-falling-today-august-24-heres-why"
     }
   ],
   "guide": {
@@ -97,7 +107,7 @@
     "sub": "capex $31-35B \u00b7 Q3 $3.4-3.6B",
     "tone": "warn"
   },
-  "latestProse": "Q2 2026 (reported Aug 11). Revenue $2.58B +112% YoY, +24% QoQ (beat); adjusted operating income $128M (5% margin) against interest expense of $640M; GAAP net loss $626M; FCF roughly -$5.7B in the quarter. Revenue backlog $104.2B (+246%): OpenAI ~$22.4B, Meta ~$35B implied, a new Anthropic agreement, $6B Jane Street. Stock jumped ~13% after hours.",
+  "latestProse": "Q2 2026 (reported Aug 11). Revenue $2.58B +112% YoY, +24% QoQ (beat); adjusted operating income $128M (5% margin) against interest expense of $640M; GAAP net loss $626M; FCF roughly -$5.7B in the quarter. Revenue backlog $104.2B (+246%): OpenAI ~$22.4B, Meta ~$35B implied, a new Anthropic agreement, $6B Jane Street - and on Aug 20 Hudson River Trading signed a multiyear, multibillion-dollar expansion on Vera Rubin NVL72. The stock jumped ~13% after hours on the print, then gave it all back: insider selling drove a ~12% drop on Aug 18 and the market cap sat near $47B by Aug 24. The disclosure that matters most: interest expense of $640M ran five times adjusted operating income of $128M - the backlog belongs to the lenders before it belongs to shareholders.",
   "guidanceProse": "FY2026 raised to $12.4-13.2B revenue with $960M-1.15B adjusted operating income; Q3 $3.4-3.6B (+158% at midpoint). FY2026 capex $31-35B, debt-funded - the equity is a spread between an ~11% cost of debt and contracted returns on GPUs that depreciate faster than the loans amortize.",
   "bullCharts": {
     "0": [

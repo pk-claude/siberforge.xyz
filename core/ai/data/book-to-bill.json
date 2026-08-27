@@ -1,11 +1,11 @@
 {
- "updated": "2026-06-10",
+ "updated": "2026-08-26",
  "source": "Company filings and earnings calls. Most names do not report bookings; ratio shown only where computable or management-cited.",
  "data": [
   {
    "symbol": "NVDA",
    "ratio": null,
-   "basis": "Not disclosed. May 2026 call: >$1T cumulative Blackwell+Rubin revenue visibility through CY2027; supply constrained through Vera Rubin."
+   "basis": "Not disclosed. Aug 2026 call: FY28 revenue guided to ~70% growth ('we have supply for 70% growth; demand is much higher'); supply commitments more than doubled q/q to $279B, mostly memory procurement."
   },
   {
    "symbol": "AMD",

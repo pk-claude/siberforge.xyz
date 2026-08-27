@@ -1,27 +1,27 @@
 {
-  "asOf": "2026-08-12",
-  "oneLiner": "The purest public bet on the 2026 NAND supercycle - 84.6% gross margin and $39 of quarterly EPS at the peak - priced near 3x forward earnings because the entire debate is how long it can possibly last.",
+  "asOf": "2026-08-17",
+  "oneLiner": "The purest public bet on the 2026 NAND supercycle just told investors the cycle is dead: mid-to-high-teens growth and ~80% gross margins guided through 2030, and the market paid it a 30% three-day rally to start believing.",
   "thesis": [
     "AI inference has structurally rewired NAND demand. Server eSSDs were 48% of industry bit shipments in Q2 CY2026; Sandisk datacenter revenue rose 437% in FY2026 and 103% QoQ in Q4, and the QLC Stargate platform began revenue shipments for high-capacity AI data lakes.",
     "The NBM contract model attacks cyclicality head-on. Ten New Business Model agreements worth a minimum $93.9B with 4+ years of visibility have been signed, and management expects NBMs to cover 50%+ of FY2027 bits with locked pricing.",
-    "Supply discipline is holding. Capex stays near 6% of revenue, BiCS8 now carries the majority of bit production, and the Kioxia JV was extended to 2034 - the industry has not yet blinked into overbuild.",
-    "It is a cash machine returning capital. FY2026 GAAP net income was $11.43B on $20.25B revenue, and the buyback authorization was expanded to $15.5B.",
-    "Even heroic skepticism struggles with the multiple. At roughly 3.2x consensus FY2027 EPS, the market already assumes a violent margin collapse; anything less is upside."
+    "Management now guides the through-cycle. At the Aug 13, 2026 investor day, Sandisk targeted mid-to-high-teens annual revenue growth for 2028-2030 with non-GAAP gross margins around 80%, and said demand outpaces its supply with output tight into 2028.",
+    "Supply discipline is holding. Capex stays near 6% of revenue, BiCS8 carries the majority of bit production, BiCS10 production began at Kitakami Fab2 in July 2026, and the Kioxia JV was extended to 2034.",
+    "It is a cash machine returning capital. FY2026 GAAP net income was $11.43B on $20.25B revenue, and the buyback authorization was expanded to $15.5B."
   ],
   "latestQuarter": {
-    "label": "Q4 FY2026 (reported Aug 5, 2026)",
+    "label": "Q4 FY2026 (reported Aug 5, 2026); investor day Aug 13, 2026",
     "points": [
       "Revenue $8.965B, up 51% QoQ and 372% YoY; record, above the high end of guidance",
       "Non-GAAP gross margin 84.6% vs 79-81% guided; sequential growth ~one-third volume, two-thirds pricing",
       "GAAP diluted EPS $43.97 (net income $6.90B); non-GAAP EPS $39.25 vs consensus $34.45",
       "End markets: Datacenter $2,977M (+103% QoQ, ~33% of revenue), Edge $5,432M (+48% QoQ), Consumer $556M (-32% QoQ)",
-      "FY2026: revenue $20.25B (+175% YoY); Datacenter +437% YoY",
-      "Buyback expanded to $15.5B; Kioxia JV extended to 2034; $1B investment in Nanya for DRAM supply"
+      "FY2026: revenue $20.25B (+175% YoY); Datacenter +437% YoY; buyback expanded to $15.5B",
+      "Investor day (Aug 13): 2028-2030 targets of mid-to-high-teens revenue growth at ~80% gross margin; NAND TAM seen passing $300B in 2026 and $500B in 2027; stock rallied ~30% over Aug 12-14 to $1,641.11"
     ]
   },
-  "latestProse": "Q4 FY2026 (reported August 5) was a blowout: revenue of $8.965B rose 51% sequentially and 372% YoY, with roughly one-third of the sequential gain from volume and two-thirds from pricing - ASPs are still climbing. Non-GAAP gross margin reached 84.6% against a 79-81% guide, producing non-GAAP EPS of $39.25 (consensus $34.45). Datacenter revenue of $2,977M doubled sequentially to ~33% of sales (management cited datacenter at 38% of portfolio exiting the year vs 12% at the start). The disclosure that matters most: ten NBM long-term agreements totaling a minimum $93.9B, converting a spot-price cycle into contracted visibility.",
-  "guidanceProse": "Q1 FY2027 guidance: revenue $10.3-10.8B, non-GAAP gross margin 83-85%, non-GAAP EPS $44-46 - record numbers that still read as deceleration, since sequential growth is now mostly volume with only modest price increases because NBM contracts lock pricing, and margin is guided down from 84.6% on mix and higher component costs. That is the headline debate: bulls see contracted visibility toward a NAND market management says exceeds $300B in CY2026 and approaches $500B in CY2027; bears see the moment ASP momentum stalls at the top of the cycle. The stock fell ~8% after hours on the guide.",
-  "guide": {"label": "Q1 FY2027 revenue guide", "val": "$10.3-10.8B", "sub": "Non-GAAP GM 83-85%, EPS $44-46; growth mostly volume as NBM pricing is locked", "tone": "accent"},
+  "latestProse": "Q4 FY2026 (reported August 5) was a blowout: revenue of $8.965B rose 51% sequentially and 372% YoY, with roughly one-third of the sequential gain from volume and two-thirds from pricing. Non-GAAP gross margin reached 84.6% against a 79-81% guide, producing non-GAAP EPS of $39.25 (consensus $34.45), and datacenter revenue of $2,977M doubled sequentially to ~33% of sales. Then the Aug 13 investor day reframed the whole debate: CFO Luis Visoso told investors the NAND market passes $300B in 2026 and $500B in 2027, that demand exceeds Sandisk's supply with output tight into 2028, and - with Kioxia - showed a ninth-generation 2Tb QLC part with a 4.8Gb/s interface (+33% vs prior gen) built on CMOS-bonded-array wafer bonding, plus a sampled 1Tb BiCS10 chip with 59% higher bit density. The disclosure that matters most: management formally guided mid-to-high-teens annual revenue growth with ~80% gross margins for 2028 through 2030 - a claim, backed by $93.9B of NBM contracts, that NAND is no longer a cyclical business.",
+  "guidanceProse": "Q1 FY2027 guidance: revenue $10.3-10.8B, non-GAAP gross margin 83-85%, non-GAAP EPS $44-46 - record numbers that still read as deceleration, since sequential growth is now mostly volume with NBM contracts locking pricing. The investor day then extended the horizon: mid-to-high-teens revenue growth for 2028-2030 at ~80% gross margin, supply tight into 2028, and a technology roadmap (gen-9 2Tb QLC at 4.8Gb/s, BiCS10 in production at Kitakami Fab2 since July) to defend cost leadership. Wall Street cheered - the stock rose roughly 30% across Aug 12-14 to $1,641.11 - but the structure of the debate is unchanged: bulls see contracted, de-cyclicalized economics; bears see peak-cycle margins being extrapolated to 2030 at precisely the moment $500B TAM forecasts invite a supply response.",
+  "guide": {"label": "Q1 FY2027 revenue guide", "val": "$10.3-10.8B", "sub": "GM 83-85%, EPS $44-46; investor day targets mid-to-high-teens growth at ~80% GM for 2028-2030", "tone": "accent"},
   "segments": [
     "Datacenter (enterprise SSD/AI): $2,977M, ~33% of Q4 revenue, +103% QoQ, +437% YoY for FY26 - mix was ~12% entering the fiscal year",
     "Edge (client/mobile/OEM): $5,432M, ~61% of Q4 revenue, +48% QoQ on repricing",
@@ -29,42 +29,43 @@
   ],
   "competitive": [
     "Q2 CY2026 NAND share by shipments: Samsung 25%, SK Hynix 22%, YMTC 14% (top-3 for the first time), then Kioxia, Micron, and Sandisk sixth by volume - though Sandisk and Kioxia rank higher by revenue on richer eSSD mix",
-    "Kioxia is simultaneously JV partner (shared fabs, common BiCS roadmap, JV extended to 2034) and direct rival in enterprise SSD",
+    "Kioxia is simultaneously JV partner (shared fabs, common BiCS roadmap, JV extended to 2034, joint gen-9 CBA flash) and direct rival in enterprise SSD",
     "Samsung and SK Hynix are diverting capex priority toward HBM/DRAM, a key reason NAND supply stayed tight; their re-entry appetite is the biggest swing factor",
     "YMTC's volume surge is the wildcard supply threat, mitigated for now by its low eSSD share and export-control constraints"
   ],
-  "moat": "NAND is a commodity: no supplier holds pricing power through a full cycle, and today's 84.6% margin is cycle rent, not moat. Sandisk's durable edges are cost/scale via the Kioxia JV and BiCS8/BiCS10 node leadership, plus - if they hold in a downturn - NBM contracts that convert spot exposure into multi-year committed volumes. The contracts are unproven in a falling-price environment.",
+  "moat": "NAND is a commodity: no supplier holds pricing power through a full cycle, and today's 84.6% margin is cycle rent, not moat. Sandisk's durable edges are cost/scale via the Kioxia JV and BiCS8/BiCS10 node leadership (with gen-9 CBA wafer bonding), plus - if they hold in a downturn - NBM contracts that convert spot exposure into multi-year committed volumes. The contracts are unproven in a falling-price environment, and the 2028-2030 targets assume they hold.",
   "risks": [
-    "Peak-cycle margins are unprecedented and already guided down. No NAND maker has sustained 80%+ gross margin; the first quarter of falling ASPs will compress margins and the multiple simultaneously.",
+    "Peak-cycle margins are unprecedented and now guided to persist. No NAND maker has sustained 80%+ gross margin through a cycle; the investor day made ~80% the official 2028-2030 target, raising the cost of any miss.",
     "Double-ordering risk. Prior shortages ended when customers who double-ordered walked away; a $93.9B 'minimum' backlog built at panic pricing is exactly where that unwinds.",
-    "The supply response is coming. YMTC hit 14% shipment share, and $500B TAM forecasts are precisely the signal that historically triggers competitor capacity expansion into 2027-28 oversupply.",
+    "The supply response is coming. YMTC hit 14% shipment share, and management's own $500B CY2027 TAM call is precisely the signal that historically triggers competitor capacity expansion into 2027-28 oversupply.",
     "NBM enforceability is untested. Minimum-value, multi-year agreements have never been through a NAND downturn.",
-    "Kioxia JV dependence. Capacity and node-transition decisions are shared, not controlled, and BiCS10 execution risk is material.",
-    "Extreme expectations embedded in estimates. Consensus FY2027 EPS near $396 assumes shortage conditions persist all year; a modest ASP miss craters the E in the P/E."
+    "Kioxia JV dependence. Capacity and node-transition decisions are shared, not controlled; BiCS10 and gen-9 CBA execution risk is material.",
+    "Expectations just ratcheted higher. A ~30% three-day rally into a $1,641 print leaves consensus FY2027 EPS near $396 as the floor, not the bar; the first soft ASP data point now hits both the E and the multiple."
   ],
   "catalysts": [
-    "Late Oct/early Nov 2026: Q1 FY2027 earnings",
+    "Late Oct/early Nov 2026: Q1 FY2027 earnings - first print against the investor-day framework",
     "Late Oct 2026: Samsung and SK Hynix Q3 CY2026 NAND capex commentary",
     "Nov-Dec 2026: TrendForce/Counterpoint Q3 CY2026 NAND pricing and share data",
-    "Ongoing: additional NBM agreements and $15.5B buyback execution"
+    "Ongoing: additional NBM agreements, $15.5B buyback execution, BiCS10/gen-9 CBA ramp milestones"
   ],
-  "pricedIn": "SNDK traded at $1,266.50 on Aug 11, 2026, up ~574% over the past year but ~45% below its early-summer high near $2,350. The forward P/E is roughly 3.2x on consensus FY2027 EPS near $396 - the classic trough-multiple-on-peak-earnings memory setup. Consensus target is $2,054 (Strong Buy; range $1,000-3,000). The debate: if NBMs genuinely de-cyclicalize earnings the stock re-rates dramatically; if this is a normal cycle wearing contracts as a costume, 3x peak EPS is not cheap at all.",
+  "pricedIn": "SNDK closed at $1,641.11 on Aug 14, 2026, up roughly 30% in the three sessions around the investor day and up ~7x over the past year, though still ~30% below the early-summer high near $2,350. The forward P/E is roughly 4.1x on consensus FY2027 EPS near $396 - the classic trough-multiple-on-peak-earnings memory setup, now colliding with management guidance that earnings will not trough. Consensus target was near $2,054 (Strong Buy) before the event and targets are migrating higher. The debate: if the 2028-2030 guide (mid-to-high-teens growth, ~80% GM) is even half right, 4x forward is absurdly cheap; if this is a normal cycle wearing contracts as a costume, the market just paid a 30% premium for the costume.",
   "scenarios": {
     "bear": "The cycle tops in FY2027: supply responds (YMTC, restarted Samsung/SK Hynix NAND capex), customers work down double-ordered inventory, NBM minimums get renegotiated, and ASPs roll; margins fall toward historical 30-40%, EPS collapses to a small fraction of consensus, and the stock overshoots down toward the pre-surge hundreds.",
-    "base": "Shortage conditions persist through CY2027 but pricing flattens; margins ease into the 70s, FY2027 non-GAAP EPS lands meaningfully below the $396 consensus but still very high, and the stock oscillates in the $1,200-1,800 range as the market refuses a full re-rating until NBMs survive a soft quarter.",
-    "bull": "AI storage demand keeps NAND undersupplied into CY2028, the ~$500B CY2027 TAM view proves roughly right, NBM coverage above 50% of bits holds pricing through wobbles; even at 5-6x the stock exceeds the $2,054 consensus target."
+    "base": "Shortage conditions persist through CY2027 but pricing flattens; margins ease into the 70s, FY2027 non-GAAP EPS lands meaningfully below the $396 consensus but still very high, and the stock oscillates in the $1,300-1,900 range as the market demands proof the 2028-2030 guide survives a soft quarter.",
+    "bull": "AI storage demand keeps NAND undersupplied into CY2028, the ~$500B CY2027 TAM view proves roughly right, NBM coverage above 50% of bits holds pricing through wobbles, and the 2028-2030 targets start getting modeled as base case; even at 5-6x forward the stock exceeds the pre-event $2,054 consensus target."
   },
   "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.12, "gT": 0.02, "years": 7,
     "bear": {"g": -0.30}, "base": {"g": -0.12}, "bull": {"g": 0.05},
-    "note": "Basis is forward earnings, MU-style: at ~3.2x forward the market prices a violent earnings decline - the reverse DCF quantifies the implied annual collapse rate. Only 3 years of standalone filings exist (Feb 2025 spin)."},
+    "note": "Basis is forward earnings, MU-style: at ~4x forward the market still prices a violent earnings decline - the reverse DCF quantifies the implied annual collapse rate against management's new 2028-2030 growth guide. Only 3 years of standalone filings exist (Feb 2025 spin)."},
   "bullCharts": {"0": ["revQ"], "3": ["niQ"]},
   "bearCharts": {"0": ["gmA"], "5": ["priceH"]},
   "sources": [
     {"label": "Sandisk IR - Q4 FY2026 results", "url": "https://investor.sandisk.com/news-releases/news-release-details/sandisk-reports-fiscal-fourth-quarter-2026-financial-results"},
-    {"label": "StockTitan - Q4 FY2026 summary", "url": "https://www.stocktitan.net/news/SNDK/sandisk-reports-fiscal-fourth-quarter-2026-financial-kc0v6ojj1c1u.html"},
-    {"label": "Globe and Mail - Q4 2026 call transcript", "url": "https://www.theglobeandmail.com/investing/markets/stocks/SNDK-Q/pressreleases/3816588/sandisk-sndk-q4-2026-earnings-call-transcript/"},
-    {"label": "Seeking Alpha - Q1 FY2027 guidance", "url": "https://seekingalpha.com/news/4627102-sandisk-forecasts-q1-fy2027-revenue-of-10_3b-10_8b-and-non-gaap-eps-of-44-46-while-expanding"},
-    {"label": "Benzinga - post-earnings reaction", "url": "https://www.benzinga.com/markets/earnings/26/08/60981104/sandisk-stock-earnings-after-hours-analyst-leap-of-faith"},
+    {"label": "Counterpoint - investor day analysis", "url": "https://counterpointresearch.com/en/insights/sandisk-investor-day-caching-out-the-nand-cycle-with-contracts"},
+    {"label": "Benzinga - investor day AI roadmap, 80% margin targets", "url": "https://www.benzinga.com/markets/tech/26/08/61190186/sandisk-stock-ai-roadmap-investor-day"},
+    {"label": "Benzinga - gen-9 Kioxia flash with 33% speed boost", "url": "https://www.benzinga.com/markets/tech/26/08/61166300/sandisk-kioxia-unveil-ai-ready-flash-tech-with-33-speed-boost"},
+    {"label": "FinanceFeeds - investor day preview: NAND tight into 2028", "url": "https://financefeeds.com/sandisk-investor-day-sndk-what-to-watch/"},
+    {"label": "Yahoo Finance - post-investor-day rally", "url": "https://finance.yahoo.com/markets/stocks/article/sandisk-stock-surges-as-wall-street-cheers-flash-memory-makers-bullish-outlook-131502540.html"},
     {"label": "Counterpoint - Q2 2026 NAND share", "url": "https://finance.biggo.com/news/0d947490-529d-486e-9181-37a9219aaf44"}
   ]
 }

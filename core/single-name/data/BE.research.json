@@ -1,11 +1,11 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "The time-to-power trade in its purest form: fuel cells for AI data centers drove revenue up 166%, a genuine profitability inflection, and gigawatt-scale frameworks with Oracle and AEP -- priced at ~17x forward sales, so conversion cadence is everything.",
+  "asOf": "2026-08-25",
+  "oneLiner": "The time-to-power trade in its purest form: fuel cells for AI data centers drove revenue up 166%, a genuine profitability inflection, and gigawatt-scale frameworks with Oracle and AEP -- but a ~40% drawdown from the $350 high and a scandium-sourcing class action now test how much scarcity premium survives.",
   "thesis": [
     "AI data centers turned fuel cells into baseload infrastructure. AEP finalized a 20-year offtake reported at $2.65B for up to 1 GW in January 2026, anchored by a ~900 MW Wyoming data-center campus (deal terms per press reports). Oracle followed on Apr 14, 2026 with a master agreement for up to 2.8 GW, with an initial 1.2 GW already contracted and Project Jupiter in New Mexico underway.",
     "The profitability inflection arrived in Q2 2026. GAAP operating income swung to $182.2M on 33.4% gross margin (reported Jul 28, 2026), operating cash flow turned positive at $226.4M, and FY26 guidance implies $800-900M of non-GAAP operating income.",
     "Capacity is the constraint, and it doubles this year. Fremont is expanding from a 1 GW to 2 GW annual run-rate by end-2026 (~$100M, on schedule as of Jul 2026) with the site expandable toward 5 GW; $2.69B of cash after the late-2025 convertible raise funds the buildout.",
-    "Brookfield removes the customer's capex barrier. The financing framework for Bloom-powered AI infrastructure was expanded fivefold from $5B to $25B on Jul 1, 2026, letting customers buy power-as-a-service instead of owning the equipment.",
+    "Brookfield removes the customer's capex barrier -- and the financing stack keeps widening. The framework for Bloom-powered AI infrastructure was expanded fivefold from $5B to $25B on Jul 1, 2026, and in mid-August Industrial Development Funding and Oaktree announced a $1.7B investment supporting Bloom-powered infrastructure for Nebius's AI cloud operations, letting customers buy power-as-a-service instead of owning the equipment.",
     "Hydrogen is a free option. Bloom's solid oxide platform runs in reverse as an electrolyzer (SOEC); revenue is negligible today, but it is the same factory and stack if green hydrogen economics ever arrive."
   ],
   "latestQuarter": {
@@ -37,11 +37,12 @@
     "FCEL: subscale, restructuring, no meaningful data-center traction; Bloom is the only SOFC maker operating at gigawatt scale.",
     "GEV is the real competitor: gas turbines are cheaper per MW at scale, but slots are effectively sold out into 2028-29 -- Bloom sells time-to-power in months, not years.",
     "Bridge power from recip engines (Caterpillar, Cummins) and, longer term, faster grid interconnection and SMRs compete for the same load.",
-    "On ~17x forward sales Bloom is priced like a tech platform; GEV trades far cheaper on sales, while PLUG and FCEL are option-value stocks (multiples approximate, Aug 2026)."
+    "On ~15x forward sales Bloom is still priced like a tech platform even after the August drawdown; GEV trades far cheaper on sales, while PLUG and FCEL are option-value stocks (multiples approximate, late Aug 2026)."
   ],
   "moat": "A decade of solid-oxide manufacturing learning gives Bloom the only at-scale SOFC platform, and 30-plus-point gross margins suggest real cost-curve advantage. But there is no patent wall against turbines, engines, or an eventually faster grid -- the moat today is time-to-power and a bankable delivery record. If interconnection queues shorten and turbine capacity catches up by 2028, the pricing premium erodes.",
   "risks": [
-    "Valuation: ~$70B market cap is ~17x FY26 guided revenue and ~75x forward non-GAAP EPS; the stock swung 11%+ on earnings day alone, so any growth wobble gets amplified.",
+    "Valuation and momentum: even after falling from a $350 YTD high to roughly $200 (a ~$60B market cap, ~40% drawdown, including a ~14% slide in the week of Aug 17), the stock trades near 15x FY26 guided revenue and ~240x trailing GAAP earnings; the shares are up ~364% in a year, so any growth wobble gets amplified.",
+    "Legal and sourcing overhang: a July 8, 2026 Hunterbrook report ('Bloom's Big Lie') alleged undisclosed reliance on Chinese scandium routed through intermediaries in Thailand, Japan and South Korea; securities class actions followed (class period Feb 27, 2025-Jul 8, 2026; lead-plaintiff deadline Sep 28, 2026). Allegations are unproven, but they attach a China-supply-chain narrative to a stock priced for flawless execution.",
     "'Up to' is not backlog: Oracle (2.8 GW) and AEP (1 GW) are frameworks; only ~1.2 GW of the Oracle MSA was contracted as of Apr 2026. Conversion cadence is the whole story.",
     "Competition normalizes: GEV turbine capacity expands and interconnection queues shorten toward 2028-29, eroding the time-to-power premium that justifies Bloom's pricing.",
     "Natural gas dependence: Energy Servers run predominantly on natural gas; sustained gas price spikes or adverse carbon rules dent both economics and the clean-power narrative.",
@@ -53,11 +54,12 @@
     "Fremont 2 GW expansion completion by end-2026 (on schedule and on budget as of Jul 2026).",
     "Oracle Project Jupiter (New Mexico) deployments and further tranches under the 2.8 GW MSA through 2027.",
     "Brookfield $25B framework: first funded project announcements expected H2 2026.",
-    "AEP follow-on orders beyond the initial ~1 GW agreement; any new hyperscaler framework."
+    "AEP follow-on orders beyond the initial ~1 GW agreement; any new hyperscaler framework.",
+    "Legal calendar: lead-plaintiff deadline in the securities class action is Sep 28, 2026; watch any company rebuttal or disclosure on scandium sourcing."
   ],
-  "pricedIn": "At roughly $210 and a ~$70B market cap (early Aug 2026), Bloom trades near 17x FY2026 guided revenue and roughly 75-80x the $2.70 midpoint of FY2026 non-GAAP EPS. That embeds years of hypergrowth: full conversion of the Oracle and AEP frameworks, capacity scaling past 2 GW toward Fremont's 5 GW potential, and mid-30s gross margins holding as volume doubles. What is not priced: hydrogen electrolyzer revenue (essentially zero today) and the Brookfield $25B framework converting into a repeatable annuity. What is priced and fragile: the assumption that gas turbines stay sold out and grid queues stay long through 2028 -- the entire premium rests on scarcity of alternatives.",
+  "pricedIn": "At roughly $200 (late Aug 2026) and a ~$60B market cap, Bloom trades near 15x FY2026 guided revenue and roughly 70-75x the $2.70 midpoint of FY2026 non-GAAP EPS -- down from ~17x sales and a $350 high in early August, a ~40% drawdown driven by rising yields, profit-taking after a 364% one-year run, and the scandium class-action overhang rather than any change in the business. What is still embedded: full conversion of the Oracle and AEP frameworks, capacity scaling past 2 GW toward Fremont's 5 GW potential, and mid-30s gross margins holding as volume doubles. What is not priced: hydrogen electrolyzer revenue and the Brookfield $25B plus Oaktree/IDF $1.7B frameworks converting into a repeatable annuity. The premium still rests on scarcity of alternatives through 2028; the August tape shows how fast that premium reprices when sentiment turns. Sell-side average target is ~$272 (10 Buys, 9 Holds).",
   "scenarios": {
-    "bear": "AI capex digests in 2027; GEV and the turbine supply chain add capacity, interconnects speed up, and bridge-power premiums compress. Oracle and AEP take far less than the 'up to' volumes, growth decelerates to 20-30% off a $4B base, and gross margin slips below 30% on pricing pressure. At 30-40x a lower EPS path the stock retraces toward $60-90 -- still a good company, but a brutal de-rating from 17x sales.",
+    "bear": "AI capex digests in 2027; GEV and the turbine supply chain add capacity, interconnects speed up, and bridge-power premiums compress. The scandium litigation surfaces documents that force a sourcing restatement or costly supply-chain requalification. Oracle and AEP take far less than the 'up to' volumes, growth decelerates to 20-30% off a $4B base, and gross margin slips below 30% on pricing pressure. At 30-40x a lower EPS path the stock retraces toward $60-90 -- still a good company, but a brutal de-rating from peak multiples.",
     "base": "FY2026 lands near the $4.05B midpoint with ~34% gross margin and non-GAAP EPS of $2.55-2.85; the 2 GW Fremont expansion completes on schedule and 2027 revenue grows 30-45% as Oracle's initial 1.2 GW deploys and AEP follow-ons land. Margins hold as scale offsets pricing. The stock compounds with earnings rather than re-rating -- call it $200-260 -- with violent swings around each deal headline and quarter.",
     "bull": "Time-to-power stays the binding constraint through 2028. Oracle converts most of its 2.8 GW, AEP expands beyond 1 GW, another hyperscaler signs, and Brookfield's $25B framework becomes a repeatable power-as-a-service engine. Capacity heads toward 3-5 GW, 2027-28 revenue compounds 50%+, EPS approaches $5 by 2028, and hydrogen SOEC adds a second act. Growth multiples hold and the stock pushes past $300."
   },
@@ -121,6 +123,18 @@
     {
       "label": "AEP deal and AI power context (CNBC, Jan 2026)",
       "url": "https://www.cnbc.com/2026/01/11/bloom-energy-ai-data-center-power-stock-bubble.html"
+    },
+    {
+      "label": "TipRanks: BE three-session slide, valuation and PT context (Aug 20, 2026)",
+      "url": "https://www.tipranks.com/news/why-nebius-and-bloom-energy-stocks-are-sliding-today-and-what-wall-street-sees-next-august-20"
+    },
+    {
+      "label": "Motley Fool: why BE crashed this week; Oaktree/IDF $1.7B for Nebius infra (Aug 21, 2026)",
+      "url": "https://www.fool.com/investing/2026/08/21/why-bloom-energy-stock-crashed-this-week/"
+    },
+    {
+      "label": "Class action notice: Hunterbrook scandium allegations, Sep 28 deadline (Robbins Geller, Aug 21, 2026)",
+      "url": "https://www.globenewswire.com/news-release/2026/08/21/3349003/0/en/be-investor-alert-robbins-geller-rudman-dowd-llp-announces-that-bloom-energy-corporation-investors-with-substantial-losses-have-opportunity-to-lead-class-action-lawsuit-before-sept.html"
     }
   ]
 }
