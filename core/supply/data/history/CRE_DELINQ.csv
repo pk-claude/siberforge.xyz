@@ -1,4 +1,4 @@
-# CRE Loan Delinquency Rate  source=fred  generated=2026-08-24T06:39:57.618Z
+# CRE Loan Delinquency Rate  source=fred  generated=2026-08-31T12:18:38.714Z
 date,value
 2010-01-01,8.75
 2010-04-01,8.76
@@ -65,3 +65,4 @@ date,value
 2025-07-01,1.57
 2025-10-01,1.58
 2026-01-01,1.56
+2026-04-01,1.53

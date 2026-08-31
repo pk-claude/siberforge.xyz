@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-27T01:56:19.173Z",
+  "generatedAt": "2026-08-31T12:18:48.025Z",
   "windowDays": 14,
   "windows": {
     "next14": [
@@ -11,11 +11,11 @@
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 5.348,
-        "lastDate": "2026-08-03",
+        "lastValue": 5.652,
+        "lastDate": "2026-08-24",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 5.348 on 2026-08-03"
+        "context": "Last: 5.652 on 2026-08-24"
       },
       {
         "date": "2026-08-31",
@@ -24,11 +24,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.079,
-        "lastDate": "2026-08-03",
+        "lastValue": 4.085,
+        "lastDate": "2026-08-24",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.079 on 2026-08-03"
+        "context": "Last: 4.085 on 2026-08-24"
       },
       {
         "date": "2026-08-31",
@@ -37,11 +37,11 @@
         "shortLabel": "Gas Price",
         "category": "last-mile",
         "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.079,
-        "lastDate": "2026-08-03",
+        "lastValue": 4.085,
+        "lastDate": "2026-08-24",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.079 on 2026-08-03"
+        "context": "Last: 4.085 on 2026-08-24"
       },
       {
         "date": "2026-09-01",
@@ -206,11 +206,11 @@
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 5.348,
-        "lastDate": "2026-08-03",
+        "lastValue": 5.652,
+        "lastDate": "2026-08-24",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 5.348 on 2026-08-03"
+        "context": "Last: 5.652 on 2026-08-24"
       },
       {
         "date": "2026-09-07",
@@ -219,11 +219,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.079,
-        "lastDate": "2026-08-03",
+        "lastValue": 4.085,
+        "lastDate": "2026-08-24",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.079 on 2026-08-03"
+        "context": "Last: 4.085 on 2026-08-24"
       },
       {
         "date": "2026-09-07",
@@ -232,11 +232,76 @@
         "shortLabel": "Gas Price",
         "category": "last-mile",
         "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.079,
-        "lastDate": "2026-08-03",
+        "lastValue": 4.085,
+        "lastDate": "2026-08-24",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.079 on 2026-08-03"
+        "context": "Last: 4.085 on 2026-08-24"
+      },
+      {
+        "date": "2026-09-12",
+        "id": "CASS_EXPENDITURES",
+        "label": "Cass Freight Index — Expenditures",
+        "shortLabel": "Cass Expend.",
+        "category": "middle-mile",
+        "cadence": "Cass, ~12th of month",
+        "lastValue": 3.518,
+        "lastDate": "2026-07-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: 3.5 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-12",
+        "id": "CASS_SHIPMENTS",
+        "label": "Cass Freight Index — Shipments",
+        "shortLabel": "Cass Shipments",
+        "category": "middle-mile",
+        "cadence": "Cass, ~12th of month",
+        "lastValue": 0.983,
+        "lastDate": "2026-07-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: 1.0 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-12",
+        "id": "CASS_LINEHAUL",
+        "label": "Cass Truckload Linehaul Index",
+        "shortLabel": "Cass Linehaul",
+        "category": "middle-mile",
+        "cadence": "Cass, ~12th of month",
+        "lastValue": 152.9,
+        "lastDate": "2026-07-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: 152.9 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-13",
+        "id": "CRE_PRICES",
+        "label": "Commercial Real Estate Prices",
+        "shortLabel": "CRE Prices",
+        "category": "industrial-re",
+        "cadence": "BIS via FRED, quarterly",
+        "lastValue": -7.01283683704492,
+        "lastDate": "2025-04-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: -7.0 on 2025-04-01"
+      },
+      {
+        "date": "2026-09-13",
+        "id": "CRE_DELINQ",
+        "label": "CRE Loan Delinquency Rate",
+        "shortLabel": "CRE Delinq.",
+        "category": "industrial-re",
+        "cadence": "Federal Reserve, ~6 weeks after qtr-end",
+        "lastValue": 1.53,
+        "lastDate": "2026-04-01",
+        "unit": "%",
+        "decimals": 2,
+        "context": "Last: 1.53 on 2026-04-01"
       }
     ],
     "byCategory": {
@@ -248,11 +313,11 @@
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 5.348,
-          "lastDate": "2026-08-03",
+          "lastValue": 5.652,
+          "lastDate": "2026-08-24",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 5.348 on 2026-08-03"
+          "context": "Last: 5.652 on 2026-08-24"
         },
         {
           "date": "2026-08-31",
@@ -261,11 +326,11 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.079,
-          "lastDate": "2026-08-03",
+          "lastValue": 4.085,
+          "lastDate": "2026-08-24",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.079 on 2026-08-03"
+          "context": "Last: 4.085 on 2026-08-24"
         },
         {
           "date": "2026-09-04",
@@ -287,11 +352,11 @@
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 5.348,
-          "lastDate": "2026-08-03",
+          "lastValue": 5.652,
+          "lastDate": "2026-08-24",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 5.348 on 2026-08-03"
+          "context": "Last: 5.652 on 2026-08-24"
         },
         {
           "date": "2026-09-07",
@@ -300,11 +365,50 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.079,
-          "lastDate": "2026-08-03",
+          "lastValue": 4.085,
+          "lastDate": "2026-08-24",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.079 on 2026-08-03"
+          "context": "Last: 4.085 on 2026-08-24"
+        },
+        {
+          "date": "2026-09-12",
+          "id": "CASS_EXPENDITURES",
+          "label": "Cass Freight Index — Expenditures",
+          "shortLabel": "Cass Expend.",
+          "category": "middle-mile",
+          "cadence": "Cass, ~12th of month",
+          "lastValue": 3.518,
+          "lastDate": "2026-07-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 3.5 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-12",
+          "id": "CASS_SHIPMENTS",
+          "label": "Cass Freight Index — Shipments",
+          "shortLabel": "Cass Shipments",
+          "category": "middle-mile",
+          "cadence": "Cass, ~12th of month",
+          "lastValue": 0.983,
+          "lastDate": "2026-07-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 1.0 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-12",
+          "id": "CASS_LINEHAUL",
+          "label": "Cass Truckload Linehaul Index",
+          "shortLabel": "Cass Linehaul",
+          "category": "middle-mile",
+          "cadence": "Cass, ~12th of month",
+          "lastValue": 152.9,
+          "lastDate": "2026-07-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 152.9 on 2026-07-01"
         }
       ],
       "last-mile": [
@@ -315,11 +419,11 @@
           "shortLabel": "Gas Price",
           "category": "last-mile",
           "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.079,
-          "lastDate": "2026-08-03",
+          "lastValue": 4.085,
+          "lastDate": "2026-08-24",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.079 on 2026-08-03"
+          "context": "Last: 4.085 on 2026-08-24"
         },
         {
           "date": "2026-09-04",
@@ -367,11 +471,11 @@
           "shortLabel": "Gas Price",
           "category": "last-mile",
           "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.079,
-          "lastDate": "2026-08-03",
+          "lastValue": 4.085,
+          "lastDate": "2026-08-24",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.079 on 2026-08-03"
+          "context": "Last: 4.085 on 2026-08-24"
         }
       ],
       "international": [
@@ -482,6 +586,34 @@
           "unit": "k",
           "decimals": 0,
           "context": "Last: 1,835 on 2026-07-01"
+        }
+      ],
+      "industrial-re": [
+        {
+          "date": "2026-09-13",
+          "id": "CRE_PRICES",
+          "label": "Commercial Real Estate Prices",
+          "shortLabel": "CRE Prices",
+          "category": "industrial-re",
+          "cadence": "BIS via FRED, quarterly",
+          "lastValue": -7.01283683704492,
+          "lastDate": "2025-04-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: -7.0 on 2025-04-01"
+        },
+        {
+          "date": "2026-09-13",
+          "id": "CRE_DELINQ",
+          "label": "CRE Loan Delinquency Rate",
+          "shortLabel": "CRE Delinq.",
+          "category": "industrial-re",
+          "cadence": "Federal Reserve, ~6 weeks after qtr-end",
+          "lastValue": 1.53,
+          "lastDate": "2026-04-01",
+          "unit": "%",
+          "decimals": 2,
+          "context": "Last: 1.53 on 2026-04-01"
         }
       ]
     }
