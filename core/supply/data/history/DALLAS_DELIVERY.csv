@@ -1,4 +1,4 @@
-# Dallas Fed Mfg Delivery Time  source=fred  generated=2026-08-31T12:18:38.728Z
+# Dallas Fed Mfg Delivery Time  source=fred  generated=2026-09-07T11:11:43.127Z
 date,value
 2010-01-01,-2.4
 2010-02-01,3.9
@@ -199,3 +199,4 @@ date,value
 2026-05-01,1.4
 2026-06-01,0.9
 2026-07-01,2.3
+2026-08-01,12.5

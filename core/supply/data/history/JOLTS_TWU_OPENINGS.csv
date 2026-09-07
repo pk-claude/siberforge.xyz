@@ -1,4 +1,4 @@
-# JOLTS: Transp/Warehouse/Utilities Openings  source=fred  generated=2026-08-31T12:18:38.707Z
+# JOLTS: Transp/Warehouse/Utilities Openings  source=fred  generated=2026-09-07T11:11:43.104Z
 date,value
 2010-01-01,50
 2010-02-01,56
@@ -197,4 +197,5 @@ date,value
 2026-03-01,277
 2026-04-01,344
 2026-05-01,286
-2026-06-01,400
+2026-06-01,390
+2026-07-01,330

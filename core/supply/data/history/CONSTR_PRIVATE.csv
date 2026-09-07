@@ -1,4 +1,4 @@
-# Total Private Construction Spending  source=fred  generated=2026-08-31T12:18:38.713Z
+# Total Private Construction Spending  source=fred  generated=2026-09-07T11:11:43.111Z
 date,value
 2010-01-01,523818
 2010-02-01,522690
@@ -196,5 +196,6 @@ date,value
 2026-02-01,1654750
 2026-03-01,1663330
 2026-04-01,1627358
-2026-05-01,1624521
-2026-06-01,1622458
+2026-05-01,1624146
+2026-06-01,1622949
+2026-07-01,1614171
