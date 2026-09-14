@@ -1,4 +1,4 @@
-# PPI: Couriers & Messengers  source=fred  generated=2026-09-07T11:11:43.122Z
+# PPI: Couriers & Messengers  source=fred  generated=2026-09-14T11:22:21.592Z
 date,value
 2010-01-01,152.3
 2010-02-01,152.1
@@ -199,3 +199,4 @@ date,value
 2026-05-01,384.494
 2026-06-01,379.428
 2026-07-01,376.362
+2026-08-01,381.583

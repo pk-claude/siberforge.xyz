@@ -1,113 +1,9 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-07T11:11:50.681Z",
+  "generatedAt": "2026-09-14T11:22:33.397Z",
   "windowDays": 14,
   "windows": {
     "next14": [
-      {
-        "date": "2026-09-07",
-        "id": "DIESEL_RETAIL",
-        "label": "Diesel Retail Price (US Avg)",
-        "shortLabel": "Diesel",
-        "category": "middle-mile",
-        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 5.599,
-        "lastDate": "2026-08-31",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 5.599 on 2026-08-31"
-      },
-      {
-        "date": "2026-09-07",
-        "id": "GASOLINE_RETAIL",
-        "label": "Gasoline Retail Price (US Avg)",
-        "shortLabel": "Gasoline",
-        "category": "middle-mile",
-        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.071,
-        "lastDate": "2026-08-31",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 4.071 on 2026-08-31"
-      },
-      {
-        "date": "2026-09-07",
-        "id": "GASREG",
-        "label": "Retail Gasoline Price (Regular)",
-        "shortLabel": "Gas Price",
-        "category": "last-mile",
-        "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.071,
-        "lastDate": "2026-08-31",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 4.071 on 2026-08-31"
-      },
-      {
-        "date": "2026-09-12",
-        "id": "CASS_EXPENDITURES",
-        "label": "Cass Freight Index — Expenditures",
-        "shortLabel": "Cass Expend.",
-        "category": "middle-mile",
-        "cadence": "Cass, ~12th of month",
-        "lastValue": 3.518,
-        "lastDate": "2026-07-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: 3.5 on 2026-07-01"
-      },
-      {
-        "date": "2026-09-12",
-        "id": "CASS_SHIPMENTS",
-        "label": "Cass Freight Index — Shipments",
-        "shortLabel": "Cass Shipments",
-        "category": "middle-mile",
-        "cadence": "Cass, ~12th of month",
-        "lastValue": 0.983,
-        "lastDate": "2026-07-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: 1.0 on 2026-07-01"
-      },
-      {
-        "date": "2026-09-12",
-        "id": "CASS_LINEHAUL",
-        "label": "Cass Truckload Linehaul Index",
-        "shortLabel": "Cass Linehaul",
-        "category": "middle-mile",
-        "cadence": "Cass, ~12th of month",
-        "lastValue": 152.9,
-        "lastDate": "2026-07-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: 152.9 on 2026-07-01"
-      },
-      {
-        "date": "2026-09-13",
-        "id": "CRE_PRICES",
-        "label": "Commercial Real Estate Prices",
-        "shortLabel": "CRE Prices",
-        "category": "industrial-re",
-        "cadence": "BIS via FRED, quarterly",
-        "lastValue": -7.01283683704492,
-        "lastDate": "2025-04-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: -7.0 on 2025-04-01"
-      },
-      {
-        "date": "2026-09-13",
-        "id": "CRE_DELINQ",
-        "label": "CRE Loan Delinquency Rate",
-        "shortLabel": "CRE Delinq.",
-        "category": "industrial-re",
-        "cadence": "Federal Reserve, ~6 weeks after qtr-end",
-        "lastValue": 1.53,
-        "lastDate": "2026-04-01",
-        "unit": "%",
-        "decimals": 2,
-        "context": "Last: 1.53 on 2026-04-01"
-      },
       {
         "date": "2026-09-14",
         "id": "DIESEL_RETAIL",
@@ -115,11 +11,11 @@
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 5.599,
-        "lastDate": "2026-08-31",
+        "lastValue": 5.967,
+        "lastDate": "2026-09-07",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 5.599 on 2026-08-31"
+        "context": "Last: 5.967 on 2026-09-07"
       },
       {
         "date": "2026-09-14",
@@ -141,11 +37,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.071,
-        "lastDate": "2026-08-31",
+        "lastValue": 4.157,
+        "lastDate": "2026-09-07",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.071 on 2026-08-31"
+        "context": "Last: 4.157 on 2026-09-07"
       },
       {
         "date": "2026-09-14",
@@ -167,11 +63,11 @@
         "shortLabel": "Corrugated PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 380.81,
-        "lastDate": "2026-07-01",
+        "lastValue": 386.156,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 380.8 on 2026-07-01"
+        "context": "Last: 386.2 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -180,11 +76,11 @@
         "shortLabel": "Courier PPI",
         "category": "last-mile",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 376.362,
-        "lastDate": "2026-07-01",
+        "lastValue": 381.583,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 376.4 on 2026-07-01"
+        "context": "Last: 381.6 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -193,11 +89,11 @@
         "shortLabel": "Local Truck PPI",
         "category": "last-mile",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 192.78,
-        "lastDate": "2026-07-01",
+        "lastValue": 198.606,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 192.8 on 2026-07-01"
+        "context": "Last: 198.6 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -206,11 +102,11 @@
         "shortLabel": "TL PPI",
         "category": "middle-mile",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 195.575,
-        "lastDate": "2026-07-01",
+        "lastValue": 207.644,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 195.6 on 2026-07-01"
+        "context": "Last: 207.6 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -219,11 +115,11 @@
         "shortLabel": "MHE PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 379.724,
-        "lastDate": "2026-07-01",
+        "lastValue": 380.808,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 379.7 on 2026-07-01"
+        "context": "Last: 380.8 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -232,11 +128,11 @@
         "shortLabel": "Warehouse Svc PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 158.853,
-        "lastDate": "2026-07-01",
+        "lastValue": 159.681,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 158.9 on 2026-07-01"
+        "context": "Last: 159.7 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -245,11 +141,11 @@
         "shortLabel": "Pallets PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 356.731,
-        "lastDate": "2026-07-01",
+        "lastValue": 356.438,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 356.7 on 2026-07-01"
+        "context": "Last: 356.4 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -258,11 +154,11 @@
         "shortLabel": "Pulp PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 213.155,
-        "lastDate": "2026-07-01",
+        "lastValue": 218.37,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 213.2 on 2026-07-01"
+        "context": "Last: 218.4 on 2026-08-01"
       },
       {
         "date": "2026-09-14",
@@ -271,11 +167,11 @@
         "shortLabel": "Gas Price",
         "category": "last-mile",
         "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.071,
-        "lastDate": "2026-08-31",
+        "lastValue": 4.157,
+        "lastDate": "2026-09-07",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.071 on 2026-08-31"
+        "context": "Last: 4.157 on 2026-09-07"
       },
       {
         "date": "2026-09-14",
@@ -349,11 +245,11 @@
         "shortLabel": "LA-LB Imports",
         "category": "international",
         "cadence": "Port of LA, ~15th",
-        "lastValue": 10917639,
+        "lastValue": 12781404,
         "lastDate": "2026-08-01",
         "unit": "TEU",
         "decimals": 0,
-        "context": "Last: 10,917,639 on 2026-08-01"
+        "context": "Last: 12,781,404 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -362,11 +258,11 @@
         "shortLabel": "LA-LB Ship Calls",
         "category": "international",
         "cadence": "Port of LB, ~15th",
-        "lastValue": 158,
+        "lastValue": 173,
         "lastDate": "2026-08-01",
         "unit": "ships",
         "decimals": 0,
-        "context": "Last: 158 on 2026-08-01"
+        "context": "Last: 173 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -414,11 +310,11 @@
         "shortLabel": "NY-NJ Imports",
         "category": "international",
         "cadence": "PANYNJ, ~5 weeks after",
-        "lastValue": 4256000,
+        "lastValue": 5119774,
         "lastDate": "2026-08-01",
         "unit": "TEU",
         "decimals": 0,
-        "context": "Last: 4,256,000 on 2026-08-01"
+        "context": "Last: 5,119,774 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -440,11 +336,11 @@
         "shortLabel": "Corrugated PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 380.81,
-        "lastDate": "2026-07-01",
+        "lastValue": 386.156,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 380.8 on 2026-07-01"
+        "context": "Last: 386.2 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -453,11 +349,11 @@
         "shortLabel": "Courier PPI",
         "category": "last-mile",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 376.362,
-        "lastDate": "2026-07-01",
+        "lastValue": 381.583,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 376.4 on 2026-07-01"
+        "context": "Last: 381.6 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -466,11 +362,11 @@
         "shortLabel": "Local Truck PPI",
         "category": "last-mile",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 192.78,
-        "lastDate": "2026-07-01",
+        "lastValue": 198.606,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 192.8 on 2026-07-01"
+        "context": "Last: 198.6 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -479,11 +375,11 @@
         "shortLabel": "TL PPI",
         "category": "middle-mile",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 195.575,
-        "lastDate": "2026-07-01",
+        "lastValue": 207.644,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 195.6 on 2026-07-01"
+        "context": "Last: 207.6 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -492,11 +388,11 @@
         "shortLabel": "MHE PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 379.724,
-        "lastDate": "2026-07-01",
+        "lastValue": 380.808,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 379.7 on 2026-07-01"
+        "context": "Last: 380.8 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -505,11 +401,11 @@
         "shortLabel": "Warehouse Svc PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 158.853,
-        "lastDate": "2026-07-01",
+        "lastValue": 159.681,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 158.9 on 2026-07-01"
+        "context": "Last: 159.7 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -518,11 +414,11 @@
         "shortLabel": "Pallets PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 356.731,
-        "lastDate": "2026-07-01",
+        "lastValue": 356.438,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 356.7 on 2026-07-01"
+        "context": "Last: 356.4 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -531,11 +427,11 @@
         "shortLabel": "Pulp PPI",
         "category": "dc",
         "cadence": "BLS PPI, mid-month",
-        "lastValue": 213.155,
-        "lastDate": "2026-07-01",
+        "lastValue": 218.37,
+        "lastDate": "2026-08-01",
         "unit": "",
         "decimals": 1,
-        "context": "Last: 213.2 on 2026-07-01"
+        "context": "Last: 218.4 on 2026-08-01"
       },
       {
         "date": "2026-09-15",
@@ -640,87 +536,165 @@
         "unit": "%",
         "decimals": 1,
         "context": "Last: 76.0 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-21",
+        "id": "DIESEL_RETAIL",
+        "label": "Diesel Retail Price (US Avg)",
+        "shortLabel": "Diesel",
+        "category": "middle-mile",
+        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+        "lastValue": 5.967,
+        "lastDate": "2026-09-07",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 5.967 on 2026-09-07"
+      },
+      {
+        "date": "2026-09-21",
+        "id": "GASOLINE_RETAIL",
+        "label": "Gasoline Retail Price (US Avg)",
+        "shortLabel": "Gasoline",
+        "category": "middle-mile",
+        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+        "lastValue": 4.157,
+        "lastDate": "2026-09-07",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 4.157 on 2026-09-07"
+      },
+      {
+        "date": "2026-09-21",
+        "id": "GASREG",
+        "label": "Retail Gasoline Price (Regular)",
+        "shortLabel": "Gas Price",
+        "category": "last-mile",
+        "cadence": "EIA Weekly Petroleum",
+        "lastValue": 4.157,
+        "lastDate": "2026-09-07",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 4.157 on 2026-09-07"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "ATA_TONNAGE",
+        "label": "ATA Truck Tonnage Index",
+        "shortLabel": "ATA Tonnage",
+        "category": "middle-mile",
+        "cadence": "ATA, ~3 weeks after month-end",
+        "lastValue": 113.3,
+        "lastDate": "2026-06-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: 113.3 on 2026-06-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "DALLAS_DELIVERY",
+        "label": "Dallas Fed Mfg Delivery Time",
+        "shortLabel": "Dallas Delivery",
+        "category": "dc",
+        "cadence": "Dallas Fed Mfg Survey, last Mon",
+        "lastValue": 12.5,
+        "lastDate": "2026-08-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: 12.5 on 2026-08-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "ELEC_INDUSTRIAL",
+        "label": "Industrial Electricity Rate (US)",
+        "shortLabel": "Ind. Electricity",
+        "category": "dc",
+        "cadence": "EIA Electric Power Monthly, ~6 weeks after",
+        "lastValue": 9.17,
+        "lastDate": "2026-06-01",
+        "unit": "¢/kWh",
+        "decimals": 2,
+        "context": "Last: 9.17 on 2026-06-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "JOLTS_TWU_OPENINGS",
+        "label": "JOLTS: Transp/Warehouse/Utilities Openings",
+        "shortLabel": "TWU Openings",
+        "category": "dc",
+        "cadence": "BLS JOLTS, ~5 weeks after month-end",
+        "lastValue": 330,
+        "lastDate": "2026-07-01",
+        "unit": "k",
+        "decimals": 0,
+        "context": "Last: 330 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "JOLTS_TWU_LAYOFFS",
+        "label": "JOLTS: TWU Layoffs Rate",
+        "shortLabel": "TWU Layoffs",
+        "category": "dc",
+        "cadence": "BLS JOLTS, ~5 weeks after month-end",
+        "lastValue": 1,
+        "lastDate": "2026-07-01",
+        "unit": "%",
+        "decimals": 1,
+        "context": "Last: 1.0 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "JOLTS_TWU_QUITS",
+        "label": "JOLTS: TWU Quits Rate",
+        "shortLabel": "TWU Quits",
+        "category": "dc",
+        "cadence": "BLS JOLTS, ~5 weeks after month-end",
+        "lastValue": 2.2,
+        "lastDate": "2026-07-01",
+        "unit": "%",
+        "decimals": 1,
+        "context": "Last: 2.2 on 2026-07-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "TSI_FREIGHT",
+        "label": "Transportation Services Index — Freight",
+        "shortLabel": "TSI Freight",
+        "category": "middle-mile",
+        "cadence": "BTS, ~6 weeks after month-end",
+        "lastValue": 134.9,
+        "lastDate": "2026-06-01",
+        "unit": "",
+        "decimals": 1,
+        "context": "Last: 134.9 on 2026-06-01"
+      },
+      {
+        "date": "2026-09-25",
+        "id": "BORDER_MX_TRUCKS",
+        "label": "US-Mexico Border Truck Crossings",
+        "shortLabel": "MX Trucks",
+        "category": "international",
+        "cadence": "BTS Border Crossing, monthly",
+        "lastValue": 650.466,
+        "lastDate": "2026-07-01",
+        "unit": "k",
+        "decimals": 0,
+        "context": "Last: 650 on 2026-07-01"
       }
     ],
     "byCategory": {
       "middle-mile": [
         {
-          "date": "2026-09-07",
-          "id": "DIESEL_RETAIL",
-          "label": "Diesel Retail Price (US Avg)",
-          "shortLabel": "Diesel",
-          "category": "middle-mile",
-          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 5.599,
-          "lastDate": "2026-08-31",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 5.599 on 2026-08-31"
-        },
-        {
-          "date": "2026-09-07",
-          "id": "GASOLINE_RETAIL",
-          "label": "Gasoline Retail Price (US Avg)",
-          "shortLabel": "Gasoline",
-          "category": "middle-mile",
-          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.071,
-          "lastDate": "2026-08-31",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 4.071 on 2026-08-31"
-        },
-        {
-          "date": "2026-09-12",
-          "id": "CASS_EXPENDITURES",
-          "label": "Cass Freight Index — Expenditures",
-          "shortLabel": "Cass Expend.",
-          "category": "middle-mile",
-          "cadence": "Cass, ~12th of month",
-          "lastValue": 3.518,
-          "lastDate": "2026-07-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 3.5 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-12",
-          "id": "CASS_SHIPMENTS",
-          "label": "Cass Freight Index — Shipments",
-          "shortLabel": "Cass Shipments",
-          "category": "middle-mile",
-          "cadence": "Cass, ~12th of month",
-          "lastValue": 0.983,
-          "lastDate": "2026-07-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 1.0 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-12",
-          "id": "CASS_LINEHAUL",
-          "label": "Cass Truckload Linehaul Index",
-          "shortLabel": "Cass Linehaul",
-          "category": "middle-mile",
-          "cadence": "Cass, ~12th of month",
-          "lastValue": 152.9,
-          "lastDate": "2026-07-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 152.9 on 2026-07-01"
-        },
-        {
           "date": "2026-09-14",
           "id": "DIESEL_RETAIL",
           "label": "Diesel Retail Price (US Avg)",
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 5.599,
-          "lastDate": "2026-08-31",
+          "lastValue": 5.967,
+          "lastDate": "2026-09-07",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 5.599 on 2026-08-31"
+          "context": "Last: 5.967 on 2026-09-07"
         },
         {
           "date": "2026-09-14",
@@ -729,11 +703,11 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.071,
-          "lastDate": "2026-08-31",
+          "lastValue": 4.157,
+          "lastDate": "2026-09-07",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.071 on 2026-08-31"
+          "context": "Last: 4.157 on 2026-09-07"
         },
         {
           "date": "2026-09-14",
@@ -742,11 +716,11 @@
           "shortLabel": "TL PPI",
           "category": "middle-mile",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 195.575,
-          "lastDate": "2026-07-01",
+          "lastValue": 207.644,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 195.6 on 2026-07-01"
+          "context": "Last: 207.6 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -768,11 +742,11 @@
           "shortLabel": "TL PPI",
           "category": "middle-mile",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 195.575,
-          "lastDate": "2026-07-01",
+          "lastValue": 207.644,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 195.6 on 2026-07-01"
+          "context": "Last: 207.6 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -799,166 +773,58 @@
           "unit": "",
           "decimals": 1,
           "context": "Last: 1,238,489.0 on 2026-06-01"
-        }
-      ],
-      "last-mile": [
+        },
         {
-          "date": "2026-09-07",
-          "id": "GASREG",
-          "label": "Retail Gasoline Price (Regular)",
-          "shortLabel": "Gas Price",
-          "category": "last-mile",
-          "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.071,
-          "lastDate": "2026-08-31",
+          "date": "2026-09-21",
+          "id": "DIESEL_RETAIL",
+          "label": "Diesel Retail Price (US Avg)",
+          "shortLabel": "Diesel",
+          "category": "middle-mile",
+          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+          "lastValue": 5.967,
+          "lastDate": "2026-09-07",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.071 on 2026-08-31"
+          "context": "Last: 5.967 on 2026-09-07"
         },
         {
-          "date": "2026-09-14",
-          "id": "PPI_COURIERS",
-          "label": "PPI: Couriers & Messengers",
-          "shortLabel": "Courier PPI",
-          "category": "last-mile",
-          "cadence": "BLS PPI, mid-month",
-          "lastValue": 376.362,
-          "lastDate": "2026-07-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 376.4 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-14",
-          "id": "PPI_LOCAL_TRUCKING",
-          "label": "PPI: General Freight Trucking, Local",
-          "shortLabel": "Local Truck PPI",
-          "category": "last-mile",
-          "cadence": "BLS PPI, mid-month",
-          "lastValue": 192.78,
-          "lastDate": "2026-07-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 192.8 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-14",
-          "id": "GASREG",
-          "label": "Retail Gasoline Price (Regular)",
-          "shortLabel": "Gas Price",
-          "category": "last-mile",
-          "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.071,
-          "lastDate": "2026-08-31",
+          "date": "2026-09-21",
+          "id": "GASOLINE_RETAIL",
+          "label": "Gasoline Retail Price (US Avg)",
+          "shortLabel": "Gasoline",
+          "category": "middle-mile",
+          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+          "lastValue": 4.157,
+          "lastDate": "2026-09-07",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.071 on 2026-08-31"
+          "context": "Last: 4.157 on 2026-09-07"
         },
         {
-          "date": "2026-09-15",
-          "id": "LIGHT_TRUCK_SAAR",
-          "label": "Light Trucks SAAR",
-          "shortLabel": "Light Truck Sales",
-          "category": "last-mile",
-          "cadence": "BEA, monthly",
-          "lastValue": 14.028,
-          "lastDate": "2026-08-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 14 on 2026-08-01"
-        },
-        {
-          "date": "2026-09-15",
-          "id": "PPI_COURIERS",
-          "label": "PPI: Couriers & Messengers",
-          "shortLabel": "Courier PPI",
-          "category": "last-mile",
-          "cadence": "BLS PPI, mid-month",
-          "lastValue": 376.362,
-          "lastDate": "2026-07-01",
+          "date": "2026-09-25",
+          "id": "ATA_TONNAGE",
+          "label": "ATA Truck Tonnage Index",
+          "shortLabel": "ATA Tonnage",
+          "category": "middle-mile",
+          "cadence": "ATA, ~3 weeks after month-end",
+          "lastValue": 113.3,
+          "lastDate": "2026-06-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 376.4 on 2026-07-01"
+          "context": "Last: 113.3 on 2026-06-01"
         },
         {
-          "date": "2026-09-15",
-          "id": "PPI_LOCAL_TRUCKING",
-          "label": "PPI: General Freight Trucking, Local",
-          "shortLabel": "Local Truck PPI",
-          "category": "last-mile",
-          "cadence": "BLS PPI, mid-month",
-          "lastValue": 192.78,
-          "lastDate": "2026-07-01",
+          "date": "2026-09-25",
+          "id": "TSI_FREIGHT",
+          "label": "Transportation Services Index — Freight",
+          "shortLabel": "TSI Freight",
+          "category": "middle-mile",
+          "cadence": "BTS, ~6 weeks after month-end",
+          "lastValue": 134.9,
+          "lastDate": "2026-06-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 192.8 on 2026-07-01"
-        }
-      ],
-      "industrial-re": [
-        {
-          "date": "2026-09-13",
-          "id": "CRE_PRICES",
-          "label": "Commercial Real Estate Prices",
-          "shortLabel": "CRE Prices",
-          "category": "industrial-re",
-          "cadence": "BIS via FRED, quarterly",
-          "lastValue": -7.01283683704492,
-          "lastDate": "2025-04-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: -7.0 on 2025-04-01"
-        },
-        {
-          "date": "2026-09-13",
-          "id": "CRE_DELINQ",
-          "label": "CRE Loan Delinquency Rate",
-          "shortLabel": "CRE Delinq.",
-          "category": "industrial-re",
-          "cadence": "Federal Reserve, ~6 weeks after qtr-end",
-          "lastValue": 1.53,
-          "lastDate": "2026-04-01",
-          "unit": "%",
-          "decimals": 2,
-          "context": "Last: 1.53 on 2026-04-01"
-        },
-        {
-          "date": "2026-09-15",
-          "id": "CONSTR_MANUF",
-          "label": "Manufacturing Construction Spending",
-          "shortLabel": "Mfg Constr.",
-          "category": "industrial-re",
-          "cadence": "Census Construction Spending",
-          "lastValue": 169795,
-          "lastDate": "2026-07-01",
-          "unit": "$M SAAR",
-          "decimals": 0,
-          "context": "Last: 169,795 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-15",
-          "id": "CONSTR_PRIVATE",
-          "label": "Total Private Construction Spending",
-          "shortLabel": "Private Constr.",
-          "category": "industrial-re",
-          "cadence": "Census Construction Spending",
-          "lastValue": 1614171,
-          "lastDate": "2026-07-01",
-          "unit": "$M SAAR",
-          "decimals": 0,
-          "context": "Last: 1,614,171 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-20",
-          "id": "MFG_CAPACITY_UTIL",
-          "label": "Manufacturing Capacity Utilization",
-          "shortLabel": "Mfg Cap Util",
-          "category": "industrial-re",
-          "cadence": "Federal Reserve G.17, ~mid-month",
-          "lastValue": 75.9621,
-          "lastDate": "2026-07-01",
-          "unit": "%",
-          "decimals": 1,
-          "context": "Last: 76.0 on 2026-07-01"
+          "context": "Last: 134.9 on 2026-06-01"
         }
       ],
       "dc": [
@@ -995,11 +861,11 @@
           "shortLabel": "Corrugated PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 380.81,
-          "lastDate": "2026-07-01",
+          "lastValue": 386.156,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 380.8 on 2026-07-01"
+          "context": "Last: 386.2 on 2026-08-01"
         },
         {
           "date": "2026-09-14",
@@ -1008,11 +874,11 @@
           "shortLabel": "MHE PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 379.724,
-          "lastDate": "2026-07-01",
+          "lastValue": 380.808,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 379.7 on 2026-07-01"
+          "context": "Last: 380.8 on 2026-08-01"
         },
         {
           "date": "2026-09-14",
@@ -1021,11 +887,11 @@
           "shortLabel": "Warehouse Svc PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 158.853,
-          "lastDate": "2026-07-01",
+          "lastValue": 159.681,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 158.9 on 2026-07-01"
+          "context": "Last: 159.7 on 2026-08-01"
         },
         {
           "date": "2026-09-14",
@@ -1034,11 +900,11 @@
           "shortLabel": "Pallets PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 356.731,
-          "lastDate": "2026-07-01",
+          "lastValue": 356.438,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 356.7 on 2026-07-01"
+          "context": "Last: 356.4 on 2026-08-01"
         },
         {
           "date": "2026-09-14",
@@ -1047,11 +913,11 @@
           "shortLabel": "Pulp PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 213.155,
-          "lastDate": "2026-07-01",
+          "lastValue": 218.37,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 213.2 on 2026-07-01"
+          "context": "Last: 218.4 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1112,11 +978,11 @@
           "shortLabel": "Corrugated PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 380.81,
-          "lastDate": "2026-07-01",
+          "lastValue": 386.156,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 380.8 on 2026-07-01"
+          "context": "Last: 386.2 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1125,11 +991,11 @@
           "shortLabel": "MHE PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 379.724,
-          "lastDate": "2026-07-01",
+          "lastValue": 380.808,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 379.7 on 2026-07-01"
+          "context": "Last: 380.8 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1138,11 +1004,11 @@
           "shortLabel": "Warehouse Svc PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 158.853,
-          "lastDate": "2026-07-01",
+          "lastValue": 159.681,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 158.9 on 2026-07-01"
+          "context": "Last: 159.7 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1151,11 +1017,11 @@
           "shortLabel": "Pallets PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 356.731,
-          "lastDate": "2026-07-01",
+          "lastValue": 356.438,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 356.7 on 2026-07-01"
+          "context": "Last: 356.4 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1164,11 +1030,11 @@
           "shortLabel": "Pulp PPI",
           "category": "dc",
           "cadence": "BLS PPI, mid-month",
-          "lastValue": 213.155,
-          "lastDate": "2026-07-01",
+          "lastValue": 218.37,
+          "lastDate": "2026-08-01",
           "unit": "",
           "decimals": 1,
-          "context": "Last: 213.2 on 2026-07-01"
+          "context": "Last: 218.4 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1195,6 +1061,164 @@
           "unit": "$M",
           "decimals": 0,
           "context": "Last: 944,710 on 2026-06-01"
+        },
+        {
+          "date": "2026-09-25",
+          "id": "DALLAS_DELIVERY",
+          "label": "Dallas Fed Mfg Delivery Time",
+          "shortLabel": "Dallas Delivery",
+          "category": "dc",
+          "cadence": "Dallas Fed Mfg Survey, last Mon",
+          "lastValue": 12.5,
+          "lastDate": "2026-08-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 12.5 on 2026-08-01"
+        },
+        {
+          "date": "2026-09-25",
+          "id": "ELEC_INDUSTRIAL",
+          "label": "Industrial Electricity Rate (US)",
+          "shortLabel": "Ind. Electricity",
+          "category": "dc",
+          "cadence": "EIA Electric Power Monthly, ~6 weeks after",
+          "lastValue": 9.17,
+          "lastDate": "2026-06-01",
+          "unit": "¢/kWh",
+          "decimals": 2,
+          "context": "Last: 9.17 on 2026-06-01"
+        },
+        {
+          "date": "2026-09-25",
+          "id": "JOLTS_TWU_OPENINGS",
+          "label": "JOLTS: Transp/Warehouse/Utilities Openings",
+          "shortLabel": "TWU Openings",
+          "category": "dc",
+          "cadence": "BLS JOLTS, ~5 weeks after month-end",
+          "lastValue": 330,
+          "lastDate": "2026-07-01",
+          "unit": "k",
+          "decimals": 0,
+          "context": "Last: 330 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-25",
+          "id": "JOLTS_TWU_LAYOFFS",
+          "label": "JOLTS: TWU Layoffs Rate",
+          "shortLabel": "TWU Layoffs",
+          "category": "dc",
+          "cadence": "BLS JOLTS, ~5 weeks after month-end",
+          "lastValue": 1,
+          "lastDate": "2026-07-01",
+          "unit": "%",
+          "decimals": 1,
+          "context": "Last: 1.0 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-25",
+          "id": "JOLTS_TWU_QUITS",
+          "label": "JOLTS: TWU Quits Rate",
+          "shortLabel": "TWU Quits",
+          "category": "dc",
+          "cadence": "BLS JOLTS, ~5 weeks after month-end",
+          "lastValue": 2.2,
+          "lastDate": "2026-07-01",
+          "unit": "%",
+          "decimals": 1,
+          "context": "Last: 2.2 on 2026-07-01"
+        }
+      ],
+      "last-mile": [
+        {
+          "date": "2026-09-14",
+          "id": "PPI_COURIERS",
+          "label": "PPI: Couriers & Messengers",
+          "shortLabel": "Courier PPI",
+          "category": "last-mile",
+          "cadence": "BLS PPI, mid-month",
+          "lastValue": 381.583,
+          "lastDate": "2026-08-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 381.6 on 2026-08-01"
+        },
+        {
+          "date": "2026-09-14",
+          "id": "PPI_LOCAL_TRUCKING",
+          "label": "PPI: General Freight Trucking, Local",
+          "shortLabel": "Local Truck PPI",
+          "category": "last-mile",
+          "cadence": "BLS PPI, mid-month",
+          "lastValue": 198.606,
+          "lastDate": "2026-08-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 198.6 on 2026-08-01"
+        },
+        {
+          "date": "2026-09-14",
+          "id": "GASREG",
+          "label": "Retail Gasoline Price (Regular)",
+          "shortLabel": "Gas Price",
+          "category": "last-mile",
+          "cadence": "EIA Weekly Petroleum",
+          "lastValue": 4.157,
+          "lastDate": "2026-09-07",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 4.157 on 2026-09-07"
+        },
+        {
+          "date": "2026-09-15",
+          "id": "LIGHT_TRUCK_SAAR",
+          "label": "Light Trucks SAAR",
+          "shortLabel": "Light Truck Sales",
+          "category": "last-mile",
+          "cadence": "BEA, monthly",
+          "lastValue": 14.028,
+          "lastDate": "2026-08-01",
+          "unit": "k",
+          "decimals": 0,
+          "context": "Last: 14 on 2026-08-01"
+        },
+        {
+          "date": "2026-09-15",
+          "id": "PPI_COURIERS",
+          "label": "PPI: Couriers & Messengers",
+          "shortLabel": "Courier PPI",
+          "category": "last-mile",
+          "cadence": "BLS PPI, mid-month",
+          "lastValue": 381.583,
+          "lastDate": "2026-08-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 381.6 on 2026-08-01"
+        },
+        {
+          "date": "2026-09-15",
+          "id": "PPI_LOCAL_TRUCKING",
+          "label": "PPI: General Freight Trucking, Local",
+          "shortLabel": "Local Truck PPI",
+          "category": "last-mile",
+          "cadence": "BLS PPI, mid-month",
+          "lastValue": 198.606,
+          "lastDate": "2026-08-01",
+          "unit": "",
+          "decimals": 1,
+          "context": "Last: 198.6 on 2026-08-01"
+        },
+        {
+          "date": "2026-09-21",
+          "id": "GASREG",
+          "label": "Retail Gasoline Price (Regular)",
+          "shortLabel": "Gas Price",
+          "category": "last-mile",
+          "cadence": "EIA Weekly Petroleum",
+          "lastValue": 4.157,
+          "lastDate": "2026-09-07",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 4.157 on 2026-09-07"
         }
       ],
       "international": [
@@ -1231,11 +1255,11 @@
           "shortLabel": "LA-LB Imports",
           "category": "international",
           "cadence": "Port of LA, ~15th",
-          "lastValue": 10917639,
+          "lastValue": 12781404,
           "lastDate": "2026-08-01",
           "unit": "TEU",
           "decimals": 0,
-          "context": "Last: 10,917,639 on 2026-08-01"
+          "context": "Last: 12,781,404 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1244,11 +1268,11 @@
           "shortLabel": "LA-LB Ship Calls",
           "category": "international",
           "cadence": "Port of LB, ~15th",
-          "lastValue": 158,
+          "lastValue": 173,
           "lastDate": "2026-08-01",
           "unit": "ships",
           "decimals": 0,
-          "context": "Last: 158 on 2026-08-01"
+          "context": "Last: 173 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1257,11 +1281,11 @@
           "shortLabel": "NY-NJ Imports",
           "category": "international",
           "cadence": "PANYNJ, ~5 weeks after",
-          "lastValue": 4256000,
+          "lastValue": 5119774,
           "lastDate": "2026-08-01",
           "unit": "TEU",
           "decimals": 0,
-          "context": "Last: 4,256,000 on 2026-08-01"
+          "context": "Last: 5,119,774 on 2026-08-01"
         },
         {
           "date": "2026-09-15",
@@ -1288,6 +1312,60 @@
           "unit": "$M",
           "decimals": 0,
           "context": "Last: 320,627 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-25",
+          "id": "BORDER_MX_TRUCKS",
+          "label": "US-Mexico Border Truck Crossings",
+          "shortLabel": "MX Trucks",
+          "category": "international",
+          "cadence": "BTS Border Crossing, monthly",
+          "lastValue": 650.466,
+          "lastDate": "2026-07-01",
+          "unit": "k",
+          "decimals": 0,
+          "context": "Last: 650 on 2026-07-01"
+        }
+      ],
+      "industrial-re": [
+        {
+          "date": "2026-09-15",
+          "id": "CONSTR_MANUF",
+          "label": "Manufacturing Construction Spending",
+          "shortLabel": "Mfg Constr.",
+          "category": "industrial-re",
+          "cadence": "Census Construction Spending",
+          "lastValue": 169795,
+          "lastDate": "2026-07-01",
+          "unit": "$M SAAR",
+          "decimals": 0,
+          "context": "Last: 169,795 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-15",
+          "id": "CONSTR_PRIVATE",
+          "label": "Total Private Construction Spending",
+          "shortLabel": "Private Constr.",
+          "category": "industrial-re",
+          "cadence": "Census Construction Spending",
+          "lastValue": 1614171,
+          "lastDate": "2026-07-01",
+          "unit": "$M SAAR",
+          "decimals": 0,
+          "context": "Last: 1,614,171 on 2026-07-01"
+        },
+        {
+          "date": "2026-09-20",
+          "id": "MFG_CAPACITY_UTIL",
+          "label": "Manufacturing Capacity Utilization",
+          "shortLabel": "Mfg Cap Util",
+          "category": "industrial-re",
+          "cadence": "Federal Reserve G.17, ~mid-month",
+          "lastValue": 75.9621,
+          "lastDate": "2026-07-01",
+          "unit": "%",
+          "decimals": 1,
+          "context": "Last: 76.0 on 2026-07-01"
         }
       ]
     }
