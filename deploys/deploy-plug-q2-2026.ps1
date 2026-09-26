@@ -54,4 +54,4 @@ EBITDAS-positive target Q4 2026 reiterated.
 git commit -m $msg
 git push origin main
 
-Write-Host "`n=== done - verify at siberforge.xyz/core/plug/ ===" -ForegroundColor Green
+Write-Host "`n=== done - verify at siberforge.xyz/research/plug/ ===" -ForegroundColor Green

@@ -1,6 +1,6 @@
 // scripts/calendar.mjs
 // 14-day forward publications calendar.
-// Reads core/supply/cadence.js + snapshot.json, produces calendar.json
+// Reads supply/cadence.js + snapshot.json, produces calendar.json
 // with entries for each upcoming release per metric in the next 14 days.
 
 import fs from 'node:fs/promises';
@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = path.join(REPO_ROOT, 'core', 'supply', 'data');
+const DATA_DIR = path.join(REPO_ROOT, 'supply', 'data');
 const SNAPSHOT_PATH = path.join(DATA_DIR, 'snapshot.json');
 const CALENDAR_PATH = path.join(DATA_DIR, 'calendar.json');
 
@@ -236,8 +236,8 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       series.history = hist[id] || series.spark || [];
     }
   }
-  const { INDICATORS } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/indicators.js')).toString());
-  const { RELEASE_CADENCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/cadence.js')).toString());
+  const { INDICATORS } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'supply/indicators.js')).toString());
+  const { RELEASE_CADENCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'supply/cadence.js')).toString());
   const cal = await buildCalendar({ snapshot, indicators: INDICATORS, cadenceMap: RELEASE_CADENCE, dryRun });
   console.log(`[calendar] generated ${cal.windows.next14.length} entries in next ${cal.windowDays} days`);
 }

@@ -3,7 +3,7 @@
 // Daily forward-P/E snapshot. Reads the universe from companies.json (the
 // latest weekly refresh), fetches just the "live" fields needed (forward
 // P/E, trailing P/E, price, market cap), and writes one JSON to
-// core/equity/pe/snapshots/YYYY-MM-DD.json.
+// markets/valuation/snapshots/YYYY-MM-DD.json.
 //
 // Skips weekends (no new data). The daily history accumulates so that 3
 // months from now you can compare today's forward P/E vs. realized.
@@ -18,8 +18,8 @@ import { fetchFundamentals } from './sources/yahoo-equity-pe.mjs';
 import { pMapLimit } from './lib/http.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const DATA = path.join(ROOT, 'core', 'equity', 'pe', 'data');
-const SNAP = path.join(ROOT, 'core', 'equity', 'pe', 'snapshots');
+const DATA = path.join(ROOT, 'markets', 'valuation', 'data');
+const SNAP = path.join(ROOT, 'markets', 'valuation', 'snapshots');
 const FORCE = process.argv.includes('--force');
 
 function todayUTC() {

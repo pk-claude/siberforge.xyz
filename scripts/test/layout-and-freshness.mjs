@@ -17,12 +17,12 @@ function boot(bodyAttrs) {
        <main><h2>Sector returns</h2><div class="wrap"><canvas id="chart-a"></canvas></div>
        <table><thead><tr><th>Ticker</th><th>P/E</th></tr></thead><tbody><tr><td>A</td><td>1</td></tr></tbody></table>
        </main></body></html>`,
-    { runScripts: 'outside-only', url: 'https://www.siberforge.xyz/core/macro/inflation/' }
+    { runScripts: 'outside-only', url: 'https://www.siberforge.xyz/macro/inflation/' }
   );
   const w = dom.window;
-  w.eval(rd('core/lib/nav-config.js'));
-  w.eval(rd('core/lib/freshness.js'));
-  w.eval(rd('core/lib/layout.js'));
+  w.eval(rd('lib/nav-config.js'));
+  w.eval(rd('lib/freshness.js'));
+  w.eval(rd('lib/layout.js'));
   return new Promise(resolve => {
     if (w.document.readyState === 'complete') return resolve(w);
     w.document.addEventListener('DOMContentLoaded', () => resolve(w));
@@ -47,9 +47,9 @@ run('canvas label from h2',  () => { const l = d.getElementById('chart-a').getAt
 run('th got scope=col',      () => { for (const x of d.querySelectorAll('thead th')) if (x.getAttribute('scope') !== 'col') throw new Error('missing scope'); });
 run('search overlay built',  () => { if (!d.getElementById('sf-search-overlay')) throw new Error('no overlay'); });
 run('see-also: 3 cards',     () => { const s = d.querySelector('.sf-seealso'); if (!s) throw new Error('no see-also'); const n = s.querySelectorAll('.sf-seealso-card').length; if (n !== 3) throw new Error('cards=' + n); });
-run('see-also -> regional-cpi', () => { const h = [...d.querySelectorAll('.sf-seealso-card')].map(a => a.getAttribute('href')); if (!h.includes('/core/macro/regional/regional-cpi/')) throw new Error(h.join(',')); });
+run('see-also -> regional-cpi', () => { const h = [...d.querySelectorAll('.sf-seealso-card')].map(a => a.getAttribute('href')); if (!h.includes('/regional/regional-cpi/')) throw new Error(h.join(',')); });
 
-console.log('breadcrumb: /core/plug/ (was a duplicate crumb)');
+console.log('breadcrumb: /research/plug/ (was a duplicate crumb)');
 const w2 = await boot('data-section="equity" data-sub-section="plug" data-page="plug-overview"');
 run('no duplicate crumb', () => {
   const crumbs = [...w2.document.querySelectorAll('.sf-crumb')].map(c => c.textContent);

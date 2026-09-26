@@ -7,63 +7,253 @@
   },
   "redirects": [
     {
-      "source": "/markets",
-      "destination": "/core/macro/markets.html",
+      "source": "/core/equity",
+      "destination": "/markets/valuation/",
       "permanent": true
     },
     {
-      "source": "/macro",
-      "destination": "/core/macro/",
+      "source": "/core/macro/markets.html",
+      "destination": "/markets/",
       "permanent": true
     },
     {
-      "source": "/regional",
-      "destination": "/core/macro/regional/",
+      "source": "/core/macro/markets.js",
+      "destination": "/markets/markets.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/holdings.js",
+      "destination": "/markets/holdings.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/bonds.html",
+      "destination": "/markets/bonds/",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/bonds.js",
+      "destination": "/markets/bonds/bonds.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/stock-bond-corr.js",
+      "destination": "/markets/bonds/stock-bond-corr.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/ticker.html",
+      "destination": "/tools/ticker/",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/ticker.js",
+      "destination": "/tools/ticker/ticker.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/research.html",
+      "destination": "/tools/pairs/",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/network.html",
+      "destination": "/tools/network/",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/styles.css",
+      "destination": "/lib/dashboard.css",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/recession.html",
+      "destination": "/macro/recession/",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/recession.js",
+      "destination": "/macro/recession/recession.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/recession-core.js",
+      "destination": "/macro/recession/recession-core.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/compare.html",
+      "destination": "/tools/compare/",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/compare.js",
+      "destination": "/tools/compare/compare.js",
+      "permanent": true
+    },
+    {
+      "source": "/core/index.html",
+      "destination": "/tools/a-z/",
+      "permanent": true
+    },
+    {
+      "source": "/core/",
+      "destination": "/tools/a-z/",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/index.html",
+      "destination": "/macro/regime/",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/index.html",
+      "destination": "/macro/indicators/",
+      "permanent": true
+    },
+    {
+      "source": "/core/single-name/index.html",
+      "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/real-economy/:path*",
+      "destination": "/macro/consumer/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/inflation/:path*",
+      "destination": "/macro/inflation/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/geography/:path*",
+      "destination": "/regional/geography/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/backtest/:path*",
+      "destination": "/tools/backtest/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/regional/:path*",
+      "destination": "/regional/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/housing/:path*",
+      "destination": "/macro/housing/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/credit/:path*",
+      "destination": "/macro/credit/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/cycle/:path*",
+      "destination": "/macro/cycle/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/labor/:path*",
+      "destination": "/macro/labor/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/single-name/:path*",
+      "destination": "/research/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/influencers/:path*",
+      "destination": "/research/archive/influencers/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/equity/pe/:path*",
+      "destination": "/markets/valuation/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/equity/:path*",
+      "destination": "/markets/valuation/",
+      "permanent": true
+    },
+    {
+      "source": "/core/supply/:path*",
+      "destination": "/supply/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/macro/:path*",
+      "destination": "/macro/regime/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/tools/:path*",
+      "destination": "/tools/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/econ/:path*",
+      "destination": "/macro/indicators/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/plug/:path*",
+      "destination": "/research/plug/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/data/:path*",
+      "destination": "/tools/data/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/lib/:path*",
+      "destination": "/lib/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core/ai/:path*",
+      "destination": "/research/ai/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/core",
+      "destination": "/tools/a-z/",
       "permanent": true
     },
     {
       "source": "/ai",
-      "destination": "/core/ai/",
-      "permanent": true
-    },
-    {
-      "source": "/supply",
-      "destination": "/core/supply/",
-      "permanent": true
-    },
-    {
-      "source": "/tools",
-      "destination": "/core/tools/",
-      "permanent": true
-    },
-    {
-      "source": "/data",
-      "destination": "/core/data/",
-      "permanent": true
-    },
-    {
-      "source": "/index",
-      "destination": "/core/",
+      "destination": "/research/ai/",
       "permanent": true
     },
     {
       "source": "/plug",
-      "destination": "/core/plug/",
+      "destination": "/research/plug/",
       "permanent": true
     },
     {
       "source": "/pe",
-      "destination": "/core/equity/pe/",
+      "destination": "/markets/valuation/",
+      "permanent": true
+    },
+    {
+      "source": "/index",
+      "destination": "/tools/a-z/",
       "permanent": true
     },
     {
       "source": "/reference",
-      "destination": "/core/tools/",
+      "destination": "/tools/",
       "permanent": true
     },
     {
-      "source": "/core/equity",
-      "destination": "/core/macro/markets.html",
+      "source": "/single-name",
+      "destination": "/research/",
       "permanent": true
     }
   ],

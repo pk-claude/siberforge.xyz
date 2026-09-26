@@ -4,7 +4,7 @@
 import { JSDOM } from 'jsdom';
 import fs from 'node:fs';
 
-const snjs = fs.readFileSync('core/single-name/sn.js', 'utf8');
+const snjs = fs.readFileSync('research/sn.js', 'utf8');
 const TICKERS = ['NVDA', 'TSM', 'MU', 'AVGO', 'GOOGL', 'PLTR', 'CRWV', 'CBRS',
   'META', 'MSFT', 'AAPL', 'AMZN', 'AMD', 'INTC', 'MRVL', 'AMAT', 'SMCI', 'SNDK',
   'IONQ', 'QBTS', 'RGTI', 'QS', 'HOVR', 'MRLN', 'NBIS', 'SPCX', 'BE', 'RIVN',
@@ -18,9 +18,9 @@ async function testTicker(T) {
     { runScripts: 'outside-only', pretendToBeVisual: true });
   const { window } = dom;
   window.fetch = async (url) => {
-    const m = String(url).match(/\/core\/single-name\/data\/(.+)$/);
+    const m = String(url).match(/\/tools/a-z/\/single-name\/data\/(.+)$/);
     if (m) {
-      const p = 'core/single-name/data/' + m[1];
+      const p = 'research/data/' + m[1];
       if (fs.existsSync(p)) return { ok: true, json: async () => JSON.parse(fs.readFileSync(p, 'utf8')) };
       return { ok: false, json: async () => { throw new Error('404'); } };
     }
@@ -56,9 +56,9 @@ async function testEtf(T) {
     { runScripts: 'outside-only', pretendToBeVisual: true, url: 'https://x.test/' });
   const { window } = dom;
   window.fetch = async (url) => {
-    const m = String(url).match(/\/core\/single-name\/data\/(.+)$/);
-    if (m && fs.existsSync('core/single-name/data/' + m[1]))
-      return { ok: true, json: async () => JSON.parse(fs.readFileSync('core/single-name/data/' + m[1], 'utf8')) };
+    const m = String(url).match(/\/tools/a-z/\/single-name\/data\/(.+)$/);
+    if (m && fs.existsSync('research/data/' + m[1]))
+      return { ok: true, json: async () => JSON.parse(fs.readFileSync('research/data/' + m[1], 'utf8')) };
     return { ok: false, json: async () => null };
   };
   const errors = [];

@@ -2,7 +2,7 @@
 // scripts/refresh-single-name.mjs
 // Refresh data for the single-name research pages.
 //
-// Per tier-1 ticker, writes core/single-name/data/<TICKER>.json with:
+// Per tier-1 ticker, writes research/data/<TICKER>.json with:
 //   snapshot   - Yahoo quoteSummary (price, multiples, margins, growth)
 //   annual     - deep history: EDGAR 10-K facts (US filers), Yahoo fills gaps
 //   quarterly  - EDGAR YTD-differenced standalone quarters + Yahoo recents
@@ -21,7 +21,7 @@ import { fetchStatements, fetchFxPerUsd, fetchEtfProfile } from './sources/yahoo
 import { cikForTicker, fetchCompanyFacts, annualSeries, quarterlySeries, instantSeries, CONCEPTS, INSTANT_CONCEPTS, sleep } from './sources/edgar-facts.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const OUT  = path.join(ROOT, 'core', 'single-name', 'data');
+const OUT  = path.join(ROOT, 'research', 'data');
 const DRY  = process.argv.includes('--dry-run');
 
 const TIER1 = [

@@ -17,7 +17,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const ORIGIN = 'https://www.siberforge.xyz';
 
 // nav-config.js is a browser IIFE that assigns to window.
-const src = readFileSync(join(ROOT, 'core/lib/nav-config.js'), 'utf8');
+const src = readFileSync(join(ROOT, 'lib/nav-config.js'), 'utf8');
 const sandbox = { window: {} };
 new Function('window', src)(sandbox.window);
 const NAV = sandbox.window.SIBERFORGE_NAV;

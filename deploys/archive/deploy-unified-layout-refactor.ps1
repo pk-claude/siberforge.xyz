@@ -34,11 +34,11 @@ Replace per-page hand-copied header/nav with shared runtime layout.
 Every dashboard page now declares identity via <body> data-attrs and
 the header + two-tier nav are rendered from a single nav-config.
 
-- Added /core/lib/tokens.css       Design tokens (colors, type, spacing)
-- Added /core/lib/layout.css       Shared header, two-tier nav, theme toggle
-- Added /core/lib/nav-config.js    Single source of truth for nav structure
-- Added /core/lib/layout.js        Renders header + nav from data attrs
-- Added /core/tools/index.html     Tools hub (was orphan link in nav)
+- Added /lib/tokens.css       Design tokens (colors, type, spacing)
+- Added /lib/layout.css       Shared header, two-tier nav, theme toggle
+- Added /lib/nav-config.js    Single source of truth for nav structure
+- Added /lib/layout.js        Renders header + nav from data attrs
+- Added /tools/     Tools hub (was orphan link in nav)
 - Migrated 51 pages to unified layout (zero inline header/nav copies)
 - Renamed nav buckets: Equity / Markets, Macro, AI, Supply Chain, Tools, Reference
 - Fixed mis-grouping: markets/bonds/ticker now under Equity, not Macro

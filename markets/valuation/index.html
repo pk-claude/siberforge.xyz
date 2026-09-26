@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Equity P/E Multiples</title>
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/markets/valuation/pe.css" />
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script src="/lib/freshness.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="equity" data-page="pe-overview" data-page-sub="P/E Multiples" data-page-status-text="Loading...">
+
+<main>
+  <span class="eyebrow">Equity valuation</span>
+  <h1 class="page-title">P/E Multiples &mdash; S&amp;P 500 &amp; Nasdaq-100</h1>
+  <p class="page-sub">
+    Trailing, forward, and
+    <span class="term" data-def="Normalized P/E (Shiller-style) divides current price by the average TTM EPS over the past ~5 years rather than current TTM or analyst forward EPS. It addresses earnings cyclicality: companies in cyclical industries (semis, energy, materials, autos, banks) earn far above trend at peaks and far below at troughs. Trailing/forward P/E anchors the multiple to whichever phase of the cycle you happen to be observing — making peak-cycle stocks look cheap on forward P/E and trough-cycle stocks look expensive on trailing P/E. Normalized P/E flattens the cycle and gives a multiple based on through-cycle earnings, which is closer to what a long-term investor should pay for. A wide gap between Normalized and Trailing/Forward (e.g. MU at ~160 vs 35 vs 7) flags that current earnings are far from trend and the stated multiple may revert as earnings revert. For stable growers (MSFT, V) Normalized P/E sits close to Trailing P/E and the gap is small. Method: arithmetic mean of monthly TTM EPS over the past ~5 years (loss years included honestly). The cycle tag (Peak/Above-trend/Mid-cycle/Below-trend/Trough) is the percentile rank of current EPS within that 5-year distribution.">normalized</span>
+    <span class="term" data-def="Price-to-Earnings ratio. Trailing P/E uses last-twelve-months EPS; Forward P/E uses consensus next-twelve-months EPS estimates. Normalized P/E uses the 5-year average TTM EPS (Shiller-style). Lower P/E means cheaper relative to earnings.">P/E</span>
+    multiples for every S&amp;P 500 and Nasdaq-100 constituent. Group by sector, sort, and click any company for detailed financials, cycle position, and a 5-year P/E history chart.
+    <span class="term" data-def="Forward P/E shown on the dashboard is consensus analyst estimates as of the most recent refresh. The historical chart's Forward P/E line uses perfect-foresight (price divided by realized next-12-month earnings), which differs from what was published at the time.">Methodology note.</span>
+  </p>
+
+  <!-- Refresh banner -->
+  <section class="refresh-banner" id="refresh-banner">
+    <div class="rb-row">
+      <span class="rb-pill rb-pill--accent">DATA</span>
+      <span class="rb-text">Loading refresh status...</span>
+    </div>
+  </section>
+
+  <!-- Controls strip -->
+  <section class="controls-strip">
+    <div class="cs-tabs" role="tablist">
+      <button class="cs-tab cs-tab--active" data-view="sp" role="tab">S&amp;P 500</button>
+      <button class="cs-tab" data-view="ndx" role="tab">Nasdaq-100</button>
+    </div>
+    <div class="cs-controls">
+      <label>Group
+        <select id="group">
+          <option value="sec" selected>By sector</option>
+          <option value="none">None (flat)</option>
+        </select>
+      </label>
+      <label>Sort
+        <select id="sort">
+          <option value="fpe-asc" selected>Forward P/E &uarr;</option>
+          <option value="fpe-desc">Forward P/E &darr;</option>
+          <option value="tpe-asc">Trailing P/E &uarr;</option>
+          <option value="tpe-desc">Trailing P/E &darr;</option>
+          <option value="npe-asc">Normalized P/E &uarr;</option>
+          <option value="npe-desc">Normalized P/E &darr;</option>
+          <option value="mc-desc">Market cap &darr;</option>
+          <option value="alpha">A &rarr; Z (ticker)</option>
+          <option value="name">A &rarr; Z (name)</option>
+        </select>
+      </label>
+      <label>Color by
+        <select id="metric">
+          <option value="tpe">Trailing P/E</option>
+          <option value="fpe" selected>Forward P/E</option>
+          <option value="npe">Normalized P/E</option>
+        </select>
+      </label>
+      <label>Cols
+        <select id="cols">
+          <option value="3">3</option>
+          <option value="4" selected>4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+        </select>
+      </label>
+      <input id="search" type="search" placeholder="Search ticker / name..." />
+    </div>
+    <div class="cs-legend" id="legend" aria-label="P/E color buckets"></div>
+  </section>
+
+  <!-- The list views -->
+  <section class="view view--active" id="view-sp" data-view="sp"></section>
+  <section class="view" id="view-ndx" data-view="ndx"></section>
+
+</main>
+
+<!-- Hover tooltip + detail panel -->
+<div id="tip" role="tooltip"></div>
+<div id="scrim"></div>
+<aside id="panel" aria-label="Company detail panel"></aside>
+
+<footer>&copy; Siberforge &middot; Data via Yahoo Finance &middot; Daily forward-P/E snapshots since first refresh &middot; <a href="#methodology" id="meth-link">Methodology</a></footer>
+
+<script defer src="/markets/valuation/pe.js"></script>
+</body>
+</html>

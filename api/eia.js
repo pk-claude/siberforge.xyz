@@ -1,5 +1,5 @@
 // Vercel serverless function: proxies EIA API v2 with server-side key.
-// Used by /core/supply/ for diesel, gasoline, electricity series.
+// Used by /supply/ for diesel, gasoline, electricity series.
 //
 // Returns { series: [...], errors: [...] } shape mirroring /api/fred.
 

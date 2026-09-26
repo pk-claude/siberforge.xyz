@@ -6,7 +6,7 @@ import { guard } from './_guard.js';
 const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
 const CATALOG = {
-  // ====================== MACRO DASHBOARD (/core/macro/) ======================
+  // ====================== MACRO DASHBOARD (/macro/regime/) ======================
   CPIAUCSL:  { label: 'CPI (Headline)',          freq: 'monthly',   unit: 'index',   transform: 'yoy_pct' },
   DFF:       { label: 'Fed Funds Rate',          freq: 'daily',     unit: 'percent', transform: 'level' },
   UNRATE:    { label: 'Unemployment Rate',       freq: 'monthly',   unit: 'percent', transform: 'level' },
@@ -23,7 +23,7 @@ const CATALOG = {
   WTREGEN:   { label: 'Treasury General Account',freq: 'weekly',    unit: 'bn_usd',  transform: 'level' },
   USREC:     { label: 'NBER Recession Indicator',freq: 'monthly',   unit: 'binary',  transform: 'level' },
 
-  // ================= CYCLE DASHBOARD (/core/macro/cycle/) =================
+  // ================= CYCLE DASHBOARD (/macro/cycle/) =================
   NFCI:          { label: 'Chicago Fed NFCI',              freq: 'weekly',  unit: 'index',   transform: 'level', group: 'cycle' },
   ANFCI:         { label: 'Adjusted NFCI',                 freq: 'weekly',  unit: 'index',   transform: 'level', group: 'cycle' },
   BAMLC0A0CM:    { label: 'IG Credit Spread (OAS)',        freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
@@ -31,14 +31,14 @@ const CATALOG = {
   DFII10:        { label: '10Y TIPS Real Yield',           freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
   RECPROUSM156N: { label: 'Smoothed Recession Probability',freq: 'monthly', unit: 'percent', transform: 'level', group: 'cycle' },
 
-  // ================= INFLATION DASHBOARD (/core/macro/inflation/) =================
+  // ================= INFLATION DASHBOARD (/macro/inflation/) =================
   T5YIE:                   { label: '5Y Breakeven Inflation',          freq: 'daily',   unit: 'percent', transform: 'level',   group: 'inflation' },
   T10YIE:                  { label: '10Y Breakeven Inflation',         freq: 'daily',   unit: 'percent', transform: 'level',   group: 'inflation' },
   COREFLEXCPIM159SFRBATL:  { label: 'Atlanta Flex-Price Core CPI',     freq: 'monthly', unit: 'percent', transform: 'level',   group: 'inflation' },
   CPIHOSSL:                { label: 'CPI Shelter',                     freq: 'monthly', unit: 'index',   transform: 'yoy_pct', group: 'inflation' },
   MICH:                    { label: 'UMich 1Y Inflation Expectations', freq: 'monthly', unit: 'percent', transform: 'level',   group: 'inflation' },
 
-  // ================= REAL ECONOMY (/core/macro/real-economy/) =================
+  // ================= REAL ECONOMY (/macro/consumer/) =================
   PCE:           { label: 'Personal Consumption Expenditures',          freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
   DSPI:          { label: 'Disposable Personal Income',                 freq: 'monthly',   unit: 'bn_usd',  transform: 'yoy_pct', group: 'real-economy' },
   PSAVERT:       { label: 'Personal Saving Rate',                       freq: 'monthly',   unit: 'percent', transform: 'level',   group: 'real-economy' },
@@ -51,7 +51,7 @@ const CATALOG = {
   DRALACBS:      { label: 'Auto Loan Delinquency Rate',             freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'real-economy' },
   OPHNFB:        { label: 'Output Per Hour (Nonfarm Business)', freq: 'quarterly', unit: 'index', transform: 'yoy_pct', group: 'real-economy' },
 
-  // ================= HOUSING DASHBOARD (/core/macro/housing/) =================
+  // ================= HOUSING DASHBOARD (/macro/housing/) =================
   HOUST1F:       { label: 'Housing Starts: Single-Family',  freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
   HOUST5F:       { label: 'Housing Starts: 5+ Units (MF)',  freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
   COMPUTSA:      { label: 'Housing Completions',            freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
@@ -67,7 +67,7 @@ const CATALOG = {
   ASPNHSUS:      { label: 'Avg Sales Price of New Houses',   freq: 'quarterly', unit: 'usd',     transform: 'level',   group: 'housing' },
   CUSR0000SEHE:  { label: "CPI: Tenants' & Household Insurance", freq: 'monthly', unit: 'index', transform: 'yoy_pct', group: 'housing' },
 
-  // ===================== ECON DASHBOARD (/core/econ/) =====================
+  // ===================== ECON DASHBOARD (/macro/indicators/) =====================
   T10Y3M:                { label: '10Y-3M Treasury Spread',  freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
   GACDISA066MSFRBNY:     { label: 'Empire State Mfg Index',  freq: 'monthly',   unit: 'index',   transform: 'level',   group: 'econ' },
   GDPNOW:                { label: 'Atlanta Fed GDPNow',      freq: 'daily',     unit: 'percent', transform: 'level',   group: 'econ' },
@@ -89,11 +89,11 @@ const CATALOG = {
   MORTGAGE30US:          { label: '30Y Fixed Mortgage Rate', freq: 'weekly',    unit: 'percent', transform: 'level',   group: 'econ' },
   CSUSHPISA:             { label: 'Case-Shiller Home Prices',freq: 'monthly',   unit: 'index',   transform: 'yoy_pct', group: 'econ' },
 
-  // ===================== RECESSION DASHBOARD (/core/econ/recession.html) =====
+  // ===================== RECESSION DASHBOARD (/macro/recession/) =====
   SAHMCURRENT:           { label: 'Sahm Rule Recession Indicator',  freq: 'monthly', unit: 'percent', transform: 'level', group: 'recession' },
   BAMLH0A0HYM2:          { label: 'High-Yield OAS',                 freq: 'daily',   unit: 'percent', transform: 'level', group: 'recession' },
 
-  // ============== TRANSMISSION NETWORK (/core/macro/network.html) =============
+  // ============== TRANSMISSION NETWORK (/tools/network/) =============
   PPIACO:                { label: 'PPI: All Commodities',           freq: 'monthly', unit: 'index',   transform: 'yoy_pct', group: 'network' },
   CUMFNS:                { label: 'Capacity Utilization (Mfg)',     freq: 'monthly', unit: 'percent', transform: 'level',   group: 'network' },
   JTSJOL:                { label: 'JOLTS Job Openings',             freq: 'monthly', unit: 'count',   transform: 'yoy_pct', group: 'network' },
@@ -103,7 +103,7 @@ const CATALOG = {
   DCOILWTICO:            { label: 'WTI Crude Oil Spot Price',       freq: 'daily',   unit: 'usd',     transform: 'yoy_pct', group: 'network' },
   VIXCLS:                { label: 'CBOE VIX',                       freq: 'daily',   unit: 'index',   transform: 'level',   group: 'network' },
 
-  // ===================== SUPPLY CHAIN DASHBOARD (/core/supply/) =====================
+  // ===================== SUPPLY CHAIN DASHBOARD (/supply/) =====================
   // Distribution Center
   CES4300000008:    { label: 'TTU Avg Hourly Earnings',           freq: 'monthly', unit: 'usd',     transform: 'level',   group: 'supply' },
   CES4349300001:    { label: 'Warehousing & Storage Employment',  freq: 'monthly', unit: 'count',   transform: 'level',   group: 'supply' },
@@ -155,7 +155,7 @@ const CATALOG = {
   DTCDISA066MSFRBNY: { label: 'Empire State Mfg Delivery Time',   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
   DTCDFSA066MSFRBPHI:{ label: 'Philly Fed Mfg Delivery Time',     freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
 
-  // ====================== BONDS DASHBOARD (/core/macro/bonds.html) ====================
+  // ====================== BONDS DASHBOARD (/markets/bonds/) ====================
   DGS30:         { label: '30Y Treasury Yield',            freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
   DFII5:         { label: '5Y TIPS Real Yield',            freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
   DFII30:        { label: '30Y TIPS Real Yield',           freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },

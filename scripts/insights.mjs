@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = path.join(REPO_ROOT, 'core', 'supply', 'data');
+const DATA_DIR = path.join(REPO_ROOT, 'supply', 'data');
 const SNAPSHOT_PATH = path.join(DATA_DIR, 'snapshot.json');
 const INSIGHTS_PATH = path.join(DATA_DIR, 'insights.json');
 
@@ -266,7 +266,7 @@ if (import.meta.url === `file://${process.argv[1]}`) {
       series.history = hist[id] || series.spark || [];
     }
   }
-  const { INDICATORS } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/indicators.js')).toString());
+  const { INDICATORS } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'supply/indicators.js')).toString());
   const insights = await buildInsights({ snapshot, indicators: INDICATORS, dryRun });
   console.log(`[insights] generated ${insights.all.length} flagged metrics; ${insights.summary.risks} risks, ${insights.summary.opportunities} opportunities, ${insights.summary.watches} watches`);
 }

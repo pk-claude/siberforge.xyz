@@ -25,8 +25,8 @@ t('menu button + panel exist in markup', () => {
   if (!d.getElementById('ed-menu')) throw new Error('no panel');
 });
 
-w.eval(readFileSync(R + '/core/lib/nav-config.js', 'utf8'));
-w.eval(readFileSync(R + '/core/lib/landing-hub.js', 'utf8'));
+w.eval(readFileSync(R + '/lib/nav-config.js', 'utf8'));
+w.eval(readFileSync(R + '/lib/landing-hub.js', 'utf8'));
 await new Promise(r => { d.addEventListener('DOMContentLoaded', r); setTimeout(r, 1200); });
 
 t('menu populated with all six sections', () => {

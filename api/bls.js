@@ -1,5 +1,5 @@
 // Vercel serverless function: proxies BLS Public Data API v2.
-// Used by /core/supply/ for series not on FRED (or with richer detail than FRED's mirror).
+// Used by /supply/ for series not on FRED (or with richer detail than FRED's mirror).
 //
 // Returns { series: [...], errors: [...] } shape mirroring /api/fred.
 
