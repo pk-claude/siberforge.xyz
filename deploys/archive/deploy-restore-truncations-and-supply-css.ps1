@@ -42,8 +42,8 @@ Write-Host ''
 Write-Host '=== Done. Vercel redeploying. ===' -ForegroundColor Green
 Write-Host ''
 Write-Host 'Verify after Vercel finishes:' -ForegroundColor Yellow
-Write-Host '  - https://www.siberforge.xyz/core/ai/                  capex flow Sankey chart should render'
-Write-Host '  - https://www.siberforge.xyz/core/ai/screen/           page footer + scripts intact'
-Write-Host '  - https://www.siberforge.xyz/core/macro/cycle/         page footer + scripts intact'
-Write-Host '  - https://www.siberforge.xyz/core/supply/              header rules now identical to macro'
+Write-Host '  - https://www.siberforge.xyz/research/ai/                  capex flow Sankey chart should render'
+Write-Host '  - https://www.siberforge.xyz/research/ai/screen/           page footer + scripts intact'
+Write-Host '  - https://www.siberforge.xyz/macro/cycle/         page footer + scripts intact'
+Write-Host '  - https://www.siberforge.xyz/supply/              header rules now identical to macro'
 Write-Host '  Hard-reload (Ctrl+Shift+R) to bypass cache.'

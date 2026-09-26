@@ -32,7 +32,7 @@ jobs:
         run: |
           git config user.name  "siberforge-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add -A core/equity/pe/snapshots core/equity/pe/data/last-refresh.json
+          git add -A markets/valuation/snapshots markets/valuation/data/last-refresh.json
           if git diff --staged --quiet; then
             echo "No changes."
           else

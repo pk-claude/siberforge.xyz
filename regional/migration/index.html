@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Net Domestic Migration</title>
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/regional/regional.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="regional" data-page="migration" data-page-sub="Migration" data-page-status-text="Ready">
+<section class="cycle-intro">
+  <h1 class="cycle-title">Net domestic migration &mdash; where Americans are moving</h1>
+  <p class="cycle-subtitle">
+    Domestic migration (excluding international immigration) is the most direct future-housing-demand
+    signal available. People physically moving INTO a state will form households there within
+    1-3 years, driving HPI, rents, retail, and home-improvement demand. The Sun Belt vs.
+    high-tax-coastal divergence has been the dominant story for 15 years.
+  </p>
+</section>
+
+<div class="reg-snapshot-banner">
+  <strong>Snapshot data.</strong> Net migration figures below are most-recent IRS SOI county-to-county
+  migration data, expressed as % of state population. IRS releases annually with ~18-month lag.
+  Refresh this page's data when new vintage drops.
+</div>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Net domestic migration &mdash; latest year, % of state population</h2>
+    <p class="cycle-section-sub">
+      Positive = net inflow of US residents from other states; negative = net outflow.
+      International immigration excluded so this isolates pure domestic preference signal.
+    </p>
+  </div>
+  <div class="reg-chart-wrap" style="height:600px"><canvas id="chart-migration"></canvas></div>
+  <p class="cycle-note" id="note-migration"></p>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>County-level migration &mdash; pick a state</h2>
+    <p class="cycle-section-sub">
+      IRS SOI publishes county-to-county migration as raw counts, available for the most recent
+      filing year. Below shows the top 10 counties in the selected state by net domestic inflow
+      and outflow (% of county population). Available for select high-coverage states only;
+      drop a list if your state isn&rsquo;t there yet.
+    </p>
+  </div>
+  <div class="geo-controls">
+    <div class="control-group">
+      <span class="control-label">State</span>
+      <select id="state-select"></select>
+    </div>
+  </div>
+  <div id="county-table"></div>
+</section>
+
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>5-year cumulative migration &mdash; the secular winners and losers</h2>
+    <p class="cycle-section-sub">
+      Year-by-year noise drops out; the structural pattern is clear.
+    </p>
+  </div>
+  <div id="cumulative-table"></div>
+</section>
+
+<footer>
+  <span>Source: IRS Statistics of Income (SOI) county-to-county migration. Snapshot vintage refreshed quarterly.</span>
+</footer>
+
+<script type="module" src="/regional/migration/migration.js"></script>
+<script src="/lib/download-button.js"></script>
+<script src="/lib/chart-range.js"></script>
+</body>
+</html>

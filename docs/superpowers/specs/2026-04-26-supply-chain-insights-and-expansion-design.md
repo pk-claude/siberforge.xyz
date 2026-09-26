@@ -221,7 +221,7 @@ REIT basket (PLD, REXR, FR, STAG, EGP, TRNO + new COLD, LINE, PSA, EXR, CUBE) is
 
 Existing aggregate basket tile remains as the headline.
 
-### 5.5 Dedicated `/core/supply/insights/` page
+### 5.5 Dedicated `/supply/insights/` page
 
 Single-page morning read:
 - Environment Summary (same as overview)
@@ -279,7 +279,7 @@ api/
 ## 8. Out of scope for v2
 
 - LLM-narrative upgrade (deferred — cheap to add later)
-- Working capital (DSO/DPO/DIO from XBRL) — leverages /core/single-name/ infra, separate effort (v3)
+- Working capital (DSO/DPO/DIO from XBRL) — leverages /research/ infra, separate effort (v3)
 - Metro-level industrial vacancy (still requires broker PDF scraping)
 - Email/alert delivery on rule firings
 - Cross-metric relational rules ("diesel rising AND wages flat → carrier margin pressure")

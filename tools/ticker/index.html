@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Ticker</title>
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="equity" data-page="ticker" data-page-sub="Ticker" data-page-status-text="Initializing…">
+<h1 class="sr-only">Ticker Lookup</h1>
+
+<section class="ticker-hero">
+  <div class="ticker-headline">
+    <div class="ticker-symbol-block">
+      <div class="ticker-symbol" id="t-symbol">—</div>
+      <div class="ticker-name" id="t-name">—</div>
+    </div>
+    <div class="ticker-price-block">
+      <div class="ticker-price" id="t-price">—</div>
+      <div class="ticker-change" id="t-change">—</div>
+    </div>
+    <div class="ticker-meta-block">
+      <div class="ticker-meta-row"><span class="t-meta-label">Open</span> <span id="t-open">—</span></div>
+      <div class="ticker-meta-row"><span class="t-meta-label">Day H/L</span> <span id="t-hilo">—</span></div>
+      <div class="ticker-meta-row"><span class="t-meta-label">Prev close</span> <span id="t-prevclose">—</span></div>
+    </div>
+  </div>
+  <p class="ticker-profile" id="t-profile"></p>
+</section>
+
+<section class="ticker-chart-section">
+  <div class="ticker-chart-controls">
+    <div class="control-group">
+      <span class="control-label">Period</span>
+      <div class="control-tabs">
+        <button class="period-tab" data-y="1">1Y</button>
+        <button class="period-tab active" data-y="5">5Y</button>
+        <button class="period-tab" data-y="10">10Y</button>
+        <button class="period-tab" data-y="30">Max</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <span class="control-label">Mode</span>
+      <div class="control-tabs">
+        <button class="chart-mode-tab active" data-m="normalized">Normalized vs SPY</button>
+        <button class="chart-mode-tab" data-m="absolute">Absolute price</button>
+      </div>
+    </div>
+    <div id="t-chart-stats" class="ticker-chart-stats"></div>
+  </div>
+  <div class="ticker-chart-wrap"><canvas id="ticker-chart"></canvas></div>
+  <p class="note" id="t-chart-note"></p>
+</section>
+
+<section class="ticker-grid">
+  <div class="ticker-holdings">
+    <h2>Top Holdings <span class="t-as-of" id="t-holdings-asof"></span></h2>
+    <div id="t-holdings-table"></div>
+    <p class="t-holdings-note" id="t-holdings-note"></p>
+  </div>
+  <div class="ticker-news">
+    <h2>News &amp; Drivers <span class="t-as-of" id="t-news-asof"></span></h2>
+    <div id="t-news-list"></div>
+  </div>
+</section>
+
+<footer>
+  <span>Quotes via Finnhub. Daily history via Yahoo Finance (adjusted close). News via Finnhub /company-news.</span>
+  <span id="last-updated"></span>
+</footer>
+
+<script type="module" src="/tools/ticker/ticker.js"></script>
+<script src="/lib/ui.js"></script>
+<script src="/lib/download-button.js"></script>
+<script src="/lib/chart-range.js"></script>
+</body>
+</html>

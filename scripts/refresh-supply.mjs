@@ -40,7 +40,7 @@ import * as portWatchSrc from './sources/imf-portwatch.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
-const DATA_DIR = path.join(REPO_ROOT, 'core', 'supply', 'data');
+const DATA_DIR = path.join(REPO_ROOT, 'supply', 'data');
 const HISTORY_DIR = path.join(DATA_DIR, 'history');
 const SNAPSHOT_PATH = path.join(DATA_DIR, 'snapshot.json');
 const MANIFEST_PATH = path.join(DATA_DIR, 'manifest.json');
@@ -73,7 +73,7 @@ async function main() {
   const dryRun = process.argv.includes('--dry-run');
   if (dryRun) console.log('[refresh-supply] DRY RUN');
 
-  const { INDICATORS, INDICATORS_BY_SOURCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/indicators.js')).toString());
+  const { INDICATORS, INDICATORS_BY_SOURCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'supply/indicators.js')).toString());
   await fs.mkdir(HISTORY_DIR, { recursive: true });
   await fs.mkdir(path.join(DATA_DIR, 'raw'), { recursive: true });
 
@@ -132,7 +132,7 @@ async function main() {
   // Calendar
   try {
     const { buildCalendar } = await import('./calendar.mjs');
-    const { RELEASE_CADENCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'core/supply/cadence.js')).toString());
+    const { RELEASE_CADENCE } = await import(url.pathToFileURL(path.join(REPO_ROOT, 'supply/cadence.js')).toString());
     const cal = await buildCalendar({ snapshot, indicators: INDICATORS, cadenceMap: RELEASE_CADENCE, dryRun });
     console.log(`[refresh-supply] calendar: ${cal.windows.next14.length} entries in next 14 days`);
   } catch (err) {

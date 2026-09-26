@@ -18,7 +18,7 @@ function ratio(a, b) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
-const css = readFileSync(ROOT + '/core/lib/tokens.css', 'utf8');
+const css = readFileSync(ROOT + '/lib/tokens.css', 'utf8');
 function tokens(selector) {
   const re = new RegExp(selector.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\s*\\{([\\s\\S]*?)\\}');
   const m = css.match(re);

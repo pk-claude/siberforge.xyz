@@ -23,9 +23,9 @@ const EXCUSED = new Set([
   '404.html',                      // error page
   'index.html',                    // landing
   'core/equity/index.html',        // legacy redirect stub
-  'core/econ/indicator.html',      // drill-down, uses data-page-parent
-  'core/supply/metric.html',       // drill-down, uses data-page-parent
-  'core/influencers/index.html',   // Home Depot work, deliberately unlisted
+  'macro/indicators/indicator.html',      // drill-down, uses data-page-parent
+  'supply/metric.html',       // drill-down, uses data-page-parent
+  'research/archive/influencers/',   // Home Depot work, deliberately unlisted
 ]);
 
 // Pages that load layout.js purely for the header + global search and are
@@ -36,7 +36,7 @@ const CHROME_ONLY = new Set([
   '404.html',
 ]);
 
-const src = readFileSync(join(ROOT, 'core/lib/nav-config.js'), 'utf8');
+const src = readFileSync(join(ROOT, 'lib/nav-config.js'), 'utf8');
 const win = {};
 new Function('window', src)(win);
 const NAV = win.SIBERFORGE_NAV;
@@ -86,7 +86,7 @@ for (const rel of files) {
 
   // Pages that deliberately render no shared chrome are not checked for
   // nav identity -- they have none by design.
-  if (!html.includes('/core/lib/layout.js')) continue;
+  if (!html.includes('/lib/layout.js')) continue;
 
   const get = (n) => (body.match(new RegExp(n + '="([^"]*)"')) || [])[1] || '';
   const section = get('data-section');

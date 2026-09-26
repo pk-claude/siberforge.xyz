@@ -44,5 +44,5 @@ Write-Host ''
 Write-Host '=== Done. Vercel redeploying. ===' -ForegroundColor Green
 Write-Host ''
 Write-Host 'After Vercel finishes:' -ForegroundColor Yellow
-Write-Host '  - https://www.siberforge.xyz/core/macro/bonds.html  (all 6 chart sections should render)'
+Write-Host '  - https://www.siberforge.xyz/markets/bonds/  (all 6 chart sections should render)'
 Write-Host '  Hard-reload (Ctrl+Shift+R) to bypass cache.'

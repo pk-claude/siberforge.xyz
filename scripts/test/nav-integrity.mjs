@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const win = {};
-new Function('window', readFileSync(ROOT + '/core/lib/nav-config.js', 'utf8'))(win);
+new Function('window', readFileSync(ROOT + '/lib/nav-config.js', 'utf8'))(win);
 const NAV = win.SIBERFORGE_NAV;
 const index = NAV.index();
 const ids = new Set(index.map(i => i.id));

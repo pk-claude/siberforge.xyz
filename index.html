@@ -18,10 +18,10 @@
 <meta name="description" content="Financial analysis with a personality. Live macro signals + 51 dashboards reconstructed from SEC EDGAR filings and FRED series. Every line traceable." />
 <link rel="preconnect" href="https://rsms.me/" />
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
-<link rel="stylesheet" href="/core/lib/tokens.css" />
-<link rel="stylesheet" href="/core/macro/styles.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
 <link rel="stylesheet" href="./landing.css" />
-<script src="/core/lib/theme-toggle.js"></script>
+<script src="/lib/theme-toggle.js"></script>
 </head>
 <body class="landing-page editorial">
 
@@ -86,25 +86,25 @@
 
   <!-- 4 hero mini-tiles (DOM hooks expected by live-data module) -->
   <div class="ed-ribbon" id="hero-visual" aria-label="Live macro ribbon">
-    <a class="mini-tile is-loading" data-tile="GDPC1" href="/core/econ/indicator.html?id=GDPC1">
+    <a class="mini-tile is-loading" data-tile="GDPC1" href="/macro/indicators/indicator.html?id=GDPC1">
       <div class="mini-tile-head"><span class="mini-tile-label">Real GDP</span><span class="mini-tile-delta">&middot;</span></div>
       <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
       <div class="mini-tile-spark"></div>
       <div class="mini-tile-asof">YoY &middot; &mdash;</div>
     </a>
-    <a class="mini-tile is-loading" data-tile="CPILFESL" href="/core/econ/indicator.html?id=CPILFESL">
+    <a class="mini-tile is-loading" data-tile="CPILFESL" href="/macro/indicators/indicator.html?id=CPILFESL">
       <div class="mini-tile-head"><span class="mini-tile-label">Core CPI</span><span class="mini-tile-delta">&middot;</span></div>
       <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
       <div class="mini-tile-spark"></div>
       <div class="mini-tile-asof">YoY &middot; &mdash;</div>
     </a>
-    <a class="mini-tile is-loading" data-tile="CSUSHPISA" href="/core/econ/indicator.html?id=CSUSHPISA">
+    <a class="mini-tile is-loading" data-tile="CSUSHPISA" href="/macro/indicators/indicator.html?id=CSUSHPISA">
       <div class="mini-tile-head"><span class="mini-tile-label">Case-Shiller HPI</span><span class="mini-tile-delta">&middot;</span></div>
       <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
       <div class="mini-tile-spark"></div>
       <div class="mini-tile-asof">YoY &middot; &mdash;</div>
     </a>
-    <a class="mini-tile is-loading" data-tile="UNRATE" href="/core/econ/indicator.html?id=UNRATE">
+    <a class="mini-tile is-loading" data-tile="UNRATE" href="/macro/indicators/indicator.html?id=UNRATE">
       <div class="mini-tile-head"><span class="mini-tile-label">Unemployment</span><span class="mini-tile-delta">&middot;</span></div>
       <div class="mini-tile-value">&mdash;<span class="mini-tile-unit">%</span></div>
       <div class="mini-tile-spark"></div>
@@ -127,7 +127,7 @@
         <div class="rec-dots" id="rec-dots" aria-hidden="true"></div>
         <div class="rec-meta">
           <span class="rec-asof" id="rec-asof">&nbsp;</span>
-          <a href="/core/econ/recession.html" class="rec-cta">Open full composite <span class="arrow">&rarr;</span></a>
+          <a href="/macro/recession/" class="rec-cta">Open full composite <span class="arrow">&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -149,7 +149,7 @@
         <div class="ind-spark" aria-hidden="true"></div>
         <div class="ind-meta">
           <span class="ind-asof">&nbsp;</span>
-          <a href="/core/econ/indicator.html?id=AHE" class="ind-cta">See full detail <span class="arrow">&rarr;</span></a>
+          <a href="/macro/indicators/indicator.html?id=AHE" class="ind-cta">See full detail <span class="arrow">&rarr;</span></a>
         </div>
       </div>
     </section>
@@ -182,7 +182,7 @@
     </div>
   </div>
 
-  <div class="cat-grid" id="hub-cat-grid"><!-- Rendered from /core/lib/landing-hub.js --></div>
+  <div class="cat-grid" id="hub-cat-grid"><!-- Rendered from /lib/landing-hub.js --></div>
 </section>
 
 <!-- ==================== ABOUT ==================== -->
@@ -241,19 +241,19 @@
   <div class="ed-copyright">&copy; 2026 Siberforge</div>
 </footer>
 
-<script src="/core/lib/nav-config.js"></script>
-<script src="/core/lib/landing-hub.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script src="/lib/landing-hub.js"></script>
 
 <script type="module">
-  import { fetchFred } from './core/lib/fred-client.js';
-  import { applyTransform } from './core/lib/transforms.js';
-  import { renderSparkline } from './core/econ/sparklines.js';
+  import { fetchFred } from './lib/fred-client.js';
+  import { applyTransform } from './lib/transforms.js';
+  import { renderSparkline } from './macro/indicators/sparklines.js';
   import {
     SERIES as REC_SERIES,
     HISTORY_START as REC_HISTORY,
     tierOf as recTierOf,
     computeSignals,
-  } from './core/econ/recession-core.js';
+  } from './macro/recession/recession-core.js';
 
   // ---- Formatting helpers -------------------------------------------------
   const MONTH_NAMES = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];

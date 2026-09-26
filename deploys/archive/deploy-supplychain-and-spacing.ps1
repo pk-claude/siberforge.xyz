@@ -32,5 +32,5 @@ Write-Host ''
 Write-Host 'After Vercel finishes:' -ForegroundColor Yellow
 Write-Host '  1. Hard-reload bonds.html (Ctrl+Shift+R) to bypass any stale cache'
 Write-Host '  2. If charts still empty, open DevTools Console and look for the actual error'
-Write-Host '  3. Also worth checking view-source on https://www.siberforge.xyz/core/macro/stock-bond-corr.js'
+Write-Host '  3. Also worth checking view-source on https://www.siberforge.xyz/markets/bonds/stock-bond-corr.js'
 Write-Host '     -- it should be ~8KB and end with a closing brace, not truncated'

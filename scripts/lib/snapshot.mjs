@@ -60,7 +60,7 @@ export async function buildSnapshot({ dataDir, indicators, manifest }) {
 }
 
 // Per-series stats for tile rendering. Mirrors the client-side computeDeltas
-// in core/supply/dashboard.js -- keep the two in sync. Computing at build
+// in supply/dashboard.js -- keep the two in sync. Computing at build
 // time lets snapshot.json ship without full history (see splitSnapshot).
 export function computeDeltas(history, freq, longTermNormYears = 10) {
   if (!history || history.length < 2) return null;

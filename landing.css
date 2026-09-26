@@ -6,7 +6,7 @@
 
 /* ==========================================================================
    Section 1: Original landing layout (compact dashboard density)
-   Sits on top of /core/lib/tokens.css for color tokens.
+   Sits on top of /lib/tokens.css for color tokens.
    ========================================================================== */
 /* Compact dashboard density, dark by default, light theme via shared toggle.   */
 

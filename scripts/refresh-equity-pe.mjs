@@ -3,7 +3,7 @@
 // Weekly full refresh: pulls S&P 500 + Nasdaq-100 constituents, fetches
 // fundamentals + monthly history + quarterly/annual EPS for each, computes
 // peer groups and historical P/E series, writes all outputs to
-// core/equity/pe/data/.
+// markets/valuation/data/.
 //
 // Run: node scripts/refresh-equity-pe.mjs
 // Dry: node scripts/refresh-equity-pe.mjs --dry-run
@@ -19,7 +19,7 @@ import {
 } from './sources/yahoo-equity-pe.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
-const OUT  = path.join(ROOT, 'core', 'equity', 'pe', 'data');
+const OUT  = path.join(ROOT, 'markets', 'valuation', 'data');
 const DRY  = process.argv.includes('--dry-run');
 
 // -------------------------------------------------------------------------

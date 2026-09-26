@@ -2,7 +2,7 @@
 
 **Date:** 2026-04-25
 **Author:** Pavel (with Claude)
-**Target:** siberforge.xyz/core/supply/
+**Target:** siberforge.xyz/supply/
 **Status:** Approved — ready for implementation plan
 
 ---
@@ -17,24 +17,24 @@ Add a Supply Chain Dashboard to siberforge.xyz that tracks publicly-available in
 - Surface rich hover-over context per metric (latest, deltas vs last month / last year / 10y norm, why it matters, how to interpret)
 - Label key points on every chart (latest, local extrema, regime turns)
 - Expose the full historical dataset for download (per-metric CSV plus a single bundle.zip) at a dedicated location on the site
-- Match the existing siberforge visual language and registry-driven architecture used by `/core/econ/` and `/core/macro/`
+- Match the existing siberforge visual language and registry-driven architecture used by `/macro/indicators/` and `/macro/regime/`
 
-The deliverable is a working slice on `siberforge.xyz/core/supply/` plus a weekly GitHub Actions refresh job that commits fresh snapshot data back to the repo.
+The deliverable is a working slice on `siberforge.xyz/supply/` plus a weekly GitHub Actions refresh job that commits fresh snapshot data back to the repo.
 
 ## 2. Context
 
 The siberforge.xyz repo (`github.com/pk-claude/siberforge.xyz`) already contains:
 
 - A Vercel-hosted static site with serverless function proxies under `api/` (`fred.js`, `stocks.js`)
-- A registry-driven indicator pattern in `/core/econ/indicators.js` with fields for FRED ID, transform, category, label, methodology, direction, target, hasVintages
+- A registry-driven indicator pattern in `/macro/indicators/indicators.js` with fields for FRED ID, transform, category, label, methodology, direction, target, hasVintages
 - Reusable `sparklines.js` (SVG sparkline + percentile-strip renderer)
-- A reusable per-metric drill-down page at `/core/econ/indicator.html` driven entirely by the registry
+- A reusable per-metric drill-down page at `/macro/indicators/indicator.html` driven entirely by the registry
 - A tooltip / hover-context system (commits 065dc4f and 3567280) wired across all six existing deep-dive pages
-- A landing-page hub at `/index.html` that links to every project under `/core/`
-- A `/core/data/` section that is the natural home for cross-project bulk-data hand-off
+- A landing-page hub at `/index.html` that links to every project under `/tools/a-z/`
+- A `/tools/data/` section that is the natural home for cross-project bulk-data hand-off
 - API keys (`FRED_API_KEY`, `FINNHUB_API_KEY`) configured in Vercel and ready to extend
 
-The Supply Chain Dashboard is additive. It does not modify any existing project — it adds a new project at `/core/supply/`, extends the `/api/fred` CATALOG whitelist with supply-chain FRED IDs, and adds two small new API proxies (`/api/eia` and `/api/bls`) so the registry can declaratively pull from those sources too.
+The Supply Chain Dashboard is additive. It does not modify any existing project — it adds a new project at `/supply/`, extends the `/api/fred` CATALOG whitelist with supply-chain FRED IDs, and adds two small new API proxies (`/api/eia` and `/api/bls`) so the registry can declaratively pull from those sources too.
 
 ## 3. Decisions made during brainstorming
 
@@ -113,13 +113,13 @@ siberforge/
 GitHub Actions runner → `scripts/refresh-supply.mjs` → for each registry entry, dispatch to the right `sources/*.mjs` fetcher → write `data/history/<id>.csv` → rebuild `data/snapshot.json` → rebuild `data/bundle.zip` → update `data/manifest.json` → commit + push if anything changed → Vercel auto-deploys.
 
 **Read path (page load):**
-Browser → static asset fetch of `/core/supply/data/snapshot.json` (CDN-cached) → `dashboard.js` renders tiles, sparklines, tooltips entirely client-side from snapshot.
+Browser → static asset fetch of `/supply/data/snapshot.json` (CDN-cached) → `dashboard.js` renders tiles, sparklines, tooltips entirely client-side from snapshot.
 
-There are no per-pageview server calls. The serverless `/api/*` proxies remain available for any future interactive controls but are not on the hot path for the supply dashboard. This is the key behavioral change vs `/core/macro/`: that dashboard fetches live; this one reads a snapshot.
+There are no per-pageview server calls. The serverless `/api/*` proxies remain available for any future interactive controls but are not on the hot path for the supply dashboard. This is the key behavioral change vs `/macro/regime/`: that dashboard fetches live; this one reads a snapshot.
 
 ### 4.3 Indicator registry shape
 
-Extends the existing pattern from `/core/econ/indicators.js`. Each entry:
+Extends the existing pattern from `/macro/indicators/indicators.js`. Each entry:
 
 ```js
 {
@@ -290,7 +290,7 @@ Tiles compute "stale" badges from `lastSuccess` per source.
 
 ### 5.6 Composite — "Supply Chain Pressure"
 
-Z-score blend rendered as a single tile at the top of `/core/supply/index.html`.
+Z-score blend rendered as a single tile at the top of `/supply/`.
 
 ```
 SCP = mean(
@@ -344,7 +344,7 @@ Labels are positioned by the existing `sparklines.js` with a new `labelExtrema` 
 
 ## 7. Layout
 
-### 7.1 `/core/supply/index.html` (overview)
+### 7.1 `/supply/` (overview)
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -366,11 +366,11 @@ Equal-width columns, equal panel heights. Symmetry-first.
 
 ### 7.2 Category deep-dives
 
-Dense tile grid (Bloomberg-terminal density, matching existing `/core/econ/`). Every metric in the category as a tile. Each tile clickable to per-metric drill page.
+Dense tile grid (Bloomberg-terminal density, matching existing `/macro/indicators/`). Every metric in the category as a tile. Each tile clickable to per-metric drill page.
 
-**DC category page specifically excludes Industrial Real Estate metrics** — those live on the IR sub-page (§7.3). The DC page renders a prominent "Industrial Real Estate →" callout card linking to `/core/supply/dc/industrial-re.html` so the relationship is visible without crowding the operational-economics grid.
+**DC category page specifically excludes Industrial Real Estate metrics** — those live on the IR sub-page (§7.3). The DC page renders a prominent "Industrial Real Estate →" callout card linking to `/supply/dc/industrial-re.html` so the relationship is visible without crowding the operational-economics grid.
 
-### 7.3 Industrial RE (`/core/supply/dc/industrial-re.html`)
+### 7.3 Industrial RE (`/supply/dc/industrial-re.html`)
 
 Distinct narrative-led layout. Sections:
 1. Construction pipeline (CONSTR_PRIVATE_IND, CONSTR_MANUF charts)
@@ -380,13 +380,13 @@ Distinct narrative-led layout. Sections:
 
 ### 7.4 Per-metric drill-down
 
-Reuses `/core/econ/indicator.html` template. Receives `?id=<id>` and `?registry=supply` query params. Renders full-window chart with labeled extrema, methodology, last-N revisions where `hasVintages`.
+Reuses `/macro/indicators/indicator.html` template. Receives `?id=<id>` and `?registry=supply` query params. Renders full-window chart with labeled extrema, methodology, last-N revisions where `hasVintages`.
 
-### 7.5 Download zone (`/core/supply/data.html`)
+### 7.5 Download zone (`/supply/data.html`)
 
 Table: ID · Label · Category · Source · Last Refresh · Frequency · CSV link.
-Top of page: "Download all (.zip)" button → `/core/supply/data/bundle.zip`.
-Linked from `/core/data/` hub.
+Top of page: "Download all (.zip)" button → `/supply/data/bundle.zip`.
+Linked from `/tools/data/` hub.
 
 ## 8. Refresh pipeline
 
@@ -481,11 +481,11 @@ The site is mostly declarative (registry-driven, snapshot-rendered) so testing f
 - A schema test on `snapshot.json` runs in CI on every PR
 - A visual regression check: a Puppeteer script loads every page in light + dark theme, screenshots, diffs against committed baselines (matches the existing approach if any; otherwise added as new infra)
 - Manual QA before merging:
-  - Open `/core/supply/` — composite tile renders, all four panels render, no console errors
+  - Open `/supply/` — composite tile renders, all four panels render, no console errors
   - Hover every tile — tooltip renders all five sections
   - Click every "Open deep dive →" — page renders
   - Click any metric tile — drill-down renders with chart and methodology
-  - `/core/supply/data.html` — every CSV link returns a CSV; `bundle.zip` downloads and unzips correctly
+  - `/supply/data.html` — every CSV link returns a CSV; `bundle.zip` downloads and unzips correctly
   - Verify `manifest.json` timestamps look plausible
 
 ## 11. Out of scope (v2 follow-ups)
@@ -506,7 +506,7 @@ The site is mostly declarative (registry-driven, snapshot-rendered) so testing f
 4. Execute implementation plan in this session
 5. Provide Pavel a single PowerShell snippet to set GitHub secrets via `gh secret set`
 6. Trigger first refresh manually via `workflow_dispatch`
-7. Verify `/core/supply/` lives at siberforge.xyz/core/supply/ and download bundle works
+7. Verify `/supply/` lives at siberforge.xyz/supply/ and download bundle works
 8. Document the new project in the root `index.html` hub
 
 ---

@@ -15,15 +15,15 @@ w.Chart = {
   defaults: { plugins: { tooltip: {}, legend: { labels: {} } } },
   register: p => plugins.push(p),
 };
-w.eval(readFileSync(process.cwd() + '/core/lib/theme-toggle.js', 'utf8'));
-w.eval(readFileSync(process.cwd() + '/core/lib/chart-theme.js', 'utf8'));
+w.eval(readFileSync(process.cwd() + '/lib/theme-toggle.js', 'utf8'));
+w.eval(readFileSync(process.cwd() + '/lib/chart-theme.js', 'utf8'));
 
 const errors = [];
 const t = (label, fn) => { try { fn(); console.log('  PASS', label); } catch (e) { console.log('  FAIL', label, '--', e.message); errors.push(label); } };
 
 t('plugin registered', () => { if (plugins.length !== 1) throw new Error('n=' + plugins.length); });
 
-// A config copied from core/macro/dashboard.js
+// A config copied from macro/regime/dashboard.js
 const chart = { options: {
   plugins: { legend: { labels: { color: '#e5e9ee' } },
              tooltip: { backgroundColor: '#13171c', borderColor: '#232b35' } },
@@ -79,7 +79,7 @@ t('themechange event fires', () => {
   const btn = w.document.createElement('button');
   btn.className = 'theme-toggle';
   w.document.body.appendChild(btn);
-  w.eval(readFileSync(process.cwd() + '/core/lib/theme-toggle.js', 'utf8'));
+  w.eval(readFileSync(process.cwd() + '/lib/theme-toggle.js', 'utf8'));
   btn.click();
   if (!fired) throw new Error('no event');
 });

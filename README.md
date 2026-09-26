@@ -4,14 +4,14 @@ Landing page + project hub. The root `index.html` is a directory of Siberforge p
 
 Currently shipped:
 
-- **Economic Indicators** (`/core/econ/`) — 22-indicator overview of US growth, inflation, consumer/labor, and housing. Latest print, YoY/MoM change, 5yr sparkline, and historical-percentile context strip per card. Pulls from FRED.
-- **Macro & Markets Dashboard** (`/core/macro/`) — economic indicators tracker with S&P 500 / sector ETF correlation. Static front-end + Vercel serverless functions that proxy FRED and Finnhub with server-side keys.
+- **Economic Indicators** (`/macro/indicators/`) — 22-indicator overview of US growth, inflation, consumer/labor, and housing. Latest print, YoY/MoM change, 5yr sparkline, and historical-percentile context strip per card. Pulls from FRED.
+- **Macro & Markets Dashboard** (`/macro/regime/`) — economic indicators tracker with S&P 500 / sector ETF correlation. Static front-end + Vercel serverless functions that proxy FRED and Finnhub with server-side keys.
 
 ## Architecture
 
 ```
 siberforge/
-├── index.html              # landing-page hub (links to projects under /core/)
+├── index.html              # landing-page hub (links to projects under /tools/a-z/)
 ├── README.md
 ├── package.json
 ├── vercel.json
@@ -21,13 +21,13 @@ siberforge/
 │   └── stocks.js           # /api/stocks  -- Finnhub proxy (60s quote, 24h history)
 └── core/
     ├── econ/               # Economic Indicators overview (22 FRED series)
-    │   ├── index.html      # overview UI (served at /core/econ/)
+    │   ├── index.html      # overview UI (served at /macro/indicators/)
     │   ├── dashboard.js    # controller: batch-fetch, transform, render
     │   ├── indicators.js   # indicator registry (FRED IDs, transforms, categories, context)
     │   ├── sparklines.js   # reusable SVG sparkline + percentile-strip renderers
     │   └── styles.css      # local styles (category accents, dense card grid)
     ├── macro/              # Macro & Markets Dashboard
-    │   ├── index.html      # dashboard UI (served at /core/macro/)
+    │   ├── index.html      # dashboard UI (served at /macro/regime/)
     │   ├── dashboard.js    # client controller (ES module)
     │   └── styles.css      # dark theme
     └── lib/
