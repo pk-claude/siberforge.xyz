@@ -26,6 +26,13 @@
   const fmtX   = (v) => (v == null || !isFinite(v) || v <= 0) ? '—' : v.toFixed(1) + 'x';
   const fmtPx  = (v) => v == null ? '—' : '$' + v.toFixed(2);
   const esc    = (s) => String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  // Research notes are dated opinions. Say how old, and flag after 60 days.
+  const noteAge = (d) => {
+    if (!d) return 'Undated note.';
+    const days = Math.round((Date.now() - new Date(d + 'T00:00:00Z').getTime()) / 86400000);
+    const stale = days > 60 ? ' <span class="sn-stale">older than 60 days</span>' : '';
+    return 'Research note written ' + esc(d) + ' (' + days + ' days ago).' + stale;
+  };
   const pctFmt = (v) => (v * 100).toFixed(1) + '%';
   const yrFmt  = (v) => v + 'y';
   const xFmt   = (v) => v.toFixed(0) + 'x';
@@ -423,7 +430,7 @@
     const r1 = (back(12) && last) ? last / back(12) - 1 : null;
 
     let h = '<section class="sn-sec">'
-      + '<div class="tk-header"><span class="tk">' + esc(D.ticker) + '</span>'
+      + '<div class="tk-header"><h1 class="tk">' + esc(D.ticker) + '</h1>'
       + '<span class="nm">' + esc(D.name) + ' &middot; ETF</span>'
       + '<span class="price" id="q-px">' + fmtPx(S.px) + '</span>'
       + '<span class="change">52w ' + fmtPx(S.l52) + ' - ' + fmtPx(S.h52) + '</span></div>';
@@ -476,7 +483,7 @@
 
     // research
     h += '<section class="sn-sec"><h2>Research notes</h2>'
-      + '<p class="sn-asof">Written ' + esc(R.asOf || D.asOf) + '. Ask for a refresh after major moves.</p>'
+      + '<p class="sn-asof">' + noteAge(R.asOf || D.asOf) + ' Prices and fundamentals refresh weekly; the written thesis does not.</p>'
       + '<div class="col-2">';
     if (R.thesis) h += '<div class="thesis-box bull"><h4>Why own it</h4><ul>' + R.thesis.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>';
     if (R.risks) h += '<div class="thesis-box bear"><h4>Risks</h4><ul>' + R.risks.map(t => '<li>' + esc(t) + '</li>').join('') + '</ul></div>';
@@ -543,7 +550,7 @@
 
     // ---- section 1: header + KPIs + narrative ----
     let h = '<section class="sn-sec">'
-      + '<div class="tk-header"><span class="tk">' + esc(T) + '</span>'
+      + '<div class="tk-header"><h1 class="tk">' + esc(T) + '</h1>'
       + '<span class="nm">' + esc(D.name) + ' &middot; ' + esc(D.sector || '') + '</span>'
       + '<span class="price" id="q-px">' + fmtPx(px) + '</span>'
       + '<span class="change" id="q-chg">P/E (TTM) ' + fmtX(S.tpe).replace('x', '') + ' &middot; Fwd P/E ' + fmtX(S.fpe).replace('x', '') + '</span></div>';
@@ -672,7 +679,7 @@
 
     // ---- section 6: research notes ----
     h += '<section class="sn-sec"><h2>Research notes</h2>'
-      + '<p class="sn-asof">Written ' + esc(R.asOf || D.asOf) + '. Ask for a refresh after major news or earnings.</p>';
+      + '<p class="sn-asof">' + noteAge(R.asOf || D.asOf) + ' Prices and fundamentals refresh weekly; the written thesis does not.</p>';
     if (R.moat) h += '<h3>Moat</h3><p>' + esc(R.moat) + '</p>';
     if (R.segments && R.segments.length) h += '<h3>Business &amp; segments</h3><ul>' + R.segments.map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>';
     if (R.competitive && R.competitive.length) h += '<h3>Competitive landscape</h3><ul>' + R.competitive.map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>';

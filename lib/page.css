@@ -1,0 +1,77 @@
+/* page.css -- standard page template pieces (new and revamped pages).
+   Layered on tokens.css + layout.css + dashboard.css + macro/cycle/cycle.css.
+
+   Template:
+     .sf-page-head   eyebrow / h1 / dek (the verdict) / meta row (as-of)
+     .cycle-section  content blocks (existing cycle.css look)
+     #method         "Methodology & sources" <details> at the end            */
+
+.sf-page-head { padding: 24px 24px 8px; max-width: 1400px; }
+.sf-eyebrow { font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 6px; }
+.sf-page-head h1 { font-size: 26px; font-weight: 700; margin: 0 0 8px; color: var(--text); letter-spacing: -0.2px; }
+.sf-dek { font-size: 15px; line-height: 1.55; color: var(--text); max-width: 980px; margin: 0 0 8px; }
+.sf-dek strong { color: var(--accent); font-weight: 700; }
+.sf-meta { font-size: 11.5px; color: var(--muted); }
+.sf-meta a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Dials (State of the Cycle) */
+.sf-dials { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; padding: 8px 24px 18px; }
+.sf-dial { display: block; background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--dial, var(--line)); border-radius: 6px; padding: 12px 14px; color: inherit; text-decoration: none; transition: border-color var(--t-fast); }
+.sf-dial:hover { border-color: var(--accent); }
+.sf-dial-top { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+.sf-dial-name { font-size: 10.5px; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+.sf-dial-chg { font-size: 11px; font-variant-numeric: tabular-nums; color: var(--muted); }
+.sf-dial-chg.up { color: var(--red); } .sf-dial-chg.down { color: var(--green); }
+.sf-dial-val { font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--dial, var(--text)); margin-top: 4px; line-height: 1.1; }
+.sf-dial-val small { font-size: 13px; font-weight: 500; color: var(--muted); margin-left: 3px; }
+.sf-dial-label { font-size: 12px; font-weight: 700; color: var(--dial, var(--text)); margin-top: 2px; }
+.sf-dial-read { font-size: 11.5px; color: var(--muted); margin-top: 6px; line-height: 1.45; }
+.sf-bar { height: 4px; background: var(--line); border-radius: 2px; margin-top: 8px; position: relative; }
+.sf-bar > i { position: absolute; top: -3px; width: 10px; height: 10px; border-radius: 50%; background: var(--dial, var(--accent)); transform: translateX(-50%); }
+
+/* Two-column lists */
+.sf-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.sf-card { background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 16px 18px; }
+.sf-card h3 { margin: 0 0 10px; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+.sf-list { list-style: none; margin: 0; padding: 0; }
+.sf-list li { padding: 8px 0; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.5; }
+.sf-list li:first-child { border-top: 0; padding-top: 0; }
+.sf-list b { color: var(--text); }
+.sf-list .muted, .muted { color: var(--muted); }
+
+/* Data tables */
+.sf-table-wrap { overflow-x: auto; }
+table.sf-table { width: 100%; border-collapse: collapse; font-size: 12.5px; font-variant-numeric: tabular-nums; }
+table.sf-table th, table.sf-table td { padding: 7px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+table.sf-table th:first-child, table.sf-table td:first-child { text-align: left; }
+table.sf-table thead th { color: var(--muted); font-weight: 600; font-size: 11px; letter-spacing: .5px; text-transform: uppercase; }
+table.sf-table tbody th { font-weight: 600; color: var(--text); }
+.pos { color: var(--green); } .neg { color: var(--red); }
+table.sf-table tr.sf-hl td, table.sf-table tr.sf-hl th { background: var(--accent-bg); }
+
+/* Methodology block */
+details.sf-method-block { margin: 8px 24px 24px; background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 12px 16px; }
+details.sf-method-block summary { cursor: pointer; font-weight: 700; font-size: 13px; color: var(--text); }
+details.sf-method-block p, details.sf-method-block li { font-size: 12.5px; line-height: 1.6; color: var(--muted); }
+details.sf-method-block[open] summary { margin-bottom: 8px; }
+
+.rp-noedge { background: var(--panel); border: 1px solid var(--line); border-left: 4px solid var(--muted); border-radius: 6px; padding: 14px 16px; font-size: 13px; line-height: 1.55; margin: 10px 0; }
+table.rp-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+table.rp-table th, table.rp-table td { padding: 6px 8px; border-bottom: 1px solid var(--line); text-align: right; }
+table.rp-table th:first-child { text-align: left; }
+table.rp-table tr.rp-sig td, table.rp-table tr.rp-sig th { background: var(--accent-bg); }
+
+@media (max-width: 1000px) { .sf-dials { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 800px) {
+  .sf-page-head { padding: 16px 16px 6px; }
+  .sf-page-head h1 { font-size: 22px; }
+  .sf-dek { font-size: 14px; }
+  .sf-dials { padding: 6px 16px 14px; gap: 8px; }
+  .sf-cols { grid-template-columns: 1fr; }
+  details.sf-method-block { margin: 8px 16px 20px; }
+}
+@media (max-width: 420px) { .sf-dials { grid-template-columns: 1fr; } }
+main.sf-page { padding: 0 0 24px; max-width: 1400px; margin: 0 auto; }
+table.sf-table a { color: var(--text); text-decoration: none; border-bottom: 1px dotted var(--muted); } table.sf-table a:hover { color: var(--accent); }
+.cycle-chart-row.sf-split { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); }
+@media (max-width: 1000px) { .cycle-chart-row.sf-split { grid-template-columns: 1fr; } }

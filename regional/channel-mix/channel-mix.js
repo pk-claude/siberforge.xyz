@@ -28,6 +28,8 @@ async function fetchJSON(url) {
 }
 function latestValue(s) { return s && s.length ? s[s.length - 1] : null; }
 
+const NO_CONS = new Set(['DE', 'HI', 'MD', 'NE']);
+
 async function loadAll() {
   setStatus('stale', `Loading 0/${STATES.length} states…`);
   // Fetch construction (CONS) + nonfarm (NA) for each state, in batches.
@@ -37,7 +39,10 @@ async function loadAll() {
   for (let i = 0; i < STATES.length; i += 8) {
     const batch = STATES.slice(i, i + 8);
     const ids = [];
-    for (const s of batch) { ids.push(`${s}CONS`); ids.push(`${s}NA`); }
+    // BLS publishes no stand-alone construction series for DE, HI, MD and NE
+    // (construction is combined with mining and logging there), so FRED has no
+    // <ST>CONS for them. Skip rather than request a series that cannot exist.
+    for (const s of batch) { if (!NO_CONS.has(s)) ids.push(`${s}CONS`); ids.push(`${s}NA`); }
     try {
       const j = await fetchJSON(`/api/fred?series=${ids.join(',')}&start=2010-01-01`);
       const byId = Object.fromEntries(j.series.map(s => [s.id, s.observations]));

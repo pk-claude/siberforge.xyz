@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; State of the Cycle</title>
+<meta name="description" content="One-screen verdict on the US cycle: regime, eight dials, what changed and what would change the call." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="macro" data-page="state" data-page-sub="State of the Cycle" data-page-status-text="Loading&hellip;">
+<main class="sf-page">
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Macro &middot; State of the Cycle</div>
+  <h1>Where the US cycle stands</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+
+<section class="sf-dials" id="dials" aria-label="Eight dials"></section>
+
+<section class="cycle-section">
+  <div class="sf-cols">
+    <div class="sf-card"><h3>What changed in the last 3 months</h3><ul class="sf-list" id="changed"></ul></div>
+    <div class="sf-card"><h3>What would change the call</h3><ul class="sf-list" id="flip"></ul></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Scorecard</h2>
+    <p class="cycle-section-sub">Six composites, each scored 0&ndash;100 as a percentile of its own last 20 years (100 = most risk). Past readings use only data that had been published by that date.</p>
+  </div>
+  <div class="sf-card sf-table-wrap"><table class="sf-table" id="scorecard"></table></div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>Recession odds, three ways</h2>
+    <p class="cycle-section-sub">A leading model (yield curve, 12 months ahead), a coincident rule (Sahm) and the composite. They disagree often; when all three agree, the signal has been reliable.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-odds"></canvas></div>
+    <div class="cycle-tiles" id="tiles-odds"></div>
+  </div>
+</section>
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p><b>Regime.</b> Growth = average robust z-score (median/MAD, trailing 10 years) of the 6-month annualized change in industrial production, payrolls and real retail sales. Inflation = the same for core CPI. The four quadrants are Goldilocks (growth up, inflation down), Reflation (both up), Stagflation (growth down, inflation up) and Disinflation (both down). The headline is a 3-month majority vote; conviction is the distance of the latest month to the nearest quadrant boundary.</p>
+  <p><b>Composites.</b> Each signal is scored as its percentile within its own trailing 20 years and the composite is a weighted mean. Every page's "How this score is built" panel lists the signals, weights and transforms.</p>
+  <p><b>Dials.</b> Growth uses the regime growth z and the Chicago Fed National Activity Index (3-month average; 0 = trend growth). Policy is the real fed funds rate (effective rate minus core PCE inflation, year over year) against its 20-year range. Financial conditions is the Chicago Fed NFCI (negative = looser than average).</p>
+  <p><b>Recession odds.</b> Curve model: P = &Phi;(&minus;0.533 &minus; 0.633 &times; monthly-average 10Y&minus;3M spread), the Estrella&ndash;Trubin specification behind the NY Fed's published probability. Sahm rule: FRED SAHMREALTIME.</p>
+  <p><b>Limits.</b> FRED serves the latest revised data, so history looks cleaner than it did in real time. Weights are judgement, not fitted: four recessions are too few to fit weights without overfitting.</p>
+</details>
+
+</main>
+<footer>
+  <span>Data: FRED (St. Louis Fed) static snapshot, refreshed on a schedule; market prices via Yahoo Finance daily closes. Not investment advice.</span>
+  <span id="last-updated"></span>
+</footer>
+<script type="module" src="/macro/state.js"></script>
+<script src="/lib/chart-range.js"></script>
+<script type="module" src="/lib/tile-tooltip.js"></script>
+</body>
+</html>
