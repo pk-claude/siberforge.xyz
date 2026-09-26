@@ -117,7 +117,7 @@ function renderConditionsChart() {
     if (lvl < -0.4) txt = `NFCI at ${lvl.toFixed(2)} — financial conditions decisively easy. Accommodative for cyclical/credit-sensitive sectors.`;
     else if (lvl < 0) txt = `NFCI at ${lvl.toFixed(2)} — slightly looser than average. Default credit-friendly stance still intact.`;
     else if (lvl < 0.5) txt = `NFCI at ${lvl.toFixed(2)} — tighter than average but below the 0.5 stress threshold. Watch.`;
-    else txt = `NFCI at ${lvl.toFixed(2)} — above 0.5 stress threshold; historically precedes recessions by 6-9 months.`;
+    else txt = `NFCI at ${lvl.toFixed(2)} — above 0.5: tighter than average, a level seen during past stress episodes.`;
     el('note-conditions').textContent = txt;
   }
 }

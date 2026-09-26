@@ -252,7 +252,7 @@ async function renderStateCharts() {
   // Hero scorecard tile
   renderHeroScorecard(stateName, stData, usData);
   renderStateNote(stateName, stData, usData);
-  setStatus('live', 'Live');
+  setStatus('live', 'Data loaded');
 }
 
 function renderHeroScorecard(stateName, stData, usData) {
@@ -404,7 +404,7 @@ async function renderRankedStates() {
   });
 
   el('geo-rank-title').textContent = `${config.label} — all states ranked, ${state.selectedState} highlighted`;
-  setStatus('live', 'Live');
+  setStatus('live', 'Data loaded');
 }
 
 // ---------- MSA chart ----------
@@ -444,7 +444,7 @@ async function renderMsaChart() {
     else                 note += `HPI ${msaLast.value >= 0 ? '+' : ''}${msaLast.value.toFixed(1)}% YoY, in line with US. `;
   }
   el('note-msa').innerHTML = note;
-  setStatus('live', 'Live');
+  setStatus('live', 'Data loaded');
 }
 
 // ---------- synthesis ----------
@@ -515,7 +515,7 @@ async function main() {
     await renderMsaChart();
     renderSynthesis();
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Live');
+    setStatus('live', 'Data loaded');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

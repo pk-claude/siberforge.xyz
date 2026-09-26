@@ -135,7 +135,7 @@ async function main() {
     renderRegionsChart();
     renderRankedTable();
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Live');
+    setStatus('live', 'Data loaded');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

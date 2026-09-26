@@ -197,7 +197,7 @@ function renderTakeaway() {
   const txt = `Composite score is <strong style="color:${phase.color}">${result.score.toFixed(0)}/100 (${phase.label})</strong>. ${
     result.score < 25 ? 'Labor market is unambiguously tight; employment growth and wage pressure should support the consumer.' :
     result.score < 45 ? 'Labor market healthy. Watch wage growth and claims for early-warning shifts.' :
-    result.score < 65 ? 'Cooling — payrolls slowing and/or claims drifting up. Discretionary spending typically softens 6-9 months from here.' :
+    result.score < 65 ? 'Cooling — payrolls slowing and/or claims drifting up. A cooling phase, not by itself a recession signal.' :
     result.score < 80 ? 'Weakening — Sahm Rule trajectory and claims pattern suggest accelerating deterioration. Consumer-discretionary risk elevated.' :
     'Recessionary regime confirmed. Defensive labor positioning historically beats cyclical labor-sensitive sectors by 15-25%.'
   }`;

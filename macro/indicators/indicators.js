@@ -86,9 +86,9 @@ export const INDICATORS = [
     freq: 'daily',
     transform: 'level_bps', // FRED returns %; multiply by 100
     release: 'Daily',
-    context: 'Yield-curve recession signal. Sustained inversion (<0) has preceded every US recession since 1960.',
+    context: 'Yield-curve recession signal. Sustained inversion (<0) preceded every US recession since 1968; the 2022-2025 inversion has not (yet) been followed by one.',
     direction: 'higher_better',
-    methodology: 'Spread between the 10-year constant-maturity Treasury yield and the 3-month Treasury bill rate. The NY Fed\'s preferred recession-probability input (per Estrella-Mishkin). Inversion has preceded every US recession since 1960 with 6–18 month leads. More reliable than 2s10s for recession signaling per most academic studies, though 2s10s draws more financial-press attention.',
+    methodology: 'Spread between the 10-year constant-maturity Treasury yield and the 3-month Treasury bill rate. The NY Fed\'s preferred recession-probability input (per Estrella-Mishkin). Inversion preceded every US recession since 1960 with 6–18 month leads. More reliable than 2s10s for recession signaling per most academic studies, though 2s10s draws more financial-press attention.',
   },
   {
     id: 'INDPRO',
@@ -169,7 +169,7 @@ export const INDICATORS = [
     release: 'Daily',
     context: 'Classic recession indicator. Inversion historically leads recessions by 12–18 months.',
     direction: 'higher_better',
-    methodology: 'Spread between 10Y and 2Y constant-maturity Treasury yields. The classic "2s10s" curve that financial press covers. Inversion has preceded every US recession since 1976, but with long and variable leads (12–24 months). Less statistically robust than T10Y3M per NY Fed research, but more closely watched.',
+    methodology: 'Spread between 10Y and 2Y constant-maturity Treasury yields. The classic "2s10s" curve that financial press covers. Inversion preceded every US recession since 1976, but with long and variable leads (12–24 months). Less statistically robust than T10Y3M per NY Fed research, but more closely watched.',
   },
 
   // --------------------------------------------------------------- INFLATION

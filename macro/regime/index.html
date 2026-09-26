@@ -17,7 +17,11 @@
 <script defer src="/lib/layout.js"></script>
 </head>
 <body data-section="macro" data-page="regime" data-page-sub="Regime" data-page-status-text="Initializing…" data-page-download="true" data-page-hub="true">
-<h1 class="sr-only">Macro Regime Dashboard</h1>
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Macro &middot; Regime &amp; base rates</div>
+  <h1>Growth &times; inflation regime, and what historically came next</h1>
+  <div class="sf-meta">Regime inputs: industrial production, payrolls, real retail sales, core CPI (6-month annualized, robust z vs 10 years). Summary of the whole cycle: <a href="/macro/">State of the Cycle</a>.</div>
+</header>
 <!-- Today's Read hero — the conclusions layer. Pulls all 4 composite scores + regime + outliers. -->
 <section class="today-read" id="today-read">
   <div class="tr-loading">Loading Today's Read…</div>
@@ -25,9 +29,6 @@
 
 
 <!-- Live macro strip: 6 indicators with current value, percentile, 1m delta -->
-<div class="section-head">
-  <h2>Live macro indicators</h2>
-</div>
 <section class="macro-strip" id="macro-strip">
   <!-- Populated by renderMacroStrip() -->
 </section>
@@ -35,7 +36,7 @@
 <section class="regime-section">
   <div class="section-head">
     <h2>Regime — trajectory &amp; what came next</h2>
-    <span class="regime-meth-q section-head-meta" tabindex="0" title="Growth = composite z-score of INDPRO + nonfarm payrolls + real retail sales (each 6m annualized). Inflation = z-score of Core CPI 6m annualized. Trailing 120-month window so the regime is 'vs recent history' rather than against the inflationary 1970s." aria-label="Methodology">?</span>
+    <span class="regime-meth-q section-head-meta" tabindex="0" title="Growth = average robust z-score (median/MAD) of INDPRO, nonfarm payrolls and real retail sales, each 6m annualized. Inflation = the same for core CPI. Trailing 120-month window, so the regime is measured against recent history rather than the 1970s." aria-label="Methodology">?</span>
   </div>
 
   <div class="regime-hero regime-hero-v2">

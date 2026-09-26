@@ -502,7 +502,7 @@ async function main() {
     wireRangeToggle(ind, transformed, []);
   }
 
-  setStatus('live', 'Live');
+  setStatus('live', 'Data loaded');
 }
 
 // Re-draw chart on window resize (uPlot does not auto-resize).
