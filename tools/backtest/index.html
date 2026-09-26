@@ -24,10 +24,12 @@
   <p class="cycle-subtitle">
     A regime model that only shows you historical averages is a chart, not a strategy. This page
     runs a <strong>walk-forward backtest</strong>: at each monthly rebalance, classify the regime
-    using only data available on that date, rank sectors by their prior-period forward returns in
-    that regime <em>as known at that date</em>, and hold the top-3 equal-weight for the next month.
-    No look-ahead; every decision uses only information a real allocator would have had.
-    Benchmarks: SPY buy-and-hold, and a 60/40 SPY+IEF monthly-rebalanced portfolio.
+    using the latest month whose data had been published (a one-month lag), rank sectors by their
+    prior forward returns in that regime <em>as known at that date</em>, and hold the top 3 equal-weight
+    for the next month, net of 5bp per trade. Benchmarks: SPY, an equal-weight basket of the same sectors
+    (which isolates the ranking skill from sector beta), and a 60/40 SPY+IEF portfolio. The verdict
+    comes from a bootstrap interval on the excess over the equal-weight basket. One remaining bias:
+    FRED serves revised macro data, which a real allocator would not have had.
     Related: <a href="/macro/regime/">regime view</a>, <a href="/macro/cycle/">cycle position</a>,
     <a href="/macro/inflation/">inflation persistence</a>.
   </p>
@@ -57,7 +59,7 @@
     <h2>2. Risk-adjusted performance</h2>
     <p class="cycle-section-sub">
       CAGR is compound annual growth. Annualized volatility and Sharpe use monthly returns
-      (Sharpe assumes 2% risk-free). Max drawdown is worst peak-to-trough decline on the equity
+      (Sharpe = mean monthly return over the 3-month T-bill, annualized). Max drawdown is worst peak-to-trough decline on the equity
       curve. Beta is regression slope vs SPY. Hit rate is % of months the strategy&rsquo;s monthly
       return exceeded SPY&rsquo;s. Turnover is the average absolute weight change per rebalance,
       annualized.

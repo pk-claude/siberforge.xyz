@@ -10,11 +10,13 @@
 //      equal-weight them, hold for 1 month.
 //   4. Rebalance at next month's close.
 //
-// Benchmarks: SPY buy-and-hold; 60/40 (SPY + IEF) monthly-rebalanced.
+// Benchmarks: SPY buy-and-hold; equal-weight sectors (the strategy's own
+// universe, so the comparison isolates the regime ranking from sector beta);
+// 60/40 (SPY + IEF) monthly-rebalanced.
 //
-// Walk-forward discipline matters: using full-sample sector rankings (which
-// the main dashboard table shows) would bake the future into every decision
-// and inflate the apparent edge. This implementation has zero look-ahead.
+// Point-in-time: at the close of month t the latest classifiable regime month
+// is t-1 (its CPI, IP, retail and payroll data are published during month t).
+// Remaining limitation: FRED serves revised data, not first releases.
 
 import { buildRegimeMap } from '/macro/regime/regimes.js';
 import { dailyToMonthEnd } from '/macro/regime/regime-returns.js';
@@ -54,9 +56,14 @@ async function loadAllData() {
 
   setStatus('stale', 'Loading 40y of macro history…');
   const REGIME_START = `${new Date().getFullYear() - 40}-01-01`;
-  const r = await fetchJSON(`/api/fred?series=CPILFESL,INDPRO,PAYEMS,RRSFS&start=${REGIME_START}`);
+  const r = await fetchJSON(`/api/fred?series=CPILFESL,INDPRO,PAYEMS,RRSFS,DTB3&start=${REGIME_START}`);
   const series = {};
   for (const s of r.series) series[s.id] = s.observations;
+  // Risk-free: 3M T-bill, monthly average, as a monthly rate.
+  state.rf = new Map();
+  const acc = new Map();
+  for (const o of series.DTB3 || []) { const k = o.date.slice(0, 7); const e = acc.get(k) || [0, 0]; e[0] += o.value; e[1]++; acc.set(k, e); }
+  for (const [k, [sum, n]] of acc) state.rf.set(k, sum / n / 100 / 12);
   state.regimeMap = buildRegimeMap({
     cpi:    series.CPILFESL || [],
     indpro: series.INDPRO   || [],
@@ -87,9 +94,10 @@ function priorRegimeRanking(regime, cutoffYm) {
     const samples = [];
     for (const [ym, info] of state.regimeMap.entries()) {
       if (info.regime !== regime) continue;
-      if (compareYm(ym, cutoffYm) >= 0) continue; // strict <
-      const startClose = monthEnds.get(ym);
-      const futureYm = shiftMonth(ym, 6);
+      const entryYm = shiftMonth(ym, 1); // regime for ym is known at the close of ym+1
+      if (compareYm(entryYm, cutoffYm) >= 0) continue; // strict <
+      const startClose = monthEnds.get(entryYm);
+      const futureYm = shiftMonth(entryYm, 6);
       const futureClose = monthEnds.get(futureYm);
       // Also require the future month to be < cutoff so the realized 6m return
       // was actually observable at cutoff time (no in-flight returns sneaking in).
@@ -138,7 +146,7 @@ function runBacktest() {
   const earliestData = [minSpyYm, minIefYm, '1999-12'].filter(Boolean).sort().pop();
   const backtestStart = shiftMonth(earliestData, 60);
 
-  const usable = regimeMonths.filter(ym => compareYm(ym, backtestStart) >= 0);
+  const usable = regimeMonths.map(ym => shiftMonth(ym, 1)).filter(ym => compareYm(ym, backtestStart) >= 0);
   if (usable.length < 12) {
     return { error: 'Insufficient overlap between regime data and price history.' };
   }
@@ -159,6 +167,8 @@ function runBacktest() {
   let stratValueNet = 100;
   let benchSpy = 100;
   let benchSf = 100;
+  let benchEw = 100;
+  const ewReturns = [], ewValues = [], rfReturns = [];
   let prevWeights = {};
   const stratReturns = [], spyReturns = [], sfReturns = [];
   const stratReturnsNet = [];
@@ -171,8 +181,10 @@ function runBacktest() {
   // We rebalance at month t, hold to month t+1. So we iterate up to second-to-last.
   for (let i = 0; i < usable.length - 1; i++) {
     const ym = usable[i];
-    const info = state.regimeMap.get(ym);
+    const info = state.regimeMap.get(shiftMonth(ym, -1)); // known at close of ym
     if (!info) continue;
+    const spyR = monthReturn('SPY', ym);
+    if (spyR == null) continue; // no silent zero returns
 
     // Walk-forward sector ranking
     const ranking = priorRegimeRanking(info.regime, ym);
@@ -188,12 +200,15 @@ function runBacktest() {
     }
 
     // Realized return over the next month
-    let stratR = 0;
+    // Renormalize over holdings that actually have a return (no implicit cash).
+    let stratR = 0, wSum = 0;
     for (const [sym, w] of Object.entries(weights)) {
       const r = monthReturn(sym, ym);
-      if (r != null) stratR += w * r;
+      if (r != null) { stratR += w * r; wSum += w; }
     }
-    const spyR = monthReturn('SPY', ym) ?? 0;
+    if (wSum > 0) stratR /= wSum;
+    const ewAvail = SECTOR_SYMS.map(s2 => monthReturn(s2, ym)).filter(r => r != null);
+    const ewR = ewAvail.length ? ewAvail.reduce((a, b) => a + b, 0) / ewAvail.length : spyR;
     const iefR = monthReturn('IEF', ym) ?? 0;
     const sfR = 0.6 * spyR + 0.4 * iefR;
 
@@ -215,6 +230,9 @@ function runBacktest() {
     stratValueNet *= (1 + stratRNet);
     benchSpy   *= (1 + spyR);
     benchSf    *= (1 + sfR);
+    benchEw    *= (1 + ewR);
+    ewReturns.push(ewR); ewValues.push(benchEw);
+    rfReturns.push(state.rf?.get(usable[i + 1]) ?? state.rf?.get(ym) ?? 0);
 
     // Record at end of held period (i.e., month t+1)
     const holdYm = usable[i + 1];
@@ -237,6 +255,8 @@ function runBacktest() {
     costOneWay:  COST_ONE_WAY,
     spy:         { name: 'SPY (buy-hold)',  returns: spyReturns,   values: spyValues,   color: '#5a9cff' },
     sixtyForty:  { name: '60/40',           returns: sfReturns,    values: sfValues,    color: '#3ecf8e' },
+    equalWeight: { name: 'Equal-weight sectors', returns: ewReturns, values: ewValues, color: '#b07cff' },
+    rf: rfReturns,
     turnoverMonthly,
     backtestStart,
   };
@@ -244,7 +264,7 @@ function runBacktest() {
 
 // ---------- metrics ----------
 
-function metrics(result, vsSpy) {
+function metrics(result, vsSpy, rf = null) {
   const r = result.returns;
   const v = result.values;
   if (!r.length) return null;
@@ -256,7 +276,9 @@ function metrics(result, vsSpy) {
   let sumSq = 0; for (const x of r) sumSq += (x - mu) * (x - mu);
   const monthlyVol = Math.sqrt(sumSq / Math.max(1, months - 1));
   const annVol = monthlyVol * Math.sqrt(12);
-  const sharpe = annVol > 0 ? (cagr - 0.02) / annVol : NaN;
+  // Sharpe: mean monthly excess over the T-bill, annualized (arithmetic).
+  let ex = 0; for (let i = 0; i < months; i++) ex += r[i] - (rf ? rf[i] || 0 : 0.02 / 12); ex /= months;
+  const sharpe = annVol > 0 ? (ex * 12) / annVol : NaN;
 
   // Max drawdown
   let peak = v[0], maxDd = 0;
@@ -283,7 +305,7 @@ function metrics(result, vsSpy) {
 // ---------- rendering ----------
 
 function renderEquityCurve(result) {
-  const datasets = [result.strategy, result.spy, result.sixtyForty].map(s => ({
+  const datasets = [result.strategyNet, result.spy, result.equalWeight, result.sixtyForty].map(s => ({
     label: s.name,
     data: result.dates.map((d, i) => ({ x: `${d}-15`, y: s.values[i] })),
     borderColor: s.color,
@@ -318,7 +340,7 @@ function renderMetricsTable(stratM, spyM, sfM, totalTurnover, stratNetM, costOne
   const rows = [
     ['CAGR',                stratM, spyM, sfM, m => m ? `${(m.cagr * 100).toFixed(2)}%` : '—', 'higher'],
     ['Annualized vol',      stratM, spyM, sfM, m => m ? `${(m.annVol * 100).toFixed(1)}%` : '—', 'lower'],
-    ['Sharpe (rf=2%)',      stratM, spyM, sfM, m => m ? m.sharpe.toFixed(2) : '—', 'higher'],
+    ['Sharpe (vs T-bill)',      stratM, spyM, sfM, m => m ? m.sharpe.toFixed(2) : '—', 'higher'],
     ['Max drawdown',        stratM, spyM, sfM, m => m ? `${(m.maxDd * 100).toFixed(1)}%` : '—', 'higher'], // less negative = better
     ['Beta vs SPY',         stratM, spyM, sfM, m => m && Number.isFinite(m.beta) ? m.beta.toFixed(2) : '—', null],
     ['Hit rate vs SPY',     stratM, spyM, sfM, m => m && Number.isFinite(m.hitRate) ? `${(m.hitRate * 100).toFixed(0)}%` : '—', null],
@@ -531,18 +553,36 @@ function renderRegimeBreakdown(result) {
 
 // stratM here is the NET series. The verdict a reader acts on has to be the
 // one they could actually have earned, not the one before trading costs.
-function renderVerdict(stratM, spyM, sfM, stratGrossM, costOneWay) {
+// Moving-block bootstrap (6-month blocks) of the mean monthly excess return of
+// the net strategy over the equal-weight sector benchmark. Returns the
+// annualized mean and a 95% interval. Seeded so the page is reproducible.
+function bootstrapExcess(a, b, block = 6, draws = 2000) {
+  const d = a.map((x, i) => x - b[i]);
+  const n = d.length; if (n < block * 4) return null;
+  let seed = 12345; const rnd = () => (seed = (seed * 1103515245 + 12345) % 2147483648) / 2147483648;
+  const means = [];
+  for (let k = 0; k < draws; k++) {
+    let sum = 0, cnt = 0;
+    while (cnt < n) { const st = Math.floor(rnd() * (n - block)); for (let j = 0; j < block && cnt < n; j++, cnt++) sum += d[st + j]; }
+    means.push(sum / n * 12 * 100);
+  }
+  means.sort((x, y) => x - y);
+  return { mean: d.reduce((x, y) => x + y, 0) / n * 12 * 100, lo: means[Math.floor(draws * 0.025)], hi: means[Math.floor(draws * 0.975)] };
+}
+
+function renderVerdict(stratM, spyM, sfM, stratGrossM, costOneWay, boot, ewM) {
   const tgt = el('bt-verdict-section');
   if (!tgt || !stratM || !spyM) return;
   const cagrEdge = (stratM.cagr - spyM.cagr) * 100;
   const sharpeEdge = stratM.sharpe - spyM.sharpe;
   const grossEdge = stratGrossM ? (stratGrossM.cagr - spyM.cagr) * 100 : null;
 
+  // The verdict reads off the bootstrap interval of the net excess over the
+  // equal-weight sector benchmark: that isolates the regime-ranking skill.
   let verdictColor = '#5a9cff';
-  let verdictLabel = 'Inconclusive';
-  if (cagrEdge > 1.5 && sharpeEdge > 0.1)        { verdictColor = '#3ecf8e'; verdictLabel = 'Edge confirmed'; }
-  else if (cagrEdge > 0 && sharpeEdge > 0)       { verdictColor = '#f7a700'; verdictLabel = 'Modest edge'; }
-  else if (cagrEdge < -0.5 || sharpeEdge < -0.1) { verdictColor = '#ef4f5a'; verdictLabel = 'No edge'; }
+  let verdictLabel = 'No demonstrated edge';
+  if (boot && boot.lo > 0)      { verdictColor = '#3ecf8e'; verdictLabel = 'Edge (95% interval above zero)'; }
+  else if (boot && boot.hi < 0) { verdictColor = '#ef4f5a'; verdictLabel = 'Underperforms (95% interval below zero)'; }
 
   tgt.innerHTML = `
     <div class="cs-score-card">
@@ -550,7 +590,7 @@ function renderVerdict(stratM, spyM, sfM, stratGrossM, costOneWay) {
         <div class="cs-score-label">VERDICT &middot; ${stratM.months} MONTHS</div>
         <div class="cs-score-value" style="font-size:38px">${cagrEdge >= 0 ? '+' : ''}${cagrEdge.toFixed(2)}<span class="cs-score-scale">pp/yr</span></div>
         <div class="cs-score-phase" style="color:${verdictColor}">${verdictLabel}</div>
-        <div class="cs-score-desc">Regime Rotation CAGR <b>net of trading costs</b> minus SPY CAGR over the backtest window.${grossEdge != null ? ` Gross of costs it would read ${grossEdge >= 0 ? '+' : ''}${grossEdge.toFixed(2)}pp.` : ''}</div>
+        <div class="cs-score-desc">Regime Rotation CAGR <b>net of trading costs</b> minus SPY CAGR.${grossEdge != null ? ` Gross of costs: ${grossEdge >= 0 ? '+' : ''}${grossEdge.toFixed(2)}pp.` : ''}${boot ? `<br>Versus equal-weight sectors: ${boot.mean >= 0 ? '+' : ''}${boot.mean.toFixed(2)}pp/yr, 95% interval ${boot.lo.toFixed(2)} to ${boot.hi.toFixed(2)}pp (6-month block bootstrap).` : ''}</div>
       </div>
       <div class="cs-signals">
         <div class="cs-signals-title">Headline numbers</div>
@@ -572,9 +612,9 @@ function renderVerdict(stratM, spyM, sfM, stratGrossM, costOneWay) {
         <div class="cs-signal">
           <div class="cs-signal-name">Drawdown vs SPY</div>
           <div class="cs-signal-bar"><div class="cs-signal-fill" style="width:${Math.min(100, Math.max(0, (Math.abs(spyM.maxDd) - Math.abs(stratM.maxDd)) * 200 + 50))}%;background:${verdictColor}"></div></div>
-          <div class="cs-signal-value">${((Math.abs(spyM.maxDd) - Math.abs(stratM.maxDd)) * 100).toFixed(1)}pp better</div>
+          <div class="cs-signal-value">${(() => { const g = (Math.abs(spyM.maxDd) - Math.abs(stratM.maxDd)) * 100; return `${Math.abs(g).toFixed(1)}pp ${g >= 0 ? 'shallower' : 'deeper'}`; })()}</div>
         </div>
-        <div class="cs-weights-note">All metrics use walk-forward decisions (no look-ahead) and are net of ${((costOneWay || 0) * 10000).toFixed(0)}bp per one-way trade. Backtest window: ${stratM.months} months, ~${(stratM.months / 12).toFixed(1)} years. Taxes are not modelled.</div>
+        <div class="cs-weights-note">Walk-forward decisions using the regime as it was knowable (one-month publication lag); FRED's revised data is still used. Net of ${((costOneWay || 0) * 10000).toFixed(0)}bp per one-way trade. Backtest window: ${stratM.months} months, ~${(stratM.months / 12).toFixed(1)} years. Taxes are not modelled.</div>
       </div>
     </div>
   `;
@@ -594,20 +634,21 @@ async function main() {
     }
     state.results = result;
 
-    const stratM = metrics(result.strategy, result.spy);
-    const stratNetM = metrics(result.strategyNet, result.spy);
-    const spyM   = metrics(result.spy,      result.spy);
-    const sfM    = metrics(result.sixtyForty, result.spy);
+    const stratM = metrics(result.strategy, result.spy, result.rf);
+    const stratNetM = metrics(result.strategyNet, result.spy, result.rf);
+    const spyM   = metrics(result.spy,      result.spy, result.rf);
+    const sfM    = metrics(result.sixtyForty, result.spy, result.rf);
+    const ewM    = metrics(result.equalWeight, result.spy, result.rf);
+    const boot   = bootstrapExcess(result.strategyNet.returns, result.equalWeight.returns);
     const avgTurnover = result.turnoverMonthly.reduce((s, x) => s + x, 0) / Math.max(1, result.turnoverMonthly.length);
 
-    renderVerdict(stratNetM, spyM, sfM, stratM, result.costOneWay);
+    renderVerdict(stratNetM, spyM, sfM, stratM, result.costOneWay, boot, ewM);
     renderEquityCurve(result);
     renderMetricsTable(stratM, spyM, sfM, avgTurnover, stratNetM, result.costOneWay);
     renderExcessChart(result);
     renderRegimeBreakdown(result);
 
-    el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Live');
+    setStatus('live', `Through ${result.dates[result.dates.length - 1]}`);
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

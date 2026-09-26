@@ -12,75 +12,34 @@
 // Config
 // ============================================================================
 
-export const SERIES = ['SAHMCURRENT', 'T10Y3M', 'BAMLH0A0HYM2', 'UNRATE', 'PAYEMS'];
+// Four signals, one per channel. The earlier version counted three coincident
+// labor measures (Sahm, UNRATE 6m change, payrolls) as separate "votes", so a
+// single labor wobble looked like consensus; they are collapsed into the Sahm
+// rule. HY OAS is replaced by Moody's Baa-10Y because ICE's OAS on FRED now
+// covers only ~3 years, which made the historical count silently "out of 4".
+export const SERIES = ['SAHMREALTIME', 'T10Y3M', 'BAA10Y', 'CFNAIMA3', 'USREC'];
 export const HISTORY_START = '1975-01-01';
 
-// Signal metadata — order here = render order on the subpage.
 export const SIGNALS = [
   {
-    id: 'sahm',
-    label: 'Sahm Rule',
-    short: 'Sahm',
-    source: 'SAHMCURRENT',
-    unit: 'pp',
-    decimals: 2,
-    threshold: 0.50,
-    direction: 'above',          // trigger when value >= threshold
-    axisMin: -0.5,
-    axisMax: 3.0,
-    description: 'UNRATE 3mo avg − its 12mo prior min. Trigger ≥ 0.50. Caveat: triggered mid-2024 with no recession following — its first false positive since 1970.',
+    id: 'sahm', label: 'Labor: Sahm rule (real-time)', short: 'Sahm', source: 'SAHMREALTIME',
+    unit: 'pp', decimals: 2, threshold: 0.50, direction: 'above', axisMin: -0.5, axisMax: 3.0, horizon: 'coincident',
+    description: '3-month average unemployment rate minus its low of the prior 12 months. Trigger >= 0.50pp. Coincident: it confirms rather than forecasts. Triggered Jul-2024 with no recession.',
   },
   {
-    id: 'curve',
-    label: 'Yield Curve (10Y − 3M)',
-    short: '10Y-3M',
-    source: 'T10Y3M',
-    unit: '%',
-    decimals: 2,
-    threshold: 0.00,
-    direction: 'below',          // trigger when value < threshold
-    axisMin: -2.5,
-    axisMax: 4.0,
-    description: 'Spread between 10-year and 3-month Treasury yields. Trigger < 0 (inversion).',
+    id: 'curve', label: 'Rates: yield curve (10Y - 3M)', short: '10Y-3M', source: 'T10Y3M',
+    unit: '%', decimals: 2, threshold: 0.00, direction: 'below', axisMin: -2.5, axisMax: 4.0, horizon: 'leads 6-18 months',
+    description: 'Monthly average spread between 10-year and 3-month Treasury yields. Trigger < 0 (inversion). Leading, with a long and variable lag; inverted from late 2022 into 2025 with no recession.',
   },
   {
-    id: 'hyoas',
-    label: 'High-Yield OAS',
-    short: 'HY OAS',
-    source: 'BAMLH0A0HYM2',
-    unit: '%',
-    decimals: 2,
-    threshold: 6.00,
-    direction: 'above',
-    axisMin: 2.0,
-    axisMax: 22.0,
-    description: 'ICE BofA US HY option-adjusted spread. Trigger ≥ 6.00%.',
+    id: 'credit', label: 'Credit: Baa - 10Y spread', short: 'Baa spread', source: 'BAA10Y',
+    unit: '%', decimals: 2, threshold: 3.00, direction: 'above', axisMin: 1.0, axisMax: 6.5, horizon: 'coincident to slightly leading',
+    description: "Moody's Baa corporate yield minus the 10-year Treasury (history since 1986). Trigger >= 3.00%.",
   },
   {
-    id: 'unchg6',
-    label: 'Unemployment 6mo Change',
-    short: 'UNRATE Δ6m',
-    source: 'derived',
-    unit: 'pp',
-    decimals: 2,
-    threshold: 0.50,
-    direction: 'above',
-    axisMin: -2.0,
-    axisMax: 4.0,
-    description: 'Current UNRATE minus UNRATE 6 months ago. Trigger ≥ +0.5 pp.',
-  },
-  {
-    id: 'nfp3',
-    label: 'Payrolls 3mo Avg',
-    short: 'NFP 3mo',
-    source: 'derived',
-    unit: 'k/mo',
-    decimals: 0,
-    threshold: 50,
-    direction: 'below',
-    axisMin: -500,
-    axisMax: 600,
-    description: 'Average monthly change in nonfarm payrolls over last 3 months. Trigger < 50k/mo.',
+    id: 'activity', label: 'Activity: CFNAI 3-month average', short: 'CFNAI-MA3', source: 'CFNAIMA3',
+    unit: '', decimals: 2, threshold: -0.70, direction: 'below', axisMin: -5, axisMax: 2, horizon: 'coincident',
+    description: 'Chicago Fed National Activity Index, 3-month average of 85 indicators. The Chicago Fed reads below -0.70 after an expansion as an increasing likelihood that a recession has begun.',
   },
 ];
 
@@ -119,9 +78,9 @@ export function recessionRangesFromUsrec(obs) {
 
 // Tier thresholds
 export function tierOf(count) {
-  if (count >= 3) return { label: 'HIGH',      cls: 'tier-high',     sub: 'Multiple signals agree — historically rare outside of or just before recessions.' };
-  if (count >= 2) return { label: 'ELEVATED',  cls: 'tier-elevated', sub: 'Two signals triggered. Worth watching, not yet a consensus alarm.' };
-  if (count >= 1) return { label: 'LOW',       cls: 'tier-low',      sub: 'One signal triggered. Common during late-cycle conditions without a recession following.' };
+  if (count >= 3) return { label: 'HIGH',      cls: 'tier-high',     sub: 'Three or more channels agree. See the calibration table for how often that has happened outside recessions.' };
+  if (count >= 2) return { label: 'ELEVATED',  cls: 'tier-elevated', sub: 'Two channels triggered. Historically this mostly happened at or just after recession starts, not well ahead of them.' };
+  if (count >= 1) return { label: 'LOW',       cls: 'tier-low',      sub: 'One channel triggered. Common late in expansions without a recession following.' };
   return            { label: 'BENIGN',    cls: 'tier-benign',   sub: 'No signals triggered.' };
 }
 
@@ -180,33 +139,67 @@ export function isTriggered(value, sig) {
 // `raw` is the { [seriesId]: [{date, value}, …] } map returned by fetchFred
 // (unwrapped to just observations).
 export function computeSignals(raw) {
-  const sahmMonthly = raw.SAHMCURRENT || [];
-  const curveMonthly = resampleToMonthly(raw.T10Y3M || []);
-  const hyMonthly = resampleToMonthly(raw.BAMLH0A0HYM2 || []);
-  const unchgMonthly = unrateChange6m(raw.UNRATE || []);
-  const nfpMonthly = payemsAvg3mo(raw.PAYEMS || []);
-
   const seriesBySignal = {
-    sahm:   sahmMonthly,
-    curve:  curveMonthly,
-    hyoas:  hyMonthly,
-    unchg6: unchgMonthly,
-    nfp3:   nfpMonthly,
+    sahm:     raw.SAHMREALTIME || [],
+    curve:    monthlyMean(raw.T10Y3M || []),
+    credit:   monthlyMean(raw.BAA10Y || []),
+    activity: raw.CFNAIMA3 || [],
   };
-
   const out = SIGNALS.map(sig => {
     const s = seriesBySignal[sig.id];
     const last = s[s.length - 1];
-    return {
-      ...sig,
-      series: s,
-      currentValue: last ? last.value : NaN,
-      currentDate:  last ? last.date  : null,
-      triggered:    last ? isTriggered(last.value, sig) : false,
-    };
+    return { ...sig, series: s, currentValue: last ? last.value : NaN, currentDate: last ? last.date : null, triggered: last ? isTriggered(last.value, sig) : false };
   });
-
   return { signals: out, seriesBySignal };
+}
+
+// Monthly mean of a daily series, dated YYYY-MM-01.
+export function monthlyMean(obs) {
+  const m = new Map();
+  for (const o of obs) { const k = o.date.slice(0, 7); const e = m.get(k) || [0, 0]; e[0] += o.value; e[1]++; m.set(k, e); }
+  return [...m.entries()].sort((a, b) => a[0].localeCompare(b[0])).map(([k, [s, n]]) => ({ date: `${k}-01`, value: s / n }));
+}
+
+// Calibration against NBER dates, computed from the data on every load so the
+// page reports its own track record instead of asserting one.
+//   caught:     recessions where the signal fired between 24 months before the
+//               start and 6 months after it (among recessions its data covers)
+//   medianLead: months from first firing in that window to the start
+//               (positive = fired before the recession began)
+//   falseRate:  share of firing months outside recessions (and the 12 months
+//               after them) that were NOT followed by a recession start
+//               within 12 months
+export function calibrate(series, test, usrec) {
+  const idx = ym => { const [y, m] = ym.split('-').map(Number); return y * 12 + m - 1; };
+  const ranges = recessionRangesFromUsrec(usrec);
+  const vals = new Map(series.map(o => [o.date.slice(0, 7), o.value]));
+  const first = series.length ? series[0].date.slice(0, 7) : null;
+  const lastYm = series.length ? series[series.length - 1].date.slice(0, 7) : null;
+  if (!first) return null;
+  const covered = ranges.filter(([s]) => idx(s) - 24 >= idx(first));
+  const leads = [];
+  for (const [s] of covered) {
+    for (let k = idx(s) - 24; k <= idx(s) + 6; k++) {
+      const ym = `${Math.floor(k / 12)}-${String(k % 12 + 1).padStart(2, '0')}`;
+      if (test(vals.get(ym))) { leads.push(idx(s) - k); break; }
+    }
+  }
+  // In, or within 12 months after, a recession: late confirmation, not a false alarm.
+  const inRec = k => ranges.some(([s, e]) => k >= idx(s) && k <= idx(e) + 12);
+  const startsWithin12 = k => ranges.some(([s]) => idx(s) > k && idx(s) - k <= 12);
+  let fires = 0, falseFires = 0;
+  for (const [ym, v] of vals) {
+    const k = idx(ym);
+    if (!test(v) || inRec(k) || idx(lastYm) - k < 12) continue;
+    fires++; if (!startsWithin12(k)) falseFires++;
+  }
+  leads.sort((a, b) => a - b);
+  return {
+    covered: covered.length, caught: leads.length,
+    medianLead: leads.length ? leads[Math.floor((leads.length - 1) / 2)] : null,
+    falseRate: fires ? falseFires / fires : null, fires,
+    since: first,
+  };
 }
 
 // ============================================================================
