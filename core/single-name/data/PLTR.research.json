@@ -1,52 +1,54 @@
 {
-  "asOf": "2026-08-11",
-  "oneLiner": "Arguably the best operating metrics in software (Rule of 40 = 155, +93% growth at $8B scale) attached to the most expensive multiple in large-cap software (~50x forward sales).",
+  "asOf": "2026-09-07",
+  "oneLiner": "Arguably the best operating metrics in software (Rule of 40 = 155, +93% growth at $8B scale) attached to the most expensive multiple in large-cap software (~50x forward sales), now converting prototypes into production hardware programs.",
   "thesis": [
     "AIP is winning the enterprise agentic-AI land grab: US commercial +149% YoY with 157% net dollar retention and accelerating sequential growth.",
-    "Government is an annuity with upside: $10B/10-year Army Enterprise Agreement, NATO Maven purchases, NGC2 and Golden Dome positioning; US government +90% YoY.",
-    "Ontology layer creates deep switching costs: data, logic, and actions bound into operational workflows; NDR is the evidence.",
-    "Margins already elite: 62% adjusted operating margin, $4.5-4.7B FCF guided for FY2026; the entire question is what multiple to pay."
+    "Government is an annuity with upside, and it is moving from prototype to production: the $10B/10-year Army Enterprise Agreement, NATO Maven purchases, NGC2, Golden Dome, and on Sep 1, 2026 the Army moving TITAN into its production phase.",
+    "The ontology layer creates deep switching costs: data, logic and actions bound into operational workflows; 157% NDR is the evidence.",
+    "Margins are already elite: 62% adjusted operating margin and $4.5-4.7B of FCF guided for FY2026. The entire question is what multiple to pay."
   ],
   "latestQuarter": {
     "label": "Q2 2026 (reported Aug 3, 2026)",
     "points": [
       "Revenue $1.94B, +93% YoY (consensus ~$1.80B); adjusted EPS $0.41.",
-      "Adjusted operating margin 62%; GAAP operating margin 47%; GAAP net margin 55% (incl. SpaceX marks).",
-      "Government $990M (+79%), US government $809M (+90%); US commercial $764M (+149% YoY, +28% seq).",
-      "Net dollar retention 157%, up 700bps sequentially.",
-      "Guide raised: FY2026 revenue $8.15B (+82%); US commercial >$3.42B (+134%); adjusted FCF $4.5-4.7B; Q3 ~$2.16B."
+      "Adjusted operating margin 62%; GAAP operating margin 47%; GAAP net margin 55% (including SpaceX marks).",
+      "Government $990M (+79%), US government $809M (+90%); US commercial $764M (+149% YoY, +28% sequential).",
+      "Net dollar retention 157%, up 700bp sequentially.",
+      "Guide raised: FY2026 revenue $8.15B (+82%); US commercial above $3.42B (+134%); adjusted FCF $4.5-4.7B; Q3 ~$2.16B."
     ]
   },
   "segments": [
-    "Government ~51% of revenue: Army EA, NATO Maven, allied defense.",
-    "Commercial ~49%, with US commercial (+149%) the growth engine on AIP adoption."
+    "Government ~51% of revenue: Army Enterprise Agreement, NATO Maven, TITAN, allied defense.",
+    "Commercial ~49%, with US commercial (+149%) the growth engine on AIP adoption; an expanded PwC alliance is the newest enterprise distribution channel."
   ],
   "competitive": [
-    "Enterprise AI platforms: Databricks, Snowflake Cortex, Microsoft Fabric target the same data/AI budgets.",
-    "Defense tech: Anduril is partner and rival (joint $100M Army NGC2 win Jul 2026; Golden Dome co-development with Scale AI and SpaceX).",
-    "Big-3 consultancies compete for AI-implementation budgets; Palantir's forward-deployed model positions it as software, not billable hours.",
+    "Enterprise AI platforms: Databricks, Snowflake Cortex and Microsoft Fabric target the same data and AI budgets.",
+    "Defense tech: Anduril is simultaneously partner and rival - the two split the Sep 2026 TITAN production orders ($127M to Palantir, $65M to Anduril) after jointly winning Army NGC2 work in July.",
+    "The big consultancies compete for AI-implementation budgets; Palantir's forward-deployed model positions it as software rather than billable hours, and the PwC alliance co-opts one of them.",
     "C3.ai has faded as a serious threat."
   ],
-  "moat": "The ontology layer binding an institution's data, logic, and actions creates switching costs once operational workflows run through Foundry/AIP. In government: decades of accreditations, classified deployments, and contract vehicles newcomers cannot replicate quickly.",
+  "moat": "The ontology layer binding an institution's data, logic and actions creates switching costs once operational workflows run through Foundry and AIP. In government: decades of accreditations, classified deployments and contract vehicles newcomers cannot replicate quickly - and with TITAN, a hardware delivery program that embeds Palantir in the Army's deep-sensing architecture rather than alongside it.",
   "risks": [
-    "Valuation: ~67x trailing EV/S is 150% above its own 10-year median; any growth wobble is severely punished.",
-    "Insider selling: Karp sold ~$54M in May 2026; insiders sold >$250M in late 2025; 34 sells, 0 buys in five years.",
-    "Government dependency: ~51% of revenue tied to US/allied budgets; a CR or budget fight hits the biggest segment.",
-    "Law of large numbers: +93% on an $8B base is unprecedented; 2027 comps get brutal.",
-    "Anduril tension could cap Palantir's share of next-gen defense programs.",
-    "SBC keeps GAAP margins (47%) well below adjusted (62%)."
+    "Valuation: roughly 67x trailing EV/sales is about 150% above its own 10-year median; any growth wobble is severely punished.",
+    "Insider selling remains relentless: reports of an $86M CEO sale in the same month as the TITAN award follow ~$54M in May 2026 and more than $250M by insiders in late 2025, against 34 sells and zero buys over five years (reported).",
+    "Bear scrutiny of accounting: Michael Burry has publicly renewed a bearish position citing accounting practices and valuation (reported).",
+    "Government dependency: ~51% of revenue is tied to US and allied budgets; a continuing resolution or budget fight hits the biggest segment.",
+    "Law of large numbers: +93% on an $8B base is unprecedented, and 2027 comparisons get brutal.",
+    "Hardware programs like TITAN carry delivery, integration and schedule risk that pure software does not - eight systems over 18 months is an execution commitment.",
+    "Stock-based compensation keeps GAAP margins (47%) well below adjusted (62%)."
   ],
   "catalysts": [
-    "Q3 2026 earnings ~early Nov 2026.",
     "US federal fiscal year-end Sept 30 award flow.",
-    "Army NGC2 next-phase decision (~mid-2027).",
-    "Golden Dome milestones; further NATO/allied Maven expansions."
+    "Q3 2026 earnings in early November 2026.",
+    "TITAN delivery milestones across the eight initial systems (four Advanced, four Basic) over the next 18 months.",
+    "Army NGC2 next-phase decision around mid-2027.",
+    "Golden Dome milestones and further NATO or allied Maven expansions."
   ],
-  "pricedIn": "~82x forward earnings, ~50x forward sales. To justify it: hold 60%+ growth for years at ~60% adjusted margins, growing $8.15B toward ~$25B+ by 2029-2030, which brings EV/S toward ~17x on out-year sales. Bulls: Q2's +93% proves the AI-operating-system thesis. Bears: even perfection is fully paid for at ~$420B.",
+  "pricedIn": "Around $174-186 in early September, roughly 12-16% below the $207.52 52-week high, at approximately 82x forward earnings and 50x forward sales. To justify it, Palantir has to hold 60%+ growth for years at ~60% adjusted margins, taking $8.15B toward $25B+ by 2029-2030, which brings EV/sales toward ~17x on out-year sales. Bulls point to Q2's +93% and the fact that TITAN and NGC2 turn demos into programs of record. Bears note the market barely moved on a fresh DoD award, which is what a fully-priced stock looks like: good news is already in it.",
   "scenarios": {
-    "bear": "US commercial growth halves as AIP pilots saturate and Databricks/Snowflake/Fabric win mainstream; a 2027 budget impasse freezes government; NDR fades to 120%. Growth of 'only' 40% forces the multiple from ~50x toward 15-20x forward sales: a 50-60% derating even with rising earnings.",
-    "base": "FY2026 lands at $8.15B (+82%); 2027 decelerates to 45-60% at ~60% adjusted margins and $4.5B+ FCF; multiple compresses gradually as earnings grow into it; stock oscillates in the established $130-210 range with earnings-driven spikes.",
-    "bull": "AI agents in production become the enterprise standard with AIP the category winner; US commercial sustains >100% into 2027; Golden Dome and NGC2 convert into multi-billion production programs; revenue triples by 2028-29 and growth outruns multiple compression."
+    "bear": "US commercial growth halves as AIP pilots saturate and Databricks, Snowflake and Fabric win the mainstream; a 2027 budget impasse freezes government; NDR fades toward 120%. Growth of 'only' 40% forces the multiple from ~50x toward 15-20x forward sales - a 50-60% derating even with rising earnings.",
+    "base": "FY2026 lands at $8.15B (+82%); 2027 decelerates to 45-60% at ~60% adjusted margins and $4.5B+ of FCF; production programs like TITAN add durable but low-multiple revenue; the multiple compresses gradually as earnings grow into it and the stock oscillates in the established $130-210 range with earnings-driven spikes.",
+    "bull": "AI agents in production become the enterprise standard with AIP the category winner; US commercial sustains above 100% into 2027; Golden Dome, NGC2 and TITAN convert into multi-billion production programs; revenue triples by 2028-29 and growth outruns multiple compression."
   },
   "valPresets": {
     "mode": "fcf",
@@ -62,7 +64,7 @@
     "bull": {
       "g": 0.65
     },
-    "note": "Even the bear preset needs 25% year-1 FCF growth; the reverse DCF shows ~30%+ constant growth for a decade is priced in. That asymmetry is the entire PLTR debate."
+    "note": "Even the bear preset needs 25% year-one FCF growth; the reverse DCF shows roughly 30%+ constant growth for a decade is priced in. That asymmetry is the entire PLTR debate."
   },
   "sources": [
     {
@@ -74,16 +76,16 @@
       "url": "https://www.cnbc.com/2026/08/03/palantir-pltr-earnings-q2-2026.html"
     },
     {
-      "label": "Army NGC2 award",
-      "url": "https://finance.yahoo.com/news/palantir-pltr-wins-100m-u-054043546.html"
+      "label": "TITAN production award (Sep 1, 2026)",
+      "url": "https://www.businesswire.com/news/home/20260901157594/en/Palantir-to-Deliver-Eight-TITAN-Systems-to-the-U.S.-Army"
+    },
+    {
+      "label": "TITAN production orders split with Anduril",
+      "url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/"
     },
     {
       "label": "EV/Revenue history",
       "url": "https://www.gurufocus.com/term/enterprise-value-to-revenue/PLTR"
-    },
-    {
-      "label": "Insider selling",
-      "url": "https://www.benzinga.com/trading-ideas/insider-trades/25/11/48995589/"
     }
   ],
   "guide": {
@@ -92,8 +94,8 @@
     "sub": "US comm >$3.42B \u00b7 FCF $4.5-4.7B",
     "tone": "accent"
   },
-  "latestProse": "Q2 2026 (reported Aug 3). Revenue $1.94B +93% (consensus ~$1.80B); adjusted operating margin 62%, GAAP operating margin 47%. US commercial $764M, +149% YoY and +28% sequential; US government $809M, +90%. Net dollar retention 157%, up 700bp sequentially. Rule of 40 score: 155.",
-  "guidanceProse": "FY2026 raised to $8.15B (+82%); US commercial guided above $3.42B (+134%); adjusted FCF $4.5-4.7B; Q3 ~$2.16B. At ~50x forward sales the guide has to keep being beaten, not merely met - every quarter is a referendum on the multiple.",
+  "latestProse": "Q2 2026 (reported Aug 3). Revenue $1.94B, +93% against ~$1.80B consensus; adjusted operating margin 62%, GAAP operating margin 47%. US commercial $764M, +149% YoY and +28% sequential; US government $809M, +90%. Net dollar retention 157%, up 700bp sequentially, for a Rule of 40 score of 155. Since the print, the Army moved TITAN into production on Sep 1, awarding $192M of delivery orders - $127M to Palantir USG and $65M to Anduril - covering eight initial systems, four Advanced and four Basic, over 18 months. The disclosure that matters most: 157% net dollar retention with US commercial still accelerating sequentially, because the bear case has always been that AIP land-and-expand saturates, and it has not started to.",
+  "guidanceProse": "FY2026 is guided to $8.15B (+82%), US commercial above $3.42B (+134%), adjusted FCF $4.5-4.7B, and Q3 around $2.16B. At roughly 50x forward sales the guide has to keep being beaten rather than merely met - every quarter is a referendum on the multiple. The September signal is what did not happen: a fresh DoD production award and an expanded PwC alliance landed without moving the stock, which trades 12-16% below its high, while Michael Burry publicly renewed a short thesis on accounting and valuation and insiders kept selling.",
   "bullCharts": {
     "0": [
       "revQ"

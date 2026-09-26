@@ -1,11 +1,11 @@
 {
-  "asOf": "2026-08-12",
+  "asOf": "2026-08-31",
   "oneLiner": "A post-scandal AI-server pure play that just doubled its gross margin and guided FY2027 revenue roughly 26% above Street, yet trades near 11x forward earnings because the market does not fully trust the margins, the customers, or the controls.",
   "thesis": [
     "The margin inflection finally showed up. Q4 FY2026 GAAP gross margin hit 17.5% versus 9.9% in Q3 FY26 and guidance of 8.2-8.4%, on favorable customer and product mix; non-GAAP EPS of $1.70 beat consensus $0.71 by 139%.",
     "FY2027 guidance towers over consensus. Management guided $65-72B revenue versus Street ~$54.4B, backed by more than $60B of new orders received in Q4 alone and a record backlog.",
     "Rack-scale liquid-cooling leadership into the Rubin cycle. DCBBS blueprints for NVIDIA Vera Rubin NVL72/NVL144 and DLC-2 direct liquid cooling (up to 362kW per rack) keep Supermicro first-to-market as DLC becomes mandatory at Rubin power densities.",
-    "The customer base is broadening. Nine customers each generated over $1B of revenue in FY2026, up from four in FY2025.",
+    "The customer base is broadening. Nine customers each generated over $1B of revenue in FY2026, up from four in FY2025 - and on Aug 25, 2026 Cisco announced it will integrate Supermicro's liquid-cooled rack-scale systems into its Secure AI Factory with NVIDIA, opening a Cisco enterprise sales channel from October.",
     "US-based manufacturing is a strategic asset. San Jose HQ, R&D and expanded domestic rack-scale capacity fit the onshoring policy environment and hyperscaler speed requirements."
   ],
   "latestQuarter": {
@@ -29,6 +29,7 @@
   ],
   "competitive": [
     "Dell (ISG) and HPE bundle AI servers with services and financing and drove the price competition that held SMCI gross margin near 9-10% through FY25; Q4's 17.5% reflects mix, not a truce",
+    "Cisco flipped from potential rival to channel: the Aug 25, 2026 Secure AI Factory partnership puts Supermicro racks inside Cisco's enterprise sales motion with NVIDIA - distribution SMCI never had",
     "ODMs (Quanta, Wiwynn, Foxconn) serve hyperscalers directly at thin margins and cap pricing on the biggest deals",
     "NVIDIA allocation is the real gatekeeper: Supermicro ships GB300 at volume and has announced Vera Rubin NVL72/NVL144 support with DCBBS blueprints scaling 5MW to 1GW",
     "Differentiators are time-to-market cadence, building-block architecture, DLC-2 cooling scale, and US manufacturing"
@@ -36,7 +37,7 @@
   "moat": "There is little structural moat in assembling x86/GPU servers; Dell, HPE and ODMs can replicate most of the portfolio, which is why gross margin historically sat near 10%. Supermicro's edge is speed - first-to-market on each NVIDIA generation - plus rack-scale DLC integration at volume. That is a lead measured in quarters, not years.",
   "risks": [
     "Margin mean reversion. A gross margin that doubled in one quarter on customer mix can halve the same way; guidance credibility rests on repeating it, and top analysts openly doubt it.",
-    "The governance overhang is not resolved. Material weaknesses in internal controls remained unremediated as of March 31, 2026, BDO issued an adverse ICFR opinion on FY2024, DOJ/SEC document subpoenas remain outstanding, and a March 19, 2026 DOJ indictment charged two employees and a contractor over alleged export-control violations (company not charged).",
+    "The governance overhang is not resolved. Material weaknesses in internal controls remained unremediated as of March 31, 2026, BDO issued an adverse ICFR opinion on FY2024, DOJ/SEC document subpoenas remain outstanding, and a March 19, 2026 DOJ indictment charged two employees and a contractor over alleged export-control violations (company not charged), and on Aug 24, 2026 Taiwanese prosecutors indicted nine individuals - including two employees of Supermicro's Taiwan unit - over alleged illegal AI-server exports to China; prosecutors confirmed the company itself faces no charges, which the market read as clearing an overhang, but the export-control exposure is now on two continents.",
     "Customer concentration and order quality. One customer was 27% of Q3 FY26 revenue; the $60B order book is only as good as hyperscaler follow-through.",
     "Competition and allocation. Any shift in NVIDIA allocation toward Dell, HPE or ODMs on the Rubin ramp directly hits the FY27 guide.",
     "Working capital strain. Funding $65-72B of revenue requires massive inventory and receivables build, with dilution or debt risk if cash conversion lags.",
@@ -44,11 +45,12 @@
   ],
   "catalysts": [
     "Late Aug 2026: FY2026 10-K filing - ICFR opinion, remediation progress, concentration disclosure",
+    "Oct 2026: Cisco Secure AI Factory systems with Supermicro hardware launch - first read on the enterprise channel",
     "Early Nov 2026: Q1 FY2027 earnings",
     "2H CY2026 into CY2027: Vera Rubin NVL72/NVL144 volume shipments",
     "No set timetable: conclusion of the independent board investigation"
   ],
-  "pricedIn": "The stock jumped 17.6% to $37.15 on Aug 12, 2026 after the print, and the forward P/E sits near 11x - far below AI-hardware peers. The price implies the market discounts both the $65-72B guide and the 17.5% margin: taking guidance at face value with even 14-15% gross margins would make the stock cheap outright. The debate is binary - durable margin regime plus real backlog versus a mix-driven one-off from a company with unremediated material weaknesses.",
+  "pricedIn": "The stock jumped 17.6% to $37.15 on Aug 12, 2026 after the print, popped another ~9% on Aug 25 on the Cisco deal and Taiwan clearance, and closed Aug 28 at $37.08 - round-tripping to the post-earnings level. The forward P/E sits near 11x - far below AI-hardware peers. The price implies the market discounts both the $65-72B guide and the 17.5% margin: taking guidance at face value with even 14-15% gross margins would make the stock cheap outright. The debate is binary - durable margin regime plus real backlog versus a mix-driven one-off from a company with unremediated material weaknesses.",
   "scenarios": {
     "bear": "Gross margin reverts toward 10-12% as the mix normalizes and Dell/HPE/ODM price pressure returns, FY27 revenue lands nearer $55B, and the investigation or a delayed 10-K reignites the accounting discount; EPS stalls near $4 and the multiple compresses toward 8x - low $30s or below.",
     "base": "Revenue lands in the lower half of the $65-72B guide with gross margins settling in the 12-14% range, non-GAAP EPS in the $5-6 area for FY27, filings stay current and the investigation closes without company charges; at 10-12x the stock grinds toward the $55-70 range.",
@@ -65,6 +67,8 @@
     {"label": "Seeking Alpha - Q4 FY2026 call transcript", "url": "https://seekingalpha.com/article/4935037-super-micro-computer-inc-smci-q4-2026-earnings-call-transcript"},
     {"label": "24/7 Wall St - Q4 2026 recap", "url": "https://247wallst.com/cards/super-micro-computer-inc-q4-2026-earnings-smci-01kzs75ekjmv562kq4bvhmapqq"},
     {"label": "Supermicro IR - board investigation update", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Provides-Update-on-Investigation-by-Independent-Board-Directors/default.aspx"},
-    {"label": "CFO Dive - internal control scrutiny", "url": "https://www.cfodive.com/news/super-micros-protracted-internal-control-repairs-draw-scrutiny-accounting/821042/"}
+    {"label": "CFO Dive - internal control scrutiny", "url": "https://www.cfodive.com/news/super-micros-protracted-internal-control-repairs-draw-scrutiny-accounting/821042/"},
+    {"label": "TipRanks - Cisco AI deal and Taiwan clearance lift overhang (Aug 25, 2026)", "url": "https://www.tipranks.com/news/super-micro-stock-smci-jumps-9-as-cisco-ai-deal-and-taiwan-clearance-lift-overhang"},
+    {"label": "Seeking Alpha - Cisco partners with Supermicro on Secure AI Factory", "url": "https://seekingalpha.com/news/4636561-cisco-partners-with-supermicro-to-expand-secure-ai-factory-with-nvidia"}
   ]
 }
