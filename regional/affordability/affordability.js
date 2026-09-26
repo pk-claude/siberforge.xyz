@@ -61,6 +61,8 @@ function renderChart() {
   const data = rows.map(r => r.pti);
   const colors = data.map(v => v > 6 ? 'rgba(239, 79, 90, 0.75)' : v > 4 ? 'rgba(247, 167, 0, 0.65)' : 'rgba(62, 207, 142, 0.65)');
 
+  const prior = window.Chart && Chart.getChart ? Chart.getChart('chart-pti') : null;
+  if (prior) prior.destroy();
   new Chart(el('chart-pti').getContext('2d'), {
     type: 'bar',
     data: { labels, datasets: [{ label: 'Home value / household income', data, backgroundColor: colors, borderWidth: 0 }] },

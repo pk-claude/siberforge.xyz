@@ -118,3 +118,6 @@ table.sn-peers{width:100%;border-collapse:collapse;font-size:12px;background:var
 .sn-sources a{color:var(--accent)}
 .sn-sources li{margin-bottom:4px}
 .sn-lede{font-size:14px;line-height:1.6;color:var(--text);margin:6px 0 0;max-width:100ch}
+
+h1.tk{margin:0;line-height:1.1}
+.sn-stale{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:3px;font-size:11px;background:rgba(239,79,90,.15);color:var(--red,#ef4f5a)}

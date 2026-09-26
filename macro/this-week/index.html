@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; This Week</title>
+<meta name="description" content="The week's biggest data surprises against history, series at extremes, releases due and market moves." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/this-week/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="macro" data-page="this-week" data-page-sub="This Week" data-page-status-text="Loading&hellip;">
+<main class="sf-page">
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Macro &middot; This Week</div>
+  <h1>What moved, measured against its own history</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>1. Biggest surprises in the latest prints</h2>
+    <p class="cycle-section-sub">For each series, the latest change is compared with the typical size of its changes over the prior 10 years (a z-score). |z| &ge; 2 is a move seen roughly one print in twenty. Consensus forecasts are not freely available, so this measures surprise against history, not against economists.</p>
+  </div>
+  <div class="sf-card sf-table-wrap"><table class="sf-table" id="tbl-moves"></table></div>
+</section>
+
+<section class="cycle-section">
+  <div class="sf-cols">
+    <div class="sf-card"><h3>At the edge of their 20-year range</h3><ul class="sf-list" id="extremes"></ul></div>
+    <div class="sf-card"><h3>Due in the next 14 days</h3><ul class="sf-list" id="calendar"></ul></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>2. Markets over the past week</h2>
+    <p class="cycle-section-sub">Five trading days, total return for ETFs; basis-point change for yields and spreads.</p>
+  </div>
+  <div class="sf-card sf-table-wrap"><table class="sf-table" id="tbl-mkt"></table></div>
+</section>
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p><b>Surprise.</b> z = (latest change &minus; mean change) / standard deviation of changes, over the 10 years before the latest print. Changes are taken on the transformed series shown (level, or year-over-year rate). "New" marks series whose data changed in the snapshot within the last 8 days.</p>
+  <p><b>Range.</b> Percentile of the latest value within its own trailing 20 years.</p>
+  <p><b>Sources.</b> FRED snapshot; release dates from FRED's release calendar; market data from Yahoo Finance daily closes.</p>
+</details>
+
+</main>
+<footer>
+  <span>Data: FRED (St. Louis Fed) static snapshot, refreshed on a schedule; market prices via Yahoo Finance daily closes. Not investment advice.</span>
+  <span id="last-updated"></span>
+</footer>
+<script type="module" src="/macro/this-week/week.js"></script>
+<script src="/lib/chart-range.js"></script>
+<script type="module" src="/lib/tile-tooltip.js"></script>
+</body>
+</html>

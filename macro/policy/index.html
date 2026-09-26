@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Policy & Rates</title>
+<meta name="description" content="Fed funds vs the 2-year yield, the real policy rate against neutral, the Treasury curve and the term premium." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/policy/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="macro" data-page="policy" data-page-sub="Policy & Rates" data-page-status-text="Loading&hellip;">
+<main class="sf-page">
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Macro &middot; Policy &amp; Rates</div>
+  <h1>Where policy is, and what the market prices</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>1. Policy rate vs the market</h2>
+    <p class="cycle-section-sub">The 2-year Treasury yield is roughly the market's average expected policy rate over the next two years, plus a small term premium. A 2-year yield below fed funds means the market expects cuts; above means hikes.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-policy"></canvas></div>
+    <div class="cycle-tiles" id="tiles-policy"></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>2. Real policy rate vs neutral</h2>
+    <p class="cycle-section-sub">Real fed funds = effective rate minus core PCE inflation (year over year). The neutral proxy is the FOMC's own longer-run median rate minus its 2% target. Above neutral restrains demand; the further above, the more restrictive.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-real"></canvas></div>
+    <div class="cycle-tiles" id="tiles-real"></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>3. Treasury curve: today vs 3 and 12 months ago</h2>
+    <p class="cycle-section-sub">Constant-maturity yields from 1 month to 30 years. A bull steepener (short yields falling fastest) usually accompanies an easing cycle; a bear steepener (long yields rising) points to term-premium or fiscal pressure.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-curve"></canvas></div>
+    <div class="cycle-tiles" id="tiles-curve"></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>4. What is inside the 10-year yield</h2>
+    <p class="cycle-section-sub">The nominal 10-year splits into a real yield (TIPS) plus breakeven inflation. Separately, the Kim&ndash;Wright model splits it into expected short rates plus a term premium: the extra yield investors demand for holding duration.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-10y"></canvas></div>
+    <div class="cycle-tiles" id="tiles-10y"></div>
+  </div>
+</section>
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p>FRED series: DFEDTARL/DFEDTARU (target range), DFF (effective fed funds), DGS1MO&ndash;DGS30 (constant-maturity Treasuries), PCEPILFE (core PCE), FEDTARMD and FEDTARMDLR (FOMC Summary of Economic Projections medians), DFII5/DFII10 (TIPS yields), T10YIE (10-year breakeven), THREEFYTP10 (Kim&ndash;Wright 10-year term premium, Federal Reserve Board).</p>
+  <p><b>Market-implied path.</b> 2Y minus fed funds is a rough gauge. It mixes expectations with a term premium and cannot separate the timing of moves. Fed funds futures give a cleaner path but are not available from free keyless sources.</p>
+  <p><b>Neutral.</b> r* is unobservable. The FOMC longer-run median minus 2% is the committee's own estimate; model estimates (Laubach&ndash;Williams, Holston&ndash;Laubach&ndash;Williams) differ by up to a percentage point.</p>
+</details>
+
+</main>
+<footer>
+  <span>Data: FRED (St. Louis Fed) static snapshot, refreshed on a schedule; market prices via Yahoo Finance daily closes. Not investment advice.</span>
+  <span id="last-updated"></span>
+</footer>
+<script type="module" src="/macro/policy/policy.js"></script>
+<script src="/lib/chart-range.js"></script>
+<script type="module" src="/lib/tile-tooltip.js"></script>
+</body>
+</html>

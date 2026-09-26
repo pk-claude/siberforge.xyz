@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Liquidity & Fiscal</title>
+<meta name="description" content="Net Fed liquidity, bank reserves, the federal deficit and the interest burden." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/liquidity/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="macro" data-page="liquidity" data-page-sub="Liquidity & Fiscal" data-page-status-text="Loading&hellip;">
+<main class="sf-page">
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Macro &middot; Liquidity &amp; Fiscal</div>
+  <h1>Liquidity and the federal balance sheet</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>1. Net Fed liquidity</h2>
+    <p class="cycle-section-sub">Fed balance sheet minus the Treasury's cash account (TGA) minus overnight reverse repo: the part of the Fed's balance sheet that sits in the banking system and markets. It tracked equities closely in 2020&ndash;2023; the relationship is loose over longer periods, so read it as a flow gauge, not a price target.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-netliq"></canvas></div>
+    <div class="cycle-tiles" id="tiles-netliq"></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>2. Bank reserves</h2>
+    <p class="cycle-section-sub">Reserves as a share of GDP. When reserves become scarce, repo rates spike (September 2019); the Fed has said it aims to stop balance-sheet runoff while reserves are still "somewhat above ample".</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-res"></canvas></div>
+    <div class="cycle-tiles" id="tiles-res"></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>3. Deficit and the interest burden</h2>
+    <p class="cycle-section-sub">A running 12-month federal deficit (Monthly Treasury Statement) against nominal GDP, and federal interest payments as a share of federal receipts. Large deficits outside recessions add Treasury supply and can lift the term premium.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-fiscal"></canvas></div>
+    <div class="cycle-tiles" id="tiles-fiscal"></div>
+  </div>
+</section>
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p>FRED: WALCL (Fed total assets, $mn, weekly), WTREGEN (TGA, $mn, weekly), RRPONTSYD (overnight reverse repo, $bn, daily; weekly average used), WRESBAL (reserve balances, $mn), SP500, MTSDS133FMS (monthly federal surplus/deficit, $mn), GDP (nominal, SAAR), A091RC1Q027SBEA (federal interest payments, SAAR), FGRECPT (federal current receipts, SAAR), GFDEGDQ188S (federal debt held by the public and intragovernmental, % of GDP).</p>
+  <p>Net liquidity = WALCL &minus; TGA &minus; RRP, all converted to $bn. The 12-month deficit sums the last 12 monthly statements and divides by the latest quarterly nominal GDP (annualized). FRED's S&amp;P 500 series only covers the last 10 years.</p>
+</details>
+
+</main>
+<footer>
+  <span>Data: FRED (St. Louis Fed) static snapshot, refreshed on a schedule; market prices via Yahoo Finance daily closes. Not investment advice.</span>
+  <span id="last-updated"></span>
+</footer>
+<script type="module" src="/macro/liquidity/liquidity.js"></script>
+<script src="/lib/chart-range.js"></script>
+<script type="module" src="/lib/tile-tooltip.js"></script>
+</body>
+</html>

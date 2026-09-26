@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; Global, FX & Commodities</title>
+<meta name="description" content="The dollar and major crosses, equities outside the US, rates abroad, energy and metals." />
+<link rel="canonical" href="https://www.siberforge.xyz/markets/global/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
+<script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
+<script defer src="/lib/chart-theme.js"></script>
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+</head>
+<body data-section="markets" data-page="global" data-page-sub="Global, FX & Commodities" data-page-status-text="Loading&hellip;">
+<main class="sf-page">
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Markets &middot; Global, FX &amp; Commodities</div>
+  <h1>The dollar, the rest of the world, and raw materials</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>1. The dollar</h2>
+    <p class="cycle-section-sub">The Fed's broad trade-weighted dollar index and six major crosses. A rising dollar tightens financial conditions for the rest of the world and weighs on commodity prices and US multinationals' earnings. Moves are shown as the change in the dollar's value (positive = dollar stronger).</p>
+  </div>
+  <div class="cycle-chart-row sf-split">
+    <div class="cycle-chart-wrap"><canvas id="chart-usd"></canvas></div>
+    <div class="sf-card sf-table-wrap"><table class="sf-table" id="tbl-fx"></table></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>2. Equities outside the US</h2>
+    <p class="cycle-section-sub">US-listed country and regional ETFs, total return in dollars (Yahoo adjusted closes), so currency moves are included. "vs SPY" is the difference in return over the same window.</p>
+  </div>
+  <div class="cycle-chart-row sf-split">
+    <div class="cycle-chart-wrap"><canvas id="chart-eq"></canvas></div>
+    <div class="sf-card sf-table-wrap"><table class="sf-table" id="tbl-eq"></table></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>3. Rates abroad</h2>
+    <p class="cycle-section-sub">Policy rates and 10-year government yields. Wide US-minus-abroad rate gaps support the dollar; narrowing gaps usually precede dollar weakness.</p>
+  </div>
+  <div class="cycle-chart-row">
+    <div class="cycle-chart-wrap"><canvas id="chart-rates"></canvas></div>
+    <div class="cycle-tiles" id="tiles-rates"></div>
+  </div>
+</section>
+
+<section class="cycle-section">
+  <div class="cycle-section-head">
+    <h2>4. Commodities</h2>
+    <p class="cycle-section-sub">Energy and metals from FRED spot series and US-listed ETFs. The copper-to-gold ratio (industrial demand over safe-haven demand) has historically moved with the 10-year yield; a gap between the two is worth a look, not a trade.</p>
+  </div>
+  <div class="cycle-chart-row sf-split">
+    <div class="cycle-chart-wrap"><canvas id="chart-cg"></canvas></div>
+    <div class="sf-card sf-table-wrap"><table class="sf-table" id="tbl-cmd"></table></div>
+  </div>
+</section>
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p>FRED: DTWEXBGS (broad dollar index), DEXUSEU, DEXJPUS, DEXUSUK, DEXCHUS, DEXCAUS, DEXMXUS (noon buying rates, New York Fed; about a one-week lag), ECBDFR, DFF, DGS10, IRLTLT01DEM156N, IRLTLT01JPM156N, IRLTLT01GBM156N (OECD monthly long-term yields), DCOILWTICO, DCOILBRENTEU, DHHNGSP, PCOPPUSDM (IMF monthly copper).</p>
+  <p>Yahoo Finance adjusted daily closes: SPY, EFA, EEM, EWJ, EWG, EWU, FXI, INDA, EWZ, EWY, GLD, CPER, USO, DBC. YTD = since the last close of the prior year.</p>
+</details>
+
+</main>
+<footer>
+  <span>Data: FRED (St. Louis Fed) static snapshot, refreshed on a schedule; market prices via Yahoo Finance daily closes. Not investment advice.</span>
+  <span id="last-updated"></span>
+</footer>
+<script type="module" src="/markets/global/global.js"></script>
+<script src="/lib/chart-range.js"></script>
+<script type="module" src="/lib/tile-tooltip.js"></script>
+</body>
+</html>

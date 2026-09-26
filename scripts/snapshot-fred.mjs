@@ -89,6 +89,19 @@ await Promise.all([0, 1].map(async w => {
   }
 }));
 
+// Release calendar (next 60 days) via the same code the live endpoint runs,
+// so pages can fall back to it when /api/releases is blocked upstream.
+if (!only) {
+  try {
+    const { default: releases } = await import('../api/releases.js');
+    let body = null, status = 0;
+    const res = { setHeader() {}, status(c) { status = c; return this; }, json(b) { body = b; return this; }, end() { return this; } };
+    await releases({ query: { days: '60' }, headers: {}, method: 'GET' }, res);
+    if (status === 200 && body) fs.writeFileSync(path.join(OUT, 'releases.json'), JSON.stringify(body));
+    else console.error('[fred] releases: status', status);
+  } catch (e) { console.error('[fred] releases failed:', redact(e.message)); }
+}
+
 const sorted = Object.fromEntries(Object.keys(man.series).sort().map(k => [k, man.series[k]]));
 fs.writeFileSync(manPath, JSON.stringify({ generatedAt: man.generatedAt, count: Object.keys(sorted).length, failed: fail, series: sorted }, null, 0));
 console.log(`[fred] done: ${ids.length - fail} ok, ${fail} failed`);
