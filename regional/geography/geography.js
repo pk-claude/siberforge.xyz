@@ -29,35 +29,37 @@ const STATES = [
   { code: 'WV', name: 'West Virginia' }, { code: 'WI', name: 'Wisconsin' }, { code: 'WY', name: 'Wyoming' },
 ];
 
+// Top 27 metros with FHFA HPI codes. FHFA publishes the largest MSAs only at
+// metro-division level (e.g. 35614, not 35620), so those use division codes.
 // Top 25 MSAs with FHFA HPI codes. Format: ATNHPIUS#####Q (quarterly).
 const MSAS = [
   { code: '12060', name: 'Atlanta-Sandy Springs-Roswell, GA' },
   { code: '12420', name: 'Austin-Round Rock-Georgetown, TX' },
-  { code: '14460', name: 'Boston-Cambridge-Newton, MA-NH' },
+  { code: '14454', name: 'Boston, MA (metro division)' },
   { code: '15380', name: 'Buffalo-Cheektowaga, NY' },
-  { code: '16980', name: 'Chicago-Naperville-Elgin, IL-IN-WI' },
+  { code: '16984', name: 'Chicago-Naperville-Evanston, IL (metro division)' },
   { code: '17140', name: 'Cincinnati, OH-KY-IN' },
   { code: '17460', name: 'Cleveland-Elyria, OH' },
-  { code: '19100', name: 'Dallas-Fort Worth-Arlington, TX' },
+  { code: '19124', name: 'Dallas-Plano-Irving, TX (metro division)' },
   { code: '19740', name: 'Denver-Aurora-Lakewood, CO' },
-  { code: '19820', name: 'Detroit-Warren-Dearborn, MI' },
+  { code: '19804', name: 'Detroit-Dearborn-Livonia, MI (metro division)' },
   { code: '26420', name: 'Houston-The Woodlands-Sugar Land, TX' },
   { code: '28140', name: 'Kansas City, MO-KS' },
-  { code: '31080', name: 'Los Angeles-Long Beach-Anaheim, CA' },
-  { code: '33100', name: 'Miami-Fort Lauderdale-West Palm Beach, FL' },
+  { code: '31084', name: 'Los Angeles-Long Beach-Glendale, CA (metro division)' },
+  { code: '33124', name: 'Miami-Miami Beach-Kendall, FL (metro division)' },
   { code: '33460', name: 'Minneapolis-St. Paul-Bloomington, MN-WI' },
   { code: '34980', name: 'Nashville-Davidson--Murfreesboro, TN' },
-  { code: '35620', name: 'New York-Newark-Jersey City, NY-NJ-PA' },
+  { code: '35614', name: 'New York-Jersey City-White Plains, NY-NJ (metro division)' },
   { code: '36740', name: 'Orlando-Kissimmee-Sanford, FL' },
-  { code: '37980', name: 'Philadelphia-Camden-Wilmington, PA-NJ-DE-MD' },
+  { code: '37964', name: 'Philadelphia, PA (metro division)' },
   { code: '38060', name: 'Phoenix-Mesa-Scottsdale, AZ' },
   { code: '38900', name: 'Portland-Vancouver-Hillsboro, OR-WA' },
   { code: '40140', name: 'Riverside-San Bernardino-Ontario, CA' },
   { code: '41740', name: 'San Diego-Carlsbad, CA' },
-  { code: '41860', name: 'San Francisco-Oakland-Hayward, CA' },
-  { code: '42660', name: 'Seattle-Tacoma-Bellevue, WA' },
+  { code: '41884', name: 'San Francisco-San Mateo-Redwood City, CA (metro division)' },
+  { code: '42644', name: 'Seattle-Bellevue-Kent, WA (metro division)' },
   { code: '45300', name: 'Tampa-St. Petersburg-Clearwater, FL' },
-  { code: '47900', name: 'Washington-Arlington-Alexandria, DC-VA-MD-WV' },
+  { code: '47894', name: 'Washington-Arlington-Alexandria, DC-VA-MD-WV (metro division)' },
 ];
 
 const state = {

@@ -8,6 +8,7 @@
 // sections with charts + tiles + interpretation, synthesis.
 
 import { renderMethodology } from '/lib/composite-scores.js';
+import { computeInflationScore as shared_computeInflationScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology } from '/lib/composite-scores.js';
 
 const state = {
   series: {},
@@ -305,7 +306,7 @@ function renderStickySection() {
   });
 
   const ls = latestValue(sticky), lf = latestValue(flex), lsh = latestValue(shelter);
-  const pctSticky = percentile(sticky.slice(-360), ls?.value); // 30y context
+  const pctSticky = percentile(sticky.slice(-360), ls?.value); // last 30y of monthly obs
 
   const tiles = [
     {
@@ -476,48 +477,9 @@ function renderWagesSection() {
 // 0 = pure disinflation momentum / transitory; 100 = entrenched inflation.
 // Weighted combination of five signals, each mapped to a 0-100 subscore.
 
+// Single implementation: lib/composite-scores.js (percentile-based, point-in-time).
 function computePersistenceScore() {
-  const signals = [];
-
-  // Sticky CPI (weight 0.30) — primary persistence indicator
-  const ls = latestValue(state.series.CORESTICKM159SFRBATL);
-  if (ls) {
-    const score = Math.min(100, Math.max(0, ((ls.value - 2) / 3) * 100)); // 2% -> 0, 5% -> 100
-    signals.push({ name: 'Sticky-Price Core CPI', score, weight: 0.30, raw: `${fmt(ls.value, 1)}%` });
-  }
-
-  // 5y5y breakeven (weight 0.20) — market view on persistence
-  const lf = latestValue(state.series.T5YIFR);
-  if (lf) {
-    const score = Math.min(100, Math.max(0, ((lf.value - 1.8) / 1.2) * 100)); // 1.8% -> 0, 3.0% -> 100
-    signals.push({ name: '5y5y Forward Breakeven', score, weight: 0.20, raw: `${fmt(lf.value, 2)}%` });
-  }
-
-  // Core CPI 6m annualized momentum (weight 0.20) — is it flowing or stuck?
-  const l6 = latestValue(state.series._core6m || []);
-  if (l6) {
-    const score = Math.min(100, Math.max(0, ((l6.value - 2) / 3) * 100));
-    signals.push({ name: 'Core CPI 6m annualized', score, weight: 0.20, raw: `${fmt(l6.value, 1)}%` });
-  }
-
-  // Wage growth (weight 0.15) — services feeder
-  const lw = latestValue(state.series._wageYoy || []);
-  if (lw) {
-    const score = Math.min(100, Math.max(0, ((lw.value - 3) / 2) * 100)); // 3% -> 0, 5% -> 100
-    signals.push({ name: 'Wage growth (AHE)', score, weight: 0.15, raw: `${fmt(lw.value, 1)}%` });
-  }
-
-  // Shelter CPI (weight 0.15) — largest services category, lags slowly
-  const lsh = latestValue(state.series._shelterYoy || []);
-  if (lsh) {
-    const score = Math.min(100, Math.max(0, ((lsh.value - 3) / 3) * 100)); // 3% -> 0, 6% -> 100
-    signals.push({ name: 'Shelter CPI', score, weight: 0.15, raw: `${fmt(lsh.value, 1)}%` });
-  }
-
-  if (!signals.length) return null;
-  const totalW = signals.reduce((s, n) => s + n.weight, 0);
-  const weighted = signals.reduce((s, n) => s + n.score * n.weight, 0) / totalW;
-  return { score: weighted, signals };
+  return shared_computeInflationScore(state.series);
 }
 
 function renderPersistenceScore() {
@@ -526,12 +488,7 @@ function renderPersistenceScore() {
   if (!tgt || !result) { if (tgt) tgt.innerHTML = ''; return; }
 
   const score = result.score;
-  let phase, color;
-  if (score < 25)      { phase = 'Disinflationary';      color = '#3ecf8e'; }
-  else if (score < 45) { phase = 'Normalizing';          color = '#5a9cff'; }
-  else if (score < 65) { phase = 'Sticky';               color = '#f7a700'; }
-  else if (score < 80) { phase = 'Persistent';           color = '#ef4f5a'; }
-  else                 { phase = 'Accelerating';         color = '#ef4f5a'; }
+  const { label: phase, color } = shared_phaseFor('inflation', score);
 
   const bars = result.signals.map(s => {
     const sevColor = s.score < 33 ? '#3ecf8e' : s.score < 66 ? '#f7a700' : '#ef4f5a';
@@ -553,7 +510,7 @@ function renderPersistenceScore() {
       <div class="cs-signals">
         <div class="cs-signals-title">Component readings</div>
         ${bars}
-        <div class="cs-weights-note">Weights: Sticky 30% · 5y5y fwd 20% · Core 6m 20% · Wages 15% · Shelter 15%.</div>
+        <div class="cs-weights-note">Each signal is scored as its percentile within its own last 20 years (100 = most risk); weights and transforms under "How this score is built".${result.stale && result.stale.length ? " Stale input: " + result.stale.join(", ") + "." : ""}</div>
       </div>
     </div>
   `;

@@ -3,9 +3,9 @@
 // the composite score, three time-series charts, threshold tiles, and a
 // data-driven narrative.
 
-import { computeCreditScore, phaseFor } from '/lib/composite-scores.js';
+import { renderMethodology as shared_renderMethodology, computeCreditScore, phaseFor } from '/lib/composite-scores.js';
 
-const SERIES = ['NFCI', 'ANFCI', 'BAMLH0A0HYM2', 'BAMLC0A0CM', 'T10Y3M', 'DFII10'];
+const SERIES = ['NFCI', 'ANFCI', 'BAMLH0A0HYM2', 'BAMLC0A0CM', 'T10Y3M', 'DFII10', 'BAA10Y', 'AAA10Y'];
 const state = { data: {}, errors: [] };
 
 const el = id => document.getElementById(id);
@@ -65,10 +65,11 @@ function renderScoreHero() {
       <div class="cs-signals">
         <div class="cs-signals-title">Component readings</div>
         ${signalBars}
-        <div class="cs-weights-note">Weights: NFCI 25% · ANFCI 15% · HY OAS 20% · IG OAS 15% · 10Y-3M curve 15% · 10Y real yield 10%.</div>
+        <div class="cs-weights-note">Each signal is scored as its percentile within its own last 20 years (100 = most risk); weights and transforms under "How this score is built".</div>
       </div>
     </div>
   `;
+  shared_renderMethodology(tgt, 'credit');
 }
 
 // ---- chart 1: NFCI overlay ----

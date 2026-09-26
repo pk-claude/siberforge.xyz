@@ -13,6 +13,7 @@
 import {
   buildRegimeMap,
   smoothCurrentRegime,
+  regimeConviction,
   REGIMES,
 } from '/macro/regime/regimes.js';
 import {
@@ -30,11 +31,11 @@ const ALL_SERIES = [
   // Regime
   'CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS',
   // Cycle
-  'RECPROUSM156N', 'UNRATE', 'T10Y3M', 'NFCI', 'BAMLH0A0HYM2',
+  'UNRATE', 'SAHMREALTIME', 'T10Y3M', 'NFCI', 'BAA10Y', 'AAA10Y', 'BAMLH0A0HYM2',
   // Inflation
   'CORESTICKM159SFRBATL', 'T5YIFR', 'CES0500000003', 'CPIHOSSL',
   // Housing
-  'HOSSUPUSM673N', 'PERMIT', 'MORTGAGE30US', 'HOUST1F', 'CSUSHPISA', 'DRSFRMACBS', 'CES2000000001',
+  'HOSSUPUSM673N', 'PERMIT', 'MORTGAGE30US', 'HOUST1F', 'CSUSHPISA', 'DRSFRMACBS', 'USCONS',
   // Consumer
   'PSAVERT', 'DRCCLACBS', 'IC4WSA', 'UMCSENT', 'TDSP',
   // Credit & Liquidity (additions; UNRATE/NFCI/HY OAS/T10Y3M/CES/PAYEMS/IC4WSA already above)
@@ -54,7 +55,7 @@ async function fetchJSON(url) {
 
 async function loadAll() {
   // Batched fetches; partial-failure tolerant.
-  const start = '1990-01-01';
+  const start = '1980-01-01';
   const batches = [];
   for (let i = 0; i < ALL_SERIES.length; i += 6) batches.push(ALL_SERIES.slice(i, i + 6));
   for (const batch of batches) {
@@ -68,20 +69,14 @@ async function loadAll() {
   }
 }
 
-// Find the date that's `monthsBack` months before the latest available date
-// across the full data set. Used as a cutoff for back-cast scores.
+// As-of date `monthsBack` months before today. Composites back-cast
+// point-in-time from it (only prints public by then count), so the deltas
+// measure what a reader would have seen then -- not "the newest date in the
+// data set minus N months", which froze monthly inputs and printed 0pt deltas.
 function cutoffForMonthsBack(monthsBack) {
-  const latestKnown = Object.values(state.data)
-    .map(arr => (arr && arr.length) ? arr[arr.length - 1].date : null)
-    .filter(Boolean)
-    .sort()
-    .pop();
-  if (!latestKnown) return null;
-  const [y, m] = latestKnown.slice(0, 7).split('-').map(Number);
-  const total = y * 12 + (m - 1) - monthsBack;
-  const ny = Math.floor(total / 12);
-  const nm = (total % 12 + 12) % 12 + 1;
-  return `${ny}-${String(nm).padStart(2, '0')}-31`;
+  const d = new Date();
+  d.setUTCMonth(d.getUTCMonth() - monthsBack);
+  return d.toISOString().slice(0, 10);
 }
 
 // Identify outliers — anything currently in 'warn' status. Each outlier
@@ -89,13 +84,10 @@ function cutoffForMonthsBack(monthsBack) {
 // straight to the chart/context for that metric.
 function findOutliers() {
   const flags = [];
-  // Sahm
-  const unrate = state.data.UNRATE || [];
-  if (unrate.length >= 3) {
-    const recent3 = unrate.slice(-3);
-    const ma3 = recent3.reduce((s, o) => s + o.value, 0) / 3;
-    const min12 = Math.min(...unrate.slice(-12).map(o => o.value));
-    const sahm = ma3 - min12;
+  // Sahm (FRED real-time series: the official construction)
+  const sahmS = state.data.SAHMREALTIME || [];
+  if (sahmS.length) {
+    const sahm = sahmS[sahmS.length - 1].value;
     if (sahm >= 0.5) flags.push({ metric: 'SAHM', kind: 'warn', text: `Sahm Rule TRIGGERED (${sahm.toFixed(2)}pp)`, link: '/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
     else if (sahm >= 0.4) flags.push({ metric: 'SAHM', kind: 'caution', text: `Sahm Rule near trigger (${sahm.toFixed(2)}pp; needs 0.50pp)`, link: '/macro/cycle/#cycle-recession', linkLabel: 'see cycle dashboard' });
   }
@@ -175,85 +167,24 @@ function zPhrase(z) {
   return `well ${dir} 10-yr norm`;
 }
 
-// Curated tilt picks per regime, matched to the EMPIRICAL regime-conditional
-// returns table (Positioning section). Source-of-truth alignment is critical
-// — earlier versions of this code derived tilt from the cycle composite SCORE
-// which doesn't always match the regime CLASSIFIER (e.g. early-Disinflation
-// looks like "expansion" by cycle score but is actually recession-middle by
-// growth/inflation z's). Curated lookup keeps the V3 chips consistent with
-// the Positioning detail below it.
-const REGIME_TILT = {
-  goldilocks: {
-    action: 'Add risk',
-    overweights:  'XLK tech, XLY discretionary, XLC communications',
-    underweights: 'XLP staples, XLU utilities, XLE energy',
-  },
-  reflation: {
-    action: 'Real-asset bias',
-    overweights:  'XLE energy, XLB materials, XLF financials',
-    underweights: 'XLK tech, XLU utilities, XLP staples',
-  },
-  stagflation: {
-    action: 'Defensive + commodities',
-    overweights:  'XLE energy, XLP staples, XLV healthcare',
-    underweights: 'XLK tech, XLY discretionary, XLC communications',
-  },
-  disinflation: {
-    action: 'Position for recovery',
-    overweights:  'XLB materials, XLY discretionary, XLF financials',
-    underweights: 'XLK tech, XLU utilities, XLP staples',
-  },
-};
-
+// Tilt chips mirror the Positioning section exactly: a sector appears only if
+// its 6-month excess return vs SPY in this regime clears |t| >= 2 (Newey-West).
+// There is no static fallback list any more: a curated list that disagrees with
+// the data was worse than saying nothing.
 function buildTilt(regimeKey) {
-  // Sync with empirical positioning picks from dashboard.js
-  const sample = window.__SF_STATE?.positioningSample || 'full';
-  const table = sample === 'post2022' ? window.__SF_STATE?.regimeTablePost2022 : window.__SF_STATE?.regimeTable;
-  const minN = sample === 'post2022' ? 6 : 24;
-
-  if (!table || !regimeKey) {
-    // Fallback to static map if dashboard hasn't loaded
-    return REGIME_TILT[regimeKey] || { action: 'Stay neutral', overweights: '', underweights: '' };
-  }
-
-  // Replicate positioning logic: filter by minN, sort by mean, top 3 / bottom 3
-  const allSyms = window.__SF_STATE?.regimeSymbols?.filter(s => s !== 'SPY') || [];
-  const cells = allSyms
-    .map(s => ({ s, c: table[s]?.[regimeKey]?.[6] }))
-    .filter(o => o.c && o.c.n >= minN)
-    .sort((a, b) => b.c.mean - a.c.mean);
-
-  if (cells.length < 6) {
-    // Not enough picks
-    return REGIME_TILT[regimeKey] || { action: 'Stay neutral', overweights: '', underweights: '' };
-  }
-
-  const top = cells.slice(0, 3);
-  const bottom = cells.slice(-3).reverse();
-
-  // Map symbols to sector labels
-  const getSectorLabel = (sym) => {
-    // Import SECTOR_PROFILES lazily or assume it's available globally
-    const profiles = window.__SF_STATE?.SECTOR_PROFILES || {};
-    const profile = profiles[sym];
-    return profile?.label || sym;
-  };
-
-  const overweights = top.map(t => `${t.s} ${getSectorLabel(t.s)}`).join(', ');
-  const underweights = bottom.map(t => `${t.s} ${getSectorLabel(t.s)}`).join(', ');
-
-  // Use static action string for this regime
-  const actions = {
-    goldilocks: 'Add risk',
-    reflation: 'Real-asset bias',
-    stagflation: 'Defensive + commodities',
-    disinflation: 'Position for recovery',
-  };
-
+  const st = window.__SF_STATE;
+  const sample = st?.positioningSample || 'full';
+  const table = sample === 'post2022' ? st?.excessPost2022 : st?.excess;
+  if (!table || !regimeKey) return { action: 'Loading base rates…', overweights: '', underweights: '' };
+  const rows = Object.entries(table).map(([s, r]) => ({ s, c: r?.[regimeKey] })).filter(o => o.c && o.c.n >= 12);
+  const lab = s => st?.SECTOR_PROFILES?.[s]?.label || s;
+  const over  = rows.filter(o => o.c.mean > 0 && o.c.t >= 2).sort((a, b) => b.c.mean - a.c.mean);
+  const under = rows.filter(o => o.c.mean < 0 && o.c.t <= -2).sort((a, b) => a.c.mean - b.c.mean);
+  if (!over.length && !under.length) return { action: 'No statistically supported sector tilt', overweights: '', underweights: '' };
   return {
-    action: actions[regimeKey] || 'Stay neutral',
-    overweights,
-    underweights,
+    action: 'Historical tilt (|t| &ge; 2)',
+    overweights: over.map(o => `${o.s} ${lab(o.s)}`).join(', '),
+    underweights: under.map(o => `${o.s} ${lab(o.s)}`).join(', '),
   };
 }
 
@@ -537,14 +468,6 @@ function renderRose(scoresNow, scores12m) {
   `;
 }
 
-function regimeConviction(growthZ, inflationZ) {
-  if (!Number.isFinite(growthZ) || !Number.isFinite(inflationZ)) return null;
-  const dist = Math.sqrt(growthZ * growthZ + inflationZ * inflationZ);
-  if (dist < 0.5) return { label: 'LOW',    color: '#ef4f5a', desc: 'Near regime boundary — high flip risk.' };
-  if (dist < 1.0) return { label: 'MEDIUM', color: '#f7a700', desc: 'Solid regime read; watch for shifts.' };
-  return                { label: 'HIGH',   color: '#3ecf8e', desc: 'Deep in regime; high conviction.' };
-}
-
 export async function renderTodayRead() {
   const tgt = el('today-read');
   if (!tgt) return;
@@ -566,7 +489,7 @@ export async function renderTodayRead() {
 
   const regimeLabel = smoothed ? REGIMES[smoothed.regime].label : 'Unclassified';
   const regimeColor = smoothed ? REGIMES[smoothed.regime].color : '#8a94a3';
-  const conviction = currentInfo ? regimeConviction(currentInfo.growthZ, currentInfo.inflationZ) : null;
+  const conviction = regimeConviction(currentInfo, smoothed);
 
   // Composite scores: now + 1m ago + 3m ago + 12m ago. Six composites.
   const scoresNow = {

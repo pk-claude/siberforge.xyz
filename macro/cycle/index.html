@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Siberforge &mdash; Cycle Position</title>
 <link rel="stylesheet" href="/lib/tokens.css" />
@@ -47,10 +48,11 @@
   <div class="cycle-section-head">
     <h2>1. Leading recession signals</h2>
     <p class="cycle-section-sub">
-      Twelve-month-ahead recession odds from the NY Fed's yield-curve model. The Sahm Rule triggers in
-      real time once the 3-month jobless-rate moving average rises 0.5pp above its trailing 12-month
-      low. Historically: Sahm has flagged every post-1970 US recession without a false positive prior
-      to 2024.
+      Twelve-month-ahead recession odds from a term-spread probit (the NY Fed's yield-curve model, recomputed
+      here from the 10Y&ndash;3M spread), with the Chauvet-Piger coincident probability for context. The Sahm
+      Rule triggers once the 3-month average jobless rate rises 0.5pp above its low of the prior 12 months.
+      Both have a recent false alarm: the curve model read above 50% through 2023 and Sahm triggered in
+      July 2024, and no recession followed.
     </p>
   </div>
   <div class="cycle-chart-row">
@@ -114,7 +116,7 @@
 </section>
 
 <footer>
-  <span>Data: FRED (USREC, NFCI, ANFCI, RECPROUSM156N, yield spreads, credit OAS). Pink bands on time-series = NBER recessions.</span>
+  <span>Data: FRED (USREC, T10Y3M, SAHMREALTIME, RECPROUSM156N, NFCI, ANFCI, BAA10Y, ICE BofA OAS). Pink bands on time-series = NBER recessions.</span>
   <span id="last-updated"></span>
 </footer>
 

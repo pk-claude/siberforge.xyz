@@ -5,7 +5,7 @@ import { guard } from './_guard.js';
 
 const FRED_BASE = 'https://api.stlouisfed.org/fred/series/observations';
 
-const CATALOG = {
+export const CATALOG = {
   // ====================== MACRO DASHBOARD (/macro/regime/) ======================
   CPIAUCSL:  { label: 'CPI (Headline)',          freq: 'monthly',   unit: 'index',   transform: 'yoy_pct' },
   DFF:       { label: 'Fed Funds Rate',          freq: 'daily',     unit: 'percent', transform: 'level' },
@@ -27,7 +27,6 @@ const CATALOG = {
   NFCI:          { label: 'Chicago Fed NFCI',              freq: 'weekly',  unit: 'index',   transform: 'level', group: 'cycle' },
   ANFCI:         { label: 'Adjusted NFCI',                 freq: 'weekly',  unit: 'index',   transform: 'level', group: 'cycle' },
   BAMLC0A0CM:    { label: 'IG Credit Spread (OAS)',        freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
-  DFII2:         { label: '2Y TIPS Real Yield',            freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
   DFII10:        { label: '10Y TIPS Real Yield',           freq: 'daily',   unit: 'percent', transform: 'level', group: 'cycle' },
   RECPROUSM156N: { label: 'Smoothed Recession Probability',freq: 'monthly', unit: 'percent', transform: 'level', group: 'cycle' },
 
@@ -61,7 +60,7 @@ const CATALOG = {
   MEHOINUSA672N: { label: 'Real Median Family Income',      freq: 'annual',    unit: 'usd',     transform: 'level',   group: 'housing' },
   MORTGAGE15US:  { label: '15Y Fixed Mortgage Rate',        freq: 'weekly',    unit: 'percent', transform: 'level',   group: 'housing' },
   PRRESCONS:     { label: 'Private Residential Construction Spending', freq: 'monthly', unit: 'mm_usd', transform: 'yoy_pct', group: 'housing' },
-  CES2000000001: { label: 'Construction Employment',        freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
+  USCONS: { label: 'Construction Employment',        freq: 'monthly',   unit: 'count',   transform: 'yoy_pct', group: 'housing' },
   RHVRUSQ156N:   { label: 'Rental Vacancy Rate',            freq: 'quarterly', unit: 'percent', transform: 'level',   group: 'housing' },
   MSPNHSUS:      { label: 'Median Sales Price of New Houses', freq: 'quarterly', unit: 'usd',     transform: 'level',   group: 'housing' },
   ASPNHSUS:      { label: 'Avg Sales Price of New Houses',   freq: 'quarterly', unit: 'usd',     transform: 'level',   group: 'housing' },
@@ -162,6 +161,51 @@ const CATALOG = {
   DTB3:          { label: '3-Month Treasury Bill',         freq: 'daily',   unit: 'percent', transform: 'level', group: 'bonds' },
   DTMSAMFRBDAL:      { label: 'Dallas Fed Mfg Delivery Time',     freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
   WPU0911:           { label: 'PPI: Wood Pulp',                   freq: 'monthly', unit: 'index',   transform: 'level',   group: 'supply' },
+  // ====== 2026-09 revamp: policy, liquidity/fiscal, global/FX/commodities, analytics ======
+  DFEDTARU: { label: 'Fed Funds Target Upper', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DFEDTARL: { label: 'Fed Funds Target Lower', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  SOFR: { label: 'SOFR', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS1MO: { label: '1M Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS3MO: { label: '3M Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS6MO: { label: '6M Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS1: { label: '1Y Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS3: { label: '3Y Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS7: { label: '7Y Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  DGS20: { label: '20Y Treasury Yield', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  THREEFYTP10: { label: '10Y Term Premium (Kim-Wright)', freq: 'daily', unit: 'percent', transform: 'level', group: 'policy' },
+  FEDTARMD: { label: 'FOMC SEP Median Fed Funds', freq: 'annual', unit: 'percent', transform: 'level', group: 'policy' },
+  FEDTARMDLR: { label: 'FOMC SEP Median Longer-Run Fed Funds', freq: 'annual', unit: 'percent', transform: 'level', group: 'policy' },
+  PCEPI: { label: 'PCE Price Index', freq: 'monthly', unit: 'index', transform: 'yoy_pct', group: 'policy' },
+  WRESBAL: { label: 'Reserve Balances at Fed', freq: 'weekly', unit: 'bn_usd', transform: 'level', group: 'liquidity' },
+  MTSDS133FMS: { label: 'Federal Surplus/Deficit (monthly)', freq: 'monthly', unit: 'mm_usd', transform: 'level', group: 'liquidity' },
+  FYFSGDA188S: { label: 'Federal Surplus/Deficit % GDP', freq: 'annual', unit: 'percent', transform: 'level', group: 'liquidity' },
+  FYOIGDA188S: { label: 'Federal Interest Outlays % GDP', freq: 'annual', unit: 'percent', transform: 'level', group: 'liquidity' },
+  A091RC1Q027SBEA: { label: 'Federal Interest Payments (SAAR)', freq: 'quarterly', unit: 'bn_usd', transform: 'level', group: 'liquidity' },
+  GFDEGDQ188S: { label: 'Federal Debt % GDP', freq: 'quarterly', unit: 'percent', transform: 'level', group: 'liquidity' },
+  GDP: { label: 'Nominal GDP', freq: 'quarterly', unit: 'bn_usd', transform: 'level', group: 'liquidity' },
+  FGRECPT: { label: 'Federal Current Receipts (SAAR)', freq: 'quarterly', unit: 'bn_usd', transform: 'level', group: 'liquidity' },
+  DEXUSEU: { label: 'USD per EUR', freq: 'daily', unit: 'fx', transform: 'level', group: 'global' },
+  DEXJPUS: { label: 'JPY per USD', freq: 'daily', unit: 'fx', transform: 'level', group: 'global' },
+  DEXCHUS: { label: 'CNY per USD', freq: 'daily', unit: 'fx', transform: 'level', group: 'global' },
+  DEXUSUK: { label: 'USD per GBP', freq: 'daily', unit: 'fx', transform: 'level', group: 'global' },
+  DEXMXUS: { label: 'MXN per USD', freq: 'daily', unit: 'fx', transform: 'level', group: 'global' },
+  DEXCAUS: { label: 'CAD per USD', freq: 'daily', unit: 'fx', transform: 'level', group: 'global' },
+  ECBDFR: { label: 'ECB Deposit Facility Rate', freq: 'daily', unit: 'percent', transform: 'level', group: 'global' },
+  IRLTLT01DEM156N: { label: 'Germany 10Y Yield', freq: 'monthly', unit: 'percent', transform: 'level', group: 'global' },
+  IRLTLT01JPM156N: { label: 'Japan 10Y Yield', freq: 'monthly', unit: 'percent', transform: 'level', group: 'global' },
+  IRLTLT01GBM156N: { label: 'UK 10Y Yield', freq: 'monthly', unit: 'percent', transform: 'level', group: 'global' },
+  DCOILBRENTEU: { label: 'Brent Crude Spot', freq: 'daily', unit: 'usd', transform: 'level', group: 'global' },
+  DHHNGSP: { label: 'Henry Hub Natural Gas Spot', freq: 'daily', unit: 'usd', transform: 'level', group: 'global' },
+  PCOPPUSDM: { label: 'Global Copper Price', freq: 'monthly', unit: 'usd', transform: 'level', group: 'global' },
+  SAHMREALTIME: { label: 'Sahm Rule (real-time)', freq: 'monthly', unit: 'percent', transform: 'level', group: 'cycle' },
+  BAA10Y: { label: 'Baa Corporate - 10Y Treasury Spread', freq: 'daily', unit: 'percent', transform: 'level', group: 'cycle' },
+  AAA10Y: { label: 'Aaa Corporate - 10Y Treasury Spread', freq: 'daily', unit: 'percent', transform: 'level', group: 'cycle' },
+  CFNAI: { label: 'Chicago Fed National Activity Index', freq: 'monthly', unit: 'index', transform: 'level', group: 'cycle' },
+  CFNAIMA3: { label: 'CFNAI 3-Month Average', freq: 'monthly', unit: 'index', transform: 'level', group: 'cycle' },
+  NFCIRISK: { label: 'NFCI Risk Subindex', freq: 'weekly', unit: 'index', transform: 'level', group: 'cycle' },
+  NFCICREDIT: { label: 'NFCI Credit Subindex', freq: 'weekly', unit: 'index', transform: 'level', group: 'cycle' },
+  NFCILEVERAGE: { label: 'NFCI Leverage Subindex', freq: 'weekly', unit: 'index', transform: 'level', group: 'cycle' },
+  POPTHM: { label: 'US Population', freq: 'monthly', unit: 'count', transform: 'level', group: 'geography' },
 };
 
 // Sleep helper for retry backoff.
@@ -185,7 +229,10 @@ async function fetchSeries(id, key, start, opts = {}) {
 
   for (let attempt = 0; attempt <= RETRY_DELAYS.length; attempt++) {
     try {
-      const res = await fetch(url.toString());
+      const res = await fetch(url.toString(), {
+        headers: { 'User-Agent': 'siberforge.xyz/1.0 (+https://www.siberforge.xyz)', 'Accept': 'application/json' },
+        signal: AbortSignal.timeout(4000),
+      });
       if (res.ok) {
         const json = await res.json();
         const observations = (json.observations || [])
@@ -197,11 +244,14 @@ async function fetchSeries(id, key, start, opts = {}) {
       // Non-OK response. Read body for debug; decide if we should retry.
       const text = await res.text();
       const transient = res.status >= 500 || res.status === 429;
-      lastErr = new Error(`FRED ${id} ${res.status}: ${text.slice(0, 200)}`);
+      lastErr = new Error(`FRED ${id} ${res.status}: ${text.slice(0, 120).replace(/api_key=[^&\s"]+/gi, 'api_key=REDACTED')}`);
+      lastErr.status = res.status;
       if (!transient || attempt === RETRY_DELAYS.length) throw lastErr;
       await sleep(RETRY_DELAYS[attempt]);
     } catch (err) {
       // Network/connection error — also transient; retry until we exhaust.
+      // A 4xx thrown above (block, bad id) is final: rethrow immediately.
+      if (err && err.status && err.status < 500 && err.status !== 429) throw err;
       lastErr = err instanceof Error ? err : new Error(String(err));
       if (attempt === RETRY_DELAYS.length) throw lastErr;
       await sleep(RETRY_DELAYS[attempt]);
@@ -235,7 +285,10 @@ export default async function handler(req, res) {
   const unknown = ids.filter(id => !CATALOG[id] && !STATE_RE.test(id) && !MSA_RE.test(id) && !CPI_RE.test(id));
   if (unknown.length) return res.status(400).json({ error: `unknown series: ${unknown.join(',')}` });
 
+  if (ids.length > 40) return res.status(400).json({ error: 'at most 40 series per request' });
+
   const start = req.query.start || '2010-01-01';
+  if (!validDate(start)) return res.status(400).json({ error: 'start must be YYYY-MM-DD' });
   const opts = {};
   if (req.query.realtime_start) {
     if (!validDate(req.query.realtime_start)) return res.status(400).json({ error: 'realtime_start must be YYYY-MM-DD' });
@@ -247,7 +300,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    const settled = await Promise.allSettled(ids.map(id => fetchSeries(id, key, start, opts)));
+    // At most 4 upstream calls in flight, and stop calling FRED at all once it
+    // answers 403: that is an IP-level block, and hammering it prolongs it.
+    let blocked = false;
+    const settled = new Array(ids.length);
+    let next = 0;
+    await Promise.all(Array.from({ length: Math.min(4, ids.length) }, async () => {
+      while (next < ids.length) {
+        const i = next++;
+        if (blocked) { settled[i] = { status: 'rejected', reason: new Error(`FRED ${ids[i]} skipped: upstream blocked (403)`) }; continue; }
+        try { settled[i] = { status: 'fulfilled', value: await fetchSeries(ids[i], key, start, opts) }; }
+        catch (e) { if (e && e.status === 403) blocked = true; settled[i] = { status: 'rejected', reason: e }; }
+      }
+    }));
     const series = [];
     const errors = [];
     settled.forEach((r, i) => {
@@ -255,9 +320,14 @@ export default async function handler(req, res) {
       else errors.push({ id: ids[i], error: String(r.reason?.message || r.reason) });
     });
     if (series.length === 0 && errors.length > 0) {
+      res.setHeader('Cache-Control', 'no-store');
       return res.status(502).json({ error: 'all series failed', errors });
     }
-    res.setHeader('Cache-Control', 'public, s-maxage=21600, stale-while-revalidate=86400');
+    // Only a complete answer earns the long edge cache; a partial one would
+    // pin the missing series as missing for hours.
+    res.setHeader('Cache-Control', errors.length
+      ? 'public, s-maxage=60, stale-while-revalidate=300'
+      : 'public, s-maxage=21600, stale-while-revalidate=86400');
     return res.status(200).json({ series, errors });
   } catch (err) {
     return res.status(502).json({ error: String(err.message || err) });

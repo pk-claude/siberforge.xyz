@@ -7,9 +7,10 @@
 // top aggregates the individual signals into a single 0-100 risk gauge.
 
 // ---------- state ----------
-import { renderMethodology } from '/lib/composite-scores.js';
+import { renderMethodology, computeCycleScore as sharedCycleScore, termSpreadProbit, phaseFor } from '/lib/composite-scores.js';
 
 const state = {
+  raw: {},
   series: {},          // id -> raw observations [{date, value}, ...]
   recessionRanges: [], // [{start, end}, ...] derived from USREC
 };
@@ -109,15 +110,15 @@ async function loadSeries() {
   // doesn't blow up the whole page load, and (b) we stay well within Vercel
   // serverless cold-start timeout budget per call.
   const batches = [
-    ['RECPROUSM156N', 'UNRATE', 'T10Y3M', 'T10Y2Y'],  // Sections 1-2
-    ['NFCI', 'ANFCI', 'DFII2'],                        // Section 3
-    ['BAMLH0A0HYM2', 'BAMLC0A0CM'],                    // Section 4
+    ['RECPROUSM156N', 'UNRATE', 'T10Y3M', 'T10Y2Y', 'SAHMREALTIME', 'IC4WSA'],  // Sections 1-2
+    ['NFCI', 'ANFCI', 'DFII5'],                        // Section 3
+    ['BAMLH0A0HYM2', 'BAMLC0A0CM', 'BAA10Y'],          // Section 4
   ];
   const allErrors = [];
   for (const batch of batches) {
     try {
       const j = await fetchJSON(`/api/fred?series=${batch.join(',')}&start=${start}`);
-      for (const s of j.series) state.series[s.id] = s.observations;
+      for (const s of j.series) { state.series[s.id] = s.observations; state.raw[s.id] = s.observations; }
       if (j.errors && j.errors.length) allErrors.push(...j.errors);
     } catch (err) {
       console.warn(`Batch ${batch.join(',')} failed entirely:`, err);
@@ -216,49 +217,54 @@ function renderTiles(containerId, tiles) {
 // ---------- section 1: recession signals ----------
 
 function renderRecessionSection() {
-  const recProb = state.series.RECPROUSM156N || [];
-  const sahm    = state.series.SAHM || [];
+  // 12m-ahead probability from the NY Fed-style term-spread probit, computed
+  // here from the monthly-average 10Y-3M spread. FRED's RECPROUSM156N is a
+  // different model (Chauvet-Piger, coincident, revised after the fact) and is
+  // shown only as a second line for context.
+  const probit = termSpreadProbit(state.raw.T10Y3M || []);
+  const cp     = state.raw.RECPROUSM156N || [];
+  const sahm   = (state.raw.SAHMREALTIME && state.raw.SAHMREALTIME.length) ? state.raw.SAHMREALTIME : (state.series.SAHM || []);
 
-  // Chart: NY Fed recession prob with 30% threshold line.
   timeSeriesChart(el('chart-recprob'), [{
-    label: 'NY Fed 12m recession probability (%)',
-    data: recProb.map(o => ({ x: o.date, y: o.value })),
+    label: 'Term-spread probit: P(recession within 12m) (%)',
+    data: probit.map(o => ({ x: o.date, y: o.value })),
     borderColor: '#ef4f5a',
     backgroundColor: 'rgba(239, 79, 90, 0.12)',
-    borderWidth: 1.8,
-    fill: true,
-    pointRadius: 0,
-    tension: 0.1,
+    borderWidth: 1.8, fill: true, pointRadius: 0, tension: 0.1,
+  }, {
+    label: 'Chauvet-Piger: P(in recession now) (%)',
+    data: cp.map(o => ({ x: o.date, y: o.value })),
+    borderColor: 'rgba(138,148,163,0.9)', borderWidth: 1.2, borderDash: [4, 3],
+    fill: false, pointRadius: 0, tension: 0.1,
   }], {
     yTitle: 'probability (%)',
     yMin: 0, yMax: 100,
     extraPlugins: [thresholdLinePlugin([
-      { value: 30, label: '30% — historical danger zone', color: 'rgba(247, 167, 0, 0.7)' },
+      { value: 30, label: '30%', color: 'rgba(247, 167, 0, 0.7)' },
     ])],
   });
 
-  // Tiles.
-  const latestProb = latestValue(recProb);
+  const latestProb = latestValue(probit);
   const latestSahm = latestValue(sahm);
   const sahmTriggered = latestSahm && latestSahm.value >= 0.5;
   const tiles = [
     {
       metric: 'RECPROB',
-      label: 'NY Fed recession prob',
-      value: latestProb ? `${latestProb.value.toFixed(1)}%` : '—',
-      meta: latestProb ? `as of ${latestProb.date.slice(0, 7)}` : '',
-      threshold: '&gt; 30% historically precedes recession within 12mo',
+      label: 'Term-spread probit (12m ahead)',
+      value: latestProb ? `${latestProb.value.toFixed(0)}%` : '—',
+      meta: latestProb ? `${latestProb.date.slice(0, 7)} avg spread` : '',
+      threshold: 'Above ~30% preceded every recession since 1968, but also flagged 2022-24 with no recession',
       status: latestProb ? (latestProb.value > 30 ? 'warn' : latestProb.value > 20 ? 'caution' : 'ok') : '',
-      help: 'Derived from 10Y-3M spread via the Estrella-Mishkin model.',
+      help: 'P = Phi(-0.533 - 0.633 x monthly-average 10Y-3M spread), Estrella-Trubin coefficients.',
     },
     {
       metric: 'SAHM',
-      label: 'Sahm Rule',
+      label: 'Sahm Rule (real-time)',
       value: sahmTriggered ? 'TRIGGERED' : 'Untriggered',
-      meta: latestSahm ? `reading: ${latestSahm.value.toFixed(2)}pp (0.5pp = trigger)` : '',
-      threshold: '&ge; 0.50pp = recession underway (0 false positives pre-2024)',
+      meta: latestSahm ? `reading: ${latestSahm.value.toFixed(2)}pp (0.50pp = trigger)` : '',
+      threshold: '&ge; 0.50pp: coincident signal; triggered in Jul-2024 without a recession',
       status: sahmTriggered ? 'warn' : (latestSahm?.value >= 0.3 ? 'caution' : 'ok'),
-      help: '3-mo avg unemployment rate minus its trailing 12-mo low.',
+      help: '3-month average unemployment rate minus its low over the prior 12 months (FRED SAHMREALTIME).',
     },
   ];
   renderTiles('tiles-recession', tiles);
@@ -272,12 +278,12 @@ function renderRecessionNote(recProb, sahm) {
   const prob = recProb.value;
   const tone = prob > 30 || triggered ? 'cycle-note-warn' : prob > 20 || sahm.value >= 0.3 ? 'cycle-note-caution' : 'cycle-note-ok';
   let msg = `<strong>Current read:</strong> `;
-  if (triggered) msg += `Sahm Rule is triggered (${sahm.value.toFixed(2)}pp) — this historically marks a recession <em>already underway</em>, not a forecast. `;
-  else if (sahm.value >= 0.3) msg += `Sahm Rule at ${sahm.value.toFixed(2)}pp — within 0.2pp of triggering. Labor-market deterioration is accelerating. `;
-  else msg += `Sahm Rule inactive (${sahm.value.toFixed(2)}pp, needs 0.50pp to trigger). Labor market remains tight. `;
-  if (prob > 30) msg += `NY Fed model places 12m recession probability at ${prob.toFixed(0)}% — above the historical danger threshold. `;
-  else if (prob > 20) msg += `NY Fed probability at ${prob.toFixed(0)}% — elevated but not yet at the 30% threshold. `;
-  else msg += `NY Fed probability at ${prob.toFixed(0)}% — benign. `;
+  if (triggered) msg += `Sahm Rule is triggered (${sahm.value.toFixed(2)}pp). It is a coincident indicator: historically it confirms a recession already underway rather than forecasting one, and it misfired in 2024. `;
+  else if (sahm.value >= 0.3) msg += `Sahm Rule at ${sahm.value.toFixed(2)}pp, within 0.2pp of triggering. `;
+  else msg += `Sahm Rule inactive (${sahm.value.toFixed(2)}pp; trigger is 0.50pp). `;
+  if (prob > 30) msg += `The curve-based model puts 12-month recession odds at ${prob.toFixed(0)}%, above the 30% line. The same model read 60-70% through 2023 with no recession, so treat it as one input. `;
+  else if (prob > 20) msg += `Curve-based 12-month recession odds ${prob.toFixed(0)}%: elevated, below 30%. `;
+  else msg += `Curve-based 12-month recession odds ${prob.toFixed(0)}%: low. `;
   return `<span class="${tone}">${msg}</span>`;
 }
 
@@ -368,7 +374,7 @@ function renderCurveSection() {
 function renderConditionsSection() {
   const nfci  = state.series.NFCI  || [];
   const anfci = state.series.ANFCI || [];
-  const dfii2 = state.series.DFII2 || [];
+  const dfii2 = state.series.DFII5 || [];
 
   timeSeriesChart(el('chart-nfci'), [
     {
@@ -423,7 +429,7 @@ function renderConditionsSection() {
       status: latestA ? (latestA.value > 0.25 ? 'warn' : latestA.value > 0 ? 'caution' : 'ok') : '',
     },
     {
-      label: '2Y real yield (DFII2)',
+      label: '5Y real yield (DFII5)',
       value: latest2y ? `${latest2y.value >= 0 ? '+' : ''}${latest2y.value.toFixed(2)}%` : '—',
       meta: 'proxy for monetary tightness',
       threshold: '&gt; 2% = historically restrictive',
@@ -454,8 +460,21 @@ function renderConditionsSection() {
 function renderCreditSection() {
   const hy = state.series.BAMLH0A0HYM2 || [];
   const ig = state.series.BAMLC0A0CM   || [];
+  // ICE BofA OAS on FRED now covers only the last ~3 years (licensing), so
+  // percentiles on them describe 3 years, not a cycle. Moody's Baa-10Y
+  // (1986+) carries the long history.
+  const baa = (state.raw.BAA10Y || []).map(o => ({ date: o.date, value: o.value * 100 }));
 
   timeSeriesChart(el('chart-credit'), [
+    {
+      label: 'Baa - 10Y spread (bps, long history)',
+      data: baa.filter((o, i) => i % 5 === 0 || i === baa.length - 1).map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#f7a700',
+      borderWidth: 1.4,
+      pointRadius: 0,
+      fill: false,
+      tension: 0.1,
+    },
     {
       label: 'HY OAS (bps)',
       data: hy.map(o => ({ x: o.date, y: o.value })),
@@ -496,7 +515,7 @@ function renderCreditSection() {
       metric: 'HY_OAS',
       label: 'HY OAS',
       value: latestHy ? `${latestHy.value.toFixed(0)}bp` : '—',
-      meta: pctHy != null ? `${pctHy}th %ile post-1996` : '',
+      meta: pctHy != null && hy.length ? `${pctHy}th %ile since ${hy[0].date.slice(0, 7)} only` : '',
       threshold: '&lt;300 complacent · 400–600 normal · &gt;800 stress',
       status: latestHy ? (latestHy.value > 800 ? 'warn' : latestHy.value > 500 ? 'caution' : 'ok') : '',
     },
@@ -504,9 +523,17 @@ function renderCreditSection() {
       metric: 'IG_OAS',
       label: 'IG OAS',
       value: latestIg ? `${latestIg.value.toFixed(0)}bp` : '—',
-      meta: pctIg != null ? `${pctIg}th %ile post-1996` : '',
+      meta: pctIg != null && ig.length ? `${pctIg}th %ile since ${ig[0].date.slice(0, 7)} only` : '',
       threshold: '&gt;200bp = IG stress',
       status: latestIg ? (latestIg.value > 200 ? 'warn' : latestIg.value > 150 ? 'caution' : 'ok') : '',
+    },
+    {
+      metric: 'BAA10Y',
+      label: 'Baa - 10Y spread',
+      value: baa.length ? `${baa[baa.length - 1].value.toFixed(0)}bp` : '—',
+      meta: baa.length ? `${percentile(baa, baa[baa.length - 1].value)}th %ile since ${baa[0].date.slice(0, 4)}` : '',
+      threshold: 'Long-history credit gauge; above ~300bp has marked stress',
+      status: baa.length ? (baa[baa.length - 1].value > 300 ? 'warn' : baa[baa.length - 1].value > 230 ? 'caution' : 'ok') : '',
     },
     {
       metric: 'HY_IG_RATIO',
@@ -544,50 +571,11 @@ function renderCreditSection() {
 // score. Simple weighted sum; each signal contributes a 0-100 sub-score based
 // on its current value vs. historical thresholds.
 
+// One implementation for the whole site: lib/composite-scores.js. It takes
+// raw FRED units (percent), so it reads state.raw, not the bps-converted
+// display series.
 function computeCycleScore() {
-  const signals = [];
-
-  // 1. NY Fed recession probability (0-100 direct, weight 0.25)
-  const p = latestValue(state.series.RECPROUSM156N);
-  if (p) signals.push({ name: 'NY Fed rec. prob', score: Math.min(100, p.value * 1.5), weight: 0.25, raw: `${p.value.toFixed(0)}%` });
-
-  // 2. Sahm Rule (binary-ish, weight 0.25)
-  const s = latestValue(state.series.SAHM);
-  if (s) {
-    // 0 at 0pp, 50 at 0.25pp, 100 at 0.5pp+
-    const score = Math.min(100, Math.max(0, (s.value / 0.5) * 100));
-    signals.push({ name: 'Sahm Rule', score, weight: 0.25, raw: `${s.value.toFixed(2)}pp` });
-  }
-
-  // 3. 10Y-3M curve (weight 0.15) — more negative = higher score
-  const c = latestValue(state.series.T10Y3M);
-  if (c) {
-    // +200bp = 0; 0bp = 50; -200bp = 100
-    const score = Math.min(100, Math.max(0, 50 - (c.value / 4)));
-    signals.push({ name: '10Y-3M curve', score, weight: 0.15, raw: `${c.value >= 0 ? '+' : ''}${c.value.toFixed(0)}bp` });
-  }
-
-  // 4. NFCI (weight 0.15) — tighter = higher score
-  const nfci = latestValue(state.series.NFCI);
-  if (nfci) {
-    // -1 = 0; 0 = 50; +1 = 100
-    const score = Math.min(100, Math.max(0, 50 + (nfci.value * 50)));
-    signals.push({ name: 'NFCI', score, weight: 0.15, raw: nfci.value.toFixed(2) });
-  }
-
-  // 5. HY OAS (weight 0.20) — wider = higher score
-  const hy = latestValue(state.series.BAMLH0A0HYM2);
-  if (hy) {
-    // 200bp = 0; 600bp = 50; 1200bp = 100
-    const score = Math.min(100, Math.max(0, ((hy.value - 200) / 1000) * 100));
-    signals.push({ name: 'HY OAS', score, weight: 0.20, raw: `${hy.value.toFixed(0)}bp` });
-  }
-
-  // Weighted average
-  if (!signals.length) return null;
-  const totalW = signals.reduce((sum, s) => sum + s.weight, 0);
-  const weighted = signals.reduce((sum, s) => sum + s.score * s.weight, 0) / totalW;
-  return { score: weighted, signals };
+  return sharedCycleScore(state.raw);
 }
 
 function renderCycleScore() {
@@ -596,12 +584,7 @@ function renderCycleScore() {
   if (!tgt || !result) return;
 
   const score = result.score;
-  let phase, color;
-  if (score < 25)      { phase = 'Early/Mid Expansion'; color = '#3ecf8e'; }
-  else if (score < 45) { phase = 'Late Expansion';       color = '#5a9cff'; }
-  else if (score < 65) { phase = 'Slowdown';             color = '#f7a700'; }
-  else if (score < 80) { phase = 'Contraction Risk';     color = '#ef4f5a'; }
-  else                 { phase = 'Contraction Underway'; color = '#ef4f5a'; }
+  const { label: phase, color } = phaseFor('cycle', score);
 
   const signalBars = result.signals.map(s => {
     const sevColor = s.score < 33 ? '#3ecf8e' : s.score < 66 ? '#f7a700' : '#ef4f5a';
@@ -618,16 +601,14 @@ function renderCycleScore() {
         <div class="cs-score-label">CYCLE RISK SCORE</div>
         <div class="cs-score-value">${score.toFixed(0)}<span class="cs-score-scale">/100</span></div>
         <div class="cs-score-phase" style="color:${color}">${phase}</div>
-        <div class="cs-score-desc">Composite of 5 leading signals; 0 = fully expansionary, 100 = contraction confirmed.</div>
+        <div class="cs-score-desc">Weighted percentile of 5 signals vs their own last 20 years. 80 = riskier than 80% of that history.${result.stale.length ? ' Stale input: ' + result.stale.join(', ') + '.' : ''}</div>
       </div>
       <div class="cs-signals">
         <div class="cs-signals-title">Component readings</div>
         ${signalBars}
-        <div class="cs-weights-note">Weights: NY Fed prob 25% · Sahm 25% · HY OAS 20% · Curve 15% · NFCI 15%.<br>
-          This is a weighted continuous score. The
-          <a href="/macro/recession/">5-signal recession model</a> counts
-          binary triggers instead and can read differently; near a threshold, a
-          signal contributes here and not there.</div>
+        <div class="cs-weights-note">Weights: term-spread probit 25% · Sahm (real-time) 25% · Baa spread 20% · NFCI 15% · claims 15%.<br>
+          A continuous score. The <a href="/macro/recession/">recession signals page</a>
+          counts threshold triggers and shows each one's historical hit rate; the two can read differently near a threshold.</div>
       </div>
     </div>
   `;

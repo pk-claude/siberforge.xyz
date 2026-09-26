@@ -285,7 +285,7 @@
     "LOCAL_TRUCK_EMP": {
       "ok": false,
       "lastFetchAt": "2026-04-26T01:52:44.023Z",
-      "error": "https://api.stlouisfed.org/fred/series/observations?series_id=CES4848400001&api_key=c001f54a8e9016c8d86fd167a8b80fc1&file_type=json&observation_start=2010-01-01 400: {\"error_code\":400,\"error_message\":\"Bad Request.  The series does not exist.\"}"
+      "error": "https://api.stlouisfed.org/fred/series/observations?series_id=CES4848400001&api_key=REDACTED&file_type=json&observation_start=2010-01-01 400: {\"error_code\":400,\"error_message\":\"Bad Request.  The series does not exist.\"}"
     },
     "ECOM_SHARE": {
       "ok": true,
@@ -350,7 +350,7 @@
     "AIR_FREIGHT": {
       "ok": false,
       "lastFetchAt": "2026-04-26T01:52:44.072Z",
-      "error": "https://api.stlouisfed.org/fred/series/observations?series_id=IPN21311N&api_key=c001f54a8e9016c8d86fd167a8b80fc1&file_type=json&observation_start=2010-01-01 400: {\"error_code\":400,\"error_message\":\"Bad Request.  The series does not exist.\"}"
+      "error": "https://api.stlouisfed.org/fred/series/observations?series_id=IPN21311N&api_key=REDACTED&file_type=json&observation_start=2010-01-01 400: {\"error_code\":400,\"error_message\":\"Bad Request.  The series does not exist.\"}"
     },
     "ELEC_INDUSTRIAL": {
       "ok": true,

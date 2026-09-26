@@ -25,6 +25,13 @@ export function dailyToMonthEnd(closes) {
   return m;
 }
 
+export function prevMonth(ym) {
+  let [y, m] = ym.split('-').map(Number);
+  m -= 1; if (m === 0) { m = 12; y -= 1; }
+  return `${y}-${String(m).padStart(2, '0')}`;
+}
+const monthIndex = ym => { const [y, m] = ym.split('-').map(Number); return y * 12 + m - 1; };
+
 // Quantile of a sorted array via linear interpolation between observations.
 // q in [0, 1].
 function quantile(sorted, q) {
@@ -52,7 +59,9 @@ export function regimeForwardReturns(monthEndCloses, regimeMap, horizons = [1, 3
   for (let i = 0; i < months.length; i++) {
     const ym = months[i];
     if (since && ym < since.slice(0, 7)) continue;
-    const info = regimeMap.get(ym);
+    // Point-in-time: at the close of month m the latest classifiable month is
+    // m-1 (CPI, IP, retail sales and payrolls for m are published during m+1).
+    const info = regimeMap.get(prevMonth(ym));
     if (!info) continue;
     const startVal = monthEndCloses.get(ym).value;
     if (!Number.isFinite(startVal) || startVal <= 0) continue;
@@ -105,4 +114,46 @@ export function buildRegimeReturnsTable(stockHistoryMap, regimeMap, horizons = [
     result[symbol] = regimeForwardReturns(monthEnds, regimeMap, horizons, { since });
   }
   return result;
+}
+
+// Excess forward return of `sym` over SPY, conditional on regime, on MATCHED
+// months only (both series must exist at start and end), with a Newey-West
+// t-statistic. Overlapping h-month windows sampled monthly are serially
+// correlated to lag h-1, so the naive n overstates the evidence roughly h-fold;
+// NW with lag h-1 corrects the standard error.
+//
+// Returns { regime: { mean, n, t, se, first } }.
+export function regimeExcessStats(symCloses, spyCloses, regimeMap, h = 6, { since = null } = {}) {
+  const a = dailyToMonthEnd(symCloses), b = dailyToMonthEnd(spyCloses);
+  const months = [...a.keys()].filter(k => b.has(k)).sort();
+  const byRegime = {};
+  for (let i = 0; i + h < months.length; i++) {
+    const ym = months[i];
+    if (since && ym < since.slice(0, 7)) continue;
+    const end = months[i + h];
+    if (monthIndex(end) - monthIndex(ym) !== h) continue; // gap in data
+    const info = regimeMap.get(prevMonth(ym));
+    if (!info) continue;
+    const ra = a.get(end).value / a.get(ym).value - 1;
+    const rb = b.get(end).value / b.get(ym).value - 1;
+    if (!Number.isFinite(ra) || !Number.isFinite(rb)) continue;
+    (byRegime[info.regime] ||= []).push({ k: monthIndex(ym), e: (ra - rb) * 100, ym });
+  }
+  const out = {};
+  for (const [r, xs] of Object.entries(byRegime)) {
+    const n = xs.length;
+    const mean = xs.reduce((s, x) => s + x.e, 0) / n;
+    let v = xs.reduce((s, x) => s + (x.e - mean) ** 2, 0) / n;
+    const L = h - 1;
+    for (let lag = 1; lag <= L; lag++) {
+      let g = 0;
+      for (let i = 0; i < n; i++) for (let j = i + 1; j < n && xs[j].k - xs[i].k <= lag; j++) {
+        if (xs[j].k - xs[i].k === lag) g += (xs[i].e - mean) * (xs[j].e - mean);
+      }
+      v += 2 * (1 - lag / (L + 1)) * (g / n);
+    }
+    const se = Math.sqrt(Math.max(v, 1e-12) / n);
+    out[r] = { mean, n, se, t: mean / se, first: xs[0].ym };
+  }
+  return out;
 }
