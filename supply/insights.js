@@ -39,16 +39,20 @@ export function getCalendar() { return CALENDAR; }
 
 export function renderCalendarStrip(host, opts = {}) {
   if (!CALENDAR || !host) return;
-  const list = opts.category
+  // The calendar is built by the weekly pipeline; filter against TODAY so
+  // releases that already happened drop off between refreshes.
+  const today = new Date().toISOString().slice(0, 10);
+  const horizon = new Date(Date.now() + 14 * 864e5).toISOString().slice(0, 10);
+  const list = (opts.category
     ? (CALENDAR.windows.byCategory?.[opts.category] || [])
-    : (CALENDAR.windows.next14 || []);
+    : (CALENDAR.windows.next14 || [])).filter(e => e.date >= today && e.date <= horizon);
   if (list.length === 0) return;
 
   const wrap = document.createElement('div');
   wrap.className = 'cal-strip';
   const head = document.createElement('div');
   head.className = 'cal-strip-head';
-  head.innerHTML = `<span class="cal-strip-title">📅 NEXT 14 DAYS</span><span class="cal-strip-count">${list.length} releases</span>`;
+  head.innerHTML = `<span class="cal-strip-title">Next 14 days</span><span class="cal-strip-count">${list.length} releases</span>`;
   wrap.appendChild(head);
 
   const cards = document.createElement('div');
