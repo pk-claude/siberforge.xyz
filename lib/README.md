@@ -12,7 +12,9 @@ Modules consumed by every macro/deep-dive page. Keep these dependency-free
 | `csv-export.js`         | ES module    | `downloadCSV`, `downloadJSON`, `seriesToCSV`, `tableToCSV` |
 | `download-button.js`    | classic JS   | Universal click handler for every page's "Download data" button |
 | `fred-client.js`        | ES module    | FRED API client with the catalog passthrough |
-| `landing-hub.js`        | classic JS   | Renders the landing top bar, Themes grid and "Every view." tree from `nav-config.js` |
+| `sf-kit.js`             | ES module    | Data (snapshot + prices), series math, tiles and Chart.js helpers for template pages |
+| `fred-snapshot.js`      | classic JS   | First script on every page: serves /api/fred from data/fred/ snapshots |
+| `page.css`              | CSS          | Standard page template: page head, dials, tables, methodology block |
 | `layout.css`            | CSS          | Header, two-tier nav, tab menus, breadcrumbs, search overlay, hub child lists |
 | `layout.js`             | classic JS   | Injects the shared chrome on every dashboard page: header, nav, breadcrumbs, global search |
 | `nav-config.js`         | classic JS   | **Single source of truth for navigation.** Sections, pages, landing hub, flat search index |
@@ -32,10 +34,10 @@ the landing page top bar, the landing Themes grid, the landing hub tree, the A-Z
 index at `/tools/a-z/`, and `sitemap.xml`. Nothing else defines structure. If a page is
 not in `nav-config.js`, it does not exist as far as the site is concerned.
 
-The six sections are fixed: **Markets, Macro, Regional, AI, Supply Chain,
-Tools & Data**. Section *ids* are frozen (`equity`, `tools`) even where the label
-has moved on, because renaming an id means touching `data-section` on every page
-in that section.
+The six sections are **Macro, Markets, Regional, Supply Chain, Research,
+Tools & Data** (ids `macro`, `markets`, `regional`, `supply`, `research`, `tools`).
+Sub-trees use `data-sub-section`: `research:single` (companies, rendered as a
+picker), `research:plug`, `research:ai`.
 
 ### Adding a page
 

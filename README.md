@@ -1,146 +1,71 @@
 # Siberforge
 
-Landing page + project hub. The root `index.html` is a directory of Siberforge projects; each project lives under `core/` and is linked from the hub.
+Independent US macro, markets and supply-chain dashboards at https://www.siberforge.xyz.
+Static HTML/JS (no build step) on Vercel, a few serverless proxies in `api/`, and
+scheduled GitHub Actions that snapshot data into the repo.
 
-Currently shipped:
+## Site map (six sections)
 
-- **Economic Indicators** (`/macro/indicators/`) — 22-indicator overview of US growth, inflation, consumer/labor, and housing. Latest print, YoY/MoM change, 5yr sparkline, and historical-percentile context strip per card. Pulls from FRED.
-- **Macro & Markets Dashboard** (`/macro/regime/`) — economic indicators tracker with S&P 500 / sector ETF correlation. Static front-end + Vercel serverless functions that proxy FRED and Finnhub with server-side keys.
+| Section | URL | What it answers |
+|---|---|---|
+| Macro | `/macro/` | State of the Cycle (front door), This Week, Regime & base rates, Labor, Consumer, Housing, Inflation, All indicators, Policy & Rates, Liquidity & Fiscal, Credit, Cycle & Recession, Recession signals |
+| Markets | `/markets/` | US equities & sectors (breadth, vol), Rates & credit, Global FX & commodities, Valuation (P/E) |
+| Regional | `/regional/` | Geography, CPI dispersion, affordability, build vs buy, channel mix, climate, demographics, migration |
+| Supply Chain | `/supply/` | SC Pressure composite, insights, DC, industrial RE, middle/last mile, international, downloads |
+| Research | `/research/` | Dated notes: 38 company deep dives (`/research/<ticker>/`), Plug Power (`/research/plug/`), AI beneficiaries (`/research/ai/`) |
+| Tools & Data | `/tools/` | Pair explorer, compare, correlation network, regime backtest, ticker lookup, data catalog, A-Z |
 
-## Architecture
+`lib/nav-config.js` is the single source of truth for navigation, search, the landing
+section grid, the A-Z index and `sitemap.xml`. Old `/core/...` URLs 301 to the new ones
+(`vercel.json`).
+
+## Layout
 
 ```
-siberforge/
-├── index.html              # landing-page hub (links to projects under /tools/a-z/)
-├── README.md
-├── package.json
-├── vercel.json
-├── .gitignore
-├── api/                    # serverless functions (required at root by Vercel)
-│   ├── fred.js             # /api/fred    -- FRED proxy (6h edge cache)
-│   └── stocks.js           # /api/stocks  -- Finnhub proxy (60s quote, 24h history)
-└── core/
-    ├── econ/               # Economic Indicators overview (22 FRED series)
-    │   ├── index.html      # overview UI (served at /macro/indicators/)
-    │   ├── dashboard.js    # controller: batch-fetch, transform, render
-    │   ├── indicators.js   # indicator registry (FRED IDs, transforms, categories, context)
-    │   ├── sparklines.js   # reusable SVG sparkline + percentile-strip renderers
-    │   └── styles.css      # local styles (category accents, dense card grid)
-    ├── macro/              # Macro & Markets Dashboard
-    │   ├── index.html      # dashboard UI (served at /macro/regime/)
-    │   ├── dashboard.js    # client controller (ES module)
-    │   └── styles.css      # dark theme
-    └── lib/
-        └── analytics.js    # correlation, regression, z-score, alignment
+index.html, home.css      landing page
+lib/                      shared: layout (chrome), nav-config, tokens, page.css (page template),
+                          sf-kit.js (data + chart helpers), fred-snapshot.js (data shim),
+                          composite-scores.js (all composite scores), freshness, chart theme
+macro/ markets/ regional/ supply/ research/ tools/    one folder per section
+data/fred/                FRED snapshot (generated; do not hand-edit)
+api/                      Vercel functions: fred, stocks, releases, bls, eia, edgar (+ _guard)
+scripts/                  refresh/snapshot pipelines, audits, tests
 ```
 
-**Why `api/` sits at the repo root.** Vercel's serverless-function file-based routing only discovers functions under `api/` at the project root — the `functions` key in `vercel.json` configures already-discovered functions but can't relocate them. So `api/` is a platform-imposed exception to the "everything under `core/`" rule. Everything else that isn't a Vercel-handled root file lives under `core/`.
+## Data backbone
 
-**Why a proxy layer?** So API keys stay server-side and cache headers throttle upstream requests. Clients hit `/api/*`; Vercel's CDN caches responses; Finnhub/FRED see one request per TTL, not one per viewer.
+- **FRED**: `scripts/snapshot-fred.mjs` pulls every series in the `api/fred.js` CATALOG
+  plus `scripts/fred-universe.json` (state, metro and regional-CPI families) into
+  `data/fred/<ID>.json` (daily series split into `.hist.json` + current year) and
+  `data/fred/manifest.json`. Runs twice each weekday and Sunday (`snapshot-fred.yml`).
+  `lib/fred-snapshot.js` is the first script on every page: it serves `/api/fred?...`
+  requests from the snapshot and only calls the live proxy for series the snapshot lacks.
+  Reason: FRED's CDN blocks Vercel's shared IPs at times (seen 2026-09-26).
+- **Market prices**: `/api/stocks?mode=history` (Yahoo daily closes, 24h edge cache).
+- **Supply chain, P/E, single names**: their own weekly/daily workflows commit JSON under
+  `supply/data`, `markets/valuation/data`, `research/data`.
+- All data workflows share the concurrency group `data-commits` and `git pull --rebase`
+  before pushing. Failures open a GitHub issue.
 
-## Adding a new project
+## Analytics conventions
 
-1. Create a new subfolder under `core/` (e.g. `core/fx/`).
-2. Add an `index.html` (+ any project-specific `.js` / `.css`) inside it. It will be served at `/core/fx/`.
-3. Shared libraries go in `core/lib/`; new serverless endpoints go in `api/` at the repo root (Vercel requires functions there — see routing note above).
-4. Add a `<a class="card" href="/core/fx/">` to the root `index.html` so it shows up on the hub.
+- Composite scores (`lib/composite-scores.js`): each signal = percentile of its own trailing
+  20 years, sign-aligned so 100 = most risk; weighted mean; point-in-time (an observation
+  counts only after its typical release lag). One implementation used by every page.
+- Regime: robust z (median/MAD, 120 months) of 6m-annualized growth and core inflation;
+  regimes are paired with returns one month later (publication lag).
+- Sector tilts are shown only when the 6m excess return vs SPY clears |t| >= 2 (Newey-West).
+- Recession page reports each signal's hit rate and false alarms, computed on load.
 
-## Data sources
+## Local check before pushing
 
-**FRED (St. Louis Fed)** — free, unlimited with a key. Indicators wired in (series ID → label):
+```
+npm ci
+npm run check        # nav audit, link check, test suite
+```
 
-| Group        | ID         | Indicator                    | Freq      | Transform |
-|--------------|------------|------------------------------|-----------|-----------|
-| Core macro   | CPIAUCSL   | CPI (headline)               | monthly   | YoY %     |
-| Core macro   | DFF        | Fed Funds Rate               | daily     | level     |
-| Core macro   | UNRATE     | Unemployment Rate            | monthly   | level     |
-| Core macro   | GDPC1      | Real GDP                     | quarterly | YoY %     |
-| Core macro   | DGS10      | 10Y Treasury Yield           | daily     | level     |
-| Leading      | INDPRO     | Industrial Production        | monthly   | YoY %     |
-| Leading      | ICSA       | Initial Jobless Claims       | weekly    | level     |
-| Leading      | UMCSENT    | Consumer Sentiment (UMich)   | monthly   | level     |
-| Leading      | PERMIT     | Building Permits             | monthly   | YoY %     |
-| Leading      | RSAFS      | Retail Sales                 | monthly   | YoY %     |
-| Liquidity    | M2SL       | M2 Money Supply              | monthly   | YoY %     |
-| Liquidity    | WALCL      | Fed Balance Sheet            | weekly    | level     |
-| Liquidity    | RRPONTSYD  | Reverse Repo (overnight)     | daily     | level     |
-| Liquidity    | WTREGEN    | Treasury General Account     | weekly    | level     |
+## Secrets
 
-Caveats: ISM/PMI is **not** on FRED (license pulled 2021) — `INDPRO` is substituted as a cyclical proxy. Swap in a PMI feed later if you pay for one.
-
-**Finnhub** — free tier = 60 req/min. Used for **live quotes only** (`/quote`). SPY proxies the S&P 500 because `^GSPC` isn't on the free tier. Sector universe: XLK, XLF, XLE, XLV, XLI, XLY, XLP, XLU, XLB, XLRE, XLC.
-
-**Yahoo Finance v8 chart endpoint** — used for **historical daily closes** (adjusted close, so dividends + splits are included in returns). Keyless, unofficial, but stable for years. Reason: Finnhub moved `/stock/candle` behind a ~$49/mo paywall in 2024, so the free tier has no history. If Yahoo ever breaks, swap to Stooq (also keyless) or Alpha Vantage (25 req/day free, which is enough given 24h edge caching). Yahoo also exposes `^VIX`, `^VIX3M`, `DX-Y.NYB`, etc. keyless via the same endpoint — useful for the planned conditions/internals expansions.
-
-## Local setup
-
-1. `npm install -g vercel` (if you don't have it)
-2. `cd siberforge && vercel login`
-3. Create a `.env.local` with:
-   ```
-   FRED_API_KEY=your_fred_key
-   FINNHUB_API_KEY=your_finnhub_key
-   ```
-4. `vercel dev` — runs at http://localhost:3000
-
-## Deployment
-
-### One-time setup
-
-1. **Get API keys**
-   - FRED: https://fredaccount.stlouisfed.org/apikeys (instant)
-   - Finnhub: https://finnhub.io/register (free tier, instant)
-
-2. **Commit and push this folder to the siberforge GitHub repo.**
-   ```bash
-   cd siberforge
-   git init                   # if not already a repo
-   git add .
-   git commit -m "Initial macro/markets dashboard"
-   git remote add origin git@github.com:<your-user>/siberforge.git
-   git push -u origin main
-   ```
-
-3. **Connect repo to Vercel** (Vercel dashboard → Add New Project → Import from GitHub → siberforge). Framework preset: **Other** (it's a static site). Root directory: the `siberforge/` folder if that's not the repo root, otherwise leave blank.
-
-4. **Add env vars in Vercel** (Project → Settings → Environment Variables). Scope each to **Production, Preview, Development**:
-   - `FRED_API_KEY` = your FRED key
-   - `FINNHUB_API_KEY` = your Finnhub key
-
-5. **Bind the siberforge.com domain** (Project → Settings → Domains → Add). Vercel will give you DNS records to set at Porkbun:
-   - For apex (`siberforge.com`): an A record pointing to `76.76.21.21`
-   - For `www`: a CNAME pointing to `cname.vercel-dns.com`
-   (Exact values are shown in the Vercel UI — always trust those over what's documented.)
-
-### Ongoing
-
-`git push` → Vercel auto-deploys. Preview deploys per branch, production on `main`.
-
-## Refresh behavior
-
-- **Quotes (SPY + sector ETFs):** client polls `/api/stocks?mode=quote` every 60s. Vercel caches for 60s so real upstream calls are ~1/min regardless of traffic.
-- **Daily history:** fetched once per session; CDN caches for 24h. The regime-returns section pulls 30y of history (max), the rolling/scatter tabs pull whatever the user-selected window asks for (default 5y).
-- **FRED series:** fetched on selection change; CDN caches for 6h. FRED releases are monthly/quarterly anyway — more frequent polling buys nothing. The regime classifier fetches 40y of CPILFESL/INDPRO/PAYEMS/RRSFS once at page load.
-
-## What the tabs do
-
-1. **Rolling correlation** — Pearson r between the (transformed) indicator and SPY daily log returns, computed over a sliding window. Shows regime shifts. A window crossing zero means the macro-market relationship flipped sign.
-2. **Scatter + regression** — Indicator values on x, daily return (%) on y, with OLS fit line. Reports β, α, R², n. R² will be low — that's expected for daily-frequency macro factor models.
-3. **Time-series overlay** — Both series standardized (z-score) and plotted together. Divergences = macro and price telling different stories.
-
-Below the tabs: a **regime-conditional sector returns** table. Each historical month is classified into one of four growth × inflation regimes (Goldilocks / Reflation / Stagflation / Disinflation), and the table shows the average forward total return for SPY and each sector ETF given that regime, at +1m / +3m / +6m horizons. The current regime is read off the most recent month and highlighted. Cells dim by sample size (n<24 fade, n<12 grey out). Methodology lives in `core/macro/regimes.js` (composite growth z = INDPRO + payrolls + real retail sales, all 6m annualized; inflation z = Core CPI 6m annualized; trailing 120-month z-window).
-
-## Not wired (could add later)
-
-- Lead/lag analysis (shift indicators forward N days to find predictive windows)
-- Regime-dependent correlation on the rolling/scatter tabs (color points by the same 4-regime classification used below)
-- Financial conditions panel (NFCI, ANFCI, HY OAS) as a leading-indicator layer between regime and returns
-- Equity Risk Premium time series (earnings yield − 10Y real)
-- CSV export per chart
-- Authentication (the dashboard is public by default; add Vercel password protection if you don't want it indexed)
-
-## Rate limit math
-
-- **Finnhub (quotes):** free = 60/min. Per user visit: 12 quote requests on load, then 12/min after. Vercel edge caching collapses that to **12 upstream requests per 60s total across all users**. At the 60/min limit that's 5× headroom.
-- **Yahoo (history):** no documented rate limit for this endpoint. 24h edge cache means ~12 upstream calls per day regardless of traffic.
-- **FRED:** no hard limit documented. 6h edge cache.
+Vercel env and GitHub Actions secrets: `FRED_API_KEY`, `FINNHUB_API_KEY`, `EIA_API_KEY`,
+`BLS_API_KEY`, `CENSUS_API_KEY`. Never print request URLs with keys; `scripts/lib/http.mjs`
+redacts them.
