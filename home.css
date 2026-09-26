@@ -43,3 +43,8 @@
 :root[data-skin="editorial"] .home-sub { margin-left: auto; margin-right: auto; }
 :root[data-skin="editorial"] .home-cta { justify-content: center; }
 :root[data-skin="editorial"] .home-card { border-radius: 0; }
+@media (max-width: 800px) {
+  :root[data-skin="editorial"] .home-hero { padding: 28px 16px 16px; }
+  :root[data-skin="editorial"] .home-hero h1 { font-size: 30px; letter-spacing: -0.6px; }
+  :root[data-skin="editorial"] .home-eyes { width: 130px; }
+}

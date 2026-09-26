@@ -754,3 +754,8 @@ footer {
 
 /* Mobile: wide financial tables scroll inside their card instead of widening the page. */
 @media (max-width: 800px) { table.data { display: block; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; } }
+@media (max-width: 800px) { main { padding: 20px 16px 32px; } main p, main li, main .card { overflow-wrap: anywhere; } .grid { grid-template-columns: 1fr !important; } }
+/* Hidden glossary tooltips must not take layout space (they widened the page on phones). */
+.term::after, .term::before { display: none; }
+.term:hover::after, .term:hover::before, .term:focus::after, .term:focus::before { display: block; }
+@media (max-width: 800px) { .term::after { max-width: 80vw; } }
