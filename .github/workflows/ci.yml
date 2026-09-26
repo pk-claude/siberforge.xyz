@@ -24,13 +24,13 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Syntax-check every JS/MJS file
         run: |
           set -e
           fail=0
-          files=$(find api core scripts -name '*.js' -o -name '*.mjs' | grep -v node_modules)
+          files=$(find api lib macro markets regional research supply tools scripts \( -name '*.js' -o -name '*.mjs' \) | grep -v node_modules)
           for f in $files; do
             if ! node --check "$f" 2>/tmp/err; then
               echo "::error file=$f::$(head -3 /tmp/err | tr '\n' ' ')"
@@ -40,6 +40,12 @@ jobs:
           echo "checked $(echo "$files" | wc -l) files"
           exit $fail
 
+      - name: No mojibake (double-encoded UTF-8)
+        run: |
+          if grep -rlE $'\xc3\xa2\xe2\x82\xac|\xc3\xa2\xe2\x80\xa0' --include=*.js --include=*.html --include=*.css --include=*.mjs . --exclude-dir=node_modules --exclude-dir=.git; then
+            echo "::error::Double-encoded UTF-8 found in the files above (save as UTF-8, not cp1252)"; exit 1; fi
+          echo "clean"
+
       - name: Validate JSON config
         run: |
           set -e
@@ -48,7 +54,7 @@ jobs:
           done
 
       - name: Install dev deps (jsdom, for the DOM tests)
-        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Nav + sitemap audit
         run: node scripts/audit-nav.mjs

@@ -50,7 +50,7 @@ run('see-also: 3 cards',     () => { const s = d.querySelector('.sf-seealso'); i
 run('see-also -> regional-cpi', () => { const h = [...d.querySelectorAll('.sf-seealso-card')].map(a => a.getAttribute('href')); if (!h.includes('/regional/regional-cpi/')) throw new Error(h.join(',')); });
 
 console.log('breadcrumb: /research/plug/ (was a duplicate crumb)');
-const w2 = await boot('data-section="equity" data-sub-section="plug" data-page="plug-overview"');
+const w2 = await boot('data-section="research" data-sub-section="plug" data-page="plug-overview"');
 run('no duplicate crumb', () => {
   const crumbs = [...w2.document.querySelectorAll('.sf-crumb')].map(c => c.textContent);
   console.log('       trail:', crumbs.join(' > '));
@@ -58,7 +58,7 @@ run('no duplicate crumb', () => {
 });
 
 console.log('leaf with no curated related entries');
-const w3 = await boot('data-section="equity" data-sub-section="plug" data-page="plug-map"');
+const w3 = await boot('data-section="research" data-sub-section="plug" data-page="plug-map"');
 run('no empty see-also block', () => { if (w3.document.querySelector('.sf-seealso')) throw new Error('rendered empty block'); });
 
 console.log('freshness.js');

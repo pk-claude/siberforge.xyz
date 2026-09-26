@@ -9,6 +9,11 @@ permissions:
   contents: write
   issues: write
 
+# Data jobs all commit to main; run them one at a time so they never race.
+concurrency:
+  group: data-commits
+  cancel-in-progress: false
+
 jobs:
   refresh:
     runs-on: ubuntu-latest
@@ -20,10 +25,10 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22'
 
       - name: Install deps
-        run: npm ci --no-audit --no-fund || npm install --no-audit --no-fund
+        run: npm ci --no-audit --no-fund
 
       - name: Refresh single-name data
         run: node scripts/refresh-single-name.mjs
@@ -37,6 +42,7 @@ jobs:
             echo "No changes."
           else
             git commit -m "data: weekly single-name refresh $(date -u +%F)"
+            git pull --rebase origin main
             git push
           fi
 

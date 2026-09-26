@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://www.siberforge.xyz/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/a-z/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/consumer/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/credit/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/cycle/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/housing/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/indicators/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/inflation/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/labor/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/liquidity/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/policy/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/recession/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/regime/</loc></url>
+  <url><loc>https://www.siberforge.xyz/macro/this-week/</loc></url>
+  <url><loc>https://www.siberforge.xyz/markets/</loc></url>
+  <url><loc>https://www.siberforge.xyz/markets/bonds/</loc></url>
+  <url><loc>https://www.siberforge.xyz/markets/global/</loc></url>
+  <url><loc>https://www.siberforge.xyz/markets/valuation/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/affordability/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/build-buy/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/channel-mix/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/climate-risk/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/demographics/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/geography/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/migration/</loc></url>
+  <url><loc>https://www.siberforge.xyz/regional/regional-cpi/</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/aapl/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/ai/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/ai/adopters/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/ai/compute/</loc></url>
@@ -9,42 +36,6 @@
   <url><loc>https://www.siberforge.xyz/research/ai/power/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/ai/screen/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/ai/top-5/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/data/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/indicators/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/compare/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/recession/</loc></url>
-  <url><loc>https://www.siberforge.xyz/markets/valuation/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/regime/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/backtest/</loc></url>
-  <url><loc>https://www.siberforge.xyz/markets/bonds/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/credit/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/cycle/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/geography/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/housing/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/inflation/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/labor/</loc></url>
-  <url><loc>https://www.siberforge.xyz/markets/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/network/</loc></url>
-  <url><loc>https://www.siberforge.xyz/macro/consumer/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/affordability/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/build-buy/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/channel-mix/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/climate-risk/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/demographics/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/migration/</loc></url>
-  <url><loc>https://www.siberforge.xyz/regional/regional-cpi/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/pairs/</loc></url>
-  <url><loc>https://www.siberforge.xyz/tools/ticker/</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/balance.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/cashflow.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/liquidity.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/map.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/pnl.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/plug/revenue.html</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/</loc></url>
-  <url><loc>https://www.siberforge.xyz/research/aapl/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/amat/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/amd/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/amzn/</loc></url>
@@ -69,6 +60,13 @@
   <url><loc>https://www.siberforge.xyz/research/nvda/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/orcl/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/pltr/</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/balance.html</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/cashflow.html</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/liquidity.html</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/map.html</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/pnl.html</loc></url>
+  <url><loc>https://www.siberforge.xyz/research/plug/revenue.html</loc></url>
   <url><loc>https://www.siberforge.xyz/research/qbts/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/qs/</loc></url>
   <url><loc>https://www.siberforge.xyz/research/rgti/</loc></url>
@@ -90,4 +88,11 @@
   <url><loc>https://www.siberforge.xyz/supply/last-mile/</loc></url>
   <url><loc>https://www.siberforge.xyz/supply/middle-mile/</loc></url>
   <url><loc>https://www.siberforge.xyz/tools/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/a-z/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/backtest/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/compare/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/data/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/network/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/pairs/</loc></url>
+  <url><loc>https://www.siberforge.xyz/tools/ticker/</loc></url>
 </urlset>
