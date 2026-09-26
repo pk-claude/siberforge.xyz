@@ -493,7 +493,7 @@ async function loadPair(aId, bId) {
 
   rerender();
   updateShareLink();
-  setStatus('live', 'Live');
+  setStatus('live', 'Data loaded');
 }
 
 function rerender() {

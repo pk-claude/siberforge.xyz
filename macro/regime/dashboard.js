@@ -645,7 +645,7 @@ async function renderRegimeReturns() {
 
   if (charts.regression) await rerenderActive();
 
-  setStatus('live', 'Live — prices refresh every 60s');
+  setStatus('live', 'Snapshot data');
 }
 
 // ---------- regime trajectory chart (radial nautilus) ----------
@@ -1449,7 +1449,7 @@ async function rerenderActive() {
   renderOverlay(macro, closes);
 
   if (el('last-updated')) el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-  setStatus('live', 'Live — prices refresh every 60s');
+  setStatus('live', 'Snapshot data');
 }
 
 function wireControls() {
