@@ -7,6 +7,11 @@
   },
   "redirects": [
     {
+      "source": "/core/",
+      "destination": "/tools/a-z/",
+      "permanent": true
+    },
+    {
       "source": "/core/equity",
       "destination": "/markets/valuation/",
       "permanent": true
@@ -97,11 +102,6 @@
       "permanent": true
     },
     {
-      "source": "/core/",
-      "destination": "/tools/a-z/",
-      "permanent": true
-    },
-    {
       "source": "/core/macro/index.html",
       "destination": "/macro/regime/",
       "permanent": true
@@ -114,6 +114,11 @@
     {
       "source": "/core/single-name/index.html",
       "destination": "/research/",
+      "permanent": true
+    },
+    {
+      "source": "/core/:path*/",
+      "destination": "/core/:path*",
       "permanent": true
     },
     {
