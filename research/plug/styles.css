@@ -751,3 +751,6 @@ footer {
 @media (max-width: 700px) {
   body { overflow-x: hidden; }
 }
+
+/* Mobile: wide financial tables scroll inside their card instead of widening the page. */
+@media (max-width: 800px) { table.data { display: block; overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; } }

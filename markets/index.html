@@ -44,16 +44,27 @@
 <script defer src="/lib/chart-theme.js"></script>
 <link rel="stylesheet" href="/lib/tokens.css" />
 <link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/page.css" />
 <script src="/lib/theme-toggle.js"></script>
 <script src="/lib/nav-config.js"></script>
 <script defer src="/lib/layout.js"></script>
 </head>
 <body data-section="markets" data-page="markets" data-page-hub="true" data-page-sub="Markets" data-page-status-text="Initializing…">
 
-<div class="markets-banner-head">
-  <div>
-    <h1>Markets</h1></div>
-</div>
+<header class="sf-page-head">
+  <div class="sf-eyebrow">Markets &middot; US equities &amp; sectors</div>
+  <h1>US equities: trend, breadth and leadership</h1>
+  <p class="sf-dek" id="mk-verdict">Reading the data&hellip;</p>
+  <div class="sf-meta">Prices: Yahoo Finance daily adjusted closes (total return); intraday quotes: Finnhub. Volatility: CBOE VIX via FRED. Macro context: <a href="/macro/">State of the Cycle</a>.</div>
+</header>
+<section class="cycle-section">
+  <div class="cycle-chart-row sf-split">
+    <div class="sf-card sf-table-wrap"><h3>Sector scoreboard</h3><table class="sf-table" id="mk-sectors"></table></div>
+    <div class="cycle-tiles" id="mk-breadth"></div>
+  </div>
+</section>
+<div class="section-head" style="padding:0 24px"><h2 style="font-size:15px">Single-ticker detail &middot; click any tile</h2></div>
 
 <!-- Banner: live quotes strip. Same DOM hook as the Regime page so the quotes
      module from dashboard.js can populate it identically. -->
@@ -113,19 +124,20 @@
       <p class="t-holdings-note" id="t-holdings-note"></p>
     </div>
     <div class="ticker-news">
-      <h2>News &amp; Drivers <span class="t-as-of" id="t-news-asof"></span></h2>
-      <div id="t-news-list"></div>
+      <h2>Relative strength vs SPY <span class="t-as-of">1 year, rebased</span></h2>
+      <div class="cycle-chart-wrap" style="height:320px"><canvas id="mk-rel"></canvas></div>
     </div>
   </section>
 </div>
 
 <footer>
-  <span>Quotes via Finnhub. Daily history via Yahoo Finance (adjusted close). News via Finnhub /company-news.</span>
+  <span>Quotes via Finnhub. Daily history via Yahoo Finance (adjusted close). Not investment advice.</span>
   <span id="last-updated"></span>
 </footer>
 
 <script type="module" src="/markets/markets.js"></script>
 <script src="/lib/ui.js"></script>
 <script src="/lib/chart-range.js"></script>
+<script type="module" src="/markets/breadth.js"></script>
 </body>
 </html>

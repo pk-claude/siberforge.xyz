@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/supply/styles.css">
 <link rel="stylesheet" href="/lib/tokens.css" />
 <link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
 <script src="/lib/theme-toggle.js"></script>
 <script src="/lib/nav-config.js"></script>
 <script src="/lib/freshness.js"></script>
@@ -19,6 +20,11 @@
 <h1 class="sr-only">Supply Chain Insights</h1>
   <div id="calendar-strip-host"></div>
   <div id="insights-root"></div>
-  <script type="module" src="/supply/dashboard.js"></script>
+  <details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p>Each tile shows the latest print, its change versus a month and a year earlier, and where it sits against its own 10-year history (the percentile is derived from a z-score against the 10-year mean). The Supply Chain Pressure composite averages the standardized readings of its component series; above average means more pressure (higher costs, tighter capacity).</p>
+  <p>Sources: FRED (BLS, Census, Federal Reserve), EIA, NY Fed GSCPI, Drewry, Freightos, Baltic Exchange and other public feeds, refreshed weekly by a scheduled pipeline. Each series carries its own last-observation date; the header shows when the pipeline last ran, and a banner appears if any source failed. Full histories are on the <a href="/supply/data.html">downloads page</a>.</p>
+</details>
+<script type="module" src="/supply/dashboard.js"></script>
 </body>
 </html>

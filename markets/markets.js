@@ -406,12 +406,12 @@ function renderNews(items, sourceSymbols) {
 async function renderDrilldown(symbol) {
   state.symbol = symbol;
   state.isEtf = !!ETF_HOLDINGS[symbol];
-  document.title = `${symbol} — Markets — Siberforge`;
+  document.title = `Siberforge — Markets — ${symbol}`;
 
   // Reset volatile UI bits.
   if (chart) { chart.destroy(); chart = null; }
   el('t-chart-stats').innerHTML = '';
-  el('t-news-list').innerHTML = '<p class="t-empty">Loading…</p>';
+
   el('t-holdings-table').innerHTML = '';
   highlightSelectedTile();
 
@@ -419,7 +419,7 @@ async function renderDrilldown(symbol) {
   try {
     await loadQuote();
     renderHeader();
-    await Promise.all([loadHistory(), loadHoldingsQuotes(), loadNews()]);
+    await Promise.all([loadHistory(), loadHoldingsQuotes()]);
     renderChart();
     renderHoldings();
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
