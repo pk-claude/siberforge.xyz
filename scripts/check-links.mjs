@@ -15,7 +15,7 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 
 // Not shipped: .vercelignore excludes branding/, and deploys/ + _archive are
 // operational history rather than site content.
-const SKIP_DIRS = new Set(['node_modules', '.git', 'branding', 'deploys', '_archive', 'docs']);
+const SKIP_DIRS = new Set(['node_modules', '.git', 'branding', 'deploys', '_archive', 'docs', 'core']);
 
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {

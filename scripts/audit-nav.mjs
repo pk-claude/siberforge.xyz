@@ -25,7 +25,7 @@ const EXCUSED = new Set([
   'core/equity/index.html',        // legacy redirect stub
   'macro/indicators/indicator.html',      // drill-down, uses data-page-parent
   'supply/metric.html',       // drill-down, uses data-page-parent
-  'research/archive/influencers/',   // Home Depot work, deliberately unlisted
+  'research/archive/influencers/index.html',   // Home Depot work, deliberately unlisted
 ]);
 
 // Pages that load layout.js purely for the header + global search and are
@@ -46,7 +46,7 @@ const warnings = [];
 
 function walk(dir, out = []) {
   for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.git' || name === 'branding') continue;
+    if (name === 'node_modules' || name === '.git' || name === 'branding' || (dir === ROOT && name === 'core')) continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) walk(full, out);
     else if (name.endsWith('.html') && !name.endsWith('.bak')) out.push(full);
