@@ -34,6 +34,7 @@ const EXCUSED = new Set([
 // visitor never chose.
 const CHROME_ONLY = new Set([
   '404.html',
+  'index.html',   // landing: uses the shared chrome, belongs to no section
 ]);
 
 const src = readFileSync(join(ROOT, 'lib/nav-config.js'), 'utf8');

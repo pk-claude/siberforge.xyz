@@ -2,9 +2,13 @@
 // what changed, what would change the call. Every number is computed here
 // from the FRED snapshot; no prose is hand-written about current values.
 
-import { el, fmt, sgn, esc, addDays, todayIso, fred, last, at, pctile, yoy, tiles, lineChart, recessionRanges, asOfLine, setStatus, since, COLORS, monthName } from '/lib/sf-kit.js';
+import { el as $el, fmt, sgn, esc, addDays, todayIso, fred, last, at, pctile, yoy, tiles, lineChart, recessionRanges, asOfLine, setStatus, since, COLORS, monthName } from '/lib/sf-kit.js';
 import { SPECS, seriesFor, computeComposite, phaseFor, termSpreadProbit } from '/lib/composite-scores.js';
 import { buildRegimeMap, smoothCurrentRegime, regimeConviction, REGIMES, sixMonthAnnualized, toMonthlyMap } from '/macro/regime/regimes.js';
+
+// Tolerant element lookup: the landing page embeds this module with only the
+// verdict and dials containers present.
+const el = id => $el(id) || { set innerHTML(v) {}, set textContent(v) {} };
 
 const KINDS = ['cycle', 'labor', 'inflation', 'credit', 'housing', 'consumer'];
 const LABELS = { cycle: 'Recession risk', labor: 'Labor market', inflation: 'Inflation persistence', credit: 'Credit & liquidity', housing: 'Housing', consumer: 'Consumer stress' };
@@ -148,11 +152,11 @@ async function main() {
   // ---------- recession odds chart ----------
   const rec = recessionRanges(data.USREC || []);
   const cycHist = [];
-  for (let y = 1995; y <= new Date().getUTCFullYear(); y++) for (const mm of ['03', '06', '09', '12']) {
+  if ($el('chart-odds')) for (let y = 1995; y <= new Date().getUTCFullYear(); y++) for (const mm of ['03', '06', '09', '12']) {
     const d = `${y}-${mm}-28`; if (d > todayIso()) break;
     const s = computeComposite('cycle', data, d); if (s) cycHist.push({ date: d, value: s.score });
   }
-  lineChart('chart-odds', [
+  if ($el('chart-odds')) lineChart('chart-odds', [
     { label: 'Curve model: P(recession in 12m), %', data: since(probit, '1995-01-01'), color: COLORS.red },
     { label: 'Cycle composite (0-100)', data: cycHist, color: COLORS.accent, width: 2 },
     { label: 'Sahm rule x 100, capped (trigger = 50)', data: since(data.SAHMREALTIME || [], '1995-01-01').map(o => ({ date: o.date, value: Math.min(100, Math.max(0, o.value * 100)) })), color: COLORS.blue, dash: [4, 3] },
