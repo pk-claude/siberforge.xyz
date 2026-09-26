@@ -18,7 +18,7 @@ import {
   toMonthlyMap,
   REGIMES,
 } from '/macro/regime/regimes.js';
-import { buildRegimeReturnsTable } from '/macro/regime/regime-returns.js';
+import { buildRegimeReturnsTable, regimeExcessStats } from '/macro/regime/regime-returns.js';
 import { SECTOR_PROFILES, REGIME_NARRATIVES } from '/macro/regime/sector-profiles.js';
 import { ETF_HOLDINGS } from '/markets/holdings.js';
 
@@ -609,6 +609,16 @@ async function renderRegimeReturns() {
   state.regimeTable = buildRegimeReturnsTable(history, regimeMap, [1, 3, 6]);
   state.regimeTablePost2022 = buildRegimeReturnsTable(history, regimeMap, [1, 3, 6], { since: "2022-01-01" });
   state.positioningSample = "full";
+  // Excess 6m return vs SPY with Newey-West t-stats, per sector x regime.
+  state.excess = {}; state.excessPost2022 = {};
+  for (const s of sectors) {
+    if (!history[s] || !history.SPY) continue;
+    state.excess[s] = regimeExcessStats(history[s], history.SPY, regimeMap, 6);
+    state.excessPost2022[s] = regimeExcessStats(history[s], history.SPY, regimeMap, 6, { since: '2022-01-01' });
+  }
+  state.SECTOR_PROFILES = SECTOR_PROFILES;
+  window.__SF_STATE = state;
+  document.dispatchEvent(new CustomEvent('regime:sample-changed', { detail: { sample: 'full' } }));
 
   const months = [...regimeMap.keys()].sort();
   const currentYm = months[months.length - 1];
@@ -1280,10 +1290,10 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
   let curve = [], hyoas = [];
   try {
     const start = `${new Date().getFullYear() - 30}-01-01`;
-    const j = await fetchJSON(`/api/fred?series=T10Y3M,BAMLH0A0HYM2&start=${start}`);
+    const j = await fetchJSON(`/api/fred?series=T10Y3M,BAA10Y&start=${start}`);
     for (const s of j.series) {
       if (s.id === 'T10Y3M') curve = s.observations.map(o => ({ ym: o.date.slice(0, 7), value: o.value * 100 })); // pct -> bps
-      if (s.id === 'BAMLH0A0HYM2') hyoas = s.observations.map(o => ({ ym: o.date.slice(0, 7), value: o.value * 100 })); // pct -> bps
+      if (s.id === 'BAA10Y') hyoas = s.observations.map(o => ({ ym: o.date.slice(0, 7), value: o.value * 100 })); // pct -> bps
     }
   } catch (e) {
     console.warn('macro-strip series fetch failed:', e);
@@ -1303,7 +1313,7 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
     { id: 'RRSFS',    label: 'Real Retail',      unit: '%', desc: '6m annualized inflation-adjusted retail spending. Consumer demand.',     series: rates.RRSFS,    target: 'higher' },
     { id: 'CPILFESL', label: 'Core CPI',         unit: '%', desc: '6m annualized core inflation. Fed reaction-function input.',             series: rates.CPILFESL, target: 'target', targetVal: 2.0 },
     { id: 'T10Y3M',   label: '10Y-3M Curve',     unit: 'bp',desc: '10Y minus 3M Treasury spread. Negative = inversion = recession signal.', series: curveMonthly,   target: 'higher' },
-    { id: 'BAMLH0A0HYM2', label: 'HY Credit Spread', unit: 'bp', desc: 'High-yield option-adjusted spread. Stress thermometer.',             series: hyoasMonthly,   target: 'lower' },
+    { id: 'BAA10Y', label: 'Baa Credit Spread', unit: 'bp', desc: 'Moody\'s Baa corporate yield minus 10Y Treasury. Long-history credit stress gauge (ICE HY OAS on FRED covers only 3 years).', series: hyoasMonthly, target: 'lower' },
   ];
 
   function pctRank(arr, val) {
@@ -1339,12 +1349,12 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
     const dec = ind.unit === 'bp' ? 0 : 1;
     const sign = v => v > 0 ? '+' : '';
 
-    return `<div class="ms-tile" title="${ind.desc}">
+    return `<div class="ms-tile" title="${ind.desc} Percentile vs ${s[0].ym.slice(0, 4)}-${last.ym.slice(0, 4)}.">
       <div class="ms-label">${ind.label}</div>
       <div class="ms-value ${valClass}">${sign(last.value)}${last.value.toFixed(dec)}<span class="ms-unit">${ind.unit}</span></div>
       <div class="ms-meta">
         <span class="ms-pctile">${pctile != null ? pctile + 'th %ile' : '—'}</span>
-        ${delta != null ? `<span class="ms-delta ${delta >= 0 ? 'pos' : 'neg'}">${sign(delta)}${delta.toFixed(dec)}${ind.unit} mo/mo</span>` : ''}
+        ${delta != null ? `<span class="ms-delta ${delta >= 0 ? 'pos' : 'neg'}">${sign(delta)}${delta.toFixed(dec)}${ind.unit === 'bp' ? 'bp' : 'pp'} vs prior mo</span>` : ''}
       </div>
     </div>`;
   }).join('');
@@ -1352,7 +1362,7 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
   tgt.innerHTML = `
     <div class="ms-header">
       <span class="ms-title">Live macro inputs</span>
-      <span class="ms-subtitle">What's driving the regime today &middot; current value, percentile vs. 30-year history, 1-month delta</span>
+      <span class="ms-subtitle">What's driving the regime today &middot; 6-month annualized rates (levels for spreads), percentile vs. each series' own history (up to 30 years), change vs prior month</span>
     </div>
     <div class="ms-grid">${tiles}</div>
   `;
@@ -1549,138 +1559,81 @@ window.__SF_STATE = state;
 
 function renderPositioning() {
   const tgt = el('regime-positioning');
-  if (!tgt || !state.regimeTable || !state.currentRegime) return;
+  if (!tgt || !state.excess || !state.currentRegime) return;
   const regime = state.currentRegime;
   const meta = REGIMES[regime];
-  const horizon = 6;
-
   const sample = state.positioningSample || 'full';
-  const regimeTable = sample === 'post2022' ? state.regimeTablePost2022 : state.regimeTable;
-  const minN = sample === 'post2022' ? 6 : 24;
+  const table = sample === 'post2022' ? state.excessPost2022 : state.excess;
+  const T_CRIT = 2.0;
 
-  const sym = state.regimeSymbols.filter(s => s !== 'SPY');
-  const cells = sym
-    .map(s => ({ s, c: regimeTable[s]?.[regime]?.[horizon] }))
-    .filter(o => o.c && o.c.n >= minN);
+  const rows = Object.entries(table)
+    .map(([s, byR]) => ({ s, c: byR?.[regime] }))
+    .filter(o => o.c && o.c.n >= 12)
+    .sort((a, b) => b.c.mean - a.c.mean);
 
-  if (cells.length < 4) {
-    const msg = sample === 'post2022'
-      ? 'Insufficient post-2022 sector data in this regime (require n ≥ 6 per sector).'
-      : 'Insufficient sector history in this regime to issue tilt recommendations (require n ≥ 24 per sector).';
-    tgt.innerHTML = `<div class="rp-empty">${msg}</div>`;
-    return;
-  }
+  const over  = rows.filter(r => r.c.mean > 0 && r.c.t >= T_CRIT);
+  const under = rows.filter(r => r.c.mean < 0 && r.c.t <= -T_CRIT).reverse();
+  const sign = v => v > 0 ? '+' : '';
+  const label = s => SECTOR_PROFILES[s]?.label || s;
 
-  // Compute σ percentile for confidence bucketing
-  const allStds = [];
-  for (const s of sym) {
-    const c = regimeTable[s]?.[regime]?.[horizon];
-    if (c && c.n >= minN) allStds.push(c.std);
-  }
-  allStds.sort((a, b) => a - b);
-  const p33 = allStds[Math.floor(allStds.length * 0.33)];
-  const p67 = allStds[Math.floor(allStds.length * 0.67)];
-
-  function getConfidence(c) {
-    if (sample === 'post2022' && c.n < 20) return 'low';
-    if (c.std <= p33) return 'high';
-    if (c.std <= p67) return 'med';
-    return 'low';
-  }
-
-  const confExplain = {
-    high: 'Tight historical distribution — anchor the tilt.',
-    med: 'Moderate dispersion — normal sizing.',
-    low: 'Wide dispersion — often a sign of structural change. Smaller position size.',
-  };
-
-  cells.sort((a, b) => b.c.mean - a.c.mean);
-  const top    = cells.slice(0, 3);
-  const bottom = cells.slice(-3).reverse();
-
-  const spyCell = regimeTable.SPY?.[regime]?.[horizon];
-  const spyMean = spyCell?.mean;
-
-  function renderRec(item, kind) {
-    const profile = SECTOR_PROFILES[item.s];
-    const sign = v => v > 0 ? '+' : '';
-    const c = item.c;
-    const conf = getConfidence(c);
-    const vsSpy = Number.isFinite(spyMean) ? c.mean - spyMean : null;
-    const tailLine = Number.isFinite(c.q1)
-      ? `Worst-quartile outcome: ${sign(c.q1)}${fmt(c.q1, 1)}% (size positions accordingly).`
-      : '';
-    return `<div class="rp-rec ${kind}">
+  const call = (item, kind) => `<div class="rp-rec ${kind}">
       <div class="rp-rec-head">
         <div class="rp-rec-action">${kind === 'over' ? 'OVERWEIGHT' : 'UNDERWEIGHT'}</div>
         <div class="rp-rec-sym">${item.s}</div>
-        <div class="rp-rec-name">${profile?.label || item.s}</div>
+        <div class="rp-rec-name">${label(item.s)}</div>
       </div>
       <div class="rp-rec-stats">
-        <span class="rp-rec-mean ${c.mean >= 0 ? 'pos' : 'neg'}">${sign(c.mean)}${fmt(c.mean, 1)}%</span>
-        <span class="rp-rec-meta">avg fwd 6m</span>
-        ${vsSpy != null ? `<span class="rp-rec-vsspy ${vsSpy >= 0 ? 'pos' : 'neg'}">${sign(vsSpy)}${fmt(vsSpy, 1)}pp vs SPY</span>` : ''}
-        <span class="rp-rec-n">n=${c.n}</span>
-        <span class="rp-rec-conf rp-conf-${conf}" title="σ=${c.std.toFixed(1)}% across n=${c.n} prior occurrences. ${confExplain[conf]}">●${conf.toUpperCase()}</span>
+        <span class="rp-rec-mean ${item.c.mean >= 0 ? 'pos' : 'neg'}">${sign(item.c.mean)}${fmt(item.c.mean, 1)}pp</span>
+        <span class="rp-rec-meta">avg 6m excess vs SPY</span>
+        <span class="rp-rec-n">t = ${item.c.t.toFixed(1)} &middot; n = ${item.c.n} months (~${Math.round(item.c.n / 6)} independent)</span>
       </div>
-      <div class="rp-rec-rationale">${profile?.byRegime?.[regime] || ''}</div>
-      ${tailLine ? `<div class="rp-rec-tail">${tailLine}</div>` : ''}
+      <div class="rp-rec-rationale">${kind === 'over' ? 'Beat' : 'Lagged'} SPY by ${Math.abs(item.c.mean).toFixed(1)}pp on average over the 6 months after a ${meta.label} reading, since ${item.c.first}. The t-statistic is corrected for overlapping windows.</div>
     </div>`;
-  }
 
-  const sampCountNote = `n=${allStds.length} obs`;
-  const smallNWarn = sample === 'post2022' && allStds.length < 20
-    ? ' <span class="rp-small-n-warning">(small sample — use with caution)</span>'
-    : '';
+  const tableRows = rows.map(r => {
+    const sig = Math.abs(r.c.t) >= T_CRIT;
+    return `<tr class="${sig ? 'rp-sig' : ''}"><th>${r.s} <span class="muted">${label(r.s)}</span></th>
+      <td class="${r.c.mean >= 0 ? 'pos' : 'neg'}">${sign(r.c.mean)}${fmt(r.c.mean, 1)}pp</td>
+      <td>${r.c.t.toFixed(1)}</td><td>${r.c.n}</td><td>${r.c.first}</td></tr>`;
+  }).join('');
+
+  const verdict = (over.length || under.length)
+    ? `<div class="rp-grid">
+        <div class="rp-col rp-overweights"><div class="rp-col-title">Over-weight (|t| &ge; ${T_CRIT})</div>${over.map(o => call(o, 'over')).join('') || '<div class="rp-empty">None significant.</div>'}</div>
+        <div class="rp-col rp-underweights"><div class="rp-col-title">Under-weight (|t| &ge; ${T_CRIT})</div>${under.map(o => call(o, 'under')).join('') || '<div class="rp-empty">None significant.</div>'}</div>
+      </div>`
+    : `<div class="rp-noedge"><strong>No statistically supported tilt.</strong> In ${meta.label} months, no sector's 6-month return relative to SPY is distinguishable from zero (every |t| &lt; ${T_CRIT} once overlapping windows are accounted for). The ranking below is a base rate, not a signal.</div>`;
 
   tgt.innerHTML = `
     <div class="rp-header">
-      <div class="rp-eyebrow">Positioning &middot; based on ${meta.label} regime + 6m historical returns</div>
-      <div class="section-head">
-        <h2>So what — how to tilt the book</h2>
-      </div>
+      <div class="rp-eyebrow">Positioning &middot; ${meta.label} regime &middot; 6-month excess return vs SPY</div>
+      <div class="section-head"><h2>So what &mdash; is there a sector tilt?</h2></div>
       <p class="rp-sub">
-        Translates the current regime call into a specific over/under-weight tilt.
-        Picks the top 3 and bottom 3 sectors by historical forward 6-month return
-        in this regime (n ≥ ${minN} required to qualify). These are base rates, not
-        forecasts — but absent a strong contrary view, they're the prior that
-        should anchor sector positioning today.
+        A sector is called over- or under-weight only if its average 6-month return <em>relative to SPY</em>,
+        in months that followed a ${meta.label} reading, clears |t| &ge; ${T_CRIT} with Newey-West standard errors
+        (six-month windows sampled monthly overlap, so n months carry roughly n/6 independent observations).
+        The regime is taken as known one month later, when its data is published.
       </p>
     </div>
     <div class="rp-toolbar">
       <div class="control-group">
         <span class="control-label">Sample window</span>
         <div class="control-tabs">
-          <button class="rp-sample-tab ${sample === 'full' ? 'active' : ''}" data-sample="full">Full history (1990+)</button>
+          <button class="rp-sample-tab ${sample === 'full' ? 'active' : ''}" data-sample="full">Full history (sectors since Dec-1998)</button>
           <button class="rp-sample-tab ${sample === 'post2022' ? 'active' : ''}" data-sample="post2022">Post-2022 only</button>
         </div>
       </div>
-      <span class="rp-toolbar-note" id="rp-toolbar-note">${sampCountNote} sector × regime cells · σ percentile computed in this sample${smallNWarn}</span>
     </div>
-    <div class="rp-grid">
-      <div class="rp-col rp-overweights">
-        <div class="rp-col-title">Over-weight</div>
-        ${top.map(t => renderRec(t, 'over')).join('')}
-      </div>
-      <div class="rp-col rp-underweights">
-        <div class="rp-col-title">Under-weight</div>
-        ${bottom.map(t => renderRec(t, 'under')).join('')}
-      </div>
-    </div>
-    <details class="rp-conf-legend"><summary>What the dot means</summary>
-      <p>Each dot reflects the standard deviation (σ) of historical 6-month forward returns for that sector × regime combination, ranked against the cross-section of all sector × regime cells in the chosen sample.</p>
-      <ul>
-        <li><span class="rp-conf-dot rp-conf-high">●</span> <strong>HIGH</strong> — tight distribution. Anchor the tilt.</li>
-        <li><span class="rp-conf-dot rp-conf-med">●</span> <strong>MED</strong> — moderate dispersion. Normal sizing.</li>
-        <li><span class="rp-conf-dot rp-conf-low">●</span> <strong>LOW</strong> — wide dispersion. Often signals structural change (e.g. AI capex post-2022). Smaller position size.</li>
-      </ul>
+    ${verdict}
+    <details class="rp-conf-legend" ${over.length || under.length ? '' : 'open'}><summary>All sectors in ${meta.label} months</summary>
+      <table class="rp-table"><thead><tr><th>Sector</th><th>Avg 6m excess</th><th>t (NW)</th><th>n months</th><th>Since</th></tr></thead><tbody>${tableRows}</tbody></table>
     </details>
     <p class="rp-foot">
-      Methodology: 30+ years of monthly history classified into four regimes,
-      forward-6-month total returns averaged within the current regime, top/bottom
-      ranked. Excludes sectors with &lt; ${minN} historical observations in this regime
-      (XLRE pre-2015, XLC pre-2018 may be excluded depending on the regime).
-      <strong>Past base rates — not forecasts.</strong>
+      Out-of-sample check: the <a href="/tools/backtest/">walk-forward regime backtest</a> runs this rotation month by month using only
+      data available at the time, net of trading costs. Read its verdict before acting on any row here.
+      XLRE (2015) and XLC (2018) have short histories, and the 2018 GICS change moved GOOGL/META out of XLK and AMZN between XLY and XLC,
+      so pre-2018 rows for XLK, XLY and XLC measure a different basket.
+      <strong>Past base rates, not forecasts.</strong>
     </p>
   `;
 

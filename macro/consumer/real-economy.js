@@ -1,3 +1,4 @@
+import { computeConsumerScore as shared_computeConsumerScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology } from '/lib/composite-scores.js';
 // Real Economy page — consumer indicators: income, spending, credit health.
 //
 // Same visual pattern as cycle/inflation: composite score hero, three sections
@@ -459,49 +460,9 @@ function renderConsumer() {
 
 // ---------- Consumer Health composite ----------
 
+// Single implementation: lib/composite-scores.js (percentile-based, point-in-time).
 function computeHealthScore() {
-  const signals = [];
-  const lrw = latestValue(state.series._realWages || []);
-  if (lrw) {
-    // -2% = 100 (bad), 0% = 50, +2% = 0 (good)
-    const score = Math.min(100, Math.max(0, 50 - (lrw.value * 25)));
-    signals.push({ name: 'Real wages', score, weight: 0.25, raw: `${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%` });
-  }
-  const lsav = latestValue(state.series.PSAVERT || []);
-  if (lsav) {
-    // 12% saving = 0 (very healthy), 5% = 50, 2% = 100 (depleted)
-    const score = Math.min(100, Math.max(0, 100 - (lsav.value - 2) * 10));
-    signals.push({ name: 'Personal saving rate', score, weight: 0.20, raw: `${fmt(lsav.value, 1)}%` });
-  }
-  const ldel = latestValue(state.series.DRCCLACBS || []);
-  if (ldel) {
-    // 1.5% = 0 (healthy), 3% = 50, 5% = 100 (stress)
-    const score = Math.min(100, Math.max(0, ((ldel.value - 1.5) / 3.5) * 100));
-    signals.push({ name: 'CC delinquency', score, weight: 0.20, raw: `${fmt(ldel.value, 2)}%` });
-  }
-  const lcla = latestValue(state.series.IC4WSA || []);
-  if (lcla) {
-    // 200K = 0 (tight), 280K = 50, 380K = 100 (recession)
-    const score = Math.min(100, Math.max(0, ((lcla.value - 200000) / 180000) * 100));
-    signals.push({ name: 'Jobless claims (4wk)', score, weight: 0.15, raw: `${(lcla.value / 1000).toFixed(0)}K` });
-  }
-  const lsent = latestValue(state.series.UMCSENT || []);
-  if (lsent) {
-    // 100 sentiment = 0, 75 = 50, 50 = 100
-    const score = Math.min(100, Math.max(0, (100 - lsent.value) * 2));
-    signals.push({ name: 'UMich sentiment', score, weight: 0.10, raw: `${fmt(lsent.value, 0)}` });
-  }
-  const tdsp = latestValue(state.series.TDSP || []);
-  if (tdsp) {
-    // 9% = 0, 11% = 50, 13% = 100
-    const score = Math.min(100, Math.max(0, ((tdsp.value - 9) / 4) * 100));
-    signals.push({ name: 'Debt service ratio', score, weight: 0.10, raw: `${fmt(tdsp.value, 1)}%` });
-  }
-
-  if (!signals.length) return null;
-  const totalW = signals.reduce((s, n) => s + n.weight, 0);
-  const weighted = signals.reduce((s, n) => s + n.score * n.weight, 0) / totalW;
-  return { score: weighted, signals };
+  return shared_computeConsumerScore(state.series);
 }
 
 function renderHealthScore() {
@@ -511,12 +472,7 @@ function renderHealthScore() {
   const score = result.score;
 
   // Note the inverted scale: HIGHER score = MORE stress (like cycle/inflation)
-  let phase, color;
-  if (score < 25)      { phase = 'Robust';   color = '#3ecf8e'; }
-  else if (score < 45) { phase = 'Healthy';  color = '#5a9cff'; }
-  else if (score < 65) { phase = 'Mixed';    color = '#f7a700'; }
-  else if (score < 80) { phase = 'Stressed'; color = '#ef4f5a'; }
-  else                 { phase = 'Distressed'; color = '#ef4f5a'; }
+  const { label: phase, color } = shared_phaseFor('consumer', score);
 
   const bars = result.signals.map(s => {
     const sevColor = s.score < 33 ? '#3ecf8e' : s.score < 66 ? '#f7a700' : '#ef4f5a';
@@ -538,10 +494,11 @@ function renderHealthScore() {
       <div class="cs-signals">
         <div class="cs-signals-title">Component readings</div>
         ${bars}
-        <div class="cs-weights-note">Weights: real wages 25% · saving rate 20% · CC delinq. 20% · jobless claims 15% · sentiment 10% · debt service 10%.</div>
+        <div class="cs-weights-note">Each signal is scored as its percentile within its own last 20 years (100 = most risk); weights and transforms under "How this score is built".${result.stale && result.stale.length ? " Stale input: " + result.stale.join(", ") + "." : ""}</div>
       </div>
     </div>
   `;
+  shared_renderMethodology(tgt, 'consumer');
 }
 
 // ---------- Synthesis ----------

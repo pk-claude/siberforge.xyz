@@ -1,5 +1,11 @@
 // HTTP helpers for refresh scripts: retry, timeout, sane UA.
 
+// Never let a credential reach an error message: these messages are written
+// into published manifest.json files.
+export function redact(s) {
+  return String(s).replace(/((?:api_key|apikey|key|token|registrationkey|access_token)=)[^&\s"']+/gi, '$1REDACTED');
+}
+
 const DEFAULT_UA = 'siberforge-supply-refresh/1.0 (+https://siberforge.xyz)';
 
 export function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
@@ -39,11 +45,12 @@ export async function fetchWithRetry(url, opts = {}) {
       }
       const text = await res.text().catch(() => '');
       const transient = res.status >= 500 || res.status === 429 || res.status === 408;
-      lastErr = new Error(`${url} ${res.status}: ${text.slice(0, 200)}`);
+      lastErr = new Error(redact(`${url} ${res.status}: ${text.slice(0, 200)}`));
       if (!transient || attempt === tries - 1) throw lastErr;
     } catch (err) {
       clearTimeout(timer);
       lastErr = err instanceof Error ? err : new Error(String(err));
+      lastErr.message = redact(lastErr.message);
       if (attempt === tries - 1) throw lastErr;
     }
     await sleep(delays[attempt] ?? 4000);

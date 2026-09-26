@@ -1,3 +1,4 @@
+import { redact } from './http.mjs';
 // manifest.mjs — read/update per-source health manifest.
 
 import fs from 'node:fs/promises';
@@ -36,7 +37,7 @@ export function recordSeriesResult(manifest, id, result) {
     ...existing,
     ok: result.ok,
     lastFetchAt: new Date().toISOString(),
-    error: result.ok ? null : (result.error || 'unknown error'),
+    error: result.ok ? null : redact(result.error || 'unknown error'),
     ...(result.ok ? { lastSuccess: new Date().toISOString() } : {}),
   };
 }

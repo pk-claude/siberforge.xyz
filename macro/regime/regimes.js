@@ -1,6 +1,6 @@
 // Regime classifier.
 //
-// Pure module â€” no DOM, no fetch. Inputs are FRED-shape arrays of
+// Pure module — no DOM, no fetch. Inputs are FRED-shape arrays of
 // { date: 'YYYY-MM-DD', value: number }. Output is a Map<YYYY-MM, {regime, ...}>.
 //
 // Methodology (chosen by user, see ../../../_archive/macro_dashboard_redesign.md):
@@ -9,7 +9,7 @@
 //                          PAYEMS   (nonfarm payrolls, monthly)
 //                          RRSFS    (real retail sales, monthly)
 //                        Each series is converted to 6m annualized rate-of-change,
-//                        then z-scored on a trailing 120-month (10y) window. The
+//                        then robust-z-scored (median/MAD) on a trailing 120-month window. The
 //                        three component z's are averaged to form the composite.
 //
 //   Y-axis (inflation) = z-score of CPILFESL (Core CPI) 6m annualized rate-of-change,
@@ -19,15 +19,18 @@
 //   growthZ >= 0 & inflationZ <  0  -> goldilocks   (growth up, inflation cool)
 //   growthZ >= 0 & inflationZ >= 0  -> reflation    (growth up, inflation up)
 //   growthZ <  0 & inflationZ >= 0  -> stagflation  (growth down, inflation up)
-//   growthZ <  0 & inflationZ <  0  -> disinflation (growth down, inflation down â€” recession risk)
+//   growthZ <  0 & inflationZ <  0  -> disinflation (growth down, inflation down — recession risk)
 //
 // Why a TRAILING z-score window:
 //   Regime "where are we vs recent history" beats "where are we vs all of history."
 //   Inflation in the 1970s structurally swamps everything else; using a full-sample
 //   z-score makes the 2024 episode look mild. 120 months captures roughly one full
 //   cycle plus expansion, which is the right reference frame for cycle positioning.
-//   Trailing also means the historical classification is computable at the time â€”
-//   no look-ahead bias when a user is reading the chart.
+//   Trailing means each month's z uses only earlier data. It is NOT fully
+//   point-in-time: FRED serves the latest revised vintage, and a month's
+//   regime is only knowable once its data is published (~mid next month).
+//   Consumers that pair regimes with returns must therefore lag the regime one
+//   month (see regime-returns.js prevMonth).
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -75,8 +78,17 @@ export function sixMonthAnnualized(monthlyMap) {
   return out;
 }
 
-// Trailing rolling z-score over `window` months. For points before `minObs`
-// observations are available, returns NaN (caller filters those out).
+// Trailing ROBUST z-score over `window` months: (x - median) / (1.4826 * MAD),
+// clipped to +/-3. A plain mean/sd z let the 2020 payroll collapse and the
+// 2021-23 inflation spike dominate the window: PAYEMS 6m-annualized sd was ~9x
+// its pre-COVID level, which silenced payrolls in the growth composite until
+// ~2030 and pushed a 2.6% core-inflation print to "below norm". The median/MAD
+// version is insensitive to a handful of extreme months.
+// For points before `minObs` observations are available, returns NaN.
+function median(sorted) {
+  const n = sorted.length, h = n >> 1;
+  return n % 2 ? sorted[h] : (sorted[h - 1] + sorted[h]) / 2;
+}
 export function rollingZScore(series, window = 120, minObs = 36) {
   const out = [];
   for (let i = 0; i < series.length; i++) {
@@ -86,16 +98,11 @@ export function rollingZScore(series, window = 120, minObs = 36) {
       out.push({ ym: series[i].ym, value: NaN });
       continue;
     }
-    const vals = slice.map(o => o.value);
-    const n = vals.length;
-    let sum = 0;
-    for (const v of vals) sum += v;
-    const mu = sum / n;
-    let sq = 0;
-    for (const v of vals) sq += (v - mu) * (v - mu);
-    const sd = n > 1 ? Math.sqrt(sq / (n - 1)) : 0;
-    const z = sd === 0 ? 0 : (series[i].value - mu) / sd;
-    out.push({ ym: series[i].ym, value: z });
+    const vals = slice.map(o => o.value).sort((a, b) => a - b);
+    const med = median(vals);
+    const mad = median(vals.map(v => Math.abs(v - med)).sort((a, b) => a - b)) * 1.4826;
+    const z = mad === 0 ? 0 : (series[i].value - med) / mad;
+    out.push({ ym: series[i].ym, value: Math.max(-3, Math.min(3, z)) });
   }
   return out;
 }
@@ -137,10 +144,10 @@ export function classifyRegime(growthZ, inflationZ) {
 // Display metadata for the four regimes. Color choices match the macro
 // dashboard's existing palette (--green/--accent/--red/--blue from styles.css).
 export const REGIMES = {
-  goldilocks:   { label: 'Goldilocks',   color: '#3ecf8e', desc: 'Growth above trend, inflation cooling',  short: 'Growthâ†‘ Inflâ†“' },
-  reflation:    { label: 'Reflation',    color: '#f7a700', desc: 'Growth and inflation both above trend',  short: 'Growthâ†‘ Inflâ†‘' },
-  stagflation:  { label: 'Stagflation',  color: '#ef4f5a', desc: 'Growth slowing, inflation hot',          short: 'Growthâ†“ Inflâ†‘' },
-  disinflation: { label: 'Disinflation', color: '#5a9cff', desc: 'Growth slowing, inflation cooling',      short: 'Growthâ†“ Inflâ†“' },
+  goldilocks:   { label: 'Goldilocks',   color: '#3ecf8e', desc: 'Growth above trend, inflation cooling',  short: 'Growth↑ Infl↓' },
+  reflation:    { label: 'Reflation',    color: '#f7a700', desc: 'Growth and inflation both above trend',  short: 'Growth↑ Infl↑' },
+  stagflation:  { label: 'Stagflation',  color: '#ef4f5a', desc: 'Growth slowing, inflation hot',          short: 'Growth↓ Infl↑' },
+  disinflation: { label: 'Disinflation', color: '#5a9cff', desc: 'Growth slowing, inflation cooling',      short: 'Growth↓ Infl↓' },
 };
 
 // ---------------------------------------------------------------------------
@@ -150,7 +157,7 @@ export const REGIMES = {
 // inputs is { cpi, indpro, payems, rrsfs } each a FRED observations array.
 // Returns Map<YYYY-MM, { regime, growthZ, inflationZ, components }>.
 //
-// `components` records how many growth z's contributed (1, 2, or 3) â€” useful
+// `components` records how many growth z's contributed (1, 2, or 3) — useful
 // for diagnostics if early-history months drop a series.
 export function buildRegimeMap({ cpi, indpro, payems, rrsfs }) {
   const cpiMonthly    = toMonthlyMap(cpi);
@@ -191,7 +198,7 @@ export function buildRegimeMap({ cpi, indpro, payems, rrsfs }) {
 }
 
 // Distribution diagnostic: { goldilocks: n, reflation: n, ... } over a regime map.
-// Used at startup to sanity-check the classification balance â€” wildly skewed
+// Used at startup to sanity-check the classification balance — wildly skewed
 // distributions (e.g., 80% in one quadrant) suggest a problem with the z-window.
 export function regimeDistribution(regimeMap) {
   const out = { goldilocks: 0, reflation: 0, stagflation: 0, disinflation: 0 };
@@ -200,7 +207,7 @@ export function regimeDistribution(regimeMap) {
 }
 
 // Smooth the "current regime" reading via majority vote over the last `window`
-// months. Used ONLY for the live headline + table-row highlight â€” historical
+// months. Used ONLY for the live headline + table-row highlight — historical
 // aggregation always uses the raw monthly classification.
 //
 // Why: a single noisy CPI or payrolls print can flip the headline regime month
@@ -225,4 +232,18 @@ export function smoothCurrentRegime(regimeMap, window = 3) {
     if (votes[r] > bestCount) { bestRegime = r; bestCount = votes[r]; }
   }
   return { regime: bestRegime, ym: tail[tail.length - 1], votes, window };
+}
+
+// Conviction = distance to the NEAREST quadrant boundary, not distance from
+// the origin: growth z = 2.0 with inflation z = 0.05 is one soft CPI print from
+// flipping, however far it sits from the centre. If the latest month disagrees
+// with the 3-month smoothed call, the call is by definition fragile.
+export function regimeConviction(latest, smoothed) {
+  if (!latest || !Number.isFinite(latest.growthZ) || !Number.isFinite(latest.inflationZ)) return null;
+  const margin = Math.min(Math.abs(latest.growthZ), Math.abs(latest.inflationZ));
+  const agrees = !smoothed || smoothed.regime === latest.regime;
+  const why = `nearest boundary ${margin.toFixed(2)} z away` + (agrees ? '' : '; latest month disagrees with the 3-month call');
+  if (!agrees || margin < 0.25) return { label: 'LOW',    color: '#ef4f5a', margin, desc: `Near a regime boundary (${why}).` };
+  if (margin < 0.75)            return { label: 'MEDIUM', color: '#f7a700', margin, desc: `Clear of the boundary (${why}).` };
+  return                               { label: 'HIGH',   color: '#3ecf8e', margin, desc: `Deep in the quadrant (${why}).` };
 }

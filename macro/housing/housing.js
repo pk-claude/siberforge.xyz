@@ -1,3 +1,4 @@
+import { computeHousingScore as shared_computeHousingScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology } from '/lib/composite-scores.js';
 // Housing Cycle dashboard — wires all 20 of the publicly-pullable housing
 // metrics into a single decision-relevant view.
 //
@@ -159,7 +160,7 @@ async function loadAllData() {
     ['COMPUTSA', 'HSN1F', 'EXHOSLUSM495S'],              // pipeline 2
     ['HOSSUPUSM673N', 'CSUSHPISA', 'MSPUS', 'RHVRUSQ156N'],    // inventory + prices
     ['MORTGAGE30US', 'MORTGAGE15US', 'MEHOINUSA672N'],  // affordability
-    ['DRSFRMACBS', 'CES2000000001', 'WPU081', 'CUUR0000SEHA', 'PRRESCONS'],  // stress + construction + materials
+    ['DRSFRMACBS', 'USCONS', 'WPU081', 'CUUR0000SEHA', 'PRRESCONS'],  // stress + construction + materials
   ];
   const errors = [];
   for (const b of batches) {
@@ -185,7 +186,7 @@ async function loadAllData() {
 
   // Derived YoY series
   const yoyOf = ['HOUST', 'HOUST1F', 'HOUST5F', 'PERMIT', 'COMPUTSA', 'HSN1F',
-                 'EXHOSLUSM495S', 'CSUSHPISA', 'WPU081', 'CES2000000001',
+                 'EXHOSLUSM495S', 'CSUSHPISA', 'WPU081', 'USCONS',
                  'PRRESCONS', 'CUUR0000SEHA'];
   for (const id of yoyOf) {
     if (state.series[id]) state.series[`_${id}Yoy`] = yoyPct(state.series[id]);
@@ -448,7 +449,7 @@ function renderAffordability() {
 
 function renderStress() {
   const delinq = state.series.DRSFRMACBS || [];
-  const constrEmp = state.series._CES2000000001Yoy || [];
+  const constrEmp = state.series._USCONSYoy || [];
   const lumber = state.series._WPU081Yoy || [];
   const rent = state.series._CUUR0000SEHAYoy || [];
   const resCons = state.series._PRRESCONSYoy || [];
@@ -481,7 +482,7 @@ function renderStress() {
       meta: 'quarterly · 30+ days past due',
       threshold: '&lt; 2% benign · &gt; 5% recession-level',
       status: ld ? (ld.value < 2 ? 'ok' : ld.value < 4 ? 'caution' : 'warn') : '' },
-    { metric: 'CES2000000001', label: 'Construction Employment YoY', value: lce ? `${lce.value >= 0 ? '+' : ''}${fmt(lce.value, 1)}%` : '—',
+    { metric: 'USCONS', label: 'Construction Employment YoY', value: lce ? `${lce.value >= 0 ? '+' : ''}${fmt(lce.value, 1)}%` : '—',
       meta: 'monthly · labor-side cycle indicator',
       threshold: 'falls hard 1-2Q before recession',
       status: lce ? (lce.value > 0 ? 'ok' : lce.value > -3 ? 'caution' : 'warn') : '' },
@@ -604,62 +605,9 @@ function renderEquities() {
 
 // ---------- Composite Housing Cycle Score ----------
 
+// Single implementation: lib/composite-scores.js (percentile-based, point-in-time).
 function computeHousingScore() {
-  const signals = [];
-
-  // Months supply (30%) — primary cycle indicator
-  const lms = latestValue(state.series.HOSSUPUSM673N || []);
-  if (lms) {
-    // 3 = 0 (tight/early-cycle), 5.5 = 50, 8 = 100 (oversupplied/late-cycle)
-    const score = Math.min(100, Math.max(0, ((lms.value - 3) / 5) * 100));
-    signals.push({ name: 'Months Supply', score, weight: 0.30, raw: `${fmt(lms.value, 1)}mo` });
-  }
-  // Permits trend (15%) — leading indicator
-  const lp = latestValue(state.series._PERMITYoy || []);
-  if (lp) {
-    // +15% = 0 (strong), 0% = 50, -15% = 100 (collapsing)
-    const score = Math.min(100, Math.max(0, 50 - lp.value * (10/3)));
-    signals.push({ name: 'Permits YoY', score, weight: 0.15, raw: `${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%` });
-  }
-  // 30Y mortgage (15%) — demand pricing
-  const lmt = latestValue(state.series.MORTGAGE30US || []);
-  if (lmt) {
-    // 4% = 0 (cheap), 6% = 50, 9% = 100 (very expensive)
-    const score = Math.min(100, Math.max(0, ((lmt.value - 4) / 5) * 100));
-    signals.push({ name: '30Y Mortgage', score, weight: 0.15, raw: `${fmt(lmt.value, 2)}%` });
-  }
-  // Single-family starts trend (15%)
-  const lh1 = latestValue(state.series._HOUST1FYoy || []);
-  if (lh1) {
-    const score = Math.min(100, Math.max(0, 50 - lh1.value * (10/3)));
-    signals.push({ name: 'SF Starts YoY', score, weight: 0.15, raw: `${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%` });
-  }
-  // Case-Shiller HPI YoY (10%) — overheat / undershoot signal
-  const lhpi = latestValue(state.series._CSUSHPISAYoy || []);
-  if (lhpi) {
-    // -3% = 50 (decline = late-cycle/recession), +3% = 0 (sustainable), +10% = 100 (overheating)
-    const score = Math.min(100, Math.max(0, lhpi.value > 0 ? (lhpi.value / 10) * 100 : 50 + Math.abs(lhpi.value) * 8));
-    signals.push({ name: 'HPI YoY', score, weight: 0.10, raw: `${lhpi.value >= 0 ? '+' : ''}${fmt(lhpi.value, 1)}%` });
-  }
-  // Mortgage delinquency (10%) — distress
-  const ld = latestValue(state.series.DRSFRMACBS || []);
-  if (ld) {
-    // 1.5% = 0, 3% = 50, 6% = 100
-    const score = Math.min(100, Math.max(0, ((ld.value - 1.5) / 4.5) * 100));
-    signals.push({ name: 'SF Delinquency', score, weight: 0.10, raw: `${fmt(ld.value, 2)}%` });
-  }
-  // Construction employment trend (5%)
-  const lce = latestValue(state.series._CES2000000001Yoy || []);
-  if (lce) {
-    // +5% = 0, 0% = 50, -5% = 100
-    const score = Math.min(100, Math.max(0, 50 - lce.value * 10));
-    signals.push({ name: 'Construction Emp YoY', score, weight: 0.05, raw: `${lce.value >= 0 ? '+' : ''}${fmt(lce.value, 1)}%` });
-  }
-
-  if (!signals.length) return null;
-  const totalW = signals.reduce((s, n) => s + n.weight, 0);
-  const weighted = signals.reduce((s, n) => s + n.score * n.weight, 0) / totalW;
-  return { score: weighted, signals };
+  return shared_computeHousingScore(state.series);
 }
 
 function renderHousingScore() {
@@ -667,12 +615,7 @@ function renderHousingScore() {
   const tgt = el('housing-score-section');
   if (!tgt || !result) return;
   const score = result.score;
-  let phase, color;
-  if (score < 25)      { phase = 'Early-Cycle Recovery';  color = '#3ecf8e'; }
-  else if (score < 45) { phase = 'Mid-Cycle Expansion';   color = '#5a9cff'; }
-  else if (score < 65) { phase = 'Late-Cycle';            color = '#f7a700'; }
-  else if (score < 80) { phase = 'Cooling';               color = '#ef4f5a'; }
-  else                 { phase = 'Contraction';           color = '#ef4f5a'; }
+  const { label: phase, color } = shared_phaseFor('housing', score);
 
   const bars = result.signals.map(s => {
     const sevColor = s.score < 33 ? '#3ecf8e' : s.score < 66 ? '#f7a700' : '#ef4f5a';
@@ -694,10 +637,11 @@ function renderHousingScore() {
       <div class="cs-signals">
         <div class="cs-signals-title">Component readings</div>
         ${bars}
-        <div class="cs-weights-note">Weights: Months Supply 30% · Permits 15% · 30Y Mortgage 15% · SF Starts 15% · HPI 10% · Delinquency 10% · Construction Emp 5%.</div>
+        <div class="cs-weights-note">Each signal is scored as its percentile within its own last 20 years (100 = most risk); weights and transforms under "How this score is built".${result.stale && result.stale.length ? " Stale input: " + result.stale.join(", ") + "." : ""}</div>
       </div>
     </div>
   `;
+  shared_renderMethodology(tgt, 'housing');
 }
 
 // ---------- Synthesis ----------
