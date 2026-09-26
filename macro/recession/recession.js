@@ -30,6 +30,9 @@ import {
   tierOf,
   computeSignals,
   compositeOverTime,
+  calibrate,
+  isTriggered,
+  SIGNALS,
 } from '/macro/recession/recession-core.js';
 
 // ============================================================================
@@ -81,6 +84,7 @@ async function fetchAll() {
   const map = await fetchFred([...SERIES, 'USREC'], { start: HISTORY_START });
   const out = {};
   for (const id of SERIES) out[id] = (map[id] && map[id].observations) || [];
+  out.USREC = (map.USREC && map.USREC.observations) || [];
   const usrec = recessionRangesFromUsrec((map.USREC && map.USREC.observations) || []);
   if (usrec.length) recessionRanges = usrec;
   return out;
@@ -261,12 +265,12 @@ function renderTimeline(composite) {
     width, height,
     scales: {
       x: { time: true },
-      y: { range: [0, 5.5] },
+      y: { range: [0, SIGNALS.length + 0.5] },
     },
     axes: [
       { ...DARK_AXIS_BASE },
       { ...DARK_AXIS_BASE,
-        splits: [0, 1, 2, 3, 4, 5],
+        splits: Array.from({ length: SIGNALS.length + 1 }, (_, i) => i),
         values: (u, splits) => splits.map(v => String(Math.round(v))),
       },
     ],
@@ -348,8 +352,10 @@ async function main() {
 
   const composite = compositeOverTime(seriesBySignal);
   renderTimeline(composite);
+  renderCalibration(signals, seriesBySignal, composite, raw.USREC);
 
-  setStatus('live', 'Live');
+  const newest = signals.map(s => s.currentDate).filter(Boolean).sort().pop();
+  setStatus('live', newest ? `Data through ${newest.slice(0, 7)}` : 'Ready');
 }
 
 // Redraw on resize — re-render timeline only (sparklines are fine at their size).
@@ -360,5 +366,19 @@ window.addEventListener('resize', () => {
   // uPlot charts keep their original size; zoom still works. Users can refresh
   // if they resized dramatically.
 });
+
+function renderCalibration(signals, seriesBySignal, composite, usrec) {
+  const tgt = document.getElementById('calibration');
+  if (!tgt) return;
+  const row = (label, cal) => {
+    if (!cal) return `<tr><th>${label}</th><td colspan="4">insufficient history</td></tr>`;
+    const lead = cal.medianLead == null ? '—' : cal.medianLead > 0 ? `${cal.medianLead} mo before` : cal.medianLead === 0 ? 'same month' : `${-cal.medianLead} mo after`;
+    return `<tr><th>${label}</th><td>${cal.caught} of ${cal.covered}</td><td>${lead}</td><td>${cal.falseRate == null ? '—' : Math.round(cal.falseRate * 100) + '%'}</td><td>${cal.since.slice(0, 4)}</td></tr>`;
+  };
+  const rows = signals.map(sig => row(sig.label, calibrate(seriesBySignal[sig.id], v => isTriggered(v, sig), usrec)));
+  rows.push(row('<em>Composite: 2 or more</em>', calibrate(composite.map(o => ({ date: o.date, value: o.count })), v => v >= 2, usrec)));
+  tgt.innerHTML = `<table class="sf-table"><thead><tr><th>Signal</th><th>Recessions caught</th><th>Median timing vs start</th><th>False-alarm months</th><th>Data since</th></tr></thead><tbody>${rows.join('')}</tbody></table>
+    <p class="timeline-note">Caught = fired between 24 months before and 6 months after an NBER recession start. False-alarm months = months outside recessions (and the year after them) when the signal was on and no recession began within the next 12 months. Computed live from FRED on the latest revised data, so real-time performance was somewhat worse.</p>`;
+}
 
 main();
