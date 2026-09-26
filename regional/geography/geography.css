@@ -252,7 +252,7 @@
 }
 .metric-tooltip .mt-section.mt-sowhat {
   background: rgba(247, 167, 0, 0.05);
-  border-left: 2px solid var(--accent);
+  --lit: var(--accent);
   padding: 7px 10px;
   border-radius: 0 4px 4px 0;
   margin-top: 10px;

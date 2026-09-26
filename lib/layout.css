@@ -408,12 +408,12 @@ main {
   display: block;
   padding: 6px 16px;
   text-decoration: none;
-  border-left: 2px solid transparent;
+  --lit: transparent;
   transition: background-color var(--t-fast), border-color var(--t-fast);
 }
 .sf-menu-link:hover {
   background: var(--panel-2);
-  border-left-color: var(--accent);
+  --lit: var(--accent);
 }
 .sf-menu-name {
   display: block;
@@ -546,12 +546,12 @@ body.sf-search-open { overflow: hidden; }
   gap: 0 12px;
   padding: 9px 18px;
   text-decoration: none;
-  border-left: 2px solid transparent;
+  --lit: transparent;
 }
 .sf-search-hit.active,
 .sf-search-hit:hover {
   background: var(--panel-2);
-  border-left-color: var(--accent);
+  --lit: var(--accent);
 }
 .sf-hit-section {
   grid-area: section;

@@ -492,12 +492,12 @@
       </header>
       <div class="pn-body">
         <div class="pe-row">
-          <div class="pe-card" style="border-left:4px solid ${fillFor(r.tpe)}">
+          <div class="pe-card" style="--lit:${fillFor(r.tpe)}">
             <div class="pc-l">Trailing P/E</div>
             <div class="pc-v">${fmtPE(r.tpe)}</div>
             <div class="pc-eps">EPS (TTM): ${fmt2(r.eps_t)}</div>
           </div>
-          <div class="pe-card" style="border-left:4px solid ${fillFor(r.fpe)}">
+          <div class="pe-card" style="--lit:${fillFor(r.fpe)}">
             <div class="pc-l">Forward P/E</div>
             <div class="pc-v">${fmtPE(r.fpe)}</div>
             <div class="pc-eps">EPS (Fwd): ${fmt2(r.eps_f)}</div>
@@ -507,17 +507,17 @@
         <h3>Cycle Position ${cycleTag}</h3>
         <div class="cycle-block">
           <div class="tri-row">
-            <div class="tri-card" style="border-left:3px solid ${fillFor(r.tpe)}">
+            <div class="tri-card" style="--lit:${fillFor(r.tpe)}">
               <div class="tc-l">Trailing</div>
               <div class="tc-v">${fmtPE(r.tpe)}</div>
               <div class="tc-eps">EPS ${fmt2(r.eps_t)}</div>
             </div>
-            <div class="tri-card" style="border-left:3px solid ${fillFor(r.fpe)}">
+            <div class="tri-card" style="--lit:${fillFor(r.fpe)}">
               <div class="tc-l">Forward</div>
               <div class="tc-v">${fmtPE(r.fpe)}</div>
               <div class="tc-eps">EPS ${fmt2(r.eps_f)}</div>
             </div>
-            <div class="tri-card" style="border-left:3px solid ${fillFor(r.npe)}">
+            <div class="tri-card" style="--lit:${fillFor(r.npe)}">
               <div class="tc-l">${NPE_TERM('Normalized')}</div>
               <div class="tc-v">${fmtPE(r.npe)}</div>
               <div class="tc-eps">5y avg EPS ${fmt2(r.eps_avg5y)}</div>

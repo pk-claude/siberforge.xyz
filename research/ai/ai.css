@@ -27,7 +27,7 @@
 .ov-card:hover .ov-cta .arrow { transform: translateX(3px); }
 
 .scenario-bar {
-  background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  background: var(--panel); border: 1px solid var(--line); --lit: var(--accent);
   border-radius: 6px; padding: 14px 18px; margin: 24px 0;
 }
 .sb-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); display: block; margin-bottom: 8px; }

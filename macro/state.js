@@ -95,8 +95,10 @@ async function main() {
     dialFor('housing'),
     dialFor('consumer'),
   ].filter(Boolean);
+  // Corner seal per dial (icon set in /lib/icons.svg), keyed by the first word of the dial name.
+  const SEAL = { growth: 'growth', labor: 'labor', inflation: 'inflation', policy: 'policy', financial: 'conditions', credit: 'credit', housing: 'housing', consumer: 'consumer' };
   el('dials').innerHTML = dials.map(d => `<a class="sf-dial" href="${d.href}" style="--dial:${d.color}">
-      <div class="sf-dial-top"><span class="sf-dial-name">${d.name}</span>${d.chg != null ? `<span class="sf-dial-chg ${d.chg > 1 ? 'up' : d.chg < -1 ? 'down' : ''}">${sgn(d.chg, 0)}${d.chgUnit} 3m</span>` : ''}</div>
+      <div class="sf-dial-top"><span class="sf-dial-name">${d.name}</span><span class="sf-dial-tr">${d.chg != null ? `<span class="sf-dial-chg ${d.chg > 1 ? 'up' : d.chg < -1 ? 'down' : ''}">${sgn(d.chg, 0)}${d.chgUnit} 3m</span>` : ''}${SEAL[d.name.split(' ')[0].toLowerCase()] ? `<svg class="sf-seal" aria-hidden="true"><use href="/lib/icons.svg#d-${SEAL[d.name.split(' ')[0].toLowerCase()]}"/></svg>` : ''}</span></div>
       <div class="sf-dial-val">${d.val}<small>${d.unit}</small></div>
       <div class="sf-dial-label">${d.label}</div>
       ${d.pos != null ? `<div class="sf-bar" aria-hidden="true"><i style="left:${Math.max(0, Math.min(100, d.pos))}%"></i></div>` : ''}

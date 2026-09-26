@@ -334,7 +334,7 @@ main {
   margin: 0;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
+  --lit: var(--accent);
   border-radius: var(--radius);
   padding: 22px 26px;
   box-shadow: var(--shadow-sm);
@@ -600,7 +600,7 @@ main {
   gap: 24px;
 }
 .meth-pt {
-  border-left: 2px solid var(--accent);
+  --lit: var(--accent);
   padding: 4px 18px;
 }
 .meth-pt strong {
@@ -636,7 +636,7 @@ main {
   margin-top: 14px;
   padding: 8px 12px;
   border: 1px solid var(--line, #333);
-  border-left: 3px solid #d97706;
+  --lit: #d97706;
   border-radius: 6px;
   color: var(--muted-2, #999);
   font-size: 13px;

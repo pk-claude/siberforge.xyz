@@ -223,6 +223,7 @@ section.panel:hover {
 }
 section.panel::before {
   content: "";
+  display: none;
   position: absolute;
   left: 0;
   top: 22px;
@@ -427,15 +428,15 @@ label.chkitem input { cursor: pointer; width: 14px; height: 14px; }
 .note {
   background: var(--accent-bg);
   border: 1px solid #fcd68a;
-  border-left: 3px solid var(--accent);
+  --lit: var(--accent);
   padding: 12px 14px;
   border-radius: 6px;
   margin-top: 14px;
-  color: #5c4102;
+  color: var(--text);
   font-size: 13px;
   line-height: 1.55;
 }
-.note strong { color: #3c2a00; }
+.note strong { color: var(--accent); }
 
 /* -------- data table -------- */
 .tbl-wrap {

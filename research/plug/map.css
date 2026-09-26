@@ -130,7 +130,7 @@ td.fn-svc       { color: #64748b; font-weight: 600; }
 }
 .doe-cell {
   border: 1px solid var(--line-soft);
-  border-left: 3px solid var(--accent);
+  --lit: var(--accent);
   border-radius: 6px;
   padding: 10px 12px;
   background: #fafbfc;

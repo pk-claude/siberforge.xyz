@@ -94,7 +94,7 @@ a:hover { color: var(--accent); }
   padding: 24px;
   background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--cat-composite);
+  --lit: var(--cat-composite);
   border-radius: 6px;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -110,7 +110,7 @@ a:hover { color: var(--accent); }
 .composite-strip .regime.loose { color: var(--blue); }
 .composite-strip svg.spark { width: 100%; height: 80px; }
 .composite-strip .why {
-  font-size: 12px; color: var(--muted); border-left: 2px solid var(--line); padding-left: 14px;
+  font-size: 12px; color: var(--muted); --lit: var(--line); padding-left: 14px;
 }
 
 /* ---------- 2x2 quadrant grid (overview) ---------- */
@@ -239,7 +239,7 @@ a:hover { color: var(--accent); }
 .download-zone .hero {
   display: flex; justify-content: space-between; align-items: center;
   background: linear-gradient(135deg, var(--panel) 0%, var(--panel-2) 100%);
-  border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  border: 1px solid var(--line); --lit: var(--accent);
   padding: 18px 22px; margin-bottom: 18px; border-radius: 6px;
 }
 .download-zone .bundle-btn {
@@ -276,7 +276,7 @@ a:hover { color: var(--accent); }
   margin: 16px 24px 0;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid #6b7280;
+  --lit: #6b7280;
   border-radius: 6px;
   padding: 10px 14px;
 }
@@ -304,7 +304,7 @@ a:hover { color: var(--accent); }
   margin: 12px 24px 0;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
+  --lit: var(--accent);
   border-radius: 6px;
   padding: 10px 14px;
 }
@@ -321,9 +321,9 @@ a:hover { color: var(--accent); }
   transition: border-color .15s, transform .15s;
 }
 .watch-card:hover { transform: translateY(-1px); }
-.watch-card.watch-risk { border-left: 2px solid var(--red); }
-.watch-card.watch-opportunity { border-left: 2px solid var(--green); }
-.watch-card.watch-watch { border-left: 2px solid var(--accent); }
+.watch-card.watch-risk { --lit: var(--red); }
+.watch-card.watch-opportunity { --lit: var(--green); }
+.watch-card.watch-watch { --lit: var(--accent); }
 .watch-card .watch-score { float: right; font-size: 11px; font-weight: 700; color: var(--text); background: var(--bg); border-radius: 3px; padding: 1px 5px; }
 .watch-card .watch-icon { font-size: 13px; margin-right: 4px; }
 .watch-card.watch-risk .watch-icon { color: var(--red); }
@@ -360,9 +360,9 @@ a:hover { color: var(--accent); }
   border-radius: 4px;
   padding: 10px 14px;
   margin-top: 8px;
-  border-left: 2px solid var(--red);
+  --lit: var(--red);
 }
-.env-action-oppty { border-left-color: var(--green); }
+.env-action-oppty { --lit: var(--green); }
 .env-action-label { font-size: 10px; font-weight: 700; color: var(--red); text-transform: uppercase; letter-spacing: 1px; }
 .env-action-oppty .env-action-label { color: var(--green); }
 .env-action-headline { font-size: 14px; font-weight: 600; margin: 3px 0; }
@@ -371,7 +371,7 @@ a:hover { color: var(--accent); }
 .env-action-drill:hover { text-decoration: underline; }
 
 /* ---- Tooltip enhancements ---- */
-.tooltip .rightnow { background: rgba(247, 167, 0, 0.06); border-left: 2px solid var(--accent); padding: 6px 10px; border-radius: 3px; font-size: 11.5px; }
+.tooltip .rightnow { background: rgba(247, 167, 0, 0.06);  padding: 6px 10px; border-radius: 3px; font-size: 11.5px; }
 
 /* ---- Insight dot on tile ---- */
 .kpi-insight-dot { position: absolute; top: 6px; left: 6px; width: 6px; height: 6px; border-radius: 50%; }
@@ -389,9 +389,9 @@ a:hover { color: var(--accent); }
   border-radius: 6px;
   padding: 12px 14px;
 }
-.insight-card.insight-risk { border-left: 3px solid var(--red); }
-.insight-card.insight-opportunity { border-left: 3px solid var(--green); }
-.insight-card.insight-watch { border-left: 3px solid var(--accent); }
+.insight-card.insight-risk { --lit: var(--red); }
+.insight-card.insight-opportunity { --lit: var(--green); }
+.insight-card.insight-watch { --lit: var(--accent); }
 .ic-head { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
 .ic-score { font-weight: 700; background: var(--panel-2); padding: 2px 8px; border-radius: 3px; font-size: 11px; }
 .ic-icon { font-size: 14px; }
@@ -420,9 +420,9 @@ a:hover { color: var(--accent); }
   padding: 14px 18px;
   margin-bottom: 14px;
 }
-.drill-insight.insight-risk { border-left: 3px solid var(--red); }
-.drill-insight.insight-opportunity { border-left: 3px solid var(--green); }
-.drill-insight.insight-watch { border-left: 3px solid var(--accent); }
+.drill-insight.insight-risk { --lit: var(--red); }
+.drill-insight.insight-opportunity { --lit: var(--green); }
+.drill-insight.insight-watch { --lit: var(--accent); }
 
 /* ---- Industrial-RE ticker grid ---- */
 .ticker-grid {
@@ -513,7 +513,7 @@ a:hover { color: var(--accent); }
 }
 :root[data-theme="light"] .tooltip .rightnow {
   background: rgba(181, 103, 0, 0.06);
-  border-left-color: var(--accent);
+  
 }
 :root[data-theme="light"] .kpi-tile .stale-badge {
   background: rgba(194, 53, 63, 0.12);
@@ -735,7 +735,7 @@ a:hover { color: var(--accent); }
   margin: 10px 0 14px;
   padding: 8px 12px;
   border: 1px solid var(--line, #333);
-  border-left: 3px solid #d97706;
+  --lit: #d97706;
   border-radius: 6px;
   color: var(--muted-2, #999);
   font-size: 12.5px;

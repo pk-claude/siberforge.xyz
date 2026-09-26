@@ -41,18 +41,18 @@
 /* ---- bull / bear / catalyst boxes ---- */
 .col-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:900px){.col-2{grid-template-columns:1fr}}
-.thesis-box{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);padding:12px 16px;border-radius:4px;margin:12px 0}
-.thesis-box.bull{border-left-color:var(--green)}
-.thesis-box.bear{border-left-color:var(--red)}
-.thesis-box.cat{border-left-color:var(--brand-amber,var(--accent))}
+.thesis-box{background:var(--panel);border:1px solid var(--line);--lit: var(--accent);padding:12px 16px;border-radius:4px;margin:12px 0}
+.thesis-box.bull{--lit: var(--green)}
+.thesis-box.bear{--lit: var(--red)}
+.thesis-box.cat{--lit: var(--brand-amber,var(--accent))}
 .thesis-box h4{margin:0 0 8px;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px}
 .thesis-box.bull h4{color:var(--green);border-bottom-color:var(--green)}
 .thesis-box.bear h4{color:var(--red);border-bottom-color:var(--red)}
 .thesis-box.cat h4{color:var(--brand-amber,var(--accent))}
 .thesis-box ul{margin:4px 0;padding-left:0;list-style:none}
-.thesis-box li{margin:0 0 12px;font-size:13px;line-height:1.55;padding-left:12px;border-left:2px solid rgba(148,163,184,.25)}
-.thesis-box.bull li{border-left-color:rgba(62,207,142,.35)}
-.thesis-box.bear li{border-left-color:rgba(239,79,90,.35)}
+.thesis-box li{margin:0 0 12px;font-size:13px;line-height:1.55;padding-left:12px;}
+.thesis-box.bull li{}
+.thesis-box.bear li{}
 .thesis-box li strong{display:inline}
 .bullet-charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px;margin-top:8px}
 .bc-block{background:var(--panel-2);border:1px solid var(--line);border-radius:5px;padding:8px 8px 6px}

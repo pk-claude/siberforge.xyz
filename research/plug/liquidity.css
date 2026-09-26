@@ -130,16 +130,16 @@
   border: 1px solid var(--line-soft);
   border-radius: 6px;
   padding: 14px 16px;
-  border-left: 4px solid var(--accent);
+  --lit: var(--accent);
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.opt-card.status-committed   { border-left-color: var(--green); }
-.opt-card.status-available   { border-left-color: var(--cat-cfo); }
-.opt-card.status-contingent  { border-left-color: var(--accent); }
-.opt-card.status-suspended   { border-left-color: var(--red); }
-.opt-card.status-internal    { border-left-color: var(--cat-cff); }
+.opt-card.status-committed   { --lit: var(--green); }
+.opt-card.status-available   { --lit: var(--cat-cfo); }
+.opt-card.status-contingent  { --lit: var(--accent); }
+.opt-card.status-suspended   { --lit: var(--red); }
+.opt-card.status-internal    { --lit: var(--cat-cff); }
 
 .opt-head {
   display: flex;

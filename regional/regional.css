@@ -251,7 +251,7 @@
   font-size: 12px;
   line-height: 1.55;
   background: var(--panel-2);
-  border-left: 2px solid var(--accent);
+  --lit: var(--accent);
   border-radius: 0 4px 4px 0;
   padding: 9px 12px;
 }

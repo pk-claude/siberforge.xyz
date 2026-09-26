@@ -39,7 +39,7 @@
 }
 
 .cs-score-dial {
-  border-left: 4px solid var(--cs-color, var(--accent));
+  --lit: var(--cs-color, var(--accent));
   padding-left: 20px;
 }
 .cs-score-label {
@@ -144,7 +144,7 @@
 .cycle-section-synthesis {
   background: rgba(247, 167, 0, 0.04);
   border: 1px solid rgba(247, 167, 0, 0.22);
-  border-left: 3px solid var(--accent);
+  --lit: var(--accent);
   border-radius: 6px;
   padding: 16px 20px 20px;
   margin: 0 24px 24px;
@@ -207,15 +207,15 @@
 .cycle-tile {
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--muted);
+  --lit: var(--muted);
   border-radius: 6px;
   padding: 12px 14px;
   transition: background-color .15s;
 }
 .cycle-tile:hover { background: var(--panel-2); }
-.cycle-tile-ok      { border-left-color: var(--green); }
-.cycle-tile-caution { border-left-color: var(--accent); }
-.cycle-tile-warn    { border-left-color: var(--red); }
+.cycle-tile-ok      { --lit: var(--green); }
+.cycle-tile-caution { --lit: var(--accent); }
+.cycle-tile-warn    { --lit: var(--red); }
 
 .cycle-tile-label {
   color: var(--muted);
@@ -262,9 +262,9 @@
 .cycle-note strong { color: var(--text); }
 .cycle-note em { color: var(--accent); font-style: normal; }
 
-.cycle-note-ok      { border-left: 3px solid var(--green); }
-.cycle-note-caution { border-left: 3px solid var(--accent); }
-.cycle-note-warn    { border-left: 3px solid var(--red); }
+.cycle-note-ok      { --lit: var(--green); }
+.cycle-note-caution { --lit: var(--accent); }
+.cycle-note-warn    { --lit: var(--red); }
 
 /* Synthesis */
 .cycle-synthesis-para {
@@ -273,7 +273,7 @@
   line-height: 1.65;
   background: var(--panel);
   border: 1px solid var(--line);
-  border-left: 3px solid var(--accent);
+  --lit: var(--accent);
   border-radius: 4px;
   padding: 16px 18px;
   margin: 0 0 12px;
