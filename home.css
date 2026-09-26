@@ -35,8 +35,11 @@
 
 /* Editorial skin for the landing page only (html[data-skin=editorial]):
    red accent, poster-scale centered headline. Interior pages keep amber. */
-:root[data-skin="editorial"] { --accent: #E63946; --accent-bg: #2a0d10; --bg: #0a0a0a; --on-accent: #ffffff; }
-:root[data-skin="editorial"] body { background: #0a0a0a; }
+:root[data-skin="editorial"] { --accent: #E63946; --on-accent: #ffffff; }
+/* Dark background only in the dark theme; the light theme keeps its own tokens. */
+:root[data-skin="editorial"]:not([data-theme="light"]) { --accent-bg: #2a0d10; --bg: #0a0a0a; }
+:root[data-skin="editorial"]:not([data-theme="light"]) body { background: #0a0a0a; }
+:root[data-skin="editorial"][data-theme="light"] { --accent: #c62834; --accent-bg: #fde8ea; }
 :root[data-skin="editorial"] .home-hero { grid-template-columns: 1fr; text-align: center; justify-items: center; padding: 56px 24px 28px; max-width: none; background: radial-gradient(ellipse at top, rgba(230,57,70,.14), transparent 60%); }
 :root[data-skin="editorial"] .home-eyes { width: 220px; }
 :root[data-skin="editorial"] .home-hero h1 { font-size: 52px; letter-spacing: -1.5px; max-width: 1000px; margin-left: auto; margin-right: auto; }
