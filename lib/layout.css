@@ -834,3 +834,39 @@ body.sf-search-open { overflow: hidden; }
 
 /* Tooltip: narrative context lagging the live value. */
 .tt-asof-warn { color: var(--stale); font-weight: 600; cursor: help; }
+
+/* ==========================================================================
+   Runtime <main> wrapper (layout.js ensureMain) -- neutral, so pages that
+   carry their own content container are not double-padded. Blocks layout.js
+   injects get the standard content gutter.
+   ========================================================================== */
+main.sf-main { padding: 0; max-width: none; margin: 0; }
+main.sf-main > .sf-hub-children,
+main.sf-main > .sf-seealso {
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+  box-sizing: border-box;
+}
+@media (max-width: 800px) {
+  main.sf-main { padding: 0; }
+  main.sf-main > .sf-hub-children,
+  main.sf-main > .sf-seealso { padding-left: 16px; padding-right: 16px; }
+}
+
+/* Nav groups wrap at every width: a long group must never widen the page. */
+.sf-nav-group { flex-wrap: wrap; min-width: 0; }
+.sf-nav-pages--picker { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.sf-nav-picker { display: inline-flex; align-items: center; gap: 8px; }
+.sf-nav-picker select {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md, 6px);
+  padding: 5px 8px;
+  font: inherit;
+  font-size: 13px;
+  min-height: 28px;
+}
