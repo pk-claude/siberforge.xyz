@@ -1,164 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-21T11:36:34.788Z",
+  "generatedAt": "2026-09-28T12:32:11.370Z",
   "windowDays": 14,
   "windows": {
     "next14": [
       {
-        "date": "2026-09-21",
-        "id": "DIESEL_RETAIL",
-        "label": "Diesel Retail Price (US Avg)",
-        "shortLabel": "Diesel",
-        "category": "middle-mile",
-        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 6.285,
-        "lastDate": "2026-09-14",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 6.285 on 2026-09-14"
-      },
-      {
-        "date": "2026-09-21",
-        "id": "GASOLINE_RETAIL",
-        "label": "Gasoline Retail Price (US Avg)",
-        "shortLabel": "Gasoline",
-        "category": "middle-mile",
-        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.319,
-        "lastDate": "2026-09-14",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 4.319 on 2026-09-14"
-      },
-      {
-        "date": "2026-09-21",
-        "id": "GASREG",
-        "label": "Retail Gasoline Price (Regular)",
-        "shortLabel": "Gas Price",
-        "category": "last-mile",
-        "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.319,
-        "lastDate": "2026-09-14",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 4.319 on 2026-09-14"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "ATA_TONNAGE",
-        "label": "ATA Truck Tonnage Index",
-        "shortLabel": "ATA Tonnage",
-        "category": "middle-mile",
-        "cadence": "ATA, ~3 weeks after month-end",
-        "lastValue": 113.3,
-        "lastDate": "2026-06-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: 113.3 on 2026-06-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "DALLAS_DELIVERY",
-        "label": "Dallas Fed Mfg Delivery Time",
-        "shortLabel": "Dallas Delivery",
-        "category": "dc",
-        "cadence": "Dallas Fed Mfg Survey, last Mon",
-        "lastValue": 12.5,
-        "lastDate": "2026-08-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: 12.5 on 2026-08-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "ELEC_INDUSTRIAL",
-        "label": "Industrial Electricity Rate (US)",
-        "shortLabel": "Ind. Electricity",
-        "category": "dc",
-        "cadence": "EIA Electric Power Monthly, ~6 weeks after",
-        "lastValue": 9.17,
-        "lastDate": "2026-06-01",
-        "unit": "¢/kWh",
-        "decimals": 2,
-        "context": "Last: 9.17 on 2026-06-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "JOLTS_TWU_OPENINGS",
-        "label": "JOLTS: Transp/Warehouse/Utilities Openings",
-        "shortLabel": "TWU Openings",
-        "category": "dc",
-        "cadence": "BLS JOLTS, ~5 weeks after month-end",
-        "lastValue": 330,
-        "lastDate": "2026-07-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 330 on 2026-07-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "JOLTS_TWU_LAYOFFS",
-        "label": "JOLTS: TWU Layoffs Rate",
-        "shortLabel": "TWU Layoffs",
-        "category": "dc",
-        "cadence": "BLS JOLTS, ~5 weeks after month-end",
-        "lastValue": 1,
-        "lastDate": "2026-07-01",
-        "unit": "%",
-        "decimals": 1,
-        "context": "Last: 1.0 on 2026-07-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "JOLTS_TWU_QUITS",
-        "label": "JOLTS: TWU Quits Rate",
-        "shortLabel": "TWU Quits",
-        "category": "dc",
-        "cadence": "BLS JOLTS, ~5 weeks after month-end",
-        "lastValue": 2.2,
-        "lastDate": "2026-07-01",
-        "unit": "%",
-        "decimals": 1,
-        "context": "Last: 2.2 on 2026-07-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "TSI_FREIGHT",
-        "label": "Transportation Services Index — Freight",
-        "shortLabel": "TSI Freight",
-        "category": "middle-mile",
-        "cadence": "BTS, ~6 weeks after month-end",
-        "lastValue": 134.9,
-        "lastDate": "2026-06-01",
-        "unit": "",
-        "decimals": 1,
-        "context": "Last: 134.9 on 2026-06-01"
-      },
-      {
-        "date": "2026-09-25",
-        "id": "BORDER_MX_TRUCKS",
-        "label": "US-Mexico Border Truck Crossings",
-        "shortLabel": "MX Trucks",
-        "category": "international",
-        "cadence": "BTS Border Crossing, monthly",
-        "lastValue": 650.466,
-        "lastDate": "2026-07-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 650 on 2026-07-01"
-      },
-      {
         "date": "2026-09-28",
         "id": "DIESEL_RETAIL",
         "label": "Diesel Retail Price (US Avg)",
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 6.285,
-        "lastDate": "2026-09-14",
+        "lastValue": 6.529,
+        "lastDate": "2026-09-21",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 6.285 on 2026-09-14"
+        "context": "Last: 6.529 on 2026-09-21"
       },
       {
         "date": "2026-09-28",
@@ -167,11 +24,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.319,
-        "lastDate": "2026-09-14",
+        "lastValue": 4.478,
+        "lastDate": "2026-09-21",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.319 on 2026-09-14"
+        "context": "Last: 4.478 on 2026-09-21"
       },
       {
         "date": "2026-09-28",
@@ -180,11 +37,11 @@
         "shortLabel": "Gas Price",
         "category": "last-mile",
         "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.319,
-        "lastDate": "2026-09-14",
+        "lastValue": 4.478,
+        "lastDate": "2026-09-21",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.319 on 2026-09-14"
+        "context": "Last: 4.478 on 2026-09-21"
       },
       {
         "date": "2026-10-01",
@@ -341,74 +198,61 @@
         "unit": "k",
         "decimals": 0,
         "context": "Last: 1,837 on 2026-08-01"
+      },
+      {
+        "date": "2026-10-05",
+        "id": "DIESEL_RETAIL",
+        "label": "Diesel Retail Price (US Avg)",
+        "shortLabel": "Diesel",
+        "category": "middle-mile",
+        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+        "lastValue": 6.529,
+        "lastDate": "2026-09-21",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 6.529 on 2026-09-21"
+      },
+      {
+        "date": "2026-10-05",
+        "id": "GASOLINE_RETAIL",
+        "label": "Gasoline Retail Price (US Avg)",
+        "shortLabel": "Gasoline",
+        "category": "middle-mile",
+        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+        "lastValue": 4.478,
+        "lastDate": "2026-09-21",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 4.478 on 2026-09-21"
+      },
+      {
+        "date": "2026-10-05",
+        "id": "GASREG",
+        "label": "Retail Gasoline Price (Regular)",
+        "shortLabel": "Gas Price",
+        "category": "last-mile",
+        "cadence": "EIA Weekly Petroleum",
+        "lastValue": 4.478,
+        "lastDate": "2026-09-21",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 4.478 on 2026-09-21"
       }
     ],
     "byCategory": {
       "middle-mile": [
         {
-          "date": "2026-09-21",
-          "id": "DIESEL_RETAIL",
-          "label": "Diesel Retail Price (US Avg)",
-          "shortLabel": "Diesel",
-          "category": "middle-mile",
-          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 6.285,
-          "lastDate": "2026-09-14",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 6.285 on 2026-09-14"
-        },
-        {
-          "date": "2026-09-21",
-          "id": "GASOLINE_RETAIL",
-          "label": "Gasoline Retail Price (US Avg)",
-          "shortLabel": "Gasoline",
-          "category": "middle-mile",
-          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.319,
-          "lastDate": "2026-09-14",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 4.319 on 2026-09-14"
-        },
-        {
-          "date": "2026-09-25",
-          "id": "ATA_TONNAGE",
-          "label": "ATA Truck Tonnage Index",
-          "shortLabel": "ATA Tonnage",
-          "category": "middle-mile",
-          "cadence": "ATA, ~3 weeks after month-end",
-          "lastValue": 113.3,
-          "lastDate": "2026-06-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 113.3 on 2026-06-01"
-        },
-        {
-          "date": "2026-09-25",
-          "id": "TSI_FREIGHT",
-          "label": "Transportation Services Index — Freight",
-          "shortLabel": "TSI Freight",
-          "category": "middle-mile",
-          "cadence": "BTS, ~6 weeks after month-end",
-          "lastValue": 134.9,
-          "lastDate": "2026-06-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 134.9 on 2026-06-01"
-        },
-        {
           "date": "2026-09-28",
           "id": "DIESEL_RETAIL",
           "label": "Diesel Retail Price (US Avg)",
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 6.285,
-          "lastDate": "2026-09-14",
+          "lastValue": 6.529,
+          "lastDate": "2026-09-21",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 6.285 on 2026-09-14"
+          "context": "Last: 6.529 on 2026-09-21"
         },
         {
           "date": "2026-09-28",
@@ -417,11 +261,11 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.319,
-          "lastDate": "2026-09-14",
+          "lastValue": 4.478,
+          "lastDate": "2026-09-21",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.319 on 2026-09-14"
+          "context": "Last: 4.478 on 2026-09-21"
         },
         {
           "date": "2026-10-02",
@@ -435,22 +279,35 @@
           "unit": "k",
           "decimals": 0,
           "context": "Last: 1,470 on 2026-08-01"
+        },
+        {
+          "date": "2026-10-05",
+          "id": "DIESEL_RETAIL",
+          "label": "Diesel Retail Price (US Avg)",
+          "shortLabel": "Diesel",
+          "category": "middle-mile",
+          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+          "lastValue": 6.529,
+          "lastDate": "2026-09-21",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 6.529 on 2026-09-21"
+        },
+        {
+          "date": "2026-10-05",
+          "id": "GASOLINE_RETAIL",
+          "label": "Gasoline Retail Price (US Avg)",
+          "shortLabel": "Gasoline",
+          "category": "middle-mile",
+          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+          "lastValue": 4.478,
+          "lastDate": "2026-09-21",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 4.478 on 2026-09-21"
         }
       ],
       "last-mile": [
-        {
-          "date": "2026-09-21",
-          "id": "GASREG",
-          "label": "Retail Gasoline Price (Regular)",
-          "shortLabel": "Gas Price",
-          "category": "last-mile",
-          "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.319,
-          "lastDate": "2026-09-14",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 4.319 on 2026-09-14"
-        },
         {
           "date": "2026-09-28",
           "id": "GASREG",
@@ -458,11 +315,11 @@
           "shortLabel": "Gas Price",
           "category": "last-mile",
           "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.319,
-          "lastDate": "2026-09-14",
+          "lastValue": 4.478,
+          "lastDate": "2026-09-21",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.319 on 2026-09-14"
+          "context": "Last: 4.478 on 2026-09-21"
         },
         {
           "date": "2026-10-02",
@@ -502,128 +359,22 @@
           "unit": "k",
           "decimals": 0,
           "context": "Last: 830 on 2026-08-01"
-        }
-      ],
-      "dc": [
-        {
-          "date": "2026-09-25",
-          "id": "DALLAS_DELIVERY",
-          "label": "Dallas Fed Mfg Delivery Time",
-          "shortLabel": "Dallas Delivery",
-          "category": "dc",
-          "cadence": "Dallas Fed Mfg Survey, last Mon",
-          "lastValue": 12.5,
-          "lastDate": "2026-08-01",
-          "unit": "",
-          "decimals": 1,
-          "context": "Last: 12.5 on 2026-08-01"
         },
         {
-          "date": "2026-09-25",
-          "id": "ELEC_INDUSTRIAL",
-          "label": "Industrial Electricity Rate (US)",
-          "shortLabel": "Ind. Electricity",
-          "category": "dc",
-          "cadence": "EIA Electric Power Monthly, ~6 weeks after",
-          "lastValue": 9.17,
-          "lastDate": "2026-06-01",
-          "unit": "¢/kWh",
-          "decimals": 2,
-          "context": "Last: 9.17 on 2026-06-01"
-        },
-        {
-          "date": "2026-09-25",
-          "id": "JOLTS_TWU_OPENINGS",
-          "label": "JOLTS: Transp/Warehouse/Utilities Openings",
-          "shortLabel": "TWU Openings",
-          "category": "dc",
-          "cadence": "BLS JOLTS, ~5 weeks after month-end",
-          "lastValue": 330,
-          "lastDate": "2026-07-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 330 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-25",
-          "id": "JOLTS_TWU_LAYOFFS",
-          "label": "JOLTS: TWU Layoffs Rate",
-          "shortLabel": "TWU Layoffs",
-          "category": "dc",
-          "cadence": "BLS JOLTS, ~5 weeks after month-end",
-          "lastValue": 1,
-          "lastDate": "2026-07-01",
-          "unit": "%",
-          "decimals": 1,
-          "context": "Last: 1.0 on 2026-07-01"
-        },
-        {
-          "date": "2026-09-25",
-          "id": "JOLTS_TWU_QUITS",
-          "label": "JOLTS: TWU Quits Rate",
-          "shortLabel": "TWU Quits",
-          "category": "dc",
-          "cadence": "BLS JOLTS, ~5 weeks after month-end",
-          "lastValue": 2.2,
-          "lastDate": "2026-07-01",
-          "unit": "%",
-          "decimals": 1,
-          "context": "Last: 2.2 on 2026-07-01"
-        },
-        {
-          "date": "2026-10-02",
-          "id": "WAREHOUSE_AHE",
-          "label": "Trade & Transp/Warehouse Avg Hourly Earnings",
-          "shortLabel": "TTU Wage",
-          "category": "dc",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 31.46,
-          "lastDate": "2026-08-01",
-          "unit": "$/hr",
-          "decimals": 2,
-          "context": "Last: 31.46 on 2026-08-01"
-        },
-        {
-          "date": "2026-10-02",
-          "id": "WAREHOUSE_AHE_YOY",
-          "label": "Warehouse Wage YoY",
-          "shortLabel": "Wage YoY",
-          "category": "dc",
-          "cadence": "derived from CES",
-          "lastValue": 4.414205111184872,
-          "lastDate": "2026-08-01",
-          "unit": "%",
-          "decimals": 1,
-          "context": "Last: 4.4 on 2026-08-01"
-        },
-        {
-          "date": "2026-10-02",
-          "id": "WAREHOUSE_EMP",
-          "label": "Warehousing & Storage Employment",
-          "shortLabel": "Warehouse Emp",
-          "category": "dc",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 1837.4,
-          "lastDate": "2026-08-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 1,837 on 2026-08-01"
+          "date": "2026-10-05",
+          "id": "GASREG",
+          "label": "Retail Gasoline Price (Regular)",
+          "shortLabel": "Gas Price",
+          "category": "last-mile",
+          "cadence": "EIA Weekly Petroleum",
+          "lastValue": 4.478,
+          "lastDate": "2026-09-21",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 4.478 on 2026-09-21"
         }
       ],
       "international": [
-        {
-          "date": "2026-09-25",
-          "id": "BORDER_MX_TRUCKS",
-          "label": "US-Mexico Border Truck Crossings",
-          "shortLabel": "MX Trucks",
-          "category": "international",
-          "cadence": "BTS Border Crossing, monthly",
-          "lastValue": 650.466,
-          "lastDate": "2026-07-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 650 on 2026-07-01"
-        },
         {
           "date": "2026-10-01",
           "id": "GSCPI",
@@ -690,6 +441,47 @@
           "unit": "",
           "decimals": 2,
           "context": "Last: 0.83 on 2026-08-31"
+        }
+      ],
+      "dc": [
+        {
+          "date": "2026-10-02",
+          "id": "WAREHOUSE_AHE",
+          "label": "Trade & Transp/Warehouse Avg Hourly Earnings",
+          "shortLabel": "TTU Wage",
+          "category": "dc",
+          "cadence": "BLS CES, ~1st Friday",
+          "lastValue": 31.46,
+          "lastDate": "2026-08-01",
+          "unit": "$/hr",
+          "decimals": 2,
+          "context": "Last: 31.46 on 2026-08-01"
+        },
+        {
+          "date": "2026-10-02",
+          "id": "WAREHOUSE_AHE_YOY",
+          "label": "Warehouse Wage YoY",
+          "shortLabel": "Wage YoY",
+          "category": "dc",
+          "cadence": "derived from CES",
+          "lastValue": 4.414205111184872,
+          "lastDate": "2026-08-01",
+          "unit": "%",
+          "decimals": 1,
+          "context": "Last: 4.4 on 2026-08-01"
+        },
+        {
+          "date": "2026-10-02",
+          "id": "WAREHOUSE_EMP",
+          "label": "Warehousing & Storage Employment",
+          "shortLabel": "Warehouse Emp",
+          "category": "dc",
+          "cadence": "BLS CES, ~1st Friday",
+          "lastValue": 1837.4,
+          "lastDate": "2026-08-01",
+          "unit": "k",
+          "decimals": 0,
+          "context": "Last: 1,837 on 2026-08-01"
         }
       ]
     }
