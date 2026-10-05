@@ -1,4 +1,4 @@
-# Support Activities for Transportation Emp  source=fred  generated=2026-09-28T12:31:31.613Z
+# Support Activities for Transportation Emp  source=fred  generated=2026-10-05T13:11:18.924Z
 date,value
 2010-01-01,546.6
 2010-02-01,544.2
@@ -198,5 +198,6 @@ date,value
 2026-04-01,824.3
 2026-05-01,825.1
 2026-06-01,826.9
-2026-07-01,826.6
-2026-08-01,829.7
+2026-07-01,827.3
+2026-08-01,831.5
+2026-09-01,835
