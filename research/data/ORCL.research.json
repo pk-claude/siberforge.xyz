@@ -1,87 +1,131 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "The database incumbent that bet the balance sheet on AI infrastructure: a $638B backlog and 93% OCI growth set against negative $23.7B free cash flow, $100B-plus of debt, and a stock still down more than half from its 2025 high.",
+  "asOf": "2026-10-04",
+  "oneLiner": "The database incumbent that bet the balance sheet on AI infrastructure: a $664B backlog and 121% OCI growth set against negative free cash flow, $125B of debt, a $20B equity raise, and a stock still down roughly 59% from its 2025 high.",
   "thesis": [
-    "The backlog is real and enormous. RPO ended fiscal 2026 (May 2026, reported Jun 10, 2026) at $638B, up 363% YoY and up $85B sequentially, with $67B of new AI infrastructure contracts signed in Q4 alone.",
-    "OCI is growing at a pace no other hyperscaler matches. OCI revenue rose 93% YoY to $5.8B in Q4 FY26, and management guided Q1 FY27 cloud revenue growth of 58-64% and FY27 total revenue of roughly $90B, up 34% in constant currency.",
-    "The bet is debt-funded, which is the whole controversy. FY26 capex was $55.7B (versus $21.2B in FY25), free cash flow was negative $23.7B, and Oracle raised $43B of debt plus $5B of equity, with roughly $40B more financing planned against a $70B FY27 net capex outlay.",
-    "Customer concentration cuts both ways. Roughly $300B of the backlog is attributed by press reports to OpenAI/Stargate commitments (not company-confirmed): transformational if OpenAI keeps paying, existential capex if it cannot.",
-    "The de-rating has already happened. From a $345.68 52-week high (Sept 2025) the stock fell as low as $114.50 before recovering to about $153 by Aug 12, 2026, leaving it near 19x the $8.05 FY27 EPS guide, a discount to MSFT and GOOGL despite far faster contracted growth."
+    "The backlog is real and still growing. RPO reached $664B at Q1 FY27 (quarter ended Aug 31, 2026, reported Sep 10, 2026), up $209B YoY and $26B QoQ, after more than $30B of new AI cloud contracts that management says require no additional Oracle capital.",
+    "Conversion has visibly started. OCI revenue rose 121% YoY to $7.4B in Q1 FY27 (from 93% in Q4 FY26), total revenue grew 30% to $19.35B, and Oracle delivered 850MW of new capacity and more than 300,000 GPUs since the end of Q4. FY27 guidance was nudged up to at least $90B of revenue and $8.10 of non-GAAP EPS.",
+    "The bet is still externally funded, which is the whole controversy. Q1 FY27 capex was $28.5B against $23.1B of operating cash flow (itself flattered by $11.4B of customer prepayments), so free cash flow was negative $5.4B; Oracle sold $20B of stock via its ATM program in the quarter and carries about $125B of notes and borrowings (Aug 31, 2026).",
+    "Customer concentration cuts both ways. Roughly $300B of the backlog is attributed by press reports to OpenAI/Stargate (not company-confirmed). A late-Sept 2026 report of OpenAI's revenue run-rate nearing $70B lifted the stock, but a force majeure notice on the New Mexico Stargate campus shows the physical buildout risk.",
+    "The de-rating has already happened. At $142.30 (Oct 2, 2026 close) ORCL trades near 17.6x the $8.10 FY27 EPS guide, below the 23-27x range cited for MSFT, GOOGL, AMZN, and META, despite far faster contracted growth."
   ],
   "latestQuarter": {
-    "label": "Fiscal Q4 FY26, quarter ended May 2026 (reported Jun 10, 2026)",
+    "label": "Fiscal Q1 FY27, quarter ended Aug 31, 2026 (reported Sep 10, 2026)",
     "points": [
-      "Revenue $19.18B, up 21% YoY, versus $19.10B expected; non-GAAP EPS $2.03 versus $1.96 expected",
-      "Total cloud revenue $9.9B, up 47%; OCI $5.8B, up 93%; cloud applications $4.1B, up 10%",
-      "RPO $638B, up 363% YoY and up $85B QoQ, versus roughly $596B expected; $75B of it is prepaid or customer-supplied hardware",
-      "$67B of AI infrastructure contracts signed in the quarter, mostly bring-your-own-hardware or prepaid",
-      "GAAP operating income $6.1B, up 20%; non-GAAP operating income a record $8.6B, up 22%",
-      "FY26 totals: capex $55.7B, operating cash flow about $32B, free cash flow negative $23.7B; $43B of debt and $5B of equity raised"
+      "Revenue $19.35B, up 30% YoY (Q1 FY26: $14.93B); non-GAAP EPS $1.92, up 30%, versus consensus of roughly $1.73-1.75 (sources vary); GAAP EPS $1.56, up 55%",
+      "Total cloud revenue $11.6B, up 62%; OCI (IaaS) $7.4B, up 121%, of which CPU/GPU infrastructure $6.5B, up 151%; cloud applications $4.2B, up 10%",
+      "RPO $664B, up $209B YoY and $26B QoQ from $638B; more than $30B of new AI contracts, majority prepaid or bring-your-own-hardware",
+      "GAAP operating income $6.7B, up 57%; non-GAAP operating income $8.2B, up 31%, 42% margin; GAAP net income $4.76B",
+      "Operating cash flow $23.1B (includes $11.4B of customer prepayments); capex $28.5B; free cash flow negative $5.4B; net cash capex outlay $18.0B",
+      "Financing: $20B ATM equity sale completed in Q1; notes and borrowings about $125.3B and cash $36.4B at Aug 31, 2026; AI infrastructure utilization 97.9%"
     ]
   },
-  "latestProse": "Oracle's fiscal Q4 FY26 (reported Jun 10, 2026) beat on both lines, with $19.18B of revenue and $2.03 of non-GAAP EPS, but the income statement is no longer the story. RPO exploded to $638B, up $85B sequentially, as another $67B of AI infrastructure contracts signed, while OCI grew 93% to $5.8B. Underneath, the strain shows: FY26 capex of $55.7B swamped roughly $32B of operating cash flow, leaving free cash flow at negative $23.7B, funded by $43B of new debt and $5B of equity. Q4 margins held (non-GAAP operating income up 22%), but management conceded FY27 gross margin steps down on data-center ramp timing and mix. The disclosure that matters most: $75B of the RPO is prepaid or customer-supplied hardware, a candid admission of how much backlog quality depends on counterparties' own funding.",
-  "guidanceProse": "For FY27 Oracle guided total revenue up 34% in constant currency to roughly $90B, Q1 FY27 cloud revenue growth of 58-64%, and non-GAAP EPS of $8.05, implying continued margin compression as low-margin AI infrastructure becomes a bigger slice of the mix. The capex guide is the number that matters: a $70B net cash outlay for FY27, with roughly $40B of additional financing planned on top of a debt stack already above $100B. Management frames the margin step-down as temporary, expecting infrastructure margins to improve as data centers reach full contractual revenue contribution. Any slip in that conversion timeline flows straight into the leverage story.",
+  "latestProse": "Oracle's fiscal Q1 FY27 (reported Sep 10, 2026) was the first quarter in which the backlog visibly turned into revenue at scale: total revenue rose 30% to $19.35B, OCI grew 121% to $7.4B, and non-GAAP EPS of $1.92 beat consensus near $1.73-1.75 by roughly 10%. GAAP operating income jumped 57% to $6.7B and the non-GAAP margin held at 42%, easing fears that low-margin GPU rental would crush profitability. RPO rose a more modest $26B to $664B, with management stressing that the new contracts carry no incremental capital need. The cash picture improved but did not flip: $23.1B of operating cash flow, swollen by $11.4B of customer prepayments, still fell short of $28.5B of capex, and the gap was bridged by a $20B at-the-market stock sale that lifted the diluted share count to 3.0B. Shares rose roughly 7% after the print (per a report citing CNBC) but gave it back by early October amid data-center delay headlines. The disclosure that matters most: $11.4B of Q1 operating cash flow came from customer prepayments, meaning the headline cash improvement depends on counterparties funding Oracle's buildout up front rather than on the business paying for itself.",
+  "guidanceProse": "For Q2 FY27 Oracle guided total revenue growth of 30-34%, cloud revenue growth of 65-71% in USD, and non-GAAP EPS of $1.85-1.93 (up 21-25% excluding the one-time Ampere gain in Q2 FY26). For the full year it now expects revenue of at least $90B (previously about $90B, up 34% in constant currency) and non-GAAP EPS of $8.10 (previously $8.05). The financing plan is unchanged: roughly $40B of FY27 debt and equity, of which the $20B ATM is now done, no further debt expected in calendar 2026, and a $70B FY27 net capex outlay guide from June (not restated in the Q1 release). Management says infrastructure revenue acceleration, now nine consecutive quarters, should continue through FY27. Any slip in data-center power delivery flows straight into the leverage story.",
   "guide": {
-    "label": "FY27 outlook",
-    "val": "~$90B revenue, +34% cc",
-    "sub": "non-GAAP EPS $8.05; $70B net capex outlay with ~$40B new financing; gross margin steps down on AI infrastructure mix",
+    "label": "FY27 outlook (raised Sep 10, 2026)",
+    "val": "$90B+ revenue, EPS $8.10",
+    "sub": "Q2 FY27: revenue +30-34%, cloud +65-71%, EPS $1.85-1.93; ~$40B FY27 financing ($20B ATM done); $70B net capex outlay guide (Jun 2026)",
     "tone": "warn"
   },
   "segments": [
-    "Cloud infrastructure (OCI): $5.8B in Q4 FY26, up 93% YoY; the growth engine, but capital-hungry and margin-dilutive during the buildout",
-    "Cloud applications (Fusion, NetSuite): $4.1B in Q4 FY26, up 10% YoY; the steady, high-margin SaaS base",
-    "Legacy license, support, hardware, and services: slow-growing, but still the cash cow funding the transition"
+    "Cloud infrastructure (OCI): $7.4B in Q1 FY27, up 121% YoY (CPU/GPU $6.5B, up 151%; database services $0.9B, up 26%); the growth engine, capital-hungry during the buildout",
+    "Cloud applications (Fusion, NetSuite, Industry incl. Oracle Health): $4.2B in Q1 FY27, up 10% YoY; the steady, high-margin SaaS base",
+    "Legacy license, support, hardware, and services: software revenue $5.55B in Q1 FY27, down 3%; slow-shrinking, but still the cash cow funding the transition"
   ],
   "competitive": [
-    "MSFT/Azure: larger and self-funded from roughly $70B of annual free cash flow; Oracle is the only hyperscaler-scale builder financing capex primarily with debt",
-    "AMZN/AWS: the scale leader that Oracle undercuts on large GPU-cluster pricing and network interconnect; AWS grows a fraction as fast as OCI's 93%, but off a vastly larger base",
+    "MSFT/Azure: larger and self-funded from internal cash flow; Oracle is the only hyperscaler-scale builder financing capex with debt, equity issuance, and customer prepayments",
+    "AMZN/AWS: the scale leader that Oracle undercuts on large GPU-cluster pricing and network interconnect; AWS grows a fraction as fast as OCI's 121% (Q1 FY27), but off a vastly larger base",
     "GOOGL/GCP: the closest analog in using AI demand to gain infrastructure share, but with a fortress balance sheet behind it",
     "SAP: the applications rival relevant to Fusion and NetSuite, and entirely absent from the AI infrastructure land grab",
     "Neoclouds (CoreWeave and peers): compete for the same AI training contracts with even more aggressive debt structures, and set the marginal price of GPU capacity"
   ],
-  "moat": "The database franchise and the enterprise install base are a genuine moat with decades of switching costs, and they fund everything else. OCI's edge, price-performance on large GPU clusters and a willingness to build to a single customer's specification, is an execution advantage rather than a structural one; commodity GPUs plus debt is a replicable formula. The $638B backlog is contractual protection, but its value is only as good as the counterparties behind it.",
+  "moat": "The database franchise and the enterprise install base are a genuine moat with decades of switching costs, and they fund everything else. OCI's edge, price-performance on large GPU clusters and a willingness to build to a single customer's specification, is an execution advantage rather than a structural one; commodity GPUs plus outside capital is a replicable formula. The $664B backlog is contractual protection, but its value is only as good as the counterparties behind it and Oracle's ability to energize sites on time.",
   "risks": [
     "OpenAI concentration: reportedly around $300B of RPO depends on one unprofitable counterparty's ability to keep raising capital",
-    "Debt spiral: total debt above $100B, $43B raised in FY26 and roughly $40B more planned for FY27; a credit-market shock or ratings action raises the cost of the entire strategy",
-    "Negative free cash flow (negative $23.7B in FY26) persists through at least FY27 on management's own capex guide, removing the buyback cushion that historically supported the multiple",
-    "Margin mix: AI infrastructure carries structurally lower gross margins than license and support; FY27 gross margin steps down, and 'temporary' could prove permanent if GPU rental pricing deflates",
-    "Asset obsolescence: GPUs depreciate fast, and data centers built for today's chips risk aging out before contracts fully monetize (the 'yesterday's data centers with tomorrow's debt' critique, CNBC, Mar 9, 2026)",
-    "TikTok entanglement: the 15% stake in the TikTok USDS joint venture (valued near $2B in a Mar 2026 filing) adds geopolitical and operational exposure disproportionate to its financial size"
+    "Leverage and dilution: notes and borrowings about $125B (Aug 31, 2026), debt rated BBB- by S&P (per Business Chief), and a $20B equity sale in Q1 FY27 that lifted diluted shares 3% YoY; a credit shock raises the cost of the whole strategy (CNBC flagged rising bond-yield risk for debt-funded data-center builders, Sep 27, 2026)",
+    "Negative free cash flow persists: negative $23.7B in FY26 and negative $5.4B in Q1 FY27 even after $11.4B of customer prepayments; prepayment-funded cash flow can reverse",
+    "Power and construction delays: a force majeure notice on the New Mexico Stargate campus (Project Jupiter) and an Aterio warning that the 1.3GW Port Washington, Wisconsin campus may miss its 2H 2027 target on grid approval (Sept 2026)",
+    "Asset obsolescence and margin mix: GPUs depreciate fast (Q1 FY27 depreciation $3.2B vs $1.4B a year earlier); data centers built for today's chips risk aging out before contracts fully monetize",
+    "TikTok entanglement: the 15% stake in the TikTok USDS joint venture (valued near $2B in a Mar 2026 filing) adds geopolitical exposure disproportionate to its financial size"
   ],
   "catalysts": [
-    "Fiscal Q1 FY27 earnings (expected Sept 2026): first read on the 58-64% cloud growth guide and the pace of RPO-to-revenue conversion",
-    "Oracle AI World conference (expected Oct 2026, date unverified): historically the venue for new mega-contract announcements",
-    "FY27 debt issuance (roughly $40B of financing planned): pricing and rating-agency reaction will mark the market's tolerance for the strategy",
-    "OpenAI/Stargate funding rounds and data-center completions through 2026-27: each one de-risks or re-risks a large share of the backlog",
-    "TikTok USDS joint venture developments (Oracle holds 15% alongside Silver Lake and MGX; ByteDance retains 19.9%)"
+    "Oracle AI World, Las Vegas, Oct 25-28, 2026, with Investor Day on Oct 28: likely update on multi-year targets, capex, and new contracts",
+    "Fiscal Q2 FY27 earnings (expected around Dec 9, 2026, date unverified): test of the 65-71% cloud growth guide and RPO-to-revenue conversion",
+    "Remaining FY27 financing (about $20B left of the ~$40B plan; no new debt expected in calendar 2026): timing, mix, and rating-agency reaction",
+    "Data-center energization milestones: New Mexico (Project Jupiter) gas supply and Wisconsin (Port Washington) grid approval",
+    "OpenAI/Stargate funding and revenue updates through 2026-27: each one de-risks or re-risks a large share of the backlog"
   ],
-  "pricedIn": "At about $153 (Aug 12, 2026 close), ORCL trades near 19x the $8.05 FY27 EPS guide: cheaper than MSFT, GOOGL, and its own recent history, for a company guiding 34% revenue growth. The market has priced in substantial doubt. The stock remains down roughly 56% from its September 2025 high of $345.68, while consensus (average target near $247, Buy rating) implies analysts believe far more of the backlog than the tape does. Priced in: continued negative free cash flow, FY27 margin compression, and meaningful OpenAI counterparty risk. Not priced in: either a clean RPO-to-revenue conversion or an OpenAI funding failure that strands the capex. This is a binary being quoted as a coin flip with a debt overhang.",
+  "pricedIn": "At $142.30 (Oct 2, 2026 close), ORCL trades near 17.6x the $8.10 FY27 EPS guide, with a market cap around $409B: cheaper than MSFT, GOOGL, and its own recent history, for a company guiding 30%-plus revenue growth. The stock sits about 59% below its September 2025 high of $345.68 and near the low end of its 52-week range ($114.50-$322.54). A roughly 7% post-earnings pop faded within weeks on New Mexico and Wisconsin delay headlines, so the market is still refusing to pay for the beat. Priced in: negative free cash flow through FY27, continued dilution, and meaningful OpenAI counterparty risk. Not priced in: either a clean RPO-to-revenue conversion with margins holding near 42% non-GAAP, or a counterparty or power failure that strands the capex. Consensus target and rating as of Oct 2026: unverified.",
   "scenarios": {
-    "bear": "OpenAI's funding stumbles in 2027 and Stargate buildouts slow; portions of RPO are re-termed or cancelled while the $70B FY27 capex is already committed. Gross margins keep sliding as GPU rental pricing deflates, EPS undershoots the $8.05 guide, and rating agencies act on a debt stack heading toward $140B. With no free-cash-flow cushion, the equity re-rates on stressed earnings: 12-13x on roughly $7 of EPS points back toward the $90-110 range, below the 52-week low.",
-    "base": "The backlog converts on schedule but unevenly: FY27 revenue lands near $90B with EPS around $8, free cash flow stays negative through FY27 and approaches breakeven in FY28 as early data centers reach full contractual contribution. Debt peaks without a downgrade spiral. The multiple recovers modestly to 21-23x forward as conversion evidence accumulates, supporting a $170-185 stock over 12 months, earned quarter by quarter against the leverage clock.",
-    "bull": "AI training demand stays supply-constrained, OpenAI keeps raising capital, and Oracle signs further non-OpenAI mega-deals that dilute concentration risk. Cloud revenue compounds 40%-plus into FY28, infrastructure margins inflect upward on utilization, and free cash flow turns positive earlier than feared. EPS runs toward $10-11 by FY28 and the market re-pays a mid-20s multiple on a de-risked backlog: a $250-plus stock, back toward the consensus target near $247."
+    "bear": "OpenAI's funding stumbles in 2027 and Stargate buildouts slip on power delays; portions of RPO are re-termed or cancelled while capex is already committed. Prepayment inflows dry up, free cash flow deepens, and further equity issuance dilutes holders while rating agencies act on a debt stack already near $125B. EPS undershoots the $8.10 guide and the equity re-rates on stressed earnings: 12-13x on roughly $7 of EPS points back toward the $90-110 range, below the 52-week low.",
+    "base": "The backlog converts on schedule but unevenly: FY27 revenue lands at or slightly above $90B with EPS near $8.10, free cash flow stays negative through FY27 and approaches breakeven in FY28 as early data centers reach full contractual contribution. The remaining ~$20B of financing is placed without a downgrade. The multiple recovers modestly to 21-23x forward as conversion evidence accumulates, supporting a $170-185 stock over 12 months, earned quarter by quarter against the leverage clock.",
+    "bull": "AI training and inference demand stays supply-constrained, OpenAI keeps raising capital, and Oracle signs further non-OpenAI mega-deals that dilute concentration risk. OCI growth stays above 100% into FY28, non-GAAP margins hold in the low 40s on 98% utilization and renewal premiums, and free cash flow turns positive earlier than feared. EPS runs toward $10-11 by FY28 and the market re-pays a mid-20s multiple on a de-risked backlog: a $250-plus stock."
   },
   "valPresets": {
     "mode": "fcf",
     "basis": "fwdEps",
-    "r": 0.10,
+    "r": 0.1,
     "gT": 0.035,
     "years": 10,
-    "bear": {"g": 0.05},
-    "base": {"g": 0.12},
-    "bull": {"g": 0.18},
+    "bear": {
+      "g": 0.05
+    },
+    "base": {
+      "g": 0.12
+    },
+    "bull": {
+      "g": 0.18
+    },
     "note": "forward-earnings basis: FCF is deeply negative during the OCI/Stargate buildout; also flag the debt-funded nature of the capex"
   },
-  "bullCharts": {"0": ["revQ", "revYoyA"]},
-  "bearCharts": {"0": ["capexA", "fcfA"]},
+  "bullCharts": {
+    "0": [
+      "revQ",
+      "revYoyA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "capexA",
+      "fcfA"
+    ]
+  },
   "sources": [
-    {"label": "Oracle Q4 FY26 earnings release (Jun 10, 2026)", "url": "https://www.oracle.com/news/announcement/q4fy26-earnings-release-2026-06-10/"},
-    {"label": "Oracle Q4 FY26 earnings slides (company PDF)", "url": "https://s23.q4cdn.com/440135859/files/doc_financials/2026/q4/Q4-FY26-Oracle-Earnings-Slides.pdf"},
-    {"label": "CNBC: Oracle Q4 FY26 earnings report", "url": "https://www.cnbc.com/2026/06/10/oracle-orcl-q4-earnings-report-2026.html"},
-    {"label": "MLQ: Oracle $55.7B FY26 capex, $70B FY27 net outlay guide", "url": "https://mlq.ai/news/oracle-reports-557b-fy2026-capex-guides-to-70b-net-outlay-in-fy2027/"},
-    {"label": "Seeking Alpha: Oracle FY27 34% revenue growth guide", "url": "https://seekingalpha.com/news/4602439-oracle-expects-34-percent-fy27-revenue-growth-as-it-plans-70b-net-cash-capex-outlay"},
-    {"label": "ERP Today: $638B backlog and the funding test", "url": "https://erp.today/oracle-q4-2026-earnings-ai-cloud-backlog-funding/"},
-    {"label": "CNBC: Oracle TikTok US stake valued near $2B (Mar 11, 2026)", "url": "https://www.cnbc.com/2026/03/11/oracle-tiktok-us-stake-outages.html"},
-    {"label": "ORCL price and overview (stockanalysis.com)", "url": "https://stockanalysis.com/stocks/orcl/"}
+    {
+      "label": "Oracle Q1 FY27 earnings release (Sep 10, 2026)",
+      "url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Q1-Results-Driven-by-Triple-Digit-Growth-in-Cloud-Infrastructure-Revenues/default.aspx"
+    },
+    {
+      "label": "Oracle Q1 FY27 earnings slides (company PDF)",
+      "url": "https://s23.q4cdn.com/440135859/files/content_files/Q1-FY27-Oracle-Earnings-Slides.pdf"
+    },
+    {
+      "label": "Oracle Q4 FY26 earnings release, SEC 8-K Ex. 99.1 (Jun 10, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001341439/000119312526265848/orcl-ex99_1.htm"
+    },
+    {
+      "label": "ECIKS: Oracle stock rises after Q1 beat (citing CNBC, MarketScreener)",
+      "url": "https://eciks.org/26120-oracle-stock-earnings-beat"
+    },
+    {
+      "label": "Business Chief: $664B backlog meets its cash problem (Sep 30, 2026)",
+      "url": "https://businesschief.com/news/oracles-us-664bn-backlog-meets-its-us-24bn-cash-problem"
+    },
+    {
+      "label": "TIKR: Q4 FY26 call details, capex and RPO conversion (Jun 12, 2026)",
+      "url": "https://www.tikr.com/blog/oracle-stock-fell-8-after-a-record-quarter-heres-why-the-selloff-may-be-overblown"
+    },
+    {
+      "label": "CNBC: debt-hungry data-center companies and bond yields (Sep 27, 2026)",
+      "url": "https://cnbc.com/2026/09/27/debt-hungry-data-center-companies-increased-risk-bond-yields-spike.html"
+    },
+    {
+      "label": "CNBC: Oracle TikTok US stake valued near $2B (Mar 11, 2026)",
+      "url": "https://www.cnbc.com/2026/03/11/oracle-tiktok-us-stake-outages.html"
+    },
+    {
+      "label": "ORCL price, Oct 2, 2026 close (stockinvest.us)",
+      "url": "https://stockinvest.us/stock/ORCL"
+    }
   ]
 }
