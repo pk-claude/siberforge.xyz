@@ -1,4 +1,4 @@
-# Retail Gasoline Price (Regular)  source=fred  generated=2026-10-12T14:02:18.800Z
+# Retail Gasoline Price (Regular)  source=fred  generated=2026-10-19T11:42:51.108Z
 date,value
 2010-01-04,2.665
 2010-01-11,2.751
@@ -875,3 +875,4 @@ date,value
 2026-09-21,4.478
 2026-09-28,4.465
 2026-10-05,4.354
+2026-10-12,4.331

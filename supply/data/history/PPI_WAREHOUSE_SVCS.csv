@@ -1,4 +1,4 @@
-# PPI: Warehousing & Storage Services  source=fred  generated=2026-10-12T14:02:18.788Z
+# PPI: Warehousing & Storage Services  source=fred  generated=2026-10-19T11:42:51.097Z
 date,value
 2010-01-01,107.3
 2010-02-01,107.5
@@ -198,5 +198,6 @@ date,value
 2026-04-01,167.664
 2026-05-01,160.16
 2026-06-01,158.724
-2026-07-01,158.436
-2026-08-01,159.681
+2026-07-01,158.512
+2026-08-01,157.086
+2026-09-01,158.049
