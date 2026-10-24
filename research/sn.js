@@ -340,6 +340,238 @@
     return h;
   }
 
+  // ---------------- quality & expectations check (computed, every name) ----------------
+  // Plain-English reads of the filings, so every page carries analysis that
+  // refreshes with the data even when the written note is old.
+  function cleanQuarters(D) {
+    const q = (D.quarterly || []).map(r => {
+      const o = { ...r };
+      // some EDGAR filers drop the revenue tag in older quarters; rebuild it
+      if (!(o.revenue > 0) && o.grossProfit != null && o.costOfRev != null) o.revenue = o.grossProfit + o.costOfRev;
+      return o;
+    }).filter(r => r.revenue != null && isFinite(r.revenue) && r.revenue > 0);
+    // EDGAR Q4 share counts are derived (annual minus 9 months) and come out ~0; drop them.
+    const sh = q.map(r => r.sharesD).filter(v => v > 0).sort((a, b) => a - b);
+    const med = sh.length ? sh[Math.floor(sh.length / 2)] : null;
+    for (const r of q) if (!(r.sharesD > 0) || (med && r.sharesD < med * 0.5)) r.sharesD = null;
+    return q;
+  }
+  // The quarter ending 11-13 months before `end` (EDGAR series have gaps).
+  function yearAgo(q, end, k) {
+    const m = (e) => Number(e.slice(0, 4)) * 12 + Number(e.slice(5, 7));
+    const t = m(end);
+    for (let i = q.length - 1; i >= 0; i--) {
+      const d = t - m(q[i].end);
+      if (d >= 11 && d <= 13 && q[i][k] != null) return q[i];
+      if (d > 13) break;
+    }
+    return null;
+  }
+  const sgn = (v, d) => (v >= 0 ? '+' : '') + (v * 100).toFixed(d == null ? 0 : d) + '%';
+
+  function qualityRows(D, S, ANN, implied) {
+    const q = cleanQuarters(D);
+    const rows = [];
+    const add = (label, value, read, tone) => rows.push({ label, value, read, tone: tone || '' });
+    const sum4 = (arr, k) => arr.length === 4 && arr.every(r => r[k] != null && isFinite(r[k])) ? arr.reduce((a, r) => a + r[k], 0) : null;
+    const last4 = q.slice(-4), prev4 = q.slice(-8, -4);
+
+    // 1. growth trajectory: YoY for each of the last 4 quarters
+    const yoy = [];
+    for (let i = Math.max(0, q.length - 4); i < q.length; i++) {
+      const b = yearAgo(q, q[i].end, 'revenue');
+      if (b && b.revenue > 0) yoy.push({ end: q[i].end, g: q[i].revenue / b.revenue - 1 });
+    }
+    if (yoy.length >= 2) {
+      const lastG = yoy[yoy.length - 1].g, priorG = yoy[yoy.length - 2].g;
+      const d = lastG - priorG;
+      const dir = d > 0.05 ? 'Accelerating' : d < -0.05 ? 'Decelerating' : 'Steady';
+      add('Revenue growth (YoY, last ' + yoy.length + ' qtrs)', yoy.map(x => sgn(x.g)).join(' → '),
+        dir + ': latest quarter ' + sgn(lastG) + ' vs ' + sgn(priorG) + ' the quarter before. Multiples usually follow the second derivative, not the level.',
+        dir === 'Accelerating' ? 'good' : dir === 'Decelerating' ? 'warn' : '');
+    }
+
+    // 2. operating margin trend
+    const om = q.slice(-4).filter(r => r.opIncome != null).map(r => r.opIncome / r.revenue);
+    if (om.length >= 2 && om[om.length - 1] < -0.25) {
+      add('Operating margin (last ' + om.length + ' qtrs)', om.map(v => (v * 100).toFixed(0) + '%').join(' → '),
+        'Pre-scale: operating losses are ' + (-om[om.length - 1]).toFixed(1) + 'x revenue. Value rests entirely on future revenue, not current economics.', 'warn');
+    } else if (om.length >= 2) {
+      const d = om[om.length - 1] - om[0];
+      add('Operating margin (last ' + om.length + ' qtrs)', om.map(v => (v * 100).toFixed(0) + '%').join(' → '),
+        Math.abs(d) < 0.02 ? 'Flat - growth is dropping through at a stable margin.' :
+          d > 0 ? 'Expanding ' + (d * 100).toFixed(0) + 'pts - operating leverage is showing.' :
+            'Contracting ' + (-d * 100).toFixed(0) + 'pts - costs are growing faster than revenue.',
+        Math.abs(d) < 0.02 ? '' : d > 0 ? 'good' : 'warn');
+    }
+
+    // 3. cash conversion
+    const ni4 = sum4(last4, 'netIncome'), cfo4 = sum4(last4, 'cfo'), capex4 = sum4(last4, 'capex'), rev4 = sum4(last4, 'revenue');
+    if (ni4 > 0 && cfo4 != null) {
+      const c = cfo4 / ni4;
+      add('Cash conversion (TTM operating cash flow / net income)', (c * 100).toFixed(0) + '%',
+        c < 0.8 ? 'Weak: ' + fmtB(cfo4) + ' of operating cash against ' + fmtB(ni4) + ' of reported profit. Working capital (inventory, receivables, supplier prepayments) or non-cash gains are absorbing earnings - check before trusting the P/E.' :
+          c > 1.15 ? 'Strong: cash runs ahead of reported profit (depreciation, stock comp or deferred revenue).' :
+            'Healthy: reported profit is turning into cash.',
+        c < 0.8 ? 'bad' : c > 1.15 ? 'good' : '');
+    } else if (cfo4 != null && rev4) {
+      add('Operating cash flow (TTM)', fmtB(cfo4), cfo4 < 0 ? 'Burning ' + fmtB(-cfo4) + ' a year from operations; runway depends on the cash pile below.' : 'Positive operating cash flow despite GAAP losses.', cfo4 < 0 ? 'warn' : '');
+    }
+
+    // 4. earnings quality: net income vs operating income
+    const op4 = sum4(last4, 'opIncome');
+    if (op4 > 0 && ni4 != null) {
+      const r = ni4 / op4;
+      if (r > 0.95) add('Net income / operating income (TTM)', (r * 100).toFixed(0) + '%',
+        'Net income is at or above operating profit, which is unusual after tax. Non-operating gains (investment marks, interest income) are lifting EPS - trailing P/E looks cheaper than the operating business.', 'warn');
+      else if (r < 0.6) add('Net income / operating income (TTM)', (r * 100).toFixed(0) + '%',
+        'A large slice of operating profit is lost to interest, tax or other charges before it reaches shareholders.', 'warn');
+      else add('Net income / operating income (TTM)', (r * 100).toFixed(0) + '%', 'Normal tax and interest drag; EPS reflects the operating business.', '');
+    } else if (op4 != null && op4 <= 0 && ni4 != null && ni4 > 0) {
+      add('Net income vs operating income (TTM)', 'NI ' + fmtB(ni4) + ' vs op. ' + fmtB(op4),
+        'Profitable only below the operating line: the GAAP profit comes from non-operating items (warrant/derivative marks, investment gains), not the business.', 'bad');
+    }
+
+    // 5. share count
+    const shq = q.filter(r => r.sharesD != null);
+    if (shq.length >= 5) {
+      const a = shq[shq.length - 1], b = yearAgo(shq, a.end, 'sharesD');
+      const ch = b ? a.sharesD / b.sharesD - 1 : null;
+      if (ch != null) add('Diluted share count (YoY)', sgn(ch, 1),
+        ch > 0.03 ? 'Dilution: each share now owns ' + ((1 - 1 / (1 + ch)) * 100).toFixed(0) + '% less of the company than a year ago (equity raises, converts or stock comp).' :
+          ch < -0.015 ? 'Buybacks are shrinking the count - per-share growth beats company growth.' :
+            'Roughly flat - buybacks about offset stock comp.',
+        ch > 0.03 ? 'bad' : ch < -0.015 ? 'good' : '');
+    }
+
+    // 6. balance sheet
+    const bal = (D.balance || []).filter(b => b.cash != null);
+    const lb = bal[bal.length - 1];
+    if (lb && S.mc) {
+      const debt = lb.debt != null ? lb.debt : null;
+      const net = debt != null ? lb.cash - debt : null;
+      let read = net == null ? 'Cash ' + fmtB(lb.cash) + ' (debt not reported in the filing tags).' :
+        net >= 0 ? 'Net cash ' + fmtB(net) + ' (' + (net / S.mc * 100).toFixed(1) + '% of market cap). Balance sheet is not the risk.' :
+          'Net debt ' + fmtB(-net) + ' (' + (-net / S.mc * 100).toFixed(1) + '% of market cap).';
+      let tone = net != null && net < 0 && -net / S.mc > 0.25 ? 'warn' : '';
+      if (cfo4 != null && cfo4 < 0 && lb.cash > 0) {
+        const burn = -(cfo4 - (capex4 || 0));
+        read += ' At the TTM burn of ' + fmtB(burn) + ', cash covers ~' + (lb.cash / burn).toFixed(1) + ' years.';
+        if (lb.cash / burn < 2) tone = 'bad';
+      }
+      add('Cash vs debt (' + lb.end + ')', net == null ? fmtB(lb.cash) + ' cash' : (net >= 0 ? '+' : '-') + fmtB(Math.abs(net)).replace('-', ''), read, tone);
+    }
+
+    // 7. capex intensity
+    if (capex4 != null && rev4) {
+      const ci = capex4 / rev4;
+      const A = ANN.filter(r => !r.proj && !r.ttm && r.cm != null);
+      const old = A.length >= 4 ? A[A.length - 4] : null;
+      add('Capex / revenue (TTM)', (ci * 100).toFixed(1) + '%',
+        old ? 'Was ' + (old.cm * 100).toFixed(1) + '% in ' + String(old.end).slice(0, 4) + '. ' + (ci > old.cm * 1.5 && ci > 0.08 ? 'Rising investment burden - free cash flow lags earnings until it pays back.' : ci < old.cm * 0.7 ? 'Getting lighter - more of each dollar of profit is free cash.' : 'Broadly stable.') : 'Share of revenue reinvested in plant and equipment.',
+        old && ci > old.cm * 1.5 && ci > 0.08 ? 'warn' : '');
+    }
+
+    // 8. priced in vs delivered
+    if (implied && implied.g != null) {
+      const A = ANN.filter(r => !r.proj && !r.ttm && r.revenue > 0);
+      const a = A[A.length - 1], b = A.length >= 4 ? A[A.length - 4] : null;
+      const hist = b ? cagr(b.revenue, a.revenue, 3) : null;
+      const gap = hist != null ? implied.g - hist : null;
+      add('Priced in vs delivered', 'needs ' + sgn(implied.g, 1) + '/yr' + (hist != null ? ' · did ' + sgn(hist, 1) + '/yr' : ''),
+        'At today\'s price the reverse DCF needs ' + implied.what + ' to grow ' + sgn(implied.g, 1) + ' a year for ' + implied.n + ' years' +
+          (hist != null ? '; revenue grew ' + sgn(hist, 1) + ' a year over the last 3 fiscal years. ' +
+            (gap < -0.1 ? 'The bar is well below the track record: the market expects a sharp slowdown.' :
+              gap > 0.05 ? 'The bar is above the track record: the price needs the business to get better, not just stay good.' :
+                'The bar is close to the track record: the price assumes more of the same.') : '.'),
+        gap != null && gap > 0.05 ? 'warn' : gap != null && gap < -0.1 ? 'good' : '');
+    }
+    return rows;
+  }
+
+  function qualityHtml(rows) {
+    if (!rows.length) return '';
+    return '<section class="sn-sec"><h2>Quality &amp; expectations check</h2>'
+      + '<p class="sn-note">Computed from the latest filings on every data refresh (not written opinion). Amber and red rows are where the reported numbers and the story can diverge.</p>'
+      + '<div class="sn-table-wrap"><table class="sn-qc"><tbody>'
+      + rows.map(r => '<tr class="' + r.tone + '"><th>' + esc(r.label) + '</th><td class="qc-v">' + esc(r.value) + '</td><td class="qc-r">' + esc(r.read) + '</td></tr>').join('')
+      + '</tbody></table></div></section>';
+  }
+
+  // ---------------- verdict, scenario value, debates (research schema v3) ----------------
+  // scenarioModel: { horizon, valueDate, metric: 'eps'|'sales', unit, bear|base|bull: { p, rev, eps, multiple, why } }
+  function scenarioTargets(SM, S) {
+    const shares = (S.mc && S.px) ? S.mc / S.px : null;
+    const netCash = (S.mc != null && S.ev != null) ? S.mc - S.ev : 0;
+    const out = {};
+    for (const k of ['bear', 'base', 'bull']) {
+      const c = SM[k]; if (!c) continue;
+      let tgt = null;
+      if (SM.metric === 'sales') {
+        if (c.rev != null && c.multiple != null && shares) tgt = (c.rev * 1e9 * c.multiple + netCash) / shares;
+      } else if (c.eps != null && c.multiple != null) tgt = c.eps * c.multiple;
+      out[k] = { ...c, tgt };
+    }
+    return out;
+  }
+  function scenarioStats(SM, S, px) {
+    const T3 = scenarioTargets(SM, S);
+    const ks = Object.keys(T3).filter(k => T3[k].tgt != null);
+    const pSum = ks.reduce((a, k) => a + (T3[k].p || 0), 0);
+    if (!ks.length || !(pSum > 0) || !px) return { T3, ev: null };
+    const ev = ks.reduce((a, k) => a + T3[k].tgt * (T3[k].p || 0), 0) / pSum;
+    const yrs = SM.valueDate ? Math.max(0.25, (new Date(SM.valueDate + 'T00:00:00Z') - Date.now()) / 3.156e10) : 1;
+    const ann = (v) => Math.pow(Math.max(v, 0.0001) / px, 1 / yrs) - 1;
+    const up = T3.bull && T3.bull.tgt != null ? T3.bull.tgt - px : null;
+    const dn = T3.bear && T3.bear.tgt != null ? px - T3.bear.tgt : null;
+    return { T3, ev, ret: ev / px - 1, annRet: ann(ev), yrs, skew: (up != null && dn > 0) ? up / dn : null };
+  }
+  function verdictHtml(R, st, px) {
+    const V = R.verdict; if (!V) return '';
+    const tone = /positive|buy|attractive/i.test(V.stance || '') ? 'pos' : /cautious|negative|avoid|stretched/i.test(V.stance || '') ? 'neg' : 'neu';
+    let h = '<div class="sn-verdict ' + tone + '"><div class="vd-head"><span class="vd-stance">' + esc(V.stance || 'View') + '</span>';
+    if (st && st.ev != null) {
+      h += '<span class="vd-ev" id="vd-ev">Probability-weighted value ' + fmtPx(st.ev) + ' <b class="' + (st.ret >= 0 ? 'up' : 'down') + '">' + sgn(st.ret) + '</b>'
+        + ' (' + sgn(st.annRet) + '/yr to ' + esc(R.scenarioModel.valueDate.slice(0, 7)) + ')'
+        + (st.skew != null ? ' &middot; upside/downside ' + st.skew.toFixed(1) + ':1' : '') + '</span>';
+    }
+    h += '</div><p>' + esc(V.summary) + '</p>';
+    if (V.wtb && V.wtb.length) h += '<div class="vd-wtb"><h4>What you have to believe at this price</h4><ol>' + V.wtb.map(x => '<li>' + esc(x) + '</li>').join('') + '</ol></div>';
+    return h + '</div>';
+  }
+  function scenarioHtml(R, st, px) {
+    const SM = R.scenarioModel; if (!SM || !st) return '';
+    const isSales = SM.metric === 'sales';
+    let h = '<section class="sn-sec" id="sc-sec"><h2>Scenario value</h2>'
+      + '<p class="sn-note">Each case states ' + esc(SM.horizon) + ' fundamentals and the multiple the market would pay for them, valued at ' + esc(SM.valueDate.slice(0, 7)) + '. Returns are against the live price, so they move every day; the assumptions move only when the note is revised.</p>'
+      + '<div class="sn-table-wrap"><table class="sn-sc"><thead><tr><th>Case</th><th>Prob.</th><th>Revenue</th><th>' + (isSales ? 'EV / Sales' : 'EPS') + '</th>' + (isSales ? '' : '<th>P/E</th>') + '<th>Value / share</th><th>vs today</th><th>What has to happen</th></tr></thead><tbody>';
+    for (const k of ['bear', 'base', 'bull']) {
+      const c = st.T3[k]; if (!c) continue;
+      const r = c.tgt != null && px ? c.tgt / px - 1 : null;
+      h += '<tr class="sc-' + k + '"><td class="sc-k">' + k[0].toUpperCase() + k.slice(1) + '</td><td>' + (c.p != null ? (c.p * 100).toFixed(0) + '%' : '—') + '</td>'
+        + '<td>' + (c.rev != null ? '$' + c.rev.toFixed(c.rev >= 100 ? 0 : 1) + 'B' : '—') + '</td>'
+        + (isSales ? '<td>' + (c.multiple != null ? c.multiple.toFixed(1) + 'x' : '—') + '</td>' : '<td>' + (c.eps != null ? '$' + c.eps.toFixed(2) : '—') + '</td><td>' + (c.multiple != null ? c.multiple.toFixed(0) + 'x' : '—') + '</td>')
+        + '<td class="sc-t">' + fmtPx(c.tgt) + '</td><td class="sc-r ' + (r >= 0 ? 'up' : 'down') + '" data-tgt="' + (c.tgt || '') + '">' + (r == null ? '—' : sgn(r)) + '</td>'
+        + '<td class="sc-why">' + esc(c.why || '') + '</td></tr>';
+    }
+    h += '</tbody></table></div>';
+    if (st.ev != null) h += '<p class="sc-ev" id="sc-ev">Probability-weighted: <b>' + fmtPx(st.ev) + '</b> (' + sgn(st.ret) + ', ' + sgn(st.annRet) + '/yr)' + (st.skew != null ? '. Upside to bull vs downside to bear: ' + st.skew.toFixed(1) + ' to 1.' : '.') + '</p>';
+    if (SM.note) h += '<p class="footnote">' + esc(SM.note) + '</p>';
+    return h + '</section>';
+  }
+  function debatesHtml(R) {
+    if (!R.debates || !R.debates.length) return '';
+    let h = '<section class="sn-sec"><h2>The debates that set the price</h2><div class="sn-debates">';
+    R.debates.forEach((d, i) => {
+      h += '<div class="db-card"><div class="db-q"><span class="db-n">' + (i + 1) + '</span>' + esc(d.q) + '</div>'
+        + '<div class="db-sides"><div class="db-bull"><b>Bull</b> ' + esc(d.bull) + '</div><div class="db-bear"><b>Bear</b> ' + esc(d.bear) + '</div></div>'
+        + '<div class="db-view"><b>Our read</b> ' + esc(d.view) + '</div>';
+      if (d.signpost) h += '<div class="db-sign"><b>Signpost</b> ' + esc(d.signpost.metric) + (d.signpost.threshold ? ' &middot; <span>' + esc(d.signpost.threshold) + '</span>' : '') + (d.signpost.when ? ' &middot; ' + esc(d.signpost.when) : '') + '</div>';
+      h += '</div>';
+    });
+    return h + '</div></section>';
+  }
+
   // ---------------- main ----------------
   let D = null, R = null, ANN = [], scen = 'base';
 
@@ -585,10 +817,34 @@
       + kpiCompare('vs peers', omRows, v => v.toFixed(0) + '%') + '</div>';
     h += '</div>';
 
-    if (R.latestProse) h += '<h3>Latest financials (most recent reported)</h3><p>' + esc(R.latestProse) + '</p>';
-    if (R.guidanceProse) h += '<h3>Guidance — the headline</h3><p>' + esc(R.guidanceProse) + '</p>';
+    const SM = R.scenarioModel && R.scenarioModel.valueDate ? R.scenarioModel : null;
+    const st0 = SM ? scenarioStats(SM, S, px) : null;
+    h += verdictHtml(R, st0, px);
     if (D.fxNote) h += '<p class="footnote">' + esc(D.fxNote) + '.</p>';
     h += '</section>';
+
+    // ---- v3 analysis: scenario value, debates ----
+    h += scenarioHtml(R, st0, px);
+    h += debatesHtml(R);
+
+    // ---- computed quality check (every name) ----
+    let implied = null;
+    if (VP.mode === 'fcf' && flow0 > 0) {
+      const g = solveImpliedG(target, flow0, VP.r, VP.gT, VP.years);
+      if (g != null) implied = { g, what: flowName, n: VP.years };
+    } else if (revTtm > 0 && ev > 0) {
+      const g = solveImpliedRevCagr(ev, revTtm, (VP.base && VP.base.fcfMargin) || 0.15, VP.r, VP.gT, VP.years);
+      if (g != null) implied = { g, what: 'revenue', n: VP.years };
+    }
+    h += qualityHtml(qualityRows(D, S, ANN, implied));
+
+    // ---- latest quarter + guidance ----
+    if (R.latestProse || R.guidanceProse) {
+      h += '<section class="sn-sec"><h2>Latest quarter &amp; guidance</h2>';
+      if (R.latestProse) h += '<h3>Latest financials (most recent reported)</h3><p>' + esc(R.latestProse) + '</p>';
+      if (R.guidanceProse) h += '<h3>Guidance — the headline</h3><p>' + esc(R.guidanceProse) + '</p>';
+      h += '</section>';
+    }
 
     // ---- section 2: bull / bear + catalysts ----
     h += '<section class="sn-sec"><h2>Bull / Bear</h2><div class="col-2">';
@@ -599,7 +855,7 @@
       h += '<div class="thesis-box cat"><h4>Key catalysts &amp; watch items</h4><ul>'
         + R.catalysts.map(c => '<li>' + esc(c) + '</li>').join('') + '</ul></div>';
     }
-    if (R.pricedIn) h += '<p><strong>What is priced in:</strong> ' + esc(R.pricedIn) + '</p>';
+    if (R.pricedIn && !SM) h += '<p><strong>What is priced in:</strong> ' + esc(R.pricedIn) + '</p>';
     h += '</section>';
 
     // ---- section 3: annual trends w/ scenario projections ----
@@ -680,10 +936,14 @@
     // ---- section 6: research notes ----
     h += '<section class="sn-sec"><h2>Research notes</h2>'
       + '<p class="sn-asof">' + noteAge(R.asOf || D.asOf) + ' Prices and fundamentals refresh weekly; the written thesis does not.</p>';
+    if (R.changelog && R.changelog.length) {
+      h += '<h3>What changed in this note</h3><ul class="sn-log">' + R.changelog.slice(0, 6).map(c =>
+        '<li><span class="lg-d">' + esc(c.date) + '</span> ' + esc(c.change) + '</li>').join('') + '</ul>';
+    }
     if (R.moat) h += '<h3>Moat</h3><p>' + esc(R.moat) + '</p>';
     if (R.segments && R.segments.length) h += '<h3>Business &amp; segments</h3><ul>' + R.segments.map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>';
     if (R.competitive && R.competitive.length) h += '<h3>Competitive landscape</h3><ul>' + R.competitive.map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>';
-    if (R.scenarios) {
+    if (R.scenarios && !SM) {
       h += '<h3>Scenario narratives</h3>'
         + '<div class="thesis-box bear"><h4>Bear</h4><p>' + esc(R.scenarios.bear) + '</p></div>'
         + '<div class="thesis-box"><h4>Base</h4><p>' + esc(R.scenarios.base) + '</p></div>'
@@ -827,6 +1087,21 @@
         if (row.changePct < 0) $('q-px').classList.add('down');
         $('q-chg').textContent = (row.changePct >= 0 ? '+' : '') + (row.changePct || 0).toFixed(2) + '% today · P/E (TTM) '
           + fmtX(S.tpe).replace('x', '') + ' · Fwd ' + fmtX(S.fpe).replace('x', '');
+        // re-price the scenario table against the live quote
+        if (SM) {
+          const st = scenarioStats(SM, S, row.price);
+          document.querySelectorAll('.sc-r[data-tgt]').forEach(td => {
+            const t = parseFloat(td.getAttribute('data-tgt'));
+            if (!(t > 0)) return;
+            const r = t / row.price - 1;
+            td.textContent = sgn(r); td.className = 'sc-r ' + (r >= 0 ? 'up' : 'down');
+          });
+          if (st.ev != null) {
+            const tail = ' (' + sgn(st.annRet) + '/yr to ' + esc(SM.valueDate.slice(0, 7)) + ')' + (st.skew != null ? ' &middot; upside/downside ' + st.skew.toFixed(1) + ':1' : '');
+            if ($('vd-ev')) $('vd-ev').innerHTML = 'Probability-weighted value ' + fmtPx(st.ev) + ' <b class="' + (st.ret >= 0 ? 'up' : 'down') + '">' + sgn(st.ret) + '</b>' + tail;
+            if ($('sc-ev')) $('sc-ev').innerHTML = 'Probability-weighted: <b>' + fmtPx(st.ev) + '</b> (' + sgn(st.ret) + ', ' + sgn(st.annRet) + '/yr)' + (st.skew != null ? '. Upside to bull vs downside to bear: ' + st.skew.toFixed(1) + ' to 1.' : '.');
+          }
+        }
       }
     } catch (e) { /* static fallback */ }
   }

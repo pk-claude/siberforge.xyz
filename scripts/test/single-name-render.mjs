@@ -40,7 +40,15 @@ async function testTicker(T) {
     scenarioToggle: has('period-btn'),
     lab: has('lab-panel'), peers: has('peer-tbl'),
     research: has('Research notes'), sources: has('sn-sources'),
+    qualityCheck: has('sn-qc'),
   };
+  // v3 notes (scenarioModel) must produce a priced scenario table + verdict
+  const R = JSON.parse(fs.readFileSync('research/data/' + T + '.research.json', 'utf8'));
+  if (R.scenarioModel) {
+    checks.scenarioValue = /Probability-weighted: <b>\$\d/.test(html);
+    checks.verdict = has('sn-verdict');
+    checks.debates = has('db-card');
+  }
   const rdOut = window.document.getElementById('rd-out') || window.document.getElementById('rv-out');
   const fdOut = window.document.getElementById('fd-out') || window.document.getElementById('sv-out');
   checks.reverseOut = !!rdOut && rdOut.textContent.length > 1 && rdOut.textContent !== '—';

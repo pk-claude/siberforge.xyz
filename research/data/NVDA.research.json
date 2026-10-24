@@ -1,12 +1,11 @@
 {
-  "asOf": "2026-08-26",
-  "oneLiner": "The AI compute monopoly-in-practice: ~93% of revenue is data center growing 117% at 75% gross margins - and the balance sheet is now the strategy, with $50B+ of equity stakes in exclusive chip buyers and a $105B financing backstop for OpenAI's Ohio campus.",
+  "asOf": "2026-10-24",
+  "oneLiner": "The dominant AI accelerator franchise, priced like a cyclical at its peak: at roughly 13-14x next-twelve-month EPS the market is not paying for growth, it is betting that FY2028 is the high-water mark. The stock works if earnings merely plateau after FY2028 rather than fall.",
   "thesis": [
-    "CUDA plus full-system integration (GPU + Vera CPU + NVLink + racks) remains the deepest lock-in in semis; the annual Hopper-Blackwell-Rubin cadence keeps rivals aiming at a moving target.",
-    "Hyperscaler capex is estimated around $725B in 2026 (vs ~$410B in 2025) with ~$1T projected for 2027; NVDA captures the largest single share of that spend.",
-    "The balance sheet has become a demand engine. NVDA's Aug 14 13F revealed a $30B Intel stake (214.8M shares, from a $5B outlay) and a $21B SpaceX stake (122.8M shares via the xAI merger conversion) - both exclusive or committed chip buyers - plus Aug 10 MOUs with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR to mobilize $500B+ of AI infrastructure capital, and an up-to-$105B financing backstop (announced Aug 17) for OpenAI's 8GW Ohio data center.",
-    "Forward P/E of ~22-24x is below the trailing multiple and below the 30-40x band of 2023-2025: the market is already pricing sharp deceleration, so the debate is about duration of the capex cycle, not the multiple.",
-    "China is effectively a free option: H200 licenses exist (~$10B approved) but Beijing has blocked purchases; current numbers embed roughly zero China revenue."
+    "Full-stack lock-in. CUDA plus full-system integration (GPU + Vera CPU + NVLink + racks) and an annual Hopper-Blackwell-Rubin cadence keep rivals aiming at a moving target; Data Center was $89.0B (+117% YoY) in Q2 FY27.",
+    "Supply-limited growth. FY2028 was framed as ~70% growth with demand 'much higher', and supply commitments more than doubled q/q to $279B - management is buying capacity ahead of orders it believes it has.",
+    "Cheap against its own earnings path. The forward multiple sits far below the 30-40x band of 2023-2025, so the stock does not need a re-rating - only for earnings to hold up past FY2028.",
+    "China is a free option. H200 licences exist (~$10B approved) but Beijing has blocked purchases; guidance embeds roughly zero China Data Center revenue."
   ],
   "latestQuarter": {
     "label": "Q2 FY2027 (ended Jul 26, 2026; reported Aug 26, 2026)",
@@ -32,47 +31,74 @@
   ],
   "moat": "CUDA and the surrounding software stack, compounded by full-system integration competitors must replicate across six-plus co-designed chips, an annual platform cadence, and a 350+-factory supply chain ramped for Rubin. Increasingly reinforced by capital: equity stakes and financing guarantees that make NVDA the anchor allocator of the AI buildout.",
   "risks": [
-    "Customer concentration: three direct customers were 21%, 17% and 16% of Q1 FY27 revenue (54% combined).",
-    "Circular financing: NVDA now backstops up to $105B for OpenAI's Ohio campus (scaled back from ~$250B discussed), holds stakes in chip-buying counterparties, and mobilizes partner capital toward its own demand - vendor-finance structures flatter revenue quality and concentrate downside if AI returns disappoint.",
-    "AI capex cycle: any hyperscaler digestion pause hits NVDA disproportionately; 2027 capex guidance this fall is the swing factor.",
-    "China effectively zero: H200 licensed but unbought; Blackwell-derivative China status unclear.",
-    "Custom silicon substitution at precisely the three concentrated customers.",
-    "Power constraints: US data center power demand projected ~66GW in 2027 vs ~31GW in 2026; Ohio's first 800MW does not arrive until 2028.",
-    "Rubin execution: first shipments Q3 2026, volume Q4 2026; slippage hits FY2028 estimates."
+    "Customer concentration. Three direct customers were 21%, 17% and 16% of Q1 FY27 revenue (54% combined); a single capex pause shows up in one quarter.",
+    "Cyclical peak. If FY2029 looks down, the market will value FY2028 EPS at a peak-cycle multiple (the bear case), whatever FY2028 itself delivers.",
+    "Earnings quality. Only ~70% of trailing net income has converted to operating cash, and net income now exceeds operating income because of investment gains; vendor financing ($105B Ohio backstop, stakes in chip buyers) blurs how much demand is self-funded.",
+    "Power and execution. Data center power, not chips, may cap 2027 deployments; a one-quarter Rubin slip moves FY2028 by tens of billions."
   ],
   "catalysts": [
-    "Q3 FY2027 earnings ~Nov 2026 (guide $108B, GM ~74%) - first quarter with Rubin in full production.",
-    "Rubin volume ramp through Q4 2026 (racks already running at CoreWeave, Google Cloud, Azure).",
-    "Hyperscaler 2027 capex guidance through fall 2026.",
-    "OpenAI Ohio (PORTS-Pike) milestones: SB Energy buildout, financing syndication of the $105B backstop.",
-    "Any China H200 shipment unlock."
+    "Oct 28-30, 2026: MSFT, GOOGL, META, AMZN Q3 calls - 2027 capex guidance (debate 1).",
+    "~Nov 18, 2026: Q3 FY2027 report - guide $108B +/-2%, GM 74%; Q4 guide and cash conversion (debate 2).",
+    "Mid-Dec 2026: Broadcom Q4 FY26 - AI semiconductor guide as the custom-ASIC read (debate 3).",
+    "Rubin volume ramp through Q4 2026; any China H200 shipment unlock is upside not in numbers."
   ],
-  "pricedIn": "At ~$225 (mid-Aug 2026, up ~6% over the past month), implied forward EPS is roughly $9-10 (22-24x forward vs ~32x trailing). Paying a market-plus multiple for 100%+ growth means steep deceleration is already the base case - though the Aug 26 print (FY28 guided ~+70%) pushed the deceleration out a year. The new layer: the market must now underwrite NVDA as financier - a $105B Ohio guarantee, $50B+ of equity stakes marked through Intel and SpaceX share prices, and $500B of MOU capital - which bulls read as demand visibility through 2030 (~1.5M GPUs, $150-200B potential revenue per generation at Ohio alone) and bears read as the cycle funding itself. Key debates: durability of $725B-to-$1T hyperscaler capex, revenue quality given 54% three-customer concentration, and whether vendor financing pulls forward or manufactures demand.",
-  "scenarios": {
-    "bear": "2027 hyperscaler capex flattens as AI ROI questions bite; custom ASICs take incremental inference share; the Ohio backstop and equity stakes turn from optionality to liability as marks fall; China stays zero; growth decelerates to teens by FY2028, gross margin slips below 70%; multiple de-rates toward high-teens on cyclical-plus-credit-risk reclassification.",
-    "base": "Rubin ramps on schedule H2 2026; hyperscaler capex grows into 2027 (~$1T); Data Center revenue +35-45% in FY2028 at ~75% gross margin; the $105B Ohio guarantee syndicates without drawing on NVDA; China negligible; stock compounds roughly with earnings at a low-20s forward multiple.",
-    "bull": "Rubin's ~5x uplift accelerates replacement cycles; agentic inference demand scales faster than training; Ohio's 1.5M-GPU pipeline plus the $500B MOU capital converts to multi-year committed demand; China unlock adds a low-double-digit revenue layer; FY2028 estimates rise materially and the multiple re-rates toward high-20s/30s."
-  },
   "valPresets": {
     "mode": "fcf",
     "r": 0.1,
     "gT": 0.03,
     "years": 10,
-    "bear": {"g": 0.1},
-    "base": {"g": 0.3},
-    "bull": {"g": 0.5},
+    "bear": {
+      "g": 0.1
+    },
+    "base": {
+      "g": 0.3
+    },
+    "bull": {
+      "g": 0.5
+    },
     "note": "Growth presets are year-1 rates that fade to terminal: base (30% fading) roughly matches the ~18% constant growth the reverse DCF says is priced in."
   },
   "sources": [
-    {"label": "NVIDIA Q2 FY2027 press release (8-K, Aug 26, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm"},
-    {"label": "CNBC: Q2 FY27 earnings takeaways - FY28 ~70% growth guide (Aug 26, 2026)", "url": "https://www.cnbc.com/2026/08/26/nvidia-nvda-earnings-report-q2-2027-live-updates.html"},
-    {"label": "NVIDIA Q1 FY2027 press release", "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"},
-    {"label": "Bloomberg: 13F reveals $21B SpaceX, $30B Intel stakes (Aug 14, 2026)", "url": "https://www.bloomberg.com/news/articles/2026-08-14/nvidia-has-21-billion-spacex-stake-30-billion-in-intel-shares"},
-    {"label": "CNBC: Nvidia backing $105B financing for OpenAI Ohio data center (Aug 17, 2026)", "url": "https://www.cnbc.com/2026/08/17/nvidia-financing-open-ai-data-center-ohio.html"},
-    {"label": "Axios: OpenAI Ohio campus with SB Energy and Nvidia guarantee (Aug 17, 2026)", "url": "https://www.axios.com/2026/08/17/openai-nvidia-ohio-data-center-sb-energy"},
-    {"label": "CNBC: H200 China licenses", "url": "https://www.cnbc.com/2026/05/14/us-clears-h200-chip-sales-to-10-china-firms-as-nvidia-ceo-looks-for-breakthrough.html"},
-    {"label": "Rubin launch timeline", "url": "https://wccftech.com/nvidia-confirms-vera-rubin-launch-in-q3-volume-ramp-q4-blackwell-continues-to-see-massive-demand/"},
-    {"label": "Goldman Sachs: AI build-out tracking", "url": "https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out"}
+    {
+      "label": "NVIDIA Q2 FY2027 press release (8-K, Aug 26, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000073/q2fy27pr.htm"
+    },
+    {
+      "label": "CNBC: Q2 FY27 earnings takeaways - FY28 ~70% growth guide (Aug 26, 2026)",
+      "url": "https://www.cnbc.com/2026/08/26/nvidia-nvda-earnings-report-q2-2027-live-updates.html"
+    },
+    {
+      "label": "NVIDIA Q1 FY2027 press release",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-announces-financial-results-for-first-quarter-fiscal-2027"
+    },
+    {
+      "label": "Bloomberg: 13F reveals $21B SpaceX, $30B Intel stakes (Aug 14, 2026)",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-14/nvidia-has-21-billion-spacex-stake-30-billion-in-intel-shares"
+    },
+    {
+      "label": "CNBC: Nvidia backing $105B financing for OpenAI Ohio data center (Aug 17, 2026)",
+      "url": "https://www.cnbc.com/2026/08/17/nvidia-financing-open-ai-data-center-ohio.html"
+    },
+    {
+      "label": "Axios: OpenAI Ohio campus with SB Energy and Nvidia guarantee (Aug 17, 2026)",
+      "url": "https://www.axios.com/2026/08/17/openai-nvidia-ohio-data-center-sb-energy"
+    },
+    {
+      "label": "CNBC: H200 China licenses",
+      "url": "https://www.cnbc.com/2026/05/14/us-clears-h200-chip-sales-to-10-china-firms-as-nvidia-ceo-looks-for-breakthrough.html"
+    },
+    {
+      "label": "Rubin launch timeline",
+      "url": "https://wccftech.com/nvidia-confirms-vera-rubin-launch-in-q3-volume-ramp-q4-blackwell-continues-to-see-massive-demand/"
+    },
+    {
+      "label": "Goldman Sachs: AI build-out tracking",
+      "url": "https://www.goldmansachs.com/insights/articles/tracking-trillions-the-assumptions-shaping-scale-of-the-ai-build-out"
+    },
+    {
+      "label": "Benzinga: NVDA Q3 FY27 guidance range",
+      "url": "https://www.benzinga.com/quote/NVDA/guidance"
+    }
   ],
   "guide": {
     "label": "Q3 FY27 rev guide",
@@ -83,12 +109,104 @@
   "latestProse": "Q2 FY2027 (ended Jul 26, 2026; reported Aug 26). Revenue $96.2B, ~$5B above the $91B guide midpoint, +106% YoY and +18% QoQ; Data Center $89.0B (+117%) is ~93% of the company. GAAP gross margin 75.0%, operating margin 66.2% (operating income $63.7B, +124% YoY). GAAP diluted EPS $2.46 (+128%); non-GAAP $2.22. The call's headline was supply, not demand: FY2028 revenue guided to ~70% growth ('we have supply for 70% growth; demand is much higher'), and supply commitments more than doubled q/q from $119B to $279B, mostly memory procurement. Vera Rubin is ramping into full production with racks running at CoreWeave, Google Cloud and Azure.",
   "guidanceProse": "Q3 FY2027 guide: revenue $108.0B plus or minus 2%, gross margin 74.0% plus or minus 50bp - another +12% sequential step, with zero China Data Center compute revenue assumed. On the call NVDA put a number on next year: FY2028 revenue growth of ~70%, framed as a supply figure with demand 'much higher'. The vendor-finance overlay stands: NVDA will backstop up to $105B for OpenAI's Ohio campus (8GW planned with SB Energy, first 800MW by 2028, ~1.5M NVDA GPUs and $150-200B of potential revenue per deployed generation through 2030, scaled back from ~$250B first discussed), alongside $500B+ of AI-infrastructure MOU capital with Apollo, BlackRock, Blackstone, Brookfield, Goldman Sachs and KKR. China: H200 licensed (~$10B approved, 25% revenue share to the US government) but Beijing has blocked purchases - guidance embeds roughly zero China revenue, making it a free option.",
   "bullCharts": {
-    "0": ["gmA"],
-    "1": ["revQ"],
-    "2": ["peerFpe"]
+    "0": [
+      "gmA"
+    ],
+    "1": [
+      "revQ"
+    ],
+    "2": [
+      "peerFpe"
+    ]
   },
   "bearCharts": {
-    "1": ["revYoyA"],
-    "3": ["peerRg"]
-  }
+    "1": [
+      "revYoyA"
+    ],
+    "2": [
+      "fcfQ"
+    ]
+  },
+  "verdict": {
+    "stance": "Positive - sized for a cycle",
+    "summary": "The debate is not whether NVDA grows next year (it guided ~70% FY2028 growth, supply-limited) but what happens after. A low-teens forward multiple already discounts a sharp earnings decline beyond FY2028, so the asymmetry favours owning it: the bear case needs both a capex digestion and margin compression to lose about a third, while delivering a bit less than the guide at a high-teens multiple returns ~20%. Two things would change this view: a hyperscaler capex pause in 2027 guidance, and earnings quality - only ~70% of trailing profit has turned into operating cash while vendor financing, equity marks and supply prepayments grow.",
+    "wtb": [
+      "FY2028 revenue lands within ~10% of the ~70% growth framework (about $620-690B) - hyperscaler 2027 capex keeps rising rather than digesting.",
+      "Gross margin holds at or above ~72% through the Rubin ramp; each point is roughly $6B of FY2028 operating profit.",
+      "The market pays at least a mid-teens multiple on FY2028 EPS at end-2027, which only requires FY2029 to be flat to modestly down, not up.",
+      "Cash conversion recovers toward 85%+ as supply prepayments turn into shipped product, confirming the profit is cash and not financed demand."
+    ]
+  },
+  "scenarioModel": {
+    "horizon": "FY2028 (year ending Jan 2028)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.3,
+      "rev": 480,
+      "eps": 10.0,
+      "multiple": 14,
+      "why": "2027 hyperscaler capex flattens after the 2026 surge; FY2028 revenue grows only ~18% on FY2027's ~$406B, custom ASICs take inference share at the top three customers and gross margin slips to ~70%. The market treats FY2028 as the peak and pays a peak-cycle multiple."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 620,
+      "eps": 13.9,
+      "multiple": 18,
+      "why": "Rubin ramps on schedule but supply and power cap the year below the 70% framework (~+53%); net margin ~54% with gross margin ~73%. FY2029 visibility is mixed, so the multiple stays well below the 2023-25 range."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 690,
+      "eps": 16.0,
+      "multiple": 22,
+      "why": "The ~70% framework is met; 2027 capex guides rise again, agentic inference keeps clusters full and the Ohio/OpenAI pipeline converts to committed orders. FY2029 growth looks positive, earning a low-20s multiple."
+    },
+    "note": "FY2027 revenue assumes Q1 $81.6B + Q2 $96.2B + Q3 guide $108B + ~$120B Q4 = ~$406B. EPS = revenue x net margin / ~24.1B diluted shares. Multiples are applied to FY2028 EPS at end-2027. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Is FY2028 the peak, or the middle of the cycle?",
+      "bull": "Supply, not demand, sets the ~70% FY2028 guide; supply commitments more than doubled q/q to $279B, and hyperscaler capex is tracking ~$725B in 2026 toward ~$1T in 2027 (Goldman Sachs tracking).",
+      "bear": "Capex at this scale has always digested; the 2027 increments are smaller in % terms, and three customers were 54% of Q1 FY27 revenue, so one pause shows up immediately.",
+      "view": "The price already assumes a peak - this debate decides the multiple (14x vs 22x), not whether the stock is cheap today. Watch 2027 capex language more than NVDA's own guide.",
+      "signpost": {
+        "metric": "Combined 2027 capex guidance from MSFT, GOOGL, AMZN, META",
+        "threshold": "bullish if guided up 25%+ YoY; bearish if flat",
+        "when": "Q3 calls, Oct 28-30, 2026"
+      }
+    },
+    {
+      "q": "How much of the profit is cash?",
+      "bull": "The gap is timing: supplier prepayments for HBM and Rubin capacity buy share, and net income includes real gains on the Intel and SpaceX stakes.",
+      "bear": "Trailing operating cash flow is only ~70% of net income, net income now exceeds operating income, and NVDA is financing demand ($105B Ohio backstop, $50B+ of stakes in chip buyers). Reported EPS overstates the operating franchise.",
+      "view": "Legitimate but not yet a thesis-breaker: 70% conversion on $193B of profit is still $134B of cash. It becomes one if conversion falls further while receivables and prepayments keep rising.",
+      "signpost": {
+        "metric": "Q3 FY27 operating cash flow / net income; size of non-operating gains",
+        "threshold": "below 65% for a second quarter = red flag",
+        "when": "Q3 FY27 report, ~Nov 18, 2026"
+      }
+    },
+    {
+      "q": "Do custom ASICs cap NVDA's share at its biggest customers?",
+      "bull": "Full-system integration (GPU + Vera CPU + NVLink + racks) and CUDA are a moving target; merchant GPUs still take the largest share of every major cluster.",
+      "bear": "TrendForce sees hyperscaler in-house silicon growing ~45% vs ~16% for merchant GPUs in 2026; Broadcom and Marvell are winning exactly the three customers that matter.",
+      "view": "Margin share loss is in the base case; the bear case needs ASICs to take training, not just inference. Broadcom's AI guide is the cleanest read.",
+      "signpost": {
+        "metric": "Broadcom AI semiconductor revenue growth vs NVDA Data Center growth",
+        "threshold": "AVGO AI growth above 2x NVDA DC growth for two quarters",
+        "when": "AVGO Q4 FY26 report, mid-Dec 2026"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-24",
+      "change": "Rebuilt as a decision note: verdict, scenario values on FY2028 EPS (bear $140 / base $250 / bull $352), three debates with signposts. Added the earnings-quality concern (TTM cash conversion ~70%, net income above operating income). No new filing since the Aug 26 Q2 FY27 report."
+    },
+    {
+      "date": "2026-08-26",
+      "change": "Q2 FY27 beat (~$5B above guide), Q3 guide $108B, FY2028 ~70% growth framework."
+    }
+  ]
 }
