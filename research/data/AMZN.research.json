@@ -1,71 +1,168 @@
 {
-  "asOf": "2026-08-12",
-  "oneLiner": "An AI-infrastructure land grab hitting escape velocity - AWS reaccelerated to 37% growth with a $496B backlog and record margins - funded by $220B of capex that keeps the free-cash-flow and earnings-quality debates wide open.",
+  "asOf": "2026-10-24",
+  "oneLiner": "A retailer, ad network and the largest cloud in one P&L, where the market is betting that AWS's sold-out AI capacity turns ~$220B of 2026 capex into a durable step-up in operating income. Reported EPS is not the test - since mid-2025 it has been inflated by Anthropic marks, so the stock works only if operating income compounds.",
   "thesis": [
-    "AWS has decisively reaccelerated. Q2 revenue of $42.2B grew 36.7% YoY - the fastest in 18 quarters and the fifth straight quarter of acceleration - with a $169B annualized run-rate and a $496B backlog of contracted, not-yet-recognized work.",
-    "Custom silicon is becoming a second franchise. Trainium3 UltraServers went GA in December 2025; Anthropic has committed over $100B across ten years to AWS with up to 5GW of capacity, ~1GW of Trainium3 targeted online by end-2026. Jassy says AI and chips businesses each exceed $25B run-rates.",
-    "The margin structure keeps improving. Q2 operating income rose 43% to $27.5B (13.7% margin vs 11.4%), AWS margin hit 39% (up ~650bps YoY), and $19.8B of advertising (+26%) is among the highest-margin revenue at scale anywhere.",
-    "Retail still compounds. North America grew 16% to $116.2B at a 7.9% margin; International grew 15% - the 'low-margin retailer' framing understates a logistics network operating at record efficiency.",
-    "Embedded optionality: the Anthropic stake produced a $53.4B pre-tax mark in Q2 alone, and Amazon Leo satellite broadband is entering commercial service."
+    "AWS is supply-limited, not demand-limited. Jassy said on Oct 23, 2026 that 2027 capacity is 'largely sold out' and 'a good chunk of 2028' too, on top of the $496B Q2 backlog - capex is being spent against booked work, not hope.",
+    "Operating leverage is visible through the spend. Operating margin rose from ~10% to 13.7% over the last four quarters while quarterly capex rose ~50%; AWS earns ~60% of operating income on ~21% of revenue, so mix alone lifts the consolidated margin.",
+    "Custom silicon is a second franchise. Amazon has disclosed $225B+ of future Trainium revenue commitments including Anthropic and OpenAI (24/7 Wall St, Oct 2026); every Trainium rack that replaces a merchant GPU keeps gross margin inside AWS.",
+    "Advertising and retail fund the buildout. Ads grow mid-20s at software-like margins and North America retail earns ~8%; the non-AWS business is no longer a drag on returns."
   ],
   "latestQuarter": {
-    "label": "Q2 2026 (reported July 30, 2026)",
+    "label": "Q2 2026 (ended Jun 30, 2026; reported Jul 30, 2026)",
     "points": [
-      "Net sales $200.6B, +20% YoY - first $200B+ quarter, vs ~$196B consensus",
-      "AWS $42.2B, +36.7% (fastest in 18 quarters); 39% operating margin; backlog $496B",
-      "Operating income $27.5B, +43%; operating margin 13.7% vs 11.4% a year ago",
-      "EPS $5.75 (net income $62.65B), including $53.4B pre-tax non-operating gain, primarily Anthropic",
-      "Advertising $19.8B, +26%; North America $116.2B, +16%, 7.9% margin",
-      "Q2 capex $53.1B; full-year 2026 capex guide raised to ~$220B"
+      "Net sales $200.6B, +20% YoY (first $200B quarter); Prime Day reportedly moved from July into June, pulling sales into Q2.",
+      "AWS $42.2B, +36.7% YoY (fastest in 18 quarters), ~39% operating margin; backlog $496B.",
+      "Operating income $27.5B, +43% YoY; operating margin 13.7% vs 11.4%.",
+      "Diluted EPS $5.75 (net income $62.6B), including $53.4B of pre-tax non-operating gains, primarily the Anthropic stake.",
+      "Advertising $19.8B (+26%); North America $116.2B (+16%, 7.9% margin); Q2 capex $53.1B."
     ]
   },
-  "latestProse": "Q2 2026 (reported July 30) was Amazon's first $200B quarter: net sales of $200.6B (+20%) beat consensus, operating income jumped 43% to $27.5B (13.7% margin), and AWS grew 36.7% to $42.2B at a 39% operating margin - up roughly 650bps YoY - with a $496B backlog. Advertising rose 26% to $19.8B; North America grew 16% at a 7.9% margin. Headline EPS of $5.75 obliterated the ~$1.81 estimate, but the disclosure that matters most: $53.4B of pre-tax non-operating income, primarily the mark-up of the Anthropic stake, drove the bulk of the beat - operating results were strong, but the EPS figure is not an operating number.",
-  "guidanceProse": "For Q3 2026 Amazon guided net sales of $197-202B and operating income of $22.5-26.5B (vs $17.4B in Q3 2025). The bigger guide was capex: full-year 2026 spending raised from ~$200B to ~$220B, which Jassy attributed to soaring memory-chip prices, while declining to detail funding. Bulls see the $496B AWS backlog as pre-sold demand justifying the buildout; bears see memory-cost inflation eroding returns, near-term free cash flow going deeply negative, and the risk that AI capacity is being built faster than monetization outside a handful of anchor customers.",
-  "guide": {"label": "FY2026 capex", "val": "~$220B", "sub": "Raised from ~$200B on memory-chip cost inflation; mostly AI/cloud infrastructure", "tone": "warn"},
   "segments": [
-    "North America ~58% of Q2 revenue ($116.2B, +16%, 7.9% margin); International ~21% ($42.2B, +15%)",
-    "AWS ~21% of revenue ($42.2B) but ~60% of operating income ($16.6B of $27.5B)",
-    "Advertising $19.8B (+26%) reported within the geographic segments - the profit mix-shifter"
+    "North America ~58% of Q2 2026 revenue ($116.2B, +16%, 7.9% operating margin).",
+    "International ~21% ($42.2B, +15%).",
+    "AWS ~21% of revenue ($42.2B) but ~60% of operating income ($16.6B of $27.5B).",
+    "Advertising $19.8B (+26%), reported inside the geographic segments - the profit mix-shifter.",
+    "Strategic stakes: Anthropic ($8B invested through 2025, plus $5B in April 2026 with up to $20B more on milestones), marked up after Anthropic's May 2026 Series H at a reported ~$965B post-money."
   ],
   "competitive": [
-    "Cloud: Microsoft Azure and Google Cloud remain the share threats, but AWS's reacceleration to 37% closes the growth-gap narrative",
-    "AI silicon: Trainium3 vs Nvidia GPUs - Anthropic co-designs with Annapurna Labs",
-    "Retail: Walmart's e-commerce push is the main rival; Amazon's fulfillment density keeps share",
-    "Satellite: Amazon Leo enters a market Starlink dominates by thousands of satellites",
-    "Advertising: #3 behind Google and Meta, growing faster than both off first-party purchase data"
+    "Cloud: Azure grows faster off a smaller base and Google Cloud is gaining; AWS's reacceleration to 37% closed most of the growth gap in 2026.",
+    "AI silicon: Trainium vs Nvidia GPUs and Google TPUs; Anthropic co-designs with Annapurna Labs, OpenAI is a second anchor.",
+    "Retail: Walmart's e-commerce and Temu/Shein at the low end; fulfillment density keeps Amazon's cost lead.",
+    "Advertising: #3 behind Google and Meta, growing faster than both off first-party purchase data.",
+    "Satellite: Amazon Leo enters a market Starlink dominates by thousands of satellites."
   ],
-  "moat": "Prime plus the densest fulfillment network in Western retail creates a two-sided lock-in no rival has replicated. AWS adds enormous switching costs, a $496B contracted backlog, and increasingly proprietary silicon (Trainium, Graviton), while advertising monetizes first-party purchase intent that Google and Meta cannot see.",
+  "moat": "Prime plus the densest fulfillment network in Western retail is a two-sided lock-in no rival has replicated. AWS adds switching costs, a $496B contracted backlog and proprietary silicon (Trainium, Graviton), while advertising monetizes first-party purchase intent that Google and Meta cannot see.",
   "risks": [
-    "Capex swallows cash flow. ~$220B of 2026 spending ($53.1B in Q2 alone) pressures free cash flow, and management declined to specify funding.",
-    "Earnings quality and circularity. $53.4B of the Q2 profit was a non-operating Anthropic mark; Amazon is investing billions in the customer anchoring its Trainium demand - a vendor-financing loop that flatters both sides while it lasts.",
-    "Input-cost inflation. The capex raise was driven by memory prices, not more capacity - the same dollars now buy less compute, compressing infrastructure ROI.",
-    "Retail remains thin-margin and cyclical. A 7.9% North America margin leaves little cushion if the consumer weakens.",
-    "Leo/Kuiper is far behind. The constellation sits well short of the FCC's 1,618-satellite July 2026 milestone; Amazon has requested a two-year extension while Starlink extends its lead.",
-    "Regulatory overhang persists across marketplace practices and deepening AI partnerships."
+    "Capex outruns cash. 2026 capex of ~$220B left trailing free cash flow at about -$7.6B through Q2 2026; if 2027 capex rises again, FCF stays negative for a third year and the return on the buildout is taken on trust.",
+    "Earnings quality. Trailing net income is ~144% of operating income because of non-operating gains ($9.5B Q3 2025, $16.8B Q1 2026, $53.4B Q2 2026, mostly Anthropic); headline EPS and trailing P/E flatter the operating business, and the marks can reverse.",
+    "Circular demand. Amazon funds Anthropic, Anthropic commits $100B+ to AWS, and the stake mark lifts EPS - if Anthropic's growth or funding stalls, backlog, AWS growth and non-operating income all fall together.",
+    "Input-cost inflation. Part of the capex raise to ~$220B was memory prices, not capacity - the same dollars buy less compute, compressing infrastructure ROI and lifting 2027-28 depreciation.",
+    "Retail and Leo. A ~8% North America margin leaves little cushion if the consumer weakens; Leo is well short of the FCC's 1,618-satellite July 2026 milestone pending an extension request."
   ],
   "catalysts": [
-    "Late Oct 2026: Q3 2026 earnings - AWS growth durability and capex/FCF trajectory",
-    "2H 2026: Amazon Leo commercial launch and FCC ruling on the deadline extension",
-    "End-2026: ~1GW of Trainium3-powered compute online for Anthropic",
-    "Early Dec 2026: AWS re:Invent - Trainium4 roadmap"
+    "Oct 29, 2026 (after close): Q3 2026 report - AWS growth vs ~37%, operating income vs $22.5-26.5B guide, size of non-operating gains, first 2027 capex colour (debates 1, 2, 3).",
+    "Early Dec 2026: AWS re:Invent - Trainium3 ramp and Trainium4 roadmap, ~1GW of Trainium capacity for Anthropic by year-end (debate 1).",
+    "Anthropic IPO timing (confidential draft filed Jun 2026; listing date unverified) - turns the stake mark into a market price (debate 3).",
+    "~Early Feb 2027: Q4 2026 report - formal 2027 capex outlook and full-year FCF (debate 2)."
   ],
-  "pricedIn": "At $278.09 (Aug 10, 2026), AMZN trades around 26-31x forward earnings - the trailing ~22x is artificially low because TTM EPS includes the one-time Anthropic gain. The multiple sits well below Amazon's own 10-year average, reflecting how operating income (up 43%) has outgrown the stock. The price implies AWS sustains mid-30s growth with ~39% margins. The key debate: whether $220B of capex - increasingly inflated by memory costs - earns its cost of capital, and how much of the AI demand signal is circular (Anthropic committing $100B+ to AWS while Amazon funds Anthropic).",
-  "scenarios": {
-    "bear": "AI infrastructure demand cools or consolidates around fewer labs; the Anthropic loop unwinds; memory-cost inflation and $220B capex crush free cash flow with sub-par returns; NA retail margin stalls; Leo becomes a write-off risk. Multiple compresses toward 20x on lower estimates.",
-    "base": "AWS grows 30%+ through 2027 as the $496B backlog converts; AWS margins hold high-30s; ads compound ~20%+; retail margins grind higher; capex peaks as a percentage of sales in 2026 and FCF inflects in 2027. Stock compounds with operating income at a mid-to-high-20s forward multiple.",
-    "bull": "Trainium3/4 breaks Nvidia dependence, structurally raising AWS margins while chips become a >$25B external business; AI demand stays supply-constrained for years; Leo reaches commercial scale; earnings power re-rates the stock well above $300."
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.10,
+    "gT": 0.035,
+    "years": 10,
+    "bear": {"g": 0.06},
+    "base": {"g": 0.16},
+    "bull": {"g": 0.26},
+    "note": "Basis is forward earnings: FCF is distorted by ~$220B of 2026 capex, and trailing GAAP earnings carry Anthropic marks - forward operating EPS is the cleanest anchor available."
   },
-  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.10, "gT": 0.035, "years": 10,
-    "bear": {"g": 0.06}, "base": {"g": 0.16}, "bull": {"g": 0.26},
-    "note": "Basis is forward earnings: FCF is deeply distorted by ~$220B of capex, and trailing GAAP earnings carry the one-time $53.4B Anthropic mark - forward EPS is the cleanest anchor available."},
-  "bullCharts": {"0": ["revQ"], "2": ["omA"]},
-  "bearCharts": {"0": ["capexA"], "3": ["omA"]},
   "sources": [
-    {"label": "Amazon - Q2 2026 earnings release", "url": "https://www.aboutamazon.com/news/company-news/amazon-earnings-q2-2026-report"},
-    {"label": "CNBC - Amazon Q2 2026 earnings", "url": "https://www.cnbc.com/2026/07/30/amazon-amzn-q2-earnings-report-2026.html"},
-    {"label": "Investing.com - Q2 2026 call transcript", "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-amazon-tops-q2-2026-estimates-as-aws-growth-accelerates-93CH-4826442"},
-    {"label": "Anthropic - expanded AWS collaboration", "url": "https://www.anthropic.com/news/anthropic-amazon-compute"},
-    {"label": "TNW - Amazon Leo mid-2026 launch", "url": "https://thenextweb.com/news/amazon-leo-satellite-internet-mid-2026"},
-    {"label": "Motley Fool - Q2 2026 call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/amazon-amzn-q2-2026-earnings-call-transcript/"}
+    {"label": "Amazon Q2 2026 earnings release (Jul 30, 2026)", "url": "https://www.aboutamazon.com/news/company-news/amazon-earnings-q2-2026-report"},
+    {"label": "CNBC: Amazon Q2 2026 earnings (Jul 30, 2026)", "url": "https://www.cnbc.com/2026/07/30/amazon-amzn-q2-earnings-report-2026.html"},
+    {"label": "Motley Fool: Q2 2026 call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/07/amazon-amzn-q2-2026-earnings-call-transcript/"},
+    {"label": "Seeking Alpha: Q3 2026 guide $197-202B, 2026 cash capex ~$220B (Jul 30, 2026)", "url": "https://seekingalpha.com/news/4622393-amazon-outlines-q3-net-sales-of-197b-202b-while-lifting-2026-cash-capex-to-about-220b"},
+    {"label": "S&P Global Market Intelligence: post-Q2 2026 note, Visible Alpha consensus", "url": "https://www.spglobal.com/market-intelligence/en/news-insights/research/2026/08/amazon-postq-aws-reaccelerates-as-ai-investment-pushes-capex-higher"},
+    {"label": "Amazon: Q3 2026 results call Oct 29, 2026", "url": "https://www.aboutamazon.com/md/news/company-news/amazon-earnings-q3-2026-report"},
+    {"label": "Yahoo Finance: what to expect from Q3 2026 (non-operating gains by quarter, TTM FCF, EPS consensus)", "url": "https://finance.yahoo.com/markets/stocks/articles/expect-amazon-com-q3-2026-110710701.html"},
+    {"label": "24/7 Wall St: Jassy - 2027 largely sold out, $225B+ Trainium commitments (Oct 24, 2026)", "url": "https://247wallst.com/investing/2026/10/24/amazons-aws-has-already-sold-a-good-chunk-of-2028-capacity/"},
+    {"label": "Engadget: Amazon up to $25B more in Anthropic, $100B+ AWS commitment (Apr 2026)", "url": "https://engadget.com/ai/amazon-will-invest-up-to-25-billion-in-anthropic-in-a-broad-deal-225239302.html"},
+    {"label": "GraniteShares: Anthropic Series H ~$965B post-money, IPO draft filing", "url": "https://graniteshares.com/research/anthropic-ipo-2026-explained-from-965-billion-to-a-possible-2-trillion-listing/"},
+    {"label": "Nasdaq: Prime Day shift to June", "url": "https://www.nasdaq.com/articles/amazons-prime-day-shift-why-moving-it-june-matters"},
+    {"label": "TNW: Amazon Leo mid-2026 launch", "url": "https://thenextweb.com/news/amazon-leo-satellite-internet-mid-2026"}
+  ],
+  "guide": {"label": "Q3 2026 guide", "val": "$197-202B", "sub": "op income $22.5-26.5B | 2026 capex ~$220B", "tone": "accent"},
+  "latestProse": "Q2 2026 (ended Jun 30; reported Jul 30) was Amazon's first $200B quarter: net sales $200.6B (+20%), helped by Prime Day reportedly moving from July into June. Operating income rose 43% to $27.5B (13.7% margin vs 11.4%), with AWS $42.2B (+36.7%, fastest in 18 quarters) at a ~39% margin and a $496B backlog. Advertising grew 26% to $19.8B; North America grew 16% at a 7.9% margin. Diluted EPS of $5.75 is not an operating number: $53.4B of pre-tax non-operating income, primarily the Anthropic mark after its May Series H, supplied most of the $62.6B of net income. Q2 capex was $53.1B, and trailing free cash flow was about -$7.6B.",
+  "guidanceProse": "Q3 2026 guide: net sales $197-202B (+9-12% YoY, depressed by the Prime Day timing shift into Q2) and operating income $22.5-26.5B vs $17.4B in Q3 2025. Pre-print consensus sits near the top of the sales range (~$202B) with EPS around $1.96-2.02 - consensus does not model investment marks. Full-year 2026 cash capex was raised to ~$220B from ~$200B, partly on memory-chip prices; no 2027 capex figure has been given. Since the print, Jassy said (Oct 23) that 2027 AWS capacity is largely sold out and a good chunk of 2028 is booked, and that he does not expect the shortage to end in 2027.",
+  "bullCharts": {
+    "0": ["revQ"],
+    "1": ["omA"],
+    "3": ["gmA"]
+  },
+  "bearCharts": {
+    "0": ["fcfQ"],
+    "1": ["niQ"],
+    "3": ["capexPctA"]
+  },
+  "verdict": {
+    "stance": "Positive - on operating EPS, not the marks",
+    "summary": "Strip out the Anthropic gains and AMZN is a business compounding operating income ~30% a year with AWS capacity sold into 2028, valued on 2027 operating EPS of about $10. The base case returns low-double digits and the bull case (AWS above 35% through 2027 with margin) adds ~45%, against ~30% downside if capex keeps rising while AWS slows - a modestly favourable skew. Two things would change the view: AWS growth falling below 30% while 2027 capex guides higher, or operating income missing the guide in a quarter flattered by marks.",
+    "wtb": [
+      "AWS grows at least 30% YoY in every quarter through Q4 2027 - capacity, not demand, sets the pace.",
+      "2027 operating margin reaches at least ~14% (vs ~13% in 2026) despite the depreciation from ~$220B of 2026 capex.",
+      "Trailing free cash flow turns positive by Q4 2027, which requires 2027 capex growth well below 2026's ~65%.",
+      "The market pays ~28x 2027 operating EPS at end-2027 and gives the Anthropic stake no extra credit."
+    ]
+  },
+  "scenarioModel": {
+    "horizon": "FY2027 (calendar 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.25,
+      "rev": 880,
+      "eps": 8.44,
+      "multiple": 22,
+      "why": "AI capacity is digested: AWS slows to the mid-20s as anchor customers pause, retail softens and 2027 revenue grows ~8% on ~$817B. Depreciation from the 2026 buildout holds net margin at ~10.5%. With FCF still negative the market pays a retail-like multiple."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 925,
+      "eps": 10.31,
+      "multiple": 28,
+      "why": "AWS grows ~30% as booked capacity comes online, ads ~20%, retail mid-single digits: revenue +13%. Operating margin ~14.5%, net margin ~12.2% after ~17% tax. FCF turns positive late in 2027, so the multiple holds near Amazon's recent range."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 960,
+      "eps": 11.84,
+      "multiple": 32,
+      "why": "AWS stays above 35% as Trainium and the sold-out 2028 book convert; revenue +17.5% and AWS mix lifts net margin to ~13.5%. Visible FCF inflection and a second chip franchise earn a low-30s multiple."
+    },
+    "note": "2026 revenue assumes Q1 $181.5B + Q2 $200.6B + ~$200B Q3 (guide midpoint) + ~$235B Q4 = ~$817B. EPS = revenue x net margin / ~10.95B diluted shares (bear 880 x 10.5% = $92.4B; base 925 x 12.2% = $112.9B; bull 960 x 13.5% = $129.6B). EPS excludes non-operating investment marks (Anthropic and other stakes assumed zero), so it will sit well below reported GAAP EPS in any quarter with a mark. Multiples apply to FY2027 EPS at end-2027. Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Can AWS hold 30%+ growth through 2027?",
+      "bull": "Capacity is sold: 2027 largely booked and a good chunk of 2028, a $496B backlog, and $225B+ of Trainium commitments; the constraint is power and chips, not customers.",
+      "bear": "Two anchor labs (Anthropic, OpenAI) drive much of the backlog; if either slows funding, bookings can be renegotiated and growth reverts to the high-teens of 2024-25.",
+      "view": "This is the debate that sets the multiple (22x vs 32x). Sold-out commentary is credible for 2027; we need the Q3 print to show acceleration held without the Q2 Prime Day help to retail.",
+      "signpost": {
+        "metric": "AWS revenue growth YoY",
+        "threshold": "bullish at 35%+; bearish below 30%",
+        "when": "Q3 2026 report, Oct 29, 2026"
+      }
+    },
+    {
+      "q": "Does the capex earn its return, and when does free cash flow turn?",
+      "bull": "Capex is spent against contracted demand; AWS margins near 39% and rising operating margin show the new capacity earns more than its depreciation.",
+      "bear": "Trailing FCF is about -$7.6B, part of the 2026 raise is memory-price inflation, and capex intensity is still rising - the cash return keeps moving out a year.",
+      "view": "Acceptable while AWS margin holds; the bear case starts if 2027 capex rises again without a matching step-up in AWS revenue. Watch the ratio, not the dollar figure.",
+      "signpost": {
+        "metric": "2027 capex outlook vs AWS revenue growth",
+        "threshold": "bearish if 2027 capex guided up 25%+ with AWS growth below 30%",
+        "when": "Q3 call Oct 29, 2026; formal outlook ~early Feb 2027"
+      }
+    },
+    {
+      "q": "How much of EPS is Anthropic, and does the stake deserve credit?",
+      "bull": "The marks are real value: the stake was set by a ~$965B third-party round, and an IPO would give it a market price Amazon could monetize.",
+      "bear": "Non-operating gains lifted trailing net income to ~144% of operating income; the marks are circular (Amazon funds the customer that buys AWS) and reverse if the valuation falls.",
+      "view": "We give the stake no credit in the scenarios and value operating EPS only; this debate is upside optionality and an earnings-quality haircut, not the core case.",
+      "signpost": {
+        "metric": "Q3 operating income vs guide; size of non-operating gains",
+        "threshold": "operating income below the $24.5B guide midpoint while EPS beats on marks = red flag",
+        "when": "Q3 2026 report, Oct 29, 2026"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-24",
+      "change": "Migrated to v3: verdict (Positive - on operating EPS), FY2027 scenarios on operating EPS excluding marks (bear $8.44 x22 / base $10.31 x28 / bull $11.84 x32, p 0.25/0.5/0.25), three debates. Added the earnings-quality issue (net income 144% of operating income) and Jassy's Oct 23 'sold out' comment. No new filing since Q2; view unchanged in direction (v2 had no formal stance)."
+    },
+    {
+      "date": "2026-08-12",
+      "change": "Q2 2026: first $200B quarter, AWS +36.7%, $53.4B Anthropic gain, 2026 capex raised to ~$220B."
+    }
   ]
 }

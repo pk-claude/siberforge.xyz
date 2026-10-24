@@ -1,121 +1,168 @@
 {
-  "asOf": "2026-09-07",
-  "oneLiner": "The sole enabler of leading-edge AI silicon: N2 sold out through 2026, CoWoS 5.5x now in volume production, record monthly revenue running +45% YoY, and a customer base that just guided its own AI demand to $350B over two years.",
-  "thesis": [
-    "Effective monopoly at 2nm-class: N2 entered high-volume manufacturing in Dec 2025, is fully allocated through 2026, and targets ~100K wafers/month by year-end; Intel 18A yields lag to 2027 and Samsung SF2 is still fixing GAA.",
-    "HPC - the AI complex of NVIDIA, AMD, Broadcom ASICs and Apple compute - is 66% of revenue and grew 20% QoQ; Broadcom's Sep 2 guide of roughly $115B of FY2027 and $230B of FY2028 AI semiconductor revenue is demand that lands here in wafers and packaging.",
-    "2026 revenue growth guided to slightly above 40% YoY in USD with 65-67% gross margins despite overseas-fab dilution; July revenue of NT$467.58B (+44.7% YoY) says the run-rate is ahead of the guide.",
-    "Advanced packaging is a second bottleneck TSMC controls: 5.5x-reticle CoWoS entered volume production in August with reported yields above 98% and support for up to twelve HBM4 stacks."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (Apr-Jun; reported Jul 16, 2026); July revenue reported Aug 10, 2026",
-    "points": [
-      "Revenue $40.2B, +36% YoY, +12% QoQ, at the high end of guidance.",
-      "Gross margin 67.7% (above guide); operating margin 60.3%; ADR EPS $4.31, +77% YoY.",
-      "Guide: Q3 revenue $44.6-45.8B, gross margin 65-67%; FY2026 growth raised to slightly above 40%.",
-      "Node mix: N5 33%, N3 30%, N7 11%, N2 3% (first material quarter); 7nm-and-below is 77% of wafer revenue.",
-      "July 2026 revenue NT$467.58B, a record, +44.7% YoY and +5.6% MoM; first seven months NT$2.87T, +37.0% YoY."
+  "asOf": "2026-10-24",
+  "oneLiner": "The only foundry that can make and package leading-edge AI silicon at volume, growing ~44% this year at a ~51% net margin. The market prices it as if that growth fades fast: it is betting that 2027 is a digestion year and that today's margins are a cyclical peak.",
+  "verdict": {
+    "stance": "Positive",
+    "summary": "TSMC's Q3 2026 beat guidance, the Q4 guide steps revenue up another ~14% sequentially, and full-year growth is now ~44% in USD. Management still says AI demand is far above what it can supply. The stock is valued as though growth slows sharply: the reverse DCF needs ~6% a year against ~19% delivered over the last three years. That leaves room for a base case of ~30% FY2027 growth at a low-20s multiple to return low double digits. The bear case needs both a 2027 digestion and margin compression from N2, overseas fabs and tool inflation. Two things would change the view: a January 2027 guide pointing to growth under 15%, or a gross margin guide below 64%.",
+    "wtb": [
+      "FY2027 revenue grows at least 25% in USD (to ~$220B+ on FY2026's ~$176B) as 2nm capacity more than doubles and CoWoS roughly doubles.",
+      "Gross margin holds at or above 65% through the 2nm ramp and Arizona fab 2 start-up (overseas dilution ~2% now, 3-4% later).",
+      "2027 capex lands near the $85-90B brokerage range rather than well above it, so FCF keeps growing alongside revenue.",
+      "At end-2027 the market pays at least ~20x FY2027 EPS per ADR, which needs only 2028 growth to look positive."
     ]
   },
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.25,
+      "rev": 195,
+      "eps": 17.66,
+      "multiple": 15,
+      "why": "Hyperscalers digest 2026's build in 2027 and consumer and price-sensitive segments weaken on component inflation, the risk management itself flagged. Revenue grows only ~11%. N2 ramp costs, overseas fabs, tool inflation and a stronger NT dollar take net margin to ~47%. With record capex landing into slowing demand, the market goes back to a cyclical, Taiwan-discounted multiple."
+    },
+    "base": {
+      "p": 0.55,
+      "rev": 230,
+      "eps": 22.6,
+      "multiple": 22,
+      "why": "2nm capacity more than doubles and blended wafer prices rise as brokerages expect. Revenue grows ~31%, close to the 2026 run-rate fading. Net margin holds ~51% as pricing offsets dilution. Growth in 2028 still looks positive, so the market pays a low-20s multiple, near the stock's recent range and well above its decade norm."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 255,
+      "eps": 26.04,
+      "multiple": 25,
+      "why": "The AI accelerator and custom-ASIC ramp (Rubin, MI400, Broadcom and Google XPUs) keeps wafers and CoWoS sold out through 2027. Revenue grows ~45%, matching 2026. Price increases carry net margin to ~53%. Packaging scarcity and the lack of a viable second source earn a mid-20s multiple."
+    },
+    "note": "FY2026 revenue = Q1 $35.9B + Q2 $40.2B + Q3 $46.7B + Q4 guide midpoint $53.3B = ~$176B (~44% USD growth). EPS is per ADR in USD: 1 ADR = 5 common shares, so ~25.93B diluted common shares = ~5.19B ADR units. EPS = revenue x net margin / 5.19B. Bear 195 x 47% / 5.19 = $17.66; base 230 x 51% / 5.19 = $22.60; bull 255 x 53% / 5.19 = $26.04. Q3 2026 was US$4.60 per ADR at a 51.1% net margin. Multiples are applied to FY2027 EPS at end-2027. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Is 2027 a growth year or a digestion year?",
+      "bull": "AI demand is 'far above' supply per C.C. Wei, 2nm capacity more than doubles in 2027, Goldman sees CoWoS capacity rising ~114% in 2027, and customer roadmaps (Rubin, Broadcom XPUs) are fixed a year ahead.",
+      "bear": "Management is 'being prudent in its planning for 2027', citing component-price pressure on consumer and price-sensitive segments and macro uncertainty. HPC is 68% of revenue, so a hyperscaler pause hits harder than in any prior cycle.",
+      "view": "This debate sets both revenue and the multiple. The prudence comment is about smartphone and PC units, not AI, and AI is where capacity is sold out. We weight growth of 25%+ at 55%.",
+      "signpost": {
+        "metric": "TSMC FY2027 USD revenue growth guide; combined 2027 hyperscaler capex guidance",
+        "threshold": "bullish if TSMC guides 25%+; bearish if it guides under 15% or hyperscaler 2027 capex is flat",
+        "when": "Hyperscaler Q3 calls Oct 28-30, 2026; TSMC Q4 report, mid-Jan 2027"
+      }
+    },
+    {
+      "q": "Can gross margin hold above 65% through the 2nm ramp?",
+      "bull": "Q3's 66.4% was inside the 65-67% guide even with initial 2nm dilution. Brokerages see 2027 gross margin of 66.7-68.9% as blended wafer prices rise, and UBS argues TSMC can pass tool inflation through to customers.",
+      "bear": "Gross margin has fallen from Q2's 67.7%. 2nm at 8% of wafer revenue is dilutive while it ramps, overseas dilution widens to 3-4%, and 'tool inflation is real'. Each point of margin is ~$2.3B of FY2027 operating profit.",
+      "view": "We expect a low-to-mid 60s floor, not a cliff, because pricing power is the moat. The bear case needs margin below 64% and slowing growth together.",
+      "signpost": {
+        "metric": "Q4 2026 gross margin and Q1 2027 gross margin guide",
+        "threshold": "bearish if the Q1 2027 guide midpoint is below 64%; bullish if 66%+",
+        "when": "TSMC Q4 report, mid-Jan 2027"
+      }
+    },
+    {
+      "q": "Does the capex step-up earn its return or signal overbuild?",
+      "bull": "Capex follows customer commitments. TTM capex/revenue is ~34%, below the 48% of 2022, and FCF covers it with ~$78B of net cash left over.",
+      "bear": "Brokerages see 2027 capex of $83-90B (+40-45%) and up to $105B in 2028, as TSMC guides 2026-2028 spend 'significantly higher' than 2023-2025. Foundry overbuilds have ended every prior upcycle.",
+      "view": "Capex intensity is not the risk while it stays under ~40% of revenue. Spending that rises faster than revenue guidance would be.",
+      "signpost": {
+        "metric": "FY2027 capex guide vs FY2027 revenue growth guide",
+        "threshold": "bearish if capex growth exceeds revenue growth by 20+ points (capex/revenue above ~40%)",
+        "when": "TSMC Q4 report, mid-Jan 2027"
+      }
+    }
+  ],
+  "thesis": [
+    "Nobody else ships leading-edge at volume. 2nm went from 3% to 8% of wafer revenue in one quarter and capacity more than doubles in 2027, while Intel 18A and Samsung SF2 are still fixing yields. 79% of wafer revenue is now at 7nm and below.",
+    "Pricing power offsets dilution. Gross margin has stayed in a 66-68% band through a new node ramp and overseas start-ups, and brokerages expect blended wafer prices to rise again in 2027.",
+    "The price assumes a slowdown the business has not shown. The reverse DCF needs ~6% a year earnings growth against ~19% a year revenue growth over the last three years, and operating margin expanded ~10 points over four quarters.",
+    "Packaging is a second gate TSMC controls. CoWoS remains customers' first choice (C.C. Wei), and capacity is expected to roughly double in 2027 (Goldman Sachs), so packaging limits rivals as much as wafers do."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (Jul-Sep; reported Oct 15, 2026)",
+    "points": [
+      "Revenue US$46.72B, +41.2% YoY, +16.2% QoQ (NT$1,494.24B, +50.9% YoY), above the $44.6-45.8B guide.",
+      "Gross margin 66.4% (guide 65-67%), operating margin 58.7%, net margin 51.1%; net income NT$763.06B (+68.7% YoY).",
+      "Diluted EPS NT$29.43, US$4.60 per ADR (+68.7% YoY).",
+      "Node mix: 2nm 8%, 3nm 33%, 5nm 28%, 7nm 10%. Platform: HPC 68% (+22% QoQ), smartphone 21% (+10%), automotive 4% (+23%).",
+      "Q3 capex US$13.8B; 2026 capex held at US$60-64B."
+    ]
+  },
+  "latestProse": "Q3 2026 (reported Oct 15). Revenue US$46.72B, +41.2% YoY and +16.2% QoQ, beat the guide's top end by ~$0.9B. Gross margin of 66.4% was 130bp lower q/q, the first quarter of 2026 inside the 65-67% guide rather than above it, as the 2nm ramp began to dilute. Operating margin was 58.7%. EPS was NT$29.43 (US$4.60 per ADR). HPC rose 22% q/q to 68% of revenue, and 2nm went from 3% to 8% of wafer revenue in one quarter. Net income grew only 8% q/q against 17.6% revenue growth (NT$), so the step down in net margin is worth watching next quarter. C.C. Wei repeated that AI demand remains far above what TSMC can supply. He also said the company is being prudent in its 2027 planning because component-price inflation is pressuring consumer and price-sensitive segments.",
+  "guidanceProse": "Q4 2026 guide: revenue US$52.3-54.3B, gross margin 65-67%, operating margin 56.5-58.5%, at US$1 = NT$31.8. That implies ~44% USD growth for FY2026, raised from 'slightly above 40%'. 2026 capex stays at US$60-64B (raised in July from $52-56B). Management said 2026-2028 capex will be significantly higher than 2023-2025 and that tool inflation is real. Brokerage 2027 estimates run $83-90B (Morgan Stanley $83B, Goldman and BofA ~$85B, UBS ~$90B); TSMC has given no 2027 number. Overseas-fab gross margin dilution is now ~2%, widening to 3-4% later in the five-year period. Arizona fab 2 begins volume production in Q3 2027, slightly ahead of plan.",
+  "guide": {
+    "label": "Q4 2026 rev guide",
+    "val": "$52.3-54.3B",
+    "sub": "GM 65-67% | OM 56.5-58.5% | FY26 ~+44% USD | capex $60-64B",
+    "tone": "accent"
+  },
   "segments": [
-    "HPC 66% of revenue: AI accelerators, custom ASICs, Apple silicon compute.",
-    "Smartphone 22%: fall 2026 iPhone silicon on N2 is the next leg.",
-    "IoT 5%, Automotive 4%."
+    "HPC 68% of Q3 2026 revenue (+22% QoQ): AI accelerators, custom ASICs, server CPUs.",
+    "Smartphone 21% (+10% QoQ): fall 2026 flagship silicon on N3/N2. This is the segment exposed to component-price pressure in 2027.",
+    "Automotive 4% (+23% QoQ); IoT and other make up the remainder."
   ],
   "competitive": [
-    "Intel 18A reached high-volume manufacturing in late 2025 but Intel concedes world-class yields only by 2027, limiting external foundry wins.",
+    "Intel 18A is in volume but targets world-class yields only by 2027. Intel's EMIB packaging is the 'very competitive' alternative to CoWoS that Wei acknowledged.",
     "Samsung SF2 is prioritizing GAA yield recovery over leapfrogging.",
     "Reported N2 pricing near $30K per wafer with capacity booked into 2028 (trade press, unverified).",
-    "Practically every leading AI accelerator - NVIDIA, AMD, Google TPU, Broadcom XPUs, Trainium, Cerebras - is fabbed here, and Broadcom's own supply commentary named substrates, leading-edge wafers and HBM as its binding constraints, not design capability."
+    "Practically every leading AI accelerator (NVIDIA, AMD, Google TPU, Broadcom XPUs, Trainium, Cerebras) is fabbed here, and customers name wafers, substrates and HBM as their binding constraints."
   ],
-  "moat": "Process leadership plus yield and scale economics, advanced-packaging control, and a customer ecosystem of PDKs, IP and design services that makes defection a multi-year project. N2 was sold out through 2026 before it ramped, and CoWoS capacity - estimated at 120,000-140,000 wafers a month exiting 2026 and expanding again in 2027 - is a second gate that no competitor can open.",
+  "moat": "Process leadership, yield and scale economics, advanced-packaging control, and an ecosystem of PDKs, IP and design services that makes switching foundries a multi-year project. 2nm sold out before it ramped, and a 66%+ gross margin through a node transition shows pricing power no rival foundry has.",
   "risks": [
-    "Geopolitics: leading-edge concentration in Taiwan remains the structural discount driver, only partly offset by the US-Taiwan trade agreement that cut tariffs on Taiwanese goods to 15% in exchange for $250B of planned Taiwanese investment in the US.",
-    "AI capex cyclicality: at 66% HPC, a hyperscaler digestion year hits far harder than in prior cycles.",
-    "Customer concentration: Apple historically ~25% of revenue, NVIDIA rising fast, and now Broadcom's XPU ramp adding a third large dependency.",
-    "Capex escalation: the $52-56B 2026 plan is reported to be trending as high as $64B as Arizona accelerates, with total US commitment now around $265B (reported, unverified).",
-    "Currency: NTD appreciation compresses reported margins (USD revenue, NTD costs).",
-    "Smartphone softness: 22% of revenue declined 4% QoQ.",
-    "Overseas-fab dilution is structural, not transitory - management already guides gross margin down to 65-67%."
+    "Taiwan concentration. Leading-edge capacity is still overwhelmingly in Taiwan. Arizona (fab 2 volume Q3 2027) and the US-Taiwan trade deal (15% tariff, $250B of planned Taiwanese US investment) reduce the discount but do not remove it.",
+    "AI capex cyclicality. With HPC at 68% of revenue, a hyperscaler digestion year would hit harder than any prior foundry downturn. Management's 'prudent' 2027 stance is the first hedge in its language this cycle.",
+    "Capex escalation. 2026 capex of $60-64B is already above the original $52-56B plan, and 2027 estimates of $83-90B would put capex near 40% of revenue if growth slows.",
+    "Margin dilution stacking. 2nm ramp costs, overseas dilution widening to 3-4%, tool inflation and NT dollar strength (USD revenue, NTD costs) all push the same way. Gross margin is already off its Q2 high.",
+    "Customer concentration. Apple, NVIDIA and Broadcom are each large, single-name dependencies, and a design-win shift on any one would show up within a year."
   ],
   "catalysts": [
-    "August 2026 monthly revenue, due around Sep 10, and each subsequent monthly print.",
-    "Q3 2026 results around Oct 15, 2026 with the first 2027 capex framing.",
-    "N2 ramp to ~100K wafers/month by end-2026; N2P and A16 progression in 2027.",
-    "NVIDIA Rubin volume ramp in Q4 2026 flowing through N3/N2 and CoWoS.",
-    "Arizona fab 2 tooling in H2 2026 (mass production H2 2027) and fab 3 pulled toward 2028 for N2/A16."
+    "Oct 28-30, 2026: MSFT, GOOGL, META, AMZN Q3 calls - 2027 capex framing (debate 1).",
+    "~Nov 10 and ~Dec 10, 2026: October and November monthly revenue, tracking the Q4 guide (debate 1).",
+    "~Nov 18, 2026: NVIDIA Q3 FY2027 report - Rubin ramp on N3 and CoWoS (debate 1).",
+    "Mid-Jan 2027: TSMC Q4 2026 report - FY2027 growth, gross margin and capex guidance (debates 1, 2, 3).",
+    "Q3 2027: Arizona fab 2 volume production; 2nm capacity doubling through 2027 (debate 2)."
   ],
-  "pricedIn": "About $418, roughly 13% below the $479 52-week high: trailing ~35x and forward ~24-26x, well above TSM's own decade norm of mid-teens to 20x forward, because the Taiwan discount has largely compressed out after the stock roughly doubled in a year. The multiple embeds 40%+ 2026 growth plus a healthy 2027. Debate: are 60%+ operating margins peak-cycle artifacts, and does an AI capex pause turn a structural re-rating back into a cyclical one? Against that, Broadcom just underwrote roughly $350B of two-year AI silicon demand that has to be fabricated and packaged somewhere, and there is only one somewhere.",
-  "scenarios": {
-    "bear": "Hyperscaler capex digests in 2027 just as record capacity lands; HPC growth stalls; overseas costs, a capex bill running toward $64B and NTD strength pull gross margin to the high 50s; the multiple mean-reverts toward ~18x forward on renewed geopolitical pricing.",
-    "base": "2026 closes at 40%+ growth as guided, with monthly prints running ahead of it; N2 ramps to ~100K wafers/month at premium pricing and CoWoS expands into 2027; growth slows but stays healthy in 2027; gross margin holds mid-60s; the stock tracks earnings at low-to-mid-20s forward.",
-    "bull": "N2 pricing power plus a monopoly-like leading edge while rivals slip; accelerator unit growth compounds through Rubin, MI400 and the Broadcom XPU ramp, all fabbed here; packaging stays the scarce good and carries near-7nm ASPs; margins hold at records and the market pays a sustained premium for the sole enabler of the AI build-out."
-  },
   "valPresets": {
     "mode": "fcf",
     "basis": "fwdEps",
     "r": 0.105,
     "gT": 0.035,
     "years": 10,
-    "bear": {
-      "g": 0.05
-    },
-    "base": {
-      "g": 0.14
-    },
-    "bull": {
-      "g": 0.24
-    },
-    "note": "Valuation basis is forward earnings, not FCF: TTM FCF is structurally depressed by a capex program of $52-56B and rising, which would make an FCF-DCF read absurdly demanding."
+    "bear": {"g": 0.05},
+    "base": {"g": 0.14},
+    "bull": {"g": 0.24},
+    "note": "Valuation basis is forward earnings, not FCF: TTM FCF is structurally depressed by a $60-64B 2026 capex program heading higher in 2027, which would make an FCF-DCF read absurdly demanding."
   },
   "notes": "Statement history shown is 4 years (Yahoo) because TSMC files 20-F/6-K rather than 10-K/10-Q; figures converted from TWD at spot. FCF here is capex-heavy: the valuation lab base case uses normalized growth off a depressed FCF base.",
-  "sources": [
-    {
-      "label": "TSMC Q2 2026 earnings release (SEC 6-K)",
-      "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000451/a2q26e_withguidancexfinal.htm"
-    },
-    {
-      "label": "TSMC July 2026 revenue report",
-      "url": "https://pr.tsmc.com/english/news/3329"
-    },
-    {
-      "label": "CoWoS capacity and 5.5x reticle progress",
-      "url": "https://www.trendforce.com/news/2026/06/15/news-tsmc-cowos-supply-demand-gap-reportedly-seen-narrowing-from-20-to-10-by-end-2026-as-capacity-expands/"
-    },
-    {
-      "label": "Arizona expansion and 2026 capex reporting",
-      "url": "https://www.tomshardware.com/tech-industry/tsmc-commits-another-100-billion-to-arizona-for-at-least-four-more-2nm-fabs"
-    },
-    {
-      "label": "2nm supply landscape",
-      "url": "https://semiwiki.com/semiconductor-manufacturers/tsmc/367081-global-2nm-supply-crunch-tsmc-leads-as-intel-18a-samsung-and-rapidus-race-to-compete/"
-    }
-  ],
-  "guide": {
-    "label": "FY2026 outlook",
-    "val": "+40%+ YoY (USD)",
-    "sub": "Q3 guide $44.6-45.8B \u00b7 GM 65-67%",
-    "tone": "accent"
-  },
-  "latestProse": "Q2 2026 (reported Jul 16). Revenue $40.2B (+36% YoY, +12% QoQ), at the high end of guidance. Gross margin 67.7% (+150bp QoQ, above guide), operating margin 60.3%, ADR EPS $4.31 (+77%). Platform mix: HPC 66% of revenue (+20% QoQ), smartphone 22% (-4% QoQ). Node mix: N5 33%, N3 30%, N2 3% - the first material N2 quarter - with 77% of wafer revenue at 7nm and below. July revenue, reported Aug 10, was a record NT$467.58B, +44.7% YoY and +5.6% MoM, taking the first seven months to NT$2.87T (+37.0%). The disclosure that matters most: N2 at 3% of revenue in its first material quarter, against capacity already sold out - the mix shift to the highest-ASP node has barely started.",
-  "guidanceProse": "Q3 guide is $44.6-45.8B with gross margin 65-67% and operating margin 56-58%; FY2026 growth stands at slightly above 40% in USD, and the July run-rate is tracking ahead of it. Capex was planned at $52-56B and trade press now reports it trending as high as $64B as Arizona accelerates - fab 2 (N3) complete and tooling in H2 2026 for H2 2027 production, fab 3 pulled toward 2028 for N2 and A16, and another $100B committed, taking total US commitment to roughly $265B. The margin guide-down reflects overseas-fab dilution plus NTD strength. On packaging, 5.5x-reticle CoWoS entered volume production in August at reported yields above 98%, supporting up to twelve HBM4 stacks.",
   "bullCharts": {
-    "0": [
-      "gmA"
-    ],
-    "1": [
-      "revQ"
-    ],
-    "2": [
-      "revYoyA"
-    ]
+    "0": ["revQ"],
+    "1": ["gmA"],
+    "2": ["revYoyA", "peerFpe"]
   },
   "bearCharts": {
-    "0": [
-      "priceH"
-    ],
-    "3": [
-      "omA"
-    ]
-  }
+    "0": ["priceH"],
+    "1": ["revYoyA"],
+    "2": ["capexPctA"],
+    "3": ["omA"]
+  },
+  "sources": [
+    {"label": "TSMC Q3 2026 earnings release (SEC 6-K, Oct 15, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000726/a3q26e_withguidancexfinal.htm"},
+    {"label": "CRN Asia: Q3 2026 call - capex, platform mix, 2027 prudence, overseas dilution (Oct 2026)", "url": "https://www.crnasia.com/news/2026/components-and-peripherals/tsmc-third-quarter-revenue-tops-guidance-as-ceo-says-ai-dema"},
+    {"label": "TrendForce: brokerage 2027-28 capex, margin, ASP and CoWoS estimates after Q3 2026 (Oct 2026)", "url": "https://www.trendforce.com/news/?p=65394"},
+    {"label": "TSMC Q1 2026 earnings release (SEC 6-K, Apr 16, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/1046179/000104617926000199/a1q26e_withguidancexfinal.htm"},
+    {"label": "TSMC Q2 2026 earnings release (SEC 6-K, Jul 16, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/0001046179/000104617926000451/a2q26e_withguidancexfinal.htm"},
+    {"label": "Arizona expansion and US commitment reporting", "url": "https://www.tomshardware.com/tech-industry/tsmc-commits-another-100-billion-to-arizona-for-at-least-four-more-2nm-fabs"},
+    {"label": "2nm supply landscape (Intel 18A, Samsung SF2)", "url": "https://semiwiki.com/semiconductor-manufacturers/tsmc/367081-global-2nm-supply-crunch-tsmc-leads-as-intel-18a-samsung-and-rapidus-race-to-compete/"}
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-24",
+      "change": "Rebuilt as a v3 decision note after the Oct 15 Q3 2026 report (revenue $46.72B beat, GM 66.4%, Q4 guide $52.3-54.3B, FY26 ~+44%). Added verdict (Positive), FY2027 per-ADR scenario values (bear $265 / base $497 / bull $651) and three debates on 2027 growth, 2nm margins and capex. View unchanged; new watch item is management's 'prudent' 2027 planning."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Q2 2026 and July revenue update: FY2026 growth raised to slightly above 40%, 5.5x-reticle CoWoS in volume."
+    }
+  ]
 }

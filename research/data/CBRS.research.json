@@ -1,53 +1,125 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "The only proven non-NVIDIA inference architecture at scale: a $25.4B backlog and a cloud business that nearly quadrupled YoY, priced near 47x current-year core sales while GAAP still bleeds warrant amortization and IPO stock comp.",
-  "thesis": [
-    "Genuine architectural differentiation: wafer-scale SRAM (WSE-3: ~900K cores, 44GB on-chip, ~21PB/s) keeps weights on-die; independent tests show 3-6x Groq's tokens/sec on identical open models.",
-    "Inference is becoming the dominant AI workload and speed/latency (agentic chains, reasoning models) is exactly where wafer-scale differentiates; Q2 confirmed the pivot - core cloud/services revenue (+287% YoY) overtook hardware.",
-    "Anchor validation: $10B multi-year OpenAI compute deal (750MW; launch partner for GPT-5.6 Sol at 750 tokens/sec); AWS Bedrock production set for Q1 2027; AMD disaggregated inference (up to 5x throughput, vendor figure) in production Q4 2026.",
-    "The bet is execution against a $25.4B RPO: management plans to more than triple revenue in 2027, needing 600MW+ of contracted data center capacity to land on time and manufacturing capacity to grow >10x in 2026."
-  ],
-  "latestQuarter": {
-    "label": "Q2 FY2026 (reported Aug 12, 2026 - after close)",
-    "points": [
-      "Core revenue $209.9M, +103% YoY (GAAP $180.1M, +74%), beating the ~$194M guide; stock still fell ~17% after hours.",
-      "Mix flipped: core cloud/services $127.7M (+287%) overtook core hardware $82.1M (+17%); GAAP hardware fell ~23% to $54.1M after $28M of customer-warrant amortization.",
-      "Core gross margin 40.6% (+940bps YoY) vs GAAP 14.2%; core operating loss -$33.6M (-16% margin); GAAP net loss $450.5M (-$2.98/sh) on $377M of IPO-quarter stock comp.",
-      "RPO $25.4B as of Jun 30, 2026 - roughly 29x this year's guided core revenue.",
-      "Liquidity: $8.6B cash and short-term investments plus an $850M revolver; 1H26 operating cash flow -$47.5M, capex $549M."
+  "asOf": "2026-10-24",
+  "oneLiner": "The only wafer-scale inference platform running in production at scale, sold mostly as a cloud service to a handful of anchor customers. The market is betting on one number: whether the contracted backlog converts into the promised 2027 revenue step-up while OpenAI stays the anchor rather than drifting back to Nvidia.",
+  "verdict": {
+    "stance": "Neutral - a 2027 conversion bet",
+    "summary": "After the October reset the stock prices something close to our base case: 2027 core revenue roughly 2.6x 2026 at a ~10x EV/Sales, not management's 'more than triple'. That leaves a roughly symmetric, wide distribution - the bull case (the triple lands, 14x) is worth ~60% more, the bear case (OpenAI shifts incremental work to Nvidia, growth stalls near +70%) roughly half. The losses and burn are not the issue while ~$8.6B of liquidity lasts; customer concentration and the speed of the owned-capacity margin inflection are. We would turn Positive on a Q3 print that holds RPO near $25B with a Q4 guide implying ~$265M+ of core revenue, and Cautious if OpenAI's share of the order book visibly shrinks.",
+    "wtb": [
+      "FY2027 core revenue reaches at least ~$2.3B (about 2.6x the ~$885M FY2026 guide midpoint), with the first 2027 framework due at the Q4 report (~Feb/Mar 2027).",
+      "RPO stays at or above ~$25B at Q3 (Nov 12, 2026): new bookings at least replace what converts, and OpenAI's 750MW commitment is not resized.",
+      "Owned data centers lift core gross margin back to 43%+ by Q1 2027 from the 38-40% Q3 guide, showing the capex (127% of TTM revenue) earns a return.",
+      "The market pays ~10x EV/Sales at end-2027 for a business still growing 50%+ into 2028."
     ]
   },
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027), core revenue",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.3,
+      "rev": 1.5,
+      "multiple": 6,
+      "why": "OpenAI keeps its contracted floor but routes new high-speed modes to Nvidia; RPO stops growing, capacity arrives late and 2027 core revenue grows only ~70% to ~$1.5B. Margins stay below 40% on leased capacity, so the market values it as a concentrated, sub-scale hardware-and-hosting vendor."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 2.3,
+      "multiple": 10,
+      "why": "Most of the 600MW+ of contracted capacity is live by late 2027; OpenAI ramps, AWS Bedrock (Q1 2027) and the AMD partnership broaden the base, and core revenue reaches ~$2.3B (~2.6x). Gross margin recovers to the low-40s on owned systems but GAAP losses persist, holding the multiple near 10x."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 3.0,
+      "multiple": 14,
+      "why": "The 'more than triple' plan lands (~$3.0B), RPO compounds past $25B on new frontier-lab and enterprise contracts, and core operating margin approaches breakeven. Fast inference becomes a recognised category with Cerebras as the non-Nvidia standard, earning a premium growth multiple."
+    },
+    "note": "Revenue is core revenue (GAAP plus customer-warrant amortization, less pass-through), the basis of company guidance; GAAP revenue runs lower by the warrant amortization. Value per share = (rev x EV/Sales + current net cash) / current shares, so the page uses today's net cash; by end-2027 cumulative capex and burn will reduce it, a further drag in the bear case. Multiples are applied to FY2027 core revenue at end-2027. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does OpenAI stay the anchor, or drift back to Nvidia?",
+      "bull": "OpenAI committed to up to 750MW over three years (Jan 2026), and Altman publicly called Cerebras 'a close partner' after the October scare; RPO of $25.4B is contracted, not pipeline.",
+      "bear": "SemiAnalysis reported (Sep 30, 2026) that OpenAI's newest Ultrafast mode runs on Nvidia GPUs; a large share of RPO is tied to OpenAI, and Nvidia's $20B Groq deal gives it a fast-inference answer.",
+      "view": "The contracted floor makes a collapse unlikely, but the multiple depends on OpenAI expanding, not merely honouring, the deal. Concentration is the single biggest swing factor between the bear and base cases.",
+      "signpost": {
+        "metric": "RPO and any update on OpenAI deployed / contracted MW",
+        "threshold": "RPO at or above $25B with OpenAI capacity on schedule = base holds; RPO down or OpenAI resized = bear",
+        "when": "Q3 2026 report, Nov 12, 2026"
+      }
+    },
+    {
+      "q": "Is growth decelerating, or pausing before the capacity step-up?",
+      "bull": "Core revenue grew 103% in Q2 2026 and core cloud +287%; the FY2026 guide was raised, and 600MW+ of capacity live or contracted by end-2027 is what supports a 2027 triple.",
+      "bear": "GAAP revenue growth slowed from +94% to +74% YoY and fell ~7% QoQ in Q2; core hardware grew only 17%, and the Q3 core guide ($214-216M) is barely above Q2.",
+      "view": "The deceleration is capacity-gated, not demand-gated, if the Q4 step-up shows up. The FY2026 guide implies Q4 core revenue of roughly $260-275M (Siberforge estimate from the guide midpoint); missing that would mean the 2027 plan is at risk.",
+      "signpost": {
+        "metric": "Q3 core revenue vs $214-216M guide; Q4 core revenue guide",
+        "threshold": "Q4 guide at or above ~$265M = on track for base or bull; below $240M = bear",
+        "when": "Q3 2026 report, Nov 12, 2026"
+      }
+    },
+    {
+      "q": "When does the capex start earning a return?",
+      "bull": "Leased third-party capacity is the temporary cost; owned, lower-cost systems come online in Q4 2026, and core gross margin was already 40.6% in Q2 (+940bp YoY).",
+      "bear": "TTM capex is 127% of revenue and free cash flow -$905M; GAAP operating loss was 2.6x revenue in Q2 (mostly $377M of IPO stock comp) and ~$1.13B of warrant assets will depress GAAP revenue for years.",
+      "view": "Liquidity of ~$8.6B covers years of burn, so this is a valuation issue, not a solvency one. The test is whether core gross margin turns up as owned capacity arrives; if not, the cloud model is a low-margin hosting business.",
+      "signpost": {
+        "metric": "Core gross margin and core operating margin",
+        "threshold": "core GM back above 43% and core op margin better than -15% by Q1 2027 = bullish; GM stuck below 40% = bearish",
+        "when": "Q4 2026 report, ~Feb/Mar 2027"
+      }
+    }
+  ],
+  "thesis": [
+    "Architecturally different, not a GPU clone. Wafer-scale SRAM keeps model weights on-die, which wins on tokens per second for agentic and reasoning workloads, and needs no HBM or CoWoS - the two chokepoints every GPU vendor queues for.",
+    "The cloud business is the growth engine. Core cloud and services revenue overtook hardware in Q2 2026, turning lumpy system sales into recurring inference revenue.",
+    "Contracted visibility few small-caps have. RPO of $25.4B is about 29x FY2026 guided core revenue, and 600MW+ of data-center capacity is live or under contract for delivery by end-2027.",
+    "The October reset removed the hype premium. The base case is now roughly what the stock pays for, so the bull case (the triple lands) is not needed to avoid losses - only the base."
+  ],
+  "latestQuarter": {
+    "label": "Q2 FY2026 (ended Jun 30, 2026; reported Aug 12, 2026)",
+    "points": [
+      "Core revenue $209.9M, +103% YoY (GAAP $180.1M, +74%), above the ~$194M guide.",
+      "Core cloud/services $127.7M (+287%) vs core hardware $82.1M (+17%); GAAP hardware $54.1M after $44.3M of customer-warrant amortization.",
+      "Core gross margin 40.6% (+940bp YoY) vs GAAP 14.2%; core operating loss -$33.6M (-16%), GAAP operating loss -$477.2M.",
+      "GAAP net loss -$450.5M (-$2.98/sh) including $377.0M of IPO-quarter stock comp; core net loss -$6.9M.",
+      "RPO $25.4B; cash, restricted cash and investments ~$8.6B, $918M working-capital loan, $850M undrawn revolver; 1H26 operating cash flow -$47.5M, capex $548.9M."
+    ]
+  },
+  "latestProse": "Q2 FY2026 (ended Jun 30; reported Aug 12, the first full quarter as a public company). Core revenue of $209.9M rose 103% and beat the ~$194M guide, but the mix and the GAAP line set the tone: core cloud and services nearly quadrupled to $127.7M and overtook core hardware ($82.1M, +17%), while GAAP revenue of $180.1M carried $44.3M of customer-warrant amortization. Core gross margin reached 40.6% against 14.2% GAAP, and the core operating loss was a modest -$33.6M; the GAAP operating loss of $477M was mostly $377M of IPO stock comp. RPO reached $25.4B. The disclosure that matters most is structural: ~$1.13B of customer-warrant assets, the price of landing OpenAI and the UAE anchors, will amortize as contra-revenue for years, so GAAP will understate core revenue well into 2027.",
+  "guidanceProse": "FY2026 raised across all metrics: core revenue $880-890M, core gross margin 41-43%, core operating margin -19% to -17%. Q3 guides sequentially weaker - core revenue $214-216M, gross margin 38-40%, operating margin -25% to -23% - because leased third-party capacity carries the ramp until owned systems come online in Q4. Management plans to more than triple revenue in 2027, with AMD-partnered disaggregated inference in production in Q4 2026, AWS Bedrock in Q1 2027, manufacturing capacity up more than 10x in 2026 (Flex, Sanmina, Rocket EMS) and TSMC wafer supply secured. Since the print: SemiAnalysis reported (Sep 30) that OpenAI's newest Ultrafast mode runs on Nvidia GPUs, Altman responded (Oct 2) that Cerebras is 'a close partner', and the post-IPO lock-up expired in early October (about 19.4M shares per secondary reports; exact dates unverified). Q3 results are scheduled for Nov 12, 2026, after the close.",
+  "guide": {
+    "label": "FY26 core rev guide",
+    "val": "$880-890M",
+    "sub": "Q3 core $214-216M | GM 38-40% | report Nov 12",
+    "tone": "accent"
+  },
   "segments": [
-    "Cloud/inference services is now the larger and faster business: core cloud $127.7M (+287%) vs core hardware $82.1M (+17%) in Q2; hardware is lumpy, and customer-warrant amortization hits GAAP hardware revenue hardest.",
-    "Customer concentration still extreme: OpenAI, G42, MBZUAI, and AWS are named significant customers; FY2025 was 86% UAE entities. New logos (Cognition, Block, Figma, GSK, CrowdStrike) broaden the tail but not yet the core."
+    "Cloud and inference services (core $127.7M in Q2 2026, ~61% of core revenue, +287%): tokens sold through Cerebras Cloud, OpenAI capacity and partner marketplaces (AWS Bedrock from Q1 2027).",
+    "Hardware systems (core $82.1M, ~39%, +17%): CS-3 systems for sovereign and research buyers; lumpy, and where warrant amortization hits GAAP revenue hardest.",
+    "Customers: OpenAI, G42, MBZUAI and AWS are named significant customers; FY2025 revenue was 86% UAE entities. Cognition, Lovable, Block, Figma, AlphaSense, GSK and CrowdStrike broaden the tail."
   ],
   "competitive": [
-    "NVIDIA is the default and acquired Groq for $20B in Dec 2025 - a direct fast-inference response.",
-    "AMD went the other way: partnership integrating wafer-scale with Helios; disaggregated inference (claimed 5x throughput - vendor figure) in production Q4 2026.",
-    "Supply position is differentiated: no HBM, no CoWoS, no 3nm - the three chokepoints everyone else queues for.",
-    "Risk: commodity GPU token prices falling faster than the speed premium holds."
+    "Nvidia is the default and bought Groq for $20B in Dec 2025 - a direct fast-inference response, and reportedly the hardware behind OpenAI's newest Ultrafast mode.",
+    "AMD is a partner rather than a rival here: wafer-scale integrated with Helios for disaggregated inference (vendor-claimed up to 5x throughput), in production Q4 2026.",
+    "Hyperscaler ASICs (TPU, Trainium, Maia) and Broadcom/Marvell custom silicon compete for the same inference budgets at the largest buyers.",
+    "Risk to the speed premium: commodity GPU token prices falling faster than customers will pay for latency."
   ],
-  "moat": "Wafer-scale SRAM is hard to replicate and demonstrably fastest at inference today, but the moat is narrow: it depends on one TSMC process with no second source, and NVIDIA can buy or build fast-inference capability while bundling an unmatched software ecosystem. The $25.4B RPO is the strongest moat evidence yet - if it converts.",
+  "moat": "Wafer-scale SRAM is hard to replicate and demonstrably fast at inference, but the moat is narrow: one TSMC process with no second source, and Nvidia can buy or build fast inference while bundling an unmatched software ecosystem. The $25.4B RPO is the strongest moat evidence - if it converts and if the anchor customers keep expanding.",
   "risks": [
-    "Customer concentration: OpenAI (Master Relationship Agreement), G42, MBZUAI, and AWS dominate; the ramp deepens single-counterparty exposure.",
-    "Margin trough: Q3 guided sequentially worse (core GM 38-40%, core op margin -25% to -23%) as leased third-party capacity carries the ramp until owned systems come online in Q4.",
-    "Structural GAAP haircut: ~$1.13B of customer-warrant assets amortize as contra-revenue for years; the $30M GAAP-vs-core gap is not one-time.",
-    "NVIDIA-Groq squeeze on both demand and TSMC supply priority; TSMC single-source dependency, process not portable.",
-    "Cash burn: 1H26 operating cash flow -$47.5M with $549M capex, funded by the $6.4B IPO plus a ~$918M working capital loan.",
-    "Lockup: ~28M Class A shares tradeable two trading days after the Q2 report (~Aug 14, 2026, per pre-IPO disclosure) - landing on a tape already down ~17% after hours."
+    "Customer concentration. A large share of RPO is tied to OpenAI and FY2025 revenue was 86% UAE entities; the September SemiAnalysis report showed how fast a single routing decision at OpenAI reprices the stock.",
+    "Decelerating reported growth. GAAP revenue growth slowed from +94% to +74% YoY and dipped QoQ in Q2; if the Q4 step-up slips, the 2027 triple looks like a target rather than a plan.",
+    "Burn and capex intensity. TTM free cash flow -$905M with capex 127% of revenue; ~$8.6B of liquidity covers it for now, but a slower ramp means more years of burn and possible further financing.",
+    "GAAP losses and dilution. GAAP operating loss was 2.6x revenue in Q2 on IPO stock comp, ~$1.13B of warrant assets depress GAAP revenue for years, and ongoing stock comp plus customer warrants dilute holders.",
+    "Supply and competition. Single-source TSMC wafer dependency, and Nvidia-Groq competing for both demand and foundry priority."
   ],
   "catalysts": [
-    "~Aug 14, 2026: IPO lockup release (~28M Class A shares).",
-    "Q4 2026: owned data centers come online (guided gross-margin inflection); AMD disaggregated inference in production.",
-    "Q1 2027: Cerebras on Amazon Bedrock in production.",
-    "OpenAI 750MW deployment milestones; proof points against the 'more than triple revenue in 2027' plan and the $25.4B RPO."
+    "Oct 28-30, 2026: MSFT, GOOGL, META, AMZN Q3 calls - inference capex and any OpenAI capacity commentary (debate 1).",
+    "Nov 12, 2026 (confirmed, after close): Q3 2026 results - RPO, Q4 guide, core gross margin (debates 1, 2, 3).",
+    "Q4 2026: owned data centers come online; AMD disaggregated inference in production (debate 3).",
+    "Q1 2027: Cerebras on AWS Bedrock in production (debate 2).",
+    "~Feb/Mar 2027: Q4 2026 results and the first FY2027 revenue framework vs the 'more than triple' plan (debates 2, 3)."
   ],
-  "pricedIn": "Shares closed at $262 on Aug 12 and fell ~17% after hours to ~$215 - roughly $42B market cap (share count approximate), or ~47x the midpoint of FY2026 guided core revenue ($880-890M), down from ~55-60x pre-print. The market paid up for the cloud quadrupling and the $25.4B RPO but balked at 17% core hardware growth and a guided Q3 margin trough. Debate: if 2027 really more than triples to ~$2.7B+, this is ~15x forward core sales for the only proven non-NVIDIA inference platform; if the ramp slips, a UAE-concentrated company burning cash on leased capacity holds a multiple it cannot defend.",
-  "scenarios": {
-    "bear": "The ~Aug 14 lockup dumps ~28M shares into a spooked tape; the Q3 margin trough extends into Q4 as owned capacity slips; hardware keeps shrinking; OpenAI consolidates onto NVIDIA/Groq and internal silicon; multiple compresses toward 15-20x core sales (roughly $70-95).",
-    "base": "FY2026 lands at $880-890M with the Q4 owned-capacity margin inflection on schedule; 2027 revenue at least doubles against the RPO; AWS Bedrock broadens the base beyond the UAE; the lockup digests and the stock holds a 35-50x core-sales band (~$160-230).",
-    "bull": "2027 delivers the guided triple (~$2.7B+) on OpenAI ramp, Bedrock production, and AMD wins; gross margin clears the low-40s on owned data centers; the RPO keeps compounding past $25.4B; the stock reclaims $300 and challenges its $385 opening print."
-  },
   "valPresets": {
     "mode": "revenue",
     "r": 0.13,
@@ -68,53 +140,63 @@
       "fcfMargin": 0.25,
       "exit": 30
     },
-    "note": "Pre-scale company with three public quarters; TTM revenue uses Yahoo's trailing figure. Values the terminal business off a revenue path, horizon FCF margin, and exit multiple."
+    "note": "Pre-scale company with three public quarters of history; TTM revenue uses GAAP (below core revenue by warrant amortization). Values the terminal business off a revenue path, horizon FCF margin and exit multiple; the reverse DCF needs ~73% a year revenue growth for 7 years, below the trailing track record."
+  },
+  "bullCharts": {
+    "1": ["revQ"],
+    "2": ["revA"]
+  },
+  "bearCharts": {
+    "1": ["revQ"],
+    "2": ["capexPctA"],
+    "3": ["omA"]
   },
   "sources": [
     {
-      "label": "Cerebras Q2 2026 press release",
+      "label": "Cerebras Q2 2026 results, 8-K exhibit (SEC, Aug 12, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0002021728/000162828026056186/cbrsannouncesfinancialresu.htm"
+    },
+    {
+      "label": "Cerebras Q2 2026 press release (GlobeNewswire)",
       "url": "https://www.globenewswire.com/news-release/2026/08/12/3344077/0/en/cerebras-systems-fast-inference-cloud-business-nearly-quadruples-in-second-quarter-2026.html"
     },
     {
-      "label": "CNBC: Q2 earnings report",
-      "url": "https://www.cnbc.com/2026/08/12/cerebras-cbrs-q2-earnings-report-2026.html"
+      "label": "Cerebras - date of Q3 2026 results: Nov 12, 2026 (Oct 20, 2026)",
+      "url": "https://www.cerebras.ai/press-release/cerebras-systems-announces-date-of-third-quarter-2026-financial-results-3384934"
     },
     {
-      "label": "Earnings call transcript",
+      "label": "Q2 2026 earnings call transcript",
       "url": "https://in.investing.com/news/transcripts/earnings-call-transcript-cerebras-systems-posts-record-q2-2026-revenue-shares-sink-after-hours-93CH-5553612"
     },
     {
-      "label": "Barron's via Yahoo: margin reaction",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/cerebras-stock-plunges-earnings-even-154955333.html"
+      "label": "CNBC: Cerebras hits post-IPO low on Nvidia pressure and lock-up expiration (Oct 2, 2026)",
+      "url": "https://www.cnbc.com/2026/10/02/cerebras-stock-hits-post-ipo-low-on-nvidia-pressure-lockup-expiration.html"
     },
     {
-      "label": "OpenAI compute deal",
+      "label": "Business Chief: Altman calls Cerebras a close partner (Oct 2026)",
+      "url": "https://businesschief.com/news/cerebras-rebounds-9-as-sam-altman-calls-it-a-close-partner"
+    },
+    {
+      "label": "TipRanks: lock-up expiry frees ~19.4M shares (Oct 16, 2026)",
+      "url": "https://www.tipranks.com/news/catalyst/lockup-expiry-and-openai-jitters-hammer-cerebras-stock"
+    },
+    {
+      "label": "OpenAI 750MW compute deal (Jan 2026)",
       "url": "https://finance.yahoo.com/news/openai-buy-compute-capacity-startup-200619645.html"
     },
     {
-      "label": "AMD-Cerebras partnership",
+      "label": "AMD-Cerebras partnership (The Register, Jul 23, 2026)",
       "url": "https://www.theregister.com/systems/2026/07/23/amd-and-cerebras-join-forces-against-nvidias-groq-lpus/5277817"
     }
   ],
-  "guide": {
-    "label": "FY26 core rev guide",
-    "val": "$880-890M",
-    "sub": "raised \u00b7 Q3 core $214-216M",
-    "tone": "accent"
-  },
-  "latestProse": "Q2 FY2026 (reported Aug 12 after close). Core revenue $209.9M +103% YoY (GAAP $180.1M +74%), beating the ~$194M guide - and the stock fell ~17% after hours anyway. The mix flipped: core cloud/services $127.7M (+287%) overtook hardware, while core hardware grew just 17% to $82.1M and GAAP hardware fell ~23% after $28M of warrant amortization. Core gross margin 40.6% (+940bps) vs GAAP 14.2%; core operating loss -$33.6M (-16% margin); GAAP net loss $450.5M (-$2.98/sh) on $377M of IPO-quarter stock comp. RPO reached $25.4B. The disclosure that matters most: a ~$1.13B customer-warrant asset amortizes as contra-revenue for years - the GAAP-vs-core revenue gap is structural, the ongoing price of landing OpenAI and the UAE anchors.",
-  "guidanceProse": "FY2026 raised across the board: core revenue $880-890M (from $855-865M), core gross margin 41-43%, core operating margin -19% to -17%. But Q3 guides sequentially worse - core revenue $214-216M, gross margin 38-40%, operating margin -25% to -23% - because leased third-party capacity carries the ramp until owned, lower-cost systems come online in Q4. AWS Bedrock production lands Q1 2027, AMD disaggregated inference Q4 2026, and management plans to more than triple revenue in 2027 against the $25.4B RPO.",
-  "bullCharts": {
-    "0": [
-      "revQ"
-    ],
-    "2": [
-      "revA"
-    ]
-  },
-  "bearCharts": {
-    "5": [
-      "priceH"
-    ]
-  }
+  "changelog": [
+    {
+      "date": "2026-10-24",
+      "change": "Rebuilt in v3 format with a first explicit stance (Neutral - a 2027 conversion bet; v2 had none). Scenarios on FY2027 core revenue at EV/Sales (bear $1.5B x 6 / base $2.3B x 10 / bull $3.0B x 14); three debates on OpenAI concentration, growth deceleration and capex returns. Added the September SemiAnalysis report, Altman's response and the early-October lock-up expiry; Q3 report set for Nov 12. No new filing since Q2; the reset in the stock brought it to roughly our base case."
+    },
+    {
+      "date": "2026-08-13",
+      "change": "Q2 2026: core revenue $209.9M (+103%), cloud overtook hardware, RPO $25.4B, FY2026 core guide raised to $880-890M."
+    }
+  ]
 }
