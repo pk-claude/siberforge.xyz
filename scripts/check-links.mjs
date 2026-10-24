@@ -54,6 +54,8 @@ for (const file of files) {
     if (!href) continue;
     if (/^(https?:|mailto:|tel:|data:|javascript:|#)/i.test(href)) continue;
     if (href.startsWith('//')) continue;
+    // Served by the Vercel platform (Web Analytics), not files in the repo.
+    if (href.startsWith('/_vercel/')) continue;
     // Template placeholders inside inline scripts (`href="${sec.page}"`) are
     // not links; they are code that happens to match the attribute regex.
     if (href.includes('${') || href.includes('{{')) continue;
