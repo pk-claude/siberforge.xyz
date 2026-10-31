@@ -1,66 +1,148 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "Intel is a politically backstopped turnaround showing its first genuine revenue and margin inflection in a decade - but at ~$102 the market pays ~70x forward earnings for a company whose free cash flow is still negative and whose foundry still loses $2B a quarter.",
-  "thesis": [
-    "The P&L has inflected. Q2 2026 revenue of $16.1B grew 25% YoY - the fastest since 2011 - with non-GAAP EPS of $0.42 nearly doubling the ~$0.22 consensus and non-GAAP gross margin up 12.1pts YoY to 41.8%.",
-    "18A is real and shipping. Panther Lake (client) reached broad availability in January 2026 and Clearwater Forest Xeon 6+ (288 E-cores) launched June 2026 through Dell, HPE, Lenovo and Supermicro - the first hard proof the process roadmap executes.",
-    "Foundry losses are narrowing on schedule. Q2 foundry operating loss of $2.1B improved ~$0.3B QoQ on revenue of $5.8B (+31% YoY), with yields cited as improving and inbound interest in 18A-P.",
-    "Data center is growing again. DCAI revenue rose 59% YoY to $6.3B as Clearwater Forest and Granite Rapids restore competitiveness against AMD.",
-    "Washington and strategic investors underwrite the story. The US government's $8.9B stake (433.3M shares at $20.47, Aug 2025), plus Nvidia's $5B and SoftBank's $2B investments, make failure politically expensive and funding available."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Jul 23, 2026)",
-    "points": [
-      "Revenue $16.1B, +25% YoY, fastest growth since 2011 (vs ~$14.4B consensus)",
-      "Non-GAAP EPS $0.42 vs ~$0.22 expected; non-GAAP gross margin 41.8% (+12.1pts YoY)",
-      "GAAP net loss $11.0B, driven by a $12.5B non-cash mark-to-market loss on government Escrowed Shares",
-      "Segments: CCG $8.9B +13%; DCAI $6.3B +59%; Foundry $5.8B +31%, but external foundry revenue only $293M",
-      "Foundry operating loss $2.1B, narrowed from $2.4B in Q1",
-      "Operating cash flow $7.0B; adjusted free cash flow negative $8.4B on the capex ramp"
+  "asOf": "2026-10-31",
+  "oneLiner": "The only US-owned leading-edge logic maker, now growing again on server CPUs. The market is not paying for 2027 earnings; it is betting that Intel Foundry lands an external anchor customer and that a 2028-2030 earnings base several times today's is reachable.",
+  "verdict": {
+    "stance": "Cautious - right story, price ahead of it",
+    "summary": "The operating turnaround is real: Data Center is supply-limited, gross margin has recovered and the foundry loss is narrowing. But the Q4 guide steps down sharply on PC memory costs, the share count is up ~17% in a year, and the multiple prices a foundry outcome that has no named high-volume customer yet. On our numbers the probability-weighted value sits below the live price, because the base case needs a mid-40s multiple on 2027 EPS just to hold. Two things would turn us positive: a named high-volume external 14A or 18A-P customer, and Xeon supply easing fast enough that Data Center growth outruns the PC slump in H1 2027.",
+    "wtb": [
+      "FY2027 revenue of at least ~$68B (about +10% on a ~$62B FY2026) while the PC market stays soft through at least H1 2027.",
+      "Non-GAAP gross margin climbs back above ~42% by Q2 2027 after the ~38% Q4 2026 trough.",
+      "A named, high-volume external 14A or 18A-P customer is announced before 14A risk production in 2027.",
+      "The diluted share count stops growing: no new equity raise in 2027, holding near ~5.4B."
     ]
   },
-  "latestProse": "Q2 2026 (reported Jul 23): revenue $16.1B, +25% YoY, with non-GAAP gross margin at 41.8% (+12.1pts YoY) and non-GAAP EPS of $0.42, a seventh straight beat. GAAP showed an $11.0B net loss, almost entirely a $12.5B non-cash mark-to-market on the 158.7M government Escrowed Shares (carried as a derivative liability that grows as the stock rises). CCG rose 13% to $8.9B, DCAI 59% to $6.3B, and Foundry 31% to $5.8B with the operating loss narrowing to $2.1B. Adjusted FCF was still negative at -$8.4B as capex ramps. The disclosure that matters most: external foundry revenue of just $293M - the $100B+ foundry bet still has no anchor external customer.",
-  "guidanceProse": "Q3 2026 guidance: revenue of $15.8-16.8B, non-GAAP EPS $0.38, on ~42% non-GAAP gross margin - continuation, not acceleration. The debate: bulls see a durable turnaround (18A ramping, foundry losses shrinking, margins normalizing); bears see PC/server restocking plus an AI halo Intel doesn't actually monetize, with cost cuts (a further round of layoffs and ~$1B opex reduction in July 2026) doing much of the EPS work while negative FCF absorbs the cash the government and strategic investors put in.",
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.3,
+      "rev": 60,
+      "eps": 1.0,
+      "multiple": 32,
+      "why": "Memory-driven PC weakness lasts all of 2027, substrate limits cap Xeon, and revenue is flat on FY2026. Non-GAAP net margin stays ~9% as 18A ramp costs and the foundry loss absorb the gains. With no anchor customer the market stops paying for 2030 foundry economics and the multiple falls toward that of a stalled turnaround."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 68,
+      "eps": 1.76,
+      "multiple": 45,
+      "why": "Data Center keeps compounding as substrate supply eases from mid-2027 and the PC market recovers in H2; revenue +10% and non-GAAP net margin ~14% as the foundry loss narrows below ~$1.5B a quarter. Foundry customer interest stays unnamed, so the market keeps a high but no longer expanding multiple."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 76,
+      "eps": 2.67,
+      "multiple": 50,
+      "why": "Xeon supply unlocks, PC demand normalises by mid-2027 and a named high-volume 14A customer signs; revenue +23% and non-GAAP net margin ~19%. A visible path to foundry break-even lets the market capitalise 2028-2029 earnings, so the multiple stays at 50x."
+    },
+    "note": "FY2026 revenue assumes Q1 $13.6B + Q2 $16.1B + Q3 $16.5B + Q4 guide midpoint $15.5B = ~$61.7B. EPS = revenue x non-GAAP net margin / ~5.4B diluted shares (Q3 2026 diluted weighted average 5.307B plus stock comp): bear $60B x 9% = $1.00, base $68B x 14% = $1.76, bull $76B x 19% = $2.67. EPS is on a non-GAAP basis (excludes escrowed-share and equity-investment marks). Multiples apply to FY2027 EPS at end-2027. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does the foundry earn the multiple, or is this a CPU recovery priced like a foundry?",
+      "bull": "18A is shipping in Intel's own client and server parts, the 14A 0.9 PDK went out in October as committed, Socionext picked 18A-P in August, and press reports (unverified) link Apple to 18A-P for 2027.",
+      "bear": "The reverse DCF needs ~20% a year of earnings growth for a decade against revenue that shrank ~6% a year over the last three fiscal years. Foundry still lost $1.9B in Q3 and Intel no longer breaks out external revenue; Socionext is not a volume anchor.",
+      "view": "This is the debate that sets the multiple (32x vs 50x). Without a named high-volume customer before 14A risk production, the base case is generous. We would move to Neutral or Positive on a named volume commitment, not on 'inbound interest'.",
+      "signpost": {
+        "metric": "Named external 14A or 18A-P customer with stated volume or prepayment",
+        "threshold": "positive if a top-10 fabless or hyperscaler commits; negative if 14A risk production starts with internal products only",
+        "when": "Q4 2026 report (late Jan 2027, est.) through 14A risk production in 2027"
+      }
+    },
+    {
+      "q": "Can Data Center outrun the PC slump in H1 2027?",
+      "bull": "DCAI grew 78% in Q3 with 41% segment margin and demand Intel calls extraordinary; Nvidia systems pairing GPUs with Xeon add a new demand channel.",
+      "bear": "Output is capped by substrates, AMD's 192-core Turin parts have no direct Intel match, and CCPG fell 5% with management expecting PC weakness at least through H1 2027 as DRAM and NAND prices raise system costs. The Q4 guide is the first step down.",
+      "view": "The Q4 guide shows PC losses outweighing Data Center gains for now. The base case needs DCAI back to sequential growth by Q2 2027; if total revenue is still below $16B in Q2 2027, the bear case is in play.",
+      "signpost": {
+        "metric": "DCAI revenue growth and total revenue vs the $15.0-16.0B Q4 guide; Q1 2027 guide",
+        "threshold": "positive if Q1 2027 revenue is guided at or above $15B with DCAI growing sequentially; negative if Q1 is guided below $14B",
+        "when": "Q4 2026 report, late Jan 2027 (est.)"
+      }
+    },
+    {
+      "q": "How much of the per-share story survives dilution and accounting noise?",
+      "bull": "Q3 adjusted free cash flow was positive ($1.6B) as capex fell to ~$4.2B, and trailing operating cash flow is ~$14.9B through Q2 2026 despite GAAP losses; the equity raises bought fab capacity, not losses.",
+      "bear": "Diluted shares rose ~17% in a year (~5.31B in Q3 2026 vs ~4.53B in Q3 2025) after the government, Nvidia, SoftBank and the ~$23B public offering. GAAP net income ($3.3B) exceeded operating income ($2.5B) in Q3 on a $1.0B escrowed-share gain and $0.3B of equity gains, and these marks swing results in both directions.",
+      "view": "Value the company on non-GAAP EPS per diluted share and on cash flow, not on GAAP. Dilution is in the model at ~5.4B shares; another raise in 2027 would cut every scenario by its size.",
+      "signpost": {
+        "metric": "Diluted share count and adjusted free cash flow",
+        "threshold": "red flag if shares rise above ~5.5B or adjusted FCF turns negative for two quarters",
+        "when": "Q4 2026 and Q1 2027 reports (Jan and Apr 2027, est.)"
+      }
+    }
+  ],
+  "thesis": [
+    "Server CPUs are supply-limited, not demand-limited. Data Center was the strongest growth in 15 years per the CFO, and the constraint is substrates, which is a timing problem rather than a share problem.",
+    "Margins have structurally reset higher. Q3 non-GAAP gross margin of 44.1% compares with 40.0% a year earlier, as better 18A yields and cycle times reduce wafer costs.",
+    "The foundry loss is narrowing. The Q3 operating loss of $1.9B compares with $2.3B a year earlier on 58% higher segment revenue, and the 14A PDK milestone was met on time.",
+    "Strategic shareholders underwrite the balance sheet. The US government, Nvidia, SoftBank and the public offering together fund the 18A/14A buildout and make failure politically expensive."
+  ],
+  "risks": [
+    "Dilution has already taxed the turnaround. Shares are up ~17% in a year (debate 3); the per-share value of any recovery is smaller, and the 14A buildout could need more capital.",
+    "The price needs a better business than the record shows. The reverse DCF bar is ~20% a year of earnings growth vs a shrinking three-year revenue base; a foundry miss compresses the multiple, not just EPS.",
+    "PC memory squeeze. Higher DRAM and NAND prices shrink the PC market into at least H1 2027, and CCPG is still about half of revenue.",
+    "GAAP results are noisy. Escrowed-share and investment marks moved GAAP EPS from -$2.16 in Q2 to $0.60 in Q3; GAAP net income above operating income is not operating profit.",
+    "Competitive gaps remain. AMD leads at the top of the server core-count range and Intel has no material merchant AI accelerator revenue."
+  ],
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "1": [
+      "gmA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "revA"
+    ],
+    "1": [
+      "peerFpe"
+    ],
+    "3": [
+      "niQ"
+    ]
+  },
+  "catalysts": [
+    "Early Nov 2026: AMD Q3 2026 report - server CPU share read vs Intel's substrate-limited Xeon (debate 2).",
+    "Late Jan 2027 (est.): Q4 2026 report - delivery vs the $15.0-16.0B guide, Q1 2027 guide, share count and adjusted FCF (debates 2 and 3).",
+    "Through 2027: named external 14A or 18A-P customer announcements; the Apple 18A-P report remains unverified (debate 1).",
+    "2027: Intel 14A risk production (internal products first) - whether an external customer is on it (debate 1).",
+    "H1 2027: DRAM and NAND contract pricing - the swing factor for PC demand (debate 2)."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 2026; reported Oct 29, 2026)",
+    "points": [
+      "Revenue $16.5B, +21% YoY, above the $15.8-16.8B guide midpoint; DCAI $7.3B +78%, CCPG $8.1B -5%, Foundry $6.7B +58% (including intersegment).",
+      "Non-GAAP gross margin 44.1% (GAAP 43.0%); non-GAAP operating margin 19.6% (GAAP 15.3%).",
+      "Non-GAAP EPS $0.52 vs a $0.38 guide; GAAP EPS $0.60, including a $1.0B escrowed-share gain.",
+      "Segment operating income: DCAI $3.0B, CCPG $2.3B, Foundry -$1.9B.",
+      "Operating cash flow $5.1B, gross capex $4.2B, adjusted free cash flow $1.6B; diluted shares 5.31B."
+    ]
+  },
+  "latestProse": "Q3 2026 (reported Oct 29). Revenue $16.5B, +21% YoY and ahead of guide, carried by Data Center: DCAI $7.3B (+78%) at a ~41% segment margin, with purpose-built silicon revenue more than doubling. Client (now CCPG, Client Computing and Physical AI) fell 5% to $8.1B as memory prices raised PC system costs. Foundry revenue rose 58% to $6.7B, mostly internal, and its operating loss narrowed to $1.9B. Non-GAAP EPS of $0.52 beat the $0.38 guide; GAAP EPS of $0.60 was lifted by a $1.0B escrowed-share gain and $0.3B of equity gains. Adjusted free cash flow turned positive at $1.6B. During the quarter Intel completed a ~$23B public equity offering and agreed to acquire Classiq. Note: the filings data behind the charts runs through Q2 2026 and does not yet include this quarter.",
+  "guidanceProse": "Q4 2026 guide: revenue $15.0-16.0B, non-GAAP gross margin 38.0% (GAAP 37.1%), non-GAAP EPS $0.25 (GAAP $0.10), non-GAAP tax rate 11%. That is a sequential step down in revenue, ~6pts of gross margin and roughly half the EPS. On the call management said PC weakness from DRAM and NAND pricing lasts at least through H1 2027, Xeon output is limited by substrate supply that will take time to ease, and 18A supply is being steered toward data center parts. On foundry, the 14A 0.9 PDK shipped in October; no new high-volume external customer was named, consistent with Lip-Bu Tan's policy of not naming customers.",
   "guide": {
-    "label": "Q3 2026 revenue guide",
-    "val": "$15.8-16.8B",
-    "sub": "Non-GAAP EPS $0.38; non-GAAP gross margin ~42%",
-    "tone": "accent"
+    "label": "Q4 2026 rev guide",
+    "val": "$15.0-16.0B",
+    "sub": "Non-GAAP GM 38.0% | EPS $0.25",
+    "tone": "warn"
   },
   "segments": [
-    "Client (CCG): $8.9B, ~55% of revenue, +13% YoY",
-    "Data Center & AI (DCAI): $6.3B, ~39% of revenue, +59% YoY",
-    "Intel Foundry: $5.8B (+31% YoY) but overwhelmingly internal; external foundry revenue $293M (~2% of total)"
+    "Data Center and AI (DCAI): $7.3B in Q3 2026 (+78% YoY), ~44% of revenue; Xeon 6 / Clearwater Forest on 18A, supply-limited by substrates.",
+    "Client Computing and Physical AI (CCPG, formerly CCG): $8.1B (-5% YoY), ~49% of revenue; Panther Lake on 18A, pressured by PC memory costs.",
+    "Intel Foundry: $6.7B (+58% YoY), mostly intersegment; operating loss $1.9B. External customers include Socionext on 18A-P (Aug 2026).",
+    "Other (Mobileye, etc.): $0.7B (-30% YoY)."
   ],
   "competitive": [
-    "AMD keeps taking x86 share in client and server; Panther Lake and Clearwater Forest are Intel's first competitive 18A counterpunch",
-    "TSMC remains the process and ecosystem benchmark; Intel Foundry must win external logic business from a standing start ($293M/quarter external)",
-    "Nvidia owns AI compute; Intel's Crescent Island inference GPU only begins customer sampling in H2 2026",
-    "Nvidia's $5B stake and x86/NVLink co-development turned Intel's biggest overhang into a partial ally",
-    "Arm-based competition (Qualcomm PCs, hyperscaler Arm server CPUs) erodes the x86 pool itself"
+    "AMD leads at the top of the server range (192-core Turin) and keeps taking x86 share; Intel's answer is constrained by supply, not design.",
+    "TSMC remains the process and ecosystem benchmark; Intel Foundry must win external volume from a standing start.",
+    "Nvidia owns AI compute, but its $5B stake and GPU systems paired with Xeon made it a demand channel as well as a rival.",
+    "Arm-based PCs and hyperscaler Arm server CPUs shrink the x86 pool itself."
   ],
-  "moat": "What honestly remains: the x86 installed base and OEM/enterprise relationships, scale as the only US-owned leading-edge logic manufacturer, and an explicit government backstop. The classic process-leadership moat is not restored - 18A closes much of the gap, but TSMC keeps customer trust and ecosystem, and $293M of quarterly external foundry revenue says the new moat is still aspiration, not asset.",
-  "risks": [
-    "Free cash flow is still deeply negative. Adjusted FCF of -$8.4B in Q2 2026 as capex ramps; the equity is valued on hoped-for earnings power, not cash generation. The Aug 2026 $20B equity raise funds the ramp but at the cost of ~210M new shares, and underwriters hold a 30-day option for up to 31.6M more.",
-    "The multiple ran far ahead of the recovery. ~71x forward earnings at $102.57 - a 5x move off the government's $20.47 entry - versus old-Intel's historical 10-15x.",
-    "Foundry still loses ~$2.1B a quarter with no anchor customer. '18A-P inbound interest' is not an Apple/Nvidia/Qualcomm-scale commitment, and 14A economics depend on landing one.",
-    "Government entanglement cuts both ways. Escrowed-share mark-to-market whipsaws GAAP results, and a ~10% state shareholder constrains capacity, M&A and China decisions.",
-    "AI exposure is thin. DCAI growth is CPU-led; Intel has no material merchant AI accelerator revenue in 2026 while that market exceeds $200B.",
-    "Restructuring fatigue. Roughly 40,000 jobs cut in two years, with new cuts in July 2026 - cost-driven beats get harder from here."
-  ],
-  "catalysts": [
-    "Oct 22, 2026 (est.): Q3 2026 earnings",
-    "H2 2026: Crescent Island AI GPU customer sampling begins",
-    "Late 2026: Nova Lake desktop launch; Panther Lake holiday-season volume ramp",
-    "H2 2026 ongoing: external 18A/18A-P foundry customer announcements - the make-or-break catalyst",
-    "Jan 2027 (est.): Q4/FY2026 results with 14A and capex commitments"
-  ],
-  "pricedIn": "INTC trades at $102.57 (Aug 12, 2026) with a consensus forward P/E around 71x - extreme versus Intel's own 10-15x history, though inflated by still-depressed EPS; on Aug 10 Intel priced an upsized $20B common stock offering - 210.5M shares at $95, roughly 4-5% dilution, closed Aug 12 - with net proceeds of ~$19.7B earmarked for capex and working capital; trailing GAAP earnings are negative on the escrowed-share mark-to-market. The price implies the turnaround compounds: foundry reaching ~2027 break-even, DCAI growth persisting, margins recovering toward the high-40s, and eventually an external foundry anchor. The key debate: genuine earnings-power restoration versus a state-sponsored re-rating - seven straight beats and 25% growth against negative FCF, $2.1B quarterly foundry losses, and $293M of external foundry sales.",
-  "scenarios": {
-    "bear": "The 25% growth proves to be restocking plus AI-adjacent sentiment; PC/server demand normalizes in 2027, foundry losses plateau without an anchor customer, and 14A spending forces another capital raise or deeper cuts. The ~71x forward multiple compresses violently - a move back toward $50-60 requires nothing worse than estimates stalling.",
-    "base": "Intel keeps beating modestly: Panther Lake and Clearwater Forest ramp, foundry losses grind toward break-even through 2027, and adjusted FCF approaches zero as capex peaks. The stock digests its 5x run, trading sideways-to-up as EPS slowly grows into the multiple.",
-    "bull": "A named, large external 18A-P/14A anchor customer signs, Crescent Island gains real inference traction, and gross margin recovers toward high-40s. Normalized EPS power of $3+ by 2028 comes into view, FCF turns positive, and the re-rating extends rather than reverses."
-  },
+  "moat": "The x86 installed base and OEM/enterprise relationships, scale as the only US-owned leading-edge logic manufacturer, and an explicit government and strategic-investor backstop. Process leadership is not restored: 18A closes much of the gap and 14A is on schedule, but TSMC keeps customer trust, and until a volume customer commits, the foundry moat is a hope rather than an asset.",
   "valPresets": {
     "mode": "fcf",
     "basis": "fwdEps",
@@ -76,48 +158,50 @@
     "bull": {
       "g": 0.28
     },
-    "note": "Basis is forward earnings: FCF is deeply negative (-$8.4B in Q2 alone) through the foundry buildout, so cash-flow valuation is meaningless; the reverse DCF on ~71x forward EPS shows how much recovery is already priced."
-  },
-  "bullCharts": {
-    "0": [
-      "revQ"
-    ],
-    "3": [
-      "revYoyA"
-    ]
-  },
-  "bearCharts": {
-    "0": [
-      "fcfA"
-    ],
-    "1": [
-      "peerFpe"
-    ]
+    "note": "Basis is forward earnings: free cash flow is volatile through the 18A/14A buildout, so cash-flow valuation understates or overstates in any single year; the reverse DCF on forward EPS shows how much recovery is already priced."
   },
   "sources": [
     {
-      "label": "Intel Q2 2026 press release (IR)",
-      "url": "https://www.intc.com/news-events/press-releases/detail/1776/intel-reports-second-quarter-2026-financial-results"
+      "label": "Intel Q3 2026 earnings release (8-K, Oct 29, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000050863/000005086326000188/q326earningsrelease.htm"
     },
     {
-      "label": "CNBC: Intel Q2 2026 earnings",
-      "url": "https://www.cnbc.com/2026/07/23/intel-intc-earnings-report-q2-2026.html"
+      "label": "Intel Q2 2026 earnings release (8-K, Jul 23, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000050863/000005086326000155/q226earningsrelease.htm"
     },
     {
-      "label": "TradingKey: Q2 2026 analysis",
-      "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262088803-intel-intc-q2-2026-earnings-data-center-ai-foundry-loss-tradingkey"
+      "label": "Verdict: Intel Q3 2026 results - $23B offering, Classiq (Oct 30, 2026)",
+      "url": "https://www.verdict.co.uk/intel-q3-2026-results/"
     },
     {
-      "label": "Analysis.org: $293M external foundry sales",
-      "url": "https://analysis.org/intel-q2-2026-16-1-billion-in-revenue-and-293-million-in-external-foundry-sales/"
+      "label": "ServeTheHome: Intel Q3 2026 - substrates, memory pressure, 14A PDK (Oct 30, 2026)",
+      "url": "https://www.servethehome.com/intel-q3-2026-earnings-data-center-foundry-client/"
+    },
+    {
+      "label": "TrendForce: Socionext adds Intel 18A-P; Apple 18A-P report (Aug 20, 2026)",
+      "url": "https://www.trendforce.com/news/2026/08/20/news-japans-socionext-adds-intels-18a-p-to-foundry-mix-alongside-tsmc/"
+    },
+    {
+      "label": "Bloomberg: Nvidia 13F shows Intel stake (Aug 14, 2026)",
+      "url": "https://www.bloomberg.com/news/articles/2026-08-14/nvidia-has-21-billion-spacex-stake-30-billion-in-intel-shares"
     },
     {
       "label": "The Register: Clearwater Forest 18A launch",
       "url": "https://www.theregister.com/systems/2026/06/01/intel-launches-288-core-clearwater-forest-xeon-6-on-18a-process/5248150"
     },
     {
-      "label": "Tom's Hardware: 18A external customers",
-      "url": "https://www.tomshardware.com/tech-industry/semiconductors/intel-ceo-recognizes-its-18a-node-for-external-customers-as-18a-p-gets-inbound-interest-company-cites-increasing-yields"
+      "label": "SEC EDGAR XBRL companyfacts (share counts, cash flow, through Q2 2026)",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0000050863.json"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-31",
+      "change": "Rebuilt as a v3 decision note after the Q3 2026 report (Oct 29): beat on Data Center, but the Q4 guide steps down on PC memory costs. Stance set to Cautious: scenario values on FY2027 non-GAAP EPS (bear $32 / base $79 / bull $134, weighted ~$76). Added dilution (+17% shares YoY) and GAAP mark-to-market noise as explicit debates. Dropped the v2 claim of -$8.4B Q2 adjusted FCF, which the filings data does not support."
+    },
+    {
+      "date": "2026-08-13",
+      "change": "Q2 2026 beat (revenue +25%), Q3 guide $15.8-16.8B, $20B equity raise."
     }
   ]
 }

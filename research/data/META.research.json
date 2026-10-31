@@ -1,65 +1,148 @@
 {
-  "asOf": "2026-10-04",
-  "oneLiner": "A 27%-growth ad franchise that re-rated ~27% in September 2026 on the Muse personal-agent launch, now asking investors to underwrite $130-145B of capex, near-zero FCF and a ~$10B Q3 legal charge.",
-  "thesis": [
-    "Ad machine still accelerating. Q2 2026 ad revenue rose 27% YoY to $59.4B with impressions +14% and price per ad +12% - AI is lifting volume and pricing simultaneously.",
-    "AI monetization beyond ads is now a product. Muse, a personal AI agent on Muse Spark models, launched Sept 8, 2026 (US/Canada; free tier plus reported $20/$100 monthly plans) and reached ~5M downloads in 22 days per Sensor Tower.",
-    "Unmatched distribution. 3.60B daily active people (Q2 2026) give Muse and Meta AI instant scale via WhatsApp and the apps; FoA other revenue crossed $1B/quarter (+73% YoY) on paid messaging and subscriptions.",
-    "Hardware as an agent endpoint. Connect (Sept 23, 2026) launched Ray-Ban Meta Gen 3 ($449), camera-free Ray-Ban Meta Audio ($349), $1,300 Meta VR Glasses for spring 2027, and plans to bring Muse to glasses.",
-    "Street turned. JPMorgan (Overweight since its Sept 2026 upgrade) lifted its target to $920 from $820 on Sept 24; average target ~$794 (late Sept 2026, Yahoo via Admirals)."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported July 29, 2026)",
-    "points": [
-      "Revenue $60.8B, +28% YoY (+27% cc); advertising $59.4B, +27%",
-      "EPS $6.18, -13% YoY - first consensus miss in seven quarters; net income $15.85B, -14%",
-      "Costs +55% to $42.0B on $2.4B legal charges and $1.18B severance (8,000 May 2026 layoffs); operating margin 31% vs 43%",
-      "Reality Labs: $431M revenue, $4.62B operating loss; Family of Apps operating income $23.4B",
-      "Capex $31.1B; free cash flow fell ~91% to $784M",
-      "3.60B daily active people; impressions +14%, price per ad +12%"
+  "asOf": "2026-10-31",
+  "oneLiner": "The world's largest social-ad machine, now spending more than it earns in cash to build AI compute and starting to fund the gap with equity. The market is betting that 2027 depreciation and dilution swallow most of the ad growth; the stock works if operating margin stabilises near 30% while revenue compounds ~20%.",
+  "verdict": {
+    "stance": "Neutral - upside skew, 2027 capex unknown",
+    "summary": "The core business is not the problem: ad revenue grew 26% in Q3 2026 with pricing doing more of the work than volume, and the Q4 guide is above consensus. The problem is the bill. Capex now exceeds operating cash flow, operating margin has fallen from 41% to 20% in two quarters (35% ex the legal charge), and Meta has started selling stock - $37.5B priced in October with a $60B Class C at-the-market program planned. Our probability-weighted value is modestly above the current price, so the skew is positive but not wide enough to be Positive before the 2027 capex and expense guide in late January. Two things would move the view: a 2027 capex number above ~$250B without a matching revenue guide (to Cautious), or Muse disclosing revenue that makes the AI spend look like a second business rather than a defence of the first (to Positive).",
+    "wtb": [
+      "FY2027 revenue grows ~20% to about $305B: ad pricing keeps rising high-single to low-double digits and impressions keep growing despite the teen time limits.",
+      "FY2027 net margin holds at or above ~29% (vs ~30% in FY2026 including the legal charge) even as depreciation from the 2026 build lands.",
+      "Diluted share count stays at or below ~2.65B through 2027: the $25B forward sale and preferred convert, but the Class C ATM is used sparingly.",
+      "2027 capex guidance in late January 2027 lands at or below ~$220B, so free cash flow turns back positive by 2H 2027."
     ]
   },
-  "latestProse": "Q2 2026 revenue was $60.8B, +28% YoY, with ads at $59.4B (+27%) on impressions +14% and pricing +12%. Operating margin compressed to 31% from 43% as expenses jumped 55% to $42.0B - including $2.4B of unspecified legal accruals and $1.18B severance from ~8,000 AI-pivot layoffs - and EPS fell 13% to $6.18, the first miss in seven quarters. Reality Labs lost $4.62B on $431M revenue; FoA earned $23.4B. The disclosure that matters most: capex of $31.1B drove free cash flow down ~91% to $784M - the AI buildout is consuming nearly all cash generation.",
-  "guidanceProse": "Q3 2026 revenue is guided to $61-64B (July 29, unchanged). 2026 capex guidance is $130-145B (narrowed from $125-145B) and 2026 operating income is guided above 2025's $83.3B - but Meta has since flagged a ~$10B Q3 legal charge from the August youth settlement. No 2027 capex guide yet; third-party estimates run ~$186B (consensus) to $210-215B (Deutsche Bank). The debate: bulls say Muse and AI ad returns fund the buildout; bears see FCF near zero, rising debt and a 2027 depreciation wave.",
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.3,
+      "rev": 292,
+      "eps": 26.0,
+      "multiple": 17,
+      "why": "Revenue grows only ~14% as teen limits and agent competition cut impressions growth; 2027 capex comes in above $250B and depreciation pushes net margin to ~24%. Meta leans on the Class C ATM at lower prices (~2.70B diluted shares). With FCF still negative and dilution ongoing, the market pays a high-teens multiple, the low end of its 2022-2026 range."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 307,
+      "eps": 33.6,
+      "multiple": 21,
+      "why": "Ads compound ~20% on pricing; 2027 capex of ~$200-230B lifts depreciation but RL losses narrow to ~$15B and headcount stays down, so net margin is ~29%. Forward sale plus partial ATM use takes diluted shares to ~2.65B. FCF turns slightly positive in 2H 2027, earning a low-20s multiple in line with peers."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 320,
+      "eps": 40.2,
+      "multiple": 24,
+      "why": "Revenue grows ~25% as Muse shopping and paid messaging add a visible new revenue line; capex peaks as a share of revenue and net margin recovers to ~33%. Little ATM use (~2.63B shares). The market starts paying for an AI platform rather than an ad network spending to defend itself."
+    },
+    "note": "FY2026 revenue base ~$256B = 9M 2026 $181.7B + Q4 guide midpoint $74.5B. EPS = revenue x net margin / diluted shares: bear $292B x 24% / 2.70B = $26.0; base $307B x 29% / 2.65B = $33.6; bull $320B x 33% / 2.63B = $40.2. Share counts start from 2.573B (Q3 2026 diluted) plus ~40M forward-sale shares ($25B at $625), up to ~20M from the 6.50% mandatory convertible preferred, and scenario-specific Class C ATM issuance. Multiples apply to FY2027 EPS at end-2027. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does the 2027 compute bill outrun revenue growth?",
+      "bull": "Ex the legal charge, Q3 operating margin was still 35% on 26% revenue growth; RL losses are guided down to ~$15B in 2027, headcount is 15% lower YoY, and pricing per ad (+14%) shows AI ranking is earning its keep.",
+      "bear": "Operating margin fell from 41% to 20% in two quarters and TTM capex is 43% of revenue (27% in 2022). Management gave no 2027 number beyond investing 'aggressively'; Wedbush now models $249B of 2027 capex, so depreciation alone could absorb most of next year's revenue growth.",
+      "view": "This is the debate that sets the multiple (17x vs 24x). We assume 2027 capex of ~$200-230B in the base case; the Q4 call is the first real data point, and the expense guide matters more than the capex range because it shows how fast depreciation hits.",
+      "signpost": {
+        "metric": "2027 capex and total expense guidance",
+        "threshold": "capex at or below $220B with expense growth below 25% = bullish; capex above $250B = move to Cautious",
+        "when": "Q4 2026 report, late Jan 2027"
+      }
+    },
+    {
+      "q": "How much of the buildout do shareholders fund through dilution?",
+      "bull": "The $37.5B raised so far is ~2.3% of shares including the preferred, and the Class C structure only provides an option; Meta still holds $82.5B of cash, and the CFO called the 'hundreds of billions' filing language a theoretical maximum.",
+      "bear": "Meta has gone from $26B of buybacks in 9M 2025 to none in 9M 2026 and is now a net issuer; a $60B ATM, plus filings warning that Class C will trade at a discount, turns a flat share count into a rising one exactly when EPS is under depreciation pressure.",
+      "view": "Dilution of ~3% is in the base case. The bear case needs the ATM used heavily at lower prices. Watch issuance pace, not the size of the authorisation.",
+      "signpost": {
+        "metric": "Diluted share count and Class C ATM proceeds",
+        "threshold": "diluted shares above 2.68B by Q2 2027, or more than $20B sold under the ATM in 1H 2027 = bearish",
+        "when": "Q1 and Q2 2027 reports (late Apr / late Jul 2027)"
+      }
+    },
+    {
+      "q": "Is Muse a second business or a cost of staying in the game?",
+      "bull": "~10M people set up Muse in about six weeks (US/Canada only) with ~25% daily use; over a quarter of weekly users bought something at an average above $200, and management expects serving cost per user to fall more than 10x within a year.",
+      "bear": "Muse has no disclosed revenue, it competes with agents from OpenAI, Google, Apple and Amazon that may be more trusted, and capacity for 1B+ users is a large part of why 2027 compute grows. Amazon has already blocked it from its shopping site.",
+      "view": "Muse is the bull case, not the base case. We need a revenue or take-rate disclosure before paying for it; user counts alone do not offset the capex.",
+      "signpost": {
+        "metric": "Muse monthly users and any disclosed transaction or subscription revenue",
+        "threshold": "50M+ users plus a revenue figure = bullish; no revenue disclosure by mid-2027 = drop from bull probability",
+        "when": "Q4 2026 and Q1 2027 reports (late Jan / late Apr 2027)"
+      }
+    }
+  ],
+  "thesis": [
+    "The ad engine is still compounding. Ad revenue grew 26% in Q3 2026 with price per ad up 14% and impressions up 10%: AI ranking and Advantage+ are raising what each impression earns, which is the kind of growth that survives a slower user base.",
+    "Costs outside compute are being cut. Headcount is down 15% YoY and Reality Labs losses are guided to fall from $18-19B in 2026 to ~$15B in 2027, so most of the margin pressure is depreciation that should eventually be absorbed by growth.",
+    "The bar is low. The reverse DCF needs only ~4% a year of earnings growth against ~20% a year of revenue growth delivered over three years; the market is pricing a sharp slowdown, not the ~20% our base case assumes.",
+    "Distribution for a new product line. 3.64B daily active people (September 2026) give Muse a reach no standalone agent has, and the early shopping data suggests it can monetise through commerce rather than only ads."
+  ],
+  "risks": [
+    "Capex runs ahead of cash flow. Q3 2026 capex including finance leases exceeded operating cash flow, TTM capex is 43% of revenue, and Meta reportedly has ~$825B of future spending commitments (Reuters, unverified against filings).",
+    "Margin compression is structural, not one-off. Operating margin was 20% in Q3 2026 (35% ex the legal charge, vs 40% a year earlier); depreciation from the 2026 build lands in 2027 before the revenue it is meant to support.",
+    "Dilution replaces buybacks. Meta priced $25B of forward-sale common at $625 and $12.5B of 6.50% mandatory convertible preferred in October and plans a $60B Class C ATM; no stock was repurchased in 9M 2026.",
+    "Legal and regulatory drag. The 52-state settlement (up to ~$18.6B, with default teen time limits), school-district trials from Feb 3, 2027, the New Mexico privacy penalty (outcome not verified) and the FTC appeal keep both charges and impression limits in play.",
+    "Talent and execution at MSL. Superintelligence Labs has lost senior researchers (Andrew Tulloch left Sept 2026) while the strategy shifted from open Llama to closed Muse Spark models; slipping model quality would undercut the case for the spend."
+  ],
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "2": [
+      "peerFpe"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "capexPctA"
+    ],
+    "1": [
+      "omA"
+    ],
+    "2": [
+      "fcfQ"
+    ]
+  },
+  "catalysts": [
+    "~Nov 25, 2026: underwriters' 30-day option on 37.5M additional preferred depositary shares expires (debate 2).",
+    "Jan 19, 2027: Class C non-voting stock becomes effective; one-time Class C stock dividend (record date TBD) works like a 2-for-1 split (debate 2).",
+    "~Late Jan 2027: Q4 2026 results - 2027 capex and total expense guidance, Muse metrics (debates 1 and 3).",
+    "Feb 3, 2027: school-district MDL trials begin.",
+    "Q1 2027 onward: Class C at-the-market program of up to $60B may launch once Class C trades (debate 2).",
+    "Spring 2027: Meta VR Glasses launch ($1,300); Muse on glasses."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Oct 21, 2026)",
+    "points": [
+      "Revenue $64.6B, +26% YoY (consensus ~$63.3B); advertising $63.1B, +26%; impressions +10%, price per ad +14%.",
+      "Operating income $13.0B, margin 20% (40% a year earlier) after a $9.89B charge for the 52-state attorneys general settlement; $22.9B ex the charge.",
+      "Diluted EPS $3.83 ($7.40 ex the charge); effective tax rate 24% (17% ex the charge).",
+      "Family of Apps operating income $17.1B; Reality Labs $443M revenue, $4.13B operating loss.",
+      "Operating cash flow $32.8B vs capex incl. finance-lease principal $34.9B: free cash flow -$2.1B. No buybacks; dividends $1.36B.",
+      "Cash and securities $82.5B; long-term debt $80.9B (vs $58.7B at end-2025); headcount 66,775 (-15% YoY)."
+    ]
+  },
+  "latestProse": "Q3 2026 (reported Oct 21). Revenue beat by about $1.3B, and the mix of the beat matters: price per ad (+14%) outgrew impressions (+10%), so AI ranking is lifting yield rather than Meta simply adding ad load. Everything below revenue went the other way. Total costs rose 68% to $51.6B, including the $9.89B settlement charge, and capex including finance leases exceeded operating cash flow for the first time in more than a decade. The quarter also changed the capital structure: the same day Meta filed a charter amendment creating non-voting Class C stock, with one Class C share to be distributed per existing share and a Founder Alignment Agreement limiting Zuckerberg's Class C sales. Five days later it priced $25B of Class A common at $625 under forward sale agreements (settling by Nov 19, 2027; Nvidia committed $3B) and $12.5B of 6.50% mandatory convertible preferred converting around Aug 15, 2029. Shares fell about 8% the morning after the report. Muse early data from the call: ~10M sign-ups in about six weeks and ~25% daily use.",
+  "guidanceProse": "Q4 2026 revenue $73-76B (consensus ~$73.6B), with ~1% FX headwind; Q4 tax rate 15-17%. Full-year 2026 total expenses $175-179B, raised by ~$10B to absorb the legal charge; 2026 operating income still expected to exceed 2025 excluding that charge. 2026 capex including finance leases narrowed to $135-145B, which implies roughly $40-50B in Q4. Reality Labs 2026 losses $18-19B, narrowing to ~$15B in 2027. No 2027 capex or expense number yet: management expects 'strong' revenue growth through 2027 and says it will keep investing aggressively; the 2027 budget comes with Q4 results. Funding: the Hyperion campus in Louisiana sits in a $27B joint venture 80% owned by Blue Owl funds (Oct 2025), keeping that debt off Meta's balance sheet, and the planned $60B Class C ATM would follow the $37.5B already priced.",
   "guide": {
-    "label": "2026 capex guide",
-    "val": "$130-145B",
-    "sub": "unchanged since July; Q2 FCF $784M; ~$10B Q3 legal charge flagged",
+    "label": "Q4 2026 rev guide",
+    "val": "$73-76B",
+    "sub": "2026 capex $135-145B | 2027 capex guide due late Jan",
     "tone": "warn"
   },
   "segments": [
-    "Advertising: $59.4B, ~98% of Q2 revenue (+27% YoY)",
-    "Family of Apps: $60.4B revenue (99.3% of total), $23.4B operating income; other revenue >$1B (+73%) on WhatsApp paid messaging/subscriptions",
-    "Reality Labs: $431M (~0.7%), -$4.62B operating loss; pivoting from Quest VR toward AI glasses"
+    "Family of Apps: $64.2B revenue in Q3 2026 (99% of total), $17.1B operating income after the legal charge; advertising $63.1B plus paid messaging, subscriptions and Muse.",
+    "Reality Labs: $443M revenue, -$4.13B operating loss in Q3 2026; shifting spend from Quest VR toward AI glasses, losses guided to ~$15B in 2027."
   ],
   "competitive": [
-    "Digital ads: duopoly with Google; Amazon scaling retail media; TikTok remains the engagement rival for Reels (current share splits unverified)",
-    "AI agents: Muse vs OpenAI's Dots (launched Sept 29, 2026, paid tiers only) and Gemini agents; Amazon blocked Muse from its shopping site on Sept 20, 2026",
-    "Open models: shift from open Llama to a hybrid/closed Muse Spark strategy cedes some open-weights leadership",
-    "Wearables: Ray-Ban Meta leads consumer AI glasses; Meta VR Glasses ($1,300, spring 2027) take on Apple Vision Pro"
+    "Digital ads: Google remains the main rival for budgets; Amazon retail media and TikTok compete for performance and short-video spend.",
+    "AI agents: Muse competes with OpenAI, Gemini, Apple and Amazon agents; Amazon blocked Muse from its shopping site in Sept 2026.",
+    "Models: the shift from open Llama to closed Muse Spark models gives up open-weights leadership in exchange for product control.",
+    "Compute: hyperscalers with cloud businesses (MSFT, GOOGL, AMZN) can rent out excess capacity; Meta must earn its return through its own apps."
   ],
-  "moat": "3.6B daily users and the deepest commercial-intent dataset outside Google feed self-reinforcing ad-targeting models rivals cannot replicate at scale. Advantage+'s $75B run-rate shows the AI flywheel converting into pricing power, and ~$60B/quarter of revenue funds a compute arms race few can match.",
-  "risks": [
-    "Capex crushes free cash flow. H1 2026 capex was $50.9B, so the $130-145B guide implies ~$40-47B/quarter in H2; Q2 FCF was $784M and long-term debt rose to $83.7B (June 30, 2026) from $58.7B at end-2025.",
-    "Legal bill crystallizing. Up to $18B youth settlement over 10 years (approved Aug 26, 2026); New Mexico privacy verdict (Sept 25) with the state seeking $35-40B vs Meta's proposed $3.45B cap; FTC appeal; school-district trials from Feb 3, 2027.",
-    "Teen time limits. The settlement imposes a default two-hour daily cap for 13-17s on Facebook/Instagram, a potential drag on US impressions (size unverified).",
-    "Muse execution. Retention unpublished, privacy/security flaws reported, OpenAI Dots launched Sept 29, and MSL attrition continues (Andrew Tulloch left Sept 2026).",
-    "Reality Labs still burns ~$4.6B/quarter (Q2 2026); 2025 loss $19.2B.",
-    "Concentration and rates: ~98% of revenue is advertising; the Fed hiked to 3.75-4.00% on Sept 16, 2026."
-  ],
-  "catalysts": [
-    "Oct 2026: New Mexico judge sets privacy penalty (state seeks $35-40B)",
-    "Oct 13, 2026: Ray-Ban Meta Audio ships; Display glasses launch in Germany/France/Italy",
-    "Oct 28, 2026 (expected, unconfirmed by Meta): Q3 2026 earnings - ~$10B legal charge, first Muse metrics, early 2027 capex view",
-    "~Late Jan 2027: Q4 2026 results and full 2027 guidance (estimated); Feb 3, 2027: school-district MDL trials begin",
-    "Spring 2027: Meta VR Glasses launch; ongoing FTC appeal at the D.C. Circuit and EU DMA/DSA proceedings"
-  ],
-  "pricedIn": "At $725.93 (Oct 1, 2026 close), META trades ~27x trailing GAAP and ~22.9x 2026 / ~21x 2027 consensus EPS ($31.72 / ~$34.90) - back near its ~26.5x 5-year average P/E after a ~27% September rally that peaked at $779.82 on Sept 24. Average analyst target is ~$794 (88% Buy). The price now credits Muse with real option value; with FCF yield ~2% and Q3 EPS revisions skewed down (5 up / 35 down over 90 days), Q3 must show Muse traction and a tolerable 2027 capex number.",
-  "scenarios": {
-    "bear": "Muse usage fades against OpenAI Dots, 2027 capex lands above ~$215B, and New Mexico plus other legal outcomes add >$10B in charges on top of the settlement. FCF stays near zero, the multiple compresses toward ~17-18x 2027 EPS: stock $580-620.",
-    "base": "Ads keep compounding ~20%+, Q3 lands in the $61-64B range, 2027 capex $190-210B, and Muse shows early paid conversion. Multiple holds ~21-22x 2027 EPS: $720-780.",
-    "bull": "Muse discloses strong retention and subscription/transaction revenue, glasses become its endpoint, and ads grow >25% while capex peaks as a share of revenue. META re-rates as an AI platform at 25x+, toward JPMorgan's $920 target."
-  },
+  "moat": "3.6B daily users and the deepest social and commercial-intent data outside Google feed ad-ranking models that keep raising price per ad. Founder control, now reinforced by non-voting Class C stock, lets Meta outspend rivals through a down-cycle in free cash flow - a strength if the AI bet works and the core risk if it does not.",
   "valPresets": {
     "mode": "fcf",
     "basis": "fwdEps",
@@ -75,67 +158,60 @@
     "bull": {
       "g": 0.22
     },
-    "note": "Basis is forward earnings: TTM FCF is crushed by the $130-145B capex program (Q2 2026 FCF $784M; FCF yield ~2%), so an FCF-DCF would misread the investment cycle as value destruction."
-  },
-  "bullCharts": {
-    "0": [
-      "revQ"
-    ],
-    "1": [
-      "revA"
-    ],
-    "4": [
-      "peerFpe"
-    ]
-  },
-  "bearCharts": {
-    "0": [
-      "capexA"
-    ],
-    "1": [
-      "omA"
-    ]
+    "note": "Basis is forward earnings: Q3 2026 free cash flow was negative (-$2.1B) because of the $135-145B capex program, so an FCF-DCF would read the investment cycle as value destruction."
   },
   "sources": [
     {
+      "label": "Meta IR - Q3 2026 press release (Oct 21, 2026)",
+      "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Third-Quarter-2026-Results/default.aspx"
+    },
+    {
+      "label": "Meta IR - pricing of Series A mandatory convertible preferred and Class A forward-sale offerings (Oct 26, 2026)",
+      "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Announces-Pricing-of-Offering-of-Depositary-Shares-Representing-Series-A-Mandatory-Convertible-Preferred-Stock-and-Offering-of-Class-A-Common-Stock-in-Connection-with-Forward-Sale-Agreements/default.aspx"
+    },
+    {
+      "label": "Meta 424B5 prospectus supplement (Oct 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001326801/000119312526431043/d133631d424b5.htm"
+    },
+    {
+      "label": "Newsquawk - Q3 2026 EPS and revenue vs consensus",
+      "url": "https://www.newsquawk.com/headlines/meta-platforms-inc-meta-q3-2026-usd-eps-383-exp-667-revenue-646bln-exp-6331bln"
+    },
+    {
+      "label": "MarketBeat - Q3 2026 recap, Muse metrics, Q4 consensus (Oct 22, 2026)",
+      "url": "https://www.marketbeat.com/articles/meta-bounces-back-in-q3-but-the-bigger-test-comes-in-2027/"
+    },
+    {
+      "label": "Webull - analyst reactions, Wedbush $249B 2027 capex estimate, stock -8% (Oct 22, 2026)",
+      "url": "https://www.webull.com/news/15793566577601536"
+    },
+    {
+      "label": "Decrypt - non-voting Class C stock, Founder Alignment Agreement",
+      "url": "https://decrypt.co/381640/meta-non-voting-stock-fund-ai-buildout-zuckerberg-control"
+    },
+    {
+      "label": "CryptoBriefing (citing Reuters) - $95B equity plan, $60B Class C ATM, ~$825B commitments (Oct 26, 2026)",
+      "url": "https://cryptobriefing.com/meta-95-billion-equity-raise-ai/"
+    },
+    {
+      "label": "Tech Insider - upsized $25B common at $625, Nvidia $3B (Oct 27, 2026)",
+      "url": "https://tech-insider.org/meta-97-5-billion-equity-raise-ai-infrastructure-2026/"
+    },
+    {
+      "label": "The Asset - Meta / Blue Owl $27B Hyperion joint venture (Oct 2025)",
+      "url": "https://www.theasset.com/article/55209/meta-blue-owl-sign-us-27-billion-data-centre-campus-deal"
+    },
+    {
       "label": "Meta IR - Q2 2026 press release",
       "url": "https://investor.atmeta.com/investor-news/press-release-details/2026/Meta-Reports-Second-Quarter-2026-Results/default.aspx"
-    },
-    {
-      "label": "StockTitan - Meta Q2 2026 recap",
-      "url": "https://www.stocktitan.net/news/META/meta-reports-second-quarter-2026-hkjfhayj8l0v.html"
-    },
-    {
-      "label": "CNBC - Reality Labs Q2 2026 loss",
-      "url": "https://www.cnbc.com/2026/07/29/metas-reality-labs-lost-over-4point6-billion-in-second-quarter.html"
-    },
-    {
-      "label": "Variety - $2.4B legal charge",
-      "url": "https://variety.com/2026/digital/news/meta-q2-2026-earnings-results-legal-proceedings-charge-1236823577/"
-    },
-    {
-      "label": "Motley Fool - META forward P/E",
-      "url": "https://www.fool.com/investing/2026/08/02/meta-trades-at-a-forward-pe-of-17-below-its-5-year/"
-    },
-    {
-      "label": "FTC - appeal of Meta monopolization ruling",
-      "url": "https://www.ftc.gov/news-events/news/press-releases/2026/01/ftc-appeals-ruling-meta-monopolization-case"
-    },
-    {
-      "label": "Admirals - Meta stock analysis Oct 2026 (price, legal, capex)",
-      "url": "https://admiralmarkets.com/education/articles/shares/meta-stock-analysis-october-2026"
     },
     {
       "label": "Engadget - Everything announced at Meta Connect 2026",
       "url": "https://www.engadget.com/2267230/everything-announced-at-meta-connect-2026/"
     },
     {
-      "label": "24/7 Wall St - JPMorgan $920 target, Muse (Sept 25, 2026)",
-      "url": "https://247wallst.com/investing/2026/09/25/three-major-analysts-bet-on-metas-ai-pivot-with-price-targets-approaching-920/"
-    },
-    {
-      "label": "TechCrunch - $18B multistate youth settlement",
-      "url": "https://techcrunch.com/2026/08/26/meta-settles-for-18-billion-in-lawsuit-brought-by-29-states-over-social-media-harms-to-children/"
+      "label": "FTC - appeal of Meta monopolization ruling",
+      "url": "https://www.ftc.gov/news-events/news/press-releases/2026/01/ftc-appeals-ruling-meta-monopolization-case"
     },
     {
       "label": "Reuters via Investing.com - New Mexico seeks up to $40B",
@@ -144,6 +220,20 @@
     {
       "label": "Implicator - Andrew Tulloch leaves Meta",
       "url": "https://www.implicator.ai/andrew-tulloch-leaves-meta-after-muse-launch/"
+    },
+    {
+      "label": "SEC EDGAR XBRL companyfacts (filings data in META.json)",
+      "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001326801.json"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-31",
+      "change": "Rebuilt as a v3 decision note after the Q3 2026 report and the October equity raise: stance Neutral with an upside skew (FY2027 EPS bear $26.0 / base $33.6 / bull $40.2 at 17x / 21x / 24x). Added debates on 2027 compute costs, dilution from the $37.5B raise and $60B Class C ATM, and Muse monetisation. View moved from no stated stance to Neutral; capex and dilution now the key risks."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "v2 note: Q2 2026 recap, Muse launch and Connect 2026, ~$10B Q3 legal charge flagged."
     }
   ]
 }

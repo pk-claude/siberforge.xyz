@@ -1,68 +1,49 @@
 {
-  "asOf": "2026-08-17",
-  "oneLiner": "The largest IPO in history: a $1.9T rocket, Starlink and AI-compute conglomerate growing 92% while outspending everyone at $18B of capex per quarter - now with Nvidia's $21B stake on the register and lockup supply grinding against institutional accumulation.",
+  "asOf": "2026-10-31",
+  "oneLiner": "A launch monopoly and Starlink cash engine that has become, by revenue, mostly a GPU landlord (Super Intelligence was over half of Q3 2026 sales). The market is betting that contracted AI compute keeps scaling toward the Q1 2027 guide and beyond, and that the buildout can be funded without swamping shareholders.",
   "thesis": [
-    "Starlink is the cash engine and it is still doubling. Q2 2026 (reported August 4, 2026) Starlink revenue was $4.29B, up 66% YoY, with 12 million subscribers at June 30, exactly double a year earlier and up 1.7 million in the quarter.",
-    "AI compute became the second act almost overnight. xAI merged into SpaceX in February 2026; Anthropic signed $1.25B per month through May 2029 for exclusive access to Colossus 1 in Memphis (May 6, 2026), and Google signed roughly $920M per month (June 5, 2026), together about $26B of annualized contracted revenue.",
-    "Institutional sponsorship is now on the tape. The Aug 14, 2026 13F round revealed Nvidia holding 122.8M shares (~$21B at June 30, converted from its xAI Series E position in the February merger) and Darsana Capital building a 101M-share stake - validation from the supplier that knows the compute book best.",
-    "Launch is a near-monopoly with compounding cadence. SpaceX flew 78 missions in H1 2026 with a mean gap under three days, and on Aug 15, 2026 flew two Falcon 9 missions just 38 minutes apart, breaking its own 65-minute record.",
-    "The government moat keeps deepening. At least $7B of Pentagon awards in 2026 year-to-date, including $1.6B for Golden Dome and $2.29B for a military data network; cumulative identified Starshield contracts exceed $9.3B on a $185B program.",
-    "Starship is the option embedded in the multiple. Flight 13 (July 28, 2026) hit all objectives, at least eight 2026 flights are planned, and up to five uncrewed Starships target the November-December 2026 Mars window -- odds Musk himself puts at 50/50."
+    "The revenue step change is contracted, not hoped for. Q1 2027 revenue was guided to $33-37B against a ~$22.2B LSEG consensus, and Anthropic's S-1 discloses up to $120.5B of SpaceX compute commitments into 2029, about $3.1B a month once capacity is fully delivered in December 2026.",
+    "Compute economics are better than a typical neocloud. SI segment adjusted EBITDA was $5.0B on $7.6B of Q3 2026 revenue (~66%), on pricing reported above $50 per watt a year; SpaceX controls power, sites and its own models (Grok, Cursor), not just racks.",
+    "Starlink is still compounding underneath. Connectivity operating income grew 99% YoY in Q3 2026 while enterprise and government revenue grew 91%; the 800 MHz spectrum deal (signed Oct 8, closing H1 2027) opens a direct-to-phone business.",
+    "Starship moved from test article to payload carrier. Flight 14 was the first orbital and first revenue-generating Starship flight, carrying 26 Starlink V3 satellites (~10x the downlink capacity of a Falcon 9 Starlink launch), which lowers the cost of every future Starlink and Starship-based payload."
   ],
   "latestQuarter": {
-    "label": "Q2 2026, first public report (reported Aug 4, 2026)",
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Oct 20, 2026)",
     "points": [
-      "Revenue $7.81B, up 92% YoY from $4.1B, vs $6.93B consensus (a ~$880M beat)",
-      "Starlink revenue $4.29B, up 66% YoY; 12.0M subscribers, up 1.7M QoQ and 2x YoY",
-      "Net loss $541M, narrowed from ~$1.0B a year earlier; adjusted EBITDA $3.5B, up 191% YoY",
-      "Capex $18.37B in the quarter, of which $15.83B for AI infrastructure, vs $10.1B in Q1 and ~$13.2B expected",
-      "Space segment operating loss of $542M on Starship R&D spend",
-      "Stock fell as much as 8% after hours on capex; the Aug 6, 2026 lockup tranche then freed 911.5M insider shares"
+      "Revenue $14.58B, +161% YoY, vs ~$12.6-12.7B consensus; SI $7.56B (+830% YoY), Connectivity $5.25B (+69%), Space $1.77B (+6%).",
+      "Income from operations $2.79B (Q2: -$143M); net income $4.40B, diluted EPS $0.35 vs ~$0.10 consensus, helped by $1.03B other income and a $390M tax benefit.",
+      "Adjusted EBITDA $8.81B (+306% YoY); $2.36B of share-based compensation, of which $1.22B tied to the Cursor acquisition.",
+      "Capex $19.59B, of which $16.44B SI; nameplate compute 1.7 GW (1.4 GW at Jun 30).",
+      "Starlink consumer subscribers 13.6M (+1.6M QoQ); consumer ARPU $69/month (Q2 $66, Q3 2025 $83). Launches 35 (Q3 2025: 44)."
     ]
   },
-  "latestProse": "SpaceX's first report as a public company, on August 4, 2026, showed revenue of $7.81 billion, up 92% year over year and about $880 million ahead of consensus. Starlink contributed $4.29 billion, up 66%, ending June with 12 million subscribers, double a year earlier. Net loss narrowed to $541 million from roughly $1.0 billion, and adjusted EBITDA reached $3.5 billion, up 191%. But capex hit $18.37 billion for the quarter versus roughly $13.2 billion expected, the stock fell as much as 8% after hours, and it then slid below its $135 IPO price as the August 6 lockup tranche freed 911.5 million shares. Since then the tape has churned: shares recovered to touch $150, faded back to close at $140 on Aug 14 under lockup-driven float expansion, then rebounded about 6% on Aug 17 as the 13F round showed Nvidia (122.8M shares, ~$21B) and Darsana Capital (101M shares) on the register. The disclosure that matters most: $15.83 billion of quarterly capex went to AI infrastructure -- the rocket company is now spending like a hyperscaler before proving hyperscaler returns.",
-  "guidanceProse": "SpaceX gave no formal revenue or capex guidance in its first public release, which is itself a signal. CFO commentary implied full-year 2026 capex could approach $65 billion, more than triple the roughly $20.7 billion spent in 2025, driven by Colossus data center expansion and Starship. The central debate: whether the ~$26 billion of annualized Anthropic and Google compute contracts proves AI infrastructure is a durable second profit engine, or whether SpaceX is levering Starlink cash flow into a commodity GPU business at the top of the cycle, with Starship and Mars absorbing whatever capital is left. Nvidia's $21 billion equity position cuts both ways in that debate: committed supplier alignment for the bulls, one more strand of AI-trade circularity for the bears.",
-  "guide": {
-    "label": "FY26 capex (implied)",
-    "val": "~$65B",
-    "sub": "vs $20.7B in 2025; no formal revenue guide given in first public quarter",
-    "tone": "warn"
-  },
   "segments": [
-    "Starlink and Starshield: $4.29B of Q2 2026 revenue (about 55% of total), 12M subscribers; Starshield is the classified government constellation with $9.3B-plus of cumulative identified contracts",
-    "AI compute (ex-xAI, merged February 2026): Colossus 1 in Memphis with 220,000-plus GPUs on 300MW; Anthropic and Google contracts total ~$26B annualized, with Colossus 2 capacity building",
-    "Launch and Starship: 78 launches in H1 2026 with near-monopoly Falcon economics (including a record 38-minute gap between two orbital launches on Aug 15, 2026); Starship R&D drove a $542M space-segment operating loss in Q2 2026"
+    "Super Intelligence (~52% of Q3 2026 revenue): cloud compute (Colossus I and II, ~$7.0B solutions and infrastructure revenue), Grok models and Grok Bot, advertising ($538M) and Cursor (acquired Aug 14, 2026, $608M of revenue through Sep 30).",
+    "Connectivity (~36%): Starlink consumer ($3.12B) plus enterprise and government ($2.13B), ~11,100 satellites in orbit (new definition includes ~400 de-orbit-approved), 3,800+ aircraft; segment operating income $2.37B.",
+    "Space (~12%): Falcon launch ($1.13B of launch services revenue) and development contracts; Q3 pipeline added 3 NASA ISS crew missions, 18 National Security Space Launch missions and a Starship lunar payload contract. Segment roughly break-even (-$7M) after Starship R&D."
   ],
   "competitive": [
-    "Rocket Lab (RKLB): the only credible small/medium-lift challenger; Neutron aims at Falcon 9's reusable niche but at a fraction of SpaceX's cadence",
-    "AST SpaceMobile (ASTS): carrier-partnered direct-to-device rival contesting the phone-connectivity layer of Starlink's TAM",
-    "Lockheed Martin (LMT) / ULA and Blue Origin: national-security launch incumbents; SpaceX still won the bulk of 2026 Space Force awards, but Golden Dome procurement is politically contestable",
-    "Amazon Kuiper: the funded broadband constellation threat to Starlink's consumer growth, still years behind on deployed capacity",
-    "CoreWeave (CRWV) and the hyperscalers: on AI compute, SpaceX is effectively a new neocloud whose $920M-a-month Google deal competes with every GPU landlord - though Nvidia's OpenAI Ohio backstop (Aug 17) shows the supplier seeding rival capacity too"
+    "CoreWeave, Nebius and the hyperscalers: SI competes for the same frontier-lab compute budgets; Anthropic's S-1 also names Microsoft, Nscale and Lambda as GPU providers, so SpaceX is one supplier of several, not a sole source.",
+    "Amazon Kuiper and AST SpaceMobile (ASTS): broadband and direct-to-device rivals; the 800 MHz spectrum purchase is SpaceX's answer to carrier-partnered D2D.",
+    "Rocket Lab (RKLB), ULA and Blue Origin: launch challengers years behind on reusable cadence; national-security launch awards remain politically contestable.",
+    "OpenAI, Google and Anthropic on models: Grok and Cursor put SpaceX in direct competition with its own largest compute customers."
   ],
-  "moat": "The launch moat is real: reusable Falcon economics, a sub-three-day cadence and vertical integration no competitor matches this decade, plus a Starlink scale advantage reinforced by owning its own launch capacity. The AI compute business has no comparable moat -- it rents GPUs like every neocloud, and its two anchor contracts expire or renew around 2029. Starshield's classified relationships are sticky but politically exposed. Net: one deep moat, one shallow one, and a valuation that prices both as deep.",
+  "moat": "Two deep moats and one rented one. Reusable launch and the Starlink constellation it alone can deploy cheaply are structural advantages no rival matches this decade, now extended by an operational Starship. The SI business is built on purchased Nvidia GPUs and contracts that become cancellable on 90 days' notice in 2027; its edge is speed of power and site build-out, which is real but replicable with enough capital.",
   "risks": [
-    "Capex escalation: ~$65B implied for FY26 versus $20.7B in 2025; free cash flow deeply negative at unprecedented scale, raising future financing needs despite the $75B IPO raise",
-    "Lockup overhang: staged releases through 2026 -- 911.5M shares on Aug 6, ~7% tranches through October, ~28% after Q3 earnings, final 180-day release December 8, 2026; the mid-August fade from $150 to $140 shows the float expansion binding",
-    "Compute customer concentration: Anthropic ($1.25B/month, ends May 2029) and Google ($920M/month) are effectively the entire ~$26B AI compute book",
-    "Key-man and governance: Musk's 6.4B shares (locked until June 12, 2027), cross-company entanglements with Tesla and the xAI heritage, and founder-controlled voting; Nvidia's stake adds supplier-shareholder entanglement",
-    "Starship program risk: Block 3 unproven at scale, Mars window attempt is 50/50, and a public failure would hit both the narrative and the multiple",
-    "Political and regulatory exposure: Golden Dome and Starshield depend on administration priorities; FCC spectrum and international licensing constrain Starlink growth"
+    "Capex runs ahead of cash. Trailing capex is ~1.7x revenue; Q4 2026 capex is guided to $35-40B against ~$90B of cash and marketable securities at Sep 30, and Musk targets at least 10 GW of added compute in 2027, which at reported build costs implies external financing.",
+    "Customer concentration with an exit door. Anthropic alone could be ~$37B a year at full delivery, and its initial non-cancelable periods end in January and March 2027, after which either side can cancel on 90 days' notice; Google ($920M a month) is the other anchor.",
+    "Earnings quality and dilution. Q3 net income exceeded operating income by $1.6B on other income and a tax benefit; Cursor brings $23.4B of post-acquisition stock compensation over about three years, and Q4 gross margin was guided back to Q2 levels after a ~3-point one-time tariff refund in Connectivity.",
+    "Governance and the Tesla question. SpaceX and Tesla boards formed special committees (Oct 20, 2026) to examine a combination; Musk is recused, but a deal would set an exchange ratio between two Musk-controlled companies and could add billions of shares.",
+    "Supply overhang. Staged lockup releases continue through the final 180-day expiry around Dec 8, 2026 (date unverified), and Musk's stake unlocks June 2027; S&P 500 eligibility is reported to require one year of seasoning."
   ],
   "catalysts": [
-    "Q3 2026 earnings, expected early November 2026 (date unconfirmed): first full quarter with both compute contracts running and post-IPO cost disclosure",
-    "Staged lockup releases: tranches through October 2026, ~28% after Q3 earnings, final release December 8, 2026",
-    "Mars launch window November-December 2026: up to five uncrewed Starships attempted (Musk: 50/50 odds)",
-    "Starship flights 14-16 expected H2 2026, including first Block 3 operational payload missions",
-    "Golden Dome award decisions through late 2026 on the $185B program architecture",
-    "Further 13F/ownership disclosures as the shareholder base institutionalizes post-lockup"
+    "Dec 3, 2026: Tesla annual meeting; Barclays suggests merger terms could surface before it (debate 3).",
+    "Dec 2026: Anthropic expects full contracted capacity delivered (~$3.1B a month); Q4 exit compute target 2.5-3 GW (debate 1).",
+    "~Dec 8, 2026: final 180-day lockup release (date unverified).",
+    "Jan and Mar 2027: Anthropic's initial non-cancelable periods end (debate 1).",
+    "Q4 2026 report, ~late Jan 2027 (date unconfirmed): FY2027 capex plan and how it is funded (debate 2).",
+    "H1 2027: 800 MHz spectrum deal closes; Starship Flight 15 and the next V3 deployments (dates unconfirmed)."
   ],
-  "pricedIn": "At $140 (August 14, 2026 close, with a ~6% rebound on Aug 17), just above the $135 IPO price and well off the $225.64 post-IPO high, SpaceX's market cap is roughly $1.94 trillion. Annualizing Q2 revenue gives about $31 billion, so the stock trades near 60x run-rate sales; even crediting the full $26 billion of annualized compute contracts plus Starlink and launch growth, an exit-2026 run-rate near $45-50 billion still implies roughly 40x. That multiple prices in Starship succeeding, Starlink reaching 25 million-plus subscribers, and AI compute scaling profitably beyond two customers. Nvidia's $21B disclosed stake and Darsana's 101M shares supply the bull case with sponsorship; the staged lockups releasing supply into December 8, 2026 supply the bear case with sellers. The key debate is unchanged: whether a company spending $18 billion a quarter deserves a software multiple.",
-  "scenarios": {
-    "bear": "Capex outruns proof. AI compute economics disappoint as Anthropic or Google decline to extend beyond 2029, Starship's Mars attempt slips past the window or fails publicly, and Amazon Kuiper plus direct-to-device rivals slow Starlink net adds. Revenue still compounds near 20%, but $60 billion-plus annual capex forces new financing below the IPO price while lockups through December 8, 2026 add share supply. The multiple compresses toward 5x sales and the stock loses more than half its value.",
-    "base": "Starlink grinds toward 18-20 million subscribers by late 2027, the compute contracts run at the full ~$26 billion annualized rate from Q3 2026, and launch stays a near-monopoly at 150-plus flights a year. Revenue compounds roughly 32%, adjusted EBITDA scales, but heavy capex keeps free cash flow negative into 2028. At a 7-8x exit sales multiple the discounted value lands below today's $1.9 trillion, so the base case implies a flat-to-lower stock until Starship revenue turns tangible.",
-    "bull": "Starship works. Uncrewed Mars landings follow the November-December 2026 window, Block 3 reuse cuts launch cost an order of magnitude, and terabit-class Starlink satellites unlock 30 million-plus subscribers plus enterprise backhaul. Golden Dome scales Starshield toward tens of billions of annual government revenue, and Colossus capacity sells out to tenants beyond the $26 billion base. Revenue compounds near 47%, capex peaks in 2027, and a 10x-plus exit sales multiple supports meaningful upside from $1.9 trillion."
-  },
   "valPresets": {
     "mode": "revenue",
     "r": 0.13,
@@ -71,20 +52,119 @@
     "bear": {"revCagr": 0.20, "fcfMargin": 0.05, "exit": 5.0},
     "base": {"revCagr": 0.32, "fcfMargin": 0.18, "exit": 7.5},
     "bull": {"revCagr": 0.47, "fcfMargin": 0.28, "exit": 10.0},
-    "note": "Revenue mode: quarterly capex ($18.4B in Q2 2026) swamps EBITDA, so near-term FCF is deeply negative and margin-based modes mislead. Data limitation: SpaceX has only one filed public quarter (Q2 2026, reported Aug 4, 2026) and no filed annual history, so financial-history charts are sparse; prefer priceH and peer-relative charts until more quarters accumulate."
+    "note": "Revenue mode: quarterly capex ($19.6B in Q3 2026, $35-40B guided for Q4) swamps EBITDA, so near-term FCF is deeply negative and margin-based modes mislead. The CAGR presets are 7-year averages from the FY2026 base and sit below the Q1 2027 guide on purpose: they price durable growth after the compute ramp, not the ramp itself."
   },
-  "bullCharts": {"0": ["priceH", "peerRg"]},
-  "bearCharts": {"0": ["priceH", "peerEvS"]},
+  "bullCharts": {
+    "0": ["revQ"],
+    "1": ["omA"],
+    "2": ["peerRg"]
+  },
+  "bearCharts": {
+    "0": ["capexPctA", "fcfQ"],
+    "2": ["niQ"]
+  },
   "sources": [
-    {"label": "Forbes: SPCX debuts at $150 after largest IPO ever (Jun 12, 2026)", "url": "https://www.forbes.com/sites/tylerroush/2026/06/12/spacex-opens-at-150-surging-17-after-largest-ipo-ever-live-updates/"},
-    {"label": "CNBC: SpaceX Q2 2026 earnings live updates (Aug 4, 2026)", "url": "https://www.cnbc.com/2026/08/04/spacex-spcx-earnings-live-updates-q2-2026.html"},
-    {"label": "Bloomberg: Nvidia 13F shows $21B SpaceX stake (Aug 14, 2026)", "url": "https://www.bloomberg.com/news/articles/2026-08-14/nvidia-has-21-billion-spacex-stake-30-billion-in-intel-shares"},
-    {"label": "TradingKey: SPCX Aug 14 pullback and 13F flows", "url": "https://www.tradingkey.com/news/market-movers/262108656-market-movers-spcx-20260814"},
-    {"label": "24/7 Wall St: SpaceX rebounds 6% Monday Aug 17", "url": "https://247wallst.com/investing/2026/08/17/spacex-rebounds-6-on-monday-as-nebius-and-coreweave-look-to-rebound-from-morning-drops/"},
-    {"label": "CNBC: Google to pay SpaceX $920M a month for xAI compute (Jun 5, 2026)", "url": "https://www.cnbc.com/2026/06/05/google-to-pay-spacex-920-million-a-month-for-xai-compute-capacity.html"},
-    {"label": "SEC EDGAR: SpaceX Q2 2026 earnings release exhibit", "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/earningsreleaseq22608042.htm"},
-    {"label": "SpaceNews: $2.29B Space Force military data network contract", "url": "https://spacenews.com/spacex-wins-2-29-billion-space-force-contract-for-military-data-network/"},
-    {"label": "Yahoo Finance: Aug 6 lockup frees 911.5M insider shares", "url": "https://finance.yahoo.com/markets/stocks/articles/spacexs-lockup-expires-aug-6-080500494.html"},
-    {"label": "CompaniesMarketCap: SpaceX market capitalization", "url": "https://companiesmarketcap.com/spacex/marketcap/"}
+    {"label": "SpaceX Q3 2026 earnings release (8-K Ex. 99.1, Oct 20, 2026)", "url": "https://s21.q4cdn.com/184289198/files/doc_financials/2026/q3/Q3-2026-8-K-Earnings-Release-2026-10-20-13-10.pdf"},
+    {"label": "SpaceX IR: Q3 2026 results", "url": "https://s21.q4cdn.com/184289198/files/content_files/SpaceX-Reports-Third-Quarter-2026-Results.pdf"},
+    {"label": "Finviz: Q3 vs consensus, Q1 2027 guide, Q4 capex and margin guide, backlog", "url": "https://finviz.com/news/405179/spacex-crushes-q3-estimates-and-guides-to-a-revenue-step-change-but-doubled-capex-and-margin-normalization-complicate-the-story"},
+    {"label": "FourWeekMBA: Q1 2027 guide vs $22.2B LSEG estimate; Musk ARR claim", "url": "https://fourweekmba.com/ai-spacex-sees-up-to-37b-q1-revenue-as-musk-floats-1t-arr/"},
+    {"label": "Broadband Breakfast: 13.6M Starlink subscribers, 2.5-3 GW year-end target", "url": "https://broadbandbreakfast.com/starlink-reaches-13-6-million-subscribers-globally-as-spacex-revenue-jumps-161/"},
+    {"label": "Webull/Motley Fool: Musk on 10 GW+ of 2027 compute", "url": "https://www.webull.com/news/15782902572919808"},
+    {"label": "Tesla North: Anthropic S-1 discloses up to $120.5B of SpaceX compute (Oct 26, 2026)", "url": "https://teslanorth.com/2026/10/26/anthropic-s1-spacex-120b-compute/"},
+    {"label": "TechCrunch: SpaceX and Tesla boards form special committees (Oct 20, 2026)", "url": "https://techcrunch.com/2026/10/20/spacex-and-tesla-boards-form-special-committees-to-review-merger/"},
+    {"label": "Khaleej Times/Reuters: merger committees, Tesla approval threshold, Dec 3 meeting", "url": "https://www.khaleejtimes.com/business/elon-musk-says-spacex-tesla-merger-is-a-good-idea-as-companies-form-deal-committees"},
+    {"label": "Driving Tesla Canada: Starship Flight 14, first orbital flight", "url": "https://driveteslacanada.ca/news/spacex-starship-flight-14-first-orbital-flight/"},
+    {"label": "Analytics Insight: 2026 Mars mission shelved for Moon focus", "url": "https://www.analyticsinsight.net/news/spacex-delays-2026-mars-mission-shifts-starship-focus-to-nasa-moon-landing"},
+    {"label": "FourWeekMBA: lockup frees up to 1.3B shares after Q3 results", "url": "https://fourweekmba.com/ai-spacex-lockup-frees-up-to-1-3b-shares-175b-at-ipo-price/"},
+    {"label": "Nasdaq: SpaceX joins Nasdaq-100 (Jul 7, 2026)", "url": "https://nasdaq.com/articles/spacex-just-joined-nasdaq-100-it-time-buy"},
+    {"label": "CNBC: Google to pay SpaceX $920M a month for compute (Jun 5, 2026)", "url": "https://www.cnbc.com/2026/06/05/google-to-pay-spacex-920-million-a-month-for-xai-compute-capacity.html"},
+    {"label": "SEC EDGAR: SpaceX Q2 2026 earnings release exhibit", "url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026052515/earningsreleaseq22608042.htm"}
+  ],
+  "guide": {
+    "label": "Q1 2027 rev guide",
+    "val": "$33-37B",
+    "sub": "vs ~$22B consensus | Q4 capex $35-40B",
+    "tone": "accent"
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Oct 20). Revenue $14.58B, +161% YoY and nearly double Q2, beating ~$12.6-12.7B consensus by about $2B. The mix flipped: Super Intelligence revenue of $7.56B now exceeds Connectivity, driven by newly activated cloud agreements, Cursor and Grok. Income from operations turned positive at $2.79B, and net income of $4.40B ($0.35 diluted) included $1.03B of other income and a $390M tax benefit. Connectivity operating income was $2.37B; Space was break-even as Starship R&D absorbed launch profit. Capex was $19.59B (SI $16.44B), and cash plus marketable securities ended at $89.9B. Starlink consumer additions of 1.6M came mostly from developed markets, with ARPU up sequentially but well below a year ago as cheaper plans and markets dominate the base.",
+  "guidanceProse": "SpaceX gave its first explicit outlook on the Oct 20 call: Q1 2027 revenue of $33-37B, more than double Q3 and roughly $13B above consensus, plus Q4 2026 capex of $35-40B and nameplate compute of 2.5-3 GW by year-end. Q4 gross margin is guided back toward Q2 levels. Musk added at least 10 GW of incremental compute in 2027 (a small chance of 20 GW) and floated $500B-1T of annual recurring revenue by end-2027; that is his aspiration, not company guidance. Reported backlog rose to $63B from $47.5B (per call coverage, unverified against filings). No FY2027 revenue or capex guide yet.",
+  "verdict": {
+    "stance": "Neutral - the guide is real, the bill is not yet priced",
+    "summary": "Q3 changed the question. SpaceX is no longer asking investors to pay for Starship optionality; it is asking them to underwrite a compute business that could be most of a ~$140B annualized revenue run-rate by Q1 2027. Our probability-weighted value sits modestly below the current price: the base case gives full credit to a ~$190B FY2027 but pays a compute-like 9x sales for it, because the dominant customer can walk on 90 days' notice from early 2027 and 10 GW of 2027 build-out cannot be funded from cash on hand. Two things would move us to Positive: Anthropic and Google extending past their non-cancelable periods, and a FY2027 capex plan funded mostly by debt and operating cash rather than new shares. A dilutive Tesla deal or an Anthropic step-down would move us to Cautious.",
+    "wtb": [
+      "Q1 2027 revenue lands inside the $33-37B guide, and FY2027 reaches ~$190B or more, which needs compute capacity near 5 GW+ by mid-2027.",
+      "Anthropic does not cancel or reprice after its non-cancelable periods end in January and March 2027; SI revenue keeps rising sequentially through Q2 2027.",
+      "FY2027 capex is funded with less than ~3% net share dilution, and cash plus securities stay above ~$40B at end-2027.",
+      "The market keeps paying at least ~9x sales at end-2027, which implies Starlink plus launch are valued as franchises and compute EBITDA margins stay near 55-65%."
+    ]
+  },
+  "scenarioModel": {
+    "horizon": "FY2027 (calendar year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.3,
+      "rev": 120,
+      "multiple": 6,
+      "why": "Anthropic scales back after March 2027 and compute pricing resets toward neocloud levels; revenue stalls near the Q1 2027 run-rate (~$120B for the year). Funding the build-out needs equity, and the market values the company like a leveraged GPU landlord with a satellite business attached."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 190,
+      "multiple": 9,
+      "why": "Q1 2027 lands mid-guide and capacity ramps toward 5-6 GW by year-end, so quarterly revenue steps from ~$35B to ~$60B; compute dominates the mix with ~55-60% EBITDA margins. The multiple (~16x EBITDA) is a blend: high for Starlink and launch, compute-like for SI, because contract renewals beyond 2027 are not yet visible."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 260,
+      "multiple": 12,
+      "why": "The 10 GW+ 2027 plan largely lands, more frontier labs sign beyond Anthropic and Google, and Starlink Mobile adds a new growth leg. Contracts extend into 2029-2030, earning a multiple that treats compute as a utility-like contracted stream rather than spot rental."
+    },
+    "note": "Value per share = (FY2027 revenue x EV/Sales + ~$60B net cash) / ~13.6B shares (market cap / price, which includes Cursor and post-IPO issuance; Q3 diluted weighted shares were 12.48B). Bear $120B x 6 = ~$57; base $190B x 9 = ~$130; bull $260B x 12 = ~$234; weighted ~$129. Net cash is the current figure and will shrink with Q4 capex; new equity would lower all three. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Is the compute revenue durable once the contracts become cancellable?",
+      "bull": "Anthropic signed or amended several agreements between May and October 2026 and expects all capacity delivered in December 2026; frontier labs are capacity-constrained, so renewal on similar terms is the default.",
+      "bear": "From early 2027 either side can cancel on 90 days' notice, Anthropic lists three other GPU providers, and SpaceX's own Grok and Cursor compete with its tenants. A ~$37B-a-year customer with an exit door is not a moat.",
+      "view": "This sets the multiple more than any other variable: we price 9x in the base case precisely because renewal is not yet visible. A clean extension through 2029 is worth moving the base multiple toward the bull case.",
+      "signpost": {
+        "metric": "Anthropic contract status after its non-cancelable periods; Q1 2027 SI revenue vs Q4 2026",
+        "threshold": "bullish if extended or upsized; bearish if any notice of cancellation or SI revenue falls QoQ",
+        "when": "Jan-Mar 2027; Q1 2027 report ~late Apr 2027"
+      }
+    },
+    {
+      "q": "Who pays for 10 GW?",
+      "bull": "Compute pricing above $50 per watt a year with ~66% SI EBITDA margins implies payback in roughly two years; operating cash flow ($9.6B in Q3) is ramping with revenue, and the balance sheet holds ~$90B of cash and securities.",
+      "bear": "Trailing capex is ~1.7x revenue and free cash flow was -$40B over the last four quarters before Q4's $35-40B; the reverse DCF already needs ~83% annual revenue growth for seven years, so any equity raise lands on a price that assumes the plan succeeds.",
+      "view": "The growth is fundable only if lenders treat the contracts as collateral. The mix of debt, vendor financing and new shares in the FY2027 plan matters more than the capex number itself.",
+      "signpost": {
+        "metric": "FY2027 capex guide and funding mix (debt / operating cash vs new equity)",
+        "threshold": "net dilution above 3% of shares or cash plus securities below $40B = bearish",
+        "when": "Q4 2026 report, ~late Jan 2027"
+      }
+    },
+    {
+      "q": "Does a Tesla combination create or transfer value for SPCX holders?",
+      "bull": "A combined company gets one capital pool for compute, robotics and energy, Tesla's cash flow and buyers, and removes the related-party friction between the two.",
+      "bear": "An all-stock deal at a rich exchange ratio would add billions of shares to an already capex-hungry company; it needs a majority of all Tesla shares, so terms may have to favour Tesla holders.",
+      "view": "Neutral until terms exist. A deal priced near current relative values is roughly a wash per share; we would move to Cautious if it is paid with SPCX stock at a premium plus new financing needs.",
+      "signpost": {
+        "metric": "Announced exchange ratio and implied premium to Tesla",
+        "threshold": "premium above ~20% to Tesla holders paid in SPCX stock = bearish",
+        "when": "Before Tesla's annual meeting, Dec 3, 2026 (timing per Barclays, unverified)"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-31",
+      "change": "Rebuilt as a v3 decision note after the Q3 2026 report: revenue $14.6B (+161%), first operating profit, Q1 2027 guide $33-37B, Q4 capex $35-40B. Stance Neutral; sales-mode scenarios on FY2027 revenue (bear ~$57 / base ~$130 / bull ~$234, weighted ~$129). The view moved from 'Starship optionality at a software multiple' to 'contracted compute with renewal and funding risk'; added Anthropic cancellation terms and the Tesla merger committees."
+    },
+    {
+      "date": "2026-08-17",
+      "change": "First public quarter (Q2 2026): revenue $7.81B, capex $18.4B, Nvidia 13F stake, lockup schedule."
+    }
   ]
 }

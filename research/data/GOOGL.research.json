@@ -1,54 +1,151 @@
 {
-  "asOf": "2026-09-07",
-  "oneLiner": "Won the ad-tech case, lost four straight months of stock performance: Search compounding 17% and Cloud 82% against a $195-205B capex bill and a market that has decided Google is losing the model race.",
-  "thesis": [
-    "Distribution is still the moat: ~91% global search share, 2.5B monthly AI Overviews users, AI Mode past 1B MAU, and Search revenue accelerating to +17% despite three years of substitution fear.",
-    "Cloud is a second franchise: $24.8B in Q2 (+82%) at ~35% segment margin with a $514B backlog; Thomas Kurian says roughly three quarters of Cloud customers now use its AI products and spend about 50% above their original commitments.",
-    "The structural antitrust tail just got much shorter: on Sep 2, 2026 Judge Brinkema rejected every structural remedy in the ad-tech case, leaving Google Ad Manager intact.",
-    "Earnings quality caveat persists: Q2 GAAP EPS of $9.11 included roughly $99B of equity-stake marks (Anthropic at $124.3B, SpaceX); core EPS was about $2.85."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Jul 22, 2026)",
-    "points": [
-      "Revenue $119.8B, +24% YoY (beat); operating income $40.8B, +30%; operating margin 34% (+2pp).",
-      "Google Services $94.5B (+15%); Search ~$63.3B (+17%); YouTube ads $11.1B (+13%); subscriptions/platforms/devices $12.9B.",
-      "Cloud $24.8B (+82%); Cloud operating income $8.8B vs $2.8B a year ago; backlog $514B.",
-      "GAAP EPS $9.11 including ~$99B of equity gains (Anthropic, SpaceX); ex-gains ~$2.85 vs $2.89 consensus.",
-      "FY2026 capex raised to $195-205B with further growth flagged for 2027; the stock fell ~5% after hours on the hike."
+  "asOf": "2026-10-31",
+  "oneLiner": "Search, YouTube and a Cloud business that has become a second franchise, now being rebuilt as an AI infrastructure company that funds itself with debt and new stock. The market is betting on whether a capex program heading well past $200B a year earns a return before free cash flow is gone for good.",
+  "verdict": {
+    "stance": "Neutral - the cash has to show up",
+    "summary": "The operating story has never been better: Cloud doubled at a 36% margin, Search queries are growing at a five-year high and the Gemini 4 models closed the cadence gap that drove the summer derating. But the third quarter showed what owning it now costs. Free cash flow went negative, buybacks have stopped, and Alphabet is issuing stock and debt while 2027 capex is set to rise significantly again. On operating EPS the probability-weighted value sits near the current price: Cloud backlog would have to convert faster than the capex grows to justify a re-rating, and a 2027 capex guide above ~$300B without matching backlog growth would push us to Cautious.",
+    "wtb": [
+      "FY2027 revenue reaches ~$585B (+19%), with Cloud growing 70%+ as the $561B backlog converts (just over 55% of it within 24 months).",
+      "Operating-basis net margin holds at ~25% or better through FY2027 despite depreciation growing far faster than revenue.",
+      "Diluted shares stay at or below ~12.45B through 2027: equity issuance stops once TPU system sales and Cloud cash flow cover the build.",
+      "The market keeps paying a low-20s multiple on operating EPS (gains and losses on equity stakes excluded) at end-2027, which needs 2028 capex growth to slow."
     ]
   },
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.25,
+      "rev": 540,
+      "eps": 9.5,
+      "multiple": 17,
+      "why": "Revenue grows only ~10% on FY2026's ~$492B as FX, AI Mode's lower monetization and a capacity glut slow Search and Cloud at once; depreciation from a $300B+ capex year takes net margin to ~22%. With free cash flow negative and share issuance continuing, the market prices it like a utility building capacity and pays a high-teens multiple."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 585,
+      "eps": 12.0,
+      "multiple": 23,
+      "why": "Cloud grows ~70% on backlog conversion and TPU system sales; Search grows high single digits as AI Overviews and AI Mode ads scale. Net margin dips to ~25.5% (from ~26.6% in Q3 2026) as depreciation outruns Cloud operating leverage. FCF returns to modestly positive late in 2027, so the multiple holds in Alphabet's historical low-20s range."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 630,
+      "eps": 14.2,
+      "multiple": 27,
+      "why": "Cloud keeps compounding near 100% as TPU systems become a merchant chip business and Search re-accelerates on query growth. Net margin expands to ~28% because Cloud margin keeps rising despite third-party capacity. Visible payback on the build earns a high-20s multiple."
+    },
+    "note": "Operating basis: EPS = revenue x net margin / ~12.45B diluted shares (12.37B in Q3 2026 plus continued ATM issuance). Net margin is after-tax operating income plus net interest; gains and losses on equity securities (SpaceX, Anthropic and other stakes) are excluded because they swing EPS by dollars per quarter (+$6.26 in Q2 2026, -$0.55 in Q3). Bear 540 x 22% / 12.45 = 9.5; base 585 x 25.5% / 12.45 = 12.0; bull 630 x 28% / 12.45 = 14.2. Net cash and equity stakes add roughly $20 per share on top (Sep 30, 2026 balance sheet) and are not in the multiples. FY2026 revenue ~$492B assumes ~$135B in Q4. Siberforge estimates, not consensus; pre-print FY2027 consensus EPS was ~$15.2-15.4 (KeyCorp, Yahoo), which likely mixes in non-operating items (unverified)."
+  },
+  "debates": [
+    {
+      "q": "Does the capex earn a return fast enough?",
+      "bull": "Cloud backlog grew to $561B and Kurian says Google could serve a lot more demand with more capacity; TPU systems are sold against committed contracts, so the build is a supply response, not a bet.",
+      "bear": "Capex ran at ~40% of Q3 revenue and the 2026 guide implies $63-73B in Q4 alone, with 2027 set to rise significantly again. Depreciation grew 49% YoY in Q3 versus 25% revenue growth, and the margin drag compounds for years.",
+      "view": "This debate sets the multiple (17x vs 27x). Backlog growth per dollar of capex is the test: backlog added ~$47B in Q3 against $51B of capex. We need that ratio to hold as capex grows.",
+      "signpost": {
+        "metric": "2027 capex guide vs Q4 2026 Cloud backlog",
+        "threshold": "bearish if 2027 capex is guided above ~$300B while backlog grows less than $40B q/q; bullish if backlog passes $650B",
+        "when": "Q4 2026 report, early Feb 2027"
+      }
+    },
+    {
+      "q": "How much of the profit is cash, and who pays for the gap?",
+      "bull": "The weak cash-conversion flag is an accounting artifact: equity marks inflate net income but are not cash. Operating cash flow was 1.4x after-tax operating income over the trailing year, and inventory ($13.3B, up from $2.4B) is TPU systems built against signed contracts.",
+      "bear": "After capex, trailing FCF is $19.7B on $471B of revenue and two quarters were negative. Buybacks went from $39.8B in the first nine months of 2025 to zero in 2026, replaced by $42.9B of ATM stock sales, a $19.1B mandatory convertible and long-term debt up from $46.5B to $125.1B.",
+      "view": "The real issue is free cash flow, not conversion. Equity issuance turns the per-share story negative, so we model 12.45B shares and no buyback in FY2027. Persistent dilution would cut the base value more than any margin miss.",
+      "signpost": {
+        "metric": "Quarterly FCF and diluted share count",
+        "threshold": "red flag if FCF is negative for a third straight quarter or diluted shares exceed 12.45B",
+        "when": "Q4 2026 report, early Feb 2027"
+      }
+    },
+    {
+      "q": "Can Search monetize AI answers at the old rate?",
+      "bull": "Query growth is at a five-year high including commercial queries, AI Mode queries are about 3x longer, and ads are scaling in AI Overviews and AI Mode, including multiturn ads in the US.",
+      "bear": "Search growth halved from +17% in Q2 to +12%, management cited lower monetization in AI Mode, and Q4 faces a couple of points of further pressure from lapping the late-2025 acceleration.",
+      "view": "Most of the Q3 slowdown was FX, de minimis and World Cup comparisons, not AI. A second quarter of query growth without revenue growth would show that AI answers monetize below classic search, and that caps the base case.",
+      "signpost": {
+        "metric": "Google Search & other growth in constant currency",
+        "threshold": "below +8% in Q4 2026 while query growth is still reported as accelerating = monetization problem",
+        "when": "Q4 2026 report, early Feb 2027"
+      }
+    }
+  ],
+  "thesis": [
+    "Cloud is now a second franchise. It is a quarter of revenue at a margin above the group's, and the $561B backlog, just over 55% recognizable within 24 months, implies ~$155B a year of contracted revenue against a ~$123B Q3 run rate.",
+    "TPU is a merchant chip business in the making. Nearly 100 customers including Anthropic, Apple and Citadel Securities use TPUs, system sales were a meaningful Q3 growth contributor and management guides a meaningful revenue ramp in 2027; no other hyperscaler sells its own accelerators to outsiders at this scale.",
+    "The model-cadence gap closed. The Gemini 4 Argon and Carbon models are, in Pichai's words, leading at the frontier; the Gemini app reached 1B users, and first-party APIs process nearly 32B tokens a minute, more than 4x a year ago.",
+    "Legal risk has narrowed to behavioral remedies. Judge Brinkema rejected every structural ad-tech remedy on Sep 2, 2026, and the search remedies (data sharing, one-year default-deal caps, no Chrome sale) are behavioral unless the D.C. Circuit sides with the DOJ cross-appeal."
+  ],
+  "risks": [
+    "Capex intensity with no ceiling yet. Trailing capex is ~34% of revenue (11% in 2022) and 2027 rises significantly again; depreciation and energy costs grow faster than revenue, and third-party capacity adds near-term Cloud margin headwinds.",
+    "Dilution replaced buybacks. Alphabet is now a net issuer of equity (ATM program with $27.6B still available, plus the 6.25% mandatory convertible), so per-share growth trails earnings growth.",
+    "Reported EPS is not the business. Trailing net income was ~150% of operating income because of equity-stake marks; Q2's +$99B gain became an $8.7B loss in Q3 as SpaceX shares fell, and the Anthropic stake (largest in $135B of non-marketable securities) is marked at private-round values.",
+    "Search monetization under AI. Lower monetization in AI Mode is now acknowledged by management; agentic browsers and ChatGPT attack the query funnel even as volumes grow.",
+    "The search appeal is open. The DOJ and 35 states seek a Chrome divestiture at the D.C. Circuit, with no argument date set and a decision unlikely before 2027; the ad-tech final judgment and Google's liability appeal are still pending (status unverified)."
+  ],
+  "bullCharts": {
+    "0": [
+      "revQ"
+    ],
+    "1": [
+      "revYoyA"
+    ],
+    "2": [
+      "omA"
+    ]
+  },
+  "bearCharts": {
+    "0": [
+      "capexPctA"
+    ],
+    "1": [
+      "fcfQ"
+    ],
+    "2": [
+      "niQ"
+    ]
+  },
+  "catalysts": [
+    "Early Feb 2027: Q4 2026 report - first number for 2027 capex, Q4 backlog and FCF (debates 1 and 2).",
+    "Q4 2026 to 2027: TPU system sales ramp and third-party capacity usage show up in Cloud growth and margin (debate 1).",
+    "Quarterly: SpaceX share price and any Anthropic funding round re-mark the equity stakes, moving GAAP EPS but not operating EPS (debate 2).",
+    "Q4 2026 report: Search constant-currency growth against the lapping headwind (debate 3).",
+    "Late 2026 to 2027: D.C. Circuit argument in the search case (not yet scheduled); ad-tech final judgment and Fourth Circuit appeal."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Oct 28, 2026)",
+    "points": [
+      "Revenue $127.6B, +25% YoY (consensus ~$128B); operating income $40.6B, +30%, margin 31.8%.",
+      "Search & other $63.4B (+12%), YouTube ads $11.2B (+9%), subscriptions/platforms/devices $14.3B (+11%), Network $7.5B (+1%).",
+      "Cloud $30.7B (+103%); Cloud operating income $11.1B, margin 36.2% vs 23.7%; backlog $561B vs $514B in Q2.",
+      "GAAP EPS $2.12 vs $2.87 a year ago and ~$3.00 consensus; an $8.7B loss on equity securities (mainly SpaceX) cut EPS by $0.55.",
+      "Operating cash flow $42.3B, capex $51.4B (vs $24.0B), free cash flow -$9.1B; no buybacks, $12.4B of new stock and $28.7B of notes issued."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Oct 28). Revenue missed slightly and EPS badly: the stock fell ~8-10% after hours. Excluding the equity-stake loss, EPS was about $2.67, still well below expectations, as R&D rose 36% and depreciation 49%. Search slowed to +12% from +17% in Q2; management blamed FX first, then APAC retail after the EU de minimis change and post-World Cup media normalization, and also cited lower monetization in AI Mode. YouTube ads slowed to +9% on brand advertising, with living-room viewing over a third of YouTube ad revenue. Cloud was the bright spot: revenue doubled with TPU system sales a meaningful contributor. Other Bets lost $2.0B and Alphabet-level AI research cost $7.7B. The quarter also included a $5.2B cash payment for the 2018 European Commission Android fine. Headcount was 204,757 (+8%).",
+  "guidanceProse": "FY2026 capex guide unchanged at $195-205B. After $132.0B in the first nine months, that implies $63-73B in Q4, and CFO Anat Ashkenazi said capex will \"increase significantly\" in 2027, with the number due on the Q4 call. One secondary summary says 2027 capex will top $300B (unverified; not in the release or the call quotes we found). For Q4, management flagged a slightly larger FX headwind, a couple of points of Search pressure from lapping the late-2025 acceleration, a TPU system sales step-up, and near-term Cloud margin headwinds as third-party capacity that came online at the end of Q3 ramps. Funding is now external: $27.6B remains under the ATM equity program, and long-term debt reached $125.1B. The quarterly common dividend stays at $0.22.",
+  "guide": {
+    "label": "FY26 capex guide",
+    "val": "$195-205B",
+    "sub": "unchanged | 2027 to 'increase significantly'",
+    "tone": "warn"
+  },
   "segments": [
-    "Search ~53% of revenue; Cloud ~21% (solidly profitable, $514B backlog); YouTube ads ~9%; subscriptions/devices ~11%; Other Bets under 1%.",
-    "Gemini monetization: AI Mode above 1B MAU; AI Overviews carry ads; AI Pro $19.99/mo and AI Ultra $249.99/mo; Gemini 3.8 Flash priced at $0.75 per million input tokens and $3.75 per million output tokens."
+    "Google Services 75% of Q3 2026 revenue ($96.3B, +11%; operating income $39.2B): Search ~50%, subscriptions/platforms/devices ~11%, YouTube ads ~9%, Network ~6%.",
+    "Google Cloud 24% ($30.7B): GCP AI infrastructure and enterprise AI solutions, Workspace, and TPU system sales (product revenue).",
+    "Other Bets under 1% ($0.4B revenue, -$2.0B operating loss; mainly Waymo). Alphabet-level costs (shared AI research) are not allocated.",
+    "Investments: $135.2B of non-marketable securities (mostly Anthropic) and listed stakes including SpaceX inside $265.1B of cash and marketable securities; $34.1B of acquisitions in the first nine months of 2026 (largely Wiz, unverified)."
   ],
   "competitive": [
-    "Model cadence is now the bear case, not distribution: Google shipped Gemini 3.8 Flash on Sep 2 - its third Flash model in six weeks - plus a cybersecurity model for government and enterprise, but the Gemini 3.5 Pro flagship Sundar Pichai promised for June still had not shipped.",
-    "ChatGPT remains roughly 900M weekly actives; agentic browsers (Atlas, Comet) attack the Chrome funnel; Perplexity around 45M MAU.",
-    "Cloud share (Synergy, Q1 2026): AWS 28%, Azure 21%, Google 14% - but GCP grew 82% against Azure's ~40% and AWS's ~28%.",
-    "Antitrust: ad-tech structural remedies denied Sep 2, 2026; search remedies (finalized Dec 2025 - data sharing, one-year default-deal caps, no Chrome divestiture) remain on appeal with a DOJ cross-appeal seeking Chrome divestiture, DC Circuit late 2026 or early 2027."
+    "Models: Gemini 4 competes with OpenAI and Anthropic at the frontier - Anthropic is both a rival and a large TPU customer and Alphabet holding.",
+    "Assistants and browsers: ChatGPT (~900M weekly users, unverified) and agentic browsers (Atlas, Comet) target the query funnel that Chrome and Android protect.",
+    "Cloud: AWS 28%, Azure 21%, Google 14% share (Synergy, Q1 2026, unverified), but Google is growing more than twice as fast as either.",
+    "AI silicon: TPU systems compete directly with NVIDIA for external customers, with Broadcom as design partner and, in Anthropic's case, as a channel."
   ],
-  "moat": "Search distribution at ~91% share, the Chrome and Android funnel, and the largest AI distribution surface in the world; Cloud adds a TPU and Gemini infrastructure advantage that Broadcom's own disclosures now quantify - a long-term agreement to supply multiple tens of billions of dollars of TPUs annually. The $124B Anthropic stake is optionality on a rival's success. With Ad Manager left intact, the ads stack stays vertically integrated.",
-  "risks": [
-    "Capex escalation: $195-205B in 2026 and rising in 2027; depreciation and free-cash-flow compression if AI revenue lags the build.",
-    "Model-cadence perception: a promised June flagship still unshipped in September is the specific thing driving the derating, and Flash releases do not answer it.",
-    "Search-case tail risk survives: the DOJ cross-appeal keeps Chrome divestiture and Apple-deal termination alive, and the one-year cap on default deals injects annual renewal risk.",
-    "Ad-tech relief is not final: the Brinkema opinion is sealed pending redactions (Sep 16) with a joint proposed final judgment due Oct 2, 2026, and the behavioral remedies themselves are not yet public.",
-    "FTC is reported to be in the final stages of a YouTube consumer-protection investigation tied to account suspensions and content-policy disclosures (reported, unverified).",
-    "Earnings quality: $6.26 of Q2's $9.11 EPS was investment marks that can reverse."
-  ],
-  "catalysts": [
-    "Q3 2026 earnings late Oct 2026, with 2027 capex framing.",
-    "Ad-tech final judgment due Oct 2, 2026 and the unsealed remedy opinion after Sep 16.",
-    "DC Circuit oral arguments on the search case, late 2026 or early 2027.",
-    "Gemini 3.5 Pro flagship ship date - the single cleanest sentiment catalyst.",
-    "Possible Gemini in-app advertising launch."
-  ],
-  "pricedIn": "About $342, roughly 16% below the $408.61 high, after a four-month losing streak - the longest since 2015 - and a 10%-plus decline in the past month alone. Around 22-23x forward is mid-range of the historical 18-24x band for a business growing 24%. The bear case has migrated from antitrust to product: the ad-tech breakup risk just disappeared and the stock did not re-rate, which says the market is discounting model-race position and $200B of capex, not legal risk. The debate: is a four-month drawdown in the cheapest AI mega-cap an entry point, or the market correctly pricing the first sustained cadence gap versus OpenAI and Anthropic?",
-  "scenarios": {
-    "bear": "Capex tops $205B and rises again while Cloud decelerates into a capacity glut; depreciation crushes margins; the flagship model keeps slipping and query share finally cracks as agentic browsers route around Chrome; the DC Circuit reinstates structural search remedies; Anthropic marks reverse. Mid-teens multiple on lower core EPS.",
-    "base": "Search grows low double digits with AI Overviews monetizing near parity; Cloud compounds 40-60% off a $514B backlog; the ad-tech judgment is entered as behavioral-only and the search appeal drags through 2027; low-20s forward P/E on mid-teens core EPS growth grinds the stock higher between capex headlines.",
-    "bull": "A credible flagship ships and resets the narrative; Cloud sustains 60%+ with margin expansion; capex proves supply-constrained rather than speculative; Gemini layers ads and subscriptions into a second multi-tens-of-billions stream; both antitrust cases end behavioral, and the multiple re-rates toward 26-28x."
-  },
+  "moat": "Search distribution at ~91% global share (unverified) through Chrome, Android and default deals, now combined with the full AI stack: own models (Gemini), own silicon (TPU), own cloud and the largest consumer AI surface. TPU makes Alphabet the one hyperscaler that is less dependent on NVIDIA pricing and can sell that advantage to others. The moat is intact; the open question is the capital needed to defend it.",
   "valPresets": {
     "mode": "fcf",
     "basis": "fwdEps",
@@ -64,55 +161,66 @@
     "bull": {
       "g": 0.2
     },
-    "note": "Valuation basis is forward earnings: TTM FCF is crushed by the $195-205B capex program and TTM GAAP earnings are inflated by roughly $99B of Anthropic and SpaceX marks, so forward EPS is the cleanest anchor."
+    "note": "Valuation basis is forward earnings: TTM FCF ($19.7B through Q3 2026) is crushed by the capex program and TTM GAAP earnings are inflated by equity-stake marks ($126.8B of net securities gains in the first nine months of 2026), so forward operating EPS is the cleanest anchor."
   },
+  "changelog": [
+    {
+      "date": "2026-10-31",
+      "change": "Rebuilt as a v3 decision note after the Q3 2026 print: Cloud +103%, backlog $561B, but FCF -$9.1B, no buybacks, equity and debt issuance, and 2027 capex to rise significantly. Scenarios on FY2027 operating EPS excluding stake marks (bear $162 / base $276 / bull $383). Stance set to Neutral; the model-cadence worry is resolved and replaced by cash flow and dilution."
+    }
+  ],
   "sources": [
+    {
+      "label": "Alphabet Q3 2026 earnings release (Oct 28, 2026)",
+      "url": "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q3/2026q3-alphabet-earnings-release.pdf"
+    },
+    {
+      "label": "Alphabet Q3 2026 earnings call transcript (Motley Fool, Oct 29, 2026)",
+      "url": "https://www.fool.com/earnings/call-transcripts/2026/10/29/alphabet-googl-q3-2026-earnings-call-transcript/"
+    },
+    {
+      "label": "Motley Fool: Microsoft and Alphabet earnings put the AI boom to the test (Oct 28, 2026)",
+      "url": "https://www.fool.com/investing/2026/10/28/microsoft-and-alphabet-just-reported-earnings-putting-the-ai-boom-to-the-test/"
+    },
+    {
+      "label": "CNBC: Microsoft, Google AI capex vs estimates (Oct 29, 2026)",
+      "url": "https://www.cnbc.com/2026/10/29/microsoft-google-ai-capex-estimates.html"
+    },
+    {
+      "label": "XTB: Alphabet Q3 vs consensus, after-hours reaction",
+      "url": "https://www.xtb.com/en/market-analysis/news-and-research/alphabet-disappoints-wall-street-despite-record-results-shares-plunge-over-8-and-test-300"
+    },
+    {
+      "label": "AI Weekly: 2027 capex 'set to top $300B' (secondary, unverified)",
+      "url": "https://aiweekly.co/alerts/alphabet-posts-1276b-q3-with-google-cloud-up-103-to-307b-as-2027-capex-set-to"
+    },
     {
       "label": "Alphabet Q2 2026 earnings release",
       "url": "https://s206.q4cdn.com/479360582/files/doc_financials/2026/q2/2026q2-alphabet-earnings-release.pdf"
     },
     {
-      "label": "Brinkema rejects AdX divestiture (Sep 2, 2026)",
+      "label": "Fortune: Anthropic and SpaceX marks drive Q2 2026 profit (Jul 22, 2026)",
+      "url": "https://www.fortune.com/2026/07/22/anthropic-spacex-investments-google-earnings-biggest-ever-profit-quarter/"
+    },
+    {
+      "label": "MarketBeat: KeyCorp FY2026/FY2027 EPS estimates (Jul 29, 2026)",
+      "url": "https://www.marketbeat.com/instant-alerts/keycorp-weighs-in-on-alphabets-q3-earnings-nasdaqgoog-2026-07-29/"
+    },
+    {
+      "label": "AdExchanger: Brinkema rejects ad-tech breakup (Sep 2, 2026)",
       "url": "https://www.adexchanger.com/antitrust/google-wont-have-to-break-up-its-ad-tech-business-judge-brinkema-rules/"
     },
     {
-      "label": "Ad-tech remedy detail and next dates",
-      "url": "https://ppc.land/doj-loses-adx-divestiture-bid-as-brinkema-accepts-behavioral-remedies/"
+      "label": "The Star/Reuters: ad-tech remedies - relaxed rules, compliance monitor (Sep 17, 2026)",
+      "url": "https://www.thestar.com.my/tech/tech-news/2026/09/17/google-should-relax-ad-tech-rules-appoint-antitrust-monitor-us-judge-finds"
     },
     {
-      "label": "Gemini 3.8 Flash and the four-month losing streak",
-      "url": "https://www.cnbc.com/2026/09/02/google-starts-september-with-ai-momentum-after-long-losing-streak.html"
+      "label": "Courthouse News: DOJ urges D.C. Circuit to strengthen search remedies",
+      "url": "https://courthousenews.com/doj-urges-dc-circuit-to-beef-up-remedies-in-google-monopoly-ruling/"
     },
     {
-      "label": "Search remedies finalized (Dec 2025)",
+      "label": "CNBC: Search remedies finalized (Dec 5, 2025)",
       "url": "https://www.cnbc.com/2025/12/05/judge-finalize-remedies-in-google-antitrust-case.html"
     }
-  ],
-  "guide": {
-    "label": "FY26 capex guide",
-    "val": "$195-205B",
-    "sub": "raised from $180-190B \u00b7 more in 2027",
-    "tone": "warn"
-  },
-  "latestProse": "Q2 2026 (reported Jul 22). Revenue $119.8B, +24% (beat); operating income $40.8B (+30%), margin 34% (+2pts). Search $63.3B (+17%), YouTube ads $11.1B (+13%), Cloud $24.8B (+82%) with $8.8B of segment profit versus $2.8B a year ago and a $514B backlog. GAAP EPS was $9.11, but roughly $99B of Anthropic and SpaceX equity marks sit inside it; core EPS was about $2.85 against $2.89 consensus. The disclosure that matters most: Cloud backlog of $514B is more than four times trailing Cloud revenue, which is the only number that makes a $200B capex program look like a supply response rather than a bet.",
-  "guidanceProse": "FY2026 capex stands at $195-205B, raised from $180-190B, with further growth flagged for 2027. The legal picture improved sharply after the quarter: on Sep 2, 2026 Judge Brinkema rejected the DOJ's structural ad-tech remedies - no AdX divestiture, no open-sourcing of DFP auction logic, no contingent DFP divestiture - and accepted behavioral remedies instead, leaving Ad Manager integrated and the take rate unchanged. The opinion is sealed pending redactions on Sep 16, with a jointly proposed final judgment due Oct 2. The search case remains on appeal, where the DOJ cross-appeal still seeks Chrome divestiture.",
-  "bullCharts": {
-    "0": [
-      "revQ"
-    ],
-    "1": [
-      "revYoyA"
-    ],
-    "3": [
-      "capexA"
-    ]
-  },
-  "bearCharts": {
-    "0": [
-      "capexPctA"
-    ],
-    "4": [
-      "niQ"
-    ]
-  }
+  ]
 }

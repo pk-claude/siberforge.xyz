@@ -1,65 +1,135 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "A ~$3.9B option on solid-state batteries going commercial: four top-10 OEMs and standout safety data, against zero GAAP revenue, a $64M-per-quarter EBITDA burn, and a PowerCo program just capped at $75.4M.",
-  "thesis": [
-    "Four of the top-10 global automakers are now engaged. Honda signed a multi-year partnership June 18, 2026 after one of the most rigorous evaluations of QS technology to date, joining VW's PowerCo and two other OEMs under joint development agreements; cells also shipped to an additional automotive OEM in Q2 2026.",
-    "The Eagle Line is finally ramping. Core tools ran above 90% uptime in Q2 2026 with productivity metrics on target; management aims to double cell output in H2 2026, with customer sample shipments accelerating across all three business verticals.",
-    "The licensing model is genuinely capital-light. FY2026 capex guidance was cut to $27-37M (July 2026) while $859M of liquidity against a $250-275M adjusted EBITDA loss guide gives roughly three years of runway before new equity is needed.",
-    "New verticals widen the funnel beyond autos. QSDC targets AI data center 800V rack power via ODM engagements, and QSAS shipped QSE-5 cells to a major American defense prime (Q2 2026); the anode-free design sidesteps China-sourced graphite entirely.",
-    "Safety is the wedge. Larger-scale Q2 2026 abuse testing -- nail penetration, external short circuit, thermal stability to 300C -- replicated earlier prototype results; the ceramic separator is nonflammable, a claim silicon-anode and liquid-electrolyte rivals cannot make."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Jul 22, 2026)",
-    "points": [
-      "GAAP net loss $98.2M ($0.16/share); operating expenses $106.1M; adjusted EBITDA loss $64.2M, in line with guidance.",
-      "Customer billings $10.8M in Q2; $21.8M through H1 2026, already ahead of FY2025's $19.5M. GAAP revenue remains essentially zero -- billings are a non-GAAP invoicing metric.",
-      "Liquidity $859.0M ($132.9M cash + $726.1M marketable securities), down from ~$970.8M at Dec 31, 2025.",
-      "Operating cash use $56.7M in Q2 ($116.3M in H1); capex just $4.6M; FY26 capex guide lowered to $27-37M.",
-      "Weighted shares 617.1M, +9.9% YoY (Q2 2025: 561.7M).",
-      "$10.4M cash received from PowerCo under the amended collaboration agreement (July 16, 2026; program now capped at $75.4M aggregate)."
+  "asOf": "2026-10-31",
+  "oneLiner": "A pre-revenue solid-state battery developer that plans to license its anode-free lithium-metal cell rather than build gigafactories. The market is betting on whether a signed PowerCo license and a non-auto first customer arrive before the cash runs out, and it pays little more than the cash for that option.",
+  "verdict": {
+    "stance": "Neutral - speculative option",
+    "summary": "Q3 2026 showed the cost side working: opex fell ~20% YoY, quarterly burn is near $60M, and capex is almost nil. The revenue side has not moved. Billings slipped for a second quarter and the PowerCo relationship is still being renegotiated. Our probability-weighted value sits close to today's price with a wide spread. The bear case is cushioned by about $1.20 per share of net liquidity, and the bull case is a royalty business several times larger. That makes QS a position to size as an option, not a core holding. Two things would move the view: a signed PowerCo statement of work or IP license with cash attached (up), or a FY2027 plan that needs new equity before the 2028 100 MWh line starts (down).",
+    "wtb": [
+      "PowerCo signs an updated statement of work with milestone cash by the Q4 2026 letter (~late Jan 2027), and the IP License Agreement with its royalty prepayment follows by end-2027.",
+      "Quarterly customer billings climb back above $15M by Q2 2027 as Honda, the new mobility OEM and the first QSAS/QSDC customers ramp, after three quarters stuck near $10M.",
+      "The FY2027 plan keeps the adjusted EBITDA loss at or below ~$250M and capex below ~$75M, so the $819.8M of liquidity reaches the 2028 100 MWh line without a raise.",
+      "By end-2027 the market will pay at least a low-teens EV/Sales multiple on FY2030 GAAP revenue of ~$120M. That requires licensing and product revenue to be visibly ramping, not just billings."
     ]
   },
-  "latestProse": "Q2 2026 (reported July 22): GAAP net loss $98.2M on $106.1M of opex; adjusted EBITDA loss $64.2M, in line. Customer billings of $10.8M brought H1 to $21.8M, already above all of FY2025 ($19.5M), though GAAP revenue remains essentially nil. Liquidity ended at $859.0M with Q2 operating cash use of $56.7M and capex of only $4.6M. The Honda partnership (June 18) added a fourth top-10 OEM, the Eagle Line hit >90% core-tool uptime with output set to double in H2, and QSAS shipped QSE-5 cells to a US defense prime. The disclosure that matters most: the July 16 PowerCo amendment, which swapped open-ended cost reimbursement for delivery-and-validation milestones over the next two years and capped total program payments at $75.4M including amounts already paid.",
-  "guidanceProse": "FY2026 guidance: adjusted EBITDA loss of $250-275M reiterated; capex cut to $27-37M on capital discipline. There is no revenue guidance -- QS is pre-revenue at scale, and even customer billings carry a company disclaimer about quarter-to-quarter lumpiness. The central debate is what the amended PowerCo deal means: bulls note milestone payments tied to cell delivery and validation over the next two years keep VW on a defined path toward the IP License Agreement and its royalty prepayment; bears note $75.4M all-in is a rounding error against a $250M+ annual burn and looks like scope reduction. Second debate: whether QSDC/QSAS diversification is a real market or a narrative bridge while automotive validation grinds.",
+  "scenarioModel": {
+    "horizon": "FY2030 (calendar 2030)",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.4,
+      "rev": 0.04,
+      "multiple": 6,
+      "why": "PowerCo stays in renegotiation, no IP license is signed, and FY2030 revenue is still development billings of ~$40M a year. The 100 MWh line slips past 2028 and QS raises equity at depressed prices. The market values it near liquidity plus a small technology option."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 0.12,
+      "multiple": 14,
+      "why": "The PowerCo license lands around 2027-28. FY2030 revenue of ~$120M is ~$40M of JDA/development fees, ~$50M of licence and prepayment revenue recognised over time, and ~$30M of cells from the 100 MWh line (QSAS/QSDC). A growing royalty stream earns a mid-teens multiple, held back by one more raise and no GWh-scale licensee yet in production."
+    },
+    "bull": {
+      "p": 0.15,
+      "rev": 0.35,
+      "multiple": 18,
+      "why": "PowerCo and one more OEM sign licenses with prepayments. PowerBlock wins a data-center design, the 100 MWh line runs full from 2028, and FY2030 revenue reaches ~$350M with a first GWh-scale licensee in sight. The market re-rates QS as a capital-light IP company growing more than 50% a year."
+    },
+    "note": "Value per share = (FY2030 revenue x EV/Sales + net cash) / shares. The page uses today's ~$0.68B net cash (market cap minus EV) and ~619M shares. It does not deduct the ~$0.3B we expect QS to burn by Dec 2027, about $0.45 per share, or the ~10-15% dilution from a raise we assume in 2028 in bear and base. Those costs are absorbed in the multiples, which sit below what a funded royalty business would earn. Revenue means GAAP revenue (licence, prepayment, product and development), not the non-GAAP billings metric. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Will PowerCo sign the IP license, or is VW drifting away?",
+      "bull": "PowerCo is still paying ($28.9M of collaboration cash in 9M 2026), and QS is aligning a new statement of work to move it onto a long-term platform. The July 2026 amendment tied the remaining payments to delivery and validation, not to an exit.",
+      "bear": "The program was cut from up to ~$131M to $75.4M all-in, and the Q3 letter names no milestone hit. QS's own risk factors say agreement on updated milestones is not assured. VW has its own cell plants to fill.",
+      "view": "This is the single largest swing in value: a signed license moves weight from bear to base. Until the statement of work is signed, we keep 40% on the bear case.",
+      "signpost": {
+        "metric": "Signed PowerCo statement of work with milestone payments; IP License Agreement and royalty prepayment",
+        "threshold": "SOW signed with cash by the Q4 letter = hold base; nothing by mid-2027 = move 10 points from base to bear",
+        "when": "Q4 2026 letter ~late Jan 2027; Q2 2027 letter ~late Jul 2027"
+      }
+    },
+    {
+      "q": "Is the revenue line growing at all?",
+      "bull": "The customer base is wider than ever: first Honda billings, a new agreement with a leading global mobility manufacturer, first QSAS billings, and QSE-5 samples with defense, aviation and telecom customers, all in Q3 2026.",
+      "bear": "Billings went $11.0M, $10.8M, $9.8M across Q1-Q3 2026, and GAAP revenue is still nil. More customers have not yet produced more dollars, and the filings show no growth trajectory to underwrite.",
+      "view": "We read the wider customer list as funnel, not revenue. The base case needs billings to start compounding in 2027. Flat billings through mid-2027 would make the 2030 revenue cases look like hope.",
+      "signpost": {
+        "metric": "Quarterly customer billings",
+        "threshold": "above $15M by Q2 2027 = funnel converting; below $8M = cut base revenue",
+        "when": "Q1 2027 letter ~late Apr 2027; Q2 2027 ~late Jul 2027"
+      }
+    },
+    {
+      "q": "Does the cash reach the 100 MWh line without heavy dilution?",
+      "bull": "TTM free cash outflow is $258.8M and falling, and the Q3 2026 quarter was -$59.5M. $819.8M of liquidity covers about three years at that rate, and partners (Murata, Corning, Muehlbauer) supply much of the production equipment.",
+      "bear": "Weighted shares are still rising (620.6M in Q3 2026, +5.4% YoY), and diluted shares rose ~13% in FY2025. A 2028 production line plus the stated GWh ambition need capital that licensing has not yet produced.",
+      "view": "Runway is adequate, not comfortable. We assume one raise in 2028 in bear and base, which is why the multiples are modest. A FY2027 capex guide that implies a raise in 2027 would cut the base value.",
+      "signpost": {
+        "metric": "FY2027 adjusted EBITDA loss and capex guidance",
+        "threshold": "EBITDA loss at or below $250M and capex below $75M = no raise before 2028; capex above $100M or ATM use = dilution in 2027",
+        "when": "Q4 2026 letter ~late Jan 2027"
+      }
+    }
+  ],
+  "thesis": [
+    "The cost base is shrinking while engagement widens. Q3 2026 opex was $92.4M, down ~20% from $115.0M a year earlier, and R&D fell to $73.9M even as QSE-5 volumes from the now fully operational Eagle Line rose.",
+    "Licensing keeps capital needs small. Q3 2026 capex was $4.4M. The planned 100 MWh line (SOP 2028) is built with equipment partners Murata, Corning and Muehlbauer, and licensees are meant to fund GWh-scale plants.",
+    "The customer list now spans three verticals. Autos (PowerCo, Honda, two other top-10 OEM programs and the new mobility manufacturer), data centers (PowerBlock) and defense/aviation (first QSAS billings) give several routes to first revenue.",
+    "Safety is the wedge. Customer and third-party tests in Q3 2026 showed QS cells thermally stable above 300C, against ~180C for conventional lithium-ion. A nonflammable ceramic separator is a claim silicon-anode rivals cannot make.",
+    "The downside is cushioned by cash. Net liquidity is about $1.20 per share ($819.8M less ~$67M of obligations, over 620.6M shares, Sep 30, 2026), so the bear case values the technology at little more than zero."
+  ],
+  "risks": [
+    "PowerCo could de-scope further. The July 2026 amendment capped the program at $75.4M all-in, the statement of work is still being aligned, and QS warns that agreement on updated milestones is not assured.",
+    "Billings have stalled. They fell from $11.0M to $9.8M between Q1 and Q3 2026 and are not GAAP revenue. Without a growing top line there is nothing for a sales multiple to anchor on.",
+    "Dilution returns before the payoff. The TTM cash burn of $258.8M will rise once 100 MWh line spending starts. Weighted shares are up 5.4% YoY in Q3 2026, and a 2027-28 raise at low prices would cut per-share value in every case.",
+    "Timelines keep slipping. QS listed in 2020 targeting mid-decade production. The 2028 100 MWh line is a pilot-scale step, about 0.25% of PowerCo's prospective 40 GWh, and GWh-scale output is later still.",
+    "Rivals may industrialize first. Toyota, Samsung SDI and CATL target late-decade sulfide solid-state production while LFP and silicon-anode cells keep cutting $/kWh, which shrinks the premium a licensee would pay."
+  ],
+  "bullCharts": {
+    "0": ["fcfQ"],
+    "1": ["capexA"],
+    "4": ["peerEvS"]
+  },
+  "bearCharts": {
+    "1": ["revQ"],
+    "2": ["fcfA"]
+  },
+  "catalysts": [
+    "Nov 11, 2026: Solid-State Battery Symposium in Kyoto - technology roadmap and collaboration model update (debates 1, 2).",
+    "~Late Jan 2027: Q4 2026 letter - FY2027 EBITDA and capex guidance, PowerCo statement of work status (debates 1, 3).",
+    "H1 2027: PowerBlock integration with third-party rack power electronics; first QSDC design win would be the first data-center proof (debate 2).",
+    "~Late Apr / late Jul 2027: Q1 and Q2 2027 billings vs the $15M threshold (debate 2).",
+    "2027-2028: PowerCo IP License Agreement and royalty prepayment (timing undefined); 100 MWh line start of production targeted 2028 (debates 1, 3)."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Oct 21, 2026)",
+    "points": [
+      "GAAP net loss $84.5M ($0.14/share); opex $92.4M (R&D $73.9M, G&A $18.5M); adjusted EBITDA loss $60.7M, in line.",
+      "Customer billings $9.8M (Q2: $10.8M), including first Honda and first QSAS billings; GAAP revenue nil.",
+      "Liquidity $819.8M ($75.6M cash + $744.2M marketable securities), down from $859.0M at Jun 30.",
+      "Operating cash use $55.1M, capex $4.4M (free cash flow -$59.5M); $18.5M related-party collaboration cash received ($28.9M YTD).",
+      "Weighted shares 620.6M (+5.4% YoY); FY2026 guidance reiterated."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Oct 21). GAAP net loss narrowed to $84.5M as opex fell to $92.4M; adjusted EBITDA loss was $60.7M ($188.2M for 9M). Customer billings were $9.8M and included the first Honda billings since the June agreement and the first QSAS billings; GAAP revenue remains nil. Liquidity ended at $819.8M after $55.1M of operating cash use and $4.4M of capex, helped by $18.5M of related-party collaboration cash (VW is a shareholder; the line does not name PowerCo, so the attribution is our inference). Operationally, the Eagle Line is fully operational, QS signed an agreement with an unnamed leading global mobility manufacturer, and it launched the QS PowerBlock in-rack storage design at the OCP Global Summit on Oct 8, claiming 4x the power density and 5x the runtime of the OCP lithium-ion reference spec.",
+  "guidanceProse": "FY2026 guidance reiterated: adjusted EBITDA loss of $250-275M and capex of $27-37M. The 9M loss of $188.2M implies Q4 at $62-87M, so the low end looks likely. There is still no revenue guidance. The Q3 letter does not restate a runway date; the last explicit statement was 'into 2029' (Q2 2025 letter), and at the TTM burn the current liquidity covers about three years before 100 MWh line spending. The forward plan is a 100 MWh cell line with SOP targeted for 2028, then GWh-scale production through licensees. On PowerCo, QS is aligning a statement of work to move it onto a long-term platform, but discloses no milestone payments by name and no new date for the IP License Agreement.",
   "guide": {
     "label": "FY26 guide",
     "val": "Adj EBITDA loss $250-275M",
-    "sub": "capex cut to $27-37M | $859M liquidity",
+    "sub": "capex $27-37M | $819.8M liquidity",
     "tone": "accent"
   },
   "segments": [
-    "QSEV (electric vehicles): PowerCo/VW licensing (prospective 40 GWh, expandable to 80 GWh annually), Honda partnership, and two other top-10 OEM joint development programs.",
-    "QSDC (AI data centers): battery solutions for 800V DC rack architectures via ODM design engagements; vertical stood up in Q2 2026 under ex-MediaTek executive Shahar Noy.",
-    "QSAS (aerospace/defense): QSE-5 cells shipped to a major US defense prime in Q2 2026; pitch is energy density, safety, and a China-free anode supply chain."
+    "QSEV (electric vehicles): PowerCo/VW licensing (prospective 40 GWh, expandable to 80 GWh a year), Honda joint development, two other top-10 OEM programs, and a new agreement with an unnamed mobility manufacturer (Q3 2026).",
+    "QSDC (AI data centers): QS PowerBlock in-rack storage reference design for 800V DC racks, launched Oct 8, 2026; integration with third-party power electronics and BMS in progress.",
+    "QSAS (aerospace, defense, other): QSE-5 samples with defense, aviation and telecom customers; first billings in Q3 2026. Management cites a TAM of up to $75B by 2030 (company estimate, unverified)."
   ],
   "competitive": [
-    "In-house OEM and Asian incumbent programs are the real competition: Toyota, Samsung SDI, and CATL are all driving sulfide-based solid-state toward late-decade production; if they industrialize first, licensing QS technology loses urgency.",
-    "Enovix (ENVX): silicon-anode cells already shipping commercially into smartphones from Fab2 in Malaysia -- nearer-term revenue with a similar energy-density pitch, but a flammable liquid electrolyte; QS's safety data is the counter.",
-    "Solid Power (SLDP): the closest business-model comp -- sulfide electrolyte plus licensing deals with SK On and BMW A-sample lines -- trading at a small fraction of QS's market cap, framing the premium QS must justify.",
-    "Tesla (TSLA) and CATL keep bending the conventional cost curve (4680, LFP, fast-charge chemistries). QSE-5's energy-density and safety edge must beat a $/kWh target that falls every year it stays pre-commercial."
+    "Toyota, Samsung SDI and CATL are driving sulfide solid-state toward late-decade production; if they industrialize first, licensing QS loses urgency for automakers.",
+    "Solid Power (SLDP) is the closest business-model comp: sulfide electrolyte licensed to SK On and BMW. Enovix (ENVX) ships silicon-anode cells with a liquid electrolyte. Both have small reported revenue, which sets the peer EV/Sales frame.",
+    "LFP and fast-charge chemistries (CATL, Tesla, BYD) keep lowering the $/kWh bar that QSE-5's energy density and safety must beat.",
+    "In data centers, PowerBlock competes with lithium-ion battery backup units from established rack-power vendors, so qualification cycles and vendor lists matter more than chemistry."
   ],
-  "moat": "The ceramic separator plus anode-free lithium-metal architecture is protected by a deep patent estate and now backed by unusually strong third-party validation: four top-10 OEMs and replicated abuse-test safety data. What is unproven is everything industrial: Cobra separator yield at gigawatt-hour scale, cost per kWh versus falling lithium-ion prices, and whether B-sample cells survive automotive qualification into a production commitment. No customer has committed to mass production, and the PowerCo IP license -- the moat's monetization -- remains unsigned.",
-  "risks": [
-    "The PowerCo amendment caps the program at $75.4M all-in. The July 16, 2026 restructuring replaced cost reimbursement with two years of delivery-and-validation milestones -- external funding covers well under half a year of burn, and the IP License Agreement remains unsigned.",
-    "There is no GAAP revenue. Customer billings ($10.8M in Q2 2026) are an invoicing metric the company itself warns is lumpy and not a substitute for revenue; commercial product revenue at scale is still years out.",
-    "Runway forces a raise before the payoff. $859M of liquidity against a $250-275M FY26 adjusted EBITDA loss guide is roughly three years; weighted shares already rose ~10% YoY, and QS has issued equity repeatedly since 2023.",
-    "Validation timelines have slipped before. QS went public in 2020 targeting mid-decade production; amended PowerCo milestones now run roughly through mid-2028 just for cell delivery and validation, with high-volume manufacturing later still.",
-    "Rival chemistries can close the gap. Toyota, Samsung SDI, and CATL sulfide solid-state programs target late-decade production while LFP and silicon-anode incumbents keep cutting $/kWh -- the premium QSE-5 must justify shrinks annually.",
-    "The market already voted on the quarter. QS fell roughly 31% in July 2026 into and after the print, with the Street reading the PowerCo restructuring as de-scoping rather than deepened commitment."
-  ],
-  "catalysts": [
-    "H2 2026: Eagle Line output doubling and a step-up in customer sample shipments across QSEV/QSDC/QSAS.",
-    "PowerCo delivery-and-validation milestone payments over the next two years (amendment dated July 16, 2026; up to $75.4M aggregate).",
-    "Q3 2026 results (~late Oct 2026): billings cadence and any B-sample validation disclosures.",
-    "First QSDC data-center design win or QSAS defense program award (2026-2027).",
-    "Entry into the IP License Agreement with PowerCo and the associated royalty prepayment -- the single biggest de-risking event; timing undefined."
-  ],
-  "pricedIn": "At about $6.30 (early Aug 2026), market cap is roughly $3.9B on 617M shares; net of $859M liquidity, EV is near $3.0B. Conventional multiples do not apply: GAAP revenue is nil and even billings annualize to only ~$43M, so the market is underwriting outcomes, not results. What is implied: QSE-5 completes validation, PowerCo signs the IP license, and royalties eventually flow across EV plus data-center and defense verticals -- effectively a modest probability on a very large licensing business. The debate: bulls see four top-10 OEMs and Honda's June 2026 endorsement as accumulating proof; bears see the 31% July drawdown, a capped PowerCo program, and three years of cash as a countdown clock.",
-  "scenarios": {
-    "bear": "B-sample validation slips again, PowerCo milestones stretch, and the IP license stays unsigned through 2027. QSDC and QSAS produce demos but no contracts, billings stagnate around $40M a year, and QS returns to the equity market in 2028 with the stock weak -- heavy dilution at low prices. The stock trades toward liquidity value, $2-3, as the market concludes solid-state arrives via Toyota and CATL rather than via licensing.",
-    "base": "The Eagle Line doubles output in H2 2026, PowerCo milestones pay on schedule through 2027-28, and Honda plus one more OEM deepen their programs. The IP license lands around 2028, triggering the royalty prepayment and a licensing framework; first gigawatt-hour-scale production follows early next decade. QS raises once more at tolerable dilution. The stock oscillates roughly $5-12 on milestone news -- still an option, but one whose strike keeps getting closer.",
-    "bull": "Safety plus energy density win a data-center or defense design commitment in 2027 -- revenue arrives years before automotive SOP. PowerCo signs the IP license with its royalty prepayment, Honda converts toward a licensing structure, and Cobra's larger-format separators unlock premium cell formats. Billings compound past $150M by 2028 while the licensing model holds capex under $40M a year. The market re-rates QS as an IP royalty company: $15-20."
-  },
+  "moat": "The ceramic separator and anode-free lithium-metal architecture rest on a deep patent estate, and the safety data is now replicated by customers and third-party labs. The industrial side is unproven: Cobra separator yield at scale, cost per kWh against falling lithium-ion prices, and whether any customer commits to production. The monetization layer, a signed licence with royalties, does not exist yet.",
   "valPresets": {
     "mode": "revenue",
     "r": 0.15,
@@ -80,36 +150,38 @@
       "fcfMargin": 0.45,
       "exit": 18
     },
-    "note": "QS is pre-revenue at scale -- GAAP product revenue is nil, so 'revenue' here means licensing/prototype customer billings (~$43M annualized run-rate as of Q2 2026). Revenue mode compounds that base into prospective royalty streams; margins reflect an IP-licensing model, not cell manufacturing. Base (~45% CAGR to ~$780M by 2034) approximates a signed PowerCo license plus one additional licensee; bear is essentially liquidity value."
-  },
-  "bullCharts": {
-    "0": ["peerEvS"],
-    "2": ["capexA", "fcfQ"]
-  },
-  "bearCharts": {
-    "1": ["revQ"],
-    "5": ["priceH"]
+    "note": "QS is pre-revenue at scale. GAAP product revenue is nil, so 'revenue' here means licensing/prototype customer billings (~$40M annualized; $9.8M in Q3 2026). Revenue mode compounds that base into prospective royalty streams, with margins for an IP-licensing model rather than cell manufacturing. Base (~45% CAGR) approximates a signed PowerCo license plus one more licensee; bear is essentially liquidity value."
   },
   "sources": [
     {
-      "label": "QS Q2 2026 shareholder letter (SEC 8-K EX-99.1, Jul 22, 2026)",
-      "url": "https://www.sec.gov/Archives/edgar/data/1811414/000119312526312423/qs-ex99_1.htm"
+      "label": "QS Q3 2026 shareholder letter (SEC 8-K EX-99.1, Oct 21, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001811414/000119312526427862/qs-ex99_1.htm"
     },
     {
-      "label": "QS Q2 2026 press release (IR)",
-      "url": "https://ir.quantumscape.com/news-releases/news-release-details/quantumscape-reports-second-quarter-2026-business-and-financial"
+      "label": "QS Q3 2026 press release (SEC 8-K EX-99.2, Oct 21, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001811414/000119312526427862/qs-ex99_2.htm"
+    },
+    {
+      "label": "QS Q2 2026 shareholder letter (SEC 8-K EX-99.1, Jul 22, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/1811414/000119312526312423/qs-ex99_1.htm"
     },
     {
       "label": "SEC 8-K: PowerCo collaboration agreement amendment (Jul 16, 2026)",
       "url": "https://www.sec.gov/Archives/edgar/data/0001811414/000119312526312381/qs-20260716.htm"
     },
     {
-      "label": "StockTitan: PowerCo deal revised, up to $75.4M in milestones",
-      "url": "https://www.stocktitan.net/sec-filings/QS/8-k-quantum-scape-corp-reports-material-event-b2819f0f2dec.html"
+      "label": "QS Q2 2025 shareholder letter: runway into 2029, PowerCo up to ~$131M",
+      "url": "https://ir.quantumscape.com/static-files/284fadeb-17a7-4125-b29a-9358430a5fe5"
     },
     {
-      "label": "StockAnalysis.com: QS price and market cap",
-      "url": "https://stockanalysis.com/stocks/qs/"
+      "label": "Siberforge filings data (research/data/QS.json): quarterly opex, FCF, weighted shares, TTM through Sep 2026",
+      "url": "https://siberforge.xyz/research/qs/"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-10-31",
+      "change": "Rebuilt as a v3 decision note after Q3 2026 (Oct 21). Added a verdict (Neutral - speculative option) and FY2030 sales scenarios (bear $1.49 / base $3.82 / bull $11.28, valued Dec 2027), plus three debates on PowerCo, the stalled billings trend and runway/dilution. New facts: opex down ~20% YoY, billings $9.8M, liquidity $819.8M, new mobility-OEM agreement, PowerBlock launch, 100 MWh line targeted for 2028. The view is unchanged: still an option, now with explicit signposts."
     }
   ]
 }
