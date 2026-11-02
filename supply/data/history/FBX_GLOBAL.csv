@@ -1,4 +1,4 @@
-# Freightos Baltic Index — Global  source=scrape:freightos  generated=2026-10-26T11:59:39.201Z
+# Freightos Baltic Index — Global  source=scrape:freightos  generated=2026-11-02T14:22:38.992Z
 date,value
 2026-04-26,2025
 2026-04-27,2025
@@ -25,3 +25,4 @@ date,value
 2026-10-12,2025
 2026-10-19,2026
 2026-10-26,2026
+2026-11-02,2025
