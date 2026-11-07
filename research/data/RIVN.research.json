@@ -1,66 +1,136 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "R2 landed on time with real demand and consolidated gross margin flipped positive -- but the flip runs on software and regulatory credits, automotive still loses money per car, and the VW bridge must hold until R2 unit economics prove out.",
-  "thesis": [
-    "R2 is launching better than planned. Deliveries began in Q2 2026 at a roughly $45,000 starting price; the 12,194 vehicles delivered beat the internal 9,000-11,000 range and FY26 guidance was raised to 65,000-70,000 on Jul 30, 2026. Management says Launch Edition reservation-to-order conversion is 'meaningfully higher' than expected, with a record 57,000+ demo drives in the quarter.",
-    "Consolidated gross margin has flipped decisively positive. Q2 2026 gross profit was $179M (11% margin) versus -16% a year earlier, driven by $515M of software and services revenue at a 42% gross margin plus a surge in regulatory credit sales. Automotive alone still lost $36M at the gross line.",
-    "The VW joint venture is a genuine balance-sheet bridge. VW unlocked another $1B on Mar 27, 2026 after winter-testing milestones, bringing committed capital to $5.8B, with a further roughly $1B of nonrecourse debt scheduled for October 2026. Total liquidity exceeded $14B at Q2 2026 including future commitments.",
-    "Software and autonomy are becoming a second business. Autonomy+ launched in 2026 at $2,500 one-time or $49.99/month with Universal Hands-Free covering roughly 3.5M miles of road; a Gen 3 autonomy platform with custom silicon and LiDAR lands later in 2026. Company communications target roughly $2.5B of 2026 software and services revenue, much of it VW-driven (target, unverified as guidance).",
-    "The burn is shrinking but still heavy. Adjusted EBITDA loss narrowed to $379M in Q2 2026 from $667M a year earlier, but FY26 guidance is still -$2.0B to -$1.8B EBITDA plus $1.70-1.80B capex against $5.3B of cash and short-term investments."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Jul 30, 2026)",
-    "points": [
-      "Revenue $1.66B, +27% YoY; beat consensus by about $160M",
-      "Gross profit $179M (11% margin) vs -16% margin in Q2 2025; software and services $515M (+37% YoY) at 42% gross margin",
-      "Produced 12,613 and delivered 12,194 vehicles vs 9,000-11,000 expected, as R2 deliveries began",
-      "Automotive gross loss narrowed to $36M despite about $100M of R2 ramp costs (expedited freight, supplier premiums, unabsorbed overhead)",
-      "Adjusted EBITDA -$379M vs -$667M in Q2 2025; adjusted EPS -$0.47 beat consensus by $0.20",
-      "Cash and short-term investments $5.3B; total liquidity above $14B including committed VW capital"
+  "asOf": "2026-11-07",
+  "oneLiner": "A US EV maker whose mass-market R2 is now its best seller, funded by Volkswagen, Uber and the DOE. The market is betting that R2 volume turns automotive gross profit positive in 2027 before the cash burn forces another round of dilution.",
+  "verdict": {
+    "stance": "Neutral - better execution, still a funding story",
+    "summary": "R2 demand is no longer the question: it outsold R1 and the van in Q3 2026 and the delivery guide went up again. The open questions are unit economics and funding. Automotive still lost money at the gross line even with credits, the trailing free-cash burn is about $4.2B, and the share count is up 18.5% in a year. Our scenarios give modest upside with roughly 2:1 skew, but the base case already assumes the Q4 exit-rate promise is kept. Two things would change the view: a positive automotive gross profit exit rate in the Q4 2026 print (upgrade), or a 2027 guide that needs fresh public equity before the DOE draw (downgrade).",
+    "wtb": [
+      "Automotive gross profit is positive on an exit-rate basis by the end of Q4 2026 and for the full year 2027 excluding regulatory credits.",
+      "FY2027 revenue reaches about $11B: roughly 120,000 deliveries from two shifts in Normal plus software and services near $2.6B.",
+      "The first DOE draw (up to $4.5B for Georgia) happens by early 2027, so Georgia is funded by partners and the DOE rather than by new public equity.",
+      "Share count growth slows from +18.5% YoY to under 10% in 2027 (VW, Uber and stock comp only)."
     ]
   },
-  "latestProse": "Q2 2026 was the quarter R2 stopped being a promise. Revenue rose 27% to $1.66B, deliveries of 12,194 blew through the 9,000-11,000 internal range, and consolidated gross margin hit 11% against -16% a year earlier -- though the mix flatters: $515M of 42%-margin software and services plus a surge in regulatory credit sales did the heavy lifting while automotive still lost $36M at the gross line. Management flagged roughly $100M of temporary R2 ramp costs (expedited freight, supplier premiums, unabsorbed overhead) persisting through Q3 before easing in Q4, and is adding a second shift in Normal by end of Q3. The disclosure that matters most: R2 reservation-to-order conversion running 'meaningfully higher' than plan in a post-tax-credit market where US EV demand is shrinking -- Rivian is taking share, not riding a wave.",
-  "guidanceProse": "On Jul 30, 2026 Rivian raised FY26 delivery guidance to 65,000-70,000 vehicles from 62,000-67,000 and improved the adjusted EBITDA outlook by $50M at the midpoint to -$2.0B to -$1.8B, on capex of $1.70-1.80B. Management expects the R2 program to reach positive gross margin in the second half of 2026 and guided the roughly $100M of quarterly ramp inefficiencies to persist through Q3 before improving in Q4. The unstated bets: R2 demand holds after the Sep 30, 2025 expiry of the $7,500 federal credit, the October 2026 $1B VW nonrecourse tranche arrives on schedule, and regulatory credit sales -- a policy-dependent revenue line -- keep flowing.",
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.3,
+      "rev": 9.0,
+      "multiple": 1.0,
+      "why": "R2 demand softens once launch-edition orders clear; about 95,000 deliveries at ~$68K plus ~$2.3B of software and services. Automotive gross profit stays negative without credits, the DOE draw slips and a public raise is needed. The market pays legacy-auto-like EV/Sales for a business that still burns cash."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 11.0,
+      "multiple": 1.8,
+      "why": "About 120,000 deliveries at ~$68K (R2 mix lowers ASP) plus ~$2.6B software and services (VW JV work recognized through mid-2028) and small credits. Automotive gross profit turns slightly positive in 2027, EBITDA loss narrows but capex steps up for Georgia. A below-today multiple reflects continued burn and dilution."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 13.0,
+      "multiple": 2.8,
+      "why": "R2 sells about 145,000 units in 2027 as Normal runs near capacity, Autonomy+ attach and Point to Point add high-margin software, and Uber robotaxi milestones release equity. Gross margin reaches high single digits and EBITDA breakeven comes into view for 2028, earning a premium to autos as the credible US Tesla alternative."
+    },
+    "note": "FY2026 revenue assumes 9M $5.19B + Q4 ~$2.5B (25-28K deliveries) = ~$7.7B. Value = (FY2027 revenue x EV/Sales + live net cash) / current diluted shares; no further dilution is modeled, which is why the multiples sit below the ~2.7x trailing EV/Sales. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does automotive turn gross-profit positive without credits?",
+      "bull": "Automotive cost per unit fell by more than $12,000 QoQ in Q3 2026, the second shift adds fixed-cost leverage, and the ~$120M of R2 ramp cost is temporary. Management says it will exit Q4 2026 at an automotive gross profit.",
+      "bear": "Q3 automotive gross loss widened to $80M from $36M in Q2, and Electrek estimates about -$161M (about -$8,400 per vehicle) excluding $81M of credits and a tariff refund. Operating margin is still about -41%; R2 lowers ASP faster than it lowers cost.",
+      "view": "This sets the multiple. The exit-rate promise is specific and near; if it is met, 1.8x to 2.8x is defensible, and if it slips the bear multiple applies.",
+      "signpost": {
+        "metric": "Automotive gross profit in Q4 2026, total and excluding regulatory credits",
+        "threshold": "positive December exit rate disclosed = upgrade; full-quarter automotive loss above $80M = downgrade",
+        "when": "Q4 2026 report, ~late Feb 2027"
+      }
+    },
+    {
+      "q": "Can R2 demand hold at 25K+ deliveries a quarter without a federal credit?",
+      "bull": "Demo drives rose to 103,000+ in Q3 from 57,000 in Q2, launch-edition conversion is above plan and R2 is already the best seller; the guide implies a record Q4 of 25-28K.",
+      "bear": "Launch-edition backlogs flatter the first two quarters of any launch; US EV demand shrank after the $7,500 credit expired Sep 30, 2025, and Tesla can cut Model Y prices.",
+      "view": "Demand has earned the benefit of the doubt for 2026; 2027 is the real test once the order bank is worked down.",
+      "signpost": {
+        "metric": "Q4 2026 deliveries and the FY2027 delivery guide",
+        "threshold": "Q4 at or above 26K and a 2027 guide of 110K+ = base or better; Q4 below 25K = bear",
+        "when": "Q4 deliveries release, early Jan 2027; FY2027 guide, ~late Feb 2027"
+      }
+    },
+    {
+      "q": "Who pays for the gap: partners or shareholders?",
+      "bull": "Pro forma liquidity is $7.1B after the $1B VW term loan in October, plus a DOE loan of up to $4.5B, a $460M VW equity tranche and $250M of Uber equity tied to a year-end milestone. Partner money comes at or above market prices.",
+      "bear": "Trailing free cash flow is about -$4.2B against $5.5B of cash, about 1.3 years of runway; diluted shares rose 18.5% YoY; capex steps up in 2027 for Georgia and the DOE requires pre-funded equity and a $2B liquidity floor.",
+      "view": "Dilution is the base case, not a tail risk; the question is the price. Partner equity at milestone prices is acceptable, a discounted public offering is not.",
+      "signpost": {
+        "metric": "First DOE draw and any public equity or convertible issuance",
+        "threshold": "DOE draw by Q1 2027 with no public raise = base intact; a public raise before the draw = bear",
+        "when": "Through Q1 2027"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-07",
+      "change": "Migrated to v3 after the Q3 2026 print (Oct 29): verdict Neutral, FY2027 EV/Sales scenarios (bear $9.0B at 1.0x, base $11.0B at 1.8x, bull $13.0B at 2.8x), three debates. Q3 beat on revenue and EBITDA and the delivery guide rose, but automotive gross loss widened and dilution and burn now sit in a debate. View unchanged in direction: execution better, funding still the constraint."
+    },
+    {
+      "date": "2026-08-13",
+      "change": "Q2 2026: R2 deliveries began, consolidated gross margin 11%, FY26 delivery guide raised to 65-70K."
+    }
+  ],
+  "thesis": [
+    "R2 has product-market fit. It became the best-selling Rivian in its second quarter of deliveries, and demo-drive traffic nearly doubled QoQ; that is share gain in a shrinking post-credit US EV market.",
+    "Unit cost is falling fast. Automotive cost of revenue per unit fell by more than $12,000 QoQ in Q3 2026 while carrying ~$120M of ramp cost, and a second shift now spreads the Normal plant's fixed cost.",
+    "Software and services is a real second business. It earns a 42% gross margin and covers the automotive loss at the consolidated line; VW JV engineering is ~59% of it and is contracted through about mid-2028.",
+    "Partners fund the build-out. VW, Uber and the DOE together put total available liquidity near $13B (conditional), which lets Georgia proceed without depending on the equity market."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Oct 29, 2026)",
+    "points": [
+      "Revenue $2.155B, +38% YoY (consensus ~$2.02B, Bloomberg); automotive $1.550B (+36%), software and services $605M (+45%).",
+      "Gross profit $176M (8% margin): automotive -$80M (-5%), software and services +$256M (42%); $81M of regulatory credits and a tariff refund receivable helped.",
+      "Delivered 19,248 (+46% YoY) and produced 19,751 (+84%); R2 outsold R1 and EDV; ~$120M of R2 ramp cost in cost of revenue.",
+      "Adjusted EBITDA -$435M (consensus ~-$576M); net loss -$913M; GAAP EPS -$0.63, adjusted -$0.48 (consensus ~-$0.61).",
+      "Free cash flow -$1.124B; cash and short-term investments $5.502B; pro forma liquidity $7.095B including the $1B VW term loan funded Oct 7."
+    ]
+  },
+  "latestProse": "Q3 2026 was a volume quarter. Deliveries rose 58% QoQ as R2 became the volume leader and the second shift in Normal started, and the print beat Bloomberg consensus on revenue, adjusted EPS and EBITDA. The weak spot is the car itself: automotive gross loss widened from Q2 as cheaper R2 units replaced R1 mix, and Electrek estimates the loss at about $8,400 per vehicle once credits and the tariff refund are removed. Management said it intends to exit Q4 at an automotive gross profit but not to earn one for the full quarter. Mind Robotics: the nine-month net loss includes a $506M non-operating gain from its Series A and deconsolidation, so GAAP losses understate operating losses year to date. CFO Claire McDonough left at the end of October; Derek Mulvey is interim CFO (unverified beyond secondary reports).",
+  "guidanceProse": "On Oct 29, 2026 Rivian raised FY2026 deliveries to 67,000-70,000 (from 65,000-70,000), implying a record Q4 of roughly 25,200-28,200. Adjusted EBITDA guidance improved about $100M at the midpoint to -$1.85B to -$1.75B, and capex was cut about $300M at the midpoint to $1.40-1.50B, on timing. There is no 2027 guidance yet; management flagged a meaningful capex step-up in 2027 as Georgia construction ramps and faster R&D growth. Funding milestones: first DOE draw expected by early 2027 (equity and reserves pre-funded, $2B minimum liquidity covenant), Uber milestone by year-end 2026 for $250M of equity (up to $700M more through 2031), and a $460M VW equity investment by January 2028 at the latest.",
   "guide": {
     "label": "FY26 deliveries",
-    "val": "65,000-70,000",
-    "sub": "Raised Jul 30, 2026 from 62,000-67,000; adj EBITDA -$2.0B to -$1.8B; capex $1.70-1.80B",
+    "val": "67,000-70,000",
+    "sub": "Raised Oct 29, 2026; adj EBITDA -$1.85B to -$1.75B; capex $1.40-1.50B",
     "tone": "accent"
   },
   "segments": [
-    "Automotive: premium R1S/R1T, commercial vans, and the ~$45K R2 ramping in Normal, IL; Q2 2026 automotive gross loss of $36M including ~$100M of ramp costs",
-    "Software and services: $515M in Q2 2026 (+37% YoY) at 42% gross margin -- VW JV development revenue, service, charging, and Autonomy+ subscriptions ($2,500 one-time or $49.99/mo)",
-    "Regulatory credits: surged in Q2 2026 and drove part of the EBITDA guide improvement; lumpy and policy-dependent"
+    "Automotive: R1S/R1T, commercial vans (EDV) and the ~$45K R2 built in Normal, IL (two shifts); Georgia Phase 1 adds 300,000 units of R2/R3 capacity.",
+    "Software and services: VW JV (RV Tech) engineering revenue, service, charging and Autonomy+ ($2,500 one-time or $49.99/month); Point to Point driving goes to subscribers in 2027.",
+    "Regulatory credits: booked inside automotive revenue ($81M in Q3 2026); lumpy and policy-dependent."
   ],
   "competitive": [
-    "TSLA: Model Y is R2's direct target at a similar price with the Supercharger network and 55%+ FSD attach; Tesla's US brand erosion post-2025 gives R2 its opening",
-    "GM: broadest sub-$50K EV lineup (Equinox EV and siblings) with Ultium scale, though GM retrenched EV capacity plans through 2025",
-    "F: F-150 Lightning overlaps R1T, but Ford has slashed EV ambitions and delayed next-gen trucks, reducing near-term pressure",
-    "LCID: fellow cash-burning EV pure-play; Gravity overlaps R1S at higher price, and Lucid's Saudi backstop parallels Rivian's VW bridge",
-    "Autonomy positioning: Rivian sells driver-assist subscriptions (Autonomy+, LiDAR stack later in 2026), not robotaxis -- a monetization race against Tesla FSD, not against Waymo"
+    "TSLA: Model Y is R2's direct target, with a cost lead, the Supercharger network and FSD; Tesla's US brand erosion is R2's opening.",
+    "GM: broadest sub-$50K EV lineup on Ultium scale, though EV capacity has been scaled back.",
+    "F: F-150 Lightning overlaps R1T, but Ford has cut EV ambitions, easing near-term pressure.",
+    "LCID: fellow cash-burning EV pure-play with a sovereign backstop; Gravity overlaps R1S at a higher price.",
+    "Autonomy: Rivian sells driver assist (Autonomy+, LiDAR Gen 3 stack) and supplies Uber R2 robotaxis; it competes with Tesla FSD on monetization rather than with Waymo on driverless scale."
   ],
-  "moat": "Rivian's edge is a clean-sheet zonal software architecture good enough that VW committed $5.8B for access -- external validation most EV startups never get -- plus genuine brand loyalty in the premium adventure niche that early R2 conversion suggests travels down-market. But none of this is a structural moat against Tesla's cost position or Korean and Chinese entrants. The survival case rests on execution speed and the VW bridge, not durable pricing power.",
+  "moat": "Rivian's edge is a zonal electrical and software architecture good enough that VW is paying billions to use it, plus a premium adventure brand that R2 is carrying down-market. Neither is a structural moat against Tesla's cost position or Chinese and Korean entrants; survival rests on execution speed and partner capital, not pricing power.",
   "risks": [
-    "R2 gross margin fails to turn positive in 2H26 as guided; the ~$100M/quarter ramp costs persist beyond Q4 2026",
-    "Post-credit US EV demand keeps shrinking: the $7,500 federal credit expired Sep 30, 2025 and US EV volumes fell sharply into 2026",
-    "Regulatory credit revenue, a key Q2 2026 margin driver, is policy-dependent and could evaporate under current rulemaking",
-    "VW payments are milestone-conditional; JV friction could delay the ~$1B October 2026 nonrecourse tranche or future commitments",
-    "Cash math: -$1.8B to -$2.0B EBITDA plus $1.7-1.8B capex against $5.3B cash implies an equity or debt raise before Georgia production starts in 2028",
-    "Tariff and supply-chain shocks: R2 cost targets assume stable inputs; ramp already required expedited freight and supplier premiums"
+    "Losses before scale. Operating margin was about -41% in Q3 2026 and automotive still loses money per car; the equity value rests on 2027-2028 economics that have not been shown yet.",
+    "Cash burn and runway. Trailing free cash flow is about -$4.2B against $5.5B of cash, roughly 1.3 years, and 2027 capex steps up; the gap is covered only if conditional VW, Uber and DOE money arrives on time.",
+    "Dilution. Diluted shares rose 18.5% YoY (VW's $1B placement at $15.90, Uber-linked issuance, stock comp and conversions); our scenarios do not model further dilution, so each new raise lowers per-share value.",
+    "Credit and tariff dependence. Q3 consolidated gross profit leaned on regulatory credits and a one-off tariff refund; current rulemaking can shrink credit demand.",
+    "Leadership change. The CFO left at the end of October 2026 with an interim replacement, during a DOE draw and a capex step-up."
   ],
   "catalysts": [
-    "End of Q3 2026: second production shift at Normal, IL -- the volume signal behind the 65-70K guide",
-    "October 2026: scheduled ~$1B VW nonrecourse debt tranche",
-    "Early Nov 2026 (Q3 earnings): first clean read on R2 unit economics and whether ramp costs peaked",
-    "2H 2026: guided R2-program-positive gross margin; LiDAR-equipped Gen 3 autonomy stack ships",
-    "Through 2026-2027: Georgia plant construction milestones toward 2028 R2/R3 production"
+    "Dec 9, 2026: Autonomy and AI Day - Point to Point timing and Autonomy+ attach (debate 1).",
+    "By Dec 31, 2026: Uber milestone that unlocks $250M of equity (debate 3).",
+    "Early Jan 2027: Q4 2026 deliveries; 25.2-28.2K needed for the guide (debate 2).",
+    "Q1 2027: first DOE loan draw for Georgia (debate 3).",
+    "~Late Feb 2027: Q4 2026 results, automotive gross profit exit rate and first FY2027 guidance (debate 1)."
   ],
-  "pricedIn": "At roughly $16 (Aug 12, 2026) Rivian trades near a $19-20B market cap -- about 3x the FY26 revenue run-rate, cheap against its own history but not against a company still guiding to a $1.8-2.0B EBITDA loss. The market is pricing partial R2 success: the raised 65-70K delivery guide is broadly believed, but there is deep skepticism that automotive gross margin turns durably positive without regulatory credits, plus an assumed equity raise before Georgia. Not priced: R2 demand compounding into 2027 without a federal credit, software and services sustaining 40%+ margins at scale, or VW scope expansion. Also not priced: the downside where credits vanish and R2 margins stall -- the 2026 drawdown shows how fast that reprices.",
-  "scenarios": {
-    "bear": "R2 demand fades once the launch-edition backlog clears into a post-credit market; automotive gross margin stays negative through 2027 as ramp costs linger and regulatory credit revenue dries up. EBITDA losses hold near $2B, forcing a dilutive raise in 2027 at depressed prices before Georgia is built. VW milestones slip, the software narrative deflates, and Rivian settles into perpetual-bridge territory alongside Lucid. Revenue still grows, but the equity compounds down through dilution; the stock revisits single digits.",
-    "base": "R2 ramps roughly on plan: 65-70K FY26 deliveries, program-level positive gross margin around late 2026, and consolidated results helped by software and services growing 30%+ at a 42% gross margin. The October 2026 VW tranche lands, and cash reaches Georgia's 2028 start with one manageable capital raise. The EBITDA loss roughly halves in 2027 with breakeven visible around 2028-29 as R2 volume builds and R3 arrives. The stock grinds higher on execution but stays hostage to EV policy and credit revenue.",
-    "bull": "R2 becomes the default sub-$50K adventure EV while Tesla's brand problems persist: conversion stays hot, the second shift fills, and 2027 deliveries push well past 100K. Automotive gross margin turns positive in 2027 even excluding credits, software and services passes a $2.5B annual run-rate on VW scope expansion, and Autonomy+ attach surprises. Georgia comes online in 2028 into a reviving EV market. Rivian rerates from cash-burn survivor to the credible US Tesla alternative -- a multi-bagger from $16."
-  },
   "valPresets": {
     "mode": "revenue",
     "r": 0.14,
@@ -69,23 +139,27 @@
     "bear": {"revCagr": 0.08, "fcfMargin": 0.02, "exit": 10},
     "base": {"revCagr": 0.20, "fcfMargin": 0.06, "exit": 15},
     "bull": {"revCagr": 0.30, "fcfMargin": 0.09, "exit": 20},
-    "note": "Revenue-mode DCF because Rivian has no earnings to capitalize: FY26 revenue lands somewhere near $6-7B, so the question is what scale and FCF margin the R2/R3 platform plus the 42%-margin software line reach by 2034. Bear assumes post-credit stall-out and dilution; bull assumes Georgia full ramp and a Tesla-2019-to-2021-style inflection."
+    "note": "Revenue-mode DCF because Rivian has no earnings to capitalize: FY26 revenue lands near $7.7B, so the question is what scale and FCF margin the R2/R3 platform plus the 42%-margin software line reach by 2034. Bear assumes post-credit stall-out and dilution; bull assumes Georgia full ramp and a Tesla-2019-to-2021-style inflection."
   },
   "bullCharts": {
     "0": ["revQ"],
-    "1": ["gmA", "peerGm"]
+    "1": ["gmA", "peerGm"],
+    "2": ["revYoyA"]
   },
   "bearCharts": {
-    "1": ["priceH"],
-    "4": ["fcfQ", "capexA"]
+    "0": ["niQ"],
+    "1": ["fcfQ", "capexA"],
+    "3": ["gmA"]
   },
   "sources": [
+    {"label": "Rivian Q3 2026 shareholder presentation (8-K Ex. 99.2, Oct 29, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/0001874178/000187417826000065/ex-9923q26rivianearnings.htm"},
+    {"label": "Electrek: Rivian Q3 2026 earnings, R2 best seller, consensus and per-vehicle math (Oct 29, 2026)", "url": "https://electrek.co/2026/10/29/rivian-rivn-q3-2026-earnings-r2-best-seller/"},
+    {"label": "Trefis: Q3 call - Q4 exit-rate automotive gross profit, 2027 capex step-up (Nov 4, 2026)", "url": "https://www.trefis.com/stock/rivn/articles/622557/is-rivian-stock-still-worth-owning-after-its-quarter/2026-11-04"},
+    {"label": "Just Auto: Rivian raises 2026 guidance on Q3 revenue growth", "url": "https://www.just-auto.com/newsletters/rivian-raises-2026-guidance-q3-revenue-growth"},
+    {"label": "TechCrunch: Rivian downsizes DOE loan to $4.5B, Georgia capacity to 300K (Apr 30, 2026)", "url": "https://techcrunch.com/2026/04/30/rivian-downsizes-doe-loan-to-4-5b-while-boosting-capacity-of-georgia-factory/"},
+    {"label": "Rivian 8-K (Apr 30, 2026): VW share issuance at $15.90", "url": "https://www.sec.gov/Archives/edgar/data/0001874178/000187417826000033/rivn-20260430.htm"},
+    {"label": "TechCrunch: Volkswagen becomes Rivian's top shareholder (May 5, 2026)", "url": "https://techcrunch.com/2026/05/05/volkswagen-becomes-rivians-top-shareholder-displacing-amazon/"},
     {"label": "Electrek: Rivian Q2 2026 earnings (Jul 30, 2026)", "url": "https://electrek.co/2026/07/30/rivian-rivn-q2-2026-earnings-r2-deliveries-revenue-up-27/"},
-    {"label": "StockTitan: Rivian Q2 2026 press release summary", "url": "https://www.stocktitan.net/news/RIVN/rivian-releases-second-quarter-2026-financial-9desc6us2j0w.html"},
-    {"label": "Motley Fool: RIVN Q2 2026 earnings call transcript", "url": "https://www.fool.com/earnings/call-transcripts/2026/07/30/rivian-rivn-q2-2026-earnings-call-transcript/"},
-    {"label": "Globe and Mail: Q2 call spotlights R2 ramp and margin path", "url": "https://www.theglobeandmail.com/investing/markets/stocks/RIVN/pressreleases/3615199/rivian-q2-earnings-call-spotlights-r2-ramp-and-margin-path/"},
-    {"label": "Electrek: VW JV milestone unlocks another $1B (Mar 27, 2026)", "url": "https://electrek.co/2026/03/27/volkswagen-groups-joint-venture-with-rivian-hits-latest-milestone-unlocking-another-1b-for-the-ev-automaker/"},
-    {"label": "ENR: Rivian to resume $5B Georgia plant construction in 2026", "url": "https://www.enr.com/articles/61200-rivian-to-resume-construction-of-5b-georgia-ev-plant-in-2026"},
-    {"label": "InsideEVs: Rivian Autonomy Day - Universal Hands-Free and Autonomy+", "url": "https://insideevs.com/news/781537/rivian-autonomy-day-l4-ai/"}
+    {"label": "SEC EDGAR XBRL companyfacts: TTM FCF, diluted shares, operating margin (computed)", "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001874178.json"}
   ]
 }

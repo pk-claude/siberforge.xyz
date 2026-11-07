@@ -1,74 +1,158 @@
 {
-  "asOf": "2026-08-31",
-  "oneLiner": "A post-scandal AI-server pure play that just doubled its gross margin and guided FY2027 revenue roughly 26% above Street, yet trades near 11x forward earnings because the market does not fully trust the margins, the customers, or the controls.",
-  "thesis": [
-    "The margin inflection finally showed up. Q4 FY2026 GAAP gross margin hit 17.5% versus 9.9% in Q3 FY26 and guidance of 8.2-8.4%, on favorable customer and product mix; non-GAAP EPS of $1.70 beat consensus $0.71 by 139%.",
-    "FY2027 guidance towers over consensus. Management guided $65-72B revenue versus Street ~$54.4B, backed by more than $60B of new orders received in Q4 alone and a record backlog.",
-    "Rack-scale liquid-cooling leadership into the Rubin cycle. DCBBS blueprints for NVIDIA Vera Rubin NVL72/NVL144 and DLC-2 direct liquid cooling (up to 362kW per rack) keep Supermicro first-to-market as DLC becomes mandatory at Rubin power densities.",
-    "The customer base is broadening. Nine customers each generated over $1B of revenue in FY2026, up from four in FY2025 - and on Aug 25, 2026 Cisco announced it will integrate Supermicro's liquid-cooled rack-scale systems into its Secure AI Factory with NVIDIA, opening a Cisco enterprise sales channel from October.",
-    "US-based manufacturing is a strategic asset. San Jose HQ, R&D and expanded domestic rack-scale capacity fit the onshoring policy environment and hyperscaler speed requirements."
-  ],
-  "latestQuarter": {
-    "label": "Q4 FY2026 (reported Aug 11, 2026)",
-    "points": [
-      "Revenue $11.12B, up ~92% YoY; below consensus $11.73B and near the low end of guidance",
-      "GAAP gross margin 17.5% vs 9.9% in Q3 FY26 and 9.5% in Q4 FY25; guidance had been 8.2-8.4%",
-      "GAAP diluted EPS $1.62; non-GAAP EPS $1.70 vs consensus $0.71",
-      "FY2026: revenue $39.1B (+78% YoY), non-GAAP EPS $3.63 (+76%)",
-      "New orders exceeded $60B in the quarter; nine customers over $1B in FY26",
-      "Guided Q1 FY27 revenue $14.5-15.5B and FY27 $65-72B vs ~$54.4B consensus"
+  "asOf": "2026-11-07",
+  "oneLiner": "The largest US-listed AI rack integrator after Dell, now shipping at a ~$80B annual run-rate on NVIDIA Blackwell and Vera Rubin systems. The market is betting the earnings never turn into cash: it values Supermicro as if the revenue surge is a one-customer build-out funded by its own balance sheet.",
+  "verdict": {
+    "stance": "Positive - sized small for cash and governance risk",
+    "summary": "The FY2027 question is no longer demand: Q1 ran ~30% above the top of guidance and the year was raised to $72-82B. The stock is priced as if FY2028 earnings fall sharply, so even a flat-margin, slow-growth year at a mid-single-digit multiple beats today's price, while the bear case needs a customer air pocket plus margin reversion to lose roughly half. What keeps the position small is cash: trailing operating cash flow is deeply negative against record profit, net debt is rising and the share count grows double digits a year. Two things would change the view: a second straight quarter of operating cash burn in Q2 FY27 alongside a new equity or convert raise, or any restatement or delay from the board's export-control review.",
+    "wtb": [
+      "FY2027 revenue lands inside the $72-82B guide, which needs H2 revenue of roughly $32-42B after ~$40B in H1 - i.e. no air pocket when the largest customer's build-out ends.",
+      "GAAP gross margin holds at or above ~11% through FY2028 at this scale; each point is roughly $0.8B of pre-tax profit on $85B of revenue.",
+      "Cumulative operating cash flow for FY2027 turns positive by the Q4 FY27 report (Aug 2027) as $15B of inventory ships and customer prepayments grow.",
+      "Diluted shares stay below ~780M through FY2028 (Q2 FY27 guide assumes 753M GAAP), so EPS growth is not handed to converts and equity raises."
     ]
   },
-  "latestProse": "Q4 FY2026 (ended June 30, 2026, reported August 11) delivered revenue of $11.12B, up ~92% YoY, a slight miss versus the $11.73B consensus - but the story was margin: GAAP gross margin of 17.5% versus 9.9% in Q3 and its own 8.2-8.4% guide, driving GAAP EPS of $1.62 and non-GAAP EPS of $1.70 against a $0.71 estimate. Full-year FY2026 revenue was $39.1B (+78%) with non-GAAP EPS of $3.63. The disclosure that matters most: over $60B of new orders in a single quarter and nine $1B-plus customers (vs four in FY25) - evidence the backlog, not the quarter, now defines the stock.",
-  "guidanceProse": "Management guided Q1 FY2027 revenue to $14.5-15.5B and full-year FY2027 to $65-72B, nearly 30% above the ~$54.4B consensus, implying revenue roughly at Dell's ISG scale within a year. The debate is whether Q4's 17.5% gross margin was a mix-driven spike (a few rich rack-scale deals) or a durable step-change; BofA and Goldman stayed cautious on margin sustainability even while the Street raised targets. Explicit FY27 margin guidance: unverified.",
-  "guide": {"label": "FY2027 revenue guide", "val": "$65-72B", "sub": "vs ~$54.4B consensus; Q1 FY27 guided $14.5-15.5B", "tone": "accent"},
+  "scenarioModel": {
+    "horizon": "FY2028 (year ending Jun 2028)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.35,
+      "rev": 55,
+      "eps": 2.82,
+      "multiple": 6,
+      "why": "The largest customer's build-out ends and Rubin orders go to Dell, HPE and ODMs; revenue falls ~29% from a ~$77B FY2027. Gross margin slips to ~9% as Supermicro chases volume, net margin ~4%, and another raise lifts diluted shares to ~780M. A shrinking integrator with negative cash flow gets a distressed multiple."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 85,
+      "eps": 6.07,
+      "multiple": 7,
+      "why": "Rubin keeps revenue growing ~10% on FY2027 with concentration still high; gross margin ~10.5-11%, net margin ~5.5% on ~770M diluted shares. Cash conversion improves but stays erratic, so the market pays only a modest premium to today's discount, well below Dell."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 110,
+      "eps": 9.29,
+      "multiple": 9,
+      "why": "Rubin rack-scale DLC share gains plus the Cisco enterprise channel lift revenue ~43%; gross margin ~11.5-12% and net margin ~6.5% on ~770M shares. Positive operating cash flow and a clean ITGC opinion let the stock re-rate toward the lower end of hardware peers."
+    },
+    "note": "EPS = revenue x net margin / diluted shares: bear $55B x 4.0% / 780M = $2.82; base $85B x 5.5% / 770M = $6.07; bull $110B x 6.5% / 770M = $9.29. FY2027 base of ~$77B = guide midpoint (Q1 $19.9B + Q2 guide $19.5-21.5B + implied H2). Net margin anchor: Q2 FY27 guide implies ~6.3% (GAAP EPS $1.59-1.83 x 753M shares on $19.5-21.5B). Multiples apply to FY2028 EPS at end-2027. Probability-weighted value ~$41.8 per share. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Can the earnings become cash before the balance sheet runs out?",
+      "bull": "The burn is growth working capital, not losses: inventory and receivables built ahead of a $72-82B year, and current deferred revenue (customer prepayments) reached $4.3B at Sep 30, 2026. Q4 FY26 showed positive operating cash flow when shipments caught up.",
+      "bear": "Trailing operating cash flow is -$6.3B against $3.7B of net income (TTM through Sep 2026), net debt is ~$1.7B and rising, and the gap has been funded by converts and equity - diluted shares are up 13% YoY. EPS that has to be refinanced is worth a low multiple.",
+      "view": "This sets the multiple (6x vs 9x) more than revenue does. We need H1 FY27 operating cash flow near break-even; a second large burn plus a raise would move the stance to Neutral.",
+      "signpost": {
+        "metric": "Q2 FY27 operating cash flow and any new convert or equity issuance",
+        "threshold": "bullish if Q2 OCF is positive; bearish if H1 OCF is below -$2B or a raise above $2B is announced",
+        "when": "Q2 FY27 report, ~early Feb 2027"
+      }
+    },
+    {
+      "q": "Is ~12% the new gross-margin floor, or a stop on the way back to 9%?",
+      "bull": "Q1 FY27 GAAP gross margin of 12.7% came at four times last year's volume and above the 10.4-10.8% guide; rack-scale DLC and software/services carry more value than boxes. Company guidance points to ~12% for Q2 and FY2027 (unverified, secondary source).",
+      "bear": "The 17.5% in Q4 FY26 already halved toward 12.7% in one quarter on mix; management's own release warns margins may be lower as it targets larger customers, and Dell, HPE and ODMs price the biggest deals.",
+      "view": "Base case assumes 10.5-11% in FY2028, below today's run-rate, so the stock does not need the margin to hold - it needs it not to fall below ~9%.",
+      "signpost": {
+        "metric": "Q2 FY27 GAAP gross margin",
+        "threshold": "12% or higher confirms the floor; below 11% puts the bear case in play",
+        "when": "Q2 FY27 report, ~early Feb 2027"
+      }
+    },
+    {
+      "q": "How much of FY2027 is one customer, and what follows it?",
+      "bull": "Nine customers exceeded $1B in FY2026, Cisco opened an enterprise channel in October 2026, and capacity is being built to 8,000+ racks a month by December 2026 for the Rubin cycle.",
+      "bear": "One data-center customer was 44% of Q1 FY27 revenue (vs 28% in FY2026) and two customers held 49% and 17% of receivables (call commentary, unverified); about $2.3B of Q1 revenue was delayed deployments catching up (unverified).",
+      "view": "The raised guide already implies H2 roughly flat to below H1, so a plateau is priced; a guide cut is not. Concentration is the single biggest swing factor between the bear and base cases.",
+      "signpost": {
+        "metric": "Q2 FY27 revenue vs $19.5-21.5B guide; FY2027 guide range; largest-customer share in the 10-Q",
+        "threshold": "bearish if Q2 revenue is below $19.5B or the FY2027 guide is cut below $72B",
+        "when": "Q1 FY27 10-Q (~Nov 2026) and Q2 FY27 report (~early Feb 2027)"
+      }
+    }
+  ],
+  "thesis": [
+    "Scale arrived faster than anyone modelled. Q1 FY27 revenue beat the top of the guide by ~$4.4B and the FY2027 range moved up by $7-10B; Supermicro is now a $70B+ revenue business one year after a $22B year.",
+    "The margin floor moved up. Operating margin went from ~4% a year ago to over 10% in Q1 FY27 at roughly four times the volume - operating leverage on a thin opex base, not just a one-quarter mix spike.",
+    "Rubin-cycle capacity is in place. Liquid-cooled rack-scale systems (DLC-2) are the bottleneck at Vera Rubin power densities, and Supermicro targets 8,000+ racks a month by December 2026, about half direct liquid-cooled.",
+    "The price assumes a collapse. The reverse DCF needs forward earnings to shrink ~10% a year for eight years after revenue compounded ~76% a year for three; even the bear case is not far below today's price."
+  ],
+  "latestQuarter": {
+    "label": "Q1 FY2027 (ended Sep 30, 2026; reported Nov 3, 2026; preliminary - closing not complete)",
+    "points": [
+      "Net sales $19.9B vs $5.0B in Q1 FY26 and $11.1B in Q4 FY26; guide was $14.5-15.5B, Oct 20 preliminary $18.5-19.5B.",
+      "GAAP gross margin 12.7% (non-GAAP 12.8%) vs 17.5% in Q4 FY26 and a 10.4-10.8% guide; operating income $2.06B (10.4% margin).",
+      "GAAP net income $1.59B, diluted EPS $1.75 on 749M shares; non-GAAP EPS $1.81.",
+      "Operating cash flow -$0.43B; inventory $15.1B (+$2.2B q/q), receivables $9.7B (+$3.6B q/q); cash $6.9B vs bank debt and converts $8.6B.",
+      "Guide: Q2 FY27 net sales $19.5-21.5B, GAAP EPS $1.59-1.83 on 753M shares; FY2027 net sales raised to $72-82B from $65-72B."
+    ]
+  },
+  "latestProse": "Q1 FY2027 (ended Sep 30, 2026; reported Nov 3, after an Oct 20 preliminary update). Net sales of $19.9B were roughly four times the year-ago quarter and well above both the original guide and the preliminary range; consensus was ~$15.8-16.4B depending on source. GAAP gross margin settled at 12.7%, down from Q4 FY26's mix-driven 17.5% but far above the 9-10% of FY2025, and GAAP diluted EPS was $1.75. The weak line was cash: operating cash flow was negative despite $1.6B of profit, as receivables and inventory absorbed it. The figures are preliminary: the release says closing procedures were not complete and the auditor had performed no procedures.",
+  "guidanceProse": "Q2 FY2027 (Dec quarter) guide: net sales $19.5-21.5B, GAAP diluted EPS $1.59-1.83 and non-GAAP $1.66-1.90, on 753M GAAP / 769M non-GAAP diluted shares and a ~21% tax rate. FY2027 net sales were raised to $72-82B; with H1 near $40B, that implies H2 of roughly $32-42B, so the midpoint assumes no further sequential growth. Gross margin guidance of 12-12.5% for Q2 and 11.8-12.2% for the year was reported by a call summary but is not in the release (unverified). Management said the outlook does not assume the Q1 catch-up repeats (unverified). The release adds that margins may be lower and sales less predictable as Supermicro targets larger customers.",
+  "guide": {
+    "label": "FY2027 revenue guide",
+    "val": "$72-82B",
+    "sub": "raised from $65-72B; Q2 FY27 $19.5-21.5B",
+    "tone": "accent"
+  },
   "segments": [
-    "Server and storage systems are the overwhelming majority of revenue, subsystems/accessories the small remainder",
-    "AI/GPU rack-scale platforms are the growth engine; management has cited AI platforms as the large majority of revenue",
-    "Concentration: in Q3 FY26 one datacenter customer was 27% of revenue; nine customers each exceeded $1B for FY2026"
+    "Server and storage systems are the overwhelming majority of revenue; subsystems and accessories the small remainder.",
+    "AI/GPU rack-scale platforms are the growth engine; the CFO said more than 80% of revenue should be AI-related going forward (Q4 FY26 call).",
+    "Customers: hyperscale and neocloud data centers dominate (concentration in debate 3), with enterprise, sovereign and Cisco-channel demand the smaller, higher-margin tail."
   ],
   "competitive": [
-    "Dell (ISG) and HPE bundle AI servers with services and financing and drove the price competition that held SMCI gross margin near 9-10% through FY25; Q4's 17.5% reflects mix, not a truce",
-    "Cisco flipped from potential rival to channel: the Aug 25, 2026 Secure AI Factory partnership puts Supermicro racks inside Cisco's enterprise sales motion with NVIDIA - distribution SMCI never had",
-    "ODMs (Quanta, Wiwynn, Foxconn) serve hyperscalers directly at thin margins and cap pricing on the biggest deals",
-    "NVIDIA allocation is the real gatekeeper: Supermicro ships GB300 at volume and has announced Vera Rubin NVL72/NVL144 support with DCBBS blueprints scaling 5MW to 1GW",
-    "Differentiators are time-to-market cadence, building-block architecture, DLC-2 cooling scale, and US manufacturing"
+    "Dell (ISG) and HPE bundle AI servers with services and financing and set pricing on enterprise and sovereign deals; Dell trades at a multiple well above Supermicro's.",
+    "Cisco is a channel, not a rival: its Secure AI Factory with NVIDIA integrates Supermicro liquid-cooled racks from October 2026.",
+    "ODMs (Quanta, Wiwynn, Foxconn) serve hyperscalers directly at thin margins and cap pricing on the biggest deals.",
+    "NVIDIA allocation is the gatekeeper: Supermicro ships GB300 NVL72 and HGX B300 at volume and markets Vera Rubin NVL72 and Rubin HGX systems.",
+    "Differentiators: time-to-market on each NVIDIA generation, building-block architecture, DLC-2 cooling scale and US manufacturing."
   ],
-  "moat": "There is little structural moat in assembling x86/GPU servers; Dell, HPE and ODMs can replicate most of the portfolio, which is why gross margin historically sat near 10%. Supermicro's edge is speed - first-to-market on each NVIDIA generation - plus rack-scale DLC integration at volume. That is a lead measured in quarters, not years.",
+  "moat": "Little structural moat in assembling GPU servers; Dell, HPE and ODMs can replicate most of the portfolio, which is why gross margin sat near 10% for years. Supermicro's edge is speed - first-to-market on each NVIDIA generation - plus rack-scale liquid-cooling integration and capacity at volume. That is a lead measured in quarters, renewed every platform cycle.",
   "risks": [
-    "Margin mean reversion. A gross margin that doubled in one quarter on customer mix can halve the same way; guidance credibility rests on repeating it, and top analysts openly doubt it.",
-    "The governance overhang is not resolved. Material weaknesses in internal controls remained unremediated as of March 31, 2026, BDO issued an adverse ICFR opinion on FY2024, DOJ/SEC document subpoenas remain outstanding, and a March 19, 2026 DOJ indictment charged two employees and a contractor over alleged export-control violations (company not charged), and on Aug 24, 2026 Taiwanese prosecutors indicted nine individuals - including two employees of Supermicro's Taiwan unit - over alleged illegal AI-server exports to China; prosecutors confirmed the company itself faces no charges, which the market read as clearing an overhang, but the export-control exposure is now on two continents.",
-    "Customer concentration and order quality. One customer was 27% of Q3 FY26 revenue; the $60B order book is only as good as hyperscaler follow-through.",
-    "Competition and allocation. Any shift in NVIDIA allocation toward Dell, HPE or ODMs on the Rubin ramp directly hits the FY27 guide.",
-    "Working capital strain. Funding $65-72B of revenue requires massive inventory and receivables build, with dilution or debt risk if cash conversion lags.",
-    "Blackwell-to-Rubin transition air pocket. Customers pausing GB300 purchases ahead of Vera Rubin could create an inventory-heavy dead quarter."
+    "Earnings are not cash. Trailing operating cash flow was -$6.3B against $3.7B of net income (TTM through Sep 2026, about -173%; -305% through June) as inventory and receivables grew with revenue; until that reverses, reported EPS overstates what shareholders can keep.",
+    "Balance sheet and dilution. Net debt was ~$1.7B at Sep 30, 2026 ($8.6B of bank debt and converts vs $6.9B cash), and diluted shares rose 13% YoY in Q1 FY27 (+11% in FY2026); further burn means more converts or equity, diluting the EPS the scenarios rely on.",
+    "Customer concentration. With one customer near half of Q1 revenue and receivables (debate 3), a single pause, delay or payment dispute shows up in one quarter, in both revenue and cash.",
+    "Governance is improving but not closed. The FY2026 10-K remediated three material weaknesses but one IT general controls weakness remained open at June 30, 2026; the board is reviewing certain export-control-related transactions that the company says could affect prior-period results, and employees face export-control indictments in the US and Taiwan (company not charged). Q1 figures were released before closing was complete.",
+    "Margin mean reversion. Gross margin fell from 17.5% to 12.7% in one quarter on mix, and the company warns larger customers mean lower margins; a return to ~9% would cut EPS by roughly a third at the same revenue."
   ],
   "catalysts": [
-    "Late Aug 2026: FY2026 10-K filing - ICFR opinion, remediation progress, concentration disclosure",
-    "Oct 2026: Cisco Secure AI Factory systems with Supermicro hardware launch - first read on the enterprise channel",
-    "Early Nov 2026: Q1 FY2027 earnings",
-    "2H CY2026 into CY2027: Vera Rubin NVL72/NVL144 volume shipments",
-    "No set timetable: conclusion of the independent board investigation"
+    "~Nov 9-10, 2026: Q1 FY27 10-Q - confirms the preliminary figures, customer and receivables concentration, ITGC status (debates 1 and 3).",
+    "~Nov 18, 2026: NVIDIA Q3 FY27 report - Rubin ramp and supply as the read-through for rack demand (debate 3).",
+    "Dec 2026: 8,000+ racks per month capacity target, ~4,000 direct liquid-cooled.",
+    "~Early Feb 2027: Q2 FY27 report - revenue vs $19.5-21.5B guide, gross margin vs ~12%, operating cash flow (debates 1, 2, 3).",
+    "No set timetable: conclusion of the board's export-control transaction review; any finding that touches prior periods would reopen the accounting discount."
   ],
-  "pricedIn": "The stock jumped 17.6% to $37.15 on Aug 12, 2026 after the print, popped another ~9% on Aug 25 on the Cisco deal and Taiwan clearance, and closed Aug 28 at $37.08 - round-tripping to the post-earnings level. The forward P/E sits near 11x - far below AI-hardware peers. The price implies the market discounts both the $65-72B guide and the 17.5% margin: taking guidance at face value with even 14-15% gross margins would make the stock cheap outright. The debate is binary - durable margin regime plus real backlog versus a mix-driven one-off from a company with unremediated material weaknesses.",
-  "scenarios": {
-    "bear": "Gross margin reverts toward 10-12% as the mix normalizes and Dell/HPE/ODM price pressure returns, FY27 revenue lands nearer $55B, and the investigation or a delayed 10-K reignites the accounting discount; EPS stalls near $4 and the multiple compresses toward 8x - low $30s or below.",
-    "base": "Revenue lands in the lower half of the $65-72B guide with gross margins settling in the 12-14% range, non-GAAP EPS in the $5-6 area for FY27, filings stay current and the investigation closes without company charges; at 10-12x the stock grinds toward the $55-70 range.",
-    "bull": "Rubin-cycle DLC leadership and enterprise mix keep gross margins at 15%+, revenue reaches the $70B+ end, EPS approaches $7-8, and governance normalization re-rates the multiple toward 14-16x - a roughly $100+ stock."
+  "valPresets": {
+    "mode": "fcf",
+    "basis": "fwdEps",
+    "r": 0.12,
+    "gT": 0.025,
+    "years": 8,
+    "bear": {"g": -0.05},
+    "base": {"g": 0.12},
+    "bull": {"g": 0.28},
+    "note": "Basis is forward earnings: FCF whipsaws with working-capital swings in a pass-through hardware model. The 12% discount rate carries the cash-conversion and governance overhang; the reverse DCF shows how little growth is priced."
   },
-  "valPresets": {"mode": "fcf", "basis": "fwdEps", "r": 0.12, "gT": 0.025, "years": 8,
-    "bear": {"g": -0.05}, "base": {"g": 0.12}, "bull": {"g": 0.28},
-    "note": "Basis is forward earnings: FCF whipsaws with working-capital swings in a pass-through hardware model. The 12% discount rate carries the governance overhang; at ~11x forward, the reverse DCF shows how little growth is priced."},
-  "bullCharts": {"0": ["gmA"], "1": ["revQ"]},
-  "bearCharts": {"0": ["omA"], "4": ["fcfQ"]},
+  "bullCharts": {"0": ["revQ"], "1": ["omA"], "3": ["peerFpe"]},
+  "bearCharts": {"0": ["fcfQ"], "4": ["gmA"]},
   "sources": [
+    {"label": "Supermicro IR - Q1 FY2027 results (Nov 3, 2026)", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Announces-First-Quarter-of-Fiscal-Year-2027-Financial-Results/default.aspx"},
+    {"label": "Supermicro Q1 FY2027 Exhibit 99.1 (financial statements, Q2 guide)", "url": "https://s204.q4cdn.com/707617056/files/content_files/FQ127-Exhibit-99-1.pdf"},
+    {"label": "Supermicro IR - Q1 FY2027 preliminary business update (Oct 20, 2026)", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Provides-First-Quarter-of-Fiscal-Year-2027-Preliminary-Business-Update/default.aspx"},
+    {"label": "Benzinga via Tiger - Q1 FY27 vs consensus, guide vs estimates (Nov 4, 2026)", "url": "https://www.itiger.com/news/2680777700"},
+    {"label": "EarningsWhispers - SMCI Sep 2026 quarter consensus", "url": "https://www.earningswhispers.com/epsdetails/SMCI/202609"},
+    {"label": "Metir AI - Q1 FY2027 call summary: concentration, catch-up revenue, margin guide, rack capacity (unverified secondary)", "url": "https://www.metirai.com/blog/super-micro-q1-fy2027-revenue-19-95-billion-ai-server-guidance-2026"},
+    {"label": "Supermicro FY2026 Form 10-K - ICFR remediation, ITGC weakness", "url": "https://www.sec.gov/Archives/edgar/data/0001375365/000137536526000022/smci-20260630.htm"},
+    {"label": "Supermicro Q4 FY2026 prepared remarks (Q1 GM guide 10.4-10.8%, AI share, Rubin)", "url": "https://s204.q4cdn.com/707617056/files/doc_financials/2026/q4/V2/FQ426-SMCI-Prepared-Remarks.pdf"},
     {"label": "Supermicro IR - Q4/FY2026 results", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Announces-Fourth-Quarter-and-Full-Fiscal-Year-2026-Financial-Results/default.aspx"},
-    {"label": "Q4 FY2026 preliminary business update", "url": "https://www.businesswire.com/news/home/20260721109492/en/Supermicro-Provides-Fourth-Quarter-of-Fiscal-Year-2026-Preliminary-Business-Update"},
-    {"label": "Seeking Alpha - Q4 FY2026 call transcript", "url": "https://seekingalpha.com/article/4935037-super-micro-computer-inc-smci-q4-2026-earnings-call-transcript"},
-    {"label": "24/7 Wall St - Q4 2026 recap", "url": "https://247wallst.com/cards/super-micro-computer-inc-q4-2026-earnings-smci-01kzs75ekjmv562kq4bvhmapqq"},
-    {"label": "Supermicro IR - board investigation update", "url": "https://ir.supermicro.com/news/news-details/2026/Supermicro-Provides-Update-on-Investigation-by-Independent-Board-Directors/default.aspx"},
-    {"label": "CFO Dive - internal control scrutiny", "url": "https://www.cfodive.com/news/super-micros-protracted-internal-control-repairs-draw-scrutiny-accounting/821042/"},
-    {"label": "TipRanks - Cisco AI deal and Taiwan clearance lift overhang (Aug 25, 2026)", "url": "https://www.tipranks.com/news/super-micro-stock-smci-jumps-9-as-cisco-ai-deal-and-taiwan-clearance-lift-overhang"},
-    {"label": "Seeking Alpha - Cisco partners with Supermicro on Secure AI Factory", "url": "https://seekingalpha.com/news/4636561-cisco-partners-with-supermicro-to-expand-secure-ai-factory-with-nvidia"}
+    {"label": "TipRanks - Cisco AI deal and Taiwan clearance (Aug 25, 2026)", "url": "https://www.tipranks.com/news/super-micro-stock-smci-jumps-9-as-cisco-ai-deal-and-taiwan-clearance-lift-overhang"},
+    {"label": "Seeking Alpha - Cisco partners with Supermicro on Secure AI Factory", "url": "https://seekingalpha.com/news/4636561-cisco-partners-with-supermicro-to-expand-secure-ai-factory-with-nvidia"},
+    {"label": "SEC EDGAR XBRL companyfacts (TTM cash flow, share counts via research/data/SMCI.json)", "url": "https://data.sec.gov/api/xbrl/companyfacts/CIK0001375365.json"}
+  ],
+  "changelog": [
+    {"date": "2026-11-07", "change": "Migrated to v3 on the Q1 FY27 print (revenue $19.9B vs $14.5-15.5B guide, GAAP GM 12.7%, FY27 guide raised to $72-82B). Added scenario values on FY2028 EPS (bear $16.9 / base $42.5 / bull $83.6, weighted ~$41.8) and three debates; cash conversion, net debt and dilution are now the central risk. View moved from an implicit constructive call to an explicit Positive, sized small."},
+    {"date": "2026-08-31", "change": "Q4 FY26 margin inflection (17.5% GM), FY27 guide $65-72B, Cisco Secure AI Factory partnership, Taiwan prosecutors clear the company."}
   ]
 }

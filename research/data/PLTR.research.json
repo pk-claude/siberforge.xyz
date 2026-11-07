@@ -1,55 +1,127 @@
 {
-  "asOf": "2026-09-07",
-  "oneLiner": "Arguably the best operating metrics in software (Rule of 40 = 155, +93% growth at $8B scale) attached to the most expensive multiple in large-cap software (~50x forward sales), now converting prototypes into production hardware programs.",
-  "thesis": [
-    "AIP is winning the enterprise agentic-AI land grab: US commercial +149% YoY with 157% net dollar retention and accelerating sequential growth.",
-    "Government is an annuity with upside, and it is moving from prototype to production: the $10B/10-year Army Enterprise Agreement, NATO Maven purchases, NGC2, Golden Dome, and on Sep 1, 2026 the Army moving TITAN into its production phase.",
-    "The ontology layer creates deep switching costs: data, logic and actions bound into operational workflows; 157% NDR is the evidence.",
-    "Margins are already elite: 62% adjusted operating margin and $4.5-4.7B of FCF guided for FY2026. The entire question is what multiple to pay."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Aug 3, 2026)",
-    "points": [
-      "Revenue $1.94B, +93% YoY (consensus ~$1.80B); adjusted EPS $0.41.",
-      "Adjusted operating margin 62%; GAAP operating margin 47%; GAAP net margin 55% (including SpaceX marks).",
-      "Government $990M (+79%), US government $809M (+90%); US commercial $764M (+149% YoY, +28% sequential).",
-      "Net dollar retention 157%, up 700bp sequentially.",
-      "Guide raised: FY2026 revenue $8.15B (+82%); US commercial above $3.42B (+134%); adjusted FCF $4.5-4.7B; Q3 ~$2.16B."
+  "asOf": "2026-11-07",
+  "oneLiner": "The enterprise and defense operating system for AI agents, growing near 100% at 60%+ adjusted margins. The market is betting that US commercial demand compounds for years, so that FY2027-28 earnings grow into a multiple no other large-cap software company carries.",
+  "verdict": {
+    "stance": "Neutral - best-in-class, fully priced",
+    "summary": "Nothing in Q3 2026 weakens the business case: growth accelerated again and US commercial overtook US government. The problem is the price, not the company. Our base case (FY2027 revenue +50%, a mid-70s multiple on GAAP EPS at end-2027) lands near today's level, and the probability-weighted value sits slightly below it, because the bear case loses more than half while the bull case adds about 40%. Two things would move us to Positive: US commercial growth holding above 120% into Q4 with bookings re-accelerating, or a reset in price that puts the base case 25%+ above it. We would turn Cautious if US commercial falls below ~90% growth or the near-zero tax rate starts to show up in EPS without margin offset.",
+    "wtb": [
+      "FY2027 revenue of at least ~$12.5B (+47% on the ~$8.53B FY2026 guide), which needs US commercial to keep growing near 100% for most of the year.",
+      "GAAP net margin stays at or above ~45% in FY2027 even as the effective tax rate rises from ~1% (Q3 2026) toward a normal rate.",
+      "Shorter contracts expand as Karp claims: US commercial remaining deal value keeps growing faster than 50% YoY through Q2 2027.",
+      "The market still pays 70x+ trailing GAAP EPS at end-2027, which requires FY2028 growth to look like 35%+ at that point."
     ]
   },
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.3,
+      "rev": 11.5,
+      "eps": 1.77,
+      "multiple": 45,
+      "why": "Growth halves to ~35% as AIP pilots saturate, shorter contracts fail to expand and a federal budget impasse slows government awards. Net margin falls to ~40% as tax expense normalizes. A 35% grower still earns a premium, but the market stops paying for the 2028-30 outer years."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 12.8,
+      "eps": 2.26,
+      "multiple": 75,
+      "why": "Revenue +50%: US commercial decelerates from ~148% toward ~80% on a larger base, government grows ~35% on Army EA, Maven and TITAN. Net margin ~46% as operating leverage offsets a rising tax rate. With 40%+ growth still visible for FY2028, the market keeps paying a mid-70s multiple."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 14.0,
+      "eps": 2.69,
+      "multiple": 95,
+      "why": "Revenue +64%: AIP becomes the default enterprise agent platform, US commercial stays above 100% and Golden Dome and NGC2 convert into large production programs. Net margin holds ~50% and FY2028 looks like another 50% year, so the multiple stays near the 2025-26 range."
+    },
+    "note": "FY2026 revenue = Q1 $1.63B + Q2 $1.94B + Q3 $2.31B + Q4 guide $2.65B = ~$8.53B. EPS = FY2027 revenue x GAAP net margin / ~2.60B diluted shares (2.57B in Q3 2026 plus ~1% dilution): bear 11.5 x 40% / 2.60 = 1.77; base 12.8 x 46% / 2.60 = 2.26; bull 14.0 x 50% / 2.60 = 2.69. Multiples are applied to FY2027 GAAP EPS at end-2027. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "How long can US commercial grow faster than 100%?",
+      "bull": "US commercial accelerated sequentially for another quarter (+29% q/q in Q3 2026) and overtook US government; customers buy without a large sales force, and remaining deal value is $6.5B.",
+      "bear": "The base is now ~$1B a quarter; the comparison in 2027 is against +148% growth, and AI agent budgets at large enterprises are being contested by Databricks, Snowflake, Microsoft and the model labs themselves.",
+      "view": "This is the debate that sets the multiple. The base case needs ~80% US commercial growth in FY2027; anything below ~90% exiting 2026 puts the bear case in play.",
+      "signpost": {
+        "metric": "Q4 2026 US commercial revenue growth YoY",
+        "threshold": "bullish above 120%; bearish below 90%",
+        "when": "Q4 2026 report, early Feb 2027"
+      }
+    },
+    {
+      "q": "Do shorter contracts and a TCV dip foreshadow slower growth?",
+      "bull": "Shorter first contracts close faster and expand: Karp's 'once you go Palantir, you don't go back'. Revenue, not TCV, is what compounds, and US commercial RDV still grew 79% YoY.",
+      "bear": "Total TCV grew only 6% YoY in Q3 2026 and US commercial TCV fell to $1.46B from a record $2.13B in Q2 while revenue nearly doubled; bookings lagging revenue is usually the first sign of deceleration.",
+      "view": "One quarter of lumpy TCV is not a trend, but RDV growth has slowed to +4% q/q. If RDV stalls for another quarter, our FY2027 base revenue is too high.",
+      "signpost": {
+        "metric": "US commercial remaining deal value growth (YoY and q/q)",
+        "threshold": "below +50% YoY or a second quarter under +5% q/q = cut base revenue",
+        "when": "Q4 2026 report, early Feb 2027"
+      }
+    },
+    {
+      "q": "How much of GAAP EPS is durable?",
+      "bull": "Adjusted operating margin is 62% and adjusted FCF (~53% of Q3 revenue) exceeds net income; cash conversion is healthy at ~113% TTM, so the profit is real.",
+      "bear": "Net income runs above operating income (115% TTM; Q3 2026 net income $1.13B vs operating income $1.09B) because of ~$89M of quarterly interest income, investment marks and a tax provision of only $13.6M (~1%). SBC of $319M a quarter is excluded from adjusted figures.",
+      "view": "A real but slow-moving issue: a normal tax rate takes roughly a fifth off EPS, which is why our base uses a 46% net margin, below Q3's 49%. It moves the value if the tax rate jumps faster than operating leverage grows.",
+      "signpost": {
+        "metric": "Effective tax rate and net income / operating income",
+        "threshold": "tax rate above 15% in FY2027 guidance with no margin offset = lower base EPS",
+        "when": "FY2026 10-K and FY2027 guide, Feb 2027"
+      }
+    }
+  ],
+  "thesis": [
+    "AIP is winning enterprise agent deployment. US commercial reached $984M in Q3 2026 and passed US government for the first time; it has more than quintupled in two years.",
+    "Growth is still accelerating at scale. Total revenue growth went from +85% to +93% to +96% over the last three quarters, and the FY2026 guide was raised from $8.15B to ~$8.53B.",
+    "Government is moving from prototype to production. The $10B/10-year Army Enterprise Agreement, NATO Maven, NGC2 and the Sep 2026 TITAN production orders embed Palantir in programs of record.",
+    "Operating leverage is elite. Adjusted operating margin held at 62% and GAAP operating margin at 47% while revenue nearly doubled, with capex under 1% of revenue."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Nov 2, 2026)",
+    "points": [
+      "Revenue $2.31B, +96% YoY, +20% QoQ, vs $2.18B consensus (LSEG) and a $2.16B guide.",
+      "US commercial $984M (+148% YoY, +29% QoQ); US government $953M (+96% YoY).",
+      "GAAP operating margin 47%, adjusted 62%; GAAP net income $1.13B, diluted EPS $0.44 (vs $0.41 consensus adjusted).",
+      "TCV $2.92B, +6% YoY; US commercial TCV $1.46B; US commercial RDV $6.52B, +79% YoY.",
+      "Operating cash flow $1.21B; adjusted FCF $1.22B (53% margin); cash and Treasuries ~$10.4B."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Nov 2). Revenue $2.31B, +96% YoY and +20% QoQ, the first quarter above $2B, beating $2.18B consensus and the $2.16B guide. US commercial $984M (+148%, +29% QoQ) overtook US government $953M (+96%). GAAP operating margin 47%, adjusted 62%, Rule of 40 158. GAAP net income $1.13B ($0.44 per diluted share on 2.57B shares). Bookings were the soft spot: total TCV $2.92B (+6% YoY) and US commercial TCV fell to $1.46B from a record $2.13B in Q2, which Karp attributed to shorter initial contracts that expand later. Net dollar retention of 165% and 686 US commercial customers were reported by secondary sources but are not in the release (unverified). Shares fell in the session after the print despite the beat.",
+  "guidanceProse": "FY2026 guide raised to $8.530-8.534B (~+91%) from $8.15B, against ~$8.20B consensus before the print; US commercial above $3.559B (at least +143%); adjusted operating income $5.245-5.249B; adjusted FCF $4.8-5.0B. Q4 2026 guide: revenue $2.649-2.653B (+88% YoY) and adjusted operating income $1.640-1.644B, implying a ~62% adjusted margin. Management again guided GAAP operating income and net income positive every quarter but gave no FY2027 framework. Pre-print analyst estimates had FY2027 revenue around $12.3B (+50%) (unverified).",
+  "guide": {
+    "label": "FY26 rev guide",
+    "val": "$8.53B (+91%)",
+    "sub": "Q4 $2.65B | adj FCF $4.8-5.0B",
+    "tone": "accent"
+  },
   "segments": [
-    "Government ~51% of revenue: Army Enterprise Agreement, NATO Maven, TITAN, allied defense.",
-    "Commercial ~49%, with US commercial (+149%) the growth engine on AIP adoption; an expanded PwC alliance is the newest enterprise distribution channel."
+    "US government ~41% of Q3 2026 revenue ($953M): Army Enterprise Agreement, Maven, TITAN, NGC2; plus allied defense (NATO Maven, UK).",
+    "US commercial ($984M in Q3 2026) is the growth engine on AIP adoption; the expanded PwC alliance adds enterprise distribution.",
+    "International commercial is the laggard: $182M in Q2 2026, +26% YoY (Q3 figure not in the release)."
   ],
   "competitive": [
-    "Enterprise AI platforms: Databricks, Snowflake Cortex and Microsoft Fabric target the same data and AI budgets.",
-    "Defense tech: Anduril is simultaneously partner and rival - the two split the Sep 2026 TITAN production orders ($127M to Palantir, $65M to Anduril) after jointly winning Army NGC2 work in July.",
+    "Enterprise AI platforms: Databricks, Snowflake Cortex and Microsoft Fabric target the same data and AI budgets; model labs selling agents directly are a newer threat.",
+    "Defense tech: Anduril is partner and rival - the two split the Sep 2026 TITAN production orders ($127M to Palantir, $65M to Anduril) after jointly winning Army NGC2 work.",
     "The big consultancies compete for AI-implementation budgets; Palantir's forward-deployed model positions it as software rather than billable hours, and the PwC alliance co-opts one of them.",
     "C3.ai has faded as a serious threat."
   ],
   "moat": "The ontology layer binding an institution's data, logic and actions creates switching costs once operational workflows run through Foundry and AIP. In government: decades of accreditations, classified deployments and contract vehicles newcomers cannot replicate quickly - and with TITAN, a hardware delivery program that embeds Palantir in the Army's deep-sensing architecture rather than alongside it.",
   "risks": [
-    "Valuation: roughly 67x trailing EV/sales is about 150% above its own 10-year median; any growth wobble is severely punished.",
-    "Insider selling remains relentless: reports of an $86M CEO sale in the same month as the TITAN award follow ~$54M in May 2026 and more than $250M by insiders in late 2025, against 34 sells and zero buys over five years (reported).",
-    "Bear scrutiny of accounting: Michael Burry has publicly renewed a bearish position citing accounting practices and valuation (reported).",
-    "Government dependency: ~51% of revenue is tied to US and allied budgets; a continuing resolution or budget fight hits the biggest segment.",
-    "Law of large numbers: +93% on an $8B base is unprecedented, and 2027 comparisons get brutal.",
-    "Hardware programs like TITAN carry delivery, integration and schedule risk that pure software does not - eight systems over 18 months is an execution commitment.",
-    "Stock-based compensation keeps GAAP margins (47%) well below adjusted (62%)."
+    "Multiple compression. EV/sales sits far above its own 10-year median (peer chart); a deceleration from ~96% to ~50% growth can halve the multiple even as earnings rise (the bear case).",
+    "Bookings lag revenue. Total TCV grew only 6% YoY in Q3 2026 while revenue grew 96%; if shorter contracts do not expand, FY2027 growth undershoots the base case.",
+    "EPS flattered by below-the-line items. TTM net income is 115% of operating income on interest income, investment marks and a ~1% tax rate; normalization costs roughly a fifth of EPS, and SBC ($319M in Q3 2026) is excluded from adjusted metrics. Michael Burry has publicly criticized the accounting (reported).",
+    "Government and budget dependency. US government is ~41% of revenue; a continuing resolution or budget fight in federal FY2027 slows new awards in the second-largest segment.",
+    "Persistent insider selling. Insiders sold roughly $117M of stock in the 90 days to early Sep 2026 (unverified), continuing a pattern of zero open-market buys."
   ],
   "catalysts": [
-    "US federal fiscal year-end Sept 30 award flow.",
-    "Q3 2026 earnings in early November 2026.",
-    "TITAN delivery milestones across the eight initial systems (four Advanced, four Basic) over the next 18 months.",
-    "Army NGC2 next-phase decision around mid-2027.",
-    "Golden Dome milestones and further NATO or allied Maven expansions."
+    "Dec 2026: federal FY2027 appropriations or continuing resolution - pace of new defense awards (risk 4).",
+    "Early Feb 2027: Q4 2026 report - US commercial growth vs the 90-120% band (debate 1), RDV and TCV (debate 2), FY2027 guide.",
+    "Feb 2027: FY2026 10-K - effective tax rate and investment gains (debate 3).",
+    "Through 2027: TITAN deliveries (eight systems over 18 months), Golden Dome awards, NGC2 next-phase decision around mid-2027."
   ],
-  "pricedIn": "Around $174-186 in early September, roughly 12-16% below the $207.52 52-week high, at approximately 82x forward earnings and 50x forward sales. To justify it, Palantir has to hold 60%+ growth for years at ~60% adjusted margins, taking $8.15B toward $25B+ by 2029-2030, which brings EV/sales toward ~17x on out-year sales. Bulls point to Q2's +93% and the fact that TITAN and NGC2 turn demos into programs of record. Bears note the market barely moved on a fresh DoD award, which is what a fully-priced stock looks like: good news is already in it.",
-  "scenarios": {
-    "bear": "US commercial growth halves as AIP pilots saturate and Databricks, Snowflake and Fabric win the mainstream; a 2027 budget impasse freezes government; NDR fades toward 120%. Growth of 'only' 40% forces the multiple from ~50x toward 15-20x forward sales - a 50-60% derating even with rising earnings.",
-    "base": "FY2026 lands at $8.15B (+82%); 2027 decelerates to 45-60% at ~60% adjusted margins and $4.5B+ of FCF; production programs like TITAN add durable but low-multiple revenue; the multiple compresses gradually as earnings grow into it and the stock oscillates in the established $130-210 range with earnings-driven spikes.",
-    "bull": "AI agents in production become the enterprise standard with AIP the category winner; US commercial sustains above 100% into 2027; Golden Dome, NGC2 and TITAN convert into multi-billion production programs; revenue triples by 2028-29 and growth outruns multiple compression."
-  },
   "valPresets": {
     "mode": "fcf",
     "r": 0.105,
@@ -64,44 +136,14 @@
     "bull": {
       "g": 0.65
     },
-    "note": "Even the bear preset needs 25% year-one FCF growth; the reverse DCF shows roughly 30%+ constant growth for a decade is priced in. That asymmetry is the entire PLTR debate."
+    "note": "Even the bear preset needs 25% year-one FCF growth; the reverse DCF says ~32% constant FCF growth for a decade is priced in, close to the 3-year revenue track record. That asymmetry is the entire PLTR debate."
   },
-  "sources": [
-    {
-      "label": "Palantir Q2 2026 release",
-      "url": "https://www.businesswire.com/news/home/20260802523449/en/"
-    },
-    {
-      "label": "CNBC Q2 2026 coverage",
-      "url": "https://www.cnbc.com/2026/08/03/palantir-pltr-earnings-q2-2026.html"
-    },
-    {
-      "label": "TITAN production award (Sep 1, 2026)",
-      "url": "https://www.businesswire.com/news/home/20260901157594/en/Palantir-to-Deliver-Eight-TITAN-Systems-to-the-U.S.-Army"
-    },
-    {
-      "label": "TITAN production orders split with Anduril",
-      "url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/"
-    },
-    {
-      "label": "EV/Revenue history",
-      "url": "https://www.gurufocus.com/term/enterprise-value-to-revenue/PLTR"
-    }
-  ],
-  "guide": {
-    "label": "FY26 rev guide",
-    "val": "$8.15B (+82%)",
-    "sub": "US comm >$3.42B \u00b7 FCF $4.5-4.7B",
-    "tone": "accent"
-  },
-  "latestProse": "Q2 2026 (reported Aug 3). Revenue $1.94B, +93% against ~$1.80B consensus; adjusted operating margin 62%, GAAP operating margin 47%. US commercial $764M, +149% YoY and +28% sequential; US government $809M, +90%. Net dollar retention 157%, up 700bp sequentially, for a Rule of 40 score of 155. Since the print, the Army moved TITAN into production on Sep 1, awarding $192M of delivery orders - $127M to Palantir USG and $65M to Anduril - covering eight initial systems, four Advanced and four Basic, over 18 months. The disclosure that matters most: 157% net dollar retention with US commercial still accelerating sequentially, because the bear case has always been that AIP land-and-expand saturates, and it has not started to.",
-  "guidanceProse": "FY2026 is guided to $8.15B (+82%), US commercial above $3.42B (+134%), adjusted FCF $4.5-4.7B, and Q3 around $2.16B. At roughly 50x forward sales the guide has to keep being beaten rather than merely met - every quarter is a referendum on the multiple. The September signal is what did not happen: a fresh DoD production award and an expanded PwC alliance landed without moving the stock, which trades 12-16% below its high, while Michael Burry publicly renewed a short thesis on accounting and valuation and insiders kept selling.",
   "bullCharts": {
     "0": [
       "revQ"
     ],
     "1": [
-      "revA"
+      "revYoyA"
     ],
     "3": [
       "omA"
@@ -111,8 +153,64 @@
     "0": [
       "peerEvS"
     ],
-    "3": [
-      "revYoyA"
+    "2": [
+      "niA"
     ]
-  }
+  },
+  "sources": [
+    {
+      "label": "Palantir Q3 2026 press release (8-K, Nov 2, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001321655/000132165526000045/a2026q3ex991pressrelease.htm"
+    },
+    {
+      "label": "Palantir Q2 2026 press release (8-K, Aug 3, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001321655/000132165526000039/a2026q2ex991pressrelease.htm"
+    },
+    {
+      "label": "CNBC: Q3 2026 - US commercial tops government; LSEG consensus (Nov 2, 2026)",
+      "url": "https://www.cnbc.com/2026/11/02/palantir-pltr-earnings-q3-2026.html"
+    },
+    {
+      "label": "TechCrunch: shorter contracts and TCV decline in Q3 2026 (Nov 3, 2026)",
+      "url": "https://techcrunch.com/2026/11/03/hiding-inside-palantirs-skyrocketing-quarter-is-a-foreboding-signal/"
+    },
+    {
+      "label": "Reuters via Investing.com: Q3 2026 beat, FY guide vs $8.20B consensus",
+      "url": "https://www.investing.com/news/stock-market-news/palantir-tops-thirdquarter-revenue-estimates-on-strong-ai-software-demand-4992744"
+    },
+    {
+      "label": "Yahoo Finance: stock slips despite Q3 2026 beat",
+      "url": "https://finance.yahoo.com/markets/stocks/articles/palantir-stock-slips-despite-beating-203411993.html"
+    },
+    {
+      "label": "StockHub: Q3 2026 NDR 165%, 686 US commercial customers (secondary, unverified)",
+      "url": "https://stockhub.kr/en/insights/view_1793660987494_vh2gh0rzg"
+    },
+    {
+      "label": "TITAN production award (Sep 1, 2026)",
+      "url": "https://www.businesswire.com/news/home/20260901157594/en/Palantir-to-Deliver-Eight-TITAN-Systems-to-the-U.S.-Army"
+    },
+    {
+      "label": "DefenseScoop: TITAN production orders split with Anduril (Sep 1, 2026)",
+      "url": "https://defensescoop.com/2026/09/01/army-titan-platform-production-awards-palantir-anduril/"
+    },
+    {
+      "label": "Insider selling, 90 days to Sep 2026 (secondary, unverified)",
+      "url": "https://parameter.io/palantir-pltr-stock-slides-6-despite-positive-army-contract-news-and-executive-announcement/"
+    },
+    {
+      "label": "EV/Revenue history",
+      "url": "https://www.gurufocus.com/term/enterprise-value-to-revenue/PLTR"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-07",
+      "change": "Migrated to v3 on the Q3 2026 print (revenue $2.31B, +96%; FY2026 guide raised to ~$8.53B). Added verdict (Neutral), FY2027 EPS scenarios (bear $80 / base $170 / bull $256, weighted ~$160), three debates including the TCV dip and NI above operating income. First explicit stance, so no prior view to move; the quarter strengthened the business case but not the valuation case."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Added the Sep 1 TITAN production award and insider-selling and Burry context after the Q2 2026 print."
+    }
+  ]
 }

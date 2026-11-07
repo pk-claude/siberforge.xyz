@@ -1,36 +1,112 @@
 {
-  "asOf": "2026-10-04",
-  "oneLiner": "AMD is now a $1T second source for AI compute - record Q2 2026 results, gigawatt-scale OpenAI/Meta/Anthropic commitments and a guided doubling of data center sales in 2027 leave the stock (~$634, Oct 2, 2026) needing flawless Helios/MI450 execution.",
-  "thesis": [
-    "Data center is compounding at triple-digit rates. Q2 2026 data center revenue of $6.7B grew 107% YoY and is 58% of sales; at Citi TMT (Sep 8, 2026) management said data center should roughly double in 2027 to about $70B, with AI GPUs in the low $40Bs.",
-    "The customer roster de-risks the roadmap. OpenAI (6GW, first 1GW of MI450 in H2 2026), Meta (up to 6GW, custom MI450-based part) and Anthropic (up to 2GW of MI450 in Helios, first GW in 1H 2027) are multi-generation anchor customers.",
-    "The MI450/Helios ramp is on schedule so far. Per the CFO at Citi TMT (Sep 8, 2026), Q3 2026 marks the start of production shipments and revenue, with a very significant step-up in Q4 2026 and another in Q1 2027.",
-    "Agentic AI is reigniting server CPUs. AMD raised its 2030 server CPU TAM to $220B (from $60B) and expects server CPUs to grow 80%+ YoY in 2H 2026 and 70%+ into 2027 (Citi TMT, Sep 8, 2026).",
-    "AMD is buying a model layer. The ~$8.2B all-stock World Labs deal (announced Sep 28, 2026, close expected by end-2026) plus the completed Taalas buy aim to give Instinct a workload story beyond 'second source'."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Aug 4, 2026)",
-    "points": [
-      "Revenue $11.5B, +50% YoY, a company record; beat ~$11.3B consensus",
-      "Data center $6.7B, +107% YoY, 58% of revenue",
-      "Non-GAAP EPS $1.66 (vs ~$1.62 est.); GAAP EPS $1.38",
-      "Non-GAAP gross margin 56%, up over 200bps YoY",
-      "Client $3.1B, +23% YoY (record mobile); Gaming $779M, -31% YoY",
-      "Q3 guide: revenue ~$13.0B plus or minus $300M (~41% YoY), non-GAAP gross margin ~56%"
+  "asOf": "2026-11-07",
+  "oneLiner": "AMD is the only merchant vendor selling a complete CPU+GPU+networking AI rack as an alternative to Nvidia. The market is betting that the MI450/Helios ramp turns guided 2027 growth of more than 80% into durable earnings, and that warrants, margin dilution and thin cash flow do not eat the upside.",
+  "verdict": {
+    "stance": "Neutral - right story, fairly priced",
+    "summary": "Q3 2026 settled the execution question for now: Helios racks are live at five lead customers and management guided 2027 revenue growth above 80%. The October sell-off took the stock back to roughly what our probability-weighted case is worth, so the asymmetry is balanced rather than attractive: the base case only holds value, the bull case needs both a beat on 2027 and a mid-30s multiple, and the bear case (a 2027 that grows ~45% at lower margins) roughly halves it. Two things would move us to Positive: Q4 data center landing at the guided ~50% sequential step with gross margin holding 55%, and free cash flow recovering toward net income. A second quarter of sub-5% FCF margin with inventory still rising would move us to Cautious.",
+    "wtb": [
+      "2027 revenue lands near $94B (about +80% on ~$52B in 2026), with data center above 80% of sales.",
+      "Non-GAAP gross margin stays at or above ~54% while AI GPUs overtake server CPUs in the mix; each point is about $0.9B of 2027 gross profit.",
+      "Non-GAAP EPS reaches ~$16 in 2027 on ~1.72B diluted shares, i.e. warrant and M&A dilution stays near 4% rather than the full ~19% the OpenAI/Meta warrants allow.",
+      "Free cash flow recovers from 4% of Q3 2026 revenue to 15%+ by 2H 2027 as the ~$11.5B inventory build ships."
     ]
   },
-  "latestProse": "Q2 2026 (reported Aug 4): revenue $11.5B, +50% YoY and a record, with non-GAAP gross margin of 56% (+200bps+ YoY), non-GAAP EPS $1.66 (GAAP $1.38). Data center drove everything: $6.7B, +107% YoY, 58% of sales, on EPYC and Instinct. Client rose 23% to $3.1B on record mobile sales; gaming fell 31% to $779M on late-cycle semi-custom. The disclosure that matters most: Helios, AMD's first rack-scale platform, is in production, and second-gen Helios with MI455X begins shipping to Meta and OpenAI in the coming months - the proof point that AMD can sell systems, not just chips. The stock fell ~7% after hours, then rallied ~35% from Aug 20 to Oct 2.",
-  "guidanceProse": "Q3 2026 guidance of ~$13.0B plus or minus $300M revenue (about +41% YoY) and ~56% non-GAAP gross margin is unchanged since Aug 4. At Citi TMT (Sep 8, 2026) the CFO reiterated the Q3 margin but said Q4 2026 and 2027 gross margin should be slightly lower as MI450 ramps, prioritizing gross-profit dollars and operating leverage. She cited $29-30B of supply purchase commitments with wafers, HBM, packaging and substrates still tight. Bulls point to a ~$70B 2027 data center target; bears note rack-scale GPUs are now explicitly margin-dilutive.",
+  "scenarioModel": {
+    "horizon": "FY2027 (calendar 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.25,
+      "rev": 76,
+      "eps": 10.6,
+      "multiple": 22,
+      "why": "HBM, packaging or rack-integration limits cap the 2027 ramp at ~+45%, PCs fall double digits and customers push back on HBM cost sharing, so non-GAAP net margin slips to ~24% (gross margin near 52%). With OpenAI financing in doubt the market treats AMD as a second-source cyclical and pays a low-20s multiple."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 94,
+      "eps": 15.85,
+      "multiple": 30,
+      "why": "The guided >80% growth arrives (~$94B), data center is ~82% of sales and operating leverage lifts non-GAAP net margin to ~29% from ~26% in Q3 2026 despite a ~54-55% gross margin. Consensus 2027 EPS is ~$16, so the market pays ~30x trailing, about 21x the ~$23 2028 consensus, for a business still growing 40%+."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 104,
+      "eps": 18.74,
+      "multiple": 36,
+      "why": "Supply additions let 2027 double (~$104B): Anthropic's first GW, Meta and OpenAI deployments stack, agentic AI keeps server CPUs doubling, and gross margin holds 56% so net margin reaches ~31%. A visible 2028 step-up earns a mid-30s multiple on 2027 EPS."
+    },
+    "note": "Non-GAAP EPS throughout (GAAP is distorted by non-cash warrant remeasurement, ~$1.1B in Q3 2026). 2026 revenue = Q1 $10.25B + Q2 $11.54B + Q3 $13.38B + Q4 guide ~$17.0B = ~$52.2B. EPS = revenue x non-GAAP net margin / 1.72B diluted shares (1.661B in Q3 2026 plus ~60M for partial warrant vesting and the World Labs stock deal): bear $76B x 24% = $18.2B / 1.72B = $10.60; base $94B x 29% = $27.3B / 1.72B = $15.85; bull $104B x 31% = $32.2B / 1.72B = $18.74. Multiples apply to 2027 EPS at end-2027. Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does guided >80% 2027 growth arrive on schedule?",
+      "bull": "Helios racks are live at Anthropic, Meta, Microsoft, OpenAI and Oracle; management says wafers, substrates, packaging and memory are secured for much higher 2027 growth, and Q4 is guided +27% sequentially.",
+      "bear": "Demand exceeds supply by management's own account, Helios is AMD's first rack-scale system, and Q4 already needs data center to rise ~50% q/q; one slipped quarter moves 2027 by billions.",
+      "view": "This sets the bear-vs-base gap ($10.60 vs $15.85 EPS). Q4 is the test: a clean ~50% data center step makes the 2027 framework credible; a miss moves weight to the bear case.",
+      "signpost": {
+        "metric": "Q4 2026 data center revenue vs Q3's $8.55B",
+        "threshold": "$12.5B+ (about +46% q/q) confirms; below $11.5B is a miss",
+        "when": "Q4 2026 report, ~early Feb 2027 (date unconfirmed)"
+      }
+    },
+    {
+      "q": "How much of the profit is cash?",
+      "bull": "The Q3 cash dip is a deliberate ~$3B inventory build ahead of the Q4 ramp; trailing cash conversion through Q2 2026 was 157% and net cash was positive.",
+      "bear": "Q3 2026 free cash flow fell to $554M (4% of revenue) while debt more than doubled to $7.1B; net income ran at ~99% of operating income on a trailing basis, lifted by non-operating items and a large tax benefit that offset the warrant charge.",
+      "view": "Timing until proven otherwise, but this is the item that would move us to Cautious. We value on non-GAAP EPS, so cash has to catch up within two quarters.",
+      "signpost": {
+        "metric": "Free cash flow margin and inventory",
+        "threshold": "FCF above 10% of revenue with inventory flat or down; a second sub-5% quarter is a red flag",
+        "when": "Q4 2026 report, ~early Feb 2027"
+      }
+    },
+    {
+      "q": "Is the price asking for more than AMD has ever delivered?",
+      "bull": "Revenue growth accelerated four quarters running (to +45% in Q3 2026, +66% guided for Q4), well above the 13.6%/yr three-year record; the 2027 guide is above the 35%+ long-term model.",
+      "bear": "The reverse DCF needs ~30%/yr FCF growth for a decade, and AMD pays for demand with warrants for up to 320M shares (OpenAI and Meta) plus equity stakes in customers (up to $5B in Anthropic, $1B in Meta).",
+      "view": "The multiple, not the growth, is the swing factor (22x vs 36x). We give it a base 30x only while warrant dilution stays modest and customer-funded demand does not grow faster than revenue.",
+      "signpost": {
+        "metric": "Non-GAAP diluted share count",
+        "threshold": "above 1.75B before 2027 revenue doubles = dilution outrunning delivery",
+        "when": "Each quarterly report through 2027"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-07",
+      "change": "Migrated to v3 on the Q3 2026 print (Nov 3): beat ($13.4B, non-GAAP EPS $2.09), Q4 guide ~$17B, 2027 revenue growth guided above 80%. Added scenario values on 2027 non-GAAP EPS (bear $233 / base $476 / bull $675, weighted ~$465) and debates on ramp timing, cash conversion (Q3 FCF 4% of revenue) and dilution. View moved: from priced-for-perfection caution to Neutral, as fundamentals rose and the stock fell."
+    }
+  ],
+  "thesis": [
+    "Data center now is the company. It reached 64% of Q3 2026 sales from 47% a year earlier, and management expects it to exceed 80% of 2027 revenue with AI GPUs overtaking server CPUs in Q4 2026.",
+    "Helios is past the prototype stage. Five lead customers brought racks online in Q3 2026 and OEMs (HPE, Dell, Lenovo, Super Micro) begin shipping systems in Q4, turning AMD from a chip supplier into a system vendor.",
+    "Agentic AI is a second engine. Server revenue is expected to roughly double in 2027 with Venice EPYC on 240+ platforms, a CPU tailwind Nvidia does not share.",
+    "Operating leverage is real. Non-GAAP EPS grew 74% on 45% revenue growth in Q3 2026, so even with a slightly lower gross margin, scale drives the base-case net margin from ~26% to ~29%."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 26, 2026; reported Nov 3, 2026)",
+    "points": [
+      "Revenue $13.38B, +45% YoY, +16% QoQ, above the $13.0B +/-$0.3B guide and ~$13.09B consensus.",
+      "Data center $8.55B, +97% YoY (64% of sales); Client $2.9B, +7%; Gaming $773M, -40%; Embedded $1.11B, +29%.",
+      "Non-GAAP gross margin 56% (GAAP 54%); non-GAAP operating margin ~29%.",
+      "Non-GAAP EPS $2.09 (+74% YoY, vs ~$1.94 consensus); GAAP EPS $1.46 after a ~$1.1B non-cash warrant charge.",
+      "Operating cash flow $1.20B, free cash flow $554M; inventory $11.46B (+~$3B q/q); total debt $7.1B after a $4.7B issuance."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 26; reported Nov 3) was a clean beat on the lines that matter and a weak one on cash. MI455X shipped in volume for the first time and Anthropic, Meta, Microsoft, OpenAI and Oracle brought their first Helios racks online, with Venice EPYC launching on 240+ platforms. Client slowed sharply as memory-cost inflation hit late-quarter PC sell-through, and gaming fell on the console cycle. Cash went the other way from earnings: AMD built inventory for the Q4 ramp and issued debt, so free cash flow was the weakest in two years. Shares fell as much as 7.5% after hours, then traded flat the next day as analysts trimmed targets on sector multiples while raising 2027-2028 estimates.",
+  "guidanceProse": "Q4 2026: revenue ~$17.0B plus or minus 3% (~+66% YoY, ~+27% q/q) at ~55% non-GAAP gross margin, with data center up ~50% sequentially and Client and Gaming down more than 20%. For 2027 management guided revenue growth above 80%, server revenue roughly doubling and data center above 80% of sales, while expecting PC units to fall double digits. No 2027 margin guide: AI systems dilute the corporate average and HBM cost inflation is being shared with customers. The CFO said warrant charges will rise as the OpenAI agreement progresses; they hit GAAP, not non-GAAP or cash.",
   "guide": {
-    "label": "Q3 2026 revenue guide",
-    "val": "$13.0B +/-$300M",
-    "sub": "~+41% YoY at midpoint; non-GAAP gross margin ~56%",
+    "label": "Q4 2026 revenue guide",
+    "val": "$17.0B +/-3%",
+    "sub": "~+66% YoY; non-GAAP GM ~55%; 2027 growth >80%",
     "tone": "accent"
   },
   "segments": [
-    "Data center: $6.7B, 58% of revenue, +107% YoY (EPYC CPUs + Instinct GPUs)",
-    "Client: $3.1B, ~27% of revenue, +23% YoY; Gaming: $779M, ~7%, -31% YoY",
-    "Embedded: remainder ~$0.9-1.0B, ~8%"
+    "Data center: $8.55B in Q3 2026, 64% of revenue, +97% YoY (EPYC CPUs + Instinct MI450/Helios); guided ~+50% q/q in Q4.",
+    "Client and Gaming: $3.72B, -8% YoY (Client $2.9B +7%, Gaming $773M -40%); guided down 20%+ q/q in Q4.",
+    "Embedded: $1.11B, +29% YoY, ~8% of revenue."
   ],
   "competitive": [
     "Nvidia still dominates AI accelerator revenue and is already shipping Vera Rubin while Helios is just ramping; AMD's 2026 share is single-digit (exact figure unverified)",
@@ -41,26 +117,19 @@
   ],
   "moat": "AMD's moat is chiplet design execution plus the only complete CPU+GPU+networking rack-scale alternative to Nvidia, reinforced by customers who strategically need a second source. ROCm software remains the soft flank versus CUDA, and the warrant-laced OpenAI structure shows AMD still pays for demand certainty rather than commanding it.",
   "risks": [
-    "Priced for perfection. Shares rose ~30% in September 2026 to a ~$1.03T cap at ~40x forward earnings; a Helios slip would hit a stock that has front-run 2027.",
-    "Margin dilution is now guided. Management said Q4 2026 and 2027 gross margin should dip slightly below 56% as MI450 ramps (Citi TMT, Sep 8, 2026).",
-    "Dilution from warrants and M&A. Up to 160M shares issuable to OpenAI as milestones vest, plus a floating share count for the ~$8.2B World Labs deal (about 0.8% of shares at the Oct 2 price).",
-    "Supply constraints. Advanced wafers, HBM, packaging and substrates remain tight despite $29-30B of purchase commitments; shortfalls cap the 2027 ramp.",
-    "Customer concentration in a circular AI capex cycle. Demand concentrates in a few AI labs and hyperscalers whose financing - OpenAI's especially - is aggressive and unproven.",
-    "Execution and regulatory. Helios is AMD's first rack-scale system; World Labs needs unnamed regulatory approvals; China export licensing remains a standing risk."
+    "Thin cash behind the earnings. Q3 2026 free cash flow was 4% of revenue against a ~26% non-GAAP net margin; if the inventory build does not convert in Q4-Q1, EPS is overstating the business.",
+    "Paying for demand. Warrants for up to 320M shares (~19% of shares) to OpenAI and Meta, an up-to-$5B equity commitment to Anthropic (Jul 22, 2026) and a $1B investment in Meta's equity offering (Oct 27, 2026) tie revenue to customer financing.",
+    "OpenAI is the weakest anchor. Reports in Oct 2026 put OpenAI's annualized revenue near $50B, about $20B below figures that had circulated (unverified), and a funding squeeze would hit the 6GW deal first.",
+    "Mix-driven margin dilution. Q4 gross margin is guided down to ~55% and HBM cost inflation is being shared with customers; the bear case assumes ~52%.",
+    "Supply and execution. Demand exceeds supply by management's account; a Helios or HBM slip lands in the quarters that carry the 2027 guide, while PCs are expected to fall double digits."
   ],
   "catalysts": [
-    "Oct 12, 2026: Lisa Su opening keynote at OCP Global Summit",
-    "~Nov 3, 2026 (expected; not yet confirmed by AMD): Q3 2026 earnings - first MI450 revenue, Q4 guide, margin path",
-    "Q4 2026: 'very significant' MI450/Helios step-up; first 1GW OpenAI deployment (first warrant tranche vests)",
-    "By end-2026: World Labs acquisition close, subject to regulatory approvals",
-    "1H 2027: first gigawatt of Anthropic Helios deployment begins; further MI450 step-up in Q1 2027"
+    "~Nov 18, 2026: Nvidia Q3 FY2027 report - read-across on AI rack demand and HBM supply (debate 1).",
+    "By end-2026: World Labs acquisition close (all stock), subject to regulatory approvals (debate 3).",
+    "Late Jan 2027: MSFT, META, GOOGL, AMZN Q4 calls - 2027 capex guidance (debate 1).",
+    "~Early Feb 2027 (date unconfirmed): Q4 2026 report - data center step, gross margin, FCF and inventory (debates 1 and 2).",
+    "1H 2027: first gigawatt of Anthropic Helios deployment; OpenAI first-GW milestone and warrant vesting (debate 3)."
   ],
-  "pricedIn": "Shares closed at $633.91 on Oct 2, 2026 (intraday record $645.46), up ~35% from $469.46 on Aug 20 and ~30% in September - a ~$1.03T market cap at roughly 40x forward earnings (~39x at ~$610 on Sep 21 per data snapshot). The price assumes data center roughly doubles to ~$70B in 2027, the gigawatt deals convert on schedule and the guided margin dip stays slight. The debate: is the 2027 target effectively contracted backlog, or is AMD buying share with pricing, warrants and stock-funded M&A so EPS lags the multiple?",
-  "scenarios": {
-    "bear": "MI450/Helios slips or HBM/packaging supply caps the Q4-Q1 step-ups; margins dilute more than 'slightly' and OpenAI demand proves financing-constrained. 2027 misses the ~$70B data center target and a ~40x multiple compresses - the stock gives back the September run and more.",
-    "base": "Q3's ~$13B lands in early Nov, Q4 shows the guided MI450 step-up, and data center roughly doubles in 2027 with gross margin a touch below 56%. The stock tracks estimate revisions while the multiple compresses as EPS catches up.",
-    "bull": "Helios becomes the default second-source rack, agentic AI drives server CPUs 70%+ in 2027, and Meta/Anthropic/OpenAI deployments stack through 2027 with World Labs adding a native workload. Data center beats ~$70B and estimates step-change upward."
-  },
   "valPresets": {
     "mode": "fcf",
     "r": 0.105,
@@ -75,32 +144,64 @@
     "bull": {
       "g": 0.55
     },
-    "note": "At ~40x forward and a ~$1T cap (Oct 2026), even the bear preset needs 15% year-1 FCF growth - the reverse DCF quantifies how much of the ~$70B 2027 data center target is already in the price."
+    "note": "Year-1 FCF growth presets fade to terminal. The reverse DCF needs ~30%/yr FCF growth for 10 years versus 13.6%/yr revenue growth over the last three years; the base preset (35%) is roughly what guided 2027 growth implies if cash conversion recovers."
   },
   "bullCharts": {
     "0": [
       "revQ"
     ],
     "3": [
-      "gmA"
+      "revYoyA"
     ]
   },
   "bearCharts": {
     "0": [
-      "peerFpe"
+      "fcfQ"
     ],
     "3": [
-      "revYoyA"
+      "gmA"
     ]
   },
   "sources": [
     {
-      "label": "AMD Q2 2026 press release (IR)",
-      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
+      "label": "AMD Q3 2026 results, 8-K exhibit 99.1 (Nov 3, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000002488/000000248826000188/q32026991.htm"
     },
     {
-      "label": "CNBC: AMD earnings Q2 2026",
-      "url": "https://www.cnbc.com/2026/08/04/amd-earnings-report-q2-2026.html"
+      "label": "Earnings Whispers via Finviz: Q3 2026 review - 2027 >80% growth, DC ~+50% q/q, FCF, inventory, debt (Nov 3, 2026)",
+      "url": "https://finviz.com/news/415034/amds-modest-beat-gives-way-to-a-much-bigger-2027-outlook-while-pc-weakness-and-thin-free-cash-flow-test-the-story"
+    },
+    {
+      "label": "Constellation Research: Q3 2026 call - Helios customers, OEM shipments (Nov 3, 2026)",
+      "url": "https://www.constellationr.com/insights/news/amd-q3-shines-data-center-revenue-nearly-doubles"
+    },
+    {
+      "label": "Let's Data Science: Q3 2026 segments, consensus, after-hours move (Nov 4, 2026)",
+      "url": "https://letsdatascience.com/news/amd-reports-record-q3-as-data-center-revenue-rises-97-d2aab34a"
+    },
+    {
+      "label": "Stocktwits: analyst target changes after Q3 2026 (Nov 4, 2026)",
+      "url": "https://stocktwits.com/news-articles/markets/equity/amd-earnings-checked-every-box-but-wall-street-remains-split-on-the-stock/cNGLXFjR930"
+    },
+    {
+      "label": "TIKR: consensus EPS 2027 $16.01 / 2028 $23.03, warrants up to 320M shares, $1.1B warrant charge (Nov 4, 2026)",
+      "url": "https://www.tikr.com/blog/goldman-sachs-675-target-says-amds-selloff-went-too-far"
+    },
+    {
+      "label": "Heygotrade: AMD -10.9% on Intel outlook (Oct 30, 2026)",
+      "url": "https://www.heygotrade.com/en/news/amd-amd-stock-news-november-2-2026/"
+    },
+    {
+      "label": "TIKR: AMD -16% in a month, OpenAI revenue report (Oct 2026)",
+      "url": "https://www.tikr.com/blog/amd-just-dropped-16-in-a-month-is-it-time-to-sell-or-load-up"
+    },
+    {
+      "label": "DatacenterDynamics: AMD to invest up to $5B in Anthropic, up to 2GW MI450 (Jul 22, 2026)",
+      "url": "https://www.datacenterdynamics.com/en/tags/daniel-gross/"
+    },
+    {
+      "label": "FourWeekMBA: AMD to invest $1B in Meta equity offering (Oct 2026)",
+      "url": "https://fourweekmba.com/ai-amd-will-invest-1b-in-metas-stock-as-helios-runs-at-meta/"
     },
     {
       "label": "AMD-OpenAI 6GW partnership (IR)",
@@ -111,40 +212,16 @@
       "url": "https://ir.amd.com/news-events/press-releases/detail/1293/amd-and-cerebras-announce-industry-leading-ultra-low-latency-and-high-throughput-ai-inference-solution"
     },
     {
-      "label": "Tom's Hardware: Q2 segment detail",
-      "url": "https://www.tomshardware.com/tech-industry/amd-doubles-data-center-revenue-year-over-year-but-gaming-revenue-plunged-by-31-percent-ceo-lisa-su-says-prices-have-weighed-on-consumer-demand-but-is-optimistic-about-client-market"
-    },
-    {
-      "label": "TradingKey: post-earnings valuation",
-      "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262088719-amd-q2-2026-earnings-data-center-symmetrical-triangle-tradingkey"
+      "label": "AMD to acquire World Labs (IR, Sep 28, 2026)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute"
     },
     {
       "label": "Investing.com: AMD at Citi 2026 Global TMT (Sep 8, 2026)",
       "url": "https://www.investing.com/news/transcripts/amd-at-citis-2026-global-tmt-conference-ai-push-lifts-outlook-93CH-4891921"
     },
     {
-      "label": "Investing.com: AMD at Goldman Sachs Communacopia (Sep 11, 2026)",
-      "url": "https://www.investing.com/news/transcripts/amd-at-goldman-sachs-communacopia--technology-conference-ai-strategy-widens-93CH-4898254"
-    },
-    {
-      "label": "AMD to acquire World Labs (IR, Sep 28, 2026)",
-      "url": "https://ir.amd.com/news-events/press-releases/detail/1299/amd-to-acquire-world-labs-to-advance-the-future-of-ai-compute"
-    },
-    {
-      "label": "FinanceFeeds: World Labs deal, Oct 2 close and price history",
-      "url": "https://financefeeds.com/amd-world-labs-8-2-billion-1-trillion"
-    },
-    {
-      "label": "Motley Fool: Why AMD jumped 30% in September",
-      "url": "https://www.fool.com/investing/2026/10/02/why-amd-stock-jumped-30-in-september/"
-    },
-    {
-      "label": "CNBC: AMD hits $1 trillion market cap (Sep 21, 2026)",
-      "url": "https://www.cnbc.com/2026/09/21/amd-stock-1-trillion-value.html"
-    },
-    {
-      "label": "AMD newsroom: Lisa Su OCP 2026 keynote (Oct 12)",
-      "url": "https://newsroom.amd.com/news/media-alert-ceo-lisa-su-keynote-2026-ocp/"
+      "label": "AMD Q2 2026 press release (IR)",
+      "url": "https://ir.amd.com/news-events/press-releases/detail/1295/amd-reports-second-quarter-2026-financial-results"
     }
   ]
 }

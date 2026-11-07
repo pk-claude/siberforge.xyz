@@ -1,65 +1,130 @@
 {
-  "asOf": "2026-10-04",
-  "oneLiner": "A supply-capped supercycle under new CEO John Ternus: the $1,999 iPhone Duo foldable and Gemini-backed Siri AI have launched, but record margins still collide with advanced-node scarcity - at ~37x trailing earnings near a 52-week high.",
-  "thesis": [
-    "The iPhone cycle is real and demand-led. FQ3 iPhone revenue hit a June-quarter record $54.3B, up 22% YoY; the Sept 9, 2026 event added the iPhone 18 Pro ($1,199) and Pro Max ($1,299) plus Apple's first foldable, the iPhone Duo ($1,999), which ships Oct 23.",
-    "The Siri overhaul is now in users' hands. iOS 27 began rolling out Sept 14, 2026 with Siri AI (Gemini-assisted) on iPhone 15 Pro and newer, in English beta first, with more languages due in October - the first real test of an AI-driven upgrade cycle.",
-    "The tariff overhang reversed into a tailwind. The Supreme Court's Feb 20, 2026 ruling struck down the IEEPA reciprocal tariffs; refunds added roughly 2 points to FQ3 gross margin and $0.11 to EPS, and the India production shift cuts structural exposure.",
-    "Record profitability with a fatter mix. FQ3 gross margin of 50.1% and Services at ~28% of revenue underpin 29% EPS growth on 16% revenue growth.",
-    "Capital returns remain unmatched: a $100B buyback authorized April 30, 2026 and a $0.27 quarterly dividend - while megacap peers divert cash to AI capex."
-  ],
-  "latestQuarter": {
-    "label": "Q3 FY2026 (reported July 30, 2026)",
-    "points": [
-      "Revenue $109.4B, +16% YoY, an all-time June-quarter record; GAAP EPS $2.02, +29% (includes $0.11 favorable tariff-refund impact)",
-      "iPhone $54.3B, +22% YoY; Services $30.7B, +12.1%, below ~$31.2B consensus",
-      "Gross margin 50.1%, including ~2pp benefit from tariff refunds",
-      "Greater China $18.8B vs ~$19.6B consensus - a miss despite YoY growth",
-      "Mac $10.4B, +28.7%; iPad $6.2B, -5.9%; Wearables $7.9B, +6.5%",
-      "Installed base topped 2.5B active devices; shares fell ~6% after hours on guidance"
+  "asOf": "2026-11-07",
+  "oneLiner": "The largest installed base in consumer tech (2.5B+ active devices), now run by John Ternus, monetised through a premium iPhone cycle and a high-margin Services layer. The market is betting that FY2026's double-digit growth is a new run-rate driven by the foldable and Siri AI, not a one-off upgrade wave that fades as memory costs squeeze margins.",
+  "verdict": {
+    "stance": "Cautious - great business, full price",
+    "summary": "FY2026 was Apple's best growth year since FY2021 and the September quarter beat, but the December-quarter guide shows the next leg is harder: growth slows to 7-10% on constrained supply, gross margin steps down on memory costs, and Services decelerates. The price already capitalises the supercycle at a mid-30s multiple, so our probability-weighted value sits below the current quote: the bull case needs both mid-teens revenue growth and a held multiple, while the bear case only needs the multiple to drift toward its long-run mid-20s. We would turn more positive if the March-quarter guide holds high-single-digit growth with gross margin back above 46.5%, or on a material pullback with the cycle intact.",
+    "wtb": [
+      "FY2027 revenue grows ~10% to about $525B or more, i.e. supply catches up with iPhone 18 Pro and Duo demand by the March 2027 quarter rather than demand fading.",
+      "Gross margin bottoms in the 45-46% guided range in the December 2026 quarter and recovers toward 47% by mid-2027 as price increases offset memory costs.",
+      "Services grows at least 8% a year through FY2027 even if the D.C. Circuit restricts Google's default-search payments.",
+      "The market keeps paying ~30x+ trailing EPS at end-2027, which requires the reverse-DCF bar (~14% a year FCF growth for a decade) to look reachable rather than a FY2026 one-off."
     ]
   },
-  "latestProse": "Apple's June quarter (FQ3 FY26, ended June 27) delivered $109.4B in revenue, +16.4% YoY, with GAAP EPS of $2.02 (+29%) and net income of $29.8B. iPhone led at $54.3B (+22%, June-quarter records in every geography), Mac grew 28.7% to $10.4B, while iPad fell 5.9%. Services grew 12.1% to a record $30.7B but missed consensus, and Greater China's $18.8B came in below the ~$19.6B expected. Gross margin reached 50.1%. The disclosure that matters most: roughly 2 points of that margin and $0.11 of EPS came from one-time IEEPA tariff refunds after the Supreme Court struck the tariffs down in February 2026 - flattering optics that won't repeat.",
-  "guidanceProse": "Apple guided September-quarter revenue growth of 9-11% YoY, below the ~12% LSEG consensus, citing FX and a sharp sequential increase in advanced-node supply constraints; no revision since. Early iPhone 18 Pro reads are mixed: GF Securities' Jeff Pu called pre-order lead times 'lukewarm' and cut Duo builds to 6M from 7M, while Gene Munster saw Pro lead times ~15% longer than last year's launch day.",
+  "thesis": [
+    "The upgrade cycle is real. FY2026 revenue grew 15% after three years averaging under 2%, with iPhone up 21% for the year; demand is outrunning supply, not the reverse.",
+    "Pricing power offsets cost inflation. Apple raised iPhone 17 prices by $100 at the iPhone 18 Pro launch and lifted some MacBook prices, and the $1,999 iPhone Duo opens a new tier (Bloomberg Intelligence: $28-32B of FY2027 sales).",
+    "China turned from a drag into a driver. Greater China grew 28% in FY2026 and 21% in the September quarter, reversing the multi-year share loss to Huawei.",
+    "Per-share compounding. The diluted share count fell 1.6% YoY in FQ4 and $100B of buyback authority (April 2026) keeps shrinking it, so EPS grows faster than profit.",
+    "Earnings are cash. FY2026 operating cash flow of $145.1B exceeded net income, and capex stays near 2% of revenue while megacap peers pour cash into AI data centers."
+  ],
+  "latestQuarter": {
+    "label": "Q4 FY2026 (ended Sep 26, 2026; reported Nov 2, 2026)",
+    "points": [
+      "Revenue $114.5B, +12% YoY, a September-quarter record, vs ~$113.4B LSEG consensus; FY2026 revenue $478.8B, +15%.",
+      "Diluted EPS $2.10, +14% (vs ~$1.99 consensus), including $0.05 from tariff refunds; FY2026 EPS $8.98 vs $7.46.",
+      "Gross margin 47.9% including ~1pt from tariff refunds; operating income $35.6B, +10%.",
+      "iPhone $57.6B (+17%), Mac $10.8B (+24%), Services $31.6B (+10%), iPad $6.2B (-10%), Wearables $8.3B (-8%).",
+      "Guide: December quarter revenue +7-10% YoY, gross margin 45-46%, Services +8-9%; shares fell ~2-4% during the call."
+    ]
+  },
+  "latestProse": "Q4 FY2026 (ended Sep 26; reported Nov 2), John Ternus' first call as CEO. Revenue $114.5B (+12%) beat consensus; iPhone grew 17% and Mac 24%, while iPad and Wearables shrank. Greater China rose to $17.5B from $14.5B a year earlier. Net income was $30.7B and diluted EPS $2.10 (+14%) on 14.63B diluted shares. Tariff refunds flattered the print by ~1pt of gross margin and $0.05 of EPS, and CFO Kevan Parekh said Apple has now received the vast majority of the refunds owed, so that support ends. Apple returned ~$28B to shareholders in the quarter and kept the dividend at $0.27. Purchase commitments rose ~$33B in the quarter; COO Sabih Khan would not confirm a long-term memory supply deal.",
+  "guidanceProse": "December-quarter guide: revenue +7-10% YoY (about $153.8-158.1B against $143.8B a year ago), which would still be Apple's largest quarter ever but brackets a ~$153.4B consensus only at the low end. Gross margin 45-46%, down from 47.9%: Parekh blamed memory costs, expected to keep rising into 2027, and the cost of ramping Siri AI; ex-refunds the step-down is 1-2pts. Services +8-9% vs ~10.7% expected, citing third-party licensing and FX. Ternus said supply is 'constrained as of today' with no date for balance, and a very small share of iPhone Duo units have been returned for display issues and are being replaced.",
   "guide": {
-    "label": "FQ4 revenue growth guide",
-    "val": "+9-11% YoY",
-    "sub": "Below ~12% consensus; supply-constrained (advanced nodes), not demand-constrained",
+    "label": "FQ1 FY27 revenue guide",
+    "val": "+7-10% YoY",
+    "sub": "GM 45-46% | Services +8-9% | supply-constrained",
     "tone": "warn"
   },
   "segments": [
-    "iPhone ~50% of FQ3 revenue ($54.3B of $109.4B), the cycle engine",
-    "Services ~28% ($30.7B), the margin engine, now growing ~12%",
-    "Mac ~9.5% ($10.4B), Wearables/Home/Accessories ~7.2% ($7.9B), iPad ~5.7% ($6.2B)"
+    "iPhone ~53% of FY2026 revenue ($254.1B, +21%): iPhone 18 Pro/Pro Max and the $1,999 iPhone Duo foldable (shipping since Oct 23) lead the cycle.",
+    "Services ~26% ($123.3B, +13%): App Store, iCloud, advertising, licensing (incl. Google default-search payments); ~76% gross margin in FQ4.",
+    "Mac ~8% ($37.9B, +13%); Wearables, Home and Accessories ~7% ($35.6B, flat); iPad ~6% ($27.9B, flat).",
+    "Geography FY2026: Americas $198.1B, Europe $127.6B, Greater China $82.4B, Rest of Asia Pacific $39.9B, Japan $30.9B."
   ],
   "competitive": [
-    "Google: simultaneously AI supplier (Gemini underpins Siri AI) and rival (Pixel/Android, Pixel Fold) - an unprecedented coopetition",
-    "Samsung: Galaxy Z Fold incumbent now faces the $1,999 iPhone Duo; Apple retains pricing power at the high end",
-    "Huawei: pressures China share, where Apple's $18.8B missed consensus; China demand for the Duo is a key swing factor",
-    "TSMC allocation vs Nvidia-led AI demand is now a de facto competitive front for 2nm capacity"
+    "Google is both supplier (Gemini underpins Siri AI) and rival (Pixel, Android); Apple rents the frontier-model layer rather than owning it.",
+    "Samsung's Galaxy Z Fold now faces the iPhone Duo at the top of the foldable market.",
+    "Huawei remains the main China rival, but Apple regained share in FY2026.",
+    "Memory makers and Nvidia-led AI demand compete with Apple for DRAM/NAND and TSMC leading-node capacity, which is why supply and cost, not demand, set the near-term guide."
   ],
-  "moat": "An installed base above 2.5 billion active devices with deep ecosystem lock-in (App Store, iCloud, iMessage, silicon-software integration) drives industry-best hardware margins and a $120B+ annualized Services attach. Custom silicon and first-claim (though now contested) access to TSMC's leading nodes sustain a multi-year performance lead.",
+  "moat": "An installed base above 2.5 billion active devices with deep ecosystem lock-in (App Store, iCloud, iMessage, silicon-software integration) drives industry-best hardware margins and a recurring Services stream. Custom silicon and scale purchasing give first claim on leading-edge capacity, though AI demand now contests that claim.",
   "risks": [
-    "Supply constraints cap the supercycle. The below-consensus FQ4 guide, advanced-node scarcity and reported Duo hinge issues mean record demand may not convert to revenue for several quarters.",
-    "Apple rents its AI brain from a rival. Siri AI's reliance on Google Gemini concedes the frontier-model layer and invites antitrust scrutiny of yet another Apple-Google arrangement.",
-    "Legal overhangs. A Sept 25, 2026 jury found Apple owes over $5.7B to Taction over Taptic Engine patents (Apple will appeal); DOJ is asking the D.C. Circuit to ban Google's default-search payments to Apple.",
-    "China remains fragile. Greater China missed consensus at $18.8B amid Huawei's resurgence.",
-    "Margin quality: the tariff refund is one-time. Strip ~2pp of gross margin and $0.11 of EPS and the beat narrows; chip-driven price hikes may test elasticity.",
-    "Valuation and execution. At ~$334 and ~37x trailing EPS, a muted iPhone 18 Pro cycle, Duo slip, or stumble in the CEO transition triggers de-rating."
+    "The price needs the cycle to persist. The reverse DCF needs ~14% a year FCF growth for a decade against ~2% a year revenue growth over FY2023-FY2025; FY2026's 15% has to be the start of a trend, and the December guide already slows to 7-10%.",
+    "Memory costs compress margins. Gross margin is guided down to 45-46% with memory costs rising into 2027 and tariff refunds ending; each point of gross margin is roughly $5B of annual pre-tax profit.",
+    "Services is decelerating into legal risk. Growth is guided to 8-9%, and DOJ is asking the D.C. Circuit to ban Google's default-search payments, a high-margin licensing stream.",
+    "Supply and quality execution. Supply has no stated balance date and some Duo units have been returned for display issues; a holiday shortfall defers revenue and risks losing buyers.",
+    "Legal overhangs. A Sept 25, 2026 jury found Apple owes over $5.7B to Taction over Taptic Engine patents; Apple is appealing (status since unverified)."
   ],
   "catalysts": [
-    "Oct 13, 2026 (reported, unconfirmed): Siri AI smart-home hub (~$350 reported), new HomePod and Apple TV",
-    "Oct 16 / Oct 23, 2026: iPhone Duo pre-orders / availability",
-    "~Oct 29, 2026 (expected, date not yet confirmed by Apple): FQ4 FY26 earnings - first read on iPhone 18 Pro demand, Ternus' first call, holiday guide",
-    "Pending: D.C. Circuit appeal on Google search-default payments; Apple appeal of the $5.7B Taction verdict",
-    "Dec 2026 quarter: holiday quarter tests whether constrained supply defers or destroys demand"
+    "Mid-Nov 2026 (reported, unverified): smart-home hub shipping after the Oct 13 'Welcome Home' launch - first new Siri AI device category.",
+    "~Late Jan 2027 (date not yet confirmed): Q1 FY2027 report - December quarter vs the +7-10% guide, gross margin vs 45-46%, March-quarter guide (debates 1 and 2).",
+    "Pending: D.C. Circuit ruling on Google default-search payments (debate 3); Apple's appeal of the Taction verdict.",
+    "~Late Apr/early May 2027: Q2 FY2027 report and the annual buyback authorization (debates 1 and 3).",
+    "June 2027: WWDC - next Siri AI step and whether Apple deepens or loosens its Gemini dependence (debate 3)."
   ],
-  "pricedIn": "At $333.69 (Oct 2, 2026 close), AAPL sits ~3% below its ~$345 52-week high at ~37x trailing EPS (forward multiple unverified), versus a mid-20s norm; the average analyst target is ~$337 (range $245-$400). The price embeds an iPhone 18/Duo supercycle and Siri AI success. The debate: genuinely supply-capped (demand deferred into FY27) or a weaker run-rate masked by the one-time tariff-refund margin and mixed pre-order reads.",
-  "scenarios": {
-    "bear": "Supply limits and Duo hinge yields persist into FY27, capping growth mid-single digits; Siri AI underwhelms; China erodes; the D.C. Circuit bans Google default payments. Ex-refund margins compress and the multiple de-rates toward the mid-20s.",
-    "base": "iPhone 18 Pro and Duo land well; constrained FQ4 demand largely defers into the December and March quarters; Services grows low-double-digits; gross margin holds near 47-48% ex-refunds; the Ternus transition is uneventful; buybacks compound EPS. Stock grinds higher with earnings at ~30x.",
-    "bull": "Siri AI drives the first true AI upgrade cycle across a 2.5B-device base while the Duo opens a new premium tier and supply catches up in FY27; Services reaccelerates. Multiple holds 32x+ on higher FY27 estimates."
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Sep 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.25,
+      "rev": 500,
+      "eps": 8.68,
+      "multiple": 24,
+      "why": "Supply stays tight into mid-2027 and the cycle fades after the holiday quarter; revenue grows ~4%, memory costs hold gross margin near 45% and net margin falls to 25%. Services slows toward mid-single digits if the Google payments are curtailed. With growth back to the FY2023-25 pace, the multiple reverts toward Apple's long-run mid-20s."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 525,
+      "eps": 9.66,
+      "multiple": 31,
+      "why": "Supply catches up by the March quarter, the Duo adds a new tier and revenue grows ~10%; price increases offset most memory inflation, so net margin eases only to ~26.5% from FY2026's 27.6% (which included refunds). The market pays a premium trailing multiple for a durable cycle plus buybacks, but below today's level as growth normalises."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 555,
+      "eps": 10.6,
+      "multiple": 36,
+      "why": "Siri AI and the Duo extend the cycle across the installed base: revenue grows ~16% for a second year, memory costs ease in 2H FY2027 and net margin holds ~27.5%. Two years of mid-teens growth make the reverse-DCF bar look reachable, so the mid-30s multiple holds."
+    },
+    "note": "EPS = revenue x net margin / ~14.4B diluted shares (14.63B in FQ4 FY26, shrinking ~1.6% a year). Bear $500B x 25.0% = $125.0B / 14.4B = $8.68; base $525B x 26.5% = $139.1B / 14.4B = $9.66; bull $555B x 27.5% = $152.6B / 14.4B = $10.60. FY2026 was $478.8B revenue, $132.2B net income (27.6%), $8.98 EPS. Multiples are applied to FY2027 EPS at end-2027 (a trailing multiple by then). Scenario inputs are Siberforge estimates, not consensus; pre-print FY2027 consensus EPS was ~$9.5 (MarketBeat/aggregators, July 2026, unverified post-print)."
   },
+  "debates": [
+    {
+      "q": "Is FY2026's 15% growth a new run-rate or a one-off upgrade wave?",
+      "bull": "Demand is supply-limited, not fading: the guide is capped by component supply, the Duo opens a new price tier, Greater China is growing again and Siri AI gives the 2.5B-device base a reason to upgrade.",
+      "bear": "Revenue grew under 2% a year from FY2023 to FY2025; the December guide already halves the growth rate, and upgrade waves (FY2021) have historically been followed by flat years.",
+      "view": "This sets the multiple (24x vs 36x). The base case assumes ~10% growth, which is above the December guide's midpoint; we need the March quarter to confirm before paying up.",
+      "signpost": {
+        "metric": "March-quarter (Q2 FY2027) revenue growth guide",
+        "threshold": "bullish if +8% or more; bearish if below +5%",
+        "when": "Q1 FY2027 report, ~late Jan 2027"
+      }
+    },
+    {
+      "q": "Can pricing offset memory inflation, or is the gross margin peak behind us?",
+      "bull": "Apple has already raised iPhone 17 and some Mac prices, holds inventory bought at lower memory prices, and Services (76% gross margin) is a growing share of the mix.",
+      "bear": "The 45-46% guide is a 1-2pt step-down even ex-refunds, Parekh expects memory costs to keep rising into 2027, and the Siri AI ramp adds cost Apple cannot charge for directly.",
+      "view": "A margin dip in a constrained holiday quarter is tolerable; a second quarter below 45% would move us toward the bear case's 25% net margin.",
+      "signpost": {
+        "metric": "Reported FQ1 gross margin and FQ2 gross margin guide",
+        "threshold": "below 45% = bearish; guide back above 46.5% = bullish",
+        "when": "Q1 FY2027 report, ~late Jan 2027"
+      }
+    },
+    {
+      "q": "Does Services keep compounding at 8%+ through the Google remedy?",
+      "bull": "A 2.5B-device base, price increases and new Siri AI features keep attach rising; even a payments ban could be replaced by a revenue-share search or AI deal.",
+      "bear": "Services growth slowed from 13% in FY2026 to an 8-9% guide, and the Google default payments are almost pure profit; a ban hits EPS directly.",
+      "view": "Services is the multiple's floor. Sub-8% growth plus an adverse ruling would take the base-case multiple toward the mid-20s.",
+      "signpost": {
+        "metric": "Services revenue growth YoY; D.C. Circuit ruling on default-search payments",
+        "threshold": "below 8% for two quarters, or a payments ban upheld",
+        "when": "Q1-Q2 FY2027 reports (Jan-May 2027); ruling date unknown"
+      }
+    }
+  ],
   "valPresets": {
     "mode": "fcf",
     "r": 0.095,
@@ -74,84 +139,92 @@
     "bull": {
       "g": 0.16
     },
-    "note": "Apple still converts earnings to cash (no capex distortion), so FCF is the honest basis. At ~37x trailing near a 52-week high, even the base preset implies limited upside - which is the point of owning the reverse DCF."
+    "note": "Apple converts earnings to cash with little capex, so FCF is the honest basis. The base preset (8%, fading) sits well below the ~14% a year the reverse DCF says is priced in - that gap is the valuation argument in one number."
   },
   "bullCharts": {
     "0": [
-      "revQ"
+      "revYoyA"
     ],
-    "3": [
+    "1": [
       "gmA"
+    ],
+    "4": [
+      "fcfA"
     ]
   },
   "bearCharts": {
-    "3": [
-      "revYoyA"
+    "0": [
+      "revA"
     ],
-    "5": [
+    "1": [
+      "omA"
+    ],
+    "2": [
       "peerFpe"
     ]
   },
   "sources": [
     {
-      "label": "Apple Newsroom - Q3 FY26 results",
-      "url": "https://www.apple.com/newsroom/2026/07/apple-reports-third-quarter-results/"
+      "label": "Apple Q4 FY2026 press release (8-K Ex. 99.1, quarter ended Sep 26, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0000320193/000032019326000024/a8-kex991q4202609262026.htm"
     },
     {
-      "label": "CNBC - Apple Q3 2026 earnings",
-      "url": "https://www.cnbc.com/2026/07/30/apple-earnings-live-updates.html"
+      "label": "iThinkDifferent - December quarter guidance: revenue +7-10%, GM 45-46% (Nov 3, 2026)",
+      "url": "https://www.ithinkdiff.com/apple-december-quarter-2026-guidance/"
     },
     {
-      "label": "MacRumors - Apple 3Q 2026 earnings",
-      "url": "https://www.macrumors.com/2026/07/30/apple-3q-2026-earnings/"
+      "label": "Wealth Professional (Reuters/Bloomberg) - shares fell during Q4 call; consensus, Ternus comments, purchase commitments (Nov 3, 2026)",
+      "url": "https://www.wealthprofessional.ca/investments/equity-markets/apple-shares-fell-4-during-its-fourth-quarter-earnings-call/393928"
     },
     {
-      "label": "CNBC - Apple picks Google Gemini for AI Siri",
+      "label": "Shacknews - Q4 FY26 results vs expectations",
+      "url": "https://www.shacknews.com/article/151242/apple-aapl-q4-2026-earnings-results"
+    },
+    {
+      "label": "IANS - Apple names John Ternus CEO effective Sept 1, 2026; Cook executive chairman (Apr 21, 2026)",
+      "url": "https://ianslive.in/apple-names-john-ternus-as-next-ceo-tim-cook-to-become-executive-chairman--20260421091433"
+    },
+    {
+      "label": "CNBC - Apple picks Google Gemini for AI Siri (Jan 12, 2026)",
       "url": "https://www.cnbc.com/2026/01/12/apple-google-ai-siri-gemini.html"
     },
     {
-      "label": "AppleInsider - $100B buyback",
+      "label": "AppleInsider - $100B buyback (Apr 30, 2026)",
       "url": "https://appleinsider.com/articles/26/04/30/record-quarter-leads-to-new-100b-share-buyback-increased-dividend"
     },
     {
-      "label": "Fox Business - Sept 9, 2026 event: iPhone Duo, 18 Pro, ",
+      "label": "Fox Business - Sept 9, 2026 event: iPhone Duo, iPhone 18 Pro",
       "url": "https://www.foxbusiness.com/technology/apple-unveils-first-foldable-iphone-iphone-18-pro-lineup-new-watches-annual-launch-event"
     },
     {
-      "label": "Music Week - Ternus to become CEO Sept 1, 2026",
-      "url": "https://www.musicweek.com/digital/read/john-ternus-to-step-up-as-apple-ceo-in-september-2026/093978"
-    },
-    {
-      "label": "Engadget - iOS 27 with Siri AI available Sept 14",
+      "label": "Engadget - iOS 27 with Siri AI available Sept 14, 2026",
       "url": "https://engadget.com/2254005/ios-27-with-siri-ai-will-be-available-on-september-14"
     },
     {
-      "label": "MacRumors - iPhone 18 Pro pre-orders muted start",
-      "url": "https://macrumors.com/2026/09/15/iphone-18-pro-orders-muted-start"
-    },
-    {
-      "label": "PhoneArena - iPhone 18 Pro lead times / Duo orders",
-      "url": "https://www.phonearena.com/news/surging-lead-times-for-iphone-18-pro-models-leaves-clue-for-duo-orders_id183475"
-    },
-    {
-      "label": "Fox - $5.7B Taction patent verdict",
+      "label": "Fox 32 - $5.7B Taction patent verdict (Sept 25, 2026)",
       "url": "https://www.fox32chicago.com/news/apple-verdict-patent-dispute"
     },
     {
-      "label": "MediaPost - DOJ asks D.C. Circuit to ban Google defa",
+      "label": "MediaPost - DOJ asks D.C. Circuit to ban Google default payments",
       "url": "https://www.mediapost.com/publications/article/416888/google-search-remedies-too-weak-feds-tell-appeals.html"
     },
     {
-      "label": "Business Today - smart home hub Oct 13 report",
-      "url": "https://www.businesstoday.in/technology/news/story/apple-may-unveil-its-long-awaited-smart-home-hub-on-october-13-heres-what-to-expect-558888-2026-09-30"
+      "label": "Business Today - Apple teases Oct 13 'Welcome Home' launch (Oct 8, 2026)",
+      "url": "https://www.businesstoday.in/technology/news/story/apple-teases-october-13-launch-with-welcome-home-message-what-to-expect-560536-2026-10-08"
     },
     {
-      "label": "Gotrade - AAPL Oct 2, 2026 close, 52w range, targe",
-      "url": "https://www.heygotrade.com/en/us-stock/aapl/"
+      "label": "MarketBeat - FY2027 EPS estimates (Jul 29, 2026)",
+      "url": "https://www.marketbeat.com/instant-alerts/fy2027-eps-estimates-for-apple-increased-by-erste-group-bank-2026-07-29/"
     },
     {
-      "label": "Mac Observer - Q4 FY26 earnings date not yet announced",
-      "url": "https://www.macobserver.com/news/apple-q4-fy2026-earnings-date-not-announced/"
+      "label": "Siberforge computed fundamentals (SEC XBRL companyfacts): reverse DCF, share count, FY2023-25 revenue",
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193"
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-07",
+      "change": "Migrated to v3 after the Q4 FY26 print (Nov 2): revenue and EPS beat, but the December guide slows growth to 7-10% with gross margin down to 45-46% on memory costs. Added verdict (Cautious), FY2027 EPS scenarios (bear $208 / base $299 / bull $382 per share), three debates, and the reverse-DCF warning as a risk. China moved from risk to thesis. Confirmed John Ternus as CEO (effective Sept 1, 2026). First explicit stance; the old v2 note's limited-upside tone is unchanged."
     }
   ]
 }
