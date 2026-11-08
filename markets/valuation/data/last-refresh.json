@@ -1,12 +1,11 @@
 {
-  "refreshed_at": "2026-11-01T18:46:46.021Z",
-  "refreshed_at_human": "Sun, 01 Nov 2026 18:46:46 GMT",
-  "next_refresh_at": "2026-11-08T14:00:00.000Z",
-  "next_refresh_at_human": "Sun, 08 Nov 2026 14:00:00 GMT",
+  "refreshed_at": "2026-11-08T18:41:50.176Z",
+  "refreshed_at_human": "Sun, 08 Nov 2026 18:41:50 GMT",
+  "next_refresh_at": "2026-11-15T14:00:00.000Z",
+  "next_refresh_at_human": "Sun, 15 Nov 2026 14:00:00 GMT",
   "universe": 518,
   "sp500": 503,
   "nasdaq100": 101,
   "series_count": 514,
-  "snapshot_count": 97,
-  "latest_snapshot": "2026-11-06"
+  "snapshot_count": 97
 }
