@@ -1,216 +1,21 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-02T14:23:37.764Z",
+  "generatedAt": "2026-11-09T14:50:28.071Z",
   "windowDays": 14,
   "windows": {
     "next14": [
       {
-        "date": "2026-11-02",
-        "id": "DIESEL_RETAIL",
-        "label": "Diesel Retail Price (US Avg)",
-        "shortLabel": "Diesel",
-        "category": "middle-mile",
-        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 6.352,
-        "lastDate": "2026-10-26",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 6.352 on 2026-10-26"
-      },
-      {
-        "date": "2026-11-02",
-        "id": "GASOLINE_RETAIL",
-        "label": "Gasoline Retail Price (US Avg)",
-        "shortLabel": "Gasoline",
-        "category": "middle-mile",
-        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.269,
-        "lastDate": "2026-10-26",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 4.269 on 2026-10-26"
-      },
-      {
-        "date": "2026-11-02",
-        "id": "GSCPI",
-        "label": "NY Fed Global Supply Chain Pressure Index",
-        "shortLabel": "GSCPI",
-        "category": "international",
-        "cadence": "NY Fed, ~5th of month",
-        "lastValue": 1.28,
-        "lastDate": "2026-09-30",
-        "unit": "",
-        "decimals": 2,
-        "context": "Last: 1.28 on 2026-09-30"
-      },
-      {
-        "date": "2026-11-02",
-        "id": "PANAMA_TRANSITS",
-        "label": "Panama Canal Monthly Transits",
-        "shortLabel": "Panama Transits",
-        "category": "international",
-        "cadence": "ACP monthly stats",
-        "lastValue": 736,
-        "lastDate": "2021-09-01",
-        "unit": "ships",
-        "decimals": 0,
-        "context": "Last: 736 on 2021-09-01"
-      },
-      {
-        "date": "2026-11-02",
-        "id": "GASREG",
-        "label": "Retail Gasoline Price (Regular)",
-        "shortLabel": "Gas Price",
-        "category": "last-mile",
-        "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.269,
-        "lastDate": "2026-10-26",
-        "unit": "$/gal",
-        "decimals": 3,
-        "context": "Last: 4.269 on 2026-10-26"
-      },
-      {
-        "date": "2026-11-02",
-        "id": "SUEZ_TRANSITS",
-        "label": "Suez Canal Monthly Transits",
-        "shortLabel": "Suez Transits",
-        "category": "international",
-        "cadence": "SCA monthly press release",
-        "lastValue": 1212,
-        "lastDate": "2026-09-01",
-        "unit": "ships",
-        "decimals": 0,
-        "context": "Last: 1,212 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-02",
-        "id": "SCP_COMPOSITE",
-        "label": "Supply Chain Pressure Composite",
-        "shortLabel": "SC Pressure",
-        "category": "composite",
-        "cadence": "recomputed at GSCPI release",
-        "lastValue": 1.154,
-        "lastDate": "2026-09-30",
-        "unit": "",
-        "decimals": 2,
-        "context": "Last: 1.15 on 2026-09-30"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "AIR_TRANSP_EMP",
-        "label": "Air Transportation Employment",
-        "shortLabel": "Air Transp Emp",
-        "category": "international",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 568.5,
-        "lastDate": "2026-09-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 569 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "COURIER_EMP",
-        "label": "Couriers & Messengers Employment",
-        "shortLabel": "Courier Emp",
-        "category": "last-mile",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 1089.6,
-        "lastDate": "2026-09-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 1,090 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "RETAIL_EMP",
-        "label": "Retail Trade Employment",
-        "shortLabel": "Retail Emp",
-        "category": "last-mile",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 15378.4,
-        "lastDate": "2026-09-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 15,378 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "TRANSPORT_SUPPORT_EMP",
-        "label": "Support Activities for Transportation Emp",
-        "shortLabel": "Transp Support",
-        "category": "last-mile",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 835,
-        "lastDate": "2026-09-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 835 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "WAREHOUSE_AHE",
-        "label": "Trade & Transp/Warehouse Avg Hourly Earnings",
-        "shortLabel": "TTU Wage",
-        "category": "dc",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 31.5,
-        "lastDate": "2026-09-01",
-        "unit": "$/hr",
-        "decimals": 2,
-        "context": "Last: 31.50 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "TRUCKING_EMP",
-        "label": "Truck Transportation Employment",
-        "shortLabel": "Trucking Emp",
-        "category": "middle-mile",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 1473.1,
-        "lastDate": "2026-09-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 1,473 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "WAREHOUSE_AHE_YOY",
-        "label": "Warehouse Wage YoY",
-        "shortLabel": "Wage YoY",
-        "category": "dc",
-        "cadence": "derived from CES",
-        "lastValue": 4.339185160649217,
-        "lastDate": "2026-09-01",
-        "unit": "%",
-        "decimals": 1,
-        "context": "Last: 4.3 on 2026-09-01"
-      },
-      {
-        "date": "2026-11-06",
-        "id": "WAREHOUSE_EMP",
-        "label": "Warehousing & Storage Employment",
-        "shortLabel": "Warehouse Emp",
-        "category": "dc",
-        "cadence": "BLS CES, ~1st Friday",
-        "lastValue": 1831.8,
-        "lastDate": "2026-09-01",
-        "unit": "k",
-        "decimals": 0,
-        "context": "Last: 1,832 on 2026-09-01"
-      },
-      {
         "date": "2026-11-09",
         "id": "DIESEL_RETAIL",
         "label": "Diesel Retail Price (US Avg)",
         "shortLabel": "Diesel",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 6.352,
-        "lastDate": "2026-10-26",
+        "lastValue": 6.292,
+        "lastDate": "2026-11-02",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 6.352 on 2026-10-26"
+        "context": "Last: 6.292 on 2026-11-02"
       },
       {
         "date": "2026-11-09",
@@ -219,11 +24,11 @@
         "shortLabel": "Gasoline",
         "category": "middle-mile",
         "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-        "lastValue": 4.269,
-        "lastDate": "2026-10-26",
+        "lastValue": 4.153,
+        "lastDate": "2026-11-02",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.269 on 2026-10-26"
+        "context": "Last: 4.153 on 2026-11-02"
       },
       {
         "date": "2026-11-09",
@@ -232,11 +37,11 @@
         "shortLabel": "Gas Price",
         "category": "last-mile",
         "cadence": "EIA Weekly Petroleum",
-        "lastValue": 4.269,
-        "lastDate": "2026-10-26",
+        "lastValue": 4.153,
+        "lastDate": "2026-11-02",
         "unit": "$/gal",
         "decimals": 3,
-        "context": "Last: 4.269 on 2026-10-26"
+        "context": "Last: 4.153 on 2026-11-02"
       },
       {
         "date": "2026-11-12",
@@ -440,11 +245,11 @@
         "shortLabel": "US Exports",
         "category": "international",
         "cadence": "BEA/Census FT900, ~6 weeks",
-        "lastValue": 205660,
-        "lastDate": "2026-08-01",
+        "lastValue": 210968,
+        "lastDate": "2026-09-01",
         "unit": "$M",
         "decimals": 0,
-        "context": "Last: 205,660 on 2026-08-01"
+        "context": "Last: 210,968 on 2026-09-01"
       },
       {
         "date": "2026-11-14",
@@ -453,11 +258,11 @@
         "shortLabel": "US Imports",
         "category": "international",
         "cadence": "BEA/Census FT900, ~6 weeks",
-        "lastValue": 342232,
-        "lastDate": "2026-08-01",
+        "lastValue": 346879,
+        "lastDate": "2026-09-01",
         "unit": "$M",
         "decimals": 0,
-        "context": "Last: 342,232 on 2026-08-01"
+        "context": "Last: 346,879 on 2026-09-01"
       },
       {
         "date": "2026-11-14",
@@ -505,11 +310,11 @@
         "shortLabel": "Class 8 Sales",
         "category": "middle-mile",
         "cadence": "BEA, monthly",
-        "lastValue": 0.396,
-        "lastDate": "2026-09-01",
+        "lastValue": 0.461,
+        "lastDate": "2026-10-01",
         "unit": "k",
         "decimals": 0,
-        "context": "Last: 0 on 2026-09-01"
+        "context": "Last: 0 on 2026-10-01"
       },
       {
         "date": "2026-11-15",
@@ -531,11 +336,11 @@
         "shortLabel": "LA-LB Imports",
         "category": "international",
         "cadence": "Port of LA, ~15th",
-        "lastValue": 11294227,
-        "lastDate": "2026-09-01",
+        "lastValue": 11532080,
+        "lastDate": "2026-10-01",
         "unit": "TEU",
         "decimals": 0,
-        "context": "Last: 11,294,227 on 2026-09-01"
+        "context": "Last: 11,532,080 on 2026-10-01"
       },
       {
         "date": "2026-11-15",
@@ -544,11 +349,11 @@
         "shortLabel": "LA-LB Ship Calls",
         "category": "international",
         "cadence": "Port of LB, ~15th",
-        "lastValue": 171,
-        "lastDate": "2026-09-01",
+        "lastValue": 172,
+        "lastDate": "2026-10-01",
         "unit": "ships",
         "decimals": 0,
-        "context": "Last: 171 on 2026-09-01"
+        "context": "Last: 172 on 2026-10-01"
       },
       {
         "date": "2026-11-15",
@@ -557,11 +362,11 @@
         "shortLabel": "Light Truck Sales",
         "category": "last-mile",
         "cadence": "BEA, monthly",
-        "lastValue": 13.465,
-        "lastDate": "2026-09-01",
+        "lastValue": 13.093,
+        "lastDate": "2026-10-01",
         "unit": "k",
         "decimals": 0,
-        "context": "Last: 13 on 2026-09-01"
+        "context": "Last: 13 on 2026-10-01"
       },
       {
         "date": "2026-11-15",
@@ -570,11 +375,11 @@
         "shortLabel": "Mfg Constr.",
         "category": "industrial-re",
         "cadence": "Census Construction Spending",
-        "lastValue": 170701,
-        "lastDate": "2026-08-01",
+        "lastValue": 170217,
+        "lastDate": "2026-09-01",
         "unit": "$M SAAR",
         "decimals": 0,
-        "context": "Last: 170,701 on 2026-08-01"
+        "context": "Last: 170,217 on 2026-09-01"
       },
       {
         "date": "2026-11-15",
@@ -596,11 +401,11 @@
         "shortLabel": "NY-NJ Imports",
         "category": "international",
         "cadence": "PANYNJ, ~5 weeks after",
-        "lastValue": 3886402,
-        "lastDate": "2021-09-01",
+        "lastValue": 4510444,
+        "lastDate": "2026-10-01",
         "unit": "TEU",
         "decimals": 0,
-        "context": "Last: 3,886,402 on 2021-09-01"
+        "context": "Last: 4,510,444 on 2026-10-01"
       },
       {
         "date": "2026-11-15",
@@ -765,11 +570,11 @@
         "shortLabel": "Private Constr.",
         "category": "industrial-re",
         "cadence": "Census Construction Spending",
-        "lastValue": 1655280,
-        "lastDate": "2026-08-01",
+        "lastValue": 1639330,
+        "lastDate": "2026-09-01",
         "unit": "$M SAAR",
         "decimals": 0,
-        "context": "Last: 1,655,280 on 2026-08-01"
+        "context": "Last: 1,639,330 on 2026-09-01"
       },
       {
         "date": "2026-11-15",
@@ -778,11 +583,11 @@
         "shortLabel": "US Exports",
         "category": "international",
         "cadence": "BEA/Census FT900, ~6 weeks",
-        "lastValue": 205660,
-        "lastDate": "2026-08-01",
+        "lastValue": 210968,
+        "lastDate": "2026-09-01",
         "unit": "$M",
         "decimals": 0,
-        "context": "Last: 205,660 on 2026-08-01"
+        "context": "Last: 210,968 on 2026-09-01"
       },
       {
         "date": "2026-11-15",
@@ -791,11 +596,11 @@
         "shortLabel": "US Imports",
         "category": "international",
         "cadence": "BEA/Census FT900, ~6 weeks",
-        "lastValue": 342232,
-        "lastDate": "2026-08-01",
+        "lastValue": 346879,
+        "lastDate": "2026-09-01",
         "unit": "$M",
         "decimals": 0,
-        "context": "Last: 342,232 on 2026-08-01"
+        "context": "Last: 346,879 on 2026-09-01"
       },
       {
         "date": "2026-11-15",
@@ -809,61 +614,74 @@
         "unit": "$M",
         "decimals": 0,
         "context": "Last: 964,199 on 2026-08-01"
+      },
+      {
+        "date": "2026-11-16",
+        "id": "DIESEL_RETAIL",
+        "label": "Diesel Retail Price (US Avg)",
+        "shortLabel": "Diesel",
+        "category": "middle-mile",
+        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+        "lastValue": 6.292,
+        "lastDate": "2026-11-02",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 6.292 on 2026-11-02"
+      },
+      {
+        "date": "2026-11-16",
+        "id": "GASOLINE_RETAIL",
+        "label": "Gasoline Retail Price (US Avg)",
+        "shortLabel": "Gasoline",
+        "category": "middle-mile",
+        "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+        "lastValue": 4.153,
+        "lastDate": "2026-11-02",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 4.153 on 2026-11-02"
+      },
+      {
+        "date": "2026-11-16",
+        "id": "GASREG",
+        "label": "Retail Gasoline Price (Regular)",
+        "shortLabel": "Gas Price",
+        "category": "last-mile",
+        "cadence": "EIA Weekly Petroleum",
+        "lastValue": 4.153,
+        "lastDate": "2026-11-02",
+        "unit": "$/gal",
+        "decimals": 3,
+        "context": "Last: 4.153 on 2026-11-02"
+      },
+      {
+        "date": "2026-11-20",
+        "id": "MFG_CAPACITY_UTIL",
+        "label": "Manufacturing Capacity Utilization",
+        "shortLabel": "Mfg Cap Util",
+        "category": "industrial-re",
+        "cadence": "Federal Reserve G.17, ~mid-month",
+        "lastValue": 75.9245,
+        "lastDate": "2026-09-01",
+        "unit": "%",
+        "decimals": 1,
+        "context": "Last: 75.9 on 2026-09-01"
       }
     ],
     "byCategory": {
       "middle-mile": [
         {
-          "date": "2026-11-02",
-          "id": "DIESEL_RETAIL",
-          "label": "Diesel Retail Price (US Avg)",
-          "shortLabel": "Diesel",
-          "category": "middle-mile",
-          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 6.352,
-          "lastDate": "2026-10-26",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 6.352 on 2026-10-26"
-        },
-        {
-          "date": "2026-11-02",
-          "id": "GASOLINE_RETAIL",
-          "label": "Gasoline Retail Price (US Avg)",
-          "shortLabel": "Gasoline",
-          "category": "middle-mile",
-          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.269,
-          "lastDate": "2026-10-26",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 4.269 on 2026-10-26"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "TRUCKING_EMP",
-          "label": "Truck Transportation Employment",
-          "shortLabel": "Trucking Emp",
-          "category": "middle-mile",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 1473.1,
-          "lastDate": "2026-09-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 1,473 on 2026-09-01"
-        },
-        {
           "date": "2026-11-09",
           "id": "DIESEL_RETAIL",
           "label": "Diesel Retail Price (US Avg)",
           "shortLabel": "Diesel",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 6.352,
-          "lastDate": "2026-10-26",
+          "lastValue": 6.292,
+          "lastDate": "2026-11-02",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 6.352 on 2026-10-26"
+          "context": "Last: 6.292 on 2026-11-02"
         },
         {
           "date": "2026-11-09",
@@ -872,11 +690,11 @@
           "shortLabel": "Gasoline",
           "category": "middle-mile",
           "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
-          "lastValue": 4.269,
-          "lastDate": "2026-10-26",
+          "lastValue": 4.153,
+          "lastDate": "2026-11-02",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.269 on 2026-10-26"
+          "context": "Last: 4.153 on 2026-11-02"
         },
         {
           "date": "2026-11-12",
@@ -937,11 +755,11 @@
           "shortLabel": "Class 8 Sales",
           "category": "middle-mile",
           "cadence": "BEA, monthly",
-          "lastValue": 0.396,
-          "lastDate": "2026-09-01",
+          "lastValue": 0.461,
+          "lastDate": "2026-10-01",
           "unit": "k",
           "decimals": 0,
-          "context": "Last: 0 on 2026-09-01"
+          "context": "Last: 0 on 2026-10-01"
         },
         {
           "date": "2026-11-15",
@@ -981,206 +799,35 @@
           "unit": "",
           "decimals": 1,
           "context": "Last: 1,314,324.0 on 2026-08-01"
-        }
-      ],
-      "international": [
-        {
-          "date": "2026-11-02",
-          "id": "GSCPI",
-          "label": "NY Fed Global Supply Chain Pressure Index",
-          "shortLabel": "GSCPI",
-          "category": "international",
-          "cadence": "NY Fed, ~5th of month",
-          "lastValue": 1.28,
-          "lastDate": "2026-09-30",
-          "unit": "",
-          "decimals": 2,
-          "context": "Last: 1.28 on 2026-09-30"
         },
         {
-          "date": "2026-11-02",
-          "id": "PANAMA_TRANSITS",
-          "label": "Panama Canal Monthly Transits",
-          "shortLabel": "Panama Transits",
-          "category": "international",
-          "cadence": "ACP monthly stats",
-          "lastValue": 736,
-          "lastDate": "2021-09-01",
-          "unit": "ships",
-          "decimals": 0,
-          "context": "Last: 736 on 2021-09-01"
+          "date": "2026-11-16",
+          "id": "DIESEL_RETAIL",
+          "label": "Diesel Retail Price (US Avg)",
+          "shortLabel": "Diesel",
+          "category": "middle-mile",
+          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+          "lastValue": 6.292,
+          "lastDate": "2026-11-02",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 6.292 on 2026-11-02"
         },
         {
-          "date": "2026-11-02",
-          "id": "SUEZ_TRANSITS",
-          "label": "Suez Canal Monthly Transits",
-          "shortLabel": "Suez Transits",
-          "category": "international",
-          "cadence": "SCA monthly press release",
-          "lastValue": 1212,
-          "lastDate": "2026-09-01",
-          "unit": "ships",
-          "decimals": 0,
-          "context": "Last: 1,212 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "AIR_TRANSP_EMP",
-          "label": "Air Transportation Employment",
-          "shortLabel": "Air Transp Emp",
-          "category": "international",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 568.5,
-          "lastDate": "2026-09-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 569 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-14",
-          "id": "US_EXPORTS",
-          "label": "US Exports of Goods",
-          "shortLabel": "US Exports",
-          "category": "international",
-          "cadence": "BEA/Census FT900, ~6 weeks",
-          "lastValue": 205660,
-          "lastDate": "2026-08-01",
-          "unit": "$M",
-          "decimals": 0,
-          "context": "Last: 205,660 on 2026-08-01"
-        },
-        {
-          "date": "2026-11-14",
-          "id": "US_IMPORTS",
-          "label": "US Imports of Goods",
-          "shortLabel": "US Imports",
-          "category": "international",
-          "cadence": "BEA/Census FT900, ~6 weeks",
-          "lastValue": 342232,
-          "lastDate": "2026-08-01",
-          "unit": "$M",
-          "decimals": 0,
-          "context": "Last: 342,232 on 2026-08-01"
-        },
-        {
-          "date": "2026-11-15",
-          "id": "PORT_LA_TEU",
-          "label": "LA-Long Beach - Container Imports (TEU)",
-          "shortLabel": "LA-LB Imports",
-          "category": "international",
-          "cadence": "Port of LA, ~15th",
-          "lastValue": 11294227,
-          "lastDate": "2026-09-01",
-          "unit": "TEU",
-          "decimals": 0,
-          "context": "Last: 11,294,227 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-15",
-          "id": "PORT_LB_TEU",
-          "label": "LA-Long Beach - Container Ship Calls",
-          "shortLabel": "LA-LB Ship Calls",
-          "category": "international",
-          "cadence": "Port of LB, ~15th",
-          "lastValue": 171,
-          "lastDate": "2026-09-01",
-          "unit": "ships",
-          "decimals": 0,
-          "context": "Last: 171 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-15",
-          "id": "PORT_NYNJ_TEU",
-          "label": "NY-NJ - Container Imports (TEU)",
-          "shortLabel": "NY-NJ Imports",
-          "category": "international",
-          "cadence": "PANYNJ, ~5 weeks after",
-          "lastValue": 3886402,
-          "lastDate": "2021-09-01",
-          "unit": "TEU",
-          "decimals": 0,
-          "context": "Last: 3,886,402 on 2021-09-01"
-        },
-        {
-          "date": "2026-11-15",
-          "id": "US_EXPORTS",
-          "label": "US Exports of Goods",
-          "shortLabel": "US Exports",
-          "category": "international",
-          "cadence": "BEA/Census FT900, ~6 weeks",
-          "lastValue": 205660,
-          "lastDate": "2026-08-01",
-          "unit": "$M",
-          "decimals": 0,
-          "context": "Last: 205,660 on 2026-08-01"
-        },
-        {
-          "date": "2026-11-15",
-          "id": "US_IMPORTS",
-          "label": "US Imports of Goods",
-          "shortLabel": "US Imports",
-          "category": "international",
-          "cadence": "BEA/Census FT900, ~6 weeks",
-          "lastValue": 342232,
-          "lastDate": "2026-08-01",
-          "unit": "$M",
-          "decimals": 0,
-          "context": "Last: 342,232 on 2026-08-01"
+          "date": "2026-11-16",
+          "id": "GASOLINE_RETAIL",
+          "label": "Gasoline Retail Price (US Avg)",
+          "shortLabel": "Gasoline",
+          "category": "middle-mile",
+          "cadence": "EIA Weekly Petroleum, Mondays 4pm ET",
+          "lastValue": 4.153,
+          "lastDate": "2026-11-02",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 4.153 on 2026-11-02"
         }
       ],
       "last-mile": [
-        {
-          "date": "2026-11-02",
-          "id": "GASREG",
-          "label": "Retail Gasoline Price (Regular)",
-          "shortLabel": "Gas Price",
-          "category": "last-mile",
-          "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.269,
-          "lastDate": "2026-10-26",
-          "unit": "$/gal",
-          "decimals": 3,
-          "context": "Last: 4.269 on 2026-10-26"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "COURIER_EMP",
-          "label": "Couriers & Messengers Employment",
-          "shortLabel": "Courier Emp",
-          "category": "last-mile",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 1089.6,
-          "lastDate": "2026-09-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 1,090 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "RETAIL_EMP",
-          "label": "Retail Trade Employment",
-          "shortLabel": "Retail Emp",
-          "category": "last-mile",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 15378.4,
-          "lastDate": "2026-09-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 15,378 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "TRANSPORT_SUPPORT_EMP",
-          "label": "Support Activities for Transportation Emp",
-          "shortLabel": "Transp Support",
-          "category": "last-mile",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 835,
-          "lastDate": "2026-09-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 835 on 2026-09-01"
-        },
         {
           "date": "2026-11-09",
           "id": "GASREG",
@@ -1188,11 +835,11 @@
           "shortLabel": "Gas Price",
           "category": "last-mile",
           "cadence": "EIA Weekly Petroleum",
-          "lastValue": 4.269,
-          "lastDate": "2026-10-26",
+          "lastValue": 4.153,
+          "lastDate": "2026-11-02",
           "unit": "$/gal",
           "decimals": 3,
-          "context": "Last: 4.269 on 2026-10-26"
+          "context": "Last: 4.153 on 2026-11-02"
         },
         {
           "date": "2026-11-14",
@@ -1279,11 +926,11 @@
           "shortLabel": "Light Truck Sales",
           "category": "last-mile",
           "cadence": "BEA, monthly",
-          "lastValue": 13.465,
-          "lastDate": "2026-09-01",
+          "lastValue": 13.093,
+          "lastDate": "2026-10-01",
           "unit": "k",
           "decimals": 0,
-          "context": "Last: 13 on 2026-09-01"
+          "context": "Last: 13 on 2026-10-01"
         },
         {
           "date": "2026-11-15",
@@ -1310,63 +957,22 @@
           "unit": "",
           "decimals": 1,
           "context": "Last: 203.0 on 2026-09-01"
-        }
-      ],
-      "composite": [
+        },
         {
-          "date": "2026-11-02",
-          "id": "SCP_COMPOSITE",
-          "label": "Supply Chain Pressure Composite",
-          "shortLabel": "SC Pressure",
-          "category": "composite",
-          "cadence": "recomputed at GSCPI release",
-          "lastValue": 1.154,
-          "lastDate": "2026-09-30",
-          "unit": "",
-          "decimals": 2,
-          "context": "Last: 1.15 on 2026-09-30"
+          "date": "2026-11-16",
+          "id": "GASREG",
+          "label": "Retail Gasoline Price (Regular)",
+          "shortLabel": "Gas Price",
+          "category": "last-mile",
+          "cadence": "EIA Weekly Petroleum",
+          "lastValue": 4.153,
+          "lastDate": "2026-11-02",
+          "unit": "$/gal",
+          "decimals": 3,
+          "context": "Last: 4.153 on 2026-11-02"
         }
       ],
       "dc": [
-        {
-          "date": "2026-11-06",
-          "id": "WAREHOUSE_AHE",
-          "label": "Trade & Transp/Warehouse Avg Hourly Earnings",
-          "shortLabel": "TTU Wage",
-          "category": "dc",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 31.5,
-          "lastDate": "2026-09-01",
-          "unit": "$/hr",
-          "decimals": 2,
-          "context": "Last: 31.50 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "WAREHOUSE_AHE_YOY",
-          "label": "Warehouse Wage YoY",
-          "shortLabel": "Wage YoY",
-          "category": "dc",
-          "cadence": "derived from CES",
-          "lastValue": 4.339185160649217,
-          "lastDate": "2026-09-01",
-          "unit": "%",
-          "decimals": 1,
-          "context": "Last: 4.3 on 2026-09-01"
-        },
-        {
-          "date": "2026-11-06",
-          "id": "WAREHOUSE_EMP",
-          "label": "Warehousing & Storage Employment",
-          "shortLabel": "Warehouse Emp",
-          "category": "dc",
-          "cadence": "BLS CES, ~1st Friday",
-          "lastValue": 1831.8,
-          "lastDate": "2026-09-01",
-          "unit": "k",
-          "decimals": 0,
-          "context": "Last: 1,832 on 2026-09-01"
-        },
         {
           "date": "2026-11-14",
           "id": "EMPIRE_DELIVERY",
@@ -1602,6 +1208,99 @@
           "context": "Last: 964,199 on 2026-08-01"
         }
       ],
+      "international": [
+        {
+          "date": "2026-11-14",
+          "id": "US_EXPORTS",
+          "label": "US Exports of Goods",
+          "shortLabel": "US Exports",
+          "category": "international",
+          "cadence": "BEA/Census FT900, ~6 weeks",
+          "lastValue": 210968,
+          "lastDate": "2026-09-01",
+          "unit": "$M",
+          "decimals": 0,
+          "context": "Last: 210,968 on 2026-09-01"
+        },
+        {
+          "date": "2026-11-14",
+          "id": "US_IMPORTS",
+          "label": "US Imports of Goods",
+          "shortLabel": "US Imports",
+          "category": "international",
+          "cadence": "BEA/Census FT900, ~6 weeks",
+          "lastValue": 346879,
+          "lastDate": "2026-09-01",
+          "unit": "$M",
+          "decimals": 0,
+          "context": "Last: 346,879 on 2026-09-01"
+        },
+        {
+          "date": "2026-11-15",
+          "id": "PORT_LA_TEU",
+          "label": "LA-Long Beach - Container Imports (TEU)",
+          "shortLabel": "LA-LB Imports",
+          "category": "international",
+          "cadence": "Port of LA, ~15th",
+          "lastValue": 11532080,
+          "lastDate": "2026-10-01",
+          "unit": "TEU",
+          "decimals": 0,
+          "context": "Last: 11,532,080 on 2026-10-01"
+        },
+        {
+          "date": "2026-11-15",
+          "id": "PORT_LB_TEU",
+          "label": "LA-Long Beach - Container Ship Calls",
+          "shortLabel": "LA-LB Ship Calls",
+          "category": "international",
+          "cadence": "Port of LB, ~15th",
+          "lastValue": 172,
+          "lastDate": "2026-10-01",
+          "unit": "ships",
+          "decimals": 0,
+          "context": "Last: 172 on 2026-10-01"
+        },
+        {
+          "date": "2026-11-15",
+          "id": "PORT_NYNJ_TEU",
+          "label": "NY-NJ - Container Imports (TEU)",
+          "shortLabel": "NY-NJ Imports",
+          "category": "international",
+          "cadence": "PANYNJ, ~5 weeks after",
+          "lastValue": 4510444,
+          "lastDate": "2026-10-01",
+          "unit": "TEU",
+          "decimals": 0,
+          "context": "Last: 4,510,444 on 2026-10-01"
+        },
+        {
+          "date": "2026-11-15",
+          "id": "US_EXPORTS",
+          "label": "US Exports of Goods",
+          "shortLabel": "US Exports",
+          "category": "international",
+          "cadence": "BEA/Census FT900, ~6 weeks",
+          "lastValue": 210968,
+          "lastDate": "2026-09-01",
+          "unit": "$M",
+          "decimals": 0,
+          "context": "Last: 210,968 on 2026-09-01"
+        },
+        {
+          "date": "2026-11-15",
+          "id": "US_IMPORTS",
+          "label": "US Imports of Goods",
+          "shortLabel": "US Imports",
+          "category": "international",
+          "cadence": "BEA/Census FT900, ~6 weeks",
+          "lastValue": 346879,
+          "lastDate": "2026-09-01",
+          "unit": "$M",
+          "decimals": 0,
+          "context": "Last: 346,879 on 2026-09-01"
+        }
+      ],
       "industrial-re": [
         {
           "date": "2026-11-15",
@@ -1610,11 +1309,11 @@
           "shortLabel": "Mfg Constr.",
           "category": "industrial-re",
           "cadence": "Census Construction Spending",
-          "lastValue": 170701,
-          "lastDate": "2026-08-01",
+          "lastValue": 170217,
+          "lastDate": "2026-09-01",
           "unit": "$M SAAR",
           "decimals": 0,
-          "context": "Last: 170,701 on 2026-08-01"
+          "context": "Last: 170,217 on 2026-09-01"
         },
         {
           "date": "2026-11-15",
@@ -1623,11 +1322,24 @@
           "shortLabel": "Private Constr.",
           "category": "industrial-re",
           "cadence": "Census Construction Spending",
-          "lastValue": 1655280,
-          "lastDate": "2026-08-01",
+          "lastValue": 1639330,
+          "lastDate": "2026-09-01",
           "unit": "$M SAAR",
           "decimals": 0,
-          "context": "Last: 1,655,280 on 2026-08-01"
+          "context": "Last: 1,639,330 on 2026-09-01"
+        },
+        {
+          "date": "2026-11-20",
+          "id": "MFG_CAPACITY_UTIL",
+          "label": "Manufacturing Capacity Utilization",
+          "shortLabel": "Mfg Cap Util",
+          "category": "industrial-re",
+          "cadence": "Federal Reserve G.17, ~mid-month",
+          "lastValue": 75.9245,
+          "lastDate": "2026-09-01",
+          "unit": "%",
+          "decimals": 1,
+          "context": "Last: 75.9 on 2026-09-01"
         }
       ]
     }
