@@ -1,14 +1,14 @@
 {
-  "asOf": "2026-10-24",
-  "oneLiner": "The largest independent GPU cloud, renting NVIDIA capacity under multi-year take-or-pay contracts and funding the build almost entirely with debt. The market is betting on whether credit stays open long enough for the backlog to turn into cash - the equity is a thin slice on top of the lenders.",
+  "asOf": "2026-11-14",
+  "oneLiner": "The largest independent GPU cloud, renting NVIDIA capacity under multi-year take-or-pay contracts and funding the build almost entirely with debt. The market is betting on whether contract-backed loans and customer prepayments can carry the build while the unsecured bond market stays shut - the equity is a thin slice on top of the lenders.",
   "verdict": {
-    "stance": "Cautious - the equity is a call on credit",
-    "summary": "Demand is not the debate: the backlog is over $100B, near-term capacity is sold out and new contracts are pricing higher. The debate is the spread between contracted GPU returns and a cost of new money that the October sell-off pushed to ~15-16% on unsecured bonds, with interest still running above adjusted operating income. Because net debt already exceeds the equity value and will keep rising through 2027, small changes in the EV/Sales the market pays swing the equity several-fold, and the bear case leaves it worth single digits. The probability-weighted value is only modestly above today with very wide outcomes, which does not pay for the credit risk. We would turn more constructive if Q3 shows adjusted operating margin heading to low-teens with interest growth slowing and bond yields back toward 10%; we would turn negative on any customer contract breach, a cash-trap trigger or a capex cut forced by funding.",
+    "stance": "Neutral - still a call on credit, odds improved",
+    "summary": "Q3 answered the operating questions and left the credit one open. Margin turned a quarter ahead of plan, customer concentration fell and management laid out a 2027 funding plan that avoids the unsecured market, yet unsecured bonds still yield about 15% and interest stays above adjusted operating income through at least Q4. Net debt already exceeds the equity value and rises through 2027, so the equity swings several-fold on the EV/Sales the market pays: the bear case leaves it in the low teens, the bull case is more than ten times that. We moved up one notch from Cautious because two of three signposts were met and less of the funding now depends on reopening bond markets. We would turn Positive if the next secured loan prices at or below 7.5%, the $9B of prepayments arrives and unsecured yields fall below ~12%; we would go back to Cautious on a contract breach, a cash-trap trigger, or a parent-level raise above the $5B management capped through 2027.",
     "wtb": [
-      "Q3 2026 revenue lands in the $3.45-3.6B guide and adjusted operating margin reaches low-teens in Q4 2026, as the CFO guided on Aug 11.",
-      "Year-end 2026 annualized run-rate revenue reaches the guided $18.5-19.5B, putting FY2027 revenue near $25B (+~95%).",
-      "Unsecured bond yields fall back below ~12% by mid-2027, so the 2027 build can be refinanced without equity issuance beyond the existing ~35M-share ATM.",
-      "No top customer (OpenAI, Microsoft, Meta) breaches or renegotiates a contract that backs project debt through 2027."
+      "Q4 2026 revenue lands at $4.7-5.0B and adjusted operating income at $750-850M (~16-17% margin), as the raised FY2026 guide implies.",
+      "FY2027 revenue reaches ~$25B (+~90%) from a $20-21B exit run-rate with capex held near the 2026 level of $37-39B.",
+      "About $9B of customer prepayments and deposits is collected by the Q4 report and parent-level capital raised through 2027 stays below $5B, with no unsecured issuance.",
+      "No customer among the top two (54% of Q3 revenue) breaches or renegotiates a contract that backs project debt through 2027."
     ]
   },
   "scenarioModel": {
@@ -16,107 +16,107 @@
     "valueDate": "2027-12-31",
     "metric": "sales",
     "bear": {
-      "p": 0.35,
-      "rev": 20,
+      "p": 0.3,
+      "rev": 21,
       "multiple": 2.5,
-      "why": "Funding costs stay near mid-teens and CoreWeave slows the 2027 build to protect liquidity; revenue barely grows past the year-end 2026 run-rate (~$20B, +~55%) and a customer renegotiation or power delay hits backlog conversion. The market values the business at ~3.5x sales on end-2027 net debt, which leaves the equity worth single digits."
+      "why": "Prepayments fall short and secured lenders tighten, so CoreWeave slows the 2027 build to protect liquidity; revenue only holds the top of the exit-2026 run-rate (~$21B, +~60%) and a customer renegotiation or power delay hits backlog conversion. Interest stays above operating income (analysts already see ~$5.3B of 2027 interest vs ~$4.1B EBIT, per TIKR). The market values the business at ~3.5x sales on end-2027 net debt, which leaves the equity in the low teens per share."
     },
     "base": {
-      "p": 0.45,
+      "p": 0.48,
       "rev": 25,
-      "multiple": 3.4,
-      "why": "Backlog converts on schedule: FY2027 revenue ~$25B (+~95%), adjusted operating margin in the low-to-mid teens and adjusted EBITDA margin ~60%. Credit spreads normalise partially, so the build continues on secured, contract-backed debt. The market pays ~4.7x FY2027 sales on end-2027 net debt - a discount to today because growth halves and leverage is higher."
+      "multiple": 3.5,
+      "why": "Backlog converts on schedule: FY2027 revenue ~$25B (+~90%) from contracted deliveries plus renewals at higher prices, adjusted operating margin in the high teens and adjusted EBITDA margin above 60%. The build is funded by prepayments and secured loans at 7-7.5%, with under $5B of parent-level capital. The market pays ~4.7x FY2027 sales on end-2027 net debt - no re-rating, because growth halves and leverage is higher."
     },
     "bull": {
-      "p": 0.2,
+      "p": 0.22,
       "rev": 29,
       "multiple": 4.8,
-      "why": "The >$25B of early-Q3 commitments and Vera Rubin pricing (+~25% in July) push FY2027 revenue to ~$29B; margins expand past mid-teens, bonds rally back toward investment-grade-like spreads and the market pays ~6x sales as visibility to 2028 consensus (~$43B) firms up."
+      "why": "Pricing keeps rising (+~25% in July, +~10% more late in Q3), 2027 renewals add close to $4B of annualized revenue with no capex and new short-term deals fill every megawatt, pushing FY2027 revenue to ~$29B. Margins pass 20%, unsecured bonds rally back toward their ~9.6% coupons and the market pays ~6x sales as visibility to 2028 consensus (~$44B) firms up."
     },
-    "note": "Value per share = (FY2027 revenue x EV/Sales - net debt) / shares. The page nets the latest net debt (~$46B: $51.6B of debt and finance leases less $5.5B cash at Jun 30, 2026) and today's ~551M shares. We expect more net debt by end-2027 (Siberforge estimate, unverified: ~+$20B bear, ~+$34B base, ~+$40B bull, from 2026 capex of $35-39B and a larger 2027 build against ~$7B of TTM operating cash flow), so the multiples shown are the true end-2027 EV/Sales (~3.5x / ~4.7x / ~6.2x) minus that extra debt per dollar of revenue. Further dilution beyond today's count is not modelled, which flatters every case. Roughly: bear ~$7, base ~$70, bull ~$168 per share. Inputs are Siberforge estimates, not consensus."
+    "note": "Value per share = (FY2027 revenue x EV/Sales - net debt) / shares. The page nets its data-feed net debt of ~$45B and ~551M shares; reported figures at Sep 30, 2026 were $47.5B of debt and finance leases less $4.1B of cash (~$43B net; $2.3B of restricted cash not netted). We expect more net debt by end-2027 (Siberforge estimate, unverified: ~+$20B bear, ~+$29B base, ~+$34B bull vs the page figure, from ~$9-10B of Q4 2026 capex and a 2027 build of ~$28B / ~$38B / ~$45B against ~$11B / ~$16B / ~$20B of operating cash flow including prepayments). The multiples shown are therefore the true end-2027 EV/Sales (~3.5x / ~4.7x / ~6.0x) minus that extra debt per dollar of revenue. Roughly: bear ~$14, base ~$78, bull ~$171 per share. The base estimate of extra debt is ~$5B lower than in October because management guided 2027 capex in line with 2026 on committed backlog. Dilution beyond today's count is not modelled (556M shares were outstanding at Oct 30 and the ATM allows 35M more; using ~590M would cut the base value to ~$72). Inputs are Siberforge estimates, not consensus."
   },
   "debates": [
     {
-      "q": "Can CoreWeave keep funding the build at a cost below its contracted returns?",
-      "bull": "Most financing is secured, delayed-draw debt tied to investment-grade customer contracts (the $3.1B syndicated DDTL in Q2, a $2.6B DDTL in Aug), Sept's $3.7B 2033 convertible priced at 2.875%, and Jensen Huang said on Oct 15 that CoreWeave's cost of capital is falling and needs no NVIDIA rescue.",
-      "bear": "Unsecured 2031 bond yields rose above 16% and five-year CDS above ~1,000bp in mid-October (Reuters, via secondary coverage) - pricing a high default probability; Q3 interest expense is guided to $860-940M against $200-260M of adjusted operating income, and net debt is ~137% of equity value on the quality check.",
-      "view": "This is the debate that sets the equity. Secured, contract-backed debt can keep the build going even at wide unsecured spreads, but every turn of spread is paid by shareholders through dilution or slower growth. We need to see yields fall before paying for the base case.",
+      "q": "Can CoreWeave fund the 2027 build without the unsecured bond market?",
+      "bull": "Management says it can: about $9B of customer prepayments and deposits is expected within three months (prepayments were collected on 70% of 2026 deals), the next delayed-draw loan should price at 7-7.5% and finance more than 90% of the related capex, secured loans trade around par, and the CFO expects less than $5B of parent-level capital through 2027. Liquidity at Sep 30 was $6.5B plus nearly $5B undrawn.",
+      "bear": "Unsecured lenders disagree: the 9.625% 2032 notes yielded above 16% on Nov 6 and a 2030 note about 15.2% with five-year CDS near 1,135bp after the print (Reuters, via secondary coverage). Debt rose to $46.9B at Sep 30, of which $10.6B is current, Q4 interest is guided at $1.05-1.15B, and net debt is well above the equity value on the quality check.",
+      "view": "The plan is credible on paper because the money comes from customers and asset-level lenders who see the contracts, not from bond buyers. But it is a plan: prepayments are a forecast and the parent-level cap has not been tested. We give it better-than-even odds and want the cash to arrive before paying for more than the base case.",
       "signpost": {
-        "metric": "Yield on CoreWeave unsecured 2031/2032 notes; Q3 interest expense vs guide",
-        "threshold": "constructive below ~12% with interest inside $860-940M; bearish above ~18% or any equity raise outside the ATM",
-        "when": "Q3 2026 report (~Nov 10-16, 2026; date not yet announced) and through Q1 2027"
+        "metric": "Coupon on the next DDTL; prepayments and deposits collected; yield on unsecured 2031/2032 notes",
+        "threshold": "constructive: loan at or below 7.5%, ~$9B collected, yields below ~12%; bearish: loan above ~8.5%, under $6B collected, yields above ~18% or any equity raise outside the ATM",
+        "when": "Loan launch in the coming weeks; Q4 2026 report, late Feb 2027"
       }
     },
     {
-      "q": "Does margin turn up as the fleet scales, or does depreciation and interest eat it?",
-      "bull": "The CFO guided adjusted operating margin to expand every quarter to low-teens by Q4 2026; Q2 contracts carried contribution margins 5-10pts above recent cohorts and pricing rose ~25% across SKUs in July. Adjusted EBITDA margin was 59% in Q2.",
-      "bear": "The quality check shows operating margin contracting from +4% to -2% over four quarters; Q2 adjusted operating income fell to $128M (5%) from $200M (16.5%) a year earlier while revenue doubled, because new capacity carries depreciation and lease cost before it bills.",
-      "view": "The margin dip is mostly the cost of bringing capacity online early, but it has to reverse on schedule - the base case needs low-teens adjusted margins in Q4 2026. If Q3 misses the $200-260M guide, the bear case gains weight fast.",
+      "q": "Does operating income outgrow the interest bill in 2027?",
+      "bull": "The amber margin row on the quality check is turning: adjusted operating margin doubled to 10% in Q3 from 5% in Q2 and the raised FY2026 guide implies ~16-17% in Q4. Short-term deals sell above $40M per MW a year, new 4-5 year contracts at $20-25M per MW, and management expects the adjusted net loss to narrow in 2027 and turn positive in 1H 2028.",
+      "bear": "Interest of $846M was still 2.2x adjusted operating income in Q3 and the Q4 guide keeps it above the implied $750-850M. The GAAP net loss widened to $709M, and analysts model 2027 interest above 2027 EBIT (TIKR). Adjusted figures exclude stock compensation that shows up as dilution.",
+      "view": "The margin thesis is intact and ahead of schedule; the open question moved from whether margin turns to whether it outruns debt service. We expect adjusted operating income to pass interest in 2H 2027 in the base case. A Q4 miss on the implied range would reopen the bear case.",
       "signpost": {
-        "metric": "Q3 2026 adjusted operating income and Q4 margin guide",
-        "threshold": "above $230M and Q4 low-teens reaffirmed = on track; below $200M = margin thesis broken",
-        "when": "Q3 2026 report, ~mid-Nov 2026"
+        "metric": "Q4 2026 adjusted operating income vs interest expense; FY2027 margin and interest guide",
+        "threshold": "above $800M with interest inside $1.05-1.15B and a FY2027 guide where adjusted operating income covers interest by year-end = on track; below $700M = margin thesis slipping",
+        "when": "Q4 2026 report, late Feb 2027"
       }
     },
     {
       "q": "Is the backlog as good as cash?",
-      "bull": "Backlog was $104B at Jun 30 (+246% YoY) excluding more than $25B of net new commitments signed early in Q3, with NVIDIA obliged to buy unsold capacity through Apr 2032; contracted power rose to ~4.2GW.",
-      "bear": "Top two customers were 65% of Q1 2026 revenue, OpenAI's reported annualized revenue of ~$50B (Oct 8) was below the ~$70B reported weeks earlier, and a loan clause can trap cash if a customer backing a $2.6B facility breaches and has a termination right.",
-      "view": "The backlog is the reason the equity has value at all, but it is only as good as the funding of the two or three buyers behind most of it. We treat a single counterparty event as the main path to the bear case.",
+      "bull": "Backlog rose by ~$28B in a quarter and more than half is tied to contracts with delivery starting by end-2026; the two largest customers fell to 30% and 24% of Q3 revenue (54%, from 36% and 26% in Q2) and ~90% of growth came from existing customers. NVIDIA must buy unsold capacity through Apr 2032 and management puts qualified demand through 2027 at 10x available capacity.",
+      "bear": "Only 36% of the $132.3B of remaining performance obligations falls due by Sep 2028; the rest runs out to 2033, long after today's GPUs are a generation or two old. Two buyers are still more than half of revenue, OpenAI's funding is not CoreWeave's to control, and a loan clause can trap cash if a customer backing a $2.6B facility breaches.",
+      "view": "Diversification is working but only just through our 55% threshold. The backlog is the reason the equity has value; its near-term slice (~$48B over 24 months) supports the base case, while the long tail deserves a discount. A single counterparty event remains the main path to the bear case.",
       "signpost": {
-        "metric": "Backlog and top-customer share disclosed with Q3; any cash-trap or contract-amendment 8-K",
-        "threshold": "top-two share below 55% = diversification working; any cash-trap event = bear case",
-        "when": "Q3 2026 10-Q, ~mid-Nov 2026"
+        "metric": "FY2027 revenue guide; top-two customer share; any cash-trap or contract-amendment 8-K",
+        "threshold": "FY2027 guide at or above ~$24B and top-two share below 50% = base case or better; guide below ~$22B or any cash-trap event = bear case",
+        "when": "Q4 2026 report and 10-K, late Feb 2027"
       }
     }
   ],
   "thesis": [
-    "Demand is contracted, not hoped for. Backlog of $104B at Jun 30 plus more than $25B signed early in Q3, near-term capacity 'effectively sold out', and NVIDIA's purchase obligation on unsold capacity through Apr 2032 put a floor under utilisation.",
-    "Pricing is rising, not falling. New Blackwell/Vera Rubin contracts carry contribution margins 5-10pts above recent cohorts and July list pricing rose ~25% across SKUs, which is what turns the margin curve (debate 2).",
-    "Scale compounds. Revenue more than doubled for four straight quarters, active power reached 1.5GW with >1.85GW guided for year-end, and consensus sees 2028 revenue near $43B - the first-mover allocation of each NVIDIA generation is the moat.",
-    "Funding still clears. Even through the October stress CoreWeave issued a $3.7B 2033 convertible at 2.875% (Sept) and draws secured, contract-backed facilities; the unsecured bonds are a small part of the stack (debate 1)."
+    "Demand is contracted, not hoped for. Backlog is up 138% YoY, capacity is largely sold out through 2027 and NVIDIA's purchase obligation on unsold capacity through Apr 2032 puts a floor under utilisation (debate 3).",
+    "Pricing is rising, not falling. Two list-price increases in Q3 and short-term deals above $40M per MW are what turned the margin curve a quarter early; ~130,000 GPUs come off contract in 2027 and could reprice into close to $4B of annualized revenue with no new capex (debate 2).",
+    "Scale compounds. Q3 growth accelerated to +168% after four quarters near +110%, the exit-2026 run-rate guide rose to $20-21B and contracted power reached 4.6GW - first allocation of each NVIDIA generation is the moat.",
+    "Funding is shifting to customers and secured lenders. Prepayments, contract-backed delayed-draw loans at 7-7.5% and a parent-level raise capped below $5B through 2027 mean the distressed unsecured bonds are a price signal more than a funding source (debate 1)."
   ],
   "latestQuarter": {
-    "label": "Q2 2026 (ended Jun 30, 2026; reported Aug 11, 2026)",
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Nov 10, 2026)",
     "points": [
-      "Revenue $2.58B, +112% YoY, +24% QoQ; above guide.",
-      "Adjusted operating income $128M (5% margin, vs $200M a year earlier); GAAP operating loss $49M; GAAP net loss $626M; adjusted EBITDA $1.51B (59%).",
-      "Interest expense $640M; capex $6.4B; quarter FCF roughly -$5.7B.",
-      "Backlog ~$104B (+246%), excluding >$25B of net new commitments signed in early Q3; active power 1.5GW, contracted ~3.7GW (~4.2GW by Aug 11).",
-      "Q2 financing: $3.1B syndicated DDTL, $1B Jane Street equity investment, >$10B of unsecured and convertible debt including the first Eurobond."
+      "Revenue $3.66B, +168% YoY, +42% QoQ; above the $3.45-3.6B guide and ~$3.55B consensus.",
+      "Adjusted operating income $379M (10% margin; guide was $200-260M); GAAP operating income $207M (6%); GAAP net loss $709M ($1.27 per share); adjusted EBITDA $2.26B (62%).",
+      "Interest expense, net $846M (below the $860-940M guide); operating cash flow $1.98B; cash purchases of property and equipment $9.4B (management cited capex of $14.5B, with deliveries pulled forward from Q4).",
+      "Backlog ~$132.5B at Sep 30 (from ~$104B at Jun 30); active power above 1.7GW, contracted above 4.6GW (more than 1.3GW international).",
+      "Debt $46.9B ($41.6B recourse, $5.3B non-recourse) and cash $4.1B at Sep 30. Q3 financing: ~$4.2B of convertible notes, a $2.6B DDTL and a first ATM program for up to 35M shares."
     ]
   },
-  "latestProse": "Q2 2026 (ended Jun 30; reported Aug 11). Revenue $2.58B, +112% YoY and +24% QoQ, ahead of guide; adjusted EBITDA $1.51B (59% margin), but adjusted operating income fell to $128M (5%) from $200M a year earlier as new capacity carried depreciation before billing, and interest expense of $640M ran five times that figure; GAAP net loss $626M on 551M shares. Capex was $6.4B. Backlog reached ~$104B (+246%) before more than $25B of net new commitments signed early in Q3, and management called near-term capacity effectively sold out. Since the print the story moved from demand to credit: shares fell ~7.8% on Oct 8 on a lower OpenAI revenue report, then more than 15% on Oct 14 as unsecured 2031 bond yields rose above 16% and CDS passed ~1,000bp; Jensen Huang's Oct 15 comments (cost of capital falling, no NVIDIA backstop needed) lifted the stock 5.9% to $69.69 that day. No rating-agency downgrade was found.",
-  "guidanceProse": "Q3 2026: revenue $3.45-3.6B (+~153-164% YoY), adjusted operating income $200-260M, interest expense $860-940M, capex $11.5-13.5B. FY2026 raised on Aug 11: revenue $12.4-13.2B, adjusted operating income $960M-1.15B, capex $35-39B (from $31-35B), year-end annualized run-rate revenue $18.5-19.5B and active power above 1.85GW. The CFO guided adjusted operating margin up each quarter to low-teens in Q4. The Q3 report date has not been announced; last year's came on Nov 10.",
+  "latestProse": "Q3 2026 (ended Sep 30; reported Nov 10). Revenue $3.66B, +168% YoY and +42% QoQ, above the top of guidance; adjusted EBITDA $2.26B (62% margin) and adjusted operating income $379M (10%), a double-digit margin one quarter ahead of plan, against net interest expense of $846M; GAAP operating income $207M and GAAP net loss $709M ($1.27 per share on 559M weighted shares, +12% YoY). Operating cash flow was $1.98B and cash capex $9.4B ($14.5B on management's basis, with Q4 deliveries pulled forward). Backlog reached ~$132.5B and debt $46.9B. On the call management said capacity is largely sold out through 2027, that it will not issue parent-level unsecured debt at current yields, and that committed backlog alone implies 2027 capex in line with 2026. Shares had lost about 40% in the month before the print as unsecured yields passed 16% and CDS peaked near 1,290bp (Nov 5); they rose ~24% on Nov 11. No rating-agency action was found.",
+  "guidanceProse": "FY2026 raised on Nov 10: revenue $13.0-13.3B (from $12.4-13.2B), adjusted operating income $1.275-1.375B (from $960M-1.15B), capex $37-39B (low end up from $35B), exit-2026 annualized run-rate revenue $20-21B (from $18.5-19.5B), year-end active power above 1.85GW (reiterated). Q4 2026 interest expense $1.05-1.15B. Less the nine-month actuals, the guide implies Q4 revenue of ~$4.7-5.0B and adjusted operating income of ~$750-850M (Siberforge arithmetic). No FY2027 guide yet; management expects the adjusted net loss to narrow in 2027 and adjusted net income from 1H 2028.",
   "guide": {
-    "label": "FY26 rev guide (raised Aug 11)",
-    "val": "$12.4-13.2B",
-    "sub": "capex $35-39B | Q3 $3.45-3.6B | adj. op inc. $960M-1.15B",
-    "tone": "warn"
+    "label": "FY26 rev guide (raised Nov 10)",
+    "val": "$13.0-13.3B",
+    "sub": "adj. op inc. $1.275-1.375B | capex $37-39B | exit ARR $20-21B",
+    "tone": "accent"
   },
   "segments": [
-    "GPU cloud (neocloud): rents NVIDIA-based AI capacity (Blackwell, Vera Rubin NVL72) under multi-year committed contracts to AI labs (OpenAI, Anthropic), hyperscalers (Microsoft, Meta) and trading firms (Jane Street, Hudson River Trading).",
-    "Funding structure: $51.6B of debt and finance leases at Jun 30, 2026 (about $35.6B of financial debt per TIKR) - mostly secured delayed-draw facilities backed by customer contracts, plus unsecured notes (8.5-9.75% coupons) and convertibles; ATM program for up to 35M shares."
+    "GPU cloud (neocloud): rents NVIDIA-based AI capacity (Blackwell, Vera Rubin NVL72) under multi-year committed contracts to AI labs (OpenAI, Anthropic), hyperscalers (Microsoft, Meta) and trading firms (Jane Street, Hudson River Trading); Q3 2026 added Canva, Substack and Wayve among others.",
+    "Funding structure: mostly secured delayed-draw facilities backed by customer contracts (an $8.5B investment-grade loan in Mar 2026 carried a ~5.9% fixed tranche), plus unsecured notes (8.5-9.75% coupons), convertibles and a small non-recourse layer; ATM program for up to 35M shares."
   ],
   "competitive": [
     "Hyperscalers (AWS, Azure, GCP, OCI) are both customers and competitors; Microsoft and Meta keep building their own capacity alongside CoreWeave contracts.",
-    "Neoclouds: Nebius, Crusoe, Lambda, Nscale (Nvidia-backed; reported IPO plans in Aug 2026, status unverified) and Applied Digital/Iren as power-led hosts - the whole group sold off with CoreWeave in mid-October.",
-    "On-demand prior-generation GPU pricing is fragmented, while new-generation contract pricing is rising; the spread between the two is the repricing risk at renewal.",
-    "India and Europe expansion (240MW India campus announced Oct 6, 2026, capacity from mid-2028; UK Blackwell Ultra deployment) widens the footprint but adds capex before revenue."
+    "Neoclouds: Nebius, Crusoe, Lambda, Nscale (Nvidia-backed; reported IPO plans in Aug 2026, status unverified) and Applied Digital/Iren as power-led hosts - the whole group sold off with CoreWeave in October.",
+    "On-demand prior-generation GPU pricing is fragmented, while new-generation contract pricing is rising; the spread between the two is the repricing risk - or, as in 2026, the repricing gain - at renewal.",
+    "India, Indonesia and Spain make up more than 1.3GW of contracted power (240MW India campus announced Oct 6, 2026, capacity from mid-2028), widening the footprint but adding capex before revenue."
   ],
-  "moat": "Scale, NVIDIA allocation priority and $100B+ of contracted revenue - not technology. GPUs are a commodity any rival can buy; the edge is deployment speed, access to contract-backed financing and switching friction inside multi-year commitments. The moat is only as durable as the capital markets that fund it.",
+  "moat": "Scale, NVIDIA allocation priority and $130B+ of contracted revenue - not technology. GPUs are a commodity any rival can buy; the edge is deployment speed, access to contract-backed financing and switching friction inside multi-year commitments. The moat is only as durable as the capital markets that fund it.",
   "risks": [
-    "Credit is the binding constraint. Net debt of ~$46B at Jun 30 (137% of equity value on the quality check) keeps rising with capex of $35-39B in 2026; unsecured yields of ~15-16% and CDS above ~1,000bp in October price a high default probability (debate 1).",
-    "Dilution is the release valve. Diluted shares rose 13.1% YoY to 551M (stock comp, Jane Street's $1B investment and, unverified, convertible conversions), and the ATM allows up to ~35M more (~6%) - each share owns less of a growing but leveraged business.",
-    "Margins went backwards before they go forward. Operating margin fell from +4% to -2% over four quarters and Q3 interest is guided at ~3.3-4.7x adjusted operating income; if low-teens adjusted margins slip past Q4 2026, the equity has no earnings cushion (debate 2).",
-    "Counterparty concentration. Top two customers were 65% of Q1 2026 revenue; OpenAI's funding capacity and a cash-trap clause on contract-backed debt link one customer's problems directly to CoreWeave's liquidity (debate 3).",
-    "Depreciation and repricing. GPUs depreciate over six years against roughly annual product cycles; prior-generation fleets reprice at renewal into a fragmented spot market."
+    "Credit is the binding constraint. Q3 debt proceeds were $10.3B against $2.3B of repayments and borrowing keeps rising with the 2027 build, the leverage row on the quality check is flagged, and the unsecured market is priced for distress - the funding plan works only if prepayments and secured loans arrive as described (debate 1).",
+    "Dilution is the release valve. Diluted shares rose 13.1% YoY on the quality check (stock comp, private placements of ~$3.0B in the first nine months of 2026); the ATM allows ~35M more (~6%) and the ~$4.2B of convertibles issued in Q3 add potential shares - each share owns less of a growing but leveraged business.",
+    "Interest outruns operating income. GAAP operating margin spent three quarters below zero before Q3 and debt service still exceeds adjusted operating income; a slip in the implied Q4 margin leaves no earnings cushion under the debt (debate 2).",
+    "Counterparty concentration. Two customers are more than half of revenue; OpenAI's funding capacity and a cash-trap clause on contract-backed debt link one customer's problems directly to CoreWeave's liquidity (debate 3).",
+    "Depreciation and repricing. GPUs depreciate over six years against roughly annual product cycles, capex ran at 271% of TTM revenue on the quality check, and most of the backlog falls due after Sep 2028 - renewal pricing that helps today can reverse when supply catches up."
   ],
   "catalysts": [
-    "~Nov 10-16, 2026 (not yet announced): Q3 2026 report - revenue vs $3.45-3.6B, adjusted operating income vs $200-260M, interest vs $860-940M, Q4 margin (debates 1, 2, 3).",
-    "Nov 2026: NVIDIA Q3 FY2027 report (~Nov 18) - Vera Rubin ramp and any comment on neocloud financing (debate 1).",
-    "Q4 2026 to Q1 2027: refinancing and new facility announcements; unsecured bond yields and CDS as the daily read on debate 1.",
-    "Late Feb 2027: Q4 2026 report and FY2027 guide - first full-year 2027 revenue, capex and funding plan (debates 1, 2)."
+    "Nov 18, 2026 (approx.): NVIDIA Q3 FY2027 report - Vera Rubin ramp and any comment on neocloud financing (debate 1).",
+    "Nov-Dec 2026: launch and pricing of the next delayed-draw term loan, guided at 7-7.5% (debate 1).",
+    "Through Feb 2027: receipt of ~$9B of customer prepayments and deposits; unsecured bond yields and CDS as the daily read (debate 1).",
+    "Late Feb 2027: Q4 2026 report and first FY2027 guide - revenue, capex, interest and the funding plan (debates 1, 2, 3)."
   ],
   "valPresets": {
     "mode": "revenue",
@@ -138,11 +138,15 @@
       "fcfMargin": 0.22,
       "exit": 28
     },
-    "note": "FCF-based DCF is meaningless while TTM FCF is about -$13.7B. This mode grows revenue, applies a horizon FCF margin and an exit multiple, and nets off today's debt. Interim burn and future dilution are ignored -- generous to every case."
+    "note": "FCF-based DCF is meaningless while TTM FCF is about -$20B. This mode grows revenue, applies a horizon FCF margin and an exit multiple, and nets off today's debt. Interim burn and future dilution are ignored -- generous to every case."
   },
   "bullCharts": {"0": ["revQ"], "1": ["gmA"], "2": ["revA"]},
   "bearCharts": {"0": ["fcfQ"], "2": ["omA"], "4": ["capexPctA"]},
   "changelog": [
+    {
+      "date": "2026-11-14",
+      "change": "Q3 2026 print (Nov 10). Signposts: margin MET (adjusted operating income $379M vs our $230M bar; Q4 implied ~16-17% vs low-teens); backlog MET narrowly (top-two share 54% vs our 55% bar, no cash-trap event found); funding NOT MET (interest $846M came in under guide, but unsecured yields stayed ~15-16% vs our 12% bar, short of the 18% bearish line). New: backlog $132.5B, FY2026 guide raised, 2027 funding plan without unsecured debt. The view moved up one notch, Cautious to Neutral; scenarios now bear ~$14 / base ~$78 / bull ~$171 with bear probability cut from 35% to 30%."
+    },
     {
       "date": "2026-10-24",
       "change": "Rebuilt as a v3 decision note. Added the October credit sell-off (2031 bond yields >16%, CDS >~1,000bp, Huang's Oct 15 defence) and corrected the guide to the Aug 11 figures (Q3 $3.45-3.6B, FY capex $35-39B). Stance set at Cautious with scenarios on FY2027 EV/Sales (bear ~$7 / base ~$70 / bull ~$168). The view moved from demand to credit: no fundamental change since Q2, but the equity now depends on bond markets reopening."
@@ -153,16 +157,19 @@
     }
   ],
   "sources": [
-    {"label": "CoreWeave Q2 2026 results release (Aug 11, 2026): revenue, adjusted op income, EBITDA, interest, capex, backlog, power, financing, shares", "url": "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Reports-Strong-Second-Quarter-2026-Results/default.aspx"},
-    {"label": "MarketBeat: Q2 2026 call highlights - Q3 and FY2026 guidance, margin outlook, July pricing, >$25B new commitments (Aug 11, 2026)", "url": "https://www.marketbeat.com/instant-alerts/coreweave-q2-earnings-call-highlights-2026-08-11/"},
-    {"label": "Pulse 2.0: backlog $104B before another $25B of commitments; contracted power ~4.2GW (Aug 2026)", "url": "https://pulse2.com/coreweave-revenue-backlog-reaches-104-billion-before-another-25-billion-of-new-commitments/"},
-    {"label": "LetsDataScience (citing Reuters, TrendSpider): Oct 14-15 sell-off, 2031 bond yields >16%, CDS ~1,000bp, NVIDIA capacity purchase through Apr 13, 2032 (Oct 20, 2026)", "url": "https://letsdatascience.com/news/coreweave-shares-and-bonds-slide-as-debt-fears-grip-ai-build-b082a38e"},
-    {"label": "Bloomberg Government: Huang says CoreWeave improving, no backstop needed; close +5.9% at $69.69 (Oct 15, 2026)", "url": "https://news.bgov.com/artificial-intelligence/nvidia-ceo-huang-says-coreweave-improving-no-backstop-needed"},
-    {"label": "FXStreet: BofA reiterates $140 target, 2027 growth 105% / 2028 63% (Oct 16, 2026)", "url": "https://www.fxstreet.com/news/after-steep-sell-off-jensen-huang-and-bofa-help-coreweave-shares-rebound-202610160557"},
-    {"label": "TIKR: Oct 8 drop on OpenAI ~$50B revenue report, cash-trap clause on $2.6B loan, $3.7B 2033 converts at 2.875%, ATM 35M shares, 2028 consensus ~$43B, $35.6B financial debt (Oct 2026)", "url": "https://www.tikr.com/blog/coreweave-stock-fell-nearly-8-in-a-day-on-an-openai-revenue-report-heres-why-its-borrowing-model-raises-the-stakes"},
-    {"label": "Forbes: OpenAI dependency, top-customer concentration (Apr 29, 2026)", "url": "https://www.forbes.com/sites/phoebeliu/2026/04/29/coreweave-depends-on-openai-what-if-the-ai-chatgpt-maker-cant-pay-up/"},
-    {"label": "Hudson River Trading multiyear deal on Vera Rubin NVL72 (CoreWeave newsroom, Aug 20, 2026)", "url": "https://www.coreweave.com/news/hudson-river-trading-to-build-next-gen-research-platform-powered-by-nvidia-vera-rubin-nvl72-on-coreweave-cloud"},
-    {"label": "CoreWeave Q3 2025 results date announcement (Nov 10, 2025 precedent)", "url": "https://investors.coreweave.com/news/news-details/2025/CoreWeave-Announces-Date-of-Third-Quarter-2025-Financial-Results/default.aspx"},
-    {"label": "SEC EDGAR XBRL (site filings data): debt and finance leases $51.6B, cash $5.5B, diluted shares, TTM cash flow through Jun 2026", "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001769628&type=10-Q"}
+    {"label": "CoreWeave Q3 2026 results release (Nov 10, 2026): revenue, operating and adjusted operating income, EBITDA, interest, cash flow, debt lines, backlog, power, financing, customers, FY2026 guide, Q4 interest guide", "url": "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Reports-Strong-Third-Quarter-2026-Results/default.aspx"},
+    {"label": "CoreWeave Form 10-Q for Sep 30, 2026: customer concentration (30% / 24%), RPO $132.3B and timing, finance leases, shares outstanding at Oct 30, ~90% of growth from existing customers", "url": "https://www.sec.gov/Archives/edgar/data/0001769628/000176962826000465/crwv-20260930.htm"},
+    {"label": "MarketBeat: Q3 2026 call highlights - capex $14.5B, liquidity, prepayments, next DDTL at 7-7.5%, <$5B parent-level capital, pricing, 2027 capex and renewals, profitability path (Nov 10, 2026)", "url": "https://www.marketbeat.com/instant-alerts/transcript-coreweave-q3-earnings-call-highlights-2026-11-10/"},
+    {"label": "SiliconANGLE: Q3 2026 results, prior guide ranges, no parent-level unsecured debt through 2027 at current yields, secured loans around par, shares +~25% (Nov 2026)", "url": "https://siliconangle.com/?p=853772"},
+    {"label": "24/7 Wall St: Q3 2026 summary - consensus, backlog, run-rate target, $9B prepayments, Nov 11 share move", "url": "https://247wallst.com/cards/coreweave-q3-2026-earnings-crwv-01m73msrkgrgan75a5t7tb9fmz"},
+    {"label": "investingLive: Q3 2026 vs consensus on seven metrics (Nov 10, 2026)", "url": "https://investinglive.com/stocks/coreweave-q3-beats-on-seven-key-metrics-lifts-full-year-revenue-and-run-rate-guidance/"},
+    {"label": "Finimize (citing Reuters): after the print a 2030 bond yields ~15.2%, five-year CDS ~1,135 (Nov 2026)", "url": "https://finimize.com/content/coreweaves-revenue-beat-didnt-quiet-its-debt-fears"},
+    {"label": "TIKR: 9.625% 2032 notes above 16% on Nov 6, $8.5B investment-grade loan at ~5.9%, 2027 interest $5.3B vs EBIT $4.1B (analysts), 2028 consensus $43.7B, Q2 top customer 36% (Nov 9, 2026)", "url": "https://www.tikr.com/blog/coreweave-borrowed-at-9-earlier-this-year-its-debt-now-yields-15-going-into-tuesdays-report"},
+    {"label": "Business News Today: interest $310M to $846M, Q4 interest guide, share prices before the print (Nov 2026)", "url": "https://business-news-today.com/coreweave-revenue-surges-168-but-846m-interest-bill-threatens-ai-cloud-returns/"},
+    {"label": "sec-api.io: customer concentration history - Q2 2026 36% / 26% / 10%, Q1 2026 45% (Sep 8, 2026)", "url": "https://sec-api.io/insights/coreweave-crwv-2026-revenue-analysis-top-customer-concentration-exposure"},
+    {"label": "CoreWeave Q2 2026 results release (Aug 11, 2026): prior-quarter figures and backlog", "url": "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Reports-Strong-Second-Quarter-2026-Results/default.aspx"},
+    {"label": "LetsDataScience (citing Reuters, TrendSpider): Oct 14-15 sell-off, NVIDIA capacity purchase through Apr 13, 2032 (Oct 20, 2026)", "url": "https://letsdatascience.com/news/coreweave-shares-and-bonds-slide-as-debt-fears-grip-ai-build-b082a38e"},
+    {"label": "TIKR: cash-trap clause on $2.6B loan, $3.7B 2033 converts at 2.875%, ATM 35M shares (Oct 2026)", "url": "https://www.tikr.com/blog/coreweave-stock-fell-nearly-8-in-a-day-on-an-openai-revenue-report-heres-why-its-borrowing-model-raises-the-stakes"},
+    {"label": "SEC EDGAR XBRL (site filings data): diluted shares, TTM cash flow and capex through Jun 2026", "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001769628&type=10-Q"}
   ]
 }

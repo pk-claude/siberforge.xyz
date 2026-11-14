@@ -1,68 +1,127 @@
 {
-  "asOf": "2026-08-25",
-  "oneLiner": "AI-native neocloud converting a $46B-plus Microsoft and Meta backlog into revenue growing 454%, now part-funding its $20-25B capex bet with $5.75B of fresh converts -- and paying for it in dilution and an 18% post-earnings round trip.",
-  "thesis": [
-    "The backlog is anchored by two of the largest AI buyers on earth. Microsoft signed a five-year $17.4B dedicated-capacity contract (September 2025, expandable to $19.4B) served from a new Vineland, New Jersey site. Meta grew from a $3B five-year deal (December 2025) to a $12B commitment plus a $15B option (May 2026), taking potential backlog above $46B.",
-    "Growth is hyperscaler-fast and, unusually for a neocloud, EBITDA-positive. Q2 2026 (reported August 12, 2026) revenue rose 454% YoY to $582.3M with AI Cloud up 514%, and adjusted EBITDA turned positive at $236M, a 41% margin.",
-    "The balance sheet plus strategic stakes give funding options peers lack, now topped up with converts. Nebius held roughly $9.3B of cash at Q2 2026, closed a $5.75B convertible senior notes offering on Aug 24, 2026, and owns stakes in ClickHouse (~28%), Avride (~83%), Toloka and TripleTen, an estimated $7-8B of monetizable value versus CoreWeave's $50.8B of total liabilities.",
-    "Management is running a power land-grab. On the August 12, 2026 call, the year-end contracted power target was raised to 5 GW, with four new AI cloud deals averaging more than $1B of total contract value each at $20-25M annual contract value per megawatt.",
-    "Execution is the whole story, and financing is no longer free. The 2026 capex guide of $20-25B (raised from $16-20B in May 2026) is several times the cash on hand; the August financings -- an $800M convert-for-equity swap (15.8M shares, ~5.5% dilution per Reuters) followed by the $5.75B convert raise -- closed part of the gap but knocked roughly 18% off the stock in under two weeks."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Aug 12, 2026)",
-    "points": [
-      "Revenue $582.3M, up 454% YoY; AI Cloud revenue up 514% YoY (Q1 2026 was $399M, up 684%)",
-      "Adjusted EBITDA turned positive at $236M, roughly a 41% margin",
-      "Adjusted EPS -$0.12 vs -$0.69 consensus; revenue roughly in line with the $584M estimate",
-      "Annualized run-rate revenue reached $3.0B in the quarter",
-      "Four new AI cloud contracts with average total contract value above $1B each, at $20-25M annual contract value per contracted megawatt",
-      "Year-end contracted power target raised to 5 GW; FY26 guidance reaffirmed: revenue $3.0-3.4B, ~40% adjusted EBITDA margin, capex $20-25B, ARR exit $7-9B",
-      "Post-quarter: capex ran $5.7B in Q2 alone; in the week of Aug 17 Nebius swapped $800M of existing converts for 15.8M shares (~5.5% dilution) and priced a $5B convertible offering that closed Aug 24 at $5.75B total."
+  "asOf": "2026-11-14",
+  "oneLiner": "AI-native neocloud building GPU capacity for Microsoft, Meta and a growing enterprise list, spending several times its revenue to do it. The market is betting that a contracted backlog and customer prepayments can fund a 2027 build bigger than the company's own equity value, and that capacity now arrives on the dates promised.",
+  "verdict": {
+    "stance": "Neutral - demand intact, delivery and funding unproven",
+    "summary": "Q3 was the first quarter where the dates slipped: the year-end run-rate target moved two months, the 2026 revenue guide went to the low end, and a third of reported revenue was non-recurring. Demand is not the problem - new deals price higher and customers now prepay more than the capex behind them - but the equity is a levered residual: we estimate net debt rises from about $7B to roughly $32B by end-2027, so each turn of EV/Sales moves the share value by about $40. Our probability-weighted value sits close to where the stock trades, with a bear case that loses most of the value and a bull case that gains about as much in dollars, which is not enough skew to pay for execution and dilution risk. We would turn positive if Q4 revenue clears about $1.04B on recurring revenue (not partner fees) and February run-rate exceeds $7B; we would turn cautious on a second slip in the Microsoft schedule or an equity raise well beyond the at-the-market program.",
+    "wtb": [
+      "Q4 2026 revenue reaches at least ~$1.04B (what the $3.0B low end requires), with recurring revenue well above Q3's ~$656M.",
+      "Annualized run-rate revenue exceeds $7B for the month of February 2027 and the remaining Microsoft tranches in New Jersey are delivered in 2Q27.",
+      "FY2027 revenue lands in the $12-13B outlook (about 4x 2026) and pre-tax profit reaches breakeven in Q4 2027 on five-year compute depreciation.",
+      "Prepayments ($17-20B) and contract-backed debt fund 75-85% of the $40-45B 2027 capex, keeping new share issuance to mid-single digits of the share count per year."
     ]
   },
-  "latestProse": "Nebius reported Q2 2026 on August 12: revenue of $582.3 million, up 454% year over year with AI Cloud up 514%, and adjusted EBITDA swinging positive to $236 million, a 41% margin. Adjusted EPS of -$0.12 beat the -$0.69 consensus by a wide margin, annualized run-rate revenue hit $3.0 billion, and management closed four new AI cloud contracts averaging more than $1 billion of total value each. Shares surged roughly 34% on the print to ~$254 intraday -- then gave essentially all of it back: an $800M convert-for-equity swap (~5.5% dilution), a $5B convertible offering priced Aug 19 (closed Aug 24 at $5.75B, with convert buyers shorting the stock to hedge), and Friday reports of an IPO by Nvidia-backed rival Nscale took the stock down about 18% to ~$209 by Aug 24. The disclosure that matters most: the year-end contracted power target was raised to 5 gigawatts while capex ran $5.7 billion in the quarter alone -- Nebius is selling 2027-2028 capacity faster than it can build or finance it, and August showed what the financing costs.",
-  "guidanceProse": "Management reaffirmed 2026 guidance on August 12, 2026: revenue of $3.0-3.4 billion, an adjusted EBITDA margin near 40%, capex of $20-25 billion (raised from $16-20 billion in May 2026), and an annualized run-rate revenue exit of $7-9 billion. The central debate is the bridge from the $3.0 billion Q2 run-rate to that exit, which requires Vineland and other sites to energize on schedule in H2. The funding debate moved in August: roughly $9.3 billion of quarter-end cash was joined by $5.75 billion of convertible notes (closed Aug 24) and an $800 million convert-for-equity swap, on top of customer prepayments, a $775 million asset-backed facility and stake monetizations -- still short of a $20-25 billion capex bill, so more debt or dilution into 2027 remains the base case.",
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.3,
+      "rev": 10.5,
+      "multiple": 0.65,
+      "why": "Third-party sites and power slip again, so FY2027 revenue misses the outlook at ~$10.5B and pre-tax breakeven moves into 2028. Prepayment coverage falls back, the gap is filled with equity at low prices and secured debt, and the market pays ~3.8x FY2027 sales on end-2027 net debt of ~$31B - a capital-intensive rental multiple that leaves little for the equity."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 12.5,
+      "multiple": 2.5,
+      "why": "The outlook is met: FY2027 revenue ~$12.5B, adjusted EBITDA margin near 50% and pre-tax breakeven in Q4 2027. Prepayments and contract-backed debt cover about 80% of capex. The market pays ~5.5x FY2027 sales on end-2027 net debt of ~$32B, roughly today's multiple on the same basis, because 2028 growth is still high but leverage is several times larger."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 13.5,
+      "multiple": 4.9,
+      "why": "Capacity arrives early, asset-light partner revenue becomes regular and FY2027 revenue beats at ~$13.5B with the >$25M per MW pricing holding. Prepayments run above the $17-20B range, little equity is issued and the market pays ~8x FY2027 sales on ~$33B of net debt as 2028 revenue visibility from 5 GW of contracted power firms up."
+    },
+    "note": "Value per share = (FY2027 revenue x EV/Sales - net debt) / shares. The page nets its latest snapshot net position (about $0.8B net cash, which predates the Q3 balance sheet) on ~272M shares. We instead use Siberforge estimates (unverified): end-2027 net debt of ~$31-33B (from $6.8B at Sep 30, 2026: $14.2B debt less $7.4B cash, plus ~$12B of Q4 2026 capex and $40-45B in 2027, less $17-20B of prepayments and operating cash flow) and ~305-320M shares (292.9M at Sep 30). The multiples shown are therefore the true EV/Sales (3.8x / 5.5x / 8.0x) reduced for that extra debt and dilution. Bear: (10.5 x 3.8 - 31) / 0.320 = ~$28. Base: (12.5 x 5.5 - 32) / 0.310 = ~$119. Bull: (13.5 x 8.0 - 33) / 0.305 = ~$246. Stakes (ClickHouse, Avride) are excluded; convert conversion in the bull case would swap debt for shares. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Was Q3 a timing slip or the first sign the build cannot keep its dates?",
+      "bull": "The CFO said the guidance changes are 'just about timing, not demand'. The delays sit at third-party sites (New Jersey's power moving to Bloom fuel cells after temporary generation was retired), contracts are unchanged, Q3 saw the largest sequential increase in active capacity to date, and owned sites (Missouri, Lappeenranta, a second Mantsala, Alabama) start deploying in 2027.",
+      "bear": "Excluding ~$325M of non-recurring partner revenue, Q3 revenue was ~$656M, up only ~13% from Q2 after +46% the quarter before. The low end of the 2026 guide needs ~$1.04B in Q4, about 60% above that recurring base, and the company is dropping ARR as a metric in the quarter it missed the ARR timetable.",
+      "view": "We treat it as a real execution miss, not just optics: the same third parties are needed for 2027. One clean quarter - Q4 revenue at or above $1.04B without leaning on partner fees - restores the base case; another slip moves weight to the bear case.",
+      "signpost": {
+        "metric": "Q4 2026 revenue and its non-recurring share; February 2027 annualized run-rate",
+        "threshold": "Q4 revenue >= $1.04B with non-recurring below ~20% and February ARR > $7B = on track; Q4 below $1.0B or Microsoft tranches moved past 2Q27 = bear",
+        "when": "Q4 2026 report (expected Feb 2027, date unconfirmed) and Q1 2027 report (~May 2027)"
+      }
+    },
+    {
+      "q": "Who pays for $40-45B of 2027 capex - customers and lenders, or shareholders?",
+      "bull": "Q3 deals carried prepayments above 100% of the related capex (50-60% in Q2) with payback down to 1 year 7 months; management expects $10B of committed prepayments in 2026 and $17-20B in 2027, and says prepayments plus financing against investment-grade contracts cover 75-85% of 2027 capex. A $3.5B Citi senior secured facility was added in October.",
+      "bear": "The quality check flags +13.4% diluted shares YoY and capex at 822% of TTM revenue, both before Q3: capex was $7.3B in the quarter, debt reached $14.2B, ~$1.0B of stock was sold at the market, and the uncovered 15-25% of 2027 capex is $6-11B against $7.4B of cash. The same dollars now buy far fewer shares' worth of funding than in Q3.",
+      "view": "Prepayments are the best evidence in the note that customers want the capacity, but they are deferred revenue, not profit, and the residual still lands on shareholders. We assume mid-single-digit annual dilution in the base case; a discounted equity deal would be a thesis change, not noise.",
+      "signpost": {
+        "metric": "Prepayments received (deferred revenue growth), new contract-backed facilities, shares outstanding",
+        "threshold": "deferred revenue up > $3B in Q4 and share count below ~300M at Dec 31 = funding plan working; a marketed equity offering or share count above ~310M = cautious",
+        "when": "Q4 2026 report (expected Feb 2027) and any 6-K financing announcement before then"
+      }
+    },
+    {
+      "q": "Does the business earn a profit after depreciation and interest, or only before them?",
+      "bull": "Q3 income from operations was positive at $50.4M (a loss of $130.2M a year earlier), group adjusted EBITDA margin reached 47% and the AI cloud segment 53%; management guides pre-tax breakeven in Q4 2027 after financing costs, and new deals price above $25M of annual contract value per MW.",
+      "bear": "Without the non-recurring revenue the quarter was an operating loss, nine-month operating income is -$253.5M, and nine-month net income of $393.3M exists only because of a $780.6M ClickHouse revaluation gain (the red NI-vs-operating-income row). Useful lives were extended from four to five years in 2026, and $91.9M of Q3 interest was capitalized rather than expensed.",
+      "view": "Unit economics look real at the EBITDA line, but reported profit is flattered by a longer depreciation life, capitalized interest and one-off partner revenue. We do not pay for earnings yet; the scenarios value sales, and the breakeven date is the test.",
+      "signpost": {
+        "metric": "Income from operations excluding non-recurring partner revenue; FY2027 pre-tax guide",
+        "threshold": "positive recurring operating income by Q2 2027 and Q4 2027 breakeven reaffirmed = constructive; breakeven pushed into 2028 = bear",
+        "when": "FY2027 guide with the Q4 2026 report (expected Feb 2027); Q2 2027 report (~Aug 2027)"
+      }
+    }
+  ],
+  "thesis": [
+    "Demand is contracted and getting richer. Remaining performance obligations stand at $38.7B, customers committed more than $12B of contract value since the start of Q3, and pricing rose to above $25M of annual contract value per MW from above $20M in Q2.",
+    "Customers are funding the build. Prepayments on Q3 deals exceeded the capex behind them and payback fell to 1 year 7 months - a structure levered peers do not have at this scale (debate 2).",
+    "The customer list is widening beyond two hyperscalers. First multi-year agreements with Databricks, Datadog, Palantir and Snowflake, plus Token Factory contract value up 17x in the quarter, start to dilute the Microsoft and Meta concentration.",
+    "Margins scale with capacity. AI cloud adjusted EBITDA margin of 53% in Q3 and the first positive operating income show the model works once sites are live (debate 3)."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Nov 12, 2026)",
+    "points": [
+      "Revenue $980.8M, +571% YoY and +68% QoQ; AI cloud $973.8M (+643%). About $325M was non-recurring asset-light partner revenue; excluding it revenue was ~$656M, +13% QoQ.",
+      "Adjusted EBITDA $465.8M (47% margin; AI cloud $518.2M, 53%). Income from operations $50.4M; net loss from continuing operations $37.5M (-$0.13 per share); D&A $354.7M.",
+      "Capex $7.3B in the quarter, $15.4B for nine months; operating cash flow -$273M in Q3 (+$4.2B for nine months on customer prepayments).",
+      "Cash $7.4B and debt $14.2B at Sep 30; 292.9M shares outstanding; ~$1.0B of at-the-market equity sold in Q3.",
+      "RPO $38.7B (+3% QoQ); more than 4 GW of power contracted; annualized run-rate revenue $6.4B for September."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Nov 12). Revenue was $980.8M, but about a third ($325.1M) was non-recurring revenue from the new asset-light model, in which partners deploy Nebius architecture and its cloud platform on capacity they fund; the recurring ~$656M grew about 13% from Q2. Adjusted EBITDA was $465.8M and income from operations turned positive at $50.4M, both helped by that partner revenue; net loss from continuing operations was $37.5M after $112.5M of interest expense. September annualized run-rate revenue was $6.4B (one month annualized; the letter does not say whether it includes partner revenue, and management will stop reporting the metric). RPO rose only 3% to $38.7B even though more than $12B of contract value was signed since July 1. Delays at third-party sites pushed the remaining Microsoft tranches in New Jersey (just under half of that contract's capacity) to 2Q27. The shares fell as much as 23% on the day and about 10% more on Nov 13 (per Motley Fool).",
+  "guidanceProse": "2026 (updated Nov 12): revenue at the low end of $3.0-3.4B, which implies about $1.04B in Q4; adjusted EBITDA margin about 40% (unchanged); capex about $27B (from $20-25B); 5 GW of contracted power by year-end (unchanged). The $7-9B December run-rate target is replaced by 'above $7B for the month of February'. 2027 outlook, given for the first time: revenue $12-13B, capex $40-45B sized for more than 1 GW of new capacity, pre-tax breakeven in Q4 2027 after financing costs on five-year compute depreciation, and committed prepayments of $17-20B. From 2027 guidance covers revenue, pre-tax earnings and capacity only.",
   "guide": {
-    "label": "FY26 ARR exit target",
-    "val": "$7-9B",
-    "sub": "vs $3.0B run-rate in Q2 2026; revenue guide $3.0-3.4B, capex $20-25B",
-    "tone": "accent"
+    "label": "FY27 revenue outlook (Nov 12)",
+    "val": "$12-13B",
+    "sub": "FY26 low end of $3.0-3.4B | capex ~$27B then $40-45B | pre-tax breakeven Q4 2027",
+    "tone": "warn"
   },
   "segments": [
-    "AI Cloud (core): GPU infrastructure and AI cloud platform, up 514% YoY in Q2 2026; the Microsoft and Meta dedicated-capacity contracts sit here, served from New Jersey, Finland, UK and Israel data centers",
-    "Software and inference layer: Token Factory plus the 2026 acquisitions (Tavily, Eigen AI, Clarifai) aimed at higher-margin, usage-based revenue on top of raw compute",
-    "Strategic stakes: ClickHouse (~28% diluted, ~$15B round reported early 2026), Avride (~83% after the Uber-led round, ~$2.7-2.8B post-money), Toloka (majority economic interest) and TripleTen -- an estimated $7-8B of monetizable value"
+    "AI cloud (about 99% of Q3 2026 revenue): GPU infrastructure and cloud platform; the Microsoft ($17.4B five-year contract signed Sep 2025, served from Vineland, New Jersey) and Meta dedicated-capacity agreements sit here, alongside enterprise and AI-native customers.",
+    "Asset-light partnerships (new in 2026): go-to-market and infrastructure-development revenue from partners that fund their own capacity; $409.1M in the first nine months of 2026, described by the company as non-recurring and variable.",
+    "Software and inference layer: Token Factory plus the 2026 acquisitions (Tavily, Eigen AI, Clarifai), aimed at usage-based revenue on top of raw compute.",
+    "Stakes and other: a significant minority stake in ClickHouse (~28% per earlier disclosures; ~$15B round reported Jan 2026), Avride (autonomous vehicles, 250-vehicle fleet), Toloka and TripleTen (Q3 revenue $9.0M, -44%)."
   ],
   "competitive": [
-    "CoreWeave (CRWV): the levered mirror image. CRWV reported Q2 2026 revenue of ~$2.58B on August 11, 2026 with a ~$104B backlog, but carries ~$50.8B of total liabilities against $2.2B cash; Nebius runs the same land-grab with ~$9.3B cash and far less leverage",
-    "Microsoft (MSFT): simultaneously Nebius's largest customer ($17.4B contract) and a hyperscaler that could in-source capacity once its own buildout catches up -- the definitive frenemy risk",
-    "Oracle (ORCL): OCI is the aggressive incumbent bidder for the same multi-GW AI deals, with a balance sheet Nebius cannot match",
-    "IREN (IREN): power-first bitcoin-miner-turned-neocloud competing on cheap energy for the next wave of GPU capacity",
-    "Nscale: London-based, Nvidia-backed neocloud reportedly targeting a U.S. IPO of up to $3B as early as September 2026, telling investors it has ~$51B of contracted revenue -- fresh public-market supply chasing the same multi-GW deals (per Bloomberg/TipRanks, Aug 2026)",
-    "Hyperscaler internal buildouts (MSFT, META, GOOGL) are the structural ceiling: every megawatt they self-build in 2027-2028 is a megawatt Nebius does not rent"
+    "CoreWeave (CRWV): the larger, more levered peer - Q2 2026 revenue of ~$2.58B and a ~$104B backlog funded mostly with debt; Nebius runs the same land-grab with more customer prepayment and less borrowing so far.",
+    "Microsoft (MSFT): largest customer and a hyperscaler that can in-source capacity once its own buildout catches up.",
+    "Oracle (ORCL): OCI bids for the same multi-GW AI deals with a much larger balance sheet.",
+    "IREN and other power-first hosts compete on cheap energy for the next wave of GPU capacity; Nscale (Nvidia-backed) was reported in Aug 2026 to be planning a US IPO (status unverified).",
+    "Hyperscaler self-build is the structural ceiling: every megawatt Microsoft, Meta or Google builds for 2027-2028 is one Nebius does not rent."
   ],
-  "moat": "Honestly, the moat is thin and time-based rather than structural: contracted power, energized sites and delivery speed during a supply-constrained window, plus a Yandex-heritage engineering team that runs full-stack software on its own hardware. Five-year take-or-pay contracts with Microsoft and Meta provide revenue lock-in, but GPUs depreciate fast and customers are also competitors. If AI compute stays scarce through 2028, the head start compounds; if supply normalizes, this is a capital-intensive rental business.",
+  "moat": "Thin and time-based rather than structural: contracted power, energized sites and delivery speed in a supply-constrained window, plus a Yandex-heritage engineering team running full-stack software on its own hardware. Five-year take-or-pay contracts lock in revenue, but GPUs depreciate fast and the biggest customers are also competitors. If AI compute stays scarce through 2028 the head start compounds; if supply normalises this is a capital-intensive rental business - and Q3 showed the delivery edge depends on third parties.",
   "risks": [
-    "Funding gap and dilution: $20-25B of 2026 capex against roughly $9.3B quarter-end cash plus $5.75B of new converts; the August financings cost ~5.5% dilution (the $800M swap) plus convert-arb short pressure, and still leave a hole implying more debt or equity into 2027",
-    "Customer concentration: Microsoft and Meta represent the large majority of the $46B-plus potential backlog; either pausing deployments would gut the growth story",
-    "GPU depreciation and obsolescence: five-year contracts ride on silicon that may be economically obsolete in three; accounting lives versus real lives is the sector's open question",
-    "Execution: Vineland NJ energization, transformer and power supply chains, and the jump from ~$3.0B to $7-9B run-rate in two quarters leave no room for slippage",
-    "Pricing: $20-25M ACV per MW compresses if CoreWeave, Oracle, IREN and hyperscaler self-build flood 2027 supply",
-    "Governance and structure: founder voting control, a Russia-origin corporate history, and a stake portfolio whose sum-of-parts value is hard to realize on demand"
+    "Delivery now depends on third parties. Colocation and power partners caused the Q3 slip, the remaining Microsoft tranches moved to 2Q27, and the 2027 outlook of about 4x revenue assumes more than 1 GW of new capacity arrives on schedule (debate 1).",
+    "Dilution is already running. Diluted shares rose 13.4% YoY before Q3; since then came an $800M convert-for-share exchange, ~$1.0B of at-the-market sales and $5.75B of new convertibles, with about $17B of scheduled convertible payments beyond 12 months that either refinance or convert (debate 2).",
+    "Capex dwarfs revenue. Capex was 822% of TTM revenue on the quality check and is guided to about $27B in 2026 and $40-45B in 2027 against $12-13B of 2027 revenue; net debt was $6.8B at Sep 30 and heads much higher, with $13.2B of data-center lease commitments on top (debate 2).",
+    "Reported profit is not operating profit. Operating margin ran -30% to -110% over the four quarters to Q2 and nine-month net income rests on a $780.6M ClickHouse revaluation; Q3's positive operating line needed non-recurring revenue, a five-year depreciation life and capitalized interest (debate 3).",
+    "Concentration and frenemies. Microsoft and Meta still back most of the contracted revenue the company finances against (it cites more than $40B of such commitments); a pause, renegotiation or in-sourcing by either would hit both revenue and the funding model."
   ],
   "catalysts": [
-    "Q3 2026 earnings, expected early-to-mid November 2026 (date unconfirmed): first read on the H2 ramp toward the $7-9B ARR exit",
-    "Vineland, New Jersey deliveries to Microsoft ramping through H2 2026",
-    "Year-end 2026 checkpoint: 5 GW contracted power target and the $7-9B ARR exit, reported with Q4 results expected February 2027",
-    "Potential ClickHouse IPO or further stake monetization, 2026-2027 (timing unverified)",
-    "New multi-GW customer announcements; management flagged additional landmark-deal pipeline on the August 12, 2026 call"
+    "Feb 2027 (date unconfirmed): Q4 2026 report - revenue vs the ~$1.04B needed, non-recurring share, 5 GW contracted power, formal FY2027 guide (debates 1, 2, 3).",
+    "Feb-Mar 2027: annualized run-rate above $7B for the month of February - the reset version of the old December target (debate 1).",
+    "2Q27: delivery of the remaining Microsoft tranches in New Jersey and third-party capacity deferred from 2026 (debate 1).",
+    "Through 1H 2027: contract-backed financings against the Microsoft and Meta agreements, use of the Citi facility and any equity issuance (debate 2).",
+    "Q4 2027: guided pre-tax breakeven (debate 3); possible ClickHouse listing or stake sale (timing unverified)."
   ],
-  "pricedIn": "At about $209 on August 24, 2026 (down ~18% from the ~$254 post-earnings peak), Nebius carries a market cap near $57 billion -- roughly 18x the midpoint of 2026 revenue guidance and about 7x the midpoint of the $7-9 billion year-end ARR exit target. Strip out an estimated $7-8 billion of strategic stakes and net cash, and the core AI cloud trades somewhat cheaper. The price implies the ARR exit is hit, capex converts to contracted revenue at $20-25 million per megawatt, and Microsoft and Meta keep deploying into 2028. August added a new term to the debate: the growth is real (sell-side average target ~$273, Goldman street-high $328 on Aug 25), but each capacity tranche is now visibly paid for in converts, dilution and hedging flow -- and Nscale's planned IPO prices the competing supply.",
-  "scenarios": {
-    "bear": "The buildout slips and the AI capex cycle cools into 2027. Vineland energization delays push revenue toward the low end of guidance, the $7-9 billion ARR exit is missed, and follow-on contracts price below $20 million per megawatt as CoreWeave, Oracle, Nscale and hyperscaler self-build flood supply. Closing the remaining capex funding gap requires further dilutive equity or expensive debt on top of August's $5.75B converts. Revenue still compounds around 25%, but the exit multiple compresses toward 3x sales and the stock rerates far below today's $57 billion.",
-    "base": "Nebius hits the 2026 guide, exits near the low end of the $7-9 billion ARR target, and Microsoft and Meta deployments ramp through 2027 as contracted. Revenue compounds around 40% for several years, adjusted EBITDA margins hold near 40%, and free cash flow turns positive around 2028-2029 as the capex wave crests. Stake monetizations, led by ClickHouse, plus the August converts cover most of the funding gap. A 4-5x exit revenue multiple roughly supports today's price with modest annual upside.",
-    "bull": "Demand keeps outrunning supply. The 5 gigawatt contracted power book converts at $20-25 million ACV per megawatt, ARR exits 2026 above $9 billion, and 2027 guidance shocks upward. Token Factory, Tavily and Clarifai lift margins above pure-infrastructure peers, ClickHouse lists well above its reported $15 billion mark, and Nebius becomes the fourth Western AI cloud at scale. Revenue compounds above 55%, the multiple holds near 6x sales, and the stock is a multi-bagger from $57 billion."
-  },
   "valPresets": {
     "mode": "revenue",
     "r": 0.13,
@@ -83,21 +142,57 @@
       "fcfMargin": 0.22,
       "exit": 6.0
     },
-    "note": "Revenue mode: the $20-25B 2026 capex program keeps free cash flow deeply negative despite a 41% adjusted EBITDA margin, so revenue trajectory and exit multiple carry the valuation. Base assumes the FY26 guide is met and ARR converts; margins reflect steady-state FCF after the buildout crests, not current burn."
+    "note": "Revenue mode: a capex program of about $27B in 2026 and $40-45B in 2027 keeps free cash flow deeply negative despite a 40%+ adjusted EBITDA margin, so revenue trajectory and exit multiple carry the valuation. Margins reflect steady-state FCF after the buildout crests, not current burn; interim funding and dilution are ignored, which flatters every case."
   },
   "bullCharts": {
     "0": [
       "revQ",
       "revYoyA"
+    ],
+    "3": [
+      "omA"
     ]
   },
   "bearCharts": {
-    "0": [
+    "2": [
       "fcfQ",
       "capexPctA"
+    ],
+    "3": [
+      "niQ"
     ]
   },
+  "changelog": [
+    {
+      "date": "2026-11-14",
+      "change": "Rebuilt as a v3 decision note for Q3 2026 (reported Nov 12): revenue $980.8M but ~$325M non-recurring, 2026 revenue cut to the low end, run-rate target slipped to February, capex raised to ~$27B, first 2027 outlook ($12-13B revenue, $40-45B capex, pre-tax breakeven Q4 2027). Stance set at Neutral with FY2027 EV/Sales scenarios (bear ~$28 / base ~$118 / bull ~$246). The view moved down a notch: the old note leaned constructive on execution; the first missed timetable and a 2027 build larger than the equity make delivery and funding the debate."
+    },
+    {
+      "date": "2026-08-25",
+      "change": "Q2 2026: revenue $582.3M (+454%), adjusted EBITDA positive, FY26 guide reaffirmed ($3.0-3.4B revenue, $7-9B ARR exit, capex $20-25B); $5.75B convertible raise and $800M convert swap. Balanced-to-constructive lean, no formal stance."
+    }
+  ],
   "sources": [
+    {
+      "label": "Nebius Q3 2026 shareholder letter, Form 6-K Ex. 99.2 (Nov 12, 2026): non-recurring revenue, ARR, RPO, guidance, 2027 outlook, prepayments, delays, deal terms, financing",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001513845/000110465926126008/tm2629571d1_ex99-2.htm"
+    },
+    {
+      "label": "Nebius Q3 2026 results release, Form 6-K Ex. 99.1 (Nov 12, 2026): income statement, cash flow, cash, debt, shares outstanding",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001513845/000110465926126008/tm2629571d1_ex99-1.htm"
+    },
+    {
+      "label": "Nebius Operating and Financial Review for the nine months ended Sep 30, 2026, Form 6-K Ex. 99.1: strategic partnership revenue $325.1M / $409.1M, ClickHouse gain, capitalized interest, useful-life change, convertible and lease commitments",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001513845/000110465926126238/nbis-ex99d1.htm"
+    },
+    {
+      "label": "Motley Fool: Nebius after its third-quarter sell-off - share moves, Q4 revenue math, CFO quote, ATM sales (Nov 13, 2026)",
+      "url": "https://www.fool.com/investing/2026/11/13/should-you-buy-nebius-stock-after-its-third-quarter-sell-off/"
+    },
+    {
+      "label": "Pulse 2.0: Nebius secures $3.5B Citi senior secured facility (Oct 22, 2026)",
+      "url": "https://pulse2.com/nebius-secures-3-5-billion-citi-facility-to-fund-ai-data-center-and-gpu-expansion/"
+    },
     {
       "label": "Nebius Q2 2026 results press release (Businesswire, Aug 12, 2026)",
       "url": "https://www.businesswire.com/news/home/20260812963359/en/Nebius-reports-second-quarter-2026-financial-results"
@@ -105,10 +200,6 @@
     {
       "label": "Nebius $5.75B convertible notes closing (Businesswire, Aug 24, 2026)",
       "url": "https://www.businesswire.com/news/home/20260824987558/en/Nebius-Group-announces-closing-of-private-offering-of-convertible-senior-notes-with-aggregate-gross-proceeds-of-approximately-$5.75-billion"
-    },
-    {
-      "label": "Convert pricing upsized to $5.0B (Nebius newsroom, Aug 19, 2026)",
-      "url": "https://nebius.com/newsroom/nebius-group-announces-pricing-of-upsized-private-offering-of-5-0-billion-of-convertible-senior-notes"
     },
     {
       "label": "TipRanks: NBIS slide on $800M convert swap and dilution (Aug 20, 2026)",
@@ -119,32 +210,16 @@
       "url": "https://www.tipranks.com/news/neocloud-stocks-crwv-nbis-and-iren-are-falling-today-august-24-heres-why"
     },
     {
-      "label": "TradingKey: Nebius Q2 2026 revenue +454%, EBITDA positive",
-      "url": "https://www.tradingkey.com/news/earnings/262099252-tradingkey"
-    },
-    {
-      "label": "Motley Fool: $46B in AI cloud deals with Microsoft and Meta (Apr 2, 2026)",
-      "url": "https://www.fool.com/investing/2026/04/02/nebius-just-signed-46-billion-in-ai-cloud-deals-wi/"
+      "label": "Nebius newsroom: Microsoft multi-billion dollar agreement (Sep 2025)",
+      "url": "https://nebius.com/newsroom/nebius-announces-multi-billion-dollar-agreement-with-microsoft-for-ai-infrastructure"
     },
     {
       "label": "Nebius newsroom: Meta AI infrastructure agreement",
       "url": "https://nebius.com/newsroom/nebius-signs-new-ai-infrastructure-agreement-with-meta"
     },
     {
-      "label": "Nebius newsroom: Microsoft multi-billion dollar agreement",
-      "url": "https://nebius.com/newsroom/nebius-announces-multi-billion-dollar-agreement-with-microsoft-for-ai-infrastructure"
-    },
-    {
-      "label": "Yahoo Finance / Zacks: Nebius raises capex to $20-25B",
-      "url": "https://finance.yahoo.com/markets/stocks/articles/nebius-raises-capex-20-25b-125500935.html"
-    },
-    {
-      "label": "24/7 Wall St: CoreWeave vs Nebius balance-sheet comparison (Aug 5, 2026)",
-      "url": "https://247wallst.com/investing/2026/08/05/core-dna-coreweave-and-nebius-couldnt-be-more-different-and-why-it-matters/"
-    },
-    {
-      "label": "StockAnalysis: NBIS market cap history",
-      "url": "https://stockanalysis.com/stocks/nbis/market-cap/"
+      "label": "CoreWeave Q2 2026 results release (Aug 11, 2026): peer revenue and backlog",
+      "url": "https://investors.coreweave.com/news/news-details/2026/CoreWeave-Reports-Strong-Second-Quarter-2026-Results/default.aspx"
     }
   ]
 }

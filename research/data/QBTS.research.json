@@ -1,65 +1,127 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "A $7.7B market cap resting on $3.1M of quarterly revenue: the debate is whether 1,120% bookings growth and a federal equity stake mark the start of the S-curve or the top of the hype cycle.",
-  "thesis": [
-    "Bookings finally inflected. H1 2026 bookings were $35.5M, up 1,120% YoY, led by a record $33.4M Q1 that included a $20M Advantage2 system sale to Florida Atlantic University and a $10M two-year QCaaS deal with a Fortune 100 company (press reports suggest AT&T; unverified). RPO reached $40.7M at June 30, 2026, up 668%, with 57% expected to convert within 12 months.",
-    "Washington validated the platform with equity. On May 21, 2026 D-Wave signed a $100M CHIPS and Science Act LOI with the Department of Commerce, to be paid for in newly issued D-Wave stock - the first direct federal equity stake in a quantum company; shares jumped more than 40% on the news. The funds target a 100,000-qubit annealer and a 10,000-qubit gate-model system.",
-    "The balance sheet buys years of runway. Cash and marketable securities were $546.2M at June 30, 2026 even after paying roughly $250M cash for Quantum Circuits in January; H1 2026 operating cash use was $73.5M, implying three-plus years of runway before the DOC $100M arrives.",
-    "The annealing-only criticism is now hedged. The January 2026 Quantum Circuits acquisition adds a Yale-lineage superconducting gate-model program: a 17-qubit system in late 2026, 49 qubits in 2027 with a targeted 20x error-reduction factor, and 100 logical qubits with 1M reliable operations by 2032.",
-    "Commercial usage is real, not just pilots. 62% of Q2 2026 revenue came from commercial customers (up from 45% a year earlier), over 37% of QCaaS revenue now comes from production applications, and H1 2026 counted more than 100 revenue-generating customers."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026 (reported Aug 6, 2026)",
-    "points": [
-      "Revenue $3.1M, roughly flat YoY; H1 revenue $5.9M, down 67% versus an H1 2025 that included a high-margin Advantage2 system sale.",
-      "QCaaS revenue $1.9M, +50% YoY; professional services about $0.9M, +18%; systems about $0.3M from Florida Atlantic University site preparation.",
-      "Net loss $48.0M ($0.13 per share) versus $167.3M a year earlier - the improvement is mostly the absence of warrant remeasurement charges; all public warrants were redeemed in November 2025.",
-      "Adjusted EBITDA loss $37.1M, up 85% YoY; H1 GAAP operating expenses $111.5M, up 108%, on product development, go-to-market hiring and Quantum Circuits costs.",
-      "GAAP gross margin 55.4% (from 63.8%); non-GAAP gross margin 64.9% (from 71.8%).",
-      "Q2 bookings $2.1M (+59%); RPO $40.7M (+668%); cash and marketable securities $546.2M, down 33% YoY mostly on the Quantum Circuits purchase."
+  "asOf": "2026-11-14",
+  "oneLiner": "The only commercial supplier of quantum annealers, now also funding a gate-model program, with revenue still in the low millions per quarter. The market is betting that one record system order and a federal equity stake mark the start of repeatable system sales rather than a one-off.",
+  "verdict": {
+    "stance": "Cautious - optionality priced, repeatability unproven",
+    "summary": "Q3 2026 answered the wrong half of the question: recurring revenue grew, but bookings of $1.9M did not refill a backlog that still rests mostly on one $20M university system. The equity is an option on system sales repeating, held against an adjusted EBITDA loss near $38M a quarter and a reverse DCF that needs revenue to grow about 118% a year for 8 years versus 51% a year delivered. Our base case sits below the current price, the bear case far below and the bull case about double, so the probability-weighted value is slightly under today: the cash pile limits the downside but does not pay for it. We would turn constructive if the Florida Atlantic system is recognized in Q4 2026 and at least one new multi-million system order is booked by the Q1 2027 report; we would turn negative if the delivery slips into 2027 or bookings stay below revenue for two more quarters.",
+    "wtb": [
+      "The $20M Florida Atlantic University system is delivered in Q4 2026 and Q4 revenue is at least ~$15M (Siberforge estimate), reported around March 2027.",
+      "At least two new system orders are booked by mid-2027, so FY2027 revenue exceeds ~$50M against $38.3M of total RPO at Sep 30, 2026.",
+      "Adjusted EBITDA loss holds near $40M a quarter, leaving more than ~$300M of cash at end-2027 without equity issuance beyond the Commerce stake.",
+      "Revenue then compounds at roughly 118% a year for 8 years (the reverse-DCF bar), more than double the 51% a year delivered over the last three fiscal years."
     ]
   },
-  "latestProse": "Q2 2026, reported August 6: revenue of $3.1M was essentially flat YoY and H1 revenue of $5.9M fell 67%, lapping last year's high-margin Julich Advantage2 system sale. The recurring core improved - QCaaS grew 50% to $1.9M and 62% of revenue was commercial - but the P&L moved the wrong way: adjusted EBITDA loss widened 85% to $37.1M as H1 opex doubled to $111.5M with Quantum Circuits absorbed and go-to-market hiring accelerated. Net loss of $48.0M only looks better than last year's $167.3M because warrant charges are gone after the November 2025 redemption. Cash of $546.2M funds the plan for years. The disclosure that matters most: RPO of $40.7M with 57% converting inside 12 months - that schedule, not the bookings headline, decides whether the Q4-weighted 2026 revenue promise is kept.",
-  "guidanceProse": "D-Wave gives no dollar guidance. Management framed 2026 as sharply back-half loaded: Q3 revenue up modestly from Q2, then Q4 up significantly and delivering the majority of full-year revenue as systems ship - principally the $20M Florida Atlantic University Advantage2, recognized through installation and calibration. That makes the year a single-shipment story: any slip pushes most of 2026 revenue into 2027. The central debate is whether $35.5M of H1 bookings is the start of a repeatable enterprise pipeline or a pair of one-off deals dressed up as an inflection.",
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.3,
+      "rev": 0.03,
+      "multiple": 9.2,
+      "why": "FY2027 revenue ~$30M: the Florida Atlantic installation tail and QCaaS, but no new system orders, as the pipeline fails to convert and classical solvers keep matching annealing. Burn continues near $170M a year. The market stops paying for optionality and values the business at ~30x sales (EV ~$0.9B) plus ~$250M of remaining cash."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 0.05,
+      "multiple": 53.5,
+      "why": "FY2027 revenue ~$50M: one or two new Advantage2 system sales on top of RPO conversion and QCaaS growing 40-50%. CHIPS milestones start to pay and burn stays flat. The multiple compresses to ~65x sales (EV ~$3.25B) as revenue roughly doubles - still a scarcity premium, but below today's because losses are unchanged."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 0.09,
+      "multiple": 84.2,
+      "why": "FY2027 revenue ~$90M, above the ~$81M consensus: the tripled pipeline converts into system sales every quarter, a second Fortune 100 production contract lands and the 17-qubit gate-model system ships with paid orders. A sector re-rating pays ~90x sales (EV ~$8.1B) for visible triple-digit growth."
+    },
+    "note": "Value per share = (FY2027 revenue x EV/Sales + net cash) / shares. Revenue is $30M / $50M / $90M (the table rounds to $0.0-0.1B). The page adds net cash implied by its market data (~$875M, which predates the $252.8M Quantum Circuits payment) on ~380M shares. Actual cash was $503.4M at Sep 30, 2026 and we expect ~$250M / ~$300M / ~$350M of net cash at end-2027 after burn and partial CHIPS receipts (Siberforge estimate, unverified), so the multiples shown are the true end-2027 EV/Sales (~30x / ~65x / ~90x) reduced to offset that overstatement. Check: bear ($0.9B + $0.25B) / 380M = ~$3; base ($3.25B + $0.30B) / 380M = ~$9.4; bull ($8.1B + $0.35B) / 380M = ~$22. Dilution beyond today's count (including the Commerce shares) is not modelled, which flatters every case. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Is the 2026 bookings jump the start of repeatable system sales, or one university order?",
+      "bull": "Management said on the Nov 10 call that the dollar value of the sales pipeline rose more than 75% since the end of Q2 and more than tripled since end-2025, driven by system interest; a second Advantage2 was shipped to Como, Italy in Q3 and commercial enterprises were 52% of Q3 revenue versus 31% a year earlier.",
+      "bear": "Q3 bookings were $1.9M, down 19% YoY and less than half of the quarter's revenue, and RPO slipped to $38.3M from $40.7M at June 30. Nine-month bookings of $37.4M are roughly 80% two Q1 deals. A securities class action filed Oct 15 alleges the record bookings came mostly from two older contracts (per TIKR; allegations unproven).",
+      "view": "One order does not make a trend, and Q3 was the first chance to show a second - it did not. We will not pay for the base case until bookings exceed revenue again. Pipeline dollars are not bookings.",
+      "signpost": {
+        "metric": "Quarterly bookings and RPO",
+        "threshold": "constructive if Q4 2026 plus Q1 2027 bookings exceed ~$20M with a named system order; bearish if RPO falls below ~$30M by Mar 31, 2027",
+        "when": "Q4 2026 report (~Mar 2027) and Q1 2027 report (~May 2027)"
+      }
+    },
+    {
+      "q": "Does the cash last until revenue matters, or does dilution fill the gap?",
+      "bull": "Cash and marketable securities of $503.4M at Sep 30 cover more than three years of the current ~$145M annualized operating cash use, and up to $100M of milestone-based CHIPS funding arrives on top; adjusted EBITDA loss was flat QoQ at $37.7M, so spending has stopped accelerating.",
+      "bear": "Operating losses run about 15x revenue (TTM operating loss ~$196M on ~$13.2M of revenue), nine-month operating cash use of $109.0M is already above all of FY2025, capex has risen to roughly two-thirds of revenue, and the quality check flags +22.7% YoY diluted shares. The CHIPS money is itself paid for in stock.",
+      "view": "Solvency is not the issue through 2028; ownership is. With burn near $170M a year including capex, the company will likely raise again before revenue covers costs, and it has historically done so into strength. We treat ~5-10% annual dilution as the baseline that the scenario values do not include.",
+      "signpost": {
+        "metric": "Adjusted EBITDA loss and weighted share count",
+        "threshold": "constructive if the quarterly loss stays at or below ~$40M with share growth under 5% YoY; bearish on a new ATM or a loss above ~$45M",
+        "when": "Each quarterly report through Q2 2027"
+      }
+    },
+    {
+      "q": "Can annealing grow fast enough to meet what the price implies?",
+      "bull": "QCaaS revenue grew 56% YoY to $2.2M in Q3 and production use is spreading: NTT DOCOMO deployed a second application that cut peak location-registration signals by 65.3%, and a Fortune 100 engagement drove professional services up 318% to $2.0M. The gate-model program adds a second route, with a 17-qubit system on track and delivery orders under discussion for 2027.",
+      "bear": "The reverse DCF needs ~118% annual revenue growth for 8 years; nine-month 2026 revenue is down 52% YoY and the recurring lines together run at ~$17M annualized. Independent benchmarks still show classical heuristics matching annealers on many commercial problems, and the gate-model roadmap targets a first error-corrected logical qubit only in 2028 and 100 logical qubits in 2032.",
+      "view": "The recurring core is real but small; system sales have to do the compounding, which sends this debate back to debate 1. We read QCaaS growth above 50% as necessary, not sufficient, and give the gate-model program no value before paid orders exist.",
+      "signpost": {
+        "metric": "QCaaS revenue growth YoY; first paid gate-model system order",
+        "threshold": "QCaaS above +50% YoY through mid-2027 = on track; below +30% = recurring thesis stalling",
+        "when": "Quarterly; gate-model order by end-2027"
+      }
+    }
+  ],
+  "thesis": [
+    "The backlog is contracted. RPO of $38.3M at Sep 30, 2026 is about three times trailing revenue, with ~59% scheduled to be recognized within 12 months and ~71% within 24 months - the first time D-Wave has entered a year with visible revenue (debate 1).",
+    "The recurring core is compounding. QCaaS and professional services together were $4.2M of Q3 revenue, more than double a year earlier, and more than 100 customers generated revenue in the quarter (debate 3).",
+    "Washington is now a shareholder. The definitive CHIPS and Science Act agreement gives access to up to $100M in milestone-based installments for a 100,000-qubit annealer and a 10,000-qubit gate-model system, and makes the Department of Commerce a minority, non-controlling holder - a signal to other government buyers.",
+    "The balance sheet buys time. With more than $500M of cash and securities and little debt, D-Wave can fund both platforms through 2028 without being forced to sell stock at a low (debate 2)."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026 (ended Sep 30, 2026; reported Nov 10, 2026)",
+    "points": [
+      "Revenue $4.51M, +21% YoY; nine-month revenue $10.45M, -52% YoY against a 2025 period that included a system sale.",
+      "QCaaS $2.2M (+56%); professional services $2.0M (+318%); systems and other ~$0.36M.",
+      "GAAP gross margin 52.9% (from 71.4%); non-GAAP 63.6% (from 77.7%), on a higher services mix.",
+      "GAAP operating expenses $55.9M (+84%); operating loss $53.5M; adjusted EBITDA loss $37.7M; net loss $48.2M ($0.13 per share).",
+      "Bookings $1.9M (-19% YoY); nine-month bookings $37.4M (+611%); RPO $38.3M versus $2.9M a year earlier.",
+      "Cash and marketable securities $503.4M; nine-month operating cash use $109.0M; 374.1M weighted shares (+9.3% YoY)."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Nov 10). Revenue of $4.51M rose 21% YoY on recurring lines - QCaaS $2.2M and professional services $2.0M - while systems revenue was only ~$0.36M, so nine-month revenue of $10.45M is still down 52%. The cost base is unchanged from Q2: GAAP operating expenses of $55.9M (+84% YoY, with Quantum Circuits absorbed) produced a $53.5M operating loss and a $37.7M adjusted EBITDA loss; the $48.2M net loss only looks better than last year's $140.0M because a $121.9M warrant charge is gone. Bookings were $1.9M and RPO eased to $38.3M. Cash fell $42.9M in the quarter to $503.4M. The definitive CHIPS agreement was signed (announced early September), but no funds had been received at quarter-end and the balance sheet carries the $100M as uncollected equity proceeds. Greg Golkov presented as acting CFO in place of John Markovich (per secondary coverage; no explanation given).",
+  "guidanceProse": "D-Wave gives no dollar guidance. On the Nov 10 call management said the $20M Florida Atlantic University system is expected to be delivered in Q4 2026 with a substantial portion of revenue recognized on delivery, more over the installation period in early 2027, then smaller maintenance and cloud amounts over several years. That implies Q4 alone exceeds the first nine months and FY2026 revenue lands around $25-30M (Siberforge estimate). Consensus of ~$42.5M for FY2026 and ~$81M for FY2027 (TIKR, Nov 3) looks stale against a 12-month RPO schedule of ~$22.6M. No operating-expense outlook was given.",
   "guide": {
     "label": "FY26 revenue shape",
     "val": "Q4-weighted",
-    "sub": "no dollar guide; Q3 up modestly, Q4 the majority of FY26 on system shipments",
-    "tone": "accent"
+    "sub": "no dollar guide | $20M FAU system delivers in Q4, remainder on installation in early 2027",
+    "tone": "warn"
   },
   "segments": [
-    "QCaaS subscriptions: $1.9M in Q2 2026, +50% YoY - the recurring core, sold direct and through the Leap cloud and hyperscaler marketplaces.",
-    "Professional services: about $0.9M in Q2 2026, +18% YoY - application engagements that seed QCaaS conversions.",
-    "Systems: lumpy on-premise Advantage2 sales ($20M FAU deal booked Q1 2026; a Julich sale drove H1 2025) - only about $0.3M recognized in Q2 from site preparation."
+    "QCaaS subscriptions: the recurring core, sold direct and through the Leap cloud and hyperscaler marketplaces.",
+    "Professional services: application engagements that seed QCaaS conversions, now including paid gate-model research projects.",
+    "Systems: lumpy on-premise Advantage2 sales (Julich in H1 2025; the $20M Florida Atlantic University order booked Q1 2026; a unit shipped to Como, Italy in Q3 2026 funded by Swiss Quantum Technology SA)."
   ],
   "competitive": [
-    "IonQ posted $80.1M of Q2 2026 revenue - 26x D-Wave's - with about $2.0B of pro forma cash; on commercial traction the gap is widening, not closing.",
-    "Rigetti ($5.1M Q2 2026 revenue, $28.1M operating loss) and newly listed IQM, Quantinuum and Infleqtion all sell gate-model systems; D-Wave's Quantum Circuits unit enters that race at 17 qubits versus IBM machines in the hundreds.",
+    "IonQ posted $80.1M of Q2 2026 revenue - about 26x D-Wave's that quarter - with about $2.0B of pro forma cash; on commercial traction the gap is widening, not closing.",
+    "Rigetti ($5.1M Q2 2026 revenue) and newly listed IQM, Quantinuum and Infleqtion all sell gate-model systems; D-Wave's Quantum Circuits unit enters that race at 17 qubits versus IBM machines in the hundreds.",
     "IBM is the gate-model benchmark, targeting its fault-tolerant Starling system for 2029; Google opened early access to the 105-qubit Willow chip in March 2026.",
-    "In annealing D-Wave is effectively unopposed among quantum vendors - the real competitor is classical: GPU-accelerated heuristics and hybrid solvers keep raising the bar an annealer must beat on commercial optimization problems."
+    "In annealing D-Wave is effectively unopposed among quantum vendors - the real competitor is classical: GPU-accelerated heuristics and hybrid solvers keep raising the bar an annealer must beat."
   ],
-  "moat": "D-Wave is the only commercial supplier of quantum annealers, with the 4,400-plus-qubit Advantage2 generally available since May 2025 and a genuinely recurring, if tiny, QCaaS base. What is not proven: peer-reviewed quantum advantage on commercial optimization problems versus modern classical solvers, and the new gate-model program is years behind IBM, Google and IonQ. The moat today is uniqueness of approach plus a subsidized balance sheet, not demonstrated economic value.",
+  "moat": "D-Wave is the only commercial supplier of quantum annealers, with the 4,400-plus-qubit Advantage2 generally available since May 2025 and a genuinely recurring, if tiny, QCaaS base. What is not proven: peer-reviewed quantum advantage on commercial optimization problems versus modern classical solvers, and the gate-model program bought with Quantum Circuits in January 2026 is years behind IBM, Google and IonQ. The moat today is uniqueness of approach plus a subsidized balance sheet, not demonstrated economic value.",
   "risks": [
-    "The valuation is the biggest risk. EV of roughly $7.2B stands against $5.9M of H1 2026 revenue - hundreds of times sales, and about 175x even the full $40.7M RPO; almost any cash-flow math requires decades of near-flawless compounding.",
-    "Reported revenue is shrinking while the story grows. H1 2026 revenue fell 67% YoY, and FY26 hinges on Q4 shipment timing of essentially one $20M system; a slip of weeks moves most of the year's revenue into 2027.",
-    "Burn is accelerating into unproven demand. Adjusted EBITDA loss widened 85% YoY to $37.1M in Q2 2026; H1 operating cash use was $73.5M against just $4.0M of non-GAAP gross profit - spending is scaling an order of magnitude faster than gross profit.",
-    "Dilution is chronic and now includes Washington. Shares outstanding are up roughly 226% since late 2022 across repeated ATM programs (including a $400M ATM completed June 2025, per prior disclosures), the $100M DOC award converts into newly issued stock, and per-share math already uses about 370M shares.",
-    "The annealing-advantage question is unresolved. Independent benchmarks keep showing classical heuristics matching annealers on many commercial problems; if that persists, QCaaS growth stalls at pilot scale and the systems pipeline stays governmental and academic.",
-    "The gate-model hedge is late and expensive. $250M of cash bought a program targeting 17 qubits in late 2026 - against IBM's fault-tolerant 2029 roadmap and IonQ's 256-qubit 2026 target - and it helped double operating expenses before contributing any revenue."
+    "The bar is far above the record. The quality check's reverse DCF needs revenue growth of ~118% a year for 8 years against 51% a year delivered, and year-over-year growth over the last four reported quarters ran +100%, +19%, -81%, -1% - the track record is one of lumpy system sales, not compounding (debate 3).",
+    "Losses scale faster than gross profit. Nine-month non-GAAP gross profit was $6.9M against $114.4M of adjusted operating expenses; the operating margin, operating cash flow and capex-intensity rows are all amber and nothing in the Q3 report points to operating leverage before system sales repeat (debate 2).",
+    "Dilution is chronic. Diluted shares are up 22.7% YoY on the quality check (9.3% on Q3 weighted shares) after repeated ATM programs, and the Commerce stake adds $100M of new stock whose share count and price are not disclosed (debate 2).",
+    "One customer and one delivery carry the year. Most of FY2026 revenue depends on a single university system arriving in Q4, and one customer was about 41% of revenue last quarter (per Finsee; unverified); a slip of weeks moves the year into 2027 and would lend weight to the Oct 15 class action claims (debate 1).",
+    "The technology case is still open. Classical solvers continue to match annealers on many commercial problems, and the $252.8M gate-model purchase raised costs years before it can earn revenue."
   ],
   "catalysts": [
-    "Q3 2026 earnings, early November 2026 - first read on Q4 shipment readiness.",
-    "DOC final award documents converting the $100M CHIPS Act LOI into funded equity, expected H2 2026.",
-    "Florida Atlantic University Advantage2 shipment, installation and calibration in Q4 2026 - the majority of FY26 revenue.",
-    "Quantum Circuits 17-qubit gate-model system delivery targeted late 2026.",
-    "Sector re-rating events: Quantinuum (Aug 11) and Infleqtion (Aug 12) debut earnings set fresh public comps."
+    "By Dec 31, 2026: Florida Atlantic University Advantage2 delivery - the bulk of FY2026 revenue (debate 1).",
+    "Late 2026: completion of the 17-qubit gate-model system; first delivery orders discussed for 2027 (debate 3).",
+    "~Mar 2027 (date not announced): Q4 2026 report - system revenue recognized, Q4 bookings, RPO, any FY2027 framing (debates 1, 2).",
+    "H1 2027: first CHIPS milestone installments and disclosure of the Commerce share issuance terms (debate 2).",
+    "~May 2027: Q1 2027 report - whether a new system order has been booked (debate 1).",
+    "Ongoing: the securities class action filed Oct 15, 2026 over bookings disclosures (debate 1)."
   ],
-  "pricedIn": "At $20.76 (August 10, 2026) the market cap is about $7.7B; net of $546M cash, EV is roughly $7.2B. Against $5.9M of H1 revenue - or generously the $40.7M RPO - that is hundreds of times sales, the most extreme multiple in the quantum group (IonQ trades near 55x guided sales on 26x the revenue). The 52-week range of $12.75-$46.75 shows the market has priced both outcomes within twelve months. What the price implies: bookings compound from $35.5M toward hundreds of millions within a few years, and annealing plus gate-model both find real markets. The key debate: S-curve beginning, or a federally subsidized story stock.",
-  "scenarios": {
-    "bear": "The Q4 system shipment slips or the bookings pipeline fails to refill after FAU, exposing 2026 as two one-off deals rather than an inflection. Classical solvers keep matching annealing on benchmarks, QCaaS plateaus in the single-digit millions per quarter, and burn near $150M a year forces continued ATM issuance into a falling price. The multiple collapses toward 25-50x a roughly $30M revenue base - a stock in the low-to-mid single digits.",
-    "base": "Q4 delivers: FAU revenue lands, FY26 revenue comes in around $25-30M, and 2027 bookings hold in the $40-60M range on one or two new system deals plus steadily compounding QCaaS. The DOC award funds the dual-platform roadmap and burn stabilizes near $150M a year against $600M-plus of total resources. The stock stays a sentiment-driven trader roughly between $12 and $30, moving on bookings prints and federal headlines rather than revenue.",
-    "bull": "Annealing wins visible production deployments at Fortune 100 scale and the government relationship expands beyond the first $100M; bookings run past $100M in 2027 as system deals repeat quarterly rather than annually. The Quantum Circuits program hits its 17- and 49-qubit milestones on time, validating the dual-platform story. Scarcity value does the rest: as one of two liquid quantum pure-plays with a federal stake, QBTS retests its $46.75 high on a sector melt-up."
-  },
   "valPresets": {
     "mode": "revenue",
     "r": 0.14,
@@ -80,13 +142,13 @@
       "fcfMargin": 0.3,
       "exit": 14
     },
-    "note": "Revenue mode is the only defensible frame: D-Wave is deeply unprofitable ($37.1M quarterly adjusted EBITDA loss versus $3.1M revenue), so FCF-based DCF is meaningless. Presets compound a roughly $25-30M FY26 revenue base; even the bear case needs a 35% CAGR, and the bull case (75% CAGR for 8 years to about $2B revenue) only approaches today's EV with a premium exit multiple - an honest picture of how much compounding is already priced in."
+    "note": "Revenue mode is the only defensible frame: D-Wave is deeply unprofitable, so FCF-based DCF is meaningless. Presets compound a roughly $25-30M FY2026 revenue base (Siberforge estimate); even the bear case needs a 35% CAGR, and the bull case (75% a year for 8 years) is still well short of the growth the reverse DCF says is priced in. Interim burn and dilution are ignored - generous to every case."
   },
   "bullCharts": {
     "0": [
       "revA"
     ],
-    "4": [
+    "1": [
       "revQ"
     ]
   },
@@ -94,37 +156,64 @@
     "0": [
       "peerEvS"
     ],
-    "2": [
-      "fcfQ"
+    "1": [
+      "fcfQ",
+      "omA"
     ],
-    "3": [
+    "2": [
       "priceH"
     ]
   },
+  "changelog": [
+    {
+      "date": "2026-11-14",
+      "change": "Rebuilt as a v3 decision note for Q3 2026 (revenue $4.51M, bookings $1.9M, RPO $38.3M, cash $503.4M), the definitive CHIPS agreement, the Oct 15 class action and the acting-CFO change. Added FY2027 EV/Sales scenarios (bear ~$3 / base ~$9 / bull ~$22). The view did not move: still Cautious. The share price has roughly halved since August, but Q3 bookings failed to show a second system order, so the lower price is matched by weaker evidence of repeatability."
+    },
+    {
+      "date": "2026-08-13",
+      "change": "Q2 2026 note (v2): revenue $3.1M flat YoY, H1 bookings $35.5M on two deals, $100M CHIPS LOI, cash $546.2M. Lean was cautious - valuation named as the biggest risk and FY2026 framed as a single-shipment story."
+    }
+  ],
   "sources": [
     {
-      "label": "D-Wave Q2 2026 results (Business Wire)",
+      "label": "D-Wave Q3 2026 results release, SEC 8-K Exhibit 99.1 (Nov 10, 2026): revenue, margins, opex, losses, bookings, RPO, cash, shares, CHIPS agreement",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001907982/000190798226000180/qbts-20261110xexx991.htm"
+    },
+    {
+      "label": "MarketBeat: Q3 2026 call highlights - FAU delivery timing, pipeline, revenue by type, commercial share, gate-model roadmap (Nov 10, 2026)",
+      "url": "https://www.marketbeat.com/instant-alerts/transcript-d-wave-quantum-q3-earnings-call-highlights-2026-11-10/"
+    },
+    {
+      "label": "Quantum Computing Report: Q3 2026 results summary, NTT DOCOMO, Como shipment, Quantum Circuits $252.8M",
+      "url": "https://quantumcomputingreport.com/d-wave-reports-q3-2026-results-revenue-up-21-yoy-rpo-surges-1221-to-38-3m-and-finalizes-100m-chips-act-agreement/"
+    },
+    {
+      "label": "Quantum Computing Report: definitive $100M CHIPS Act agreement with the Department of Commerce (Sep 8, 2026)",
+      "url": "https://quantumcomputingreport.com/d-wave-finalizes-definitive-100-million-chips-act-agreement-with-u-s-department-of-commerce/"
+    },
+    {
+      "label": "InsiderFinance: Q3 2026 results - opex drivers, FAU recognition in Q4, no CHIPS funds received",
+      "url": "https://www.insiderfinance.io/news/d-wave-q3-results-show-revenue-beat-wider-loss"
+    },
+    {
+      "label": "Finsee: Q3 2026 earnings review - QoQ cash and RPO change, customer concentration, acting CFO (secondary, partly its own calculations)",
+      "url": "https://finsee.ai/earnings/qbts/2026/q3/en/"
+    },
+    {
+      "label": "TIKR: consensus revenue FY2026-28, Oct 15 class action, B. Riley target cut (updated Nov 3, 2026)",
+      "url": "https://www.tikr.com/blog/b-riley-cut-its-d-wave-target-to-27-its-still-168-above-the-stock-price"
+    },
+    {
+      "label": "D-Wave Q2 2026 results (Business Wire, Aug 6, 2026): Q2 RPO, cash, H1 bookings",
       "url": "https://www.morningstar.com/news/business-wire/20260806658831/d-wave-reports-second-quarter-2026-results"
     },
     {
-      "label": "StockTitan: QBTS Q2 2026 8-K summary",
-      "url": "https://www.stocktitan.net/sec-filings/QBTS/8-k-d-wave-quantum-inc-reports-material-event-84e480b002b1.html"
-    },
-    {
-      "label": "DCD: Quantum earnings Q2 2026 roundup",
+      "label": "DCD: Quantum earnings Q2 2026 roundup (IonQ, Rigetti, IQM comps)",
       "url": "https://www.datacenterdynamics.com/en/news/quantum-earnings-q2-2026-d-wave-ionq-and-rigetti-publish-financial-results-alongside-newly-ipo-ed-iqm-quantum-computers/"
     },
     {
-      "label": "D-Wave-DOC $100M CHIPS Act LOI",
-      "url": "https://ir.dwavequantum.com/news/news-details/2026/D-Wave-Quantum-and-Department-of-Commerce-Sign-Letter-of-Intent-for-100-Million-in-CHIPS-and-Science-Act-Funding-to-Accelerate-U-S--Leadership-in-Quantum-Computing/default.aspx"
-    },
-    {
-      "label": "TradingView: QBTS Q2 2026 summary",
-      "url": "https://www.tradingview.com/news/tradingview:fa48e5746fe20:0-d-wave-quantum-posts-q2-2026-3-1m-revenue-48-0m-net-loss-bookings-35-5m-ytd/"
-    },
-    {
-      "label": "TradingKey: QBTS valuation and AT&T deal context",
-      "url": "https://www.tradingkey.com/analysis/stocks/us-stocks/262058607-d-wave-quantum-stock-forecast-att-deal-q2-earnings-preview-tradingkey"
+      "label": "SEC EDGAR XBRL (site filings data): quarterly revenue, operating income, cash flow, capex, diluted shares through Jun 2026",
+      "url": "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0001907982&type=10-Q"
     }
   ]
 }
