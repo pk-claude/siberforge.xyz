@@ -107,24 +107,33 @@ export function rollingZScore(series, window = 120, minObs = 36) {
   return out;
 }
 
-// Average multiple { ym, value } z-series by ym. A month is included only
-// when at least one series has a finite z; missing components are skipped.
-// (This matters at the start of the sample where INDPRO is available
-// before others, etc.)
+// Average multiple { ym, value } z-series by ym.
+//
+// A month is classified only when EVERY series that has started by then has
+// reported it. Payrolls for a month arrive about two weeks before industrial
+// production and retail sales, and averaging whatever is available meant the
+// newest month was scored on payrolls alone for those two weeks: in Nov 2026
+// that flipped the headline from Goldilocks to Stagflation on one series.
+// Series that begin later in history (real retail sales, 1992) do not hold
+// back the earlier months.
 export function compositeZ(...zSeries) {
-  // Build ym -> [values] index.
   const byYm = new Map();
+  const firstYm = [];
   for (const s of zSeries) {
+    let first = null;
     for (const o of s) {
       if (!Number.isFinite(o.value)) continue;
+      if (first === null || o.ym < first) first = o.ym;
       if (!byYm.has(o.ym)) byYm.set(o.ym, []);
       byYm.get(o.ym).push(o.value);
     }
+    firstYm.push(first);
   }
   const out = [];
   for (const ym of [...byYm.keys()].sort()) {
     const arr = byYm.get(ym);
-    if (!arr.length) continue;
+    const expected = firstYm.filter(f => f !== null && f <= ym).length;
+    if (!arr.length || arr.length < expected) continue;
     let s = 0; for (const v of arr) s += v;
     out.push({ ym, value: s / arr.length, components: arr.length });
   }

@@ -1,5 +1,5 @@
 // Liquidity & Fiscal.
-import { el, fmt, sgn, addDays, fred, last, at, asof, pctile, since, tiles, lineChart, recessionRanges, asOfLine, setStatus, COLORS, change, dayName, monthName } from '/lib/sf-kit.js';
+import { el, fmt, sgn, addDays, fred, last, at, asof, combine, pctile, since, tiles, lineChart, recessionRanges, asOfLine, setStatus, COLORS, change, dayName, monthName, ordinal } from '/lib/sf-kit.js';
 
 const IDS = ['WALCL', 'WTREGEN', 'RRPONTSYD', 'WRESBAL', 'SP500', 'MTSDS133FMS', 'GDP', 'A091RC1Q027SBEA', 'FGRECPT', 'GFDEGDQ188S', 'USREC'];
 
@@ -35,7 +35,7 @@ async function main() {
   ], { recessions: rec, yTitle: '% of GDP', dec: 1, lines: [{ value: 7, label: 'Sep-2019 repo stress ~7%', color: COLORS.red }] });
   tiles('tiles-res', [
     { label: 'Reserve balances', value: `$${fmt(last(d.WRESBAL)?.value / 1e6, 2)}tn`, meta: rp ? `${fmt(rp.value, 1)}% of GDP` : '' },
-    { label: 'Change, 12 months', value: `${sgn(change(d.WRESBAL, 365, 'diff') / 1000, 0)}bn`, meta: 'balance-sheet runoff and TGA swings' },
+    { label: 'Change, 12 months', value: `${sgn(change(d.WRESBAL, 365, 'diff') / 1000, 0)}bn`, meta: `Fed assets ${sgn(change(d.WALCL, 365, 'diff') / 1000, 0)}bn over the same 12 months` },
   ]);
 
   // Fiscal.
@@ -45,7 +45,10 @@ async function main() {
     const sum = mts.slice(i - 11, i + 1).reduce((a, o) => a + o.value, 0) / 1000; // $bn
     const g = at(gdp, mts[i].date); if (g) roll.push({ date: mts[i].date, value: -sum / g.value * 100 });
   }
-  const intShare = asof(d.A091RC1Q027SBEA || [], d.FGRECPT || [], (a, b) => a / b * 100);
+  // Same-quarter interest over same-quarter receipts (receipts arrive a release
+  // later; pairing the newest interest with the previous quarter's receipts overstated it).
+  const intShare = combine(d.A091RC1Q027SBEA || [], d.FGRECPT || [], (a, b) => a / b * 100);
+  const qName = iso => `Q${Math.floor((+iso.slice(5, 7) - 1) / 3) + 1} ${iso.slice(0, 4)}`;
   const def = last(roll), is = last(intShare), debt = last(d.GFDEGDQ188S);
   lineChart('chart-fiscal', [
     { label: 'Deficit, 12m rolling, % of GDP', data: since(roll, '1990-01-01'), color: COLORS.red, width: 2 },
@@ -53,9 +56,9 @@ async function main() {
   ], { recessions: rec, yTitle: '%', dec: 1 });
   const unemploymentLike = def && def.value > 5 ? 'large for an economy not in recession' : 'moderate';
   tiles('tiles-fiscal', [
-    { label: 'Deficit, last 12 months', value: def ? `${fmt(def.value, 1)}% of GDP` : '—', meta: def ? `through ${monthName(def.date)}` : '', status: def ? (def.value > 5 ? 'caution' : 'ok') : '', threshold: 'Post-1990 average outside recessions: about 3%' },
-    { label: 'Interest / receipts', value: is ? `${fmt(is.value, 1)}%` : '—', meta: is ? `${monthName(is.date)} quarter; ${pctile(intShare, 40)}th pct of 40 years` : '', status: is ? (is.value > 18 ? 'warn' : is.value > 14 ? 'caution' : 'ok') : '' },
-    { label: 'Federal debt', value: debt ? `${fmt(debt.value, 0)}% of GDP` : '—', meta: debt ? monthName(debt.date) : '' },
+    { label: 'Deficit, last 12 months', value: def ? `${fmt(def.value, 1)}% of GDP` : '—', meta: def ? `through ${monthName(def.date)}` : '', status: def ? (def.value > 5 ? 'caution' : 'ok') : '', threshold: 'Average since 1990 outside recessions: 4.0%' },
+    { label: 'Interest / receipts', value: is ? `${fmt(is.value, 1)}%` : '—', meta: is ? `${qName(is.date)}; ${ordinal(pctile(intShare, 40))} percentile of 40 years` : '', status: is ? (is.value > 18 ? 'warn' : is.value > 14 ? 'caution' : 'ok') : '' },
+    { label: 'Federal debt', value: debt ? `${fmt(debt.value, 0)}% of GDP` : '—', meta: debt ? qName(debt.date) : '' },
   ]);
 
   el('verdict').innerHTML =

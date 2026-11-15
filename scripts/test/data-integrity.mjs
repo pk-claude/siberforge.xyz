@@ -14,8 +14,8 @@ run('every composite input is in the proxy allowlist', () => {
   const miss = Object.keys(SPECS).flatMap(seriesFor).filter(id => !CATALOG[id]);
   if (miss.length) throw new Error(miss.join(','));
 });
-run('every composite input is in the snapshot', () => {
-  const miss = Object.keys(SPECS).flatMap(seriesFor).filter(id => !man.series[id] || !man.series[id].n);
+run('every required composite input is in the snapshot', () => {
+  const miss = Object.keys(SPECS).flatMap(k => seriesFor(k, { required: true })).filter(id => !man.series[id] || !man.series[id].n);
   if (miss.length) throw new Error(miss.join(','));
 });
 run('snapshot covers >= 95% of the allowlist', () => {

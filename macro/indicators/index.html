@@ -4,7 +4,18 @@
 <meta charset="utf-8" />
 <script src="/lib/fred-snapshot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge &mdash; Economic Indicators</title>
+<title>Siberforge &mdash; All indicators</title>
+<meta name="description" content="26 US indicators on one page: latest print, change from the previous print, five-year percentile and next release date." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/indicators/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Siberforge" />
+<meta property="og:title" content="Siberforge — All indicators" />
+<meta property="og:description" content="26 US indicators on one page: latest print, change from the previous print, five-year percentile and next release date." />
+<meta property="og:url" content="https://www.siberforge.xyz/macro/indicators/" />
+<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/macro/indicators/styles.css" />
 <link rel="stylesheet" href="/lib/tokens.css" />
 <link rel="stylesheet" href="/lib/layout.css" />
@@ -14,15 +25,15 @@
 <link rel="stylesheet" href="/lib/depth.css" />
 <script defer src="/lib/depth.js"></script>
 </head>
-<body data-section="macro" data-page="indicators" data-page-sub="Economic Indicators" data-page-status-text="Ready">
+<body data-section="macro" data-page="indicators" data-page-sub="All indicators" data-page-status-text="Ready">
 
 <main>
-  <span class="eyebrow">Macro dashboard</span>
+  <span class="eyebrow">Macro &middot; All indicators</span>
   <h1 class="page-title">US Economic Indicators</h1>
   <p class="page-sub">
-    Growth, inflation, consumer health, and housing — at a glance. Each card shows
-    the latest reading, year-over-year change, a five-year spark, and a context strip
-    showing where today sits relative to its five-year range.
+    Growth, inflation, consumer health and housing at a glance. Each card shows the latest
+    reading, the change from the previous print, a five-year spark, and a strip showing where
+    today sits in its five-year range.
   </p>
 
   <section class="release-strip" id="release-strip"></section>
@@ -67,8 +78,8 @@
 <footer>
   Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (St. Louis Fed)</a> ·
   GDP nowcast: <a href="https://www.atlantafed.org/cqer/research/gdpnow" target="_blank" rel="noopener">Atlanta Fed GDPNow</a> ·
-  Series cached at the edge for 6h — FRED releases on a fixed schedule so more-frequent polling
-  buys nothing. Click any card for full history, methodology, and revision vintages. <span id="last-updated"></span>
+  Data are a static snapshot refreshed twice each weekday. Click any card for full history,
+  methodology and revision vintages. <span id="last-updated"></span>
 </footer>
 
 <script type="module" src="/macro/indicators/dashboard.js"></script>

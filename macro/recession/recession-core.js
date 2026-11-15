@@ -162,15 +162,22 @@ export function monthlyMean(obs) {
 
 // Calibration against NBER dates, computed from the data on every load so the
 // page reports its own track record instead of asserting one.
-//   caught:     recessions where the signal fired between 24 months before the
-//               start and 6 months after it (among recessions its data covers)
-//   medianLead: months from first firing in that window to the start
-//               (positive = fired before the recession began)
-//   falseRate:  share of firing months outside recessions (and the 12 months
-//               after them) that were NOT followed by a recession start
-//               within 12 months
+//   caught:      recessions where the signal fired between 24 months before the
+//                start and 6 months after it. The window never reaches back
+//                into the previous recession, so a firing during the 1980
+//                recession is not credited as catching the 1981 one.
+//   medianLead:  months from first firing in that window to the start
+//                (positive = fired before the recession began)
+//   episodes:    runs of firing months (gaps of up to 3 months are one run)
+//   falseAlarms: episodes that began outside the span from 24 months before a
+//                recession start to 12 months after its end, and are old
+//                enough to judge (began 24+ months before the latest data)
+//   open:        episodes too recent to judge
+// The previous "false-alarm months" share dropped every firing month inside a
+// recession from the denominator, so a coincident signal could only read 100%.
 export function calibrate(series, test, usrec) {
   const idx = ym => { const [y, m] = ym.split('-').map(Number); return y * 12 + m - 1; };
+  const ymOf = k => `${Math.floor(k / 12)}-${String(k % 12 + 1).padStart(2, '0')}`;
   const ranges = recessionRangesFromUsrec(usrec);
   const vals = new Map(series.map(o => [o.date.slice(0, 7), o.value]));
   const first = series.length ? series[0].date.slice(0, 7) : null;
@@ -179,25 +186,30 @@ export function calibrate(series, test, usrec) {
   const covered = ranges.filter(([s]) => idx(s) - 24 >= idx(first));
   const leads = [];
   for (const [s] of covered) {
-    for (let k = idx(s) - 24; k <= idx(s) + 6; k++) {
-      const ym = `${Math.floor(k / 12)}-${String(k % 12 + 1).padStart(2, '0')}`;
-      if (test(vals.get(ym))) { leads.push(idx(s) - k); break; }
+    const prevEnd = Math.max(-Infinity, ...ranges.filter(([, e]) => idx(e) < idx(s)).map(([, e]) => idx(e)));
+    for (let k = Math.max(idx(s) - 24, prevEnd + 1); k <= idx(s) + 6; k++) {
+      if (test(vals.get(ymOf(k)))) { leads.push(idx(s) - k); break; }
     }
   }
-  // In, or within 12 months after, a recession: late confirmation, not a false alarm.
-  const inRec = k => ranges.some(([s, e]) => k >= idx(s) && k <= idx(e) + 12);
-  const startsWithin12 = k => ranges.some(([s]) => idx(s) > k && idx(s) - k <= 12);
-  let fires = 0, falseFires = 0;
-  for (const [ym, v] of vals) {
-    const k = idx(ym);
-    if (!test(v) || inRec(k) || idx(lastYm) - k < 12) continue;
-    fires++; if (!startsWithin12(k)) falseFires++;
+  const fireMonths = [...vals].filter(([, v]) => test(v)).map(([ym]) => idx(ym)).sort((x, y) => x - y);
+  const episodes = [];
+  for (const k of fireMonths) {
+    const cur = episodes[episodes.length - 1];
+    if (cur && k - cur.end <= 3) cur.end = k; else episodes.push({ start: k, end: k });
+  }
+  const falseAlarms = [];
+  let open = 0;
+  for (const ep of episodes) {
+    const tied = ranges.some(([s, e]) => ep.start >= idx(s) - 24 && ep.start <= idx(e) + 12);
+    if (tied) continue;
+    if (idx(lastYm) - ep.start < 24) { open++; continue; }
+    falseAlarms.push(ymOf(ep.start).slice(0, 4));
   }
   leads.sort((a, b) => a - b);
   return {
     covered: covered.length, caught: leads.length,
     medianLead: leads.length ? leads[Math.floor((leads.length - 1) / 2)] : null,
-    falseRate: fires ? falseFires / fires : null, fires,
+    episodes: episodes.length, falseAlarms, open,
     since: first,
   };
 }

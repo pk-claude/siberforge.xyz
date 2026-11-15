@@ -1,6 +1,6 @@
 // Policy & Rates: where the Fed is, what the 2-year prices, real rate vs
 // neutral, the curve's shape and the 10-year's decomposition.
-import { el, fmt, sgn, addDays, fred, last, at, pctile, yoy, since, tiles, lineChart, categoryChart, recessionRanges, asOfLine, setStatus, COLORS, dayName, monthName, change } from '/lib/sf-kit.js';
+import { el, fmt, sgn, addDays, fred, last, at, pctile, yoy, since, tiles, lineChart, categoryChart, recessionRanges, asOfLine, setStatus, COLORS, dayName, monthName, change, ordinal, policyStance } from '/lib/sf-kit.js';
 
 const MATS = [['DGS1MO', '1M'], ['DGS3MO', '3M'], ['DGS6MO', '6M'], ['DGS1', '1Y'], ['DGS2', '2Y'], ['DGS3', '3Y'], ['DGS5', '5Y'], ['DGS7', '7Y'], ['DGS10', '10Y'], ['DGS20', '20Y'], ['DGS30', '30Y']];
 const IDS = ['DFF', 'DFEDTARL', 'DFEDTARU', 'PCEPILFE', 'FEDTARMD', 'FEDTARMDLR', 'DFII5', 'DFII10', 'T10YIE', 'THREEFYTP10', 'USREC', ...MATS.map(m => m[0])];
@@ -22,9 +22,10 @@ async function main() {
   const realSeries = pce.map(o => { const f = at(d.DFF, addDays(o.date, 27)); return f ? { date: o.date, value: f.value - o.value } : null; }).filter(Boolean);
 
   const dir = gap2 == null ? '' : gap2 < -25 ? `prices cuts: the 2-year sits ${fmt(Math.abs(gap2), 0)}bp below fed funds` : gap2 > 25 ? `prices hikes: the 2-year sits ${fmt(gap2, 0)}bp above fed funds` : `prices little change: the 2-year is within 25bp of fed funds`;
-  const stance = realFF == null || neutralReal == null ? '' : realFF - neutralReal > 1 ? 'clearly restrictive' : realFF - neutralReal > 0.25 ? 'modestly restrictive' : realFF - neutralReal > -0.25 ? 'close to neutral' : 'accommodative';
+  const st = policyStance(realFF, neutralReal);
+  const stance = st.gap == null ? '' : st.label;
   el('verdict').innerHTML = `Fed funds target <strong>${lo && hi ? fmt(lo.value, 2) + '&ndash;' + fmt(hi.value, 2) + '%' : '—'}</strong> (effective ${fmt(ff?.value, 2)}%). The market ${dir}. ` +
-    (realFF != null ? `The real policy rate is ${sgn(realFF, 1)}% against a neutral proxy of ${fmt(neutralReal, 1)}%, so policy is <strong>${stance}</strong>. ` : '') +
+    (realFF != null ? `The real policy rate is ${sgn(realFF, 1)}% against a neutral proxy of ${fmt(neutralReal, 1)}%, so policy reads <strong>${stance}</strong> (within half a point either way counts as neutral, since the neutral rate is uncertain). ` : '') +
     (sepPath.length ? `The latest FOMC projections have the median rate at ${sepPath.map(o => `${fmt(o.value, 2)}% (end-${o.date.slice(0, 4)})`).join(', ')}.` : '');
 
   // 1. policy vs market
@@ -44,7 +45,7 @@ async function main() {
     { label: 'Real fed funds (FF − core PCE YoY)', data: since(realSeries, '1990-01-01'), color: COLORS.accent, width: 2, fill: true },
   ], { recessions: rec, yTitle: '%', dec: 2, lines: neutralReal != null ? [{ value: neutralReal, label: `neutral proxy ${fmt(neutralReal, 1)}%`, color: COLORS.green }, { value: 0, color: 'rgba(138,148,163,0.4)' }] : [] });
   tiles('tiles-real', [
-    { label: 'Real fed funds', value: realFF != null ? `${sgn(realFF, 2)}%` : '—', meta: `${pctile(realSeries, 20, realFF)}th percentile of 20 years`, status: realFF == null ? '' : realFF - neutralReal > 1 ? 'warn' : realFF - neutralReal > 0.25 ? 'caution' : 'ok' },
+    { label: 'Real fed funds', value: realFF != null ? `${sgn(realFF, 2)}%` : '—', meta: `${ordinal(pctile(realSeries, 20, realFF))} percentile of 20 years`, status: st.tone },
     { label: 'Neutral proxy (real)', value: neutralReal != null ? `${fmt(neutralReal, 2)}%` : '—', meta: 'FOMC longer-run median minus 2%', threshold: 'Model estimates of r* range roughly 0.5-1.5%' },
     { label: 'Gap to neutral', value: realFF != null && neutralReal != null ? `${sgn(realFF - neutralReal, 2)}pp` : '—', meta: stance },
   ]);
@@ -80,9 +81,9 @@ async function main() {
   ], { recessions: rec, yTitle: '%', dec: 2, lines: [{ value: 0, color: 'rgba(138,148,163,0.4)' }] });
   const tp = last(d.THREEFYTP10);
   tiles('tiles-10y', [
-    { label: '10Y real yield', value: `${fmt(last(d.DFII10)?.value, 2)}%`, meta: `${pctile(d.DFII10, 20)}th percentile of 20 years` },
+    { label: '10Y real yield', value: `${fmt(last(d.DFII10)?.value, 2)}%`, meta: `${ordinal(pctile(d.DFII10, 20))} percentile of 20 years` },
     { label: '10Y breakeven inflation', value: `${fmt(last(d.T10YIE)?.value, 2)}%`, meta: 'market-implied average CPI over 10 years' },
-    { label: 'Term premium', value: tp ? `${sgn(tp.value, 2)}%` : '—', meta: tp ? `${pctile(d.THREEFYTP10, 20)}th percentile of 20 years` : '', threshold: 'Negative 2016-2021 under QE; rising premium = investors want paying for duration' },
+    { label: 'Term premium', value: tp ? `${sgn(tp.value, 2)}%` : '—', meta: tp ? `${ordinal(pctile(d.THREEFYTP10, 20))} percentile of 20 years` : '', threshold: 'Negative for most of 2019-2021; a rising premium means investors want more pay for holding duration' },
   ]);
 
   await asOfLine('asof', { a: d.DFF, b: d.DGS10, c: d.PCEPILFE });

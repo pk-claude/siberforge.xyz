@@ -22,7 +22,7 @@ export async function renderRegimeBanner(targetSelector = '.eyebrow') {
   const banner = document.createElement('a');
   banner.className = 'regime-banner-pill loading';
   banner.href = '/macro/regime/';
-  banner.title = 'Open the macro dashboard for full trajectory + regime returns';
+  banner.title = 'Open Regime & base rates for the trajectory and what historically came next';
   banner.innerHTML = '<span class="rbp-label">Regime</span> <span class="rbp-name">loading…</span>';
   target.parentElement.insertBefore(banner, target.nextSibling);
 
@@ -46,9 +46,9 @@ export async function renderRegimeBanner(targetSelector = '.eyebrow') {
     banner.style.setProperty('--rbp-color', meta.color);
     banner.innerHTML = `
       <span class="rbp-dot" style="background:${meta.color}"></span>
-      <span class="rbp-label">Currently</span>
+      <span class="rbp-label">Regime, 3-month read</span>
       <span class="rbp-name" style="color:${meta.color}">${meta.label}</span>
-      <span class="rbp-arrow">→ open macro dashboard</span>
+      <span class="rbp-arrow">→ regime &amp; base rates</span>
     `;
   } catch (err) {
     console.warn('regime banner fetch failed:', err);

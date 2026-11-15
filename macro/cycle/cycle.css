@@ -303,3 +303,6 @@
   .cs-score-card { grid-template-columns: 1fr; }
   .cycle-chart-row { grid-template-columns: 1fr; }
 }
+
+/* Section eyebrow above the page title (same look as lib/page.css) */
+.sf-eyebrow { font-size: 10.5px; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: var(--accent); margin-bottom: 6px; }

@@ -4,7 +4,18 @@
 <meta charset="utf-8" />
 <script src="/lib/fred-snapshot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge &mdash; Inflation Persistence</title>
+<title>Siberforge &mdash; Inflation</title>
+<meta name="description" content="Is US inflation persistent? Headline and core, sticky and flexible prices, shelter, wages and market-implied expectations." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/inflation/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Siberforge" />
+<meta property="og:title" content="Siberforge — Inflation" />
+<meta property="og:description" content="Is US inflation persistent? Headline and core, sticky and flexible prices, shelter, wages and market-implied expectations." />
+<meta property="og:url" content="https://www.siberforge.xyz/macro/inflation/" />
+<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/lib/dashboard.css" />
 <link rel="stylesheet" href="/macro/cycle/cycle.css" />
 <link rel="stylesheet" href="/macro/inflation/inflation.css" />
@@ -19,8 +30,9 @@
 <link rel="stylesheet" href="/lib/depth.css" />
 <script defer src="/lib/depth.js"></script>
 </head>
-<body data-section="macro" data-page="inflation" data-page-sub="Inflation Persistence" data-page-status-text="Initializing…" data-page-download="true">
+<body data-section="macro" data-page="inflation" data-page-sub="Inflation" data-page-status-text="Initializing…" data-page-download="true">
 <section class="cycle-intro">
+  <div class="sf-eyebrow">Macro &middot; Inflation</div>
   <h1 class="cycle-title">Is the current inflation print persistent or transitory?</h1>
   <p class="cycle-subtitle">
     The Fed cares about what they can&rsquo;t undo quickly: services, shelter, wages, and whether
@@ -38,8 +50,8 @@
 <!-- Synthesis — moved above detail sections so the takeaway reads first -->
 <section class="cycle-section cycle-section-synthesis" id="section-synthesis">
   <div class="cycle-section-head">
-    <h2>Synthesis &mdash; what this means for positioning</h2>
-    <p class="cycle-section-sub">The takeaway from all four signals below, distilled. Detail sections follow.</p>
+    <h2>What the score is made of</h2>
+    <p class="cycle-section-sub">Which inputs push the score up, which hold it down, and how it moved over three months. A description of the data, not a forecast or a recommendation.</p>
   </div>
   <div id="inflation-synthesis-content"></div>
 </section>
@@ -51,10 +63,10 @@
     <p class="cycle-section-sub">
       Three measures of the same thing with different baskets and volatility profiles. Headline
       (with food &amp; energy) is the press-cycle number. Core CPI strips those out for persistence.
-      Core PCE is the Fed&rsquo;s explicit target (2.0%), uses flexible basket weights, and runs
-      ~30bp below Core CPI structurally. Watch for divergence: when headline drops below core,
-      the energy cycle is rolling over; when core drops below headline, goods disinflation is
-      accelerating.
+      The Fed&rsquo;s 2% goal is defined on headline PCE; core PCE is its preferred guide to the
+      underlying trend. PCE uses a broader basket with shifting weights and has usually run a few
+      tenths below CPI. When headline runs above core, food and energy are rising faster than
+      everything else; when it runs below, they are a drag.
     </p>
   </div>
   <div class="cycle-chart-row">
@@ -69,12 +81,13 @@
   <div class="cycle-section-head">
     <h2>2. Sticky vs Flexible &mdash; the persistence decomposition</h2>
     <p class="cycle-section-sub">
-      The Atlanta Fed splits the core CPI basket by how often prices change.
-      <strong>Sticky</strong> (rent, medical, education, insurance) reprices annually or less.
-      <strong>Flexible</strong> (used cars, apparel, lodging, energy goods) reprices monthly.
-      Sticky-price inflation is the most persistent part of core inflation &mdash; you can&rsquo;t talk it down with rate
-      cuts. A regime where flexible is cold and sticky stays hot = &ldquo;services inflation
-      problem&rdquo; &mdash; historically requires sustained restrictive policy.
+      The Atlanta Fed splits the CPI basket by how often prices change.
+      <strong>Sticky</strong> items (rent, medical care, education, insurance) change price less
+      often than about every four months. <strong>Flexible</strong> items (used cars, apparel,
+      lodging, motor fuel) change more often. Sticky-price inflation is the most persistent part:
+      it responds slowly even to rate hikes. When flexible prices are cool and sticky prices stay
+      hot, the problem is in services, which has historically taken sustained restrictive policy
+      to bring down.
     </p>
   </div>
   <div class="cycle-chart-row">
@@ -110,10 +123,10 @@
   <div class="cycle-section-head">
     <h2>4. Wage &amp; shelter pressure &mdash; the structural feeders</h2>
     <p class="cycle-section-sub">
-      Wages drive services prices (labor is the largest services cost). Shelter is over 40% of Core
-      CPI and lags actual rent dynamics by 6&ndash;12 months (BLS methodology), so when shelter is
-      rolling over it&rsquo;s likely to keep rolling. Real wages = AHE YoY minus Core CPI YoY &mdash;
-      negative real wages eventually compress consumer demand and break the inflation cycle.
+      Wages drive services prices (labor is the largest services cost). Shelter is about 35% of
+      the CPI and 44% of core, and lags market rents by 6&ndash;12 months (leases reprice slowly),
+      so once shelter turns it tends to keep going. Real wages = average hourly earnings YoY minus
+      CPI YoY; when they are negative, prices are outpacing pay.
     </p>
   </div>
   <div class="cycle-chart-row">

@@ -870,3 +870,30 @@ main.sf-main > .sf-seealso {
   font-size: 13px;
   min-height: 28px;
 }
+
+/* Shared disclosure line (injected by layout.js on every page) */
+.sf-legal {
+  padding: 12px 24px 20px;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.6;
+  border-top: 1px solid var(--line);
+}
+.sf-legal a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+.sf-legal a:hover { color: var(--accent); }
+
+/* "Download data" button in the page header (was styled only on /tools/data/) */
+.download-data-btn {
+  background: var(--panel-2);
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md, 4px);
+  padding: 4px 10px;
+  font-size: 11.5px;
+  cursor: pointer;
+  font-family: inherit;
+  margin-left: 12px;
+  transition: color .15s, border-color .15s;
+}
+.download-data-btn:hover { color: var(--accent); border-color: var(--accent); }
+.download-data-btn:disabled { opacity: 0.6; cursor: wait; }

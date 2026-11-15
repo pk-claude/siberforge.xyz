@@ -7,7 +7,10 @@
 // top aggregates the individual signals into a single 0-100 risk gauge.
 
 // ---------- state ----------
-import { renderMethodology, computeCycleScore as sharedCycleScore, termSpreadProbit, phaseFor } from '/lib/composite-scores.js';
+import { renderMethodology, computeCycleScore as sharedCycleScore, termSpreadProbit, phaseFor, synthesisHtml, ordinal, computeSahm } from '/lib/composite-scores.js';
+
+// High-yield OAS bands, used by the chart lines, the tile and the note alike.
+const HY_BANDS = { tight: 300, elevated: 500, stress: 800 };
 
 const state = {
   raw: {},
@@ -50,19 +53,6 @@ function valueMonthsAgo(series, n) {
   return series[series.length - 1 - n];
 }
 
-// Compute a Sahm-rule indicator from monthly UNRATE observations.
-// Rule: 3-month avg U-rate minus its trailing 12-month low. Trigger at 0.5pp.
-function computeSahm(unrate) {
-  const out = [];
-  for (let i = 2; i < unrate.length; i++) {
-    const ma3 = (unrate[i].value + unrate[i - 1].value + unrate[i - 2].value) / 3;
-    const windowStart = Math.max(0, i - 11);
-    const prior12 = unrate.slice(windowStart, i + 1).map(o => o.value);
-    const min12 = Math.min(...prior12);
-    out.push({ date: unrate[i].date, value: ma3 - min12 });
-  }
-  return out;
-}
 
 // ---------- NBER recession ranges + shading plugin (shared pattern) ----------
 
@@ -226,7 +216,7 @@ function renderRecessionSection() {
   const sahm   = (state.raw.SAHMREALTIME && state.raw.SAHMREALTIME.length) ? state.raw.SAHMREALTIME : (state.series.SAHM || []);
 
   timeSeriesChart(el('chart-recprob'), [{
-    label: 'Term-spread probit: P(recession within 12m) (%)',
+    label: 'Term-spread probit: P(recession 12 months ahead) (%)',
     data: probit.map(o => ({ x: o.date, y: o.value })),
     borderColor: '#ef4f5a',
     backgroundColor: 'rgba(239, 79, 90, 0.12)',
@@ -336,7 +326,7 @@ function renderCurveSection() {
       metric: 'T10Y3M',
       label: '10Y-3M spread',
       value: latest3m ? `${latest3m.value >= 0 ? '+' : ''}${latest3m.value.toFixed(0)}bp` : '—',
-      meta: pct3m != null ? `${pct3m}th %ile post-1980` : '',
+      meta: pct3m != null ? `${ordinal(pct3m)} %ile since 1982` : '',
       threshold: '&lt; 0 bp = inversion',
       status: latest3m ? (latest3m.value < 0 ? 'warn' : latest3m.value < 50 ? 'caution' : 'ok') : '',
     },
@@ -344,27 +334,29 @@ function renderCurveSection() {
       metric: 'T10Y2Y',
       label: '10Y-2Y spread',
       value: latest2y ? `${latest2y.value >= 0 ? '+' : ''}${latest2y.value.toFixed(0)}bp` : '—',
-      meta: 'steeper = healthier',
-      threshold: '&lt; 0 bp = inversion (financial-press favorite)',
+      meta: '10-year minus 2-year Treasury',
+      threshold: '&lt; 0 bp = inversion',
       status: latest2y ? (latest2y.value < 0 ? 'warn' : latest2y.value < 50 ? 'caution' : 'ok') : '',
     },
     {
       label: 'Current inversion streak',
       value: daysInverted3m > 0 ? `${daysInverted3m}d` : 'not inverted',
       meta: '10Y-3M spread, consecutive business days',
-      threshold: 'Sustained inversion ≥ 60d is the classic signal',
+      threshold: 'The model uses the monthly average, so brief inversions count for little',
       status: daysInverted3m > 60 ? 'warn' : daysInverted3m > 0 ? 'caution' : 'ok',
     },
   ];
   renderTiles('tiles-curve', tiles);
 
   let note = '<strong>Current read:</strong> ';
+  // Last inverted day, from the data (the text used to assert a re-steepening
+  // "in progress" regardless of how long ago the inversion ended).
+  let lastInv = null;
+  for (let i = c3m.length - 1; i >= 0; i--) { if (c3m[i].value < 0) { lastInv = c3m[i].date; break; } }
   if (latest3m && latest3m.value < 0) {
-    note += `10Y-3M inverted (${latest3m.value.toFixed(0)}bp) for ${daysInverted3m} consecutive days. Historically, recession starts <em>after</em> the curve un-inverts (bull-steepener).`;
-  } else if (latest3m && latest3m.value < 50) {
-    note += `Curve flat (${latest3m.value.toFixed(0)}bp). The re-steepening from inversion is in progress — watch for the bull-steepener that historically coincides with recession start.`;
+    note += `10Y-3M inverted (${latest3m.value.toFixed(0)}bp) for ${daysInverted3m} consecutive trading days. Inversions have preceded recessions by roughly 6 to 18 months; the 2022-25 inversion was not followed by one.`;
   } else if (latest3m) {
-    note += `Curve positive (${latest3m.value.toFixed(0)}bp). Normal late-cycle shape — neither a warning nor an all-clear.`;
+    note += `10Y-3M at +${latest3m.value.toFixed(0)}bp, not inverted${lastInv ? `; the last inverted day was ${lastInv}` : ''}. Past recessions have often begun after the curve had already re-steepened, so a positive slope is not an all-clear by itself.`;
   }
   el('note-curve').innerHTML = note;
 }
@@ -415,7 +407,7 @@ function renderConditionsSection() {
       metric: 'NFCI',
       label: 'NFCI',
       value: latestN ? `${latestN.value >= 0 ? '+' : ''}${latestN.value.toFixed(2)}` : '—',
-      meta: pctN != null ? `${pctN}th %ile post-1980` : '',
+      meta: pctN != null ? `${ordinal(pctN)} %ile post-1980` : '',
       threshold: '&gt; 0 = tighter than historical average',
       status: latestN ? (latestN.value > 0.5 ? 'warn' : latestN.value > 0 ? 'caution' : 'ok') : '',
       help: 'Composite of 105 risk, credit, and leverage measures.',
@@ -443,7 +435,7 @@ function renderConditionsSection() {
     const n = latestN.value;
     if (n > 0.5)      note += `NFCI at ${n.toFixed(2)} — conditions materially tighter than average. `;
     else if (n > 0)   note += `NFCI at ${n.toFixed(2)} — mildly tight. `;
-    else              note += `NFCI at ${n.toFixed(2)} — easier than average (${pctN}th percentile). `;
+    else              note += `NFCI at ${n.toFixed(2)} — easier than average (${ordinal(pctN)} percentile). `;
   }
   if (divergence != null) {
     if (Math.abs(divergence) > 0.25) {
@@ -497,9 +489,9 @@ function renderCreditSection() {
   ], {
     yTitle: 'OAS (bps)',
     extraPlugins: [thresholdLinePlugin([
-      { value: 300,  label: 'HY 300 — complacent', color: 'rgba(62, 207, 142, 0.6)' },
-      { value: 600,  label: 'HY 600 — stress',     color: 'rgba(247, 167, 0, 0.7)' },
-      { value: 1000, label: 'HY 1000 — crisis',    color: 'rgba(239, 79, 90, 0.8)' },
+      { value: HY_BANDS.tight,    label: `HY ${HY_BANDS.tight} — tight`,      color: 'rgba(62, 207, 142, 0.6)' },
+      { value: HY_BANDS.elevated, label: `HY ${HY_BANDS.elevated} — elevated`, color: 'rgba(247, 167, 0, 0.7)' },
+      { value: HY_BANDS.stress,   label: `HY ${HY_BANDS.stress} — stress`,     color: 'rgba(239, 79, 90, 0.8)' },
     ])],
   });
 
@@ -515,32 +507,32 @@ function renderCreditSection() {
       metric: 'HY_OAS',
       label: 'HY OAS',
       value: latestHy ? `${latestHy.value.toFixed(0)}bp` : '—',
-      meta: pctHy != null && hy.length ? `${pctHy}th %ile since ${hy[0].date.slice(0, 7)} only` : '',
-      threshold: '&lt;300 complacent · 400–600 normal · &gt;800 stress',
-      status: latestHy ? (latestHy.value > 800 ? 'warn' : latestHy.value > 500 ? 'caution' : 'ok') : '',
+      meta: pctHy != null && hy.length ? `${ordinal(pctHy)} %ile since ${hy[0].date.slice(0, 7)} only` : '',
+      threshold: `&lt;${HY_BANDS.tight} tight · ${HY_BANDS.tight}–${HY_BANDS.elevated} normal · &gt;${HY_BANDS.stress} stress`,
+      status: latestHy ? (latestHy.value > HY_BANDS.stress ? 'warn' : latestHy.value > HY_BANDS.elevated ? 'caution' : 'ok') : '',
     },
     {
       metric: 'IG_OAS',
       label: 'IG OAS',
       value: latestIg ? `${latestIg.value.toFixed(0)}bp` : '—',
-      meta: pctIg != null && ig.length ? `${pctIg}th %ile since ${ig[0].date.slice(0, 7)} only` : '',
-      threshold: '&gt;200bp = IG stress',
+      meta: pctIg != null && ig.length ? `${ordinal(pctIg)} %ile since ${ig[0].date.slice(0, 7)} only` : '',
+      threshold: 'above 200bp in 2008-09, 2020 and briefly 2016',
       status: latestIg ? (latestIg.value > 200 ? 'warn' : latestIg.value > 150 ? 'caution' : 'ok') : '',
     },
     {
       metric: 'BAA10Y',
       label: 'Baa - 10Y spread',
       value: baa.length ? `${baa[baa.length - 1].value.toFixed(0)}bp` : '—',
-      meta: baa.length ? `${percentile(baa, baa[baa.length - 1].value)}th %ile since ${baa[0].date.slice(0, 4)}` : '',
-      threshold: 'Long-history credit gauge; above ~300bp has marked stress',
+      meta: baa.length ? `${ordinal(percentile(baa, baa[baa.length - 1].value))} %ile since ${baa[0].date.slice(0, 4)}` : '',
+      threshold: 'Long-history credit gauge; above 300bp has marked stress',
       status: baa.length ? (baa[baa.length - 1].value > 300 ? 'warn' : baa[baa.length - 1].value > 230 ? 'caution' : 'ok') : '',
     },
     {
       metric: 'HY_IG_RATIO',
       label: 'HY / IG ratio',
       value: hyIgRatio ? `${hyIgRatio.toFixed(1)}x` : '—',
-      meta: 'asymmetric widening tell',
-      threshold: '&gt;5x = HY stress without IG participation (single-name)',
+      meta: 'high-yield spread divided by investment-grade spread',
+      threshold: 'above 6x: high yield is widening much faster than investment grade',
       status: hyIgRatio ? (hyIgRatio > 6 ? 'warn' : hyIgRatio > 4 ? 'caution' : 'ok') : '',
     },
   ];
@@ -549,18 +541,16 @@ function renderCreditSection() {
   let note = '<strong>Current read:</strong> ';
   if (latestHy) {
     const hyV = latestHy.value;
-    if (hyV > 1000)     note += `HY at ${hyV.toFixed(0)}bp — crisis regime. `;
-    else if (hyV > 600) note += `HY at ${hyV.toFixed(0)}bp — stress regime. `;
-    else if (hyV > 400) note += `HY at ${hyV.toFixed(0)}bp — normal cycle range. `;
-    else                note += `HY at ${hyV.toFixed(0)}bp — complacent. `;
+    if (hyV > HY_BANDS.stress)        note += `HY at ${hyV.toFixed(0)}bp: stress territory (above ${HY_BANDS.stress}bp). `;
+    else if (hyV > HY_BANDS.elevated) note += `HY at ${hyV.toFixed(0)}bp: elevated (${HY_BANDS.elevated}–${HY_BANDS.stress}bp). `;
+    else if (hyV >= HY_BANDS.tight)   note += `HY at ${hyV.toFixed(0)}bp: in the normal ${HY_BANDS.tight}–${HY_BANDS.elevated}bp range. `;
+    else                              note += `HY at ${hyV.toFixed(0)}bp: tight (below ${HY_BANDS.tight}bp). `;
   }
   if (latestIg) {
     note += `IG at ${latestIg.value.toFixed(0)}bp. `;
   }
   if (hyIgRatio != null) {
-    if (hyIgRatio > 6)      note += `HY/IG ratio ${hyIgRatio.toFixed(1)}x — HY widening without IG participation = single-name stress, not systemic.`;
-    else if (hyIgRatio < 4) note += `HY/IG ratio ${hyIgRatio.toFixed(1)}x — tight ratio consistent with risk-on.`;
-    else                    note += `HY/IG ratio ${hyIgRatio.toFixed(1)}x — typical cycle range.`;
+    note += `HY/IG ratio ${hyIgRatio.toFixed(1)}x${hyIgRatio > 6 ? ': high yield is widening much faster than investment grade.' : '.'}`;
   }
   el('note-credit').innerHTML = note;
 }
@@ -624,19 +614,7 @@ function renderSynthesis() {
   const tgt = el('synthesis-content');
   if (!tgt || !result) return;
 
-  const score = result.score;
-  let paragraph = '';
-  if (score < 25) {
-    paragraph = `The cycle-risk composite at <strong>${score.toFixed(0)}/100</strong> indicates an expansionary phase. Leading signals are uniformly benign. For portfolio tilts, favor cyclicals, small-caps, and credit carry. The regime is likely to persist — historically, composite scores below 25 remain there for 12+ months before deteriorating. <em>Watch:</em> a +15 move in this score within 3 months is the canonical early-warning pattern.`;
-  } else if (score < 45) {
-    paragraph = `The cycle-risk composite at <strong>${score.toFixed(0)}/100</strong> indicates late-cycle expansion. Signals remain constructive on balance but some deterioration is visible. Maintain pro-cyclical positioning but tighten trailing stops. The biggest risk in this phase is complacency on credit — HY has historically been the last signal to flip before a downturn. <em>Watch:</em> a +10bp week-over-week HY widening paired with an ANFCI tick-up.`;
-  } else if (score < 65) {
-    paragraph = `The cycle-risk composite at <strong>${score.toFixed(0)}/100</strong> indicates a slowdown. Multiple signals are flashing caution. Reduce cyclical exposure, add quality and duration. The sector implication is clear — historically, utilities, staples, and healthcare materially outperform in this phase. <em>Watch:</em> Sahm-rule trigger (0.5pp) would elevate this to the next phase.`;
-  } else if (score < 80) {
-    paragraph = `The cycle-risk composite at <strong>${score.toFixed(0)}/100</strong> indicates material contraction risk. Multiple signals are in warning territory. The historical playbook: defensive equity tilt, duration overweight, credit underweight. The average forward 6-month SPY return in this phase is negative; the Disinflation/Recession regime row on the <a href="/macro/regime/">main dashboard</a> shows the historical sector response. <em>Watch:</em> a composite score above 80 has historically coincided with recession onset within 1-2 months.`;
-  } else {
-    paragraph = `The cycle-risk composite at <strong>${score.toFixed(0)}/100</strong> indicates contraction is likely already underway. In this phase, market bottoms historically precede economic bottoms by 3-6 months. The Fed-cut response window is open. <em>Watch:</em> the score inflecting downward from these levels is historically the best risk-on entry signal of the cycle.`;
-  }
+  const paragraph = synthesisHtml('cycle', state.raw, result);
 
   tgt.innerHTML = `<p class="cycle-synthesis-para">${paragraph}</p>
     <div class="cycle-synthesis-links">
@@ -662,7 +640,7 @@ async function main() {
     renderSynthesis();
 
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Data loaded');
+    setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

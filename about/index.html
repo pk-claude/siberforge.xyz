@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<script src="/lib/fred-snapshot.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Siberforge &mdash; About, sources and method</title>
+<meta name="description" content="What Siberforge is, where its data comes from, how its scores and signals are built, and what they cannot tell you." />
+<link rel="canonical" href="https://www.siberforge.xyz/about/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Siberforge" />
+<meta property="og:title" content="Siberforge — About, sources and method" />
+<meta property="og:description" content="What Siberforge is, where its data comes from, how its scores and signals are built, and what they cannot tell you." />
+<meta property="og:url" content="https://www.siberforge.xyz/about/" />
+<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+<link rel="stylesheet" href="/lib/dashboard.css" />
+<link rel="stylesheet" href="/macro/cycle/cycle.css" />
+<link rel="stylesheet" href="/lib/tokens.css" />
+<link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
+<script src="/lib/theme-toggle.js"></script>
+<script src="/lib/nav-config.js"></script>
+<script defer src="/lib/layout.js"></script>
+<link rel="stylesheet" href="/lib/depth.css" />
+<script defer src="/lib/depth.js"></script>
+<style>
+  .about-body { padding: 0 24px 24px; max-width: 980px; }
+  .about-body h2 { font-size: 17px; margin: 28px 0 8px; color: var(--text); }
+  .about-body p, .about-body li { font-size: 14px; line-height: 1.65; color: var(--text); }
+  .about-body ul { padding-left: 20px; margin: 8px 0; }
+  .about-body li { margin: 4px 0; }
+  .about-body a { color: var(--accent); }
+  .about-body .muted { color: var(--muted); }
+</style>
+</head>
+<body data-section="tools" data-page="about" data-page-sub="About" data-page-status-text="Static page">
+<main class="sf-page">
+<header class="sf-page-head">
+  <div class="sf-eyebrow">About</div>
+  <h1>What this site is, and how far to trust it</h1>
+  <p class="sf-dek">Siberforge is an independent set of dashboards on the US economy, markets and supply chains, built from public data. It describes where things stand and how unusual that is against history. It does not forecast, and it does not give investment advice.</p>
+</header>
+
+<div class="about-body">
+
+<h2>Where the data comes from</h2>
+<ul>
+  <li><strong>Economic series</strong> come from FRED, the St. Louis Fed's database, which republishes the original producers: the Bureau of Labor Statistics, the Bureau of Economic Analysis, the Census Bureau, the Federal Reserve Board and regional Feds, Freddie Mac, the National Association of Realtors, S&amp;P Cotality Case-Shiller, Moody's, ICE BofA and the University of Michigan.</li>
+  <li><strong>Market prices</strong> are Yahoo Finance daily closes, adjusted for dividends and splits.</li>
+  <li><strong>Company fundamentals</strong> on the research pages come from SEC EDGAR filings.</li>
+  <li>About 470 FRED series are copied into static files twice each weekday and once on Sunday. Every page shows the date of its latest observation and the date of the snapshot it is reading.</li>
+</ul>
+
+<h2>How the scores are built</h2>
+<ul>
+  <li><strong>Composite scores (0&ndash;100).</strong> Each input is ranked against its own last 20 years, with the direction set so that 100 means the most risk. The score is the weighted average of those ranks. The weights are judgement, kept roughly equal and not fitted to past recessions. Each score page lists its inputs, weights and transforms under &ldquo;How this score is built&rdquo;.</li>
+  <li><strong>Growth and inflation regime.</strong> Payrolls, industrial production and real retail sales (growth) and core CPI (inflation), each as a six-month annualized rate, are compared with their own trailing 10-year median. The four quadrants are relative labels: &ldquo;Stagflation&rdquo; here means growth below and inflation above their recent norms, which is far milder than the 1970s sense of the word. The headline is a three-month vote, and a month is classified only once all three growth inputs have been published.</li>
+  <li><strong>Recession signals.</strong> Four threshold triggers (Sahm rule, yield curve, credit spread, activity index). Their record against NBER recession dates, including false alarms, is recomputed from the data each time the page loads.</li>
+  <li><strong>Sector tilts.</strong> A sector is called over- or under-weight in a regime only when its average excess return over the S&amp;P 500 clears a t-statistic of 2 after correcting for overlapping windows. Most of the time nothing clears it, and the page says so.</li>
+</ul>
+
+<h2>What it cannot tell you</h2>
+<ul>
+  <li><strong>Revisions.</strong> History uses today's revised figures, not the numbers people saw at the time. Past readings respect publication lags (a figure counts only after it would have been released), but they are still revised data, so real-time performance was somewhat worse than the back-casts show.</li>
+  <li><strong>October 2025.</strong> The federal shutdown stopped data collection, and BLS never published an October 2025 CPI or household-survey figure. The site interpolates that single month so that year-over-year rates span exactly 12 months. The interpolated values are not official statistics.</li>
+  <li><strong>Short histories.</strong> FRED carries about three years of the ICE BofA credit spreads and 13 months of the Realtors' existing-home series, so those are shown but not ranked against history.</li>
+  <li><strong>No consensus forecasts.</strong> &ldquo;Surprise&rdquo; on the This Week page means unusual against a series' own past changes, not against what economists expected.</li>
+  <li><strong>Small samples.</strong> There have been six US recessions since 1975. Any rule fitted to six events deserves suspicion, including the ones shown here.</li>
+</ul>
+
+<h2>Disclosures</h2>
+<p>Everything here is for information only and is not investment advice, an offer or a recommendation to buy or sell anything. Past base rates are not forecasts. This is a personal project: it is not affiliated with any employer of its author and does not represent any employer's views.</p>
+<p class="muted">This product uses the FRED&reg; API but is not endorsed or certified by the Federal Reserve Bank of St. Louis.</p>
+
+</div>
+</main>
+</body>
+</html>

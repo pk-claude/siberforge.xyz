@@ -14,6 +14,14 @@ import { renderReleaseStrip } from '/macro/indicators/releases.js';
 import { applyTransform } from '/lib/transforms.js';
 import { fetchFred } from '/lib/fred-client.js';
 
+// 1 -> "1st", 22 -> "22nd", 113 -> "113th".
+function ordinal(n) {
+  const v = Math.round(Number(n));
+  if (!Number.isFinite(v)) return '—';
+  const m = Math.abs(v) % 100, t = m % 10;
+  return v + ((m >= 11 && m <= 13) ? 'th' : t === 1 ? 'st' : t === 2 ? 'nd' : t === 3 ? 'rd' : 'th');
+}
+
 const BATCH_SIZE = 8;              // max series per /api/fred call
 const HISTORY_START = '2017-01-01'; // enough runway for 5yr YoY windows
 
@@ -230,7 +238,8 @@ function renderCardFromTransformed(ind, transformed) {
     deltaForSentiment = vs3;
     deltaText = Number.isFinite(vs3) ? `${fmtSigned(vs3, 0)}${ind.unit} vs 3mo avg` : '—';
   } else if (ind.transform === 'yoy') {
-    deltaText = `${fmtSigned(delta, 2)}ppt MoM`;
+    // Change in the year-over-year rate since the previous print.
+    deltaText = `${fmtSigned(delta, 2)}ppt vs prior ${ind.freq === 'quarterly' ? 'quarter' : 'month'}`;
   } else {
     deltaText = `${fmtSigned(delta, ind.decimals)}${ind.unit}`;
   }
@@ -269,7 +278,7 @@ function renderCardFromTransformed(ind, transformed) {
     target: ind.target,
   });
   const pctl = stripEl.dataset.percentile;
-  pctlEl.textContent = pctl != null ? `${pctl}th pctl` : '';
+  pctlEl.textContent = pctl != null ? `${ordinal(pctl)} pctl` : '';
 
   state.loaded++;
 }

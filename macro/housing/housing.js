@@ -1,4 +1,4 @@
-import { computeHousingScore as shared_computeHousingScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology } from '/lib/composite-scores.js';
+import { computeHousingScore as shared_computeHousingScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, synthesisHtml, ordinal } from '/lib/composite-scores.js';
 // Housing Cycle dashboard — wires all 20 of the publicly-pullable housing
 // metrics into a single decision-relevant view.
 //
@@ -92,7 +92,8 @@ function thresholdLinePlugin(thresholds) {
       if (!a) return;
       ctx.save(); ctx.setLineDash([4, 4]); ctx.lineWidth = 1;
       for (const t of thresholds) {
-        const y = s.y.getPixelForValue(t.value);
+        const scale = s[t.axis || 'y'] || s.y;
+        const y = scale.getPixelForValue(t.value);
         if (y < a.top || y > a.bottom) continue;
         ctx.strokeStyle = t.color || 'rgba(138, 148, 163, 0.5)';
         ctx.beginPath(); ctx.moveTo(a.left, y); ctx.lineTo(a.right, y); ctx.stroke();
@@ -158,8 +159,8 @@ async function loadAllData() {
   const batches = [
     ['HOUST', 'HOUST1F', 'HOUST5F', 'PERMIT'],          // pipeline 1
     ['COMPUTSA', 'HSN1F', 'EXHOSLUSM495S'],              // pipeline 2
-    ['HOSSUPUSM673N', 'CSUSHPISA', 'MSPUS', 'RHVRUSQ156N'],    // inventory + prices
-    ['MORTGAGE30US', 'MORTGAGE15US', 'MEHOINUSA672N'],  // affordability
+    ['HOSSUPUSM673N', 'MSACSR', 'CSUSHPISA', 'MSPUS', 'RRVRUSQ156N'],    // inventory + prices
+    ['MORTGAGE30US', 'MORTGAGE15US', 'MEHOINUSA646N', 'MEHOINUSA672N', 'CPIAUCSL'],  // affordability
     ['DRSFRMACBS', 'USCONS', 'WPU081', 'CUUR0000SEHA', 'PRRESCONS'],  // stress + construction + materials
   ];
   const errors = [];
@@ -252,7 +253,7 @@ function renderPipeline() {
   let note = '<strong>Pipeline read:</strong> ';
   if (lp && lh1) {
     if (lp.value > lh1.value + 3)      note += `Permits (${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%) running ahead of SF starts (${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%) — pipeline filling. `;
-    else if (lp.value < lh1.value - 3) note += `Permits (${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%) lagging SF starts (${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%) — <em>builders pulling back; expect starts to follow within 1-2 months</em>. `;
+    else if (lp.value < lh1.value - 3) note += `Permits (${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%) lagging SF starts (${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%) — <em>permits usually lead starts by a month or two</em>. `;
     else                                 note += `Permits (${lp.value >= 0 ? '+' : ''}${fmt(lp.value, 1)}%) and SF starts (${lh1.value >= 0 ? '+' : ''}${fmt(lh1.value, 1)}%) tracking together. `;
   }
   if (lc && lns) {
@@ -268,18 +269,21 @@ function renderPipeline() {
 function renderInventory() {
   const supply = state.series.HOSSUPUSM673N || [];
   const hpi = state.series._CSUSHPISAYoy || [];
-  const vacancy = state.series.RHVRUSQ156N || [];
+  const vacancy = state.series.RRVRUSQ156N || [];
+  const newSupply = state.series.MSACSR || [];
 
   timeSeriesChart(el('chart-inventory'), [
-    { label: 'Months Supply (left)', data: supply.map(o => ({ x: o.date, y: o.value })),
+    { label: 'Months supply, new homes (left)', data: newSupply.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#ef4f5a', backgroundColor: 'rgba(239, 79, 90, 0.10)', borderWidth: 1.7, pointRadius: 0, fill: true, tension: 0.1, yAxisID: 'y' },
+    { label: 'Months supply, existing homes (left)', data: supply.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#c084fc', borderWidth: 2, pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y' },
     { label: 'Case-Shiller HPI YoY (right)', data: hpi.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#f7a700', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y1' },
-    { label: 'Rental Vacancy % (right)', data: vacancy.map(o => ({ x: o.date, y: o.value })),
-      borderColor: '#5a9cff', borderWidth: 1.3, borderDash: [4, 4], pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y1' },
+    ...(vacancy.length ? [{ label: 'Rental vacancy % (right)', data: vacancy.map(o => ({ x: o.date, y: o.value })),
+      borderColor: '#5a9cff', borderWidth: 1.3, borderDash: [4, 4], pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y1' }] : []),
   ], {
     yTitle: 'months supply',
-    y2: { yTitle: '% (HPI YoY · vacancy)', yTicks: v => `${v}%` },
+    y2: { yTitle: vacancy.length ? '% (HPI YoY · vacancy)' : '% (HPI YoY)', yTicks: v => `${v}%` },
     extraPlugins: [thresholdLinePlugin([
       { value: 4, label: '4 mo — sellers/balanced line', color: 'rgba(62, 207, 142, 0.5)' },
       { value: 6, label: '6 mo — balanced/buyers line',  color: 'rgba(247, 167, 0, 0.5)' },
@@ -290,34 +294,40 @@ function renderInventory() {
   const lhpi = latestValue(hpi);
   const lvac = latestValue(vacancy);
   const lmsp = latestValue(state.series.MSPUS || []);
-  const supplyPct = percentile(supply, lms?.value);
+  const lns = latestValue(newSupply);
+  const newSupplyPct = percentile(newSupply, lns?.value);
 
   const tiles = [
-    { metric: 'HOSSUPUSM673N', label: 'Months Supply (existing)', value: lms ? `${fmt(lms.value, 1)} mo` : '—',
-      meta: supplyPct != null ? `${supplyPct}th %ile` : '',
+    { metric: 'HOSSUPUSM673N', label: 'Months supply (existing)', value: lms ? `${fmt(lms.value, 1)} mo` : '—',
+      meta: `NAR · FRED carries the last ${supply.length} months only`,
       threshold: '&lt; 4 sellers · 4–6 balanced · &gt; 6 buyers',
-      status: lms ? (lms.value > 7 ? 'warn' : lms.value > 5 ? 'caution' : 'ok') : '',
-      help: 'Inventory of new homes ÷ monthly sales rate.' },
+      status: lms ? (lms.value > 6 ? 'warn' : lms.value > 4 ? 'caution' : 'ok') : '',
+      help: 'Existing homes for sale divided by the monthly sales pace.' },
+    { metric: 'MSACSR', label: 'Months supply (new)', value: lns ? `${fmt(lns.value, 1)} mo` : '—',
+      meta: newSupplyPct != null ? `${ordinal(newSupplyPct)} %ile since 1990` : '',
+      threshold: 'Census · long-run average about 6',
+      status: lns ? (lns.value > 9 ? 'warn' : lns.value > 7 ? 'caution' : 'ok') : '',
+      help: 'New houses for sale divided by the monthly sales pace.' },
     { metric: 'CSUSHPISA', label: 'Case-Shiller HPI', value: lhpi ? `${lhpi.value >= 0 ? '+' : ''}${fmt(lhpi.value, 1)}%` : '—',
       meta: 'YoY · lags 6mo · repeat-sales',
-      threshold: 'sustainable: 0–6%; bubble territory: &gt; 8%',
+      threshold: 'average since 1988: 4.4% a year',
       status: lhpi ? (lhpi.value > -1 && lhpi.value < 6 ? 'ok' : Math.abs(lhpi.value) < 9 ? 'caution' : 'warn') : '' },
-    { label: 'Median Sales Price', value: lmsp ? `$${(lmsp.value / 1000).toFixed(0)}K` : '—',
-      meta: 'quarterly · all sales types',
-      threshold: 'level reading; pair with mortgage rate for affordability',
+    { label: 'Median price, new homes', value: lmsp ? `$${(lmsp.value / 1000).toFixed(0)}K` : '—',
+      meta: 'Census · quarterly · new houses sold',
+      threshold: 'level; pair with the mortgage rate for affordability',
       status: '' },
-    { label: 'Rental Vacancy', value: lvac ? `${fmt(lvac.value, 1)}%` : '—',
-      meta: 'quarterly · proxy for rental supply pressure',
+    ...(lvac ? [{ label: 'Rental vacancy', value: `${fmt(lvac.value, 1)}%`,
+      meta: 'Census · quarterly · share of rental units vacant',
       threshold: '&lt; 6% tight · &gt; 8% soft',
-      status: lvac ? (lvac.value < 6 ? 'caution' : lvac.value < 8 ? 'ok' : 'warn') : '' },
+      status: lvac.value < 6 ? 'caution' : lvac.value < 8 ? 'ok' : 'warn' }] : []),
   ];
   renderTiles('tiles-inventory', tiles);
 
   let note = '<strong>Inventory read:</strong> ';
   if (lms) {
-    if (lms.value > 7)        note += `Months supply at ${fmt(lms.value, 1)} — buyers&rsquo; market; expect price weakness if it persists. `;
-    else if (lms.value > 5)   note += `Months supply at ${fmt(lms.value, 1)} — balanced-to-soft; builder pricing power moderate. `;
-    else                      note += `Months supply at ${fmt(lms.value, 1)} — tight; supports prices and pro-channel demand. `;
+    if (lms.value > 6)        note += `Existing-home supply at ${fmt(lms.value, 1)} months — a buyers&rsquo; market by the usual rule of thumb. `;
+    else if (lms.value > 4)   note += `Existing-home supply at ${fmt(lms.value, 1)} months — in the balanced 4–6 range. `;
+    else                      note += `Existing-home supply at ${fmt(lms.value, 1)} months — tight; supports prices. `;
   }
   if (lhpi) {
     if (lhpi.value > 6)       note += `<em>HPI ${lhpi.value >= 0 ? '+' : ''}${fmt(lhpi.value, 1)}% YoY — well above wage growth; affordability deteriorating fast.</em>`;
@@ -341,7 +351,17 @@ function renderAffordability() {
   const m30 = state.series.MORTGAGE30US || [];
   const m15 = state.series.MORTGAGE15US || [];
   const mspus = state.series.MSPUS || [];
-  const income = state.series.MEHOINUSA672N || [];
+  // Median household income in current dollars. Until the nominal series is in
+  // the snapshot, rebuild it from the real series (stated in the dollars of its
+  // latest year) and annual-average CPI, which reproduces it to within about 1%.
+  let income = state.series.MEHOINUSA646N || [];
+  if (!income.length && (state.series.MEHOINUSA672N || []).length && (state.series.CPIAUCSL || []).length) {
+    const byYear = new Map();
+    for (const o of state.series.CPIAUCSL) { const y = o.date.slice(0, 4); const e = byYear.get(y) || [0, 0]; e[0] += o.value; e[1]++; byYear.set(y, e); }
+    const cpi = y => { const e = byYear.get(y); return e ? e[0] / e[1] : null; };
+    const real = state.series.MEHOINUSA672N, baseYear = real[real.length - 1].date.slice(0, 4), base = cpi(baseYear);
+    income = real.map(o => { const c = cpi(o.date.slice(0, 4)); return c && base ? { date: o.date, value: o.value * c / base } : null; }).filter(Boolean);
+  }
 
   // Compute "monthly payment as % of monthly income" series.
   // Aligns: monthly mortgage rate (latest of month) × quarterly median price (forward-filled)
@@ -397,7 +417,7 @@ function renderAffordability() {
     yTitle: 'mortgage rate (%)',
     y2: { yTitle: 'P&I / income (%)', yTicks: v => `${v}%` },
     extraPlugins: [thresholdLinePlugin([
-      { value: 28, label: '28% — Fed mortgage stress threshold', color: 'rgba(239, 79, 90, 0.6)' },
+      { value: 28, axis: 'y1', label: '28% of income — lenders’ front-end rule of thumb (right axis)', color: 'rgba(239, 79, 90, 0.6)' },
     ])],
   });
 
@@ -416,17 +436,17 @@ function renderAffordability() {
       meta: 'Freddie Mac PMMS · weekly',
       threshold: 'refi target rate; ~75bp below 30Y typical',
       status: l15 ? (l15.value < 5 ? 'ok' : l15.value < 6.5 ? 'caution' : 'warn') : '' },
-    { metric: 'MSPUS', label: 'Median Sales Price', value: lmsp ? `$${(lmsp.value / 1000).toFixed(0)}K` : '—',
-      meta: 'quarterly · all-sales',
+    { metric: 'MSPUS', label: 'Median price, new homes', value: lmsp ? `$${(lmsp.value / 1000).toFixed(0)}K` : '—',
+      meta: 'Census · quarterly · new houses sold',
       threshold: 'pair with rate for affordability check',
       status: '' },
-    { label: 'Real Median Family Income', value: linc ? `$${(linc.value / 1000).toFixed(0)}K` : '—',
-      meta: 'annual · CPI-deflated',
+    { label: 'Median household income', value: linc ? `$${(linc.value / 1000).toFixed(0)}K` : '—',
+      meta: linc ? `Census · annual · ${linc.date.slice(0, 4)}, current dollars` : 'Census · annual',
       threshold: 'denominator of any affordability ratio',
       status: '' },
     { label: 'Monthly P&I / Income', value: lpr ? `${fmt(lpr.value, 1)}%` : '—',
-      meta: '20% down · 30Y fixed at current rate',
-      threshold: '&lt; 25% healthy · &gt; 30% stretched',
+      meta: 'new-home median price · 20% down · 30Y fixed',
+      threshold: 'principal and interest only; taxes and insurance add to it',
       status: lpr ? (lpr.value < 25 ? 'ok' : lpr.value < 32 ? 'caution' : 'warn') : '' },
     { label: '30Y - 15Y spread', value: l30 && l15 ? `${fmt(l30.value - l15.value, 2)}pp` : '—',
       meta: 'long-end vs short-end mortgage curve',
@@ -437,10 +457,10 @@ function renderAffordability() {
 
   let note = '<strong>Affordability read:</strong> ';
   if (lpr) {
-    if (lpr.value > 32)       note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — <em>severely stretched</em>; marginal buyers locked out of the market. Historically, ratios above this level coincide with collapsed turnover and price softness.`;
-    else if (lpr.value > 28)  note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — stretched; first-time buyer demand suppressed; refi market dead.`;
-    else if (lpr.value > 22)  note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — moderately tight; turnover normal-to-soft.`;
-    else                      note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — affordable; demand-side fundamentals healthy.`;
+    if (lpr.value > 32)       note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — <em>well above</em> the 28% front-end rule of thumb lenders use, before taxes and insurance.`;
+    else if (lpr.value > 28)  note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — above the 28% front-end rule of thumb lenders use, before taxes and insurance.`;
+    else if (lpr.value > 22)  note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — under the 28% front-end rule of thumb lenders use.`;
+    else                      note += `Monthly P&I at ${fmt(lpr.value, 1)}% of income — comfortably under the 28% front-end rule of thumb lenders use.`;
   }
   el('note-affordability').innerHTML = note;
 }
@@ -467,7 +487,7 @@ function renderStress() {
     yTitle: 'delinquency (%)',
     y2: { yTitle: 'YoY (%)', yTicks: v => `${v}%` },
     extraPlugins: [thresholdLinePlugin([
-      { value: 0, label: '0% YoY', color: 'rgba(138, 148, 163, 0.4)' },
+      { value: 0, axis: 'y1', label: '0% YoY (right axis)', color: 'rgba(138, 148, 163, 0.4)' },
     ])],
   });
 
@@ -488,7 +508,7 @@ function renderStress() {
       status: lce ? (lce.value > 0 ? 'ok' : lce.value > -3 ? 'caution' : 'warn') : '' },
     { metric: 'WPU081', label: 'Lumber PPI YoY', value: ll ? `${ll.value >= 0 ? '+' : ''}${fmt(ll.value, 1)}%` : '—',
       meta: 'monthly · WPU081',
-      threshold: 'rising = ticket-size tailwind for HD/LOW',
+      threshold: 'input cost for building and remodeling',
       status: ll ? (ll.value > 0 && ll.value < 15 ? 'ok' : ll.value < -10 ? 'warn' : 'caution') : '' },
     { label: 'Rent of Primary Residence YoY', value: lr ? `${lr.value >= 0 ? '+' : ''}${fmt(lr.value, 1)}%` : '—',
       meta: 'BLS · lags actual rent dynamics 6-12mo',
@@ -503,7 +523,7 @@ function renderStress() {
 
   let note = '<strong>Stress read:</strong> ';
   if (ld) {
-    if (ld.value > 3.5)      note += `<em>Mortgage delinquency at ${fmt(ld.value, 2)}% — elevated; rising delinquencies precede HPI weakness by 1-2 quarters.</em>`;
+    if (ld.value > 3.5)      note += `<em>Mortgage delinquency at ${fmt(ld.value, 2)}% — above its level for most of the last decade.</em>`;
     else if (ld.value > 2.5) note += `Mortgage delinquency at ${fmt(ld.value, 2)}% — normalizing back toward historical average. `;
     else                     note += `Mortgage delinquency at ${fmt(ld.value, 2)}% — benign. `;
   }
@@ -572,7 +592,7 @@ function renderEquities() {
       status: wood1y != null ? (wood1y > 5 ? 'ok' : wood1y > -10 ? 'caution' : 'warn') : '' },
     { label: 'HD 1Y total return', value: hd1y != null ? `${hd1y >= 0 ? '+' : ''}${fmt(hd1y, 1)}%` : '—',
       meta: spy1y != null ? `vs SPY: ${(hd1y - spy1y >= 0 ? '+' : '')}${fmt(hd1y - spy1y, 1)}pp` : '',
-      threshold: 'home-improvement bellwether',
+      threshold: 'largest home-improvement retailer',
       status: hd1y != null && spy1y != null ? (hd1y > spy1y + 3 ? 'ok' : hd1y > spy1y - 3 ? 'caution' : 'warn') : '' },
     { label: 'LOW 1Y total return', value: low1y != null ? `${low1y >= 0 ? '+' : ''}${fmt(low1y, 1)}%` : '—',
       meta: spy1y != null ? `vs SPY: ${(low1y - spy1y >= 0 ? '+' : '')}${fmt(low1y - spy1y, 1)}pp` : '',
@@ -588,17 +608,9 @@ function renderEquities() {
   let note = '<strong>Market-implied read:</strong> ';
   if (xhb1y != null && spy1y != null) {
     const builderEdge = xhb1y - spy1y;
-    if (builderEdge > 5)        note += `<em>Builders (XHB) outperforming SPY by ${fmt(builderEdge, 1)}pp over 1y — market pricing housing-cycle strength ahead of fundamentals.</em>`;
-    else if (builderEdge < -5)  note += `<em>Builders (XHB) underperforming SPY by ${fmt(-builderEdge, 1)}pp — market pricing housing-cycle weakness; expect fundamentals to follow.</em>`;
-    else                        note += `Builders tracking SPY (within ${fmt(Math.abs(builderEdge), 1)}pp). No directional housing-equity bid.`;
-  }
-  if (hd1y != null && low1y != null && bldr1y != null) {
-    note += ` HD/LOW avg ${fmt((hd1y + low1y) / 2, 1)}% vs BLDR ${fmt(bldr1y, 1)}% — `;
-    if (Math.abs((hd1y + low1y) / 2 - bldr1y) > 15) {
-      note += `wide retail-vs-distributor divergence; usually tied to channel-mix dynamics.`;
-    } else {
-      note += `retail and distributors moving together.`;
-    }
+    if (builderEdge > 5)        note += `<em>Builders (XHB) outperforming SPY by ${fmt(builderEdge, 1)}pp over 1y .</em>`;
+    else if (builderEdge < -5)  note += `<em>Builders (XHB) underperforming SPY by ${fmt(-builderEdge, 1)}pp .</em>`;
+    else                        note += `Builders (XHB) within ${fmt(Math.abs(builderEdge), 1)}pp of SPY over 1y.`;
   }
   el('note-equities').innerHTML = note;
 }
@@ -650,22 +662,7 @@ function renderSynthesis() {
   const result = computeHousingScore();
   const tgt = el('housing-synthesis-content');
   if (!tgt || !result) return;
-  const score = result.score;
-  const lms = latestValue(state.series.HOSSUPUSM673N || []);
-  const lmt = latestValue(state.series.MORTGAGE30US || []);
-
-  let para = '';
-  if (score < 25) {
-    para = `Housing cycle composite at <strong>${score.toFixed(0)}/100</strong> &mdash; <strong>early-cycle recovery</strong>. Tight inventory, falling rates, and rising permits are the typical setup. For housing-exposed P&L: <em>maximum exposure</em>. Builders, materials, home-improvement retailers all benefit. ETF beta highest in this regime.`;
-  } else if (score < 45) {
-    para = `Housing cycle composite at <strong>${score.toFixed(0)}/100</strong> &mdash; <strong>mid-cycle expansion</strong>. Activity expanding, prices rising, no immediate stress signals. ${lmt ? `30Y mortgage at ${fmt(lmt.value, 2)}% is the swing variable. ` : ''}For housing-exposed P&L: <em>full exposure with attention to inventory</em> &mdash; the mid-cycle is when retailers and builders earn the most.`;
-  } else if (score < 65) {
-    para = `Housing cycle composite at <strong>${score.toFixed(0)}/100</strong> &mdash; <strong>late-cycle</strong>. ${lms ? `Months supply at ${fmt(lms.value, 1)} indicates inventory building. ` : ''}Affordability stretched, marginal buyers exiting. For housing-exposed P&L: <em>reduce exposure to cyclical names</em>; rotate from builders/distributors toward HD/LOW (more recession-resilient demand). Lumber distributors most exposed to next-leg-down.`;
-  } else if (score < 80) {
-    para = `Housing cycle composite at <strong>${score.toFixed(0)}/100</strong> &mdash; <strong>cooling</strong>. Multiple indicators in caution territory; expect transactions to slow further. For housing-exposed P&L: <em>defensive bias</em>. Repair/remodel demand resilient; new-construction-tied demand soft. Builder ETFs (XHB/ITB) historically front-run the rebound by 6-9 months &mdash; watch for relative strength inflecting up.`;
-  } else {
-    para = `Housing cycle composite at <strong>${score.toFixed(0)}/100</strong> &mdash; <strong>contraction</strong>. The 2008-style regime: high rates + oversupply + rising delinquencies. For housing-exposed P&L: <em>survival mode</em>. Demand evaporates first in pro-channel and discretionary remodel; staples-of-the-home (paint, hardware, HVAC repair) hold up best. Bottom of the housing cycle is historically where XHB starts the next 5-year run.`;
-  }
+  const para = synthesisHtml('housing', state.series, result);
 
   tgt.innerHTML = `<p class="cycle-synthesis-para">${para}</p>
     <div class="cycle-synthesis-links">
@@ -691,7 +688,7 @@ async function main() {
     renderEquities();
     renderSynthesis();
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Data loaded');
+    setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

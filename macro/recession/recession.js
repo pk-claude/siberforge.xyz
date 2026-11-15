@@ -40,14 +40,17 @@ import {
 // ============================================================================
 const $ = (id) => document.getElementById(id);
 
+// The header status pill is created by lib/layout.js with these ids.
 function setStatus(cls, text) {
-  const dot = $('status-dot');
-  if (dot) {
-    dot.classList.remove('live', 'stale', 'error');
-    if (cls) dot.classList.add(cls);
-  }
-  const t = $('status-text');
+  const dot = $('refresh-indicator');
+  if (dot) dot.className = `dot ${cls || ''}`;
+  const t = $('refresh-text');
   if (t) t.textContent = text;
+  if (cls === 'error') {
+    const tier = $('tier-label'); if (tier) tier.textContent = 'Data unavailable';
+    const sub = $('tier-sub'); if (sub) sub.textContent = text;
+    const cal = $('calibration'); if (cal) cal.textContent = 'Data unavailable: ' + text;
+  }
 }
 
 function fmt(v, d = 2) {
@@ -373,12 +376,15 @@ function renderCalibration(signals, seriesBySignal, composite, usrec) {
   const row = (label, cal) => {
     if (!cal) return `<tr><th>${label}</th><td colspan="4">insufficient history</td></tr>`;
     const lead = cal.medianLead == null ? '—' : cal.medianLead > 0 ? `${cal.medianLead} mo before` : cal.medianLead === 0 ? 'same month' : `${-cal.medianLead} mo after`;
-    return `<tr><th>${label}</th><td>${cal.caught} of ${cal.covered}</td><td>${lead}</td><td>${cal.falseRate == null ? '—' : Math.round(cal.falseRate * 100) + '%'}</td><td>${cal.since.slice(0, 4)}</td></tr>`;
+    const fa = cal.falseAlarms.length
+      ? `${cal.falseAlarms.length} of ${cal.episodes} episodes <span class="muted">(${[...new Set(cal.falseAlarms)].join(', ')})</span>`
+      : `0 of ${cal.episodes} episodes`;
+    return `<tr><th>${label}</th><td>${cal.caught} of ${cal.covered}</td><td>${lead}</td><td>${fa}${cal.open ? ` <span class="muted">+ ${cal.open} too recent to judge</span>` : ''}</td><td>${cal.since.slice(0, 4)}</td></tr>`;
   };
   const rows = signals.map(sig => row(sig.label, calibrate(seriesBySignal[sig.id], v => isTriggered(v, sig), usrec)));
   rows.push(row('<em>Composite: 2 or more</em>', calibrate(composite.map(o => ({ date: o.date, value: o.count })), v => v >= 2, usrec)));
-  tgt.innerHTML = `<table class="sf-table"><thead><tr><th>Signal</th><th>Recessions caught</th><th>Median timing vs start</th><th>False-alarm months</th><th>Data since</th></tr></thead><tbody>${rows.join('')}</tbody></table>
-    <p class="timeline-note">Caught = fired between 24 months before and 6 months after an NBER recession start. False-alarm months = months outside recessions (and the year after them) when the signal was on and no recession began within the next 12 months. Computed live from FRED on the latest revised data, so real-time performance was somewhat worse.</p>`;
+  tgt.innerHTML = `<table class="sf-table"><thead><tr><th>Signal</th><th>Recessions caught</th><th>Median timing vs start</th><th>False alarms</th><th>Data since</th></tr></thead><tbody>${rows.join('')}</tbody></table>
+    <p class="timeline-note">Caught = fired between 24 months before and 6 months after an NBER recession start. An episode is a run of months with the signal on; it is a false alarm when it began more than 24 months before the next recession and more than 12 months after the last one (the year it began is shown). Computed on load from the latest revised FRED data, so real-time performance was somewhat worse. The composite row covers periods when fewer than four signals had data: two before 1982, three before 1986.</p>`;
 }
 
 main();

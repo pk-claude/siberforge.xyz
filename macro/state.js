@@ -2,7 +2,7 @@
 // what changed, what would change the call. Every number is computed here
 // from the FRED snapshot; no prose is hand-written about current values.
 
-import { el as $el, fmt, sgn, esc, addDays, todayIso, fred, last, at, pctile, yoy, tiles, lineChart, recessionRanges, asOfLine, setStatus, since, COLORS, monthName } from '/lib/sf-kit.js';
+import { el as $el, fmt, sgn, esc, addDays, todayIso, fred, last, at, pctile, yoy, tiles, lineChart, recessionRanges, asOfLine, setStatus, since, COLORS, monthName, ordinal, policyStance } from '/lib/sf-kit.js';
 import { SPECS, seriesFor, computeComposite, phaseFor, termSpreadProbit } from '/lib/composite-scores.js';
 import { buildRegimeMap, smoothCurrentRegime, regimeConviction, REGIMES, sixMonthAnnualized, toMonthlyMap } from '/macro/regime/regimes.js';
 
@@ -13,7 +13,7 @@ const el = id => $el(id) || { set innerHTML(v) {}, set textContent(v) {} };
 const KINDS = ['cycle', 'labor', 'inflation', 'credit', 'housing', 'consumer'];
 const LABELS = { cycle: 'Recession risk', labor: 'Labor market', inflation: 'Inflation persistence', credit: 'Credit & liquidity', housing: 'Housing', consumer: 'Consumer stress' };
 const PAGES = { cycle: '/macro/cycle/', labor: '/macro/labor/', inflation: '/macro/inflation/', credit: '/macro/credit/', housing: '/macro/housing/', consumer: '/macro/consumer/' };
-const EXTRA = ['CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS', 'DFF', 'PCEPILFE', 'NFCI', 'UNRATE', 'SAHMREALTIME', 'CFNAIMA3', 'T10Y3M', 'USREC', 'BAA10Y'];
+const EXTRA = ['CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS', 'DFF', 'PCEPILFE', 'NFCI', 'UNRATE', 'SAHMREALTIME', 'CFNAIMA3', 'T10Y3M', 'USREC', 'BAA10Y', 'FEDTARMDLR'];
 
 const median = a => { const s = [...a].sort((x, y) => x - y), h = s.length >> 1; return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2; };
 
@@ -49,7 +49,10 @@ async function main() {
   const realFF = lDff && lPce ? lDff.value - lPce.value : null;
   const realHist = corePce.map(o => { const f = at(dff, addDays(o.date, 27)); return f ? { date: o.date, value: f.value - o.value } : null; }).filter(Boolean);
   const realPct = realHist.length ? pctile(realHist, 20, realFF) : null;
-  const stance = realFF == null ? 'unknown' : realFF > 1.5 ? 'restrictive' : realFF > 0.5 ? 'mildly restrictive' : realFF > -0.5 ? 'near neutral' : 'accommodative';
+  const sepLR = last(data.FEDTARMDLR || []);
+  const neutralReal = sepLR ? sepLR.value - 2 : null;
+  const st = policyStance(realFF, neutralReal);
+  const stance = st.label;
 
   // ---------- recession odds ----------
   const probit = termSpreadProbit(data.T10Y3M || []);
@@ -57,14 +60,19 @@ async function main() {
 
   // ---------- verdict ----------
   const cyc = now.cycle, cycPh = cyc ? phaseFor('cycle', cyc.score) : null;
-  const gTxt = latest ? (latest.growthZ >= 0 ? 'growth above its 10-year norm' : 'growth below its 10-year norm') : '';
-  const iTxt = latest ? (latest.inflationZ >= 0 ? 'core inflation running above its 10-year norm' : 'core inflation running below its 10-year norm') : '';
+  // Describe the axes the way the call was made. The call is a 3-month vote;
+  // when the newest complete month votes differently, say so, and never print
+  // "above" or "below" for a reading that is within a quarter-sigma of its norm.
+  const side = z => Math.abs(z) < 0.25 ? 'close to' : z > 0 ? 'above' : 'below';
+  const gTxt = latest ? `growth ${side(latest.growthZ)} its 10-year norm` : '';
+  const iTxt = latest ? `core inflation ${side(latest.inflationZ)} its 10-year norm` : '';
+  const differs = smoothed && latest && smoothed.regime !== latest.regime;
   const infPh = now.inflation ? phaseFor('inflation', now.inflation.score).label.toLowerCase() : '';
   el('verdict').innerHTML =
-    (R ? `<strong>${R.label}</strong> (${conv ? conv.label.toLowerCase() : '—'} conviction): ${gTxt}, ${iTxt}. ` : '') +
+    (R ? `<strong>${R.label}</strong> on the 3-month read (${conv ? conv.label.toLowerCase() : '—'} conviction)${differs ? `; the latest complete month, ${monthName(latestYm + '-01')}, reads ${REGIMES[latest.regime].label}` : ''}: ${gTxt}, ${iTxt}. ` : '') +
     (cyc ? `Recession risk reads <strong>${cycPh.label.toLowerCase()}</strong> at ${fmt(cyc.score, 0)}/100; the yield-curve model puts 12-month odds at ${fmt(lProb?.value, 0)}% and the Sahm rule is at ${fmt(lSahm?.value, 2)}pp (trigger 0.50). ` : '') +
     (now.inflation ? `Inflation persistence is ${infPh} (${fmt(now.inflation.score, 0)}/100). ` : '') +
-    (realFF != null ? `Policy is ${stance}: real fed funds ${sgn(realFF, 1)}%, ${realPct}th percentile of 20 years.` : '');
+    (realFF != null ? `Policy is ${stance}: real fed funds ${sgn(realFF, 1)}%${neutralReal != null ? ` against a neutral proxy of ${fmt(neutralReal, 1)}%` : ''}.` : '');
 
   // ---------- dials ----------
   const cfnai = last(data.CFNAIMA3 || []);
@@ -74,23 +82,23 @@ async function main() {
     const s = now[k]; if (!s) return null;
     const ph = phaseFor(k, s.score);
     const d3 = m3[k] ? s.score - m3[k].score : null;
-    const top = [...s.signals].sort((a, b) => b.score * b.weight - a.score * a.weight)[0];
+    const top = [...s.signals].sort((a, b) => b.score - a.score)[0];
     return { name: LABELS[k], href: PAGES[k], val: fmt(s.score, 0), unit: '/100', label: ph.label, color: ph.color, pos: s.score, chg: d3, chgUnit: 'pt',
-      read: `Highest-risk input: ${top.name} (${top.raw}, ${fmt(top.score, 0)}th pct).` };
+      read: `Highest-risk input: ${top.name} (${top.raw}, ${ordinal(fmt(top.score, 0))} pct).` };
   };
   const growthColor = latest ? (latest.growthZ >= 0.25 ? COLORS.green : latest.growthZ <= -0.25 ? COLORS.red : COLORS.accent) : COLORS.grey;
   const dials = [
-    { name: 'Growth', href: '/macro/regime/', val: latest ? sgn(latest.growthZ, 2) : '—', unit: 'z', label: latest ? (latest.growthZ >= 0 ? 'Above trend' : 'Below trend') : '—', color: growthColor,
+    { name: 'Growth', href: '/macro/regime/', val: latest ? sgn(latest.growthZ, 2) : '—', unit: 'z', label: latest ? (Math.abs(latest.growthZ) < 0.25 ? 'Near its 10-year norm' : latest.growthZ > 0 ? 'Above its 10-year norm' : 'Below its 10-year norm') : '—', color: growthColor,
       pos: latest ? Math.max(0, Math.min(100, 50 - latest.growthZ * 25)) : null, chg: null,
-      read: `CFNAI 3-mo avg ${cfnai ? sgn(cfnai.value, 2) : '—'} (0 = trend growth; below -0.7 has marked recessions). ${latest ? 'Regime data through ' + monthName(latestYm + '-01') + '.' : ''}` },
+      read: `CFNAI 3-mo avg ${cfnai ? sgn(cfnai.value, 2) : '—'} (0 = trend growth; below -0.7 has marked recessions). ${latest ? 'Through ' + monthName(latestYm + '-01') + ', the latest month with payrolls, industrial production and retail sales all reported.' : ''}` },
     dialFor('labor'),
     dialFor('inflation'),
     { name: 'Policy stance', href: '/macro/policy/', val: realFF != null ? sgn(realFF, 1) : '—', unit: '% real', label: stance.charAt(0).toUpperCase() + stance.slice(1),
-      color: realFF == null ? COLORS.grey : realFF > 1.5 ? COLORS.red : realFF > 0.5 ? COLORS.accent : COLORS.green, pos: realPct, chg: null,
-      read: `Fed funds ${fmt(lDff?.value, 2)}% less core PCE ${fmt(lPce?.value, 1)}% YoY. ${realPct != null ? realPct + 'th percentile of the last 20 years.' : ''}` },
+      color: st.gap == null ? COLORS.grey : st.gap > 1 ? COLORS.red : Math.abs(st.gap) > 0.5 ? COLORS.accent : COLORS.green, pos: realPct, chg: null,
+      read: `Fed funds ${fmt(lDff?.value, 2)}% less core PCE ${fmt(lPce?.value, 1)}% YoY${neutralReal != null ? `, against a neutral proxy of ${fmt(neutralReal, 1)}% (FOMC longer-run median less 2%)` : ''}. ${realPct != null ? ordinal(realPct) + ' percentile of the last 20 years.' : ''}` },
     { name: 'Financial conditions', href: '/macro/credit/', val: nfci ? sgn(nfci.value, 2) : '—', unit: 'NFCI', label: nfci ? (nfci.value < -0.3 ? 'Loose' : nfci.value > 0.3 ? 'Tight' : 'Average') : '—',
       color: nfci ? (nfci.value < -0.3 ? COLORS.green : nfci.value > 0.3 ? COLORS.red : COLORS.accent) : COLORS.grey, pos: nfciPct, chg: null,
-      read: `Chicago Fed index, week of ${nfci ? nfci.date : '—'}; ${nfciPct}th percentile of 20 years (higher = tighter).` },
+      read: `Chicago Fed index, week of ${nfci ? nfci.date : '—'}; ${ordinal(nfciPct)} percentile of 20 years (higher = tighter).` },
     dialFor('credit'),
     dialFor('housing'),
     dialFor('consumer'),
@@ -114,7 +122,7 @@ async function main() {
   }).sort((a, b) => Math.abs(b.d) - Math.abs(a.d));
   const regime3 = regimeMap.get(months[months.length - 4]);
   const items = [];
-  if (regime3 && latest && regime3.regime !== latest.regime) items.push(`<b>Regime</b> moved from ${REGIMES[regime3.regime].label} to ${REGIMES[latest.regime].label} on the monthly read.`);
+  if (regime3 && latest && regime3.regime !== latest.regime) items.push(`<b>Regime</b>: the monthly read moved from ${REGIMES[regime3.regime].label} (${monthName(months[months.length - 4] + '-01')}) to ${REGIMES[latest.regime].label} (${monthName(latestYm + '-01')}).`);
   for (const m of moves.slice(0, 4)) {
     const phNow = phaseFor(m.k, now[m.k].score).label, phThen = phaseFor(m.k, m3[m.k].score).label;
     items.push(`<b>${LABELS[m.k]}</b> ${m.d >= 0 ? 'rose' : 'fell'} ${fmt(Math.abs(m.d), 0)} pts to ${fmt(now[m.k].score, 0)}${phNow !== phThen ? ` (${phThen} &rarr; ${phNow})` : ''}. ` +
@@ -131,9 +139,10 @@ async function main() {
   }
   const comp = [['PAYEMS', 'Payroll growth'], ['INDPRO', 'Industrial production'], ['RRSFS', 'Real retail sales']].map(([id, name]) => {
     const r = sixMonthAnnualized(toMonthlyMap(data[id] || [])); if (r.length < 120) return null;
-    return `${name} ${fmt(r[r.length - 1].value, 1)}% (median ${fmt(median(r.slice(-120).map(o => o.value)), 1)}%)`;
+    const i = r.findIndex(o => o.ym === latestYm); if (i < 119) return null;
+    return `${name} ${fmt(r[i].value, 1)}% (median ${fmt(median(r.slice(i - 119, i + 1).map(o => o.value)), 1)}%)`;
   }).filter(Boolean);
-  if (latest && comp.length) flips.push(`<b>Growth axis</b> sits ${fmt(Math.abs(latest.growthZ), 2)} z ${latest.growthZ >= 0 ? 'above' : 'below'} zero. It averages three 6-month annualized rates against their 10-year medians: ${comp.join('; ')}.`);
+  if (latest && comp.length) flips.push(`<b>Growth axis</b> sits ${fmt(Math.abs(latest.growthZ), 2)} z ${latest.growthZ >= 0 ? 'above' : 'below'} zero as of ${monthName(latestYm + '-01')}. It averages three 6-month annualized rates against their 10-year medians: ${comp.join('; ')}.`);
   const un = data.UNRATE || [];
   if (un.length > 15) {
     const ma3 = un.map((o, i) => i >= 2 ? (un[i].value + un[i - 1].value + un[i - 2].value) / 3 : null);
@@ -158,6 +167,7 @@ async function main() {
     const d = `${y}-${mm}-28`; if (d > todayIso()) break;
     const s = computeComposite('cycle', data, d); if (s) cycHist.push({ date: d, value: s.score });
   }
+  if ($el('chart-odds') && cyc) cycHist.push({ date: todayIso(), value: cyc.score });
   if ($el('chart-odds')) lineChart('chart-odds', [
     { label: 'Curve model: P(recession in 12m), %', data: since(probit, '1995-01-01'), color: COLORS.red },
     { label: 'Cycle composite (0-100)', data: cycHist, color: COLORS.accent, width: 2 },

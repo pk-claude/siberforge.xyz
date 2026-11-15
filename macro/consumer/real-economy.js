@@ -1,4 +1,4 @@
-import { computeConsumerScore as shared_computeConsumerScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology } from '/lib/composite-scores.js';
+import { computeConsumerScore as shared_computeConsumerScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, synthesisHtml, ordinal, realWages as shared_realWages } from '/lib/composite-scores.js';
 // Real Economy page — consumer indicators: income, spending, credit health.
 //
 // Same visual pattern as cycle/inflation: composite score hero, three sections
@@ -166,10 +166,8 @@ async function loadAllData() {
   const startMacro = '1990-01-01';
   // Batched FRED fetches — partial-failure tolerant.
   const fredBatches = [
-    ['HOUST', 'PERMIT', 'HSN1F', 'EXHOSLUSM495S', 'HOSSUPUSM673N'],
-    ['MORTGAGE30US', 'CSUSHPISA', 'WPU081'],
     ['PCE', 'DSPI', 'PSAVERT', 'TDSP'],
-    ['CES0500000003', 'CPILFESL', 'IC4WSA', 'DRCCLACBS', 'UMCSENT'],
+    ['CES0500000003', 'CPIAUCSL', 'IC4WSA', 'DRCCLACBS', 'UMCSENT'],
     ['DSPIC96', 'REVOLSL', 'DRALACBS'],
   ];
   const errors = [];
@@ -185,31 +183,15 @@ async function loadAllData() {
   }
   if (errors.length) console.warn('[real-economy] missing series:', errors);
 
-  // Stock history: HD, LOW, XHB, WOOD, BLDR, BCC, SPY (benchmark)
-  try {
-    const j = await fetchJSON('/api/stocks?mode=history&years=10&symbols=HD,LOW,XHB,WOOD,BLDR,BCC,SPY');
-    for (const s of j.series) state.stocks[s.symbol] = s.closes;
-  } catch (err) {
-    console.warn('stocks fetch failed:', err);
-  }
-
   // Derived series
   if (state.series.PCE)  state.series._pceYoy  = yoyPct(state.series.PCE);
   if (state.series.DSPI) state.series._dspiYoy = yoyPct(state.series.DSPI);
-  if (state.series.WPU081) state.series._lumberYoy = yoyPct(state.series.WPU081);
-  if (state.series.HOUST)  state.series._houstYoy  = yoyPct(state.series.HOUST);
-  if (state.series.PERMIT) state.series._permitYoy = yoyPct(state.series.PERMIT);
-  if (state.series.HSN1F)  state.series._hsn1fYoy  = yoyPct(state.series.HSN1F);
-  if (state.series.CSUSHPISA) state.series._hpiYoy = yoyPct(state.series.CSUSHPISA);
   if (state.series.CES0500000003) state.series._wageYoy = yoyPct(state.series.CES0500000003);
-  if (state.series.CPILFESL) state.series._coreYoy = yoyPct(state.series.CPILFESL);
-  // Real wages = AHE - Core CPI
-  if (state.series._wageYoy && state.series._coreYoy) {
-    const coreMap = new Map(state.series._coreYoy.map(o => [o.date, o.value]));
-    state.series._realWages = state.series._wageYoy
-      .filter(o => coreMap.has(o.date))
-      .map(o => ({ date: o.date, value: o.value - coreMap.get(o.date) }));
-  }
+  // Real wages = average hourly earnings YoY minus headline CPI YoY (the BLS
+  // Real Earnings convention), same function the composite uses.
+  state.series._realWages = shared_realWages(state.series);
+  if (state.series.DSPIC96) state.series._dspic96Yoy = yoyPct(state.series.DSPIC96);
+  if (state.series.REVOLSL) state.series._revolvingYoy = yoyPct(state.series.REVOLSL);
 }
 
 
@@ -217,7 +199,7 @@ async function loadAllData() {
 
 function renderIncome() {
   const dspicYoy = state.series._dspic96Yoy || [];
-  const realWageYoy = state.series._realWageIndexYoy || [];
+  const realWageYoy = state.series._realWages || [];
   const savings = state.series.PSAVERT || [];
 
   timeSeriesChart(el('chart-income'), [
@@ -251,7 +233,7 @@ function renderIncome() {
       label: 'Real wages YoY',
       value: lrw ? `${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%` : '—',
       meta: rw12m && lrw ? `12m change: ${(lrw.value - rw12m.value >= 0 ? '+' : '')}${fmt(lrw.value - rw12m.value, 1)}pp` : '',
-      threshold: 'excludes inflation · reflects purchasing power gains',
+      threshold: 'hourly earnings growth less CPI inflation',
       status: lrw ? (lrw.value > 0.5 ? 'ok' : lrw.value > -0.5 ? 'caution' : 'warn') : '',
     },
     {
@@ -259,7 +241,7 @@ function renderIncome() {
       label: 'Personal saving rate',
       value: lsav ? `${fmt(lsav.value, 1)}%` : '—',
       meta: sav12m && lsav ? `12m ago: ${fmt(sav12m.value, 1)}%` : '',
-      threshold: '&gt; 5% healthy · &lt; 3% stretched',
+      threshold: '2015–19 average 6.1%',
       status: lsav ? (lsav.value > 5 ? 'ok' : lsav.value > 3.5 ? 'caution' : 'warn') : '',
     },
   ];
@@ -296,7 +278,7 @@ function renderCredit() {
       borderColor: '#5a9cff', borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.1 },
     { label: 'Credit Card Delinquency Rate', data: ccDelinq.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#f7a700', borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0.1 },
-    { label: 'Auto Loan Delinquency Rate', data: autoDelinq.map(o => ({ x: o.date, y: o.value })),
+    { label: 'Delinquency rate, all bank loans', data: autoDelinq.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#ef4f5a', backgroundColor: 'rgba(239, 79, 90, 0.08)', borderWidth: 1.6, pointRadius: 0, fill: true, tension: 0.1 },
   ], {
     yTitle: 'YoY credit growth (%) / Delinquency (%)',
@@ -325,25 +307,25 @@ function renderCredit() {
       metric: 'DRCCLACBS',
       label: 'Credit card delinquency',
       value: lccDelinq ? `${fmt(lccDelinq.value, 2)}%` : '—',
-      meta: ccDelinqPct != null ? `${ccDelinqPct}th %ile post-1990` : '',
-      threshold: 'leads spending slowdown by 1–2Q · 2007 peak: 5.5%',
+      meta: ccDelinqPct != null ? `${ordinal(ccDelinqPct)} %ile since 1991` : '',
+      threshold: 'peak 6.8% in Q2 2009',
       status: lccDelinq ? (lccDelinq.value < 2.5 ? 'ok' : lccDelinq.value < 4 ? 'caution' : 'warn') : '',
     },
     {
       metric: 'DRALACBS',
-      label: 'Auto loan delinquency',
+      label: 'All bank loans delinquency',
       value: lautoDelinq ? `${fmt(lautoDelinq.value, 2)}%` : '—',
-      meta: autoDelinqPct != null ? `${autoDelinqPct}th %ile post-1990` : '',
-      threshold: 'leads credit card delinq by 2–3Q · 2008-09 peak: 3.8%',
+      meta: autoDelinqPct != null ? `${ordinal(autoDelinqPct)} %ile since 1990` : '',
+      threshold: 'all loans at commercial banks · peak 7.4% in Q1 2010',
       status: lautoDelinq ? (lautoDelinq.value < 1.8 ? 'ok' : lautoDelinq.value < 2.5 ? 'caution' : 'warn') : '',
     },
     {
       metric: 'TDSP',
       label: 'Debt service ratio',
       value: ltdsp ? `${fmt(ltdsp.value, 1)}%` : '—',
-      meta: tdspPct != null ? `${tdspPct}th %ile post-1990` : '',
-      threshold: '&gt; 12% = stretched (2007 peak: 13.2%) · &lt; 10% healthy',
-      status: ltdsp ? (ltdsp.value < 10 ? 'ok' : ltdsp.value < 12 ? 'caution' : 'warn') : '',
+      meta: tdspPct != null ? `${ordinal(tdspPct)} %ile since 2005` : '',
+      threshold: 'peak 15.8% in Q4 2007 · low 9.1% in Q1 2021',
+      status: ltdsp ? (ltdsp.value < 11.5 ? 'ok' : ltdsp.value < 13.5 ? 'caution' : 'warn') : '',
     },
   ];
   renderTiles('tiles-credit', tiles);
@@ -357,11 +339,7 @@ function renderCredit() {
     else
       note += `Mixed: revolving credit ${lrevolving.value >= 0 ? '+' : ''}${fmt(lrevolving.value, 1)}%, CC delinquency ${fmt(lccDelinq.value, 2)}%. `;
   }
-  if (lautoDelinq && lccDelinq) {
-    const gap = lautoDelinq.value - lccDelinq.value;
-    if (gap > 0.5)
-      note += `<em>Auto delinquency (${fmt(lautoDelinq.value, 2)}%) leading credit card delinquency (${fmt(lccDelinq.value, 2)}%) by +${fmt(gap, 2)}pp — watch for CC delinquency to follow in next 2-3 quarters.</em>`;
-  }
+  if (lautoDelinq) note += `Delinquencies across all bank loans are ${fmt(lautoDelinq.value, 2)}%.`;
   el('note-credit').innerHTML = note;
 }
 
@@ -379,7 +357,7 @@ function renderConsumer() {
   timeSeriesChart(el('chart-consumer'), [
     { label: 'PCE YoY', data: pceYoy.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#5a9cff', borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0.1 },
-    { label: 'Real Wages YoY (AHE − Core CPI)', data: realW.map(o => ({ x: o.date, y: o.value })),
+    { label: 'Real Wages YoY (AHE − CPI)', data: realW.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#3ecf8e', backgroundColor: 'rgba(62, 207, 142, 0.10)', borderWidth: 1.7, pointRadius: 0, fill: true, tension: 0.1 },
     { label: 'Personal Saving Rate (right axis)', data: savings.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#f7a700', borderWidth: 1.4, pointRadius: 0, fill: false, tension: 0.1, yAxisID: 'y1' },
@@ -400,7 +378,7 @@ function renderConsumer() {
       metric: 'REAL_WAGES',
       label: 'Real wages',
       value: lrw ? `${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%` : '—',
-      meta: 'AHE YoY − Core CPI YoY',
+      meta: 'hourly earnings YoY − CPI YoY',
       threshold: '&gt; 0 = rising purchasing power',
       status: lrw ? (lrw.value > 0.5 ? 'ok' : lrw.value > -0.5 ? 'caution' : 'warn') : '',
     },
@@ -409,7 +387,7 @@ function renderConsumer() {
       label: 'Personal saving rate',
       value: lsav ? `${fmt(lsav.value, 1)}%` : '—',
       meta: 'monthly saving / disposable income',
-      threshold: '&lt; 4% = depleted cushion · 5–8% normal · &gt; 10% recession',
+      threshold: '2015–19 average 6.1% · below 4% is a thin cushion',
       status: lsav ? (lsav.value > 5 ? 'ok' : lsav.value > 3.5 ? 'caution' : 'warn') : '',
     },
     {
@@ -417,15 +395,15 @@ function renderConsumer() {
       label: 'Debt service ratio',
       value: tdsp ? `${fmt(tdsp.value, 1)}%` : '—',
       meta: 'household debt service / DPI',
-      threshold: '&gt; 12% = stretched (2007 peak: 13.2%)',
-      status: tdsp ? (tdsp.value < 10 ? 'ok' : tdsp.value < 12 ? 'caution' : 'warn') : '',
+      threshold: 'peak 15.8% in Q4 2007 · low 9.1% in Q1 2021',
+      status: tdsp ? (tdsp.value < 11.5 ? 'ok' : tdsp.value < 13.5 ? 'caution' : 'warn') : '',
     },
     {
       metric: 'DRCCLACBS',
       label: 'CC delinquency rate',
       value: ldel ? `${fmt(ldel.value, 2)}%` : '—',
       meta: 'commercial banks, 30+ days past due',
-      threshold: 'leads consumer slowdown by 1–2Q',
+      threshold: 'peak 6.8% in Q2 2009',
       status: ldel ? (ldel.value < 2.5 ? 'ok' : ldel.value < 4 ? 'caution' : 'warn') : '',
     },
     {
@@ -440,8 +418,8 @@ function renderConsumer() {
       metric: 'UMCSENT',
       label: 'UMich Consumer Sentiment',
       value: lsent ? `${fmt(lsent.value, 0)}` : '—',
-      meta: '1985 Q1 = 100 baseline',
-      threshold: '&gt; 90 healthy · &lt; 70 recessionary',
+      meta: 'index, 1966 Q1 = 100',
+      threshold: 'average since 1978: about 84',
       status: lsent ? (lsent.value > 80 ? 'ok' : lsent.value > 65 ? 'caution' : 'warn') : '',
     },
   ];
@@ -453,8 +431,7 @@ function renderConsumer() {
     else if (lrw.value < 0 && lsav.value < 4)         note += `<em>Consumer stretched: real wages ${fmt(lrw.value, 1)}% (negative) AND saving rate ${fmt(lsav.value, 1)}% (depleted). Spending will need to slow.</em> `;
     else                                              note += `Consumer mixed: real wages ${lrw.value >= 0 ? '+' : ''}${fmt(lrw.value, 1)}%, saving ${fmt(lsav.value, 1)}%. `;
   }
-  if (ldel && ldel.value > 3.5) note += `<em>Credit card delinquency at ${fmt(ldel.value, 2)}% — elevated, historically leads spending slowdown by 1-2 quarters.</em>`;
-  else if (ldel && ldel.value > 2.5) note += `Credit card delinquency at ${fmt(ldel.value, 2)}% — normalizing back toward historical average.`;
+  if (ldel) { const d4 = valueMonthsAgo(delinq, 4); note += `Credit card delinquency is ${fmt(ldel.value, 2)}%${d4 ? `, ${ldel.value > d4.value ? 'up' : 'down'} from ${fmt(d4.value, 2)}% a year earlier` : ''}.`; }
   el('note-consumer').innerHTML = note;
 }
 
@@ -507,30 +484,7 @@ function renderSynthesis() {
   const result = computeHealthScore();
   const tgt = el('re-synthesis-content');
   if (!tgt || !result) return;
-  const score = result.score;
-
-  // Pull key reads for consumer-focused narrative
-  const ldspic = latestValue(state.series._dspic96Yoy || []);
-  const lrevolving = latestValue(state.series._revolvingYoy || []);
-  const lccDelinq = latestValue(state.series.DRCCLACBS || []);
-
-  let paragraph = '';
-  if (score < 35) {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — the consumer is in robust shape. `;
-    paragraph += ldspic && ldspic.value > 1 ? `Real disposable income running positive (+${fmt(ldspic.value, 1)}%), spending power expanding. ` : '';
-    paragraph += `For consumer-exposed P&L (XLY/XLP retail, consumer finance): this is the <strong>upside scenario</strong> — sustained income growth + low delinquencies = resilient discretionary spending. Watch credit-card and auto delinquencies for early warning signs of rolling over.`;
-  } else if (score < 55) {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — mixed picture. Some income metrics stable, but delinquencies rising at the margin. `;
-    paragraph += lrevolving && lrevolving.value > 5 ? `Revolving credit growing (+${fmt(lrevolving.value, 1)}%) — consumers increasingly leaning on credit. ` : '';
-    paragraph += `For consumer-exposed P&L: <strong>defensive positioning</strong>. Discretionary retail under pressure; staple retailers resilient. Consumer-finance businesses see rising charge-offs.`;
-  } else if (score < 75) {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — stressed. Income pressure + rising delinquencies = household buffer eroding. `;
-    if (lccDelinq && lccDelinq.value > 3.5) paragraph += `Credit card delinquency at ${fmt(lccDelinq.value, 2)}% — elevated and accelerating. `;
-    paragraph += `For consumer-exposed P&L: <strong>brace for spending slowdown</strong>. Discretionary categories (apparel, furniture, furnishings) see 5-10% same-store-sales declines. Necessity goods and services (food, pharmacy, discount retail) hold up better.`;
-  } else {
-    paragraph = `Consumer-stress composite at <strong>${score.toFixed(0)}/100</strong> — distressed. Negative real wages + elevated delinquencies + collapsing sentiment. This is the 2008-style recession regime. `;
-    paragraph += `For consumer-exposed P&L: <strong>survival mode</strong>. Discretionary spending evaporates; staples dominate. XLP significantly outperforms XLY. Consumer-finance defaults spike. Recovery comes only when labor market stabilizes and real wages resume positive growth.`;
-  }
+  const paragraph = synthesisHtml('consumer', state.series, result);
 
   tgt.innerHTML = `<p class="cycle-synthesis-para">${paragraph}</p>
     <div class="cycle-synthesis-links">
@@ -557,7 +511,7 @@ async function main() {
     renderSynthesis();
 
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Data loaded');
+    setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

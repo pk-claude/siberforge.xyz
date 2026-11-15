@@ -10,3 +10,8 @@ README.md
 *.backup
 index.html.bak*
 node_modules/
+# Leftover temp files from a FUSE mount (21 are tracked in git); never serve them.
+.fuse_hidden*
+# Internal working notes: were reachable at /CRITIQUE-PLAN.md and /REVAMP-2026-09.md.
+CRITIQUE-PLAN.md
+REVAMP-*.md

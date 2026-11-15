@@ -1,5 +1,5 @@
 // This Week: surprise-vs-history scan across the key series.
-import { el, fmt, sgn, esc, addDays, todayIso, fred, fredInfo, prices, last, at, pctile, yoy, since, change, setStatus, asOfLine, dayName, monthName, daysBetween } from '/lib/sf-kit.js';
+import { el, fmt, sgn, esc, addDays, todayIso, fred, fredInfo, prices, last, at, pctile, yoy, since, change, setStatus, asOfLine, dayName, monthName, daysBetween, ordinal } from '/lib/sf-kit.js';
 
 // [id, label, transform, decimals, unit, page]
 const U = [
@@ -80,7 +80,7 @@ async function main() {
       <td class="${r.l.value - r.p.value >= 0 ? 'pos' : 'neg'}">${sgn(r.l.value - r.p.value, r.dec)}</td><td>${sgn(r.z, 1)}</td><td>${r.pct}</td></tr>`).join('') + '</tbody>';
 
   const ext = rows.filter(r => r.pct >= 95 || r.pct <= 5).sort((a, b) => Math.abs(b.pct - 50) - Math.abs(a.pct - 50));
-  el('extremes').innerHTML = ext.map(r => `<li><b><a href="${r.page}" style="color:inherit">${esc(r.label)}</a></b> at ${v(r, r.l.value)}: <span style="color:var(--accent)">${r.pct >= 95 ? 'high: ' : 'low: '}${r.pct}th percentile</span> of 20 years.</li>`).join('') || '<li class="muted">No tracked series is in the top or bottom 5% of its 20-year range.</li>';
+  el('extremes').innerHTML = ext.map(r => `<li><b><a href="${r.page}" style="color:inherit">${esc(r.label)}</a></b> at ${v(r, r.l.value)}: <span style="color:var(--accent)">${r.pct >= 100 ? 'the highest' : r.pct <= 0 ? 'the lowest' : 'the ' + ordinal(r.pct) + ' percentile'}</span> of the last 20 years.</li>`).join('') || '<li class="muted">No tracked series is in the top or bottom 5% of its 20-year range.</li>';
 
   // Calendar
   try {
@@ -90,7 +90,7 @@ async function main() {
 
   // Markets
   const wk = s => { const a = px[s] || []; if (a.length < 6) return null; return (a[a.length - 1].value / a[a.length - 6].value - 1) * 100; };
-  const bp = id => { const a = d[id] || []; const l = last(a); const p = at(a, addDays(l.date, -7)); return l && p ? (l.value - p.value) * 100 : null; };
+  const bp = id => { const a = d[id] || []; const l = last(a); if (!l) return null; const p = at(a, addDays(l.date, -7)); return p ? (l.value - p.value) * 100 : null; };
   el('tbl-mkt').innerHTML = `<thead><tr><th>Market</th><th>Last</th><th>1 week</th></tr></thead><tbody>` +
     MKT.map(([s, l]) => { const a = px[s] || [], w = wk(s); return `<tr><th>${l} <span class="muted">${s}</span></th><td>${a.length ? '$' + fmt(last(a).value, 2) : '—'}</td><td class="${w >= 0 ? 'pos' : 'neg'}">${w == null ? '—' : sgn(w, 1) + '%'}</td></tr>`; }).join('') +
     [['DGS2', '2Y Treasury'], ['DGS10', '10Y Treasury'], ['BAA10Y', 'Baa - 10Y spread']].map(([id, l]) => { const b = bp(id); return `<tr><th>${l}</th><td>${fmt(last(d[id])?.value, 2)}%</td><td>${b == null ? '—' : sgn(b, 0) + 'bp'}</td></tr>`; }).join('') + '</tbody>';
@@ -100,7 +100,7 @@ async function main() {
   el('verdict').innerHTML = (big.length
     ? `<strong>${big.length} series</strong> printed a move of two standard deviations or more: ${big.slice(0, 4).map(r => `${esc(r.label)} (${sgn(r.z, 1)} z)`).join(', ')}. `
     : 'No tracked series moved by two standard deviations or more in its latest print. ') +
-    (ext.length ? `${ext.length} sit at the edge of their 20-year range, led by ${esc(ext[0].label)} (${ext[0].pct}th percentile). ` : '') +
+    (ext.length ? `${ext.length} sit at the edge of their 20-year range, led by ${esc(ext[0].label)} (${ext[0].pct >= 100 ? 'a 20-year high' : ext[0].pct <= 0 ? 'a 20-year low' : ordinal(ext[0].pct) + ' percentile'}). ` : '') +
     (spyW != null ? `The S&P 500 is ${sgn(spyW, 1)}% on the week.` : '');
 
   await asOfLine('asof', { a: d.IC4WSA, b: d.DGS10 });

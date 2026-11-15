@@ -14,7 +14,7 @@
     "refresh-equity-pe-dry": "node scripts/refresh-equity-pe.mjs --dry-run",
     "snapshot-equity-pe": "node scripts/snapshot-equity-pe.mjs",
     "test": "node scripts/test/run-all.mjs",
-    "check": "node scripts/audit-nav.mjs && node scripts/check-links.mjs && node scripts/test/run-all.mjs"
+    "check": "node scripts/audit-nav.mjs && node scripts/check-links.mjs && node scripts/set-head-meta.mjs --check && node scripts/test/run-all.mjs"
   },
   "engines": {
     "node": ">=20"

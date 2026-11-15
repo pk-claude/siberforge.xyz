@@ -4,28 +4,20 @@
 <meta charset="utf-8" />
 <script src="/lib/fred-snapshot.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Siberforge &mdash; Recession Risk</title>
+<title>Siberforge &mdash; Recession signals</title>
+<meta name="description" content="Four recession triggers (labor, rates, credit, activity) with each signal's track record and false alarms against NBER dates." />
+<link rel="canonical" href="https://www.siberforge.xyz/macro/recession/" />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Siberforge" />
+<meta property="og:title" content="Siberforge — Recession signals" />
+<meta property="og:description" content="Four recession triggers (labor, rates, credit, activity) with each signal's track record and false alarms against NBER dates." />
+<meta property="og:url" content="https://www.siberforge.xyz/macro/recession/" />
+<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="/macro/indicators/styles.css" />
-<!--
-  Recession-risk composite dashboard.
-
-  Five signals, each binary (triggered / not):
-    1. Sahm Rule            — SAHMCURRENT           trigger: >= 0.50
-    2. Yield curve (10Y-3M) — T10Y3M                trigger: < 0
-    3. HY OAS               — BAMLH0A0HYM2          trigger: >= 6.00 %
-    4. Unemployment 6mo chg — derived from UNRATE   trigger: >= +0.5 pp
-    5. Payrolls 3mo avg     — derived from PAYEMS   trigger: < 50,000 / mo
-
-  Composite score = count of triggered signals (0-5).
-  Risk tier:
-    0-1 triggered → LOW
-    2   triggered → ELEVATED
-    3+  triggered → HIGH
-
-  NBER recession dates are shaded on the historical timeline. Thresholds are
-  documented in methodology prose; these are professional consensus levels,
-  not inventions — citations in the methodology panel.
--->
+<!-- Recession signals: four threshold triggers (labor, rates, credit, activity) with a live track record. Logic in recession-core.js. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/uplot@1.6.31/dist/uPlot.iife.min.js"></script>
 <link rel="stylesheet" href="/lib/tokens.css" />
@@ -37,16 +29,16 @@
 <link rel="stylesheet" href="/lib/depth.css" />
 <script defer src="/lib/depth.js"></script>
 </head>
-<body class="recession" data-section="macro" data-page="recession" data-page-sub="Recession Risk" data-page-status-text="Ready">
+<body class="recession" data-section="macro" data-page="recession" data-page-sub="Recession signals" data-page-status-text="Ready">
 
 <main class="recession-main">
 
   <header class="recession-header">
-    <span class="eyebrow">Composite signal</span>
-    <h1 class="recession-title">US Recession Risk Composite</h1>
+    <span class="eyebrow">Macro &middot; Recession signals</span>
+    <h1 class="recession-title">Recession signals: how many are on</h1>
     <p class="recession-sub">
       Four signals, one per channel (labor, rates, credit, activity), each on or off
-      against a published threshold. The score is the count that are on. The table
+      against a fixed threshold. The score is the count that are on. The table
       below shows each signal's own track record against NBER recession dates.
     </p>
   </header>
@@ -64,7 +56,7 @@
     <div class="gauge-dots" id="gauge-dots" aria-label="Signal status summary"></div>
   </section>
 
-  <!-- 5 component tiles -->
+  <!-- component tiles -->
   <section class="signal-grid" id="signal-grid">
     <!-- Signals inserted by recession.js -->
   </section>
@@ -128,7 +120,7 @@
 <footer>
   Data: <a href="https://fred.stlouisfed.org" target="_blank" rel="noopener">FRED (St. Louis Fed)</a> ·
   NBER recession dates from the <a href="https://www.nber.org/research/business-cycle-dating" target="_blank" rel="noopener">NBER Business Cycle Dating Committee</a> ·
-  <a href="/macro/indicators/">Back to dashboard</a>
+  <a href="/macro/">Back to State of the Cycle</a>
 </footer>
 
 <script type="module" src="/macro/recession/recession.js"></script>

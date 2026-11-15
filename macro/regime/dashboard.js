@@ -22,6 +22,14 @@ import { buildRegimeReturnsTable, regimeExcessStats } from '/macro/regime/regime
 import { SECTOR_PROFILES, REGIME_NARRATIVES } from '/macro/regime/sector-profiles.js';
 import { ETF_HOLDINGS } from '/markets/holdings.js';
 
+// 1 -> "1st", 22 -> "22nd", 113 -> "113th".
+function ordinal(n) {
+  const v = Math.round(Number(n));
+  if (!Number.isFinite(v)) return '—';
+  const m = Math.abs(v) % 100, t = m % 10;
+  return v + ((m >= 11 && m <= 13) ? 'th' : t === 1 ? 'st' : t === 2 ? 'nd' : t === 3 ? 'rd' : 'th');
+}
+
 // ---------- state ----------
 const state = {
   catalog: null,            // FRED catalog keyed by series_id
@@ -616,6 +624,17 @@ async function renderRegimeReturns() {
     state.excess[s] = regimeExcessStats(history[s], history.SPY, regimeMap, 6);
     state.excessPost2022[s] = regimeExcessStats(history[s], history.SPY, regimeMap, 6, { since: '2022-01-01' });
   }
+  // Matched-month excess for every horizon: sector minus SPY over the SAME
+  // months. Subtracting SPY's full-sample mean (from 1996) from a sector mean
+  // over a shorter sample (XLRE from 2015, XLC from 2018) flipped signs.
+  state.excessByH = {};
+  for (const h of [1, 3, 6]) {
+    state.excessByH[h] = {};
+    for (const s of sectors) {
+      if (!history[s] || !history.SPY) continue;
+      state.excessByH[h][s] = h === 6 ? state.excess[s] : regimeExcessStats(history[s], history.SPY, regimeMap, h);
+    }
+  }
   state.SECTOR_PROFILES = SECTOR_PROFILES;
   window.__SF_STATE = state;
   document.dispatchEvent(new CustomEvent('regime:sample-changed', { detail: { sample: 'full' } }));
@@ -866,8 +885,8 @@ function renderRegimeTable() {
       let displayVal = cell.mean;
       if (isExcess) {
         if (s === 'SPY') return { s, displayVal: null, cell, isSpyExcess: true };
-        if (Number.isFinite(spyMean)) displayVal = cell.mean - spyMean;
-        else                          displayVal = null;
+        const ex = state.excessByH?.[horizon]?.[s]?.[r];
+        displayVal = ex && Number.isFinite(ex.mean) ? ex.mean : null;
       }
       return { s, displayVal, cell };
     });
@@ -995,8 +1014,8 @@ function wireRegimeTooltip() {
       return `
         <div class="rt-title">${sym} &middot; <span style="color:${meta.color}">${meta.label}</span></div>
         <div class="rt-body">${profile.description}</div>
-        <div class="rt-mech"><strong>Why this regime:</strong> ${narrative}</div>
         ${numbers}
+        <div class="rt-mech"><strong>Textbook expectation:</strong> ${narrative} <em>The numbers above are what this site measured; where the two disagree, the measurement is the finding. Quadrants here are relative to a 10-year norm, so the textbook case is often not the typical month.</em></div>
       `;
     }
     return '';
@@ -1214,8 +1233,8 @@ function renderRegimeSunburst() {
       if (!cell || cell.n === 0) return { s, ret: null, n: 0 };
       let ret = cell.mean;
       if (isExcess) {
-        if (Number.isFinite(spyMean)) ret = cell.mean - spyMean;
-        else                          ret = null;
+        const ex = state.excessByH?.[horizon]?.[s]?.[q.key];
+        ret = ex && Number.isFinite(ex.mean) ? ex.mean : null;
       }
       return { s, ret, n: cell.n };
     });
@@ -1353,7 +1372,7 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
       <div class="ms-label">${ind.label}</div>
       <div class="ms-value ${valClass}">${sign(last.value)}${last.value.toFixed(dec)}<span class="ms-unit">${ind.unit}</span></div>
       <div class="ms-meta">
-        <span class="ms-pctile">${pctile != null ? pctile + 'th %ile' : '—'}</span>
+        <span class="ms-pctile">${pctile != null ? ordinal(pctile) + ' %ile' : '—'}</span>
         ${delta != null ? `<span class="ms-delta ${delta >= 0 ? 'pos' : 'neg'}">${sign(delta)}${delta.toFixed(dec)}${ind.unit === 'bp' ? 'bp' : 'pp'} vs prior mo</span>` : ''}
       </div>
     </div>`;
@@ -1362,7 +1381,7 @@ async function renderMacroStrip(cpi, indpro, payems, rrsfs) {
   tgt.innerHTML = `
     <div class="ms-header">
       <span class="ms-title">Live macro inputs</span>
-      <span class="ms-subtitle">What's driving the regime today &middot; 6-month annualized rates (levels for spreads), percentile vs. each series' own history (up to 30 years), change vs prior month</span>
+      <span class="ms-subtitle">What's driving the regime today &middot; 6-month annualized rates (levels for spreads), percentile vs. each series' own history (up to 40 years), change vs prior month</span>
     </div>
     <div class="ms-grid">${tiles}</div>
   `;
@@ -1631,7 +1650,7 @@ function renderPositioning() {
     <p class="rp-foot">
       Out-of-sample check: the <a href="/tools/backtest/">walk-forward regime backtest</a> runs this rotation month by month using only
       data available at the time, net of trading costs. Read its verdict before acting on any row here.
-      XLRE (2015) and XLC (2018) have short histories, and the 2018 GICS change moved GOOGL/META out of XLK and AMZN between XLY and XLC,
+      XLRE (2015) and XLC (2018) have short histories, and the 2018 GICS change moved Alphabet and Meta out of XLK and media names such as Disney, Comcast and Netflix out of XLY into XLC,
       so pre-2018 rows for XLK, XLY and XLC measure a different basket.
       <strong>Past base rates, not forecasts.</strong>
     </p>

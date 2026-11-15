@@ -12,7 +12,7 @@ scheduled GitHub Actions that snapshot data into the repo.
 | Markets | `/markets/` | US equities & sectors (breadth, vol), Rates & credit, Global FX & commodities, Valuation (P/E) |
 | Regional | `/regional/` | Geography, CPI dispersion, affordability, build vs buy, channel mix, climate, demographics, migration |
 | Supply Chain | `/supply/` | SC Pressure composite, insights, DC, industrial RE, middle/last mile, international, downloads |
-| Research | `/research/` | Dated notes: 38 company deep dives (`/research/<ticker>/`), Plug Power (`/research/plug/`), AI beneficiaries (`/research/ai/`) |
+| Research | `/research/` | Dated notes: 37 single-name deep dives (`/research/<ticker>/`), Plug Power (`/research/plug/`), AI beneficiaries (`/research/ai/`) |
 | Tools & Data | `/tools/` | Pair explorer, compare, correlation network, regime backtest, ticker lookup, data catalog, A-Z |
 
 `lib/nav-config.js` is the single source of truth for navigation, search, the landing
@@ -56,6 +56,22 @@ scripts/                  refresh/snapshot pipelines, audits, tests
   regimes are paired with returns one month later (publication lag).
 - Sector tilts are shown only when the 6m excess return vs SPY clears |t| >= 2 (Newey-West).
 - Recession page reports each signal's hit rate and false alarms, computed on load.
+
+- Missing months: BLS published no October 2025 CPI or household-survey data. `lib/fred-snapshot.js`
+  fills a lone missing month by interpolation and flags it (`interpolated: true`), so positional
+  math ("12 observations ago") stays a true year. `scripts/test/gap-fill-and-regime.mjs` guards it.
+- Regime months are classified only when every growth input has reported; real wages use headline
+  CPI; the Sahm rule, policy stance and composite synthesis each have one shared implementation
+  (`lib/composite-scores.js`, `lib/sf-kit.js`).
+
+## Local preview
+
+```
+node scripts/dev-server.mjs 8790     # static files + /api/* forwarded to the live site
+```
+
+Head metadata (title, description, canonical, Open Graph) for the Macro pages is written by
+`node scripts/set-head-meta.mjs`; add a row there when a page is added.
 
 ## Local check before pushing
 

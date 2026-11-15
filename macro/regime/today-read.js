@@ -24,23 +24,19 @@ import {
   computeCreditScore,
   computeLaborScore,
   phaseFor,
+  seriesFor,
+  realWages,
+  SPECS,
 } from '/lib/composite-scores.js';
 
-// Series needed for all six composites + the regime classifier.
-const ALL_SERIES = [
-  // Regime
-  'CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS',
-  // Cycle
-  'UNRATE', 'SAHMREALTIME', 'T10Y3M', 'NFCI', 'BAA10Y', 'AAA10Y', 'BAMLH0A0HYM2',
-  // Inflation
-  'CORESTICKM159SFRBATL', 'T5YIFR', 'CES0500000003', 'CPIHOSSL',
-  // Housing
-  'HOSSUPUSM673N', 'PERMIT', 'MORTGAGE30US', 'HOUST1F', 'CSUSHPISA', 'DRSFRMACBS', 'USCONS',
-  // Consumer
-  'PSAVERT', 'DRCCLACBS', 'IC4WSA', 'UMCSENT', 'TDSP',
-  // Credit & Liquidity (additions; UNRATE/NFCI/HY OAS/T10Y3M/CES/PAYEMS/IC4WSA already above)
-  'ANFCI', 'BAMLC0A0CM', 'DFII10',
-];
+// Series needed for all six composites + the regime classifier. The composite
+// inputs come from the specs themselves, so this list cannot drift from them
+// (it had: two inputs changed and this page scored 5 of 6 and 6 of 7 signals).
+const ALL_SERIES = [...new Set([
+  'CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS',            // regime
+  'UNRATE', 'HOSSUPUSM673N', 'AAA10Y', 'BAMLH0A0HYM2', // outlier flags below
+  ...Object.keys(SPECS).flatMap(seriesFor),
+])];
 
 const state = { data: {}, errors: [] };
 
@@ -117,12 +113,9 @@ function findOutliers() {
     if (last > 7) flags.push({ metric: 'HOSSUPUSM673N', kind: 'warn', text: `Months supply at ${last.toFixed(1)} — buyers' market`, link: '/macro/housing/#section-inventory', linkLabel: 'see housing inventory' });
   }
   // Real wages
-  const wages = (state.data.CES0500000003 || []);
-  const core = (state.data.CPILFESL || []);
-  if (wages.length >= 13 && core.length >= 13) {
-    const wageYoy = (wages[wages.length - 1].value / wages[wages.length - 13].value - 1) * 100;
-    const coreYoy = (core[core.length - 1].value / core[core.length - 13].value - 1) * 100;
-    const real = wageYoy - coreYoy;
+  const rw = realWages(state.data);
+  if (rw.length) {
+    const real = rw[rw.length - 1].value;
     if (real < 0) flags.push({ metric: 'REAL_WAGES', kind: 'warn', text: `Real wages negative (${real.toFixed(1)}%)`, link: '/macro/consumer/#section-consumer', linkLabel: 'see consumer balance sheet' });
   }
   // NFCI tightening

@@ -3,9 +3,9 @@
 // composite score, three time-series charts, threshold tiles, and a
 // data-driven narrative.
 
-import { renderMethodology as shared_renderMethodology, computeLaborScore, phaseFor, computeSahm, yoyPct } from '/lib/composite-scores.js';
+import { renderMethodology as shared_renderMethodology, computeLaborScore, phaseFor, computeSahm, yoyPct, synthesisHtml, realWages } from '/lib/composite-scores.js';
 
-const SERIES = ['UNRATE', 'IC4WSA', 'PAYEMS', 'CES0500000003', 'CPILFESL', 'SAHMREALTIME'];
+const SERIES = ['UNRATE', 'IC4WSA', 'PAYEMS', 'CES0500000003', 'CPIAUCSL', 'SAHMREALTIME'];
 const state = { data: {}, errors: [] };
 
 const el = id => document.getElementById(id);
@@ -70,13 +70,16 @@ function renderUnrateChart() {
   const ctx = el('chart-unrate');
   if (!ctx) return;
   const u = state.data.UNRATE || [];
-  const sahm = computeSahm(u);
+  // First-release Sahm rule from FRED where it exists; the same rule computed
+  // from today's revised unemployment rate before that.
+  const rt = state.data.SAHMREALTIME || [];
+  const sahm = rt.length ? [...computeSahm(u).filter(o => o.date < rt[0].date), ...rt] : computeSahm(u);
   new Chart(ctx, {
     type: 'line',
     data: {
       datasets: [
         { label: 'Unemployment rate', data: u.map(o => ({ x: o.date, y: o.value })), borderColor: '#5a9cff', backgroundColor: 'rgba(90,156,255,0.10)', borderWidth: 1.6, pointRadius: 0, fill: true, tension: 0.05, yAxisID: 'y' },
-        { label: 'Sahm Rule (pp)', data: sahm.map(o => ({ x: o.date, y: o.value })), borderColor: '#ef4f5a', borderWidth: 1.4, pointRadius: 0, tension: 0.05, yAxisID: 'y2' },
+        { label: 'Sahm rule, real-time (pp)', data: sahm.map(o => ({ x: o.date, y: o.value })), borderColor: '#ef4f5a', borderWidth: 1.4, pointRadius: 0, tension: 0.05, yAxisID: 'y2' },
       ],
     },
     options: {
@@ -91,14 +94,15 @@ function renderUnrateChart() {
   });
   const cur = latest(u), s = latest(sahm);
   el('tiles-unrate').innerHTML = `
-    <div class="cycle-tile" data-tile-metric="UNRATE"><div class="cycle-tile-label">UNRATE</div><div class="cycle-tile-value">${cur ? cur.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">52-wk low ${u.length ? Math.min(...u.slice(-12).map(o => o.value)).toFixed(1) : '—'}%</div></div>
+    <div class="cycle-tile" data-tile-metric="UNRATE"><div class="cycle-tile-label">Unemployment rate</div><div class="cycle-tile-value">${cur ? cur.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">12-month low ${u.length ? Math.min(...u.slice(-12).map(o => o.value)).toFixed(1) : '—'}%</div></div>
     <div class="cycle-tile" data-tile-metric="SAHM"><div class="cycle-tile-label">Sahm Rule</div><div class="cycle-tile-value" style="color:${s && s.value >= 0.5 ? '#ef4f5a' : s && s.value >= 0.4 ? '#f7a700' : '#3ecf8e'}">${s ? s.value.toFixed(2) + 'pp' : '—'}</div><div class="cycle-tile-sub">trigger 0.50pp</div></div>`;
   if (s) {
     let txt = '';
-    if (s.value >= 0.5) txt = `Sahm Rule TRIGGERED at ${s.value.toFixed(2)}pp — recession indicator firing.`;
-    else if (s.value >= 0.4) txt = `Sahm Rule at ${s.value.toFixed(2)}pp — close to the 0.50pp trigger. Watch next 1-2 prints carefully.`;
-    else if (s.value >= 0.2) txt = `Sahm Rule at ${s.value.toFixed(2)}pp — above zero, signaling a weakening trajectory.`;
-    else txt = `Sahm Rule at ${s.value.toFixed(2)}pp — at or near cycle low; labor market remains tight.`;
+    if (s.value >= 0.5) txt = `Sahm rule at ${s.value.toFixed(2)}pp: at or above the 0.50pp trigger.`;
+    else if (s.value >= 0.4) txt = `Sahm rule at ${s.value.toFixed(2)}pp: close to the 0.50pp trigger.`;
+    else if (s.value >= 0.2) txt = `Sahm rule at ${s.value.toFixed(2)}pp: the 3-month average jobless rate is rising, but is under half-way to the trigger.`;
+    else txt = `Sahm rule at ${s.value.toFixed(2)}pp: the 3-month average jobless rate is at or near its 12-month low.`;
+    if (cur) txt += ` Unemployment is ${cur.value.toFixed(1)}%.`;
     el('note-unrate').textContent = txt;
   }
 }
@@ -127,13 +131,13 @@ function renderClaimsChart() {
     const last52Min = c.length >= 52 ? Math.min(...c.slice(-52).map(o => o.value)) : null;
     const last52Max = c.length >= 52 ? Math.max(...c.slice(-52).map(o => o.value)) : null;
     el('tiles-claims').innerHTML = `
-      <div class="cycle-tile" data-tile-metric="IC4WSA"><div class="cycle-tile-label">Claims (4wk MA)</div><div class="cycle-tile-value">${(k / 1000).toFixed(0)}K</div><div class="cycle-tile-sub">stress &gt; 350K</div></div>
-      <div class="cycle-tile" data-tile-metric="IC4WSA"><div class="cycle-tile-label">52w range</div><div class="cycle-tile-value">${last52Min ? (last52Min / 1000).toFixed(0) : '—'}-${last52Max ? (last52Max / 1000).toFixed(0) : '—'}K</div><div class="cycle-tile-sub">expansion 200-300K</div></div>`;
+      <div class="cycle-tile" data-tile-metric="IC4WSA"><div class="cycle-tile-label">Claims (4wk MA)</div><div class="cycle-tile-value">${(k / 1000).toFixed(0)}K</div><div class="cycle-tile-sub">passed 350K around the start of the 2001 and 2008 recessions</div></div>
+      <div class="cycle-tile" data-tile-metric="IC4WSA"><div class="cycle-tile-label">52w range</div><div class="cycle-tile-value">${last52Min ? (last52Min / 1000).toFixed(0) : '—'}-${last52Max ? (last52Max / 1000).toFixed(0) : '—'}K</div><div class="cycle-tile-sub">lowest and highest of the last 52 weeks</div></div>`;
     let txt = '';
-    if (k > 350000) txt = `Claims at ${(k / 1000).toFixed(0)}K — labor market weakening fast; sustained level confirms recessionary regime.`;
-    else if (k > 280000) txt = `Claims at ${(k / 1000).toFixed(0)}K — elevated. Watch for a sustained climb above 350K.`;
-    else if (k > 230000) txt = `Claims at ${(k / 1000).toFixed(0)}K — normal expansion range.`;
-    else txt = `Claims at ${(k / 1000).toFixed(0)}K — historically low; labor market remains very tight.`;
+    if (k > 350000) txt = `Claims at ${(k / 1000).toFixed(0)}K: a level reached around the start of the 2001 and 2008 recessions.`;
+    else if (k > 280000) txt = `Claims at ${(k / 1000).toFixed(0)}K: above the 200–275K of recent expansions.`;
+    else if (k > 230000) txt = `Claims at ${(k / 1000).toFixed(0)}K: within the range of recent expansions.`;
+    else txt = `Claims at ${(k / 1000).toFixed(0)}K: layoffs are historically low. That measures firing, not hiring.`;
     el('note-claims').textContent = txt;
   }
 }
@@ -142,13 +146,10 @@ function renderWagesChart() {
   const ctx = el('chart-wages');
   if (!ctx) return;
   const wages = state.data.CES0500000003 || [];
-  const core = state.data.CPILFESL || [];
   const payems = state.data.PAYEMS || [];
   const wagesYoy = yoyPct(wages);
-  const coreYoy = yoyPct(core);
-  // Real wages
-  const cm = new Map(coreYoy.map(o => [o.date, o.value]));
-  const real = wagesYoy.filter(o => cm.has(o.date)).map(o => ({ date: o.date, value: o.value - cm.get(o.date) }));
+  // Real wages: hourly earnings YoY minus headline CPI YoY (shared definition).
+  const real = realWages(state.data);
   // Payrolls 6m annualized
   const payAnn = [];
   for (let i = 6; i < payems.length; i++) {
@@ -162,7 +163,7 @@ function renderWagesChart() {
     data: {
       datasets: [
         { label: 'AHE YoY (%)', data: wagesYoy.map(o => ({ x: o.date, y: o.value })), borderColor: '#3ecf8e', borderWidth: 1.6, pointRadius: 0, tension: 0.05 },
-        { label: 'Real wages (AHE - Core CPI)', data: real.map(o => ({ x: o.date, y: o.value })), borderColor: '#5a9cff', borderWidth: 1.4, pointRadius: 0, tension: 0.05, borderDash: [4, 3] },
+        { label: 'Real wages (AHE - CPI)', data: real.map(o => ({ x: o.date, y: o.value })), borderColor: '#5a9cff', borderWidth: 1.4, pointRadius: 0, tension: 0.05, borderDash: [4, 3] },
         { label: 'Payrolls 6m ann. (%)', data: payAnn.map(o => ({ x: o.date, y: o.value })), borderColor: '#f7a700', borderWidth: 1.4, pointRadius: 0, tension: 0.05 },
       ],
     },
@@ -177,15 +178,13 @@ function renderWagesChart() {
   });
   const lw = latest(wagesYoy), lr = latest(real), lp = latest(payAnn);
   el('tiles-wages').innerHTML = `
-    <div class="cycle-tile" data-tile-metric="AHE_YOY"><div class="cycle-tile-label">AHE YoY</div><div class="cycle-tile-value">${lw ? lw.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">tight &gt; 4.5%</div></div>
-    <div class="cycle-tile" data-tile-metric="REAL_WAGES"><div class="cycle-tile-label">Real wages</div><div class="cycle-tile-value" style="color:${lr && lr.value < 0 ? '#ef4f5a' : '#3ecf8e'}">${lr ? (lr.value >= 0 ? '+' : '') + lr.value.toFixed(1) + 'pp' : '—'}</div><div class="cycle-tile-sub">vs core CPI</div></div>
-    <div class="cycle-tile" data-tile-metric="PAYEMS_6M"><div class="cycle-tile-label">Payrolls 6m ann.</div><div class="cycle-tile-value">${lp ? (lp.value >= 0 ? '+' : '') + lp.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">expansion &gt; 1.5%</div></div>`;
+    <div class="cycle-tile" data-tile-metric="AHE_YOY"><div class="cycle-tile-label">AHE YoY</div><div class="cycle-tile-value">${lw ? lw.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">2015–19 average 2.7%</div></div>
+    <div class="cycle-tile" data-tile-metric="REAL_WAGES"><div class="cycle-tile-label">Real wages</div><div class="cycle-tile-value" style="color:${lr && lr.value < 0 ? '#ef4f5a' : '#3ecf8e'}">${lr ? (lr.value >= 0 ? '+' : '') + lr.value.toFixed(1) + 'pp' : '—'}</div><div class="cycle-tile-sub">wage growth less CPI inflation</div></div>
+    <div class="cycle-tile" data-tile-metric="PAYEMS_6M"><div class="cycle-tile-label">Payrolls 6m ann.</div><div class="cycle-tile-value">${lp ? (lp.value >= 0 ? '+' : '') + lp.value.toFixed(1) + '%' : '—'}</div><div class="cycle-tile-sub">2015–19 average 1.6%</div></div>`;
   if (lw && lr) {
-    let txt = `Wages running ${lw.value.toFixed(1)}% YoY; real wages ${lr.value >= 0 ? '+' : ''}${lr.value.toFixed(1)}pp vs Core CPI. `;
-    if (lw.value > 4.5) txt += 'Tight labor market — bargaining power favors workers.';
-    else if (lw.value > 3.5) txt += 'Moderate; near productivity-trend wage growth.';
-    else txt += 'Wage growth running below 3.5% — emerging slack signal.';
-    if (lr.value < 0) txt += ' Real wages negative is a direct consumer-stress signal — discretionary spending typically softens within 1-2 quarters.';
+    let txt = `Average hourly earnings are up ${lw.value.toFixed(1)}% on the year; after CPI inflation that is ${lr.value >= 0 ? '+' : ''}${lr.value.toFixed(1)}pp in real terms`;
+    txt += lr.value < 0 ? ', so pay is losing ground to prices.' : ', so pay is outpacing prices.';
+    if (lp) txt += ` Payrolls have grown at a ${lp.value.toFixed(1)}% annualized pace over six months${lp.value < 1 ? ', below the roughly 1% that keeps pace with labor-force growth' : ''}.`;
     el('note-wages').textContent = txt;
   }
 }
@@ -193,14 +192,7 @@ function renderWagesChart() {
 function renderTakeaway() {
   const result = computeLaborScore(state.data);
   if (!result) return;
-  const phase = phaseFor('labor', result.score);
-  const txt = `Composite score is <strong style="color:${phase.color}">${result.score.toFixed(0)}/100 (${phase.label})</strong>. ${
-    result.score < 25 ? 'Labor market is unambiguously tight; employment growth and wage pressure should support the consumer.' :
-    result.score < 45 ? 'Labor market healthy. Watch wage growth and claims for early-warning shifts.' :
-    result.score < 65 ? 'Cooling — payrolls slowing and/or claims drifting up. A cooling phase, not by itself a recession signal.' :
-    result.score < 80 ? 'Weakening — Sahm Rule trajectory and claims pattern suggest accelerating deterioration. Consumer-discretionary risk elevated.' :
-    'Recessionary regime confirmed. Defensive labor positioning historically beats cyclical labor-sensitive sectors by 15-25%.'
-  }`;
+  const txt = synthesisHtml('labor', state.data, result);
   el('labor-takeaway-text').innerHTML = txt;
 }
 
@@ -213,7 +205,7 @@ function renderTakeaway() {
     renderClaimsChart();
     renderWagesChart();
     renderTakeaway();
-    setStatus('live', 'Live — labor data current as of last FRED update');
+    setStatus('live', 'Snapshot data');
   } catch (e) {
     console.error(e);
     setStatus('err', 'Failed to load labor data');

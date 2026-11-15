@@ -1,9 +1,9 @@
 // Credit & Liquidity deep-dive controller.
-// Pulls NFCI, ANFCI, HY OAS, IG OAS, 10Y-3M curve, 10Y real yield. Renders
+// Pulls NFCI, ANFCI, Baa/Aaa spreads, HY/IG OAS, 10Y-3M curve, 10Y real yield. Renders
 // the composite score, three time-series charts, threshold tiles, and a
 // data-driven narrative.
 
-import { renderMethodology as shared_renderMethodology, computeCreditScore, phaseFor } from '/lib/composite-scores.js';
+import { renderMethodology as shared_renderMethodology, computeCreditScore, phaseFor, synthesisHtml, ordinal } from '/lib/composite-scores.js';
 
 const SERIES = ['NFCI', 'ANFCI', 'BAMLH0A0HYM2', 'BAMLC0A0CM', 'T10Y3M', 'DFII10', 'BAA10Y', 'AAA10Y'];
 const state = { data: {}, errors: [] };
@@ -31,6 +31,13 @@ async function loadAll() {
 }
 
 function latest(arr) { return arr && arr.length ? arr[arr.length - 1] : null; }
+// Percentile of the latest value within the loaded history (0-100).
+function pctOf(arr) {
+  const v = (arr || []).map(o => o.value).filter(Number.isFinite);
+  if (v.length < 2) return null;
+  const x = v[v.length - 1];
+  return Math.round(100 * v.filter(y => y < x).length / (v.length - 1));
+}
 function valueAt(arr, monthsBack = 0) {
   if (!arr || !arr.length) return null;
   const idx = Math.max(0, arr.length - 1 - monthsBack);
@@ -114,26 +121,35 @@ function renderConditionsChart() {
   if (cur) {
     const lvl = cur.value;
     let txt = '';
-    if (lvl < -0.4) txt = `NFCI at ${lvl.toFixed(2)} — financial conditions decisively easy. Accommodative for cyclical/credit-sensitive sectors.`;
-    else if (lvl < 0) txt = `NFCI at ${lvl.toFixed(2)} — slightly looser than average. Default credit-friendly stance still intact.`;
-    else if (lvl < 0.5) txt = `NFCI at ${lvl.toFixed(2)} — tighter than average but below the 0.5 stress threshold. Watch.`;
-    else txt = `NFCI at ${lvl.toFixed(2)} — above 0.5: tighter than average, a level seen during past stress episodes.`;
+    const p = pctOf(nfci);
+    if (lvl < 0) txt = `NFCI at ${lvl.toFixed(2)}: looser than its long-run average of zero`;
+    else if (lvl < 0.5) txt = `NFCI at ${lvl.toFixed(2)}: tighter than its long-run average of zero`;
+    else txt = `NFCI at ${lvl.toFixed(2)}: well above zero, a level seen during past stress episodes`;
+    txt += p != null ? ` (${ordinal(p)} percentile since 1990, higher = tighter).` : '.';
     el('note-conditions').textContent = txt;
   }
 }
 
 // ---- chart 2: spreads ----
+// FRED carries only about three years of the ICE BofA option-adjusted spreads,
+// so the long history is Moody's Baa and Aaa yields minus the 10-year Treasury
+// (the two series the composite scores). The OAS lines are drawn where they exist.
 function renderSpreadsChart() {
   const ctx = el('chart-spreads');
   if (!ctx) return;
   const hy = state.data.BAMLH0A0HYM2 || [];
   const ig = state.data.BAMLC0A0CM || [];
+  const baa = state.data.BAA10Y || [];
+  const aaa = state.data.AAA10Y || [];
+  const bp = arr => arr.map(o => ({ x: o.date, y: o.value * 100 }));
   new Chart(ctx, {
     type: 'line',
     data: {
       datasets: [
-        { label: 'HY OAS (bps)', data: hy.map(o => ({ x: o.date, y: o.value * 100 })), borderColor: '#ef4f5a', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.05 },
-        { label: 'IG OAS (bps)', data: ig.map(o => ({ x: o.date, y: o.value * 100 })), borderColor: '#5a9cff', borderWidth: 1.4, pointRadius: 0, tension: 0.05 },
+        { label: 'Baa − 10Y (bp)', data: bp(baa), borderColor: '#ef4f5a', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.05 },
+        { label: 'Aaa − 10Y (bp)', data: bp(aaa), borderColor: '#5a9cff', borderWidth: 1.4, pointRadius: 0, tension: 0.05 },
+        { label: 'HY OAS (bp, 3 years on FRED)', data: bp(hy), borderColor: '#f7a700', borderWidth: 1.4, pointRadius: 0, tension: 0.05, borderDash: [4, 3] },
+        { label: 'IG OAS (bp, 3 years on FRED)', data: bp(ig), borderColor: '#3ecf8e', borderWidth: 1.4, pointRadius: 0, tension: 0.05, borderDash: [4, 3] },
       ],
     },
     options: {
@@ -146,20 +162,20 @@ function renderSpreadsChart() {
     },
   });
 
-  const hyL = latest(hy), igL = latest(ig);
-  const tilesHtml = `
-    <div class="cycle-tile" data-tile-metric="HY_OAS"><div class="cycle-tile-label">HY OAS</div><div class="cycle-tile-value">${hyL ? (hyL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">stress &gt; 800bp</div></div>
-    <div class="cycle-tile" data-tile-metric="IG_OAS"><div class="cycle-tile-label">IG OAS</div><div class="cycle-tile-value">${igL ? (igL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">stress &gt; 250bp</div></div>
-    <div class="cycle-tile" data-tile-metric="HY_IG_RATIO"><div class="cycle-tile-label">HY-IG ratio</div><div class="cycle-tile-value">${hyL && igL ? (hyL.value / igL.value).toFixed(1) + 'x' : '—'}</div><div class="cycle-tile-sub">historical avg ≈ 4x</div></div>`;
-  el('tiles-spreads').innerHTML = tilesHtml;
+  const hyL = latest(hy), igL = latest(ig), baaL = latest(baa), aaaL = latest(aaa);
+  const pBaa = pctOf(baa), pAaa = pctOf(aaa);
+  const since = arr => (arr.length ? arr[0].date.slice(0, 4) : '');
+  el('tiles-spreads').innerHTML = `
+    <div class="cycle-tile" data-tile-metric="BAA10Y"><div class="cycle-tile-label">Baa − 10Y</div><div class="cycle-tile-value">${baaL ? (baaL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">${pBaa != null ? `${ordinal(pBaa)} percentile since ${since(baa)}` : ''}</div></div>
+    <div class="cycle-tile" data-tile-metric="AAA10Y"><div class="cycle-tile-label">Aaa − 10Y</div><div class="cycle-tile-value">${aaaL ? (aaaL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">${pAaa != null ? `${ordinal(pAaa)} percentile since ${since(aaa)}` : ''}</div></div>
+    <div class="cycle-tile" data-tile-metric="HY_OAS"><div class="cycle-tile-label">HY OAS</div><div class="cycle-tile-value">${hyL ? (hyL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">peaks: about 1,100bp in 2020, 2,000bp in 2008</div></div>
+    <div class="cycle-tile" data-tile-metric="IG_OAS"><div class="cycle-tile-label">IG OAS</div><div class="cycle-tile-value">${igL ? (igL.value * 100).toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">peak: above 600bp in 2008</div></div>`;
 
-  if (hyL && igL) {
-    const hyBps = hyL.value * 100, igBps = igL.value * 100;
-    let txt = '';
-    if (hyBps > 800) txt = `HY OAS at ${hyBps.toFixed(0)}bp — credit stress regime. Historically: equity drawdown probabilities elevated and credit-sensitive sectors should be reduced.`;
-    else if (hyBps > 500) txt = `HY OAS at ${hyBps.toFixed(0)}bp — elevated but pre-stress. Watch the trajectory: a continued widening above 600 confirms tightening cycle.`;
-    else if (hyBps > 350) txt = `HY OAS at ${hyBps.toFixed(0)}bp — normal-range; complacency risk if it drops below 300.`;
-    else txt = `HY OAS at ${hyBps.toFixed(0)}bp — historically tight; suggests credit complacency / late-cycle risk-on regime.`;
+  if (baaL) {
+    let txt = `Baa spread at ${(baaL.value * 100).toFixed(0)}bp`;
+    if (pBaa != null) txt += `, the ${ordinal(pBaa)} percentile of its history since ${since(baa)}: ${pBaa < 20 ? 'investors are being paid unusually little for corporate credit risk' : pBaa > 80 ? 'investors are demanding unusually high compensation for corporate credit risk' : 'within its usual range'}`;
+    txt += '.';
+    if (hyL) txt += ` High-yield OAS is ${(hyL.value * 100).toFixed(0)}bp.`;
     el('note-spreads').textContent = txt;
   }
 }
@@ -193,16 +209,15 @@ function renderCurveChart() {
   const cBps = cv ? cv.value * 100 : null;
   const tiles = `
     <div class="cycle-tile" data-tile-metric="T10Y3M"><div class="cycle-tile-label">10Y-3M</div><div class="cycle-tile-value">${cBps != null ? (cBps >= 0 ? '+' : '') + cBps.toFixed(0) + 'bp' : '—'}</div><div class="cycle-tile-sub">${cBps != null && cBps < 0 ? 'inverted' : 'positive'}</div></div>
-    <div class="cycle-tile" data-tile-metric="DFII10"><div class="cycle-tile-label">10Y real</div><div class="cycle-tile-value">${rv ? rv.value.toFixed(2) + '%' : '—'}</div><div class="cycle-tile-sub">restrictive &gt; 1.5%</div></div>`;
+    <div class="cycle-tile" data-tile-metric="DFII10"><div class="cycle-tile-label">10Y real</div><div class="cycle-tile-value">${rv ? rv.value.toFixed(2) + '%' : '—'}</div><div class="cycle-tile-sub">${pctOf(ry) != null ? `${ordinal(pctOf(ry))} percentile since ${ry[0].date.slice(0, 4)}` : ''}</div></div>`;
   el('tiles-curve').innerHTML = tiles;
 
   if (cBps != null) {
     let txt = '';
-    if (cBps < -100) txt = `Curve at ${cBps.toFixed(0)}bp — deeply inverted. Recession lag historically 8-18 months.`;
-    else if (cBps < 0) txt = `Curve at ${cBps.toFixed(0)}bp — inverted. Steepening from inversion is when recessions tend to start.`;
-    else if (cBps < 100) txt = `Curve at ${cBps.toFixed(0)}bp — positive but flat. Bear-steepening or bull-steepening determines whether this is healthy or recession-onset.`;
-    else txt = `Curve at ${cBps.toFixed(0)}bp — healthy positive slope. Term premium normal.`;
-    if (rv && rv.value > 1.5) txt += ` Real yield at ${rv.value.toFixed(2)}% — monetary policy decisively restrictive.`;
+    if (cBps < 0) txt = `Curve at ${cBps.toFixed(0)}bp: inverted. Inversions have preceded recessions by roughly 6 to 18 months, with one false signal in 2022-25.`;
+    else if (cBps < 100) txt = `Curve at +${cBps.toFixed(0)}bp: positive but flatter than its average of about 145bp since 1990.`;
+    else txt = `Curve at +${cBps.toFixed(0)}bp: positively sloped.`;
+    if (rv) { const p = pctOf(ry); txt += ` The 10-year real yield is ${rv.value.toFixed(2)}%${p != null ? `, the ${ordinal(p)} percentile since ${ry[0].date.slice(0, 4)}` : ''}: long-term borrowing costs after inflation are ${p != null && p > 80 ? 'high by the standards of the TIPS era' : p != null && p < 20 ? 'low by the standards of the TIPS era' : 'mid-range'}.`; }
     el('note-curve').textContent = txt;
   }
 }
@@ -210,14 +225,7 @@ function renderCurveChart() {
 function renderTakeaway() {
   const result = computeCreditScore(state.data);
   if (!result) return;
-  const phase = phaseFor('credit', result.score);
-  const txt = `Composite score is <strong style="color:${phase.color}">${result.score.toFixed(0)}/100 (${phase.label})</strong>. ${
-    result.score < 25 ? 'Conditions are decisively easy — risk-on regime, credit-sensitive sectors favored.' :
-    result.score < 45 ? 'Accommodative posture; bank lending should be supportive of growth.' :
-    result.score < 65 ? 'Neutral conditions; tightening direction matters more than the level.' :
-    result.score < 80 ? 'Tight conditions — equity drawdowns and credit-sensitive earnings risk elevated.' :
-    'Stress regime — historically associated with recessions starting within 9-12 months. Reduce credit and small-cap exposure; favor quality and duration.'
-  }`;
+  const txt = synthesisHtml('credit', state.data, result);
   el('credit-takeaway-text').innerHTML = txt;
 }
 
@@ -230,7 +238,7 @@ function renderTakeaway() {
     renderSpreadsChart();
     renderCurveChart();
     renderTakeaway();
-    setStatus('live', 'Live — credit data current as of last FRED update');
+    setStatus('live', 'Snapshot data');
   } catch (e) {
     console.error(e);
     setStatus('err', 'Failed to load credit data');

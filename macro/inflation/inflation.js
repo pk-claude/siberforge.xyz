@@ -7,8 +7,7 @@
 // Same visual pattern as the cycle page: composite score hero, 4 analytical
 // sections with charts + tiles + interpretation, synthesis.
 
-import { renderMethodology } from '/lib/composite-scores.js';
-import { computeInflationScore as shared_computeInflationScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology } from '/lib/composite-scores.js';
+import { computeInflationScore as shared_computeInflationScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, renderMethodology, synthesisHtml, ordinal, realWages as shared_realWages, shelterIndex } from '/lib/composite-scores.js';
 
 const state = {
   series: {},
@@ -26,6 +25,11 @@ async function fetchJSON(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`${url} -> ${res.status}`);
   return res.json();
+}
+// Mean of a series over 2015-2019, the last stretch of low, stable inflation.
+function avg1519(s) {
+  const x = (s || []).filter(o => o.date >= '2015-01-01' && o.date <= '2019-12-31' && Number.isFinite(o.value));
+  return x.length ? x.reduce((a, o) => a + o.value, 0) / x.length : null;
 }
 function latestValue(series) { return series && series.length ? series[series.length - 1] : null; }
 function percentile(series, val) {
@@ -179,7 +183,7 @@ async function loadSeries() {
   const start = '1990-01-01';
   const batches = [
     ['CPIAUCSL', 'CPILFESL', 'PCEPILFE'],           // Section 1
-    ['CORESTICKM159SFRBATL', 'COREFLEXCPIM159SFRBATL', 'CPIHOSSL'],  // Section 2
+    ['CORESTICKM159SFRBATL', 'COREFLEXCPIM159SFRBATL', 'CPIHOSSL', 'CUSR0000SAH1'],  // Section 2
     ['T5YIE', 'T10YIE', 'T5YIFR', 'MICH'],          // Section 3
     ['CES0500000003'],                               // Section 4
   ];
@@ -201,15 +205,11 @@ async function loadSeries() {
   if (state.series.CPILFESL) state.series._coreYoy     = yoyPct(state.series.CPILFESL);
   if (state.series.PCEPILFE) state.series._pceYoy      = yoyPct(state.series.PCEPILFE);
   if (state.series.CPILFESL) state.series._core6m      = sixMonthAnnualized(state.series.CPILFESL);
-  if (state.series.CPIHOSSL) state.series._shelterYoy  = yoyPct(state.series.CPIHOSSL);
+  state.shelterIsTrue = !!(state.series.CUSR0000SAH1 && state.series.CUSR0000SAH1.length);
+  state.series._shelterYoy = yoyPct(shelterIndex(state.series));
   if (state.series.CES0500000003) state.series._wageYoy = yoyPct(state.series.CES0500000003);
-  // Real wages = AHE YoY - Core CPI YoY (aligned by date)
-  if (state.series._wageYoy && state.series._coreYoy) {
-    const coreMap = new Map(state.series._coreYoy.map(o => [o.date, o.value]));
-    state.series._realWages = state.series._wageYoy
-      .filter(o => coreMap.has(o.date))
-      .map(o => ({ date: o.date, value: o.value - coreMap.get(o.date) }));
-  }
+  // Real wages = hourly earnings YoY minus headline CPI YoY (shared definition).
+  state.series._realWages = shared_realWages(state.series);
 }
 
 // ---------- Section 1: Headline vs Core vs PCE ----------
@@ -224,7 +224,7 @@ function renderHeadlineSection() {
       borderColor: '#5a9cff', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.1 },
     { label: 'Core CPI YoY', data: c.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#f7a700', backgroundColor: 'rgba(247, 167, 0, 0.10)', borderWidth: 1.8, pointRadius: 0, fill: true, tension: 0.1 },
-    { label: 'Core PCE YoY (Fed target)', data: p.map(o => ({ x: o.date, y: o.value })),
+    { label: 'Core PCE YoY (Fed’s preferred gauge)', data: p.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#3ecf8e', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.1 },
   ], {
     yTitle: 'YoY (%)',
@@ -252,7 +252,7 @@ function renderHeadlineSection() {
       status: lc ? (lc.value < 2.5 ? 'ok' : lc.value < 3.5 ? 'caution' : 'warn') : '',
     },
     {
-      label: 'Core PCE (Fed target)',
+      label: 'Core PCE (Fed’s preferred gauge)',
       value: lp ? `${fmt(lp.value, 1)}%` : '—',
       meta: lp ? `target: 2.0%` : '',
       threshold: '&gt; 2.5% = restrictive stance justified',
@@ -274,7 +274,7 @@ function renderHeadlineSection() {
     if (Math.abs(gap) < 0.3)   note += `Headline and core converged at ${fmt((lh.value+lc.value)/2, 1)}% — food/energy no longer a net contributor. `;
     else if (gap > 0)          note += `Headline (${fmt(lh.value, 1)}%) running hotter than core (${fmt(lc.value, 1)}%) — energy/food pushing up total. `;
     else                       note += `Headline (${fmt(lh.value, 1)}%) below core (${fmt(lc.value, 1)}%) — energy/food deflationary. `;
-    note += `Core PCE at ${fmt(lp.value, 1)}% (Fed target 2.0%). `;
+    note += `Core PCE at ${fmt(lp.value, 1)}%, against the Fed's 2% goal for headline PCE. `;
     if (l6) {
       if (l6.value < lc.value - 0.3) note += `<em>6m annualized core (${fmt(l6.value, 1)}%) below YoY — disinflation trajectory intact.</em>`;
       else if (l6.value > lc.value + 0.3) note += `<em>6m annualized core (${fmt(l6.value, 1)}%) above YoY — inflation is re-accelerating.</em>`;
@@ -296,7 +296,7 @@ function renderStickySection() {
       borderColor: '#ef4f5a', backgroundColor: 'rgba(239, 79, 90, 0.10)', borderWidth: 1.8, pointRadius: 0, fill: true, tension: 0.1 },
     { label: 'Flex-Price Core CPI (YoY)', data: flex.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#5a9cff', borderWidth: 1.5, pointRadius: 0, fill: false, tension: 0.1 },
-    { label: 'Shelter CPI (YoY)', data: shelter.map(o => ({ x: o.date, y: o.value })),
+    { label: state.shelterIsTrue ? 'Shelter CPI (YoY)' : 'Housing CPI (YoY)', data: shelter.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#f7a700', borderWidth: 1.5, borderDash: [4, 4], pointRadius: 0, fill: false, tension: 0.1 },
   ], {
     yTitle: 'YoY (%)',
@@ -313,10 +313,10 @@ function renderStickySection() {
       metric: 'STICKY_CPI',
       label: 'Sticky-Price Core CPI',
       value: ls ? `${fmt(ls.value, 1)}%` : '—',
-      meta: pctSticky != null ? `${pctSticky}th %ile past 30y` : '',
-      threshold: '&lt; 3% = Fed can cut; &gt; 4% = structural problem',
+      meta: pctSticky != null ? `${ordinal(pctSticky)} %ile past 30y` : '',
+      threshold: avg1519(sticky) != null ? `2015–19 average ${fmt(avg1519(sticky), 1)}%` : '',
       status: ls ? (ls.value < 3 ? 'ok' : ls.value < 4 ? 'caution' : 'warn') : '',
-      help: 'Atlanta Fed: basket components that reprice annually or less often.',
+      help: 'Atlanta Fed: CPI components whose prices change less often than about every 4.3 months, excluding food and energy.',
     },
     {
       label: 'Flex-Price Core CPI',
@@ -327,10 +327,10 @@ function renderStickySection() {
     },
     {
       metric: 'SHELTER_CPI',
-      label: 'Shelter CPI',
+      label: state.shelterIsTrue ? 'Shelter CPI' : 'Housing CPI',
       value: lsh ? `${fmt(lsh.value, 1)}%` : '—',
-      meta: '~35% of core basket · lags real rents by 6-12mo',
-      threshold: 'rolling over = sticky will follow',
+      meta: state.shelterIsTrue ? 'about 35% of CPI, 44% of core · lags market rents by 6-12mo' : 'shelter plus utilities and furnishings · about 44% of CPI',
+      threshold: avg1519(shelter) != null ? `2015–19 average ${fmt(avg1519(shelter), 1)}%` : '',
       status: lsh ? (lsh.value < 3.5 ? 'ok' : lsh.value < 5 ? 'caution' : 'warn') : '',
     },
   ];
@@ -339,10 +339,11 @@ function renderStickySection() {
   let note = '<strong>Current read:</strong> ';
   if (ls && lf) {
     const diff = ls.value - lf.value;
-    if (diff > 2)      note += `Sticky (${fmt(ls.value, 1)}%) materially above flexible (${fmt(lf.value, 1)}%) — the inflation problem is services/shelter, not goods. Fed can't fix this with rate cuts; requires sustained restrictive policy. `;
-    else if (diff > 0) note += `Sticky (${fmt(ls.value, 1)}%) moderately above flexible (${fmt(lf.value, 1)}%) — disinflation is progressing but slowly on the services side. `;
-    else               note += `Flexible (${fmt(lf.value, 1)}%) above sticky (${fmt(ls.value, 1)}%) — inflation driver is reversible goods/energy, not structural. `;
-    if (lsh) note += `<em>Shelter at ${fmt(lsh.value, 1)}% ${lsh.value > 4 ? '— still well above trend, expect it to feed sticky for another 6-12 months' : lsh.value > 3 ? '— normalizing' : '— at or below trend'}.</em>`;
+    if (diff > 2)      note += `Sticky (${fmt(ls.value, 1)}%) materially above flexible (${fmt(lf.value, 1)}%) — the pressure is in slow-moving services and shelter prices, which respond slowly to policy. `;
+    else if (diff > 0) note += `Sticky (${fmt(ls.value, 1)}%) moderately above flexible (${fmt(lf.value, 1)}%) — slow-moving prices are rising faster than fast-moving ones. `;
+    else               note += `Flexible (${fmt(lf.value, 1)}%) above sticky (${fmt(ls.value, 1)}%) — the pressure is in fast-moving goods and energy prices, which tend to reverse. `;
+    const shAvg = avg1519(shelter);
+    if (lsh && shAvg != null) note += `${state.shelterIsTrue ? 'Shelter' : 'Housing'} inflation is ${fmt(lsh.value, 1)}%, ${lsh.value - shAvg > 1 ? 'well above' : lsh.value - shAvg > 0.3 ? 'above' : lsh.value - shAvg > -0.3 ? 'close to' : 'below'} its 2015–19 average of ${fmt(shAvg, 1)}%.`;
   } else {
     note += `Data loading or unavailable.`;
   }
@@ -427,13 +428,13 @@ function renderWagesSection() {
   timeSeriesChart(el('chart-wages'), [
     { label: 'Avg Hourly Earnings (YoY)', data: wage.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#f7a700', backgroundColor: 'rgba(247, 167, 0, 0.10)', borderWidth: 1.8, pointRadius: 0, fill: true, tension: 0.1 },
-    { label: 'Real Wages (AHE − Core CPI)', data: real.map(o => ({ x: o.date, y: o.value })),
+    { label: 'Real wages (AHE − CPI)', data: real.map(o => ({ x: o.date, y: o.value })),
       borderColor: '#3ecf8e', borderWidth: 1.6, pointRadius: 0, fill: false, tension: 0.1 },
   ], {
     yTitle: 'YoY (%)',
     extraPlugins: [thresholdLinePlugin([
       { value: 0, label: '0% — real-wage breakeven', color: 'rgba(138, 148, 163, 0.6)' },
-      { value: 3.5, label: '3.5% — Fed comfort for nominal wages', color: 'rgba(62, 207, 142, 0.5)' },
+      { value: 3.5, label: '3.5% — roughly 2% inflation plus trend productivity', color: 'rgba(62, 207, 142, 0.5)' },
     ])],
   });
 
@@ -444,14 +445,14 @@ function renderWagesSection() {
       label: 'Nominal wage growth (AHE)',
       value: lw ? `${fmt(lw.value, 1)}%` : '—',
       meta: 'private sector YoY',
-      threshold: '&gt; 4% = hard to achieve 2% core inflation',
+      threshold: 'about 3.5% is consistent with 2% inflation at trend productivity',
       status: lw ? (lw.value < 3.5 ? 'ok' : lw.value < 4.5 ? 'caution' : 'warn') : '',
     },
     {
       metric: 'REAL_WAGES',
       label: 'Real wages',
       value: lr ? `${lr.value >= 0 ? '+' : ''}${fmt(lr.value, 1)}%` : '—',
-      meta: 'nominal AHE − Core CPI',
+      meta: 'hourly earnings YoY − CPI YoY',
       threshold: '&gt; 0% = purchasing power rising',
       status: lr ? (lr.value > 0.5 ? 'ok' : lr.value > -0.5 ? 'caution' : 'warn') : '',
     },
@@ -460,14 +461,14 @@ function renderWagesSection() {
 
   let note = '<strong>Current read:</strong> ';
   if (lw) {
-    if (lw.value > 4.5)          note += `Wage growth at ${fmt(lw.value, 1)}% — incompatible with 2% core inflation unless productivity accelerates. Services pricing pressure persists. `;
-    else if (lw.value > 3.5)     note += `Wage growth at ${fmt(lw.value, 1)}% — above Fed's comfort zone (~3-3.5% is the consistent-with-2%-inflation threshold). `;
-    else                         note += `Wage growth at ${fmt(lw.value, 1)}% — consistent with 2% core inflation. `;
+    if (lw.value > 4.5)          note += `Wage growth at ${fmt(lw.value, 1)}% — faster than is consistent with 2% inflation unless productivity accelerates. `;
+    else if (lw.value > 3.5)     note += `Wage growth at ${fmt(lw.value, 1)}% — a little above the roughly 3.5% consistent with 2% inflation at trend productivity. `;
+    else                         note += `Wage growth at ${fmt(lw.value, 1)}% — consistent with 2% inflation at trend productivity. `;
   }
   if (lr) {
-    if (lr.value > 1)            note += `<em>Real wages positive (${lr.value >= 0 ? '+' : ''}${fmt(lr.value, 1)}%)</em> — consumer spending power rising, supportive of demand.`;
+    if (lr.value > 1)            note += `<em>Real wages positive (${lr.value >= 0 ? '+' : ''}${fmt(lr.value, 1)}%)</em>: pay is outpacing prices.`;
     else if (lr.value > 0)       note += `Real wages modestly positive (${lr.value >= 0 ? '+' : ''}${fmt(lr.value, 1)}%).`;
-    else                         note += `<em>Real wages negative (${fmt(lr.value, 1)}%)</em> — historical precursor to demand destruction (which ultimately breaks the inflation cycle).`;
+    else                         note += `<em>Real wages negative (${fmt(lr.value, 1)}%)</em>: prices are outpacing pay.`;
   }
   el('note-wages').innerHTML = note;
 }
@@ -526,19 +527,7 @@ function renderSynthesis() {
   const tgt = el('inflation-synthesis-content');
   if (!tgt || !result) return;
 
-  const score = result.score;
-  let paragraph = '';
-  if (score < 25) {
-    paragraph = `Persistence composite at <strong>${score.toFixed(0)}/100</strong> — <strong>disinflation momentum dominates</strong>. Sticky and market-priced expectations are both contained; wage growth is within Fed-consistent range. Positioning implication: duration overweight, growth/tech favored, long-duration bond-proxy sectors (utilities, REITs) work. The Fed path is clear — further cuts appropriate. <em>Watch:</em> a re-acceleration in 6m annualized core CPI would be the first flag to change this view.`;
-  } else if (score < 45) {
-    paragraph = `Persistence composite at <strong>${score.toFixed(0)}/100</strong> — <strong>normalizing toward target</strong>. Most signals are in the constructive half of the range but sticky or shelter components are above target. Positioning: balanced duration, modest growth tilt, keep an eye on services inflation. The Fed has runway for measured cuts but isn't racing. <em>Watch:</em> sticky-CPI above 3.5% would pause the normalization story.`;
-  } else if (score < 65) {
-    paragraph = `Persistence composite at <strong>${score.toFixed(0)}/100</strong> — <strong>sticky regime</strong>. Services, wages, and shelter are materially above target and showing limited improvement. The Fed can't cut aggressively without losing credibility; any cuts are tactical, not structural. Positioning: underweight duration, tilt toward value and real-asset beneficiaries (energy, materials), avoid long-duration growth. <em>Watch:</em> a break below 3% on sticky CPI would materially shift this view.`;
-  } else if (score < 80) {
-    paragraph = `Persistence composite at <strong>${score.toFixed(0)}/100</strong> — <strong>persistent regime</strong>. Multiple structural components are well above target and not moderating. Historical episodes (late 1970s, 2022) show this regime requires sustained restrictive policy and creates material equity drawdowns. Positioning: defensive equity (staples, healthcare), energy overweight, commodities, short duration. Avoid long-duration growth and interest-rate-sensitive sectors. <em>Watch:</em> the Fed's willingness to stay restrictive despite growth slowdown is the key variable.`;
-  } else {
-    paragraph = `Persistence composite at <strong>${score.toFixed(0)}/100</strong> — <strong>re-accelerating / unanchored</strong>. This is the 1970s-style regime, or a new supply-shock episode. All structural components are elevated and momentum is getting worse. Expect materially higher policy rates, a stronger dollar (initially), commodity/energy outperformance, and compressed equity multiples across most sectors. Real assets > financial assets. The <a href="/macro/regime/">regime dashboard</a> likely shows Stagflation conditions.`;
-  }
+  const paragraph = synthesisHtml('inflation', state.series, result);
 
   tgt.innerHTML = `<p class="cycle-synthesis-para">${paragraph}</p>
     <div class="cycle-synthesis-links">
@@ -564,7 +553,7 @@ async function main() {
     renderSynthesis();
 
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
-    setStatus('live', 'Data loaded');
+    setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);
     setStatus('error', `Error: ${err.message}`);

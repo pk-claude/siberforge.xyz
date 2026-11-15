@@ -136,24 +136,25 @@ export const SECTOR_PROFILES = {
   },
 };
 
-// Regime-level macro narratives — used on the row-label tooltip in the table.
-// Each is 2-3 sentences: the macro setup, the dominant cross-asset implication,
-// and the signature "tell" for the regime.
+// Regime-level notes for the row-label tooltip. They state how THIS site
+// defines each quadrant. The earlier versions named "typical" years (2013-19
+// as Goldilocks, 2022 as the canonical Stagflation) that the classifier itself
+// places elsewhere, because the quadrants are relative to a trailing 10-year norm.
 export const REGIME_NARRATIVES = {
   goldilocks: {
-    title: 'Goldilocks: growth expanding, inflation cooling',
-    body: 'Real economy in mid-cycle expansion, Fed not forced to tighten further, multiples can expand alongside earnings growth. Risk-on regime: cyclicals + long-duration growth lead, defensives lag. The typical 2013–2019 backdrop.',
+    title: 'Goldilocks: growth above, core inflation below, their 10-year norms',
+    body: 'Growth (payrolls, industrial production, real retail sales, six-month annualized) is running above its own trailing 10-year median, and six-month core CPI is running below its median. A relative label: it says where the economy sits against its recent past, not that inflation is at 2%.',
   },
   reflation: {
-    title: 'Reflation: growth and inflation both rising',
-    body: 'Late-expansion or early-recovery with both growth and prices accelerating. Real assets (energy, materials), curve-steepening beneficiaries (financials), and pricing-power businesses lead. Long-duration growth (tech, REITs) lags as discount rates rise. 2003–2007, parts of 2021 fit here.',
+    title: 'Reflation: growth and core inflation both above their 10-year norms',
+    body: 'Growth and six-month core CPI are both above their own trailing 10-year medians. On this definition most of 2022 falls here, because growth was still above its norm while inflation ran hot.',
   },
   stagflation: {
-    title: 'Stagflation: growth slowing, inflation hot',
-    body: 'The hostile regime: Fed forced to tighten into weakness. Real returns near zero, valuation compression dominates earnings. Energy, staples, healthcare hold up; everything else underperforms. 1970s, 2022 are the canonical episodes.',
+    title: 'Stagflation: growth below, core inflation above, their 10-year norms',
+    body: 'Growth is below and six-month core CPI is above their own trailing 10-year medians. This is much milder than the 1970s meaning of the word: on this definition most of 2019 and all of 2024 qualify, with unemployment near 4% and inflation near 3%. Read the returns in this row with that in mind.',
   },
   disinflation: {
-    title: 'Disinflation / Recession risk: growth and inflation both falling',
-    body: 'Late cycle slowdown turning into either soft landing or recession. Bimodal regime: average forward returns mask deep recessions (negative tail) and soft-landing rallies (positive tail). Defensives (utilities, staples, healthcare) and rate-cut beneficiaries (long-duration tech, REITs) tend to lead. 2001, 2008, late-2019, parts of 2024.',
+    title: 'Disinflation: growth and core inflation both below their 10-year norms',
+    body: 'Growth and six-month core CPI are both below their own trailing 10-year medians. The row mixes recessions with soft landings, so the average return hides two very different outcomes.',
   },
 };

@@ -56,7 +56,7 @@ export const INDICATORS = [
     context: 'Headline output of the US economy. Sub-2% YoY historically signals below-trend growth.',
     direction: 'higher_better',
     hasVintages: true,
-    methodology: 'Bureau of Economic Analysis quarterly measure of inflation-adjusted gross domestic product (chained 2017 dollars). Three vintages per quarter: advance estimate ~30 days after quarter end, second estimate ~60 days, third estimate ~90 days. Annual revisions each July can shift the series back ~3 years. First-print accuracy: initial estimates typically move ±0.5–1.0 percentage points on the second revision as missing data fills in — markets still trade the advance print because it lands first.',
+    methodology: 'Bureau of Economic Analysis quarterly measure of inflation-adjusted gross domestic product (chained 2017 dollars). Three vintages per quarter: advance estimate ~30 days after quarter end, second estimate ~60 days, third estimate ~90 days. Annual updates each September can revise several years of history. First-print accuracy: initial estimates typically move ±0.5–1.0 percentage points on the second revision as missing data fills in — markets still trade the advance print because it lands first.',
   },
   {
     id: 'GDPNOW',
@@ -67,12 +67,12 @@ export const INDICATORS = [
     shortLabel: 'GDPNow',
     unit: '%',
     decimals: 1,
-    freq: 'daily',
+    freq: 'quarterly',
     transform: 'level',
-    release: 'Updated several times per week through the quarter',
+    release: 'Updated after each major data release; FRED keeps one value per quarter',
     context: 'Real-time nowcast of current-quarter Real GDP (QoQ SAAR). Model-based, not a forecast.',
     direction: 'higher_better',
-    methodology: 'Atlanta Fed bridge model that ingests monthly hard data (retail, housing, trade, etc.) as it releases and mechanically rolls into a quarter-on-quarter SAAR estimate for current-quarter GDP. Updated 4–7 times per quarter. Not a forecast — it is a running sum of what the existing data implies under the model. By the end of a quarter it typically falls within 0.5ppt of the advance BEA print; early in a quarter it is noisier.',
+    methodology: 'Atlanta Fed bridge model that ingests monthly hard data (retail, housing, trade, etc.) as it releases and mechanically rolls into a quarter-on-quarter SAAR estimate for current-quarter GDP. Updated after each major data release, roughly six to eight times a month. Not a forecast: it is what the data released so far implies under the model. It is noisy early in a quarter and converges toward the advance BEA print as the data for the quarter fill in. FRED stores one value per quarter (the latest estimate for that quarter), so the change shown is against the final nowcast of the previous quarter.',
   },
   {
     id: 'T10Y3M',
@@ -88,7 +88,7 @@ export const INDICATORS = [
     release: 'Daily',
     context: 'Yield-curve recession signal. Sustained inversion (<0) preceded every US recession since 1968; the 2022-2025 inversion has not (yet) been followed by one.',
     direction: 'higher_better',
-    methodology: 'Spread between the 10-year constant-maturity Treasury yield and the 3-month Treasury bill rate. The NY Fed\'s preferred recession-probability input (per Estrella-Mishkin). Inversion preceded every US recession since 1960 with 6–18 month leads. More reliable than 2s10s for recession signaling per most academic studies, though 2s10s draws more financial-press attention.',
+    methodology: 'Spread between the 10-year constant-maturity Treasury yield and the 3-month Treasury bill rate. The NY Fed\'s preferred recession-probability input (per Estrella-Mishkin). Inversion preceded every US recession since 1968, with leads of roughly 6 to 18 months; the 2022-25 inversion was not followed by one. More reliable than 2s10s for recession signaling per most academic studies, though 2s10s draws more financial-press attention.',
   },
   {
     id: 'INDPRO',
@@ -102,7 +102,7 @@ export const INDICATORS = [
     freq: 'monthly',
     transform: 'yoy',
     release: 'Mid-month, prior month',
-    context: 'Output of factories, mines, utilities. Cyclical proxy for the goods economy (since ISM left FRED in 2021).',
+    context: 'Output of factories, mines, utilities. Cyclical proxy for the goods economy (ISM survey data left FRED in 2016).',
     direction: 'higher_better',
     methodology: 'Federal Reserve Board G.17 release. Broad measure of physical output in manufacturing (~75% of index weight), mining, and electric/gas utilities. Chain-weighted, base period 2017=100. Less relevant than it once was since services now dominate GDP, but remains the best monthly read on goods-sector capacity utilization.',
   },
@@ -167,7 +167,7 @@ export const INDICATORS = [
     freq: 'daily',
     transform: 'level_bps',
     release: 'Daily',
-    context: 'Classic recession indicator. Inversion historically leads recessions by 12–18 months.',
+    context: 'The widely quoted 2s10s curve. Inversions have led recessions by roughly 6 to 24 months.',
     direction: 'higher_better',
     methodology: 'Spread between 10Y and 2Y constant-maturity Treasury yields. The classic "2s10s" curve that financial press covers. Inversion preceded every US recession since 1976, but with long and variable leads (12–24 months). Less statistically robust than T10Y3M per NY Fed research, but more closely watched.',
   },
@@ -185,10 +185,27 @@ export const INDICATORS = [
     freq: 'monthly',
     transform: 'yoy',
     release: 'End of month, prior month',
-    context: "Fed's preferred inflation gauge. Target 2.0%. Excludes food & energy.",
+    context: "The Fed's preferred guide to underlying inflation. Its 2% goal is set on headline PCE.",
     direction: 'target_band',
     target: 2.0,
-    methodology: 'Core Personal Consumption Expenditures price index from the Bureau of Economic Analysis, excluding food and energy. The Fed\'s preferred inflation gauge because the basket flexibly reweights month-to-month based on actual household spending (captures substitution behavior). Typically runs 0.3–0.5 percentage points below Core CPI. The 2% target is exact, measured as a long-run average.',
+    methodology: 'Core Personal Consumption Expenditures price index from the Bureau of Economic Analysis, excluding food and energy. The Fed\'s preferred inflation gauge because the basket flexibly reweights month-to-month based on actual household spending (captures substitution behavior). It has typically run 0.3–0.5 percentage points below Core CPI. The 2% goal is defined on headline PCE inflation; core is the preferred guide to the trend.',
+  },
+  {
+    id: 'CPIAUCSL',
+    source: 'fred',
+    fredId: 'CPIAUCSL',
+    category: 'inflation',
+    label: 'Headline CPI (YoY)',
+    shortLabel: 'Headline CPI',
+    unit: '%',
+    decimals: 2,
+    freq: 'monthly',
+    transform: 'yoy',
+    release: 'Mid-month, prior month',
+    context: 'All-items consumer prices, including food and energy. The number households and wage contracts respond to.',
+    direction: 'target_band',
+    target: 2.0,
+    methodology: 'Consumer Price Index for All Urban Consumers, all items, seasonally adjusted (BLS). Includes food and energy, so it moves with oil and grocery prices far more than core does. BLS did not publish an October 2025 index (data collection stopped during the federal shutdown); this site interpolates that month so year-over-year rates span exactly 12 months.',
   },
   {
     id: 'CPILFESL',
@@ -255,9 +272,9 @@ export const INDICATORS = [
     freq: 'monthly',
     transform: 'level',
     release: 'First Friday of month, prior month',
-    context: 'Sahm Rule: 0.5ppt rise over 3mo-avg trough historically = recession underway.',
+    context: 'Sahm rule: a 0.5pt rise in the 3-month average above its 12-month low has marked recessions.',
     direction: 'lower_better',
-    methodology: 'U-3 unemployment rate from the BLS household survey (separate from the payrolls establishment survey). Measures unemployed / labor force. Known for the Sahm Rule: when the 3-month moving average rises 0.5 percentage points above its trailing-12-month low, the US has historically been in recession. Since 1970 the Sahm Rule has triggered during every recession, with no false positives prior to 2024.',
+    methodology: 'U-3 unemployment rate from the BLS household survey (separate from the payrolls establishment survey). Measures unemployed / labor force. Known for the Sahm Rule: when the 3-month moving average rises 0.5 percentage points above its trailing-12-month low, the US has historically been in recession. Since 1970 the Sahm rule has triggered during every recession; the July 2024 trigger was not followed by one.',
   },
   {
     id: 'PAYEMS',
@@ -271,10 +288,10 @@ export const INDICATORS = [
     freq: 'monthly',
     transform: 'mom_diff_k', // diff in thousands (FRED publishes in thousands of persons)
     release: 'First Friday of month, prior month',
-    context: 'Jobs added last month. Breakeven for stable U-rate is ~100–150K given labor-force growth.',
+    context: 'Jobs added last month. The pace needed to hold unemployment steady fell after 2025 as labor-force growth slowed.',
     direction: 'higher_better',
     hasVintages: true,
-    methodology: 'Total nonfarm payroll employment from the BLS Current Employment Statistics (establishment survey). Subject to substantial revisions: the initial print often moves ±50–100K on the first revision (next month) and again on the second (two months later). Annual benchmark revisions to business establishment counts can shift the entire level curve back 5+ years each January. The vintage ribbon tracks how each print evolved post-release.',
+    methodology: 'Total nonfarm payroll employment from the BLS Current Employment Statistics (establishment survey). Subject to substantial revisions: the initial print often moves ±50–100K on the first revision (next month) and again on the second (two months later). Annual benchmark revisions to business establishment counts are published each February with the January report and can shift the level for several years back. The vintage ribbon tracks how each print evolved post-release.',
   },
   {
     id: 'AHE',
@@ -293,15 +310,15 @@ export const INDICATORS = [
     methodology: 'Average hourly earnings of all private-sector employees from the BLS CES establishment survey. Released with payrolls. Prone to composition effects — shifts in low-wage vs high-wage employment can move the aggregate without underlying wage pressure. The Atlanta Fed Wage Growth Tracker is a cleaner same-worker measure, though not available in this dashboard yet.',
   },
   {
-    // Real wage growth: nominal AHE YoY minus Core CPI YoY, aligned by date.
-    // Core CPI (not headline) as deflator — smoother, more signal, fewer
-    // energy-driven oscillations. Common practice for labor economists.
+    // Real wage growth: nominal AHE YoY minus headline CPI YoY, aligned by date.
+    // Headline CPI is the deflator BLS uses in its Real Earnings release; core
+    // leaves out food and energy, which households pay for.
     id: 'REAL_WAGES',
     source: 'derived',
-    dependsOn: ['AHE', 'CPILFESL'],
+    dependsOn: ['AHE', 'CPIAUCSL'],
     deriveFn: (deps) => {
       const ahe = deps.AHE;        // transformed YoY % values
-      const cpi = deps.CPILFESL;    // transformed YoY % values
+      const cpi = deps.CPIAUCSL;   // transformed YoY % values
       if (!ahe || !cpi) return [];
       const cpiByDate = new Map(cpi.map(o => [o.date, o.value]));
       const out = [];
@@ -312,16 +329,16 @@ export const INDICATORS = [
       return out;
     },
     category: 'consumer',
-    label: 'Real Wages (AHE − Core CPI, YoY)',
+    label: 'Real Wages (AHE − CPI, YoY)',
     shortLabel: 'Real Wages',
     unit: '%',
     decimals: 2,
     freq: 'monthly',
     transform: 'level', // inputs are already YoY; we subtract directly
     release: 'Monthly, with payrolls + CPI',
-    context: 'Nominal wage growth minus Core CPI. >0 = workers gaining purchasing power, <0 = losing it.',
+    context: 'Wage growth minus CPI inflation. Above 0, pay is outpacing prices; below 0, it is losing ground.',
     direction: 'higher_better',
-    methodology: 'Derived indicator: nominal average hourly earnings YoY minus Core CPI YoY, aligned by date. Using Core (vs. headline) CPI as the deflator removes food/energy noise — the standard labor economics convention for tracking real wage dynamics. Positive values indicate workers are gaining purchasing power; negative values mean wages aren\'t keeping up with core inflation.',
+    methodology: 'Derived indicator: average hourly earnings YoY minus headline CPI YoY, aligned by date. Headline CPI is the deflator BLS uses in its Real Earnings release, because households pay for food and energy too. Positive values mean pay is rising faster than prices; negative values mean it is not keeping up.',
   },
   {
     id: 'RRSFS',
@@ -407,10 +424,8 @@ export const INDICATORS = [
     methodology: 'New privately-owned residential construction started, Census Bureau. Volatile month-to-month — 3-month average smooths the signal. Single-family starts are the trend component; multi-family is noisy and weather-sensitive. A direct GDP contributor through residential investment.',
   },
   {
-    // NOTE: FRED's EXHOSLUSM495S series only began ~Feb 2025 (NAR data
-    // licensing reset). Too short for YoY — showing SAAR level in millions
-    // instead. Revisit transform to 'yoy' once the series has 2+ years of
-    // history (~early 2027).
+    // NOTE: FRED carries only a rolling 13 months of this NAR series, so a
+    // year-over-year chart is impossible; the card shows the SAAR level.
     id: 'EXHOSLUS',
     source: 'fred',
     fredId: 'EXHOSLUSM495S',
@@ -424,7 +439,7 @@ export const INDICATORS = [
     release: 'Third week of month, prior month',
     context: '~90% of total home sales. Reported as seasonally-adjusted annualized rate in millions of units.',
     direction: 'higher_better',
-    methodology: 'Existing home sales from the National Association of Realtors, published on FRED as a seasonally-adjusted annualized rate in millions of units. The historical series was discontinued in a 2024 licensing reset; the current FRED series began February 2025, which is why this card shows SAAR level rather than YoY. Will switch to YoY once the series accumulates two years of history (~early 2027).',
+    methodology: 'Existing home sales from the National Association of Realtors, published on FRED as a seasonally-adjusted annualized rate in millions of units. FRED carries only the latest 13 months of this NAR series, which is why the card shows the level rather than a year-over-year rate.',
   },
   {
     id: 'HSN1F',
@@ -456,7 +471,7 @@ export const INDICATORS = [
     release: 'Every Thursday (Freddie Mac PMMS)',
     context: 'Marginal cost of a new mortgage. Each 100bp move changes monthly payment on a $400K loan by ~$260.',
     direction: 'lower_better',
-    methodology: 'Freddie Mac Primary Mortgage Market Survey 30-year fixed rate, Thursday publication. Lags 10Y Treasury moves by 1–5 business days as lenders update rate sheets. The mortgage-to-10Y spread has widened structurally since 2022 — historically ~175bp, now ~250bp — driven by higher prepayment risk premia and reduced mortgage-market liquidity.',
+    methodology: 'Freddie Mac Primary Mortgage Market Survey 30-year fixed rate, Thursday publication. Lags 10Y Treasury moves by 1–5 business days as lenders update rate sheets. The mortgage-to-10Y spread averaged about 170bp before 2022 and has run wider since, on higher prepayment risk premia and thinner mortgage-market liquidity.',
   },
   {
     id: 'CSUSHPISA',
