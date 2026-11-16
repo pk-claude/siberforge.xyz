@@ -1,4 +1,4 @@
-# Cass Freight Index — Shipments  source=scrape:cass  generated=2026-11-09T14:49:43.142Z
+# Cass Freight Index — Shipments  source=scrape:cass  generated=2026-11-16T14:25:18.045Z
 date,value
 2016-01-01,0.974
 2016-02-01,1.055
@@ -129,3 +129,4 @@ date,value
 2026-07-01,0.983
 2026-08-01,1.038
 2026-09-01,1.062
+2026-10-01,1.056

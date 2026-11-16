@@ -1,4 +1,4 @@
-# Supply Chain Pressure Composite  source=derived  generated=2026-11-09T14:50:27.945Z
+# Supply Chain Pressure Composite  source=derived  generated=2026-11-16T14:25:34.736Z
 date,value
 1998-01-31,-0.515
 1998-02-28,-0.271
@@ -345,4 +345,4 @@ date,value
 2026-07-31,1.192
 2026-08-31,0.859
 2026-09-30,1.167
-2026-10-31,1.515
+2026-10-31,1.528
