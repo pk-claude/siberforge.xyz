@@ -10,28 +10,13 @@
 //
 // The shim is a browser script, so it runs here in a vm with a fetch that
 // reads the snapshot from disk: the test exercises the code pages really load.
-import fs from 'node:fs';
 import path from 'node:path';
-import vm from 'node:vm';
-import { fileURLToPath, pathToFileURL } from 'node:url';
-
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
+import { pathToFileURL } from 'node:url';
+import { ROOT, fredLocal } from '../lib/fred-local.mjs';
 let failed = 0;
 const ok = (cond, msg) => { console.log((cond ? 'PASS  ' : 'FAIL  ') + msg); if (!cond) failed++; };
 
-// ---- load the real shim against the on-disk snapshot ----
-const fileFetch = async (input) => {
-  const u = new URL(String(input), 'http://local/');
-  const p = path.join(ROOT, decodeURIComponent(u.pathname));
-  if (!fs.existsSync(p)) return new Response('{}', { status: 404 });
-  return new Response(fs.readFileSync(p), { status: 200, headers: { 'Content-Type': 'application/json' } });
-};
-const win = { fetch: fileFetch };
-const ctx = vm.createContext({ window: win, location: { href: 'http://local/', origin: 'http://local' }, URL, Response, Promise, console, Date, JSON, Number, String, Object, Array, Math, isFinite, encodeURIComponent });
-vm.runInContext(fs.readFileSync(path.join(ROOT, 'lib', 'fred-snapshot.js'), 'utf8'), ctx);
-const SF = win.SF_FRED;
-export const fredLocal = (ids, start = '1900-01-01') => SF.get(ids, start);
-
+// ---- the real shim against the on-disk snapshot (scripts/lib/fred-local.mjs) ----
 const cs = await import(pathToFileURL(path.join(ROOT, 'lib', 'composite-scores.js')).href);
 const rg = await import(pathToFileURL(path.join(ROOT, 'macro', 'regime', 'regimes.js')).href);
 

@@ -14,8 +14,12 @@
 <meta property="og:title" content="Siberforge — Labor" />
 <meta property="og:description" content="The US labor market on one page: unemployment and the Sahm rule, jobless claims, payroll growth and real wages, with a 0-100 score." />
 <meta property="og:url" content="https://www.siberforge.xyz/macro/labor/" />
-<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta property="og:image" content="https://www.siberforge.xyz/share/macro.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Siberforge: where the US cycle stands, with the growth and inflation regime map" />
 <meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <link rel="stylesheet" href="/lib/dashboard.css" />
 <link rel="stylesheet" href="/macro/cycle/cycle.css" />
 <script defer src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
@@ -23,6 +27,7 @@
 <script defer src="/lib/chart-theme.js"></script>
 <link rel="stylesheet" href="/lib/tokens.css" />
 <link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
 <script src="/lib/theme-toggle.js"></script>
 <script src="/lib/nav-config.js"></script>
 <script defer src="/lib/layout.js"></script>
@@ -30,18 +35,14 @@
 <script defer src="/lib/depth.js"></script>
 </head>
 <body data-section="macro" data-page="labor" data-page-sub="Labor" data-page-status-text="Initializing…" data-page-download="true">
-<section class="cycle-intro">
+<main class="sf-page">
+<header class="sf-page-head">
   <div class="sf-eyebrow">Macro &middot; Labor</div>
-  <h1 class="cycle-title">How strong &mdash; or how fast weakening &mdash; is employment?</h1>
-  <p class="cycle-subtitle">
-    Employment drives household income and spending, and it turns late in the cycle. Five signals:
-    <a class="meth-link" href="/macro/indicators/indicator.html?id=UNRATE">unemployment level</a>, the
-    <a class="meth-link" href="/macro/indicators/indicator.html?id=UNRATE">Sahm Rule trigger</a>,
-    <a class="meth-link" href="/macro/indicators/indicator.html?id=IC4WSA">initial claims</a>,
-    <a class="meth-link" href="/macro/indicators/indicator.html?id=PAYEMS">payroll growth</a>, and
-    <a class="meth-link" href="/macro/indicators/indicator.html?id=AHE">wage growth</a>.
-  </p>
-</section>
+  <h1>How strong &mdash; or how fast weakening &mdash; is employment?</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+<p class="sf-intro">Employment drives household income and spending, and it turns late in the cycle. Five signals: <a class="meth-link" href="/macro/indicators/indicator.html?id=UNRATE">unemployment level</a>, the <a class="meth-link" href="/macro/indicators/indicator.html?id=UNRATE">Sahm Rule trigger</a>, <a class="meth-link" href="/macro/indicators/indicator.html?id=IC4WSA">initial claims</a>, <a class="meth-link" href="/macro/indicators/indicator.html?id=PAYEMS">payroll growth</a>, and <a class="meth-link" href="/macro/indicators/indicator.html?id=AHE">wage growth</a>.</p>
 
 <section class="cycle-score-section" id="labor-score-section"></section>
 
@@ -104,6 +105,14 @@
   </div>
   <p class="cycle-note" id="note-wages"></p>
 </section>
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p><b>Score.</b> Each input is ranked against its own last 20 years, with the direction set so that 100 means the most risk; the score is their weighted average. The inputs, weights and transforms are listed under &ldquo;How this score is built&rdquo; next to the score.</p>
+  <p><b>Data.</b> Data: FRED. UNRATE / PAYEMS / CES0500000003 from BLS; IC4WSA from DOL via FRED. Read from a static snapshot refreshed twice each weekday.</p>
+  <p><b>Limits.</b> History uses today&rsquo;s revised figures. BLS published no October 2025 CPI or household-survey data; that month is interpolated so year-over-year rates span 12 months. Thresholds quoted in the tiles are reference points from history, not rules. More on <a href="/about/">sources and method</a>.</p>
+</details>
+</main>
 
 <footer>
   <span>Data: FRED. UNRATE / PAYEMS / CES0500000003 from BLS; IC4WSA from DOL via FRED.</span>

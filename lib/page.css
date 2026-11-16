@@ -81,3 +81,47 @@ table.sf-table a { color: var(--text); text-decoration: none; border-bottom: 1px
   .sf-dial-val { font-size: 21px; }
   .sf-dial-read, .sf-dial-chg { display: none; }
 }
+
+/* Front-door hero (State of the Cycle): the call in a line, the regime map beside it */
+.sf-hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 400px); gap: 28px; align-items: center; padding-bottom: 14px; }
+.sf-hero h1 { font-size: 15px; font-weight: 600; color: var(--muted); letter-spacing: 0; margin: 0 0 10px; }
+.sf-hero-title { font-size: clamp(40px, 6vw, 64px); font-weight: 800; line-height: 1.02; letter-spacing: -1.5px; color: var(--text); display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.sf-hero-chip { font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; white-space: nowrap; }
+.sf-hero-sub { font-size: 18px; line-height: 1.45; color: var(--text); margin: 12px 0 14px; max-width: 640px; }
+.sf-hero-facts { list-style: none; margin: 0 0 14px; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; max-width: 720px; }
+.sf-hero-facts li { border-left: 2px solid var(--line); padding: 2px 0 2px 10px; font-size: 11.5px; line-height: 1.35; color: var(--muted); }
+.sf-hero-facts b { display: block; font-size: 20px; font-weight: 800; color: var(--text); font-variant-numeric: tabular-nums; }
+.sf-hero-facts span { display: block; color: var(--accent); font-weight: 600; }
+.sf-hero-detail { font-size: 13px; color: var(--muted); max-width: 720px; }
+.sf-hero-detail strong { color: var(--text); }
+.sf-hero-fig { margin: 0; }
+.sf-hero-fig svg { width: 100%; height: auto; display: block; }
+.sf-hero-fig figcaption { font-size: 11px; color: var(--muted); line-height: 1.45; margin-top: 4px; text-align: center; }
+@media (max-width: 860px) {
+  .sf-hero { grid-template-columns: 1fr; gap: 14px; }
+  .sf-hero-fig { max-width: 420px; }
+  .sf-hero-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Historical comparison table */
+table.sf-analog thead th { vertical-align: bottom; line-height: 1.35; text-transform: none; letter-spacing: 0; font-size: 12px; color: var(--text); }
+table.sf-analog thead th .muted { font-weight: 400; font-size: 11px; }
+table.sf-analog td:nth-child(2), table.sf-analog th:nth-child(2) { background: var(--accent-bg); font-weight: 700; }
+table.sf-analog tr.sf-analog-gap th, table.sf-analog tr.sf-analog-gap td { border-top: 2px solid var(--line); }
+table.sf-analog tr.sf-analog-after th { font-weight: 500; color: var(--muted); }
+table.sf-analog sup { color: var(--muted); margin-left: 1px; }
+
+.sf-table-wrap { scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
+
+/* Static explainer under the header on score pages */
+.sf-intro { padding: 0 24px 6px; margin: 0; max-width: 980px; color: var(--muted); font-size: 13px; line-height: 1.6; }
+.sf-intro a { color: var(--accent); text-decoration: none; }
+.sf-intro a:hover { text-decoration: underline; }
+@media (max-width: 800px) { .sf-intro { padding: 0 16px 6px; } }
+
+/* Comparison table on phones: keep the row labels in view while the columns scroll */
+table.sf-analog tbody th, table.sf-analog thead th:first-child { position: sticky; left: 0; background: var(--panel); z-index: 1; }
+@media (max-width: 700px) {
+  table.sf-analog tbody th { white-space: normal; min-width: 112px; max-width: 132px; font-size: 11.5px; line-height: 1.3; }
+  table.sf-analog th, table.sf-analog td { padding: 6px 8px; }
+}

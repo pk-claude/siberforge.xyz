@@ -2,18 +2,17 @@
 // what changed, what would change the call. Every number is computed here
 // from the FRED snapshot; no prose is hand-written about current values.
 
-import { el as $el, fmt, sgn, esc, addDays, todayIso, fred, last, at, pctile, yoy, tiles, lineChart, recessionRanges, asOfLine, setStatus, since, COLORS, monthName, ordinal, policyStance } from '/lib/sf-kit.js';
-import { SPECS, seriesFor, computeComposite, phaseFor, termSpreadProbit } from '/lib/composite-scores.js';
-import { buildRegimeMap, smoothCurrentRegime, regimeConviction, REGIMES, sixMonthAnnualized, toMonthlyMap } from '/macro/regime/regimes.js';
+import { el as $el, fmt, sgn, esc, todayIso, fred, last, tiles, lineChart, recessionRanges, asOfLine, setStatus, since, COLORS, monthName, ordinal } from '/lib/sf-kit.js';
+import { computeComposite, phaseFor } from '/lib/composite-scores.js';
+import { REGIMES, sixMonthAnnualized, toMonthlyMap } from '/macro/regime/regimes.js';
+import { KINDS, LABELS, STATE_SERIES, computeState, headline } from '/macro/state-core.js';
+import { quadrantSvg } from '/lib/quadrant.js';
 
 // Tolerant element lookup: the landing page embeds this module with only the
 // verdict and dials containers present.
 const el = id => $el(id) || { set innerHTML(v) {}, set textContent(v) {} };
 
-const KINDS = ['cycle', 'labor', 'inflation', 'credit', 'housing', 'consumer'];
-const LABELS = { cycle: 'Recession risk', labor: 'Labor market', inflation: 'Inflation persistence', credit: 'Credit & liquidity', housing: 'Housing', consumer: 'Consumer stress' };
 const PAGES = { cycle: '/macro/cycle/', labor: '/macro/labor/', inflation: '/macro/inflation/', credit: '/macro/credit/', housing: '/macro/housing/', consumer: '/macro/consumer/' };
-const EXTRA = ['CPILFESL', 'INDPRO', 'PAYEMS', 'RRSFS', 'DFF', 'PCEPILFE', 'NFCI', 'UNRATE', 'SAHMREALTIME', 'CFNAIMA3', 'T10Y3M', 'USREC', 'BAA10Y', 'FEDTARMDLR'];
 
 const median = a => { const s = [...a].sort((x, y) => x - y), h = s.length >> 1; return s.length % 2 ? s[h] : (s[h - 1] + s[h]) / 2; };
 
@@ -21,63 +20,62 @@ function monthsAgo(n) { const d = new Date(); d.setUTCMonth(d.getUTCMonth() - n)
 
 async function main() {
   setStatus('stale', 'Loading…');
-  const ids = [...new Set([...KINDS.flatMap(seriesFor), ...EXTRA])];
-  const data = await fred(ids, '1960-01-01');
+  const data = await fred(STATE_SERIES, '1960-01-01');
 
-  // ---------- composites ----------
-  const now = {}, m1 = {}, m3 = {}, m12 = {};
+  // ---------- today: one shared computation (macro/state-core.js) ----------
+  const S = computeState(data);
+  const { regimeMap, months, latestYm, latest, smoothed, differs, realFF, realPct, neutralReal, lDff, lPce, probit, lProb, lSahm } = S;
+  const conv = S.conviction, R = S.regime, st = S.stance, stance = st.label;
+  const gTxt = S.growthText, iTxt = S.inflationText;
+
+  // ---------- composites, now and back-cast ----------
+  const now = S.scores, m1 = {}, m3 = {}, m12 = {};
   for (const k of KINDS) {
-    now[k] = computeComposite(k, data);
     m1[k]  = computeComposite(k, data, monthsAgo(1));
     m3[k]  = computeComposite(k, data, monthsAgo(3));
     m12[k] = computeComposite(k, data, monthsAgo(12));
   }
 
-  // ---------- regime ----------
-  const regimeMap = buildRegimeMap({ cpi: data.CPILFESL || [], indpro: data.INDPRO || [], payems: data.PAYEMS || [], rrsfs: data.RRSFS || [] });
-  const months = [...regimeMap.keys()].sort();
-  const latestYm = months[months.length - 1];
-  const latest = regimeMap.get(latestYm);
-  const smoothed = smoothCurrentRegime(regimeMap, 3);
-  const conv = regimeConviction(latest, smoothed);
-  const R = smoothed ? REGIMES[smoothed.regime] : null;
-
-  // ---------- policy ----------
-  const corePce = yoy(data.PCEPILFE || []);
-  const dff = data.DFF || [];
-  const lDff = last(dff), lPce = last(corePce);
-  const realFF = lDff && lPce ? lDff.value - lPce.value : null;
-  const realHist = corePce.map(o => { const f = at(dff, addDays(o.date, 27)); return f ? { date: o.date, value: f.value - o.value } : null; }).filter(Boolean);
-  const realPct = realHist.length ? pctile(realHist, 20, realFF) : null;
-  const sepLR = last(data.FEDTARMDLR || []);
-  const neutralReal = sepLR ? sepLR.value - 2 : null;
-  const st = policyStance(realFF, neutralReal);
-  const stance = st.label;
-
-  // ---------- recession odds ----------
-  const probit = termSpreadProbit(data.T10Y3M || []);
-  const lProb = last(probit), lSahm = last(data.SAHMREALTIME || []);
+  // ---------- hero: the call in a line, and the picture ----------
+  const cyc = now.cycle, cycPh = cyc ? phaseFor('cycle', cyc.score) : null;
+  const H = headline(S);
+  el('hero-title').innerHTML = R
+    ? `<span style="color:${R.color}">${esc(H.title)}</span>${H.conviction ? ` <span class="sf-hero-chip">${esc(H.conviction)} conviction</span>` : ''}`
+    : 'Regime unavailable';
+  el('hero-sub').textContent = R ? H.sub.charAt(0).toUpperCase() + H.sub.slice(1) + '.' : '';
+  el('hero-facts').innerHTML = [
+    cyc ? `<li><b>${fmt(cyc.score, 0)}/100</b> recession risk<span>${esc(cycPh.label.toLowerCase())}</span></li>` : '',
+    lProb ? `<li><b>${fmt(lProb.value, 0)}%</b> curve-model odds<span>12 months ahead</span></li>` : '',
+    now.inflation ? `<li><b>${fmt(now.inflation.score, 0)}/100</b> inflation persistence<span>${esc(phaseFor('inflation', now.inflation.score).label.toLowerCase())}</span></li>` : '',
+    realFF != null ? `<li><b>${sgn(realFF, 1)}%</b> real fed funds<span>${esc(stance)}</span></li>` : '',
+  ].join('');
+  const trail = months.slice(-24).map(ym => { const m = regimeMap.get(ym); return { ym, g: m.growthZ, i: m.inflationZ, r: m.regime }; });
+  el('hero-quadrant').innerHTML = quadrantSvg(trail, {
+    size: 420, call: smoothed ? smoothed.regime : null,
+    palette: { text: 'var(--text)', muted: 'var(--muted)', line: 'var(--line)', panel: 'var(--panel)' },
+  });
+  el('hero-quadrant-cap').textContent = trail.length
+    ? `Each dot is a month, ${monthName(trail[0].ym + '-01')} to ${monthName(latestYm + '-01')}. The call is a vote of the last three (larger dots).`
+    : '';
 
   // ---------- verdict ----------
-  const cyc = now.cycle, cycPh = cyc ? phaseFor('cycle', cyc.score) : null;
-  // Describe the axes the way the call was made. The call is a 3-month vote;
-  // when the newest complete month votes differently, say so, and never print
-  // "above" or "below" for a reading that is within a quarter-sigma of its norm.
-  const side = z => Math.abs(z) < 0.25 ? 'close to' : z > 0 ? 'above' : 'below';
-  const gTxt = latest ? `growth ${side(latest.growthZ)} its 10-year norm` : '';
-  const iTxt = latest ? `core inflation ${side(latest.inflationZ)} its 10-year norm` : '';
-  const differs = smoothed && latest && smoothed.regime !== latest.regime;
   const infPh = now.inflation ? phaseFor('inflation', now.inflation.score).label.toLowerCase() : '';
-  el('verdict').innerHTML =
+  // On the State page the hero carries the call and the numbers, so the
+  // paragraph only adds what they leave out. The landing page has no hero and
+  // keeps the full sentence.
+  const full =
     (R ? `<strong>${R.label}</strong> on the 3-month read (${conv ? conv.label.toLowerCase() : '—'} conviction)${differs ? `; the latest complete month, ${monthName(latestYm + '-01')}, reads ${REGIMES[latest.regime].label}` : ''}: ${gTxt}, ${iTxt}. ` : '') +
     (cyc ? `Recession risk reads <strong>${cycPh.label.toLowerCase()}</strong> at ${fmt(cyc.score, 0)}/100; the yield-curve model puts 12-month odds at ${fmt(lProb?.value, 0)}% and the Sahm rule is at ${fmt(lSahm?.value, 2)}pp (trigger 0.50). ` : '') +
     (now.inflation ? `Inflation persistence is ${infPh} (${fmt(now.inflation.score, 0)}/100). ` : '') +
     (realFF != null ? `Policy is ${stance}: real fed funds ${sgn(realFF, 1)}%${neutralReal != null ? ` against a neutral proxy of ${fmt(neutralReal, 1)}%` : ''}.` : '');
+  const brief =
+    (R && differs ? `The call is a 3-month vote. The latest complete month, ${monthName(latestYm + '-01')}, reads <strong>${REGIMES[latest.regime].label}</strong>, so conviction is low. ` : R ? `The call is a 3-month vote; the latest complete month is ${monthName(latestYm + '-01')}. ` : '') +
+    (lSahm ? `The Sahm rule is at ${fmt(lSahm.value, 2)}pp against a trigger of 0.50. ` : '') +
+    (neutralReal != null ? `The neutral-rate proxy is ${fmt(neutralReal, 1)}% real.` : '');
+  el('verdict').innerHTML = $el('hero-title') ? brief : full;
 
   // ---------- dials ----------
-  const cfnai = last(data.CFNAIMA3 || []);
-  const nfci = last(data.NFCI || []);
-  const nfciPct = pctile(data.NFCI || [], 20);
+  const { cfnai, nfci, nfciPct } = S;
   const dialFor = (k) => {
     const s = now[k]; if (!s) return null;
     const ph = phaseFor(k, s.score);
@@ -180,6 +178,8 @@ async function main() {
   ]);
 
   await asOfLine('asof', { a: data.PAYEMS, b: data.CPILFESL, c: data.NFCI, d: data.T10Y3M });
+  // Historical comparison: after the page is usable, and never able to break it.
+  if ($el('analog')) import('/macro/analog.js').then(m => m.renderAnalog({ S, data })).catch(e => { console.warn('[analog]', e); const a = $el('analog'); if (a) a.hidden = true; });
   el('last-updated').textContent = '';
   setStatus('live', 'Snapshot data');
 }

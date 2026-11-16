@@ -1,4 +1,5 @@
-import { computeConsumerScore as shared_computeConsumerScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, synthesisHtml, ordinal, realWages as shared_realWages } from '/lib/composite-scores.js';
+import { computeConsumerScore as shared_computeConsumerScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, synthesisHtml, ordinal, realWages as shared_realWages, headerHtml } from '/lib/composite-scores.js';
+import { asOfLine } from '/lib/sf-kit.js';
 // Real Economy page — consumer indicators: income, spending, credit health.
 //
 // Same visual pattern as cycle/inflation: composite score hero, three sections
@@ -511,6 +512,9 @@ async function main() {
     renderSynthesis();
 
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
+    // Shared page header: one computed line and the data dates.
+    { const v = document.getElementById('verdict'); if (v) v.innerHTML = headerHtml('consumer', state.series); }
+    asOfLine('asof', state.series);
     setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);

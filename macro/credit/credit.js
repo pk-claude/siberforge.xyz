@@ -3,7 +3,8 @@
 // the composite score, three time-series charts, threshold tiles, and a
 // data-driven narrative.
 
-import { renderMethodology as shared_renderMethodology, computeCreditScore, phaseFor, synthesisHtml, ordinal } from '/lib/composite-scores.js';
+import { renderMethodology as shared_renderMethodology, computeCreditScore, phaseFor, synthesisHtml, ordinal, headerHtml } from '/lib/composite-scores.js';
+import { asOfLine } from '/lib/sf-kit.js';
 
 const SERIES = ['NFCI', 'ANFCI', 'BAMLH0A0HYM2', 'BAMLC0A0CM', 'T10Y3M', 'DFII10', 'BAA10Y', 'AAA10Y'];
 const state = { data: {}, errors: [] };
@@ -238,6 +239,9 @@ function renderTakeaway() {
     renderSpreadsChart();
     renderCurveChart();
     renderTakeaway();
+    // Shared page header: one computed line and the data dates.
+    { const v = document.getElementById('verdict'); if (v) v.innerHTML = headerHtml('credit', state.data); }
+    asOfLine('asof', state.data);
     setStatus('live', 'Snapshot data');
   } catch (e) {
     console.error(e);

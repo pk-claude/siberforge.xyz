@@ -3,7 +3,8 @@
 // composite score, three time-series charts, threshold tiles, and a
 // data-driven narrative.
 
-import { renderMethodology as shared_renderMethodology, computeLaborScore, phaseFor, computeSahm, yoyPct, synthesisHtml, realWages } from '/lib/composite-scores.js';
+import { renderMethodology as shared_renderMethodology, computeLaborScore, phaseFor, computeSahm, yoyPct, synthesisHtml, realWages, headerHtml } from '/lib/composite-scores.js';
+import { asOfLine } from '/lib/sf-kit.js';
 
 const SERIES = ['UNRATE', 'IC4WSA', 'PAYEMS', 'CES0500000003', 'CPIAUCSL', 'SAHMREALTIME'];
 const state = { data: {}, errors: [] };
@@ -205,6 +206,9 @@ function renderTakeaway() {
     renderClaimsChart();
     renderWagesChart();
     renderTakeaway();
+    // Shared page header: one computed line and the data dates.
+    { const v = document.getElementById('verdict'); if (v) v.innerHTML = headerHtml('labor', state.data); }
+    asOfLine('asof', state.data);
     setStatus('live', 'Snapshot data');
   } catch (e) {
     console.error(e);

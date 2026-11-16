@@ -64,6 +64,25 @@ scripts/                  refresh/snapshot pipelines, audits, tests
   CPI; the Sahm rule, policy stance and composite synthesis each have one shared implementation
   (`lib/composite-scores.js`, `lib/sf-kit.js`).
 
+## Front door, history and share card
+
+- `macro/state-core.js` is the State of the Cycle computation with no DOM. The page
+  (`macro/state.js`), `scripts/build-state.mjs` and the share card all call it, so they cannot disagree.
+- `scripts/build-state.mjs` runs in the `snapshot-fred` workflow after each snapshot and writes
+  `data/macro/state.json` (today), `data/macro/state-history.json` (the same dials at every
+  month-end since 1990, as they would have read then) and `share/macro.png`.
+- `share/macro.png` is the Open Graph image for the landing page and every Macro page: regime,
+  four key numbers and the regime map (`lib/quadrant.js`, the same SVG the page shows). It is
+  rendered with `@resvg/resvg-js` and the Inter files in `scripts/assets/fonts` (SIL OFL), names
+  the month rather than the day, and is rewritten only when something on it changes.
+- "When did it last look like this?" (`macro/analog.js`) ranks past months by the gap between
+  their dials and today's. Matches must be at least two years old and have 60% of each score's
+  inputs; the text says resemblance, never forecast.
+- The second-tier nav is a single row that scrolls sideways when it does not fit (`lib/layout.css`,
+  `wireNavRow` in `lib/layout.js`).
+- Score pages (Labor, Consumer, Housing, Inflation, Credit, Cycle) share the header template in
+  `lib/page.css`: eyebrow, title, one computed line (`headerHtml`), data dates, methodology block.
+
 ## Local preview
 
 ```

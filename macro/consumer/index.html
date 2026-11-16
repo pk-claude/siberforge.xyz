@@ -14,8 +14,12 @@
 <meta property="og:title" content="Siberforge — Consumer" />
 <meta property="og:description" content="US household health: real wages, real disposable income, the saving rate, debt service and delinquencies, with a 0-100 stress score." />
 <meta property="og:url" content="https://www.siberforge.xyz/macro/consumer/" />
-<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta property="og:image" content="https://www.siberforge.xyz/share/macro.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Siberforge: where the US cycle stands, with the growth and inflation regime map" />
 <meta name="twitter:card" content="summary_large_image" />
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <link rel="stylesheet" href="/lib/dashboard.css" />
 <link rel="stylesheet" href="/macro/cycle/cycle.css" />
 <link rel="stylesheet" href="/macro/consumer/real-economy.css" />
@@ -24,6 +28,7 @@
 <script defer src="/lib/chart-theme.js"></script>
 <link rel="stylesheet" href="/lib/tokens.css" />
 <link rel="stylesheet" href="/lib/layout.css" />
+<link rel="stylesheet" href="/lib/page.css" />
 <script src="/lib/theme-toggle.js"></script>
 <script src="/lib/nav-config.js"></script>
 <script defer src="/lib/layout.js"></script>
@@ -31,15 +36,14 @@
 <script defer src="/lib/depth.js"></script>
 </head>
 <body data-section="macro" data-page="consumer" data-page-sub="Consumer" data-page-status-text="Initializing…" data-page-download="true">
-<section class="cycle-intro">
+<main class="sf-page">
+<header class="sf-page-head">
   <div class="sf-eyebrow">Macro &middot; Consumer</div>
-  <h1 class="cycle-title">How is the US consumer actually doing?</h1>
-  <p class="cycle-subtitle">
-    Macro regimes are an averaging story. This page is bottom-up: spending power, balance-sheet stress, income trajectory, and household credit health. Each chart isolates one mechanism so you can see whether the consumer is accelerating, decelerating, or breaking. Related:
-    <a href="/macro/regime/">regime view</a>, <a href="/macro/cycle/">cycle position</a>,
-    <a href="/macro/inflation/">inflation persistence</a>.
-  </p>
-</section>
+  <h1>How is the US consumer actually doing?</h1>
+  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
+  <div class="sf-meta" id="asof"></div>
+</header>
+<p class="sf-intro">Macro regimes are an averaging story. This page is bottom-up: spending power, balance-sheet stress, income trajectory, and household credit health. Each chart isolates one mechanism so you can see whether the consumer is accelerating, decelerating, or breaking. Related: <a href="/macro/regime/">regime view</a>, <a href="/macro/cycle/">cycle position</a>, <a href="/macro/inflation/">inflation persistence</a>.</p>
 
 <!-- Consumer Health composite at the top -->
 <section class="cycle-score-section" id="consumer-health-section"></section>
@@ -105,6 +109,14 @@
   <p class="cycle-note" id="note-credit"></p>
 </section>
 
+
+<details class="sf-method-block" id="method">
+  <summary>Methodology &amp; sources</summary>
+  <p><b>Score.</b> Each input is ranked against its own last 20 years, with the direction set so that 100 means the most risk; the score is their weighted average. The inputs, weights and transforms are listed under &ldquo;How this score is built&rdquo; next to the score.</p>
+  <p><b>Data.</b> Data: FRED (personal income and outlays, consumer credit, bank delinquency rates, household debt service, jobless claims, University of Michigan sentiment). Read from a static snapshot refreshed twice each weekday.</p>
+  <p><b>Limits.</b> History uses today&rsquo;s revised figures. BLS published no October 2025 CPI or household-survey data; that month is interpolated so year-over-year rates span 12 months. Thresholds quoted in the tiles are reference points from history, not rules. More on <a href="/about/">sources and method</a>.</p>
+</details>
+</main>
 
 <footer>
   <span>Data: FRED (personal income and outlays, consumer credit, bank delinquency rates, household debt service, jobless claims, University of Michigan sentiment).</span>

@@ -7,7 +7,8 @@
 // top aggregates the individual signals into a single 0-100 risk gauge.
 
 // ---------- state ----------
-import { renderMethodology, computeCycleScore as sharedCycleScore, termSpreadProbit, phaseFor, synthesisHtml, ordinal, computeSahm } from '/lib/composite-scores.js';
+import { renderMethodology, computeCycleScore as sharedCycleScore, termSpreadProbit, phaseFor, synthesisHtml, ordinal, computeSahm, headerHtml } from '/lib/composite-scores.js';
+import { asOfLine } from '/lib/sf-kit.js';
 
 // High-yield OAS bands, used by the chart lines, the tile and the note alike.
 const HY_BANDS = { tight: 300, elevated: 500, stress: 800 };
@@ -640,6 +641,9 @@ async function main() {
     renderSynthesis();
 
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
+    // Shared page header: one computed line and the data dates.
+    { const v = document.getElementById('verdict'); if (v) v.innerHTML = headerHtml('cycle', state.raw); }
+    asOfLine('asof', state.raw);
     setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);

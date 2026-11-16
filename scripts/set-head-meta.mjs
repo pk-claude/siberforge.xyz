@@ -13,7 +13,9 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const ORIGIN = 'https://www.siberforge.xyz';
-const OG_IMAGE = ORIGIN + '/siberforge-og.png';
+// The live card: regime, key numbers and the regime map, re-rendered by the
+// data job whenever a number on it changes (scripts/share-card.mjs).
+const OG_IMAGE = ORIGIN + '/share/macro.png';
 
 export const PAGES = {
   'macro/index.html':            ['State of the Cycle', '/macro/', 'Where the US cycle stands on one screen: growth and inflation regime, eight dials, recession odds three ways, and what would change the call.'],
@@ -47,6 +49,9 @@ function block(title, url, desc) {
     `<meta property="og:description" content="${esc(desc)}" />`,
     `<meta property="og:url" content="${ORIGIN}${url}" />`,
     `<meta property="og:image" content="${OG_IMAGE}" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="Siberforge: where the US cycle stands, with the growth and inflation regime map" />`,
     `<meta name="twitter:card" content="summary_large_image" />`,
   ].join('\n');
 }

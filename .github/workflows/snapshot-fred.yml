@@ -41,11 +41,19 @@ jobs:
           FRED_API_KEY: ${{ secrets.FRED_API_KEY }}
         run: node scripts/snapshot-fred.mjs
 
+      # Front-door state, its monthly history and the link-preview card, all
+      # derived from the snapshot just written. Never fails the data job: pages
+      # compute their own numbers and only the comparison section and the card
+      # depend on these files.
+      - name: Build macro state and share card
+        continue-on-error: true
+        run: node scripts/build-state.mjs
+
       - name: Commit if changed
         run: |
           git config user.name  "siberforge-bot"
           git config user.email "bot@users.noreply.github.com"
-          git add -A data/fred
+          git add -A data/fred data/macro share
           if git diff --staged --quiet; then
             echo "No changes."
           else

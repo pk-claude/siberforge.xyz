@@ -1,4 +1,5 @@
-import { computeHousingScore as shared_computeHousingScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, synthesisHtml, ordinal } from '/lib/composite-scores.js';
+import { computeHousingScore as shared_computeHousingScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, synthesisHtml, ordinal, headerHtml } from '/lib/composite-scores.js';
+import { asOfLine } from '/lib/sf-kit.js';
 // Housing Cycle dashboard — wires all 20 of the publicly-pullable housing
 // metrics into a single decision-relevant view.
 //
@@ -688,6 +689,9 @@ async function main() {
     renderEquities();
     renderSynthesis();
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
+    // Shared page header: one computed line and the data dates.
+    { const v = document.getElementById('verdict'); if (v) v.innerHTML = headerHtml('housing', state.series); }
+    asOfLine('asof', state.series);
     setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);

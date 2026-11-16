@@ -7,7 +7,8 @@
 // Same visual pattern as the cycle page: composite score hero, 4 analytical
 // sections with charts + tiles + interpretation, synthesis.
 
-import { computeInflationScore as shared_computeInflationScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, renderMethodology, synthesisHtml, ordinal, realWages as shared_realWages, shelterIndex } from '/lib/composite-scores.js';
+import { computeInflationScore as shared_computeInflationScore, phaseFor as shared_phaseFor, renderMethodology as shared_renderMethodology, renderMethodology, synthesisHtml, ordinal, realWages as shared_realWages, shelterIndex, headerHtml } from '/lib/composite-scores.js';
+import { asOfLine } from '/lib/sf-kit.js';
 
 const state = {
   series: {},
@@ -553,6 +554,9 @@ async function main() {
     renderSynthesis();
 
     el('last-updated').textContent = `Fetched ${new Date().toLocaleString()} \u2014 series carry their own observation dates`;
+    // Shared page header: one computed line and the data dates.
+    { const v = document.getElementById('verdict'); if (v) v.innerHTML = headerHtml('inflation', state.series); }
+    asOfLine('asof', state.series);
     setStatus('live', 'Snapshot data');
   } catch (err) {
     console.error(err);

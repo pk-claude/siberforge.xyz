@@ -14,7 +14,10 @@
 <meta property="og:title" content="Siberforge — State of the Cycle" />
 <meta property="og:description" content="Where the US cycle stands on one screen: growth and inflation regime, eight dials, recession odds three ways, and what would change the call." />
 <meta property="og:url" content="https://www.siberforge.xyz/macro/" />
-<meta property="og:image" content="https://www.siberforge.xyz/siberforge-og.png" />
+<meta property="og:image" content="https://www.siberforge.xyz/share/macro.png" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Siberforge: where the US cycle stands, with the growth and inflation regime map" />
 <meta name="twitter:card" content="summary_large_image" />
 <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
 <link rel="stylesheet" href="/lib/dashboard.css" />
@@ -33,14 +36,36 @@
 </head>
 <body data-section="macro" data-page="state" data-page-sub="State of the Cycle" data-page-status-text="Loading&hellip;">
 <main class="sf-page">
-<header class="sf-page-head">
-  <div class="sf-eyebrow">Macro &middot; State of the Cycle</div>
-  <h1>Where the US cycle stands</h1>
-  <p class="sf-dek" id="verdict">Reading the data&hellip;</p>
-  <div class="sf-meta" id="asof"></div>
+<header class="sf-page-head sf-hero">
+  <div class="sf-hero-text">
+    <div class="sf-eyebrow">Macro &middot; State of the Cycle</div>
+    <h1>Where the US cycle stands</h1>
+    <div class="sf-hero-title" id="hero-title">Reading the data&hellip;</div>
+    <p class="sf-hero-sub" id="hero-sub"></p>
+    <ul class="sf-hero-facts" id="hero-facts"></ul>
+    <p class="sf-dek sf-hero-detail" id="verdict"></p>
+    <div class="sf-meta" id="asof"></div>
+  </div>
+  <figure class="sf-hero-fig">
+    <div id="hero-quadrant"></div>
+    <figcaption id="hero-quadrant-cap"></figcaption>
+  </figure>
 </header>
 
 <section class="sf-dials" id="dials" aria-label="Eight dials"></section>
+
+<section class="cycle-section" id="analog">
+  <div class="cycle-section-head">
+    <h2>When did it last look like this?</h2>
+    <p class="cycle-section-sub" id="analog-lede">Comparing today's dials with every month since the 1990s&hellip;</p>
+  </div>
+  <div class="sf-card sf-table-wrap"><table class="sf-table sf-analog" id="analog-table"></table></div>
+  <div class="cycle-chart-row" style="margin-top:14px">
+    <div class="cycle-chart-wrap"><canvas id="chart-analog"></canvas></div>
+    <div class="cycle-tiles" id="tiles-analog"></div>
+  </div>
+  <p class="cycle-note" id="analog-note"></p>
+</section>
 
 <section class="cycle-section">
   <div class="sf-cols">
