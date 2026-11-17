@@ -1,17 +1,17 @@
 {
  "asOf": "2026-11-17",
  "headline": {
-  "regime": "goldilocks",
-  "title": "Goldilocks",
-  "color": "#3ecf8e",
+  "regime": "reflation",
+  "title": "Reflation",
+  "color": "#f7a700",
   "conviction": "low",
-  "sub": "growth above its 10-year norm, core inflation close to its 10-year norm"
+  "sub": "growth close to its 10-year norm, core inflation close to its 10-year norm"
  },
- "latestMonth": "2026-09",
+ "latestMonth": "2026-10",
  "latestMonthRegime": "reflation",
- "differs": true,
- "growthZ": 0.37,
- "inflationZ": 0.21,
+ "differs": false,
+ "growthZ": 0.09,
+ "inflationZ": 0.05,
  "scores": {
   "cycle": {
    "score": 39,
@@ -26,7 +26,7 @@
    "phase": "Sticky"
   },
   "credit": {
-   "score": 45,
+   "score": 46,
    "phase": "Neutral"
   },
   "housing": {
@@ -45,16 +45,10 @@
  },
  "nfci": -0.46,
  "recession": {
-  "curveOdds": 16.2,
+  "curveOdds": 16.1,
   "sahm": 0
  },
  "trail": [
-  {
-   "ym": "2024-10",
-   "g": -0.62,
-   "i": 0.19,
-   "r": "stagflation"
-  },
   {
    "ym": "2024-11",
    "g": -0.78,
@@ -117,13 +111,13 @@
   },
   {
    "ym": "2025-09",
-   "g": -0.92,
+   "g": -0.93,
    "i": 0.35,
    "r": "stagflation"
   },
   {
    "ym": "2025-10",
-   "g": -1.16,
+   "g": -1.17,
    "i": 0.05,
    "r": "stagflation"
   },
@@ -153,7 +147,7 @@
   },
   {
    "ym": "2026-03",
-   "g": -0.69,
+   "g": -0.68,
    "i": -0.3,
    "r": "disinflation"
   },
@@ -165,9 +159,9 @@
   },
   {
    "ym": "2026-05",
-   "g": 0.01,
+   "g": 0,
    "i": 0.44,
-   "r": "reflation"
+   "r": "stagflation"
   },
   {
    "ym": "2026-06",
@@ -177,7 +171,7 @@
   },
   {
    "ym": "2026-07",
-   "g": 0.35,
+   "g": 0.34,
    "i": -0.2,
    "r": "goldilocks"
   },
@@ -189,8 +183,14 @@
   },
   {
    "ym": "2026-09",
-   "g": 0.37,
+   "g": 0.39,
    "i": 0.21,
+   "r": "reflation"
+  },
+  {
+   "ym": "2026-10",
+   "g": 0.09,
+   "i": 0.05,
    "r": "reflation"
   }
  ]
