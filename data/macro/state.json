@@ -26,11 +26,11 @@
    "phase": "Sticky"
   },
   "credit": {
-   "score": 46,
-   "phase": "Neutral"
+   "score": 45,
+   "phase": "Accommodative"
   },
   "housing": {
-   "score": 66,
+   "score": 69,
    "phase": "Cooling"
   },
   "consumer": {
@@ -43,7 +43,7 @@
   "neutralReal": 1.2,
   "stance": "close to neutral"
  },
- "nfci": -0.46,
+ "nfci": -0.48,
  "recession": {
   "curveOdds": 16.1,
   "sahm": 0
