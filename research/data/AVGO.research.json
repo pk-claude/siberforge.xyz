@@ -1,54 +1,48 @@
 {
-  "asOf": "2026-09-07",
-  "oneLiner": "The custom-ASIC arms dealer at escape velocity: AI revenue $16.7B in a single quarter, FY2026 tracking ~$58B, and management now guiding FY2027 to ~$115B and FY2028 to ~$230B with supply already secured.",
+  "asOf": "2026-11-21",
+  "oneLiner": "Custom AI accelerators and Ethernet switching for six frontier-model builders, with VMware software funding the build. The market is betting that the two-year doubling outlook is a peak financed by Broadcom's own guarantees rather than a contracted ramp; the stock works if FY2027 simply lands near the guide.",
   "thesis": [
-    "Six XPU customers anchor the model, four of them material: Google (Ironwood TPU v7 in volume, TPU v8i now in production), Anthropic, OpenAI (first-generation 'Jalapeno' shipping), and Meta (MTIA).",
-    "Management guided AI semiconductor revenue to roughly $115B in FY2027 and $230B in FY2028 - about $350B of AI silicon over two years, with supply secured for both - and said Broadcom is on target to exceed $30 of EPS in FY2028.",
-    "Networking grows as fast as XPUs: Tomahawk 6 is the fastest switch ramp in company history and nearly sold out, Tomahawk 7 (first 200 Tbps Ethernet switch) has taped out, and Tomahawk Ultra brings scale-up inside the rack onto Ethernet.",
-    "Infrastructure software reaccelerated to +29% YoY at 94% gross margin and ~84% operating margin with ARR +15%: VMware funds the AI build-out from internal cash."
+    "Contracted demand, not a forecast. Remaining performance obligations were $179.2B in the Q3 FY2026 10-Q (about 25% due within 12 months), and Anthropic's amended S-1 lists Broadcom as its largest compute counterparty at $161B (both via TIKR); the gigawatt schedule behind the outlook is named customer by customer.",
+    "The largest 2027 customer just funded itself. Anthropic priced its IPO on Nov 18, 2026 at $83, above the $70-78 range, selling about 980M shares for roughly $81.3B alongside a $26B private placement - the counterparty the market worried about most now holds the cash for its 2027 lease payments.",
+    "Networking is paid whoever wins the socket. AI networking grew 2.5x YoY in Q3 FY2026 and was 27% of AI revenue; Tomahawk 6 is described as nearly sold out and Tomahawk 7 (200 Tbps) has taped out, so a share shift between accelerator designers does not remove Broadcom from the rack.",
+    "Software and cash conversion carry the balance sheet. Infrastructure software runs at 94% gross margin, trailing-twelve-month operating cash flow is $49.4B on capex of 1.5% of revenue, and $5.6B of debt was repaid in Q3 FY2026 plus $1.5B after quarter-end."
   ],
   "latestQuarter": {
     "label": "Q3 FY2026 (ended Aug 2, 2026; reported Sep 2, 2026)",
     "points": [
       "Revenue $29.59B, +86% YoY: semiconductors $20.84B (+127%), infrastructure software $8.75B (+29%).",
-      "AI semiconductor revenue $16.7B, +221% YoY and +54% QoQ - 56% of total revenue vs 49% in Q2; XPUs were 73% of AI revenue and shipped up 3.5x YoY, AI networking up 2.5x.",
-      "Non-GAAP gross margin 75.0% (down 210bp QoQ, above the 74% guide); record non-GAAP operating margin 67.9% (+240bp YoY); EPS $3.32 (+96%); GAAP EPS $2.68.",
-      "FCF a record $13.67B, 46% of revenue, on just $532M of capex; non-AI semis $4.2B (+5% YoY, flat QoQ).",
-      "Balance sheet: $24.0B cash, $59.6B gross fixed-rate debt at a 4% weighted coupon and 7.4-year average maturity; $5.6B repaid in the quarter, no buybacks."
+      "AI semiconductor revenue $16.7B, +221% YoY and +54% QoQ, 56% of revenue; XPUs 73% of AI revenue.",
+      "Non-GAAP gross margin 75.0% (GAAP 69.1%); non-GAAP operating margin 67.9% (GAAP 53.9%).",
+      "Non-GAAP EPS $3.32 (+96%) on 4.94B diluted shares; GAAP EPS $2.68.",
+      "Free cash flow $13.67B, 46% of revenue; capex $532M; no buybacks in the quarter ($8.45B in the nine months).",
+      "Balance sheet at Aug 2, 2026: cash $24.0B, total debt $59.4B (4% weighted coupon, 7.4-year average maturity)."
     ]
   },
   "segments": [
-    "Semiconductor solutions 70% of revenue (was 57% a year ago): custom XPUs, Tomahawk AI networking, PCIe switching, optical DSPs and lasers, wireless, broadband, storage. Segment operating margin 61%, up 440bp YoY.",
-    "Infrastructure software 30%: VMware, mainframe, security. 94% gross margin, ~84% operating margin (+650bp YoY), ARR +15%. VMware Private AI Cloud is the new enterprise-AI attach and the workload-repatriation pitch."
+    "Semiconductor solutions 70% of Q3 FY2026 revenue (57% a year earlier): custom XPUs, Tomahawk AI networking, PCIe switching, optical DSPs and lasers, wireless, broadband, storage. Non-AI semiconductors were $4.2B, +5% YoY and flat QoQ.",
+    "Infrastructure software 30%: VMware, mainframe, security. ARR +15%; VMware Private AI Cloud is the enterprise-AI attach and the workload-repatriation pitch."
   ],
   "competitive": [
-    "NVIDIA is still the pricing umbrella, but Broadcom claims an XPU co-designed to one lab's workload matches Rubin-class GPUs at less than half the cost, and puts its own content at $20-30B per gigawatt versus the ~$40B analysts ascribe to NVIDIA.",
-    "Marvell competes for custom co-design sockets; management pointed to shipping Google's TPU v8i ahead of MediaTek's V8T as proof of time-to-market advantage.",
-    "The binding constraints are physical, not commercial: substrates, leading-edge wafers, HBM, and customer land/power/shell. Broadcom is standing up its own Singapore substrate fab in FY2027 and more than tripling indium-phosphide EML/CW/VCSEL laser capacity.",
-    "VMware alternatives (Nutanix, Proxmox, hyperscaler-native) still circle the installed base, but +29% growth and 15% ARR growth say the repricing is holding."
+    "NVIDIA remains the pricing umbrella: its Q3 FY2027 (reported Nov 17, 2026) revenue was $115.8B with a $130B Q4 guide. Broadcom claims an XPU co-designed to one lab's workload matches Rubin-class GPUs at less than half the cost (management claim, unverified).",
+    "MediaTek is the live threat inside Google: it designs the TPU 8t series, and a Nov 20, 2026 supply-chain report says Google is moving 2027 volume toward it. Marvell competes for other co-design sockets.",
+    "Physical constraints bind before commercial ones: substrates, leading-edge wafers, HBM and customer land, power and shells. Broadcom plans its own Singapore substrate fab in FY2027.",
+    "VMware alternatives (Nutanix, Proxmox, hyperscaler-native) still circle the installed base, but software growth says the repricing is holding."
   ],
-  "moat": "Multi-generation, multi-gigawatt co-design contracts institutionalize the customer relationships years ahead of revenue: a new long-term Google agreement for multiple tens of billions of dollars of TPUs annually, Anthropic at 1GW in 2026 scaling to 5GW in 2027 with line of sight to 10GW more in 2028, OpenAI at 1.3GW in 2027 and over 5GW in 2028, Meta at 3GW through 2028. Underneath sit SerDes, chip-to-chip interconnect, HBM and SRAM integration and advanced packaging IP, plus the industry's fastest definition-to-production record with no respins. Ethernet switching leadership means Broadcom monetizes the cluster even where it does not supply the accelerator.",
+  "moat": "Multi-generation co-design contracts lock in customers years ahead of revenue. Per the Sep 2, 2026 call: Google at multiple tens of billions of dollars of TPUs annually; Anthropic 1GW in 2026, another 5GW of TPU v8i in 2027 and line of sight to an incremental 10GW in 2028; OpenAI 1.3GW in 2027 and over 5GW in 2028; Meta 3GW through 2028 - about 30GW across six customers, not all of it inside the period. Underneath sit SerDes, packaging and memory-integration IP and Ethernet switching leadership.",
   "risks": [
-    "The FY27/FY28 outlook is now the stock: $115B and $230B leave no margin for error, and deployment timing depends on customers' land, power and shell, not on Broadcom's silicon.",
-    "Extreme customer concentration: Anthropic becomes the largest XPU customer in 2027 and OpenAI the second largest in 2028 - both pre-profit AI labs whose funding is not yet self-sustaining.",
-    "Vendor-financing optics: the XPV platform with Apollo and Blackstone targets more than 20GW for OpenAI and Anthropic by end-2028; the first $35B tranche closed in June, and prior filings disclosed roughly $29B of maximum exposure with modest residual-value guarantees.",
-    "Gross margin is structurally declining - guided to ~73% in Q4 from 78% a year ago - as XPU memory content rises; only operating leverage keeps operating margin flat at ~66%.",
-    "Supply, not demand, caps the outlook. Management says demand exceeds even the $115B FY27 number, which means the guide is a supply forecast dressed as a demand forecast.",
-    "Guide-versus-consensus risk is chronic: two consecutive quarters have beaten on the print and sold off on the next quarter's guide."
+    "Two pre-profit labs carry the outlook. Management expects Anthropic to be the largest XPU customer in 2027 and OpenAI the second largest in 2028; Rothschild and Co Redburn downgraded to Neutral on Nov 13, 2026, arguing both must become self-financing 'in short order', and Anthropic's amended S-1 showed Q3 compute costs growing faster than revenue (via TIKR).",
+    "Broadcom is underwriting its own demand. The $35B AI XPV tranche (June 2026) carries a backstop of up to about $29B, and the $63B Anthropic SPV (8-K dated Oct 26, 2026) adds residual value support equal to the first-lien portion, reported at about $43.5B (Reuters via Finimize; unverified against the filing). Together that would exceed the company's total debt, and it is off balance sheet.",
+    "Google can re-source a generation. TF International's Ming-Chi Kuo reported on Nov 20, 2026 that Google cut planned 2027 TPU 8i shipments by about 1M units, roughly 20%, mostly the higher-priced 8i Max, in favour of MediaTek-designed TPU 8t; neither company has confirmed it.",
+    "Gross margin is diluting as systems and memory content rise. Non-GAAP gross margin went from 78% in Q4 FY2025 to a ~73% guide for Q4 FY2026; the GAAP operating margin expansion the filings show (49% to 54%) rests on opex leverage that ends when revenue growth slows.",
+    "The price needs a decade, not two years. The page's reverse DCF requires about +14.8% a year of free-cash-flow growth for 10 years against +7.4% a year of revenue growth over the last three fiscal years; the current run rate clears it easily, a post-FY2028 digestion does not, and customer land, power and permitting decide which (see debate 4)."
   ],
   "catalysts": [
-    "Q4 FY2026 and full-year results Dec 9, 2026 - the first hard check on the $115B FY2027 path.",
-    "Goldman Sachs Communacopia and Technology conference Sept 8, 2026.",
-    "Tomahawk 7 sampling and Tomahawk Ultra scale-up deployments through FY2027.",
-    "Additional XPV tranches for OpenAI and Anthropic; an Anthropic IPO would change the counterparty credit picture.",
-    "Singapore substrate fab entering production in FY2027, the stated relief valve on the supply bottleneck."
+    "Dec 9, 2026: Q4 FY2026 and full-year results after the close - FY2027 AI outlook, Google's 2027 plans, Q1 gross margin, total backstop exposure (debates 1, 2, 3).",
+    "Late Jan to early Feb 2027: Alphabet, Microsoft, Meta, Amazon Q4 calls with 2027 capex figures; Alphabet said on Oct 28, 2026 that 2027 capex 'will increase significantly' without a number (debates 2, 4).",
+    "Q1 2027 (date unconfirmed): Anthropic's first quarterly report as a public company - revenue growth vs compute cost (debate 1).",
+    "Early Mar 2027 (date unconfirmed): Q1 FY2027 results - first quarter of deliveries under the $63B Anthropic SPV and the gross-margin floor test (debates 1, 3).",
+    "Jan to Mar 2027: state legislative sessions where data-center construction moratoriums were campaigned on (debate 4)."
   ],
-  "pricedIn": "About $357 is roughly 28% below the $495 52-week high even as AI revenue tripled year over year - near 60x trailing but only ~18x forward earnings, among the cheapest forward multiples in the AI complex. The market is explicitly declining to pay for FY2028. The debate is binary: if $230B of FY2028 AI revenue and more than $30 of EPS are real, the stock trades near 12x that number and everything else is noise; if the labs' funding, power or data-center shells slip even a year, the same guidance becomes the most expensive promise in semiconductors.",
-  "scenarios": {
-    "bear": "Deployment, not demand, is what bites: Anthropic and OpenAI shells and power slip, XPV tranches get harder to place on acceptable terms, one hyperscaler dual-sources a generation, and FY2027 AI lands nearer $90B than $115B. Gross margin keeps sliding on memory content while opex catches up; the market marks the FY2028 target to zero and the stock revisits the high-$200s.",
-    "base": "FY2026 closes near $58B of AI revenue; FY2027 tracks to roughly $115B on Google TPU v8i volume, Anthropic's 5GW and OpenAI's 1.3GW; software holds mid-20s growth; operating margin stays near 66% as leverage offsets mix dilution. EPS compounds fast enough that even a flat multiple carries the stock back toward the mid-$400s.",
-    "bull": "The gigawatt math converts: most of the roughly 30GW of customer demand across FY2027-28 actually deploys, FY2028 clears $230B, EPS exceeds $30, and Ethernet scale-up plus in-house optics widen content per rack. At even 15x forward, that is a materially higher stock, and the second pillar of AI silicon re-rates toward NVIDIA's terms."
-  },
   "valPresets": {
     "mode": "fcf",
     "r": 0.1,
@@ -63,40 +57,88 @@
     "bull": {
       "g": 0.6
     },
-    "note": "FCF is compounding violently: $13.7B in Q3 FY2026 alone and $31.9B across three quarters versus $19.4B a year earlier. The base preset (40% year-1, fading) is consistent with the ~$115B FY2027 AI path; the bull preset tracks the $230B FY2028 outlook."
+    "note": "Growth presets are year-1 rates that fade to terminal. The bear preset (15%) is roughly the constant rate the reverse DCF says is priced in; the base preset (40% fading) is consistent with FY2027 AI revenue landing a little below the ~$115B outlook."
   },
   "sources": [
     {
-      "label": "Broadcom Q3 FY2026 press release",
-      "url": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announces-third-quarter-fiscal-year-2026-financial"
+      "label": "Broadcom Q3 FY2026 press release (8-K exhibit, Sep 2, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001730168/000173016826000076/avgo-08022026x8kxex99.htm"
     },
     {
-      "label": "Q3 FY2026 earnings call transcript",
-      "url": "https://www.benzinga.com/news/26/09/61592658/broadcom-q3-2026-earnings-call-transcript"
+      "label": "Q3 FY2026 earnings call transcript (automated, via Webull)",
+      "url": "https://www.webull.com/news/15511095937917952"
     },
     {
-      "label": "CNBC Q3 FY2026 coverage",
-      "url": "https://www.cnbc.com/2026/09/02/broadcom-avgo-q3-earnings-report-2026.html"
+      "label": "Broadcom: Q4 FY2026 results date, Dec 9, 2026",
+      "url": "https://investors.broadcom.com/news-releases/news-release-details/broadcom-inc-announce-fourth-quarter-and-fiscal-year-2026"
     },
     {
-      "label": "Stock reaction to the Q4 guide",
-      "url": "https://www.fxleaders.com/news/2026/09/03/broadcom-stock-q3-2026-earnings-avgo-guidance/"
+      "label": "TIKR: Nov 5 selloff, RPO $179.2B (Nov 2026)",
+      "url": "https://www.tikr.com/blog/broadcom-and-qualcomm-each-lost-at-least-9-thursday-only-one-is-guiding-for-93-growth"
     },
     {
-      "label": "VMware pricing/EU probe",
-      "url": "https://www.techradar.com/pro/broadcom-backs-down-on-vmware-pricing-rules-as-eu-begins-investigation-following-complaints"
+      "label": "Trefis: what happened to Broadcom stock on Nov 5, 2026",
+      "url": "https://www.trefis.com/stock/avgo/articles/623354/what-just-happened-to-broadcom-stock/2026-11-06"
+    },
+    {
+      "label": "TIKR: Redburn downgrade, Anthropic S-1 exposure (Nov 13, 2026)",
+      "url": "https://www.tikr.com/blog/broadcom-sinks-7-as-rothschild-redburn-downgrade-slashes-target-to-398-unlikely-to-occur-quickly"
+    },
+    {
+      "label": "24/7 Wall St: consensus FY2027 EPS $19.47, ratings (Nov 13, 2026)",
+      "url": "https://247wallst.com/investing/2026/11/13/not-one-analyst-rates-broadcom-a-sell-what-are-they-missing/"
+    },
+    {
+      "label": "Stock Analysis: Kuo report on Google TPU 8i cuts (Nov 20, 2026)",
+      "url": "https://stockanalysis.com/news/broadcom-falls-google-tpu-cut-mediatek/"
+    },
+    {
+      "label": "24/7 Wall St: Nov 20 drop, Goldman multiple cut, Anthropic share purchase",
+      "url": "https://247wallst.com/investing/2026/11/20/broadcom-stock-plunges-12-and-loses-191-billion-after-a-report-that-google-cut-its-plans-for-broadcom-ai-chips/"
+    },
+    {
+      "label": "Constellation Research: $63B Anthropic SPV financing (Oct 27, 2026)",
+      "url": "https://www.constellationr.com/insights/news/broadcom-big-banks-line-63-billion-ai-financing-anthropic"
+    },
+    {
+      "label": "Broadcom 8-K dated Oct 26, 2026 (residual value support), via StreetInsider",
+      "url": "https://www.streetinsider.com/SEC+Filings/Form+8-K+Broadcom+Inc.+For%3A+Oct+26/27241705.html"
+    },
+    {
+      "label": "Finimize: $43.5B senior loans in the Anthropic financing",
+      "url": "https://finimize.com/content/banks-and-blackstone-line-up-63-billion-for-anthropics-broadcom-gear"
+    },
+    {
+      "label": "Apollo: $35B AI XPV platform (June 2026)",
+      "url": "https://apollo.com/insights-news/pressreleases/2026/06/apollo-leads-35-billion-capital-solution-for-broadcom-ai-xpv-platform-in-partnership-with-blackstone-and-leading-global-banks-3308896"
+    },
+    {
+      "label": "TechCrunch: Anthropic IPO priced at $83 (Nov 18, 2026)",
+      "url": "https://techcrunch.com/2026/11/18/anthropic-reportedly-prices-ipo-at-83-a-share-above-projected-range/?type=AI"
+    },
+    {
+      "label": "NVIDIA Q3 FY2027 press release (Nov 17, 2026)",
+      "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/"
+    },
+    {
+      "label": "Fox Business: Nvidia CEO resignation (Nov 12, 2026)",
+      "url": "https://www.foxbusiness.com/markets/nvidia-shares-plunge-more-7-premarket-trading-ceo-uncertainty-rattles-ai-stocks.amp"
+    },
+    {
+      "label": "RBN Energy: Q3 2026 hyperscaler capex calls",
+      "url": "https://rbnenergy.com/daily-posts/analyst-insight/q3-2026-earnings-calls-alphabet-microsoft-report-record-capex-data"
     }
   ],
   "guide": {
-    "label": "FY27 AI revenue",
-    "val": "~$115B",
-    "sub": "FY28 ~$230B \u00b7 Q4 AI $21.7B",
+    "label": "Q4 FY26 rev guide",
+    "val": "~$34.8B",
+    "sub": "AI semis $21.7B | GM ~73% | op margin ~66%",
     "tone": "accent"
   },
-  "latestProse": "Q3 FY2026 (ended Aug 2; reported Sep 2). Revenue $29.59B, +86% YoY: semiconductors $20.84B (+127%), infrastructure software $8.75B (+29%). AI semiconductor revenue $16.7B, +221% YoY and +54% sequentially, now 56% of total revenue versus 49% in Q2; XPU shipments rose 3.5x YoY and were 73% of AI revenue, with networking up 2.5x. Non-GAAP gross margin 75.0%, record non-GAAP operating margin 67.9%, EPS $3.32 (+96%), free cash flow $13.67B on $532M of capex. The disclosure that matters most: gross margin fell 210bp sequentially while operating margin hit a record - XPU memory content is diluting cost of goods exactly as management warned, and only operating leverage is offsetting it.",
-  "guidanceProse": "Q4 guide is $34.8B (+93% YoY) against roughly $35.0B consensus - the second straight quarter where a clear beat was overshadowed by an in-line-to-light guide; the stock closed Sep 2 at $367.24 and fell about 5% after hours. Inside it: semis $26.1B (+136%), AI semis $21.7B (+236%), software $8.7B (+25%), gross margin ~73% versus 78% a year ago, operating margin ~66% (flat YoY), capex $1.4B. FY2026 AI revenue was raised to about $58B (+186%) from ~$56B. Management then guided FY2027 AI revenue to roughly $115B and FY2028 to roughly $230B - about $350B over two years, with supply secured for both - and said Broadcom is on target to exceed $30 of EPS in fiscal 2028.",
+  "latestProse": "Q3 FY2026 (ended Aug 2; reported Sep 2) remains the latest print; Q4 is not out until Dec 9, 2026. Revenue of $29.59B beat the $29.4B guide, with AI semiconductors $16.7B and XPU shipments up 3.5x YoY. The disclosure that matters: non-GAAP gross margin fell 210bp sequentially to 75.0% while non-GAAP operating margin hit a record 67.9% - memory and system content dilute cost of goods as warned, and operating leverage offsets it for now. Net debt is about $35B against quarterly free cash flow of $13.67B, so the reported balance sheet is not the issue; the contingent guarantees are (risk 2).",
+  "guidanceProse": "Q4 FY2026 guide: revenue about $34.8B (+93% YoY), AI semiconductors $21.7B (+236%), software about $8.7B (+25%), non-AI semiconductors about $4.3B, gross margin about 73%, operating margin about 66%, non-GAAP tax rate about 16%, 4.94B diluted shares. FY2026 AI revenue lands near $58B. The outlook, as worded on the call: 'secured the supply to again double AI revenue to approximately $115 billion' in FY2027, demand 'exceeds this outlook', 'line of sight' to $230B in FY2028 with supply secured, and 'very much on target to exceed $30 in earnings per share in fiscal 2028' (non-GAAP basis implied, not stated). What moved the stock since: the in-line guide (Sep 3); the $63B Anthropic SPV with a Broadcom backstop (Oct 26), which revived vendor-financing worries; a 10.4% drop on Nov 5 in a post-midterm chip selloff on reported data-center moratorium pledges, with no company news; a relief rally after Nvidia's CEO resigned on Nov 12; the Redburn downgrade (Nov 13, -7%); and an 11-12% drop on Nov 20 on the unconfirmed Google report, on a day the semiconductor index fell 8%. Nvidia's Nov 17 print, which raised its FY2028 growth framework to ~75% from ~70%, says end demand is intact; the selling is about who pays and who supplies.",
   "bullCharts": {
-    "1": [
+    "0": [
       "revQ"
     ],
     "2": [
@@ -107,11 +149,104 @@
     ]
   },
   "bearCharts": {
-    "0": [
-      "priceH"
-    ],
-    "2": [
+    "3": [
       "gmA"
+    ],
+    "4": [
+      "revA"
     ]
-  }
+  },
+  "verdict": {
+    "stance": "Positive - sized for financing risk",
+    "summary": "The stock has been marked down as if the FY2027 outlook were already cut, while the only hard data since the print - Nvidia's raised growth framework and Anthropic's IPO proceeds - points the other way. Our base case sits about 9% below the $115B AI outlook and about 12% below consensus FY2027 EPS and still supports a higher value; the bear case needs both a funding failure at the labs and a Google share loss. The asymmetry is positive but the bear case is deep, because Broadcom has guaranteed the leases that buy its own chips. Two things would change the view: a cut to the FY2027 AI outlook on Dec 9, or backstop exposure growing faster than AI revenue.",
+    "wtb": [
+      "FY2027 (year ending about Oct 31, 2027) AI semiconductor revenue reaches at least $105B against the ~$115B outlook, starting with a Q1 FY2027 AI guide at or above about $24B on Dec 9, 2026.",
+      "Non-GAAP gross margin settles at or above 70% in FY2027 and operating margin stays at or above 65%, so net margin holds near 54%.",
+      "Anthropic and OpenAI fund 2027 deployments without Broadcom's residual-value support rising above about $75B in total by the Q1 FY2027 report (early Mar 2027).",
+      "At end-2027 the market pays about 21x FY2027 non-GAAP EPS, which only requires FY2028 to grow about 40%, not double."
+    ]
+  },
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending about Oct 31, 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.25,
+      "rev": 137,
+      "eps": 14.1,
+      "multiple": 15,
+      "why": "AI revenue reaches only ~$85B: Google moves a generation toward MediaTek, lab deployments slip a year on power, permitting and funding, and SPV tranches stop clearing without larger guarantees. Operating margin falls to ~62% as mix dilutes and leverage fades (net margin 51%). FY2028 looks flat, so the market pays a peak-cycle multiple and discounts the contingent liabilities."
+    },
+    "base": {
+      "p": 0.5,
+      "rev": 158,
+      "eps": 17.2,
+      "multiple": 21,
+      "why": "AI revenue ~$105B (a Google trim and site delays cost ~$10B of the outlook), software ~$36B, non-AI semiconductors ~$17B; operating margin ~65.5%, net margin 54%. FY2028 is seen growing ~40% rather than doubling, so 21x FY2027 is about 15x FY2028 EPS - below the five-year average forward multiple of 24x (TIKR), reflecting customer concentration."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 174,
+      "eps": 19.9,
+      "multiple": 26,
+      "why": "The outlook is beaten: AI revenue ~$120B as demand above supply converts, the Google report proves wrong or small, and operating margin holds ~68% (net margin 56.5%). The $230B FY2028 outlook and EPS above $30 stay credible, so 26x FY2027 is only about 16-17x FY2028 EPS, and public-market funding at Anthropic removes the counterparty discount."
+    },
+    "note": "EPS basis is non-GAAP diluted (the basis of management's FY2028 target and of consensus, which was $19.47 for FY2027 from 48 analysts on Nov 13, 2026); GAAP EPS runs about 20% lower (Q3 FY2026: $2.68 vs $3.32) because of acquisition amortization and stock compensation. EPS = revenue x non-GAAP net margin / 4.95B diluted shares: bear 137 x 51% = $69.9B = $14.1; base 158 x 54% = $85.3B = $17.2; bull 174 x 56.5% = $98.3B = $19.9. Net margin = (operating margin less ~1.2-1.5 points of net interest) x (1 - 16% tax). FY2026 base is ~$105.9B (Q1 $19.31B + Q2 $22.19B + Q3 $29.59B + Q4 guide $34.8B). Multiples are applied to FY2027 EPS at end-2027. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Can Anthropic and OpenAI pay for the gigawatts they have ordered?",
+      "bull": "Anthropic has just raised about $81.3B in its IPO plus a $26B placement, the leases are financed by banks, Apollo and Blackstone rather than by Broadcom, and the guarantees are dual-trigger: a default and a shortfall in chip resale value.",
+      "bear": "Neither lab is self-financing; the WSJ reported the $63B deal needed the CEO's intervention to close (via Constellation Research), and Broadcom reportedly bought $1B of Anthropic IPO shares (24/7 Wall St; unverified) - a supplier guaranteeing and funding its customer.",
+      "view": "Funded for FY2027, open for FY2028. The IPO moves Anthropic's 5GW from hope to cash, so we underwrite the FY2027 outlook at a ~9% haircut but give the $230B figure little credit in the base multiple.",
+      "signpost": {
+        "metric": "FY2027 AI revenue outlook and disclosed maximum residual-value exposure",
+        "threshold": "positive if ~$115B is reiterated with exposure quantified below ~$75B; negative if the outlook is cut below $105B or exposure is not disclosed",
+        "when": "Q4 FY2026 report, Dec 9, 2026"
+      }
+    },
+    {
+      "q": "Is Google dual-sourcing away from Broadcom?",
+      "bull": "On Sep 2 management said the Google engagement 'has never been stronger' and that it shipped TPU v8i ahead of MediaTek's part; Kuo himself attributes the cut to tight supply and data-center power, not a design loss, and Anthropic's TPU volume runs through Broadcom.",
+      "bear": "A ~20% cut concentrated in the highest-priced part is exactly how share loss starts, and Google has every reason to cultivate a cheaper second designer for inference.",
+      "view": "Treat the report as roughly right until denied: it is in our base case as part of the ~$10B shortfall to the outlook. One trimmed generation does not break the thesis; a second supplier taking the next generation's lead part would.",
+      "signpost": {
+        "metric": "Management comment on Google 2027 TPU volume; Alphabet 2027 capex guide",
+        "threshold": "positive if Google TPU revenue is guided up YoY in FY2027 and Alphabet capex rises 30%+; negative if Broadcom concedes share on the next generation",
+        "when": "Dec 9, 2026 call; Alphabet Q4 call, early Feb 2027"
+      }
+    },
+    {
+      "q": "Does operating margin hold while gross margin falls?",
+      "bull": "Opex is about 6% of semiconductor revenue; in Q3 FY2026 operating margin rose 240bp YoY while gross margin fell, and management asks investors to judge operating margin.",
+      "bear": "Rack-scale sales with pass-through memory can take gross margin below 70%, the Q4 guide already steps operating margin down to ~66%, and leverage disappears the quarter growth slows.",
+      "view": "Margin dilution is real but priced: every point of operating margin is about $0.27 of base-case EPS, small next to the revenue debate. It becomes a thesis issue only if operating margin breaks 63%.",
+      "signpost": {
+        "metric": "Q1 FY2027 guide: non-GAAP gross margin and operating margin",
+        "threshold": "gross margin at or above 71% and operating margin at or above 65% holds the base case; below 70% and 63% moves toward the bear case",
+        "when": "Dec 9, 2026 guide; confirmed in the Q1 FY2027 report, early Mar 2027"
+      }
+    },
+    {
+      "q": "Is FY2028 the peak the reverse DCF cannot afford?",
+      "bull": "The outlook is supply-limited with demand above it, about 30GW is contracted across six customers, and Nvidia has just raised its own next-year growth framework.",
+      "bear": "The +14.8% a year of free-cash-flow growth priced in for a decade is double the trailing three-year revenue growth rate; newly elected governors in Texas, Ohio and Georgia reportedly campaigned on data-center moratoriums (Motley Fool via Trefis; unverified), and management itself says FY2028 depends on customer sites being ready.",
+      "view": "The amber flag is fair but backward-looking: trailing free cash flow of $47.9B roughly doubles by FY2027 in our base case, which covers most of the decade's required growth early. We do not pay for $230B; we need FY2028 to be up, not double.",
+      "signpost": {
+        "metric": "FY2028 AI outlook and combined 2027 hyperscaler capex guidance",
+        "threshold": "positive if $230B is reiterated and 2027 capex is guided up 25%+; negative if FY2028 is reframed as dependent on sites not yet permitted",
+        "when": "Dec 9, 2026; hyperscaler Q4 calls, late Jan to early Feb 2027"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-21",
+      "change": "Rebuilt as a v3 decision note: verdict, scenario values on FY2027 non-GAAP EPS (bear $212 / base $361 / bull $517, probability-weighted about $363), four debates with signposts. No new filing since the Sep 2 Q3 FY2026 report. Added the $63B Anthropic SPV backstop, the Redburn downgrade, Anthropic's IPO and the unconfirmed Nov 20 report of Google TPU cuts. View moved from an implicit bull case to Positive with a 25% bear weight; base-case AI revenue set below the outlook."
+    },
+    {
+      "date": "2026-09-07",
+      "change": "Q3 FY2026 beat with an in-line Q4 guide; management introduced the ~$115B FY2027 and ~$230B FY2028 AI revenue outlook and the FY2028 EPS target above $30."
+    }
+  ]
 }

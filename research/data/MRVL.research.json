@@ -1,71 +1,178 @@
 {
-  "asOf": "2026-08-31",
-  "oneLiner": "The clear No. 2 custom AI silicon and optical interconnect franchise, now guiding to ~$18B FY28 with a signed, expanded Google agreement - and a stock that fell 8-10% on the beat anyway because expectations had run further still.",
-  "thesis": [
-    "AI demand keeps accelerating. Q2 FY27 revenue was a record $2.739B (+37% YoY, +13% QoQ), Q3 is guided to $3.15B (+50%+ YoY), and FY27 was raised to ~$12B (+~45%) with FY28 set at ~$18B (+~50%).",
-    "Custom XPU pipeline is converting. Custom silicon is expected to ramp significantly in H2 FY27 on the tier-1 XPU program plus 10+ XPU-attach programs, on top of AWS Trainium and Microsoft Maia work.",
-    "Electro-optics is a second growth engine. Marvell disclosed $1B of supply-capacity prepayments to secure 1.6T optical DSP and 51.2T switch supply - management is betting real balance sheet on the demand.",
-    "Celestial AI adds a scale-up optics option. The $3.25B Photonic Fabric acquisition (closed Feb 2, 2026) targets a ~$500M annual run-rate exiting FY28, ~$1B exiting FY29.",
-    "Google has converted from rumor to contract. On the Aug 27 call Marvell announced an expanded commercial agreement with a key hyperscaler (widely reported as Google) covering custom programs including XPU-attach, with significant revenue potential in FY2029 and beyond."
-  ],
-  "latestQuarter": {
-    "label": "Q2 FY2027 (reported Aug 27, 2026)",
-    "points": [
-      "Record revenue $2.739B, +37% YoY and +13% QoQ, $39M above guide midpoint",
-      "Data center revenue $2.172B, +46% YoY, 79% of total revenue",
-      "Non-GAAP net income $865.9M, +40% YoY; non-GAAP EPS $0.94 vs $0.93 guided",
-      "Disclosed $1B in supply-capacity prepayments for 1.6T optical DSPs and 51.2T switches",
-      "Announced expanded commercial agreement with a key hyperscaler (reported: Google) on custom programs incl. XPU-attach",
-      "Stock fell 8-10% on Aug 28 despite the beat-and-raise"
+  "asOf": "2026-11-21",
+  "oneLiner": "The No. 2 custom AI chip designer and the leading supplier of optical DSPs that link AI clusters, now trying to buy the laser maker Lumentum with stock. The market is betting that the deal dilutes holders and that AI capex peaks before the custom ramp management has promised for FY2028-FY2029 shows up.",
+  "verdict": {
+    "stance": "Positive - deal overhang, size for volatility",
+    "summary": "Since October the operating story got better and the equity story got worse: management raised FY2028 revenue to ~$20B, then agreed to issue roughly half its share count again for Lumentum, and the AI complex derated around it. On standalone FY2028 non-GAAP EPS the scenarios skew up: the base case needs a little less than the company's own framework at a mid-20s multiple, while the bear case needs both a missed ramp and a peak-cycle multiple. We stay positive but small, because the deal parks the stock until it closes in 2028 and GAAP earnings are about a third of the non-GAAP figure we value. The view changes if the Dec 1 guide implies FY2028 below ~$18B, or if deal disclosures show EPS dilution with no synergy bridge.",
+    "wtb": [
+      "FY2028 (year ending Jan 2028) revenue reaches at least ~$19B against management's ~$20B; the first test is a Q4 FY2027 guide near $3.7B on Dec 1, 2026.",
+      "Non-GAAP gross margin holds at 57.5% or better and non-GAAP operating margin reaches ~40% in FY2028, giving a ~34-35% non-GAAP net margin.",
+      "The market still pays ~24x standalone FY2028 non-GAAP EPS in January 2028, which requires the more-than-$12B FY2029 custom target to remain credible and 2027 hyperscaler capex guides to rise.",
+      "Diluted shares stay below ~940M before the Lumentum close, and the deal's pro forma EPS dilution is no worse than ~5% before synergies."
     ]
   },
-  "latestProse": "Q2 FY27 revenue was a record $2.739B, +37% YoY and +13% QoQ, $39M above the guide midpoint, with data center at $2.172B (+46% YoY, 79% of revenue) and non-GAAP EPS of $0.94 on $865.9M of non-GAAP net income (+40% YoY). Management raised FY27 revenue to ~$12B and set FY28 at ~$18B, and disclosed $1B of prepayments to lock down 1.6T optics and 51.2T switch supply. The stock still dropped 8-10% the next day - a beat-and-raise was not enough for where the shares had run. The disclosure that matters most: the expanded commercial agreement with a key hyperscaler (reported to be Google) covering custom programs including XPU-attach - the Google option is now a signed agreement, but its 'significant revenue in FY2029 and beyond' framing is exactly the payoff timeline the market balked at.",
-  "guidanceProse": "Q3 FY27 guide: revenue $3.15B plus or minus 5% (midpoint +15% QoQ, +50%+ YoY), non-GAAP gross margin 57.5-58.5% (GAAP 52.9-53.9%), non-GAAP EPS $1.10 plus or minus $0.05. FY27 revenue outlook raised to ~$12B (~45% growth) and FY28 to ~$18B (~50% growth). Management guided gross margin to stay in the 57.5-58.5% range through FY28 as the high-volume custom ramp creates a structural mix headwind - the growth is real but it arrives at below-corporate margins. The debate: whether the Aug 28 selloff on a clean beat-and-raise is healthy digestion after a huge run, or the start of multiple compression for the whole custom-silicon trade as payoffs (Google in FY29) stretch out.",
-  "guide": {"label": "Q3 FY27 revenue guide", "val": "$3.15B +/-5%", "sub": "Midpoint +50%+ YoY; non-GAAP EPS $1.10; FY27 ~$12B, FY28 ~$18B", "tone": "accent"},
+  "scenarioModel": {
+    "horizon": "FY2028 (year ending Jan 2028), standalone",
+    "valueDate": "2028-01-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.3,
+      "rev": 16,
+      "eps": 5.1,
+      "multiple": 15,
+      "why": "2027 hyperscaler capex flattens (state-level data center pauses, digestion), the custom ramp slips a generation and a contested socket is lost; revenue grows ~33% instead of ~67% and non-GAAP net margin stalls near 30% as opex was built for $20B. The market treats FY2028 as a peak, doubts the FY2029 custom target and prices in Lumentum dilution, paying a peak-cycle 15x."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 19,
+      "eps": 7.0,
+      "multiple": 24,
+      "why": "Custom and 1.6T optics ramp roughly on schedule but supply and one program slip keep the year ~5% under the ~$20B framework; gross margin ~58%, operating margin ~40%, net margin ~34.5%. FY2029 growth of 35-40% is visible, which would justify ~30x, but the pending all-stock deal and a derated sector hold the multiple at 24x (about 17x FY2029 earnings)."
+    },
+    "bull": {
+      "p": 0.25,
+      "rev": 21,
+      "eps": 8.1,
+      "multiple": 30,
+      "why": "The framework is beaten: scale-up optics and the key-hyperscaler programs pull forward, operating margin reaches ~41% and net margin ~36%. 2027 capex guides rise again, regulators clear Lumentum with a credible accretion bridge, and FY2029 custom above $12B looks underwritten, so the market pays a growth multiple of 30x."
+    },
+    "note": "EPS is NON-GAAP diluted (excludes stock comp, amortization and deal costs; Q2 FY27 GAAP EPS was $0.33 vs non-GAAP $0.94), standalone, before any Lumentum shares. EPS = revenue x non-GAAP net margin / ~935M diluted shares (Q3 FY27 guide ~921M plus warrant vesting and stock comp net of buybacks): bear $16B x 30% = $4.8B; base $19B x 34.5% = $6.56B; bull $21B x 36% = $7.56B. Net margin = operating margin less ~$145M other expense and a ~13% tax rate. Multiples apply to FY2028 EPS at end-January 2028. Inputs are Siberforge estimates, not consensus; no FY2028 EPS consensus could be verified (vendor forward EPS ~$7.4, period unverified)."
+  },
+  "debates": [
+    {
+      "q": "Does the Lumentum deal add or subtract value per share?",
+      "bull": "Lasers are the scarcest part of the optical link; owning them plus DSPs, drivers and Celestial's photonics gives Marvell the full stack as scale-up moves from copper to optics. Management claims more than $1B of run-rate cost synergies and non-GAAP EPS accretion in year one.",
+      "bear": "Lumentum holders get ~33% of the company. Press reports of Bank of America's model (unverified) show EPS 4.9% lower in calendar 2028 and 14.7% lower in 2030 without revenue synergies; the fixed ratio was struck near the highs; and optical module makers that buy Marvell DSPs become competitors.",
+      "view": "Do not pay for synergies. We value the standalone business and take roughly two multiple turns off the base case for the overhang; the deal is neither a reason to buy nor, at a fixed ratio with both stocks down, a reason to sell.",
+      "signpost": {
+        "metric": "Pro forma EPS bridge and synergy phasing on the Q3 call and in the S-4; regulatory filings",
+        "threshold": "bullish if accretion is shown before revenue synergies; bearish if no bridge is given or a China review pushes the timetable past the Nov 1, 2027 outside date",
+        "when": "Dec 1, 2026 call; S-4 expected early 2027 (timing unverified)"
+      }
+    },
+    {
+      "q": "Is ~$20B of FY2028 revenue deliverable?",
+      "bull": "The framework has been raised at every update in 2026 and FY2027's ~$12B implies a Q4 near $3.7B, already a ~$15B run-rate. 18 custom sockets are won (5 XPU, 13 XPU-attach) and the key-hyperscaler agreement carries ~$120B of cumulative revenue potential over about six years.",
+      "bear": "Custom is still under $4B in FY2028 by management's own arithmetic, so the year leans on optics supply that needed $1B of prepayments. Benchmark's Dec 2025 claim that Trainium 3 and 4 went to Alchip was never confirmed or denied (unverified).",
+      "view": "Believe ~$19B, not $20B: the base case carries a 5% haircut for supply and one program slip. A guide that keeps FY2027 at ~$12B confirms it; anything softer moves weight to the bear case.",
+      "signpost": {
+        "metric": "Q4 FY2027 revenue guide and Q3 data center growth",
+        "threshold": "on track if the guide is $3.6B or more and data center grew ~75% YoY; bearish below $3.4B or if the ~$20B framework is not repeated",
+        "when": "Q3 FY2027 report, Dec 1, 2026"
+      }
+    },
+    {
+      "q": "Does AI capex keep rising in 2027, or was October the peak multiple?",
+      "bull": "Nvidia raised its FY2028 growth outlook to ~75% on Nov 17 with supply as the limit, and custom chips plus optics are the fastest-growing lines inside that spend.",
+      "bear": "The sector derated on politics and governance, not numbers: new governors in Texas, Ohio and Georgia campaigned on pausing data center construction (per Motley Fool), and Nvidia's CEO resigned on Nov 12. Marvell's FY2031 target of $70-90B needs five more boom years that nobody has contracted.",
+      "view": "Capex decides the multiple (15x vs 30x), not FY2028 revenue, which is largely booked. The scenarios give the peak case a 30% weight; hyperscaler guides in early 2027 are the test.",
+      "signpost": {
+        "metric": "Combined 2027 capex guidance from MSFT, GOOGL, AMZN, META",
+        "threshold": "bullish if guided up 25%+ YoY; bearish if flat or if a large state enacts a data center moratorium",
+        "when": "Q4 calls, late Jan to early Feb 2027"
+      }
+    },
+    {
+      "q": "How much of the non-GAAP profit belongs to shareholders?",
+      "bull": "Cash backs the non-GAAP view: trailing free cash flow was $1.9B on $10.3B of revenue (12 months to Aug 1, 2026), and the excluded amortization is a non-cash relic of past deals.",
+      "bear": "Stock comp is a real cost: Q2 FY27 GAAP operating expenses were $385M above non-GAAP, against $200M of buybacks. Diluted shares rose 5.8% YoY (Celestial added ~27M), trailing GAAP net income was only 43% of operating income, and the hyperscaler warrant can add up to ~59M shares.",
+      "view": "Accept non-GAAP EPS for valuation but charge for it: the scenarios assume the share count keeps creeping up to ~935M and use multiples below what the growth alone would earn. A buyback pause during the merger would make this worse.",
+      "signpost": {
+        "metric": "Diluted share count and GAAP EPS as a share of non-GAAP EPS",
+        "threshold": "red flag if diluted shares exceed ~925M or GAAP EPS falls below 45% of non-GAAP (the Q3 guide implies ~48%)",
+        "when": "Q3 FY2027 report, Dec 1, 2026"
+      }
+    }
+  ],
+  "thesis": [
+    "Guidance has only gone up. At the Oct 6 Investor Day FY2028 revenue was lifted from ~$18B to ~$20B (+67%), with data center at ~$18B (+80%), and the Nov 2 pre-announcement kept the Q3 midpoint.",
+    "Custom silicon has a multi-year backlog. Custom revenue was ~$1.5B in FY2026 and is targeted above $12B in FY2029 (more than triple FY2028) and ~$30B in FY2031, about 13% of a $235B calendar-2030 market by Marvell's sizing.",
+    "Interconnect is the scarce layer. Data center interconnect is expected to pass $1B in FY2028 from ~$500M in FY2026, scale-out switching also passes $1B, and scale-up optics (Celestial's Photonic Fabric) starts at a few hundred million dollars next year.",
+    "Operating leverage is arriving. Non-GAAP operating margin was 36.6% in Q2 FY27 (+180bp YoY) and is guided into the 38-40% target range in Q4 FY27, with FY2028 operating expenses growing at about half the rate of revenue.",
+    "The price fell while the numbers rose. The shares lost more than half their value between Oct 7 and Nov 5 on the deal and a sector selloff, with no cut to any revenue framework."
+  ],
+  "risks": [
+    "The Lumentum deal is a very large dilution. Each Lumentum share converts into 4.5 Marvell shares (roughly 450M new shares by our arithmetic on a ~921M base), closing is not expected until the first half of calendar 2028, and Marvell owes a $3.2B fee if regulators block it.",
+    "Reported profit is a fraction of adjusted profit. The scenarios use non-GAAP EPS; GAAP operating margin was 16.8% in Q2 FY27 against 36.6% non-GAAP, and the difference (stock comp, amortization, deal costs) is why cash flow runs at 3-4x GAAP net income.",
+    "A handful of customers decide the outcome. Data center was 79% of Q2 FY27 revenue and custom programs are re-bid each generation; management says more than 35 sockets at the top four US hyperscalers deliver the vast majority of its long-term target.",
+    "Growth arrives at lower margins. Non-GAAP gross margin is guided to 57.5-58.5% through FY2028, below Q2's 58.9%, as custom scales; the FY2031 model allows 56-59%.",
+    "The valuation needs a long boom. The page's reverse DCF asks for mid-20s percent annual free cash flow growth for a decade, against ~14% a year revenue growth over the last three fiscal years, which included an inventory downturn."
+  ],
+  "latestQuarter": {
+    "label": "Q2 FY2027 (ended Aug 1, 2026; reported Aug 27, 2026). Q3 FY2027 is due Dec 1, 2026",
+    "points": [
+      "Revenue $2.739B, +37% YoY, +13% QoQ, $39M above the guide midpoint.",
+      "Data center $2.172B, +46% YoY; communications and other $568M, +10% YoY.",
+      "Gross margin 53.1% GAAP, 58.9% non-GAAP; GAAP diluted EPS $0.33, non-GAAP $0.94 (+40% YoY).",
+      "Operating cash flow $606M; $200M of buybacks and $54M of dividends.",
+      "Cash $3.9B against total debt of ~$5.0B (call; filings tag $5.3B).",
+      "Nov 2, 2026 pre-announcement: Q3 revenue consistent with guidance, range narrowed to +/-2%."
+    ]
+  },
+  "latestProse": "No new quarter since the last revision: Q3 FY2027 is scheduled for Dec 1, 2026 after the close (call 1:30pm PT). The last full print, Q2 FY2027, was a small beat on revenue with data center at 79% of sales, and operating cash flow dipped q/q because Marvell is prepaying suppliers (~$1B planned in FY2027) for 1.6T optical DSP and 51.2T switch capacity. What changed since is strategic. On Oct 6 the Investor Day raised FY2028 and introduced a FY2031 range of $70-90B with non-GAAP EPS above $30. On Nov 2 Marvell agreed to acquire Lumentum in an all-stock deal with an implied enterprise value of $115B, a 23.9% premium to the Oct 28 unaffected prices, leaving Marvell holders with ~67% of the combined company; the companies cite a $550B combined addressable market.",
+  "guidanceProse": "Q3 FY2027 guide (Aug 27, narrowed Nov 2): revenue $3.15B plus or minus 2% (+15% QoQ, ~+52% YoY), non-GAAP EPS $1.10 plus or minus $0.05, GAAP EPS $0.48-$0.58, ~921M diluted shares, data center up more than 20% QoQ. FY2027 revenue ~$12B (+~45%), which with $8.31B in the first three quarters at guide leaves ~$3.7B for Q4. FY2028: ~$20B, non-GAAP tax rate ~13%. Deal terms that matter for guidance: the merger agreement's outside date is Nov 1, 2027, extendable in steps to Aug 1, 2028 for regulatory approvals; both shareholder bases must vote; termination fees are $5.8B (Marvell) and $2.9B (Lumentum) for a change of recommendation or superior proposal. Marvell has not said whether buybacks continue while the deal is pending (unverified).",
+  "guide": {
+    "label": "Q3 FY27 revenue (narrowed Nov 2)",
+    "val": "$3.15B +/-2%",
+    "sub": "Non-GAAP EPS $1.10 +/-$0.05 | GM 57.5-58.5% | reports Dec 1",
+    "tone": "accent"
+  },
   "segments": [
-    "Data center: $2.172B, 79% of Q2 FY27 revenue, +46% YoY (custom compute, electro-optics, switching, storage)",
-    "Communications and other: ~$567M, ~21% of revenue (derived from total minus data center)",
-    "Within data center, custom silicon ramps significantly in H2 FY27; interconnect rides the 800G-to-1.6T optics transition"
+    "Data center (~79% of revenue): custom XPU and XPU-attach chips, optical DSPs and drivers, scale-out Ethernet switching (Teralynx), storage. Guided to grow ~60% in FY2027 and ~80% in FY2028.",
+    "Communications and other (~21%): carrier, enterprise networking, automotive and industrial; modelled by management at only ~$2.5B in FY2031.",
+    "Lumentum (pending, not in any number here): lasers and optical components; its Dec-quarter revenue guide is $1.575-1.625B."
   ],
   "competitive": [
-    "Broadcom: dominant custom-ASIC rival (Google TPU deal through 2031); Marvell holds ~20-25% of custom ASIC design share",
-    "Alchip/MediaTek: lower-cost back-end design challengers; alleged Trainium 3/4 back-end losses remain the key bear claim",
-    "Nvidia: merchant-silicon gravity plus NVLink Fusion ecosystem shapes hyperscaler make-vs-buy",
-    "Astera Labs/Credo: niche connectivity competitors; Marvell leads PAM4 optical DSPs",
-    "Customer set: AWS (Trainium), Microsoft (Maia), Meta, and now an expanded Google custom agreement across 18+ reported design wins"
+    "Broadcom: the dominant custom-ASIC and switching rival and the incumbent at Google's TPU; Marvell's FY2031 custom target implies only ~13% share.",
+    "Alchip, MediaTek, GUC: lower-cost design-service challengers that contest each new hyperscaler generation.",
+    "Nvidia: merchant GPUs still take most cluster spend and its co-packaged optics push sets the pace for scale-up links.",
+    "Credo, Astera Labs, Broadcom, MaxLinear: connectivity and DSP rivals; Marvell leads in PAM4 optical DSPs.",
+    "Optical module makers (customers for DSPs today) would compete with a combined Marvell-Lumentum, as would Coherent in lasers."
   ],
-  "moat": "Deep multi-generation co-design relationships with hyperscalers, leading PAM4 optical DSP and 224G SerDes IP, and Celestial's Photonic Fabric plus XConn CXL switching give Marvell a full electrical-plus-optical interconnect stack few can match. The $1B in supply prepayments adds a capacity moat competitors must now match. Switching costs on in-flight XPU programs are high, though the alleged Trainium loss shows the moat is per-socket, not permanent.",
-  "risks": [
-    "Socket churn. Reported (unconfirmed) loss of AWS Trainium 3/4 back-end work to Alchip; custom ASIC wins are contestable every generation.",
-    "Extreme concentration. Data center is 79% of revenue, dominated by a handful of hyperscalers; one program cancellation moves the model.",
-    "Google payoff is back-loaded. The expanded agreement points to significant revenue in FY2029 and beyond - two-plus years of execution risk before it shows up in the P&L.",
-    "Structural margin mix. Gross margin guided to 57.5-58.5% through FY28 as custom scales; the growth dilutes the margin profile.",
-    "Thin GAAP economics. Heavy SBC, amortization, and acquisition costs; Celestial adds ~27M shares plus up to $2.25B earnouts.",
-    "High-beta AI trade. An 8-10% one-day drop on a beat-and-raise shows how little cushion the multiple leaves."
-  ],
+  "moat": "Multi-generation co-design relationships with hyperscalers, leading PAM4 DSP and SerDes IP, and a portfolio that spans electrical and optical links. Switching costs are high inside a program but low between generations, so the moat is per socket and has to be re-won; prepaid supply and, if it closes, in-house lasers add a capacity edge.",
   "catalysts": [
-    "Oct 6, 2026: Investor Day - custom pipeline, Google agreement detail, and Celestial roadmap expected",
-    "Late Nov/early Dec 2026: Q3 FY27 results ($3.15B guide) - first proof of the H2 custom ramp",
-    "Through FY27: 1.6T optical DSP and 51.2T switch ramp against the $1B prepaid capacity",
-    "FY28: delivery against the ~$18B revenue target; Google custom program milestones toward FY29 revenue"
+    "Dec 1, 2026: Q3 FY2027 results and Q4 guide; first Q&A on the Lumentum accretion bridge (debates 1, 2, 4).",
+    "Mid-Dec 2026: Broadcom Q4 FY2026 report - AI semiconductor guide as the custom-ASIC read (debate 2).",
+    "Late Jan to early Feb 2027: hyperscaler Q4 calls with 2027 capex guidance (debate 3).",
+    "Early Mar 2027: Q4 FY2027 results and the first formal FY2028 quarterly guide (debate 2).",
+    "During 2027: S-4, shareholder votes and antitrust reviews; outside date Nov 1, 2027, close expected first half of 2028 (debate 1)."
   ],
-  "pricedIn": "MRVL closed around $241 on Aug 28 after the 8-10% post-earnings drop (some sources report $217; exact close unverified - sources conflict). At roughly $210B market cap the stock pays up front for the raised ~$12B FY27 outlook and much of the ~$18B FY28 target; consensus stayed bullish post-print (Barclays, UBS, Wells Fargo, Citi all reiterated). The debate is no longer whether Google converts - it did - but whether an FY29-and-beyond payoff justifies today's multiple, and whether 57.5-58.5% structural gross margins deserve Broadcom-style valuation treatment.",
-  "scenarios": {
-    "bear": "AI capex digests in 2027, the H2 custom ramp underwhelms, and contested sockets (Trainium back-end) resurface; FY28 lands nearer $14-15B than $18B. The multiple compresses toward 30x on cut estimates; stock revisits the $150-170 area.",
-    "base": "FY27 delivers ~$12B with the Q3 $3.15B step-up on schedule; the custom ramp and 1.6T optics cycle track toward ~$18B FY28. The stock chops through digestion and grinds to new highs as the Oct 6 Investor Day and Q3 print de-risk the roadmap.",
-    "bull": "The Google agreement scales into confirmed FY29 programs alongside retained AWS/Microsoft sockets, validating a $10B+ custom business; Celestial wins scale-up optical sockets. Estimates move materially higher and the stock clears $330 decisively."
+  "valPresets": {
+    "mode": "fcf",
+    "r": 0.105,
+    "gT": 0.03,
+    "years": 10,
+    "bear": {"g": 0.10},
+    "base": {"g": 0.30},
+    "bull": {"g": 0.50},
+    "note": "FCF basis works because operating cash flow is strong, but supply prepayments and Celestial earnouts are real cash claims, stock comp is a cost the DCF ignores, and the pending Lumentum share issuance is not in the share count."
   },
-  "valPresets": {"mode": "fcf", "r": 0.105, "gT": 0.03, "years": 10,
-    "bear": {"g": 0.10}, "base": {"g": 0.30}, "bull": {"g": 0.50},
-    "note": "FCF basis works here (strong operating cash flow), but the $1B supply prepayments and Celestial earnouts are real cash claims, and GAAP earnings remain a fraction of non-GAAP - SBC is a cost the DCF ignores."},
-  "bullCharts": {"0": ["revQ"], "2": ["revA"]},
-  "bearCharts": {"4": ["priceH"], "5": ["gmA"]},
+  "bullCharts": {"0": ["revQ"], "1": ["revA"], "2": ["revYoyA"], "3": ["omA"], "4": ["priceH"]},
+  "bearCharts": {"1": ["niQ", "fcfQ"], "3": ["gmA"], "4": ["fcfA"]},
+  "changelog": [
+    {
+      "date": "2026-11-21",
+      "change": "Rebuilt as a decision note (verdict, FY2028 non-GAAP EPS scenarios: bear $77 / base $168 / bull $243, four debates). New since August: FY2028 raised to ~$20B at the Oct 6 Investor Day; $115B all-stock Lumentum deal on Nov 2; Q3 pre-announced in line; shares more than halved from the October high on the deal and an AI-sector selloff. View moved from an expectations problem to Positive with a deal overhang. Q3 FY2027 not yet reported (Dec 1)."
+    },
+    {
+      "date": "2026-08-31",
+      "change": "Q2 FY27 beat, Q3 guide $3.15B, FY2027 raised to ~$12B and FY2028 set at ~$18B; expanded key-hyperscaler agreement announced."
+    }
+  ],
   "sources": [
-    {"label": "Marvell Q2 FY2027 press release", "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results"},
-    {"label": "Q2 FY2027 earnings call transcript (Motley Fool)", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/31/marvell-mrvl-q2-2027-earnings-call-transcript/"},
-    {"label": "GuruFocus Q2 FY27 call highlights", "url": "https://www.gurufocus.com/news/9057517/marvell-technology-inc-mrvl-q2-2027-earnings-call-highlights-record-revenue-and-massive-aidriven-growth-outlook"},
-    {"label": "Vantage: MRVL falls 7% despite Q2 beat", "url": "https://www.vantagemarkets.com/market-news/marvell-technology-q2-fy2027-earnings-august-28-2026/"},
-    {"label": "Converge Digest: data center 79% of sales", "url": "https://convergedigest.com/marvell-q2-fy2027-data-center-ai-revenue/"},
-    {"label": "StockAnalysis.com MRVL statistics", "url": "https://stockanalysis.com/stocks/mrvl/"}
+    {"label": "Marvell Q2 FY2027 press release (Aug 27, 2026)", "url": "https://investor.marvell.com/news-events/press-releases/detail/1031/marvell-technology-inc-reports-second-quarter-of-fiscal-year-2027-financial-results"},
+    {"label": "Q2 FY2027 earnings call transcript (Motley Fool): margins, guide, buybacks, debt", "url": "https://www.fool.com/earnings/call-transcripts/2026/08/31/marvell-mrvl-q2-2027-earnings-call-transcript/"},
+    {"label": "Marvell press release: Marvell and Lumentum to combine; preliminary Q3 revenue (Nov 2, 2026)", "url": "https://investor.marvell.com/news-events/press-releases/detail/1040/marvell-and-lumentum-to-combine-creating-a-category-leader-i"},
+    {"label": "Lumentum 8-K: merger agreement terms, outside date, termination fees", "url": "https://www.sec.gov/Archives/edgar/data/0001633978/000119312526442758/d163169d8k.htm"},
+    {"label": "Marvell: Q3 FY2027 conference call set for Dec 1, 2026", "url": "https://investor.marvell.com/news-events/press-releases/detail/1041/marvell-technology-inc-announces-conference-call-to-review-third-quarter-of-fiscal-year-2027-financial-results"},
+    {"label": "Quartr: Marvell Investor Day 2026 summary (FY2028 ~$20B, FY2031 targets, TAM)", "url": "https://quartr.com/events/marvell-technology-inc-mrvl-investor-day-2026_3Yyakqd6"},
+    {"label": "Futurum: Investor Day analysis (FY2031 EPS, margins, sockets)", "url": "https://futurumgroup.com/insights/marvell-investor-day-2026-targets-80b-fy-2031-revenue-with-custom-silicon-and-optics/"},
+    {"label": "Stocktwits: Investor Day coverage, hyperscaler warrant", "url": "https://stocktwits.com/news-articles/markets/equity/marvell-investor-day-mrvl-stock-rockets-as-firm-lays-out-path-to-up-to-90-b-in-annual-revenue-by-fiscal-2031/cZDtJMyRBlE"},
+    {"label": "Webull/Benzinga: Lumentum deal, Lumentum guide, analyst targets", "url": "https://www.webull.com/news/15854719540421632"},
+    {"label": "Fierce Network: deal rationale and channel conflict", "url": "https://www.fierce-network.com/broadband/marvell-buys-lumentum-115b-ai-networking-power-play"},
+    {"label": "Trefis: MRVL share moves Oct 7 to Nov 5, 2026", "url": "https://www.trefis.com/stock/mrvl/articles/623351/what-is-behind-the-move-in-marvell-stock/2026-11-06"},
+    {"label": "Motley Fool: chip selloff after Nvidia CEO resignation (Nov 16, 2026)", "url": "https://fool.com/investing/2026/11/16/why-marvell-stock-is-down-today"},
+    {"label": "NVIDIA Q3 FY2027 results: FY2028 growth outlook ~75% (Nov 17, 2026)", "url": "https://www.streetinsider.com/dr/news.php?gfv=1&id=27363954"},
+    {"label": "24/7 Wall St via AOL: Benchmark on Trainium 3/4 (Dec 2025, unconfirmed)", "url": "https://www.aol.com/articles/customer-defections-crumble-marvell-technology-165123515.html"}
   ]
 }

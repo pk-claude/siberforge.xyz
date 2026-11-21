@@ -1,66 +1,130 @@
 {
-  "asOf": "2026-08-13",
-  "oneLiner": "Pre-revenue hybrid eVTOL developer whose patented fan-in-wing Cavorite X7 flew a subscale transition in 2025; $78.3M of cash buys roughly two years to prove the design at full scale, against a 2030 certification target, a non-binding $600M LOI, and a share count that nearly doubled in a year.",
-  "thesis": [
-    "The fan-in-wing bet is differentiated but unproven at full scale. Horizon completed flight testing of a half-scale Cavorite prototype in 2025, including hover and the transition into wing-borne flight. The first full-scale demonstrator is now in assembly, with initial testing targeted for Q1 calendar 2027 (a slip from earlier 2026 language).",
-    "Hybrid-electric sidesteps the battery constraint that boxes in pure eVTOLs. The X7 targets 250 knots, 400-500 mile range, and ~1,500 lb VTOL useful load using batteries plus an internal-combustion generator, flying most of each mission wing-borne. These are projections, not demonstrated numbers.",
-    "The balance sheet was rebuilt in May 2026 at heavy dilution. Two offerings raised ~$45M gross (9.25M shares at ~$2.16 priced May 6; 9.96M shares at ~$2.51 priced May 26, led by existing US institutional holders), lifting cash to $78.3M at May 31, 2026 with management citing more than 24 months of runway.",
-    "Commercial validation is arriving as LOIs, not firm orders. On July 21, 2026 at Farnborough, Australia's V-Star Powered Lift Aviation signed a letter of intent for up to 100 Cavorite X7s (5 initial plus 95 options, ~$600M potential value) for aeromedical and search-and-rescue work; it is non-binding until a definitive purchase agreement.",
-    "Certification and supply-chain scaffolding is being assembled. BETA Technologies will supply fly-by-wire flight computers (July 2026), RAMPF builds the fuselage, North Aircraft Industries the wings (Feb 2026), Marshall Aerospace delivered the flight dynamics model (June 2026), and Cert Centre Canada is developing a dual-use certification basis with Transport Canada targeted to lead type certification before 2030."
-  ],
-  "latestQuarter": {
-    "label": "Q4 FY2026, ended May 31, 2026 (reported Jul 16, 2026)",
-    "points": [
-      "Revenue $0.0M; the company remains fully pre-revenue while engineering the Cavorite X7.",
-      "Cash $78.3M at May 31, 2026, up from ~$20M at the end of Q3 (Feb 28, 2026) after ~$45M gross of May equity raises; management cites more than 24 months of liquidity.",
-      "FY2026 net loss approximately C$24.0M (EPS about -$0.56; financials reported in CAD).",
-      "Shares outstanding ~66.8M, up roughly 80% year over year; May offerings priced at ~$2.16 and ~$2.51 per share.",
-      "Headcount 56, planned to exceed 100 by summer 2027 as certification engineering scales.",
-      "Full-scale demonstrator on track for initial ground and flight testing in Q1 calendar 2027."
+  "asOf": "2026-11-21",
+  "oneLiner": "Pre-revenue Canadian developer of the Cavorite X7, a hybrid-electric fan-in-wing VTOL that has flown only at half scale. The market is betting on whether the first full-scale aircraft flies in 2027 before the cash raised in May 2026 runs down and the next share issue arrives.",
+  "verdict": {
+    "stance": "Neutral - a flight-test option, not a cash-backed one",
+    "summary": "The net cash on the page looks like a floor, but it is the budget for building the demonstrator and most of it will be spent before the aircraft proves anything. What is left is a binary option on a full-scale hover and transition in 2027, and we put only about one chance in eight on the clean outcome. Our probability-weighted value sits close to the price once the burn is counted, with a bull case near three times it and a bear case that ends in a discounted raise, so this is a small position or none. We would turn Positive if the demonstrator is assembled by spring 2027 and hovers by September 2027 with quarterly cash use still under C$11M. We would turn Cautious if the completion date slips again or the at-the-market program is used heavily before first flight.",
+    "wtb": [
+      "The full-scale demonstrator is fully assembled by about Apr 30, 2027 (company target: end of Q1 calendar 2027) and makes a first hover by Sep 30, 2027.",
+      "Cash use (operations plus investing) stays under ~C$11M a quarter through May 2027, so cash at May 31, 2027 is still above ~C$40M.",
+      "The next equity raise comes after first flight, not before, and adds fewer than ~25M shares to the 67.1M outstanding at Oct 9, 2026.",
+      "At least one of the letters of intent (V-Star is the likeliest) becomes a definitive purchase agreement with deposits by Dec 31, 2027."
     ]
   },
-  "latestProse": "Fiscal Q4 2026 (May 31 year-end, reported July 16) was a funding-and-milestones quarter, not a numbers quarter: revenue is $0.0M and the FY2026 net loss was roughly C$24M. The story was the balance sheet -- $78.3M of cash after two May offerings raised about $45M gross at $2.16 and $2.51 per share, taking shares outstanding to ~66.8M, up ~80% in a year. Operationally the full-scale Cavorite X7 moved into assembly, with BETA Technologies supplying fly-by-wire flight computers, RAMPF the fuselage, and North Aircraft Industries the patented wings; initial testing is targeted for Q1 calendar 2027. The disclosure that matters most: the flight-test campaign has slipped to early 2027, and the 10-K concedes significant parts of the aircraft have never been built or tested at full scale.",
-  "guidanceProse": "Horizon gives no financial guidance -- the calendar is the guidance. Management targets full-scale demonstrator testing in Q1 2027, Transport Canada type certification before 2030, and first deliveries in 2029 at the earliest, with headcount roughly doubling to 100+ by summer 2027. Cash of $78.3M is framed as 24+ months of runway, which funds the demonstrator but not certification or production, so further equity raises are close to certain before any revenue arrives. The central debate is whether the fan-in-wing transition, proven at half scale in 2025, closes at a 5,000 lb-class aircraft -- and whether a company spending ~C$25M a year can certify an aircraft while Joby and Archer outspend it twentyfold.",
+  "scenarioModel": {
+    "horizon": "FY2032 (year ending May 2032), first full year of deliveries if certification lands around 2030-31",
+    "valueDate": "2028-02-29",
+    "metric": "sales",
+    "bear": {
+      "p": 0.5,
+      "rev": 0,
+      "multiple": 0,
+      "why": "The demonstrator is late or flies only conventionally: no full-scale hover by early 2028, no order firms up, and certification drifts past 2031. The program earns no value beyond cash, and that cash is mostly spent, so Horizon raises on weak terms. The page shows cash value on today's share count; the realistic outcome is lower (see note)."
+    },
+    "base": {
+      "p": 0.38,
+      "rev": 0.06,
+      "multiple": 0.8,
+      "why": "The aircraft is completed around mid-2027, flies conventionally and then hovers by late 2027, but full transition is still ahead at the value date. One LOI converts to a small firm order. FY2032 revenue of ~$60M is about 10 aircraft at the ~$6M implied by the V-Star LOI. The market pays 0.8x that far-out revenue: roughly 3x discounted for four-plus years of certification risk and for one more raise of 25-35M shares."
+    },
+    "bull": {
+      "p": 0.12,
+      "rev": 0.12,
+      "multiple": 1.7,
+      "why": "Full-scale transition is flown by early 2028, the first fan-in-wing aircraft to do so. V-Star firms up with deposits, a second operator or a Canadian defence program follows, and the raise that funds certification is done from strength. FY2032 revenue of ~$120M is about 20 aircraft, and 1.7x reflects a de-risked design that is still two-plus years from a type certificate."
+    },
+    "note": "Value per share = (FY2032 revenue x EV/Sales + net cash) / shares, using the page's net cash (about $55M, the May 31, 2026 balance in US dollars) and ~67M shares. Base: $60M x 0.8 = $48M of enterprise value plus net cash, about $1.53 a share. Bull: $120M x 1.7 = $204M plus net cash, about $3.85. Bear: zero program value, about $0.81. Two things flatter these numbers. First, cash was already C$70.1M (about US$49M) at Aug 31, 2026 and we expect roughly C$50-60M more to be spent by the value date, so the true bear value after a distressed raise is nearer $0.40-0.50. Second, the share count excludes the Series A preferred (convertible into 10.0M shares), 3.2M options and ~1M PSUs, about 21% more shares, plus whatever is sold under the ATM. We have absorbed dilution in base and bull by using low multiples on a far-out year, but not in the bear case. Adjusting the bear to ~$0.45 moves the weighted value from about $1.45 to about $1.27. The table rounds revenue to $0.1B; the dollar figures are in each case text. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does the full-scale aircraft hover and transition on anything like the stated schedule?",
+      "bull": "The half-scale prototype completed a full wing-borne transition in May 2025, the preliminary design review closed on Nov 10, 2026 with the design judged mature enough for detailed design, and the airframe, wing and flight-computer suppliers are all under contract.",
+      "bear": "Completion has already moved from end-2026 to the end of Q1 calendar 2027, and the critical design review still has to happen before final assembly starts. Testing begins with ground, taxi and conventional takeoff, so a hover is later still, and nothing in the lift-fan system has run at full size on an airframe.",
+      "view": "We assume one more slip: assembly finished around mid-2027 and a first hover late in 2027. That is enough for the base case. The bull case needs transition by early 2028, which we treat as a one-in-eight outcome until the aircraft exists.",
+      "signpost": {
+        "metric": "Demonstrator final assembly complete; first conventional flight; first hover",
+        "threshold": "assembled by Apr 30, 2027 and hover by Sep 30, 2027 = move 10 points from bear to base and bull; completion guided past mid-2027 = move 10 points to bear",
+        "when": "Q2 FY2027 report ~mid-Jan 2027; Q3 FY2027 report ~mid-Apr 2027"
+      }
+    },
+    {
+      "q": "Does the cash reach a flying aircraft, or is there another raise first?",
+      "bull": "Management says cash funds the operating plan for at least 24 months from Oct 2026, G&A fell by almost half year over year, and only 219,624 shares were sold under the ATM in the August quarter.",
+      "bear": "The 10-Q itself only vouches for 12 months and flags substantial doubt beyond that without new capital. R&D nearly tripled year over year, management said in Jan 2026 that operating costs could roughly double within a year, and a new $50M ATM under a $200M shelf was put in place in Sep 2026.",
+      "view": "The demonstrator is funded; certification is not, by a wide margin. We expect a raise of 25-35M shares within the scenario window and want it to follow first flight. Meaningful ATM selling before the aircraft flies would tell us management doubts the schedule.",
+      "signpost": {
+        "metric": "Quarterly cash used in operations plus investing; shares sold under the ATM; shares outstanding",
+        "threshold": "cash use above C$11M in a quarter or more than ~3M ATM shares sold before first flight = bearish; under C$9M and no ATM use = bullish",
+        "when": "Q2 FY2027 10-Q ~mid-Jan 2027; Q3 FY2027 10-Q ~mid-Apr 2027"
+      }
+    },
+    {
+      "q": "Will any letter of intent turn into a deposit-backed order?",
+      "bull": "Signed LOIs cover up to 200 purchases and 5 leases with potential sales above US$1 billion, across Australia, India and Chile, and the mission set (medevac, search and rescue, remote communities) is one where helicopters are slow and expensive.",
+      "bear": "None is binding and none carries a deposit. The oldest LOI dates from Jan 2024 and has not converted in almost three years, V-Star's is conditional on a definitive agreement and program progress, and eVTOL order books elsewhere have shrunk when cash was asked for.",
+      "view": "We give the LOIs no value in bear or base beyond one small conversion. A firm order with deposits before the aircraft hovers would be a real surprise and worth more to the multiple than another LOI of any size.",
+      "signpost": {
+        "metric": "Definitive purchase agreement with customer deposits",
+        "threshold": "one signed with deposits by Dec 31, 2027 = base holds; one signed before first hover = add to bull; another non-binding LOI = no change",
+        "when": "Paris Air Show, Jun 2027; year-end 2027"
+      }
+    }
+  ],
+  "thesis": [
+    "The fan-in-wing design is differentiated and has flown. Lift fans sit inside the wing behind covers that close for cruise, so the aircraft flies most of a mission like a normal aeroplane. No rival is flying this layout, and the half-scale result is the only transition data that exists for it.",
+    "Hybrid power fits missions that batteries cannot. The X7 targets about 250 mph cruise, roughly 500 miles of range and 1,500 lb of useful load using batteries plus a turbine generator, with flight into known icing as a design goal. Management claims a cost near $1 per seat mile against $3-5 for peers (Jan 2026 call); all of these are projections, not demonstrated numbers.",
+    "The demonstrator is paid for. Two offerings in May 2026 raised about $45M gross (9.25M shares at ~$2.16 and 9.96M at ~$2.51), which the company said would fully fund completion of the prototype. The build does not depend on the capital markets reopening.",
+    "Canada offers a shorter queue and a domestic buyer. Horizon is working a dual-use civil and military certification basis with Transport Canada through Certification Center Canada, and the federal Defence Industrial Strategy of Feb 2026 favours Canadian-built aircraft. Non-dilutive money so far is small: up to 40% of a C$10.5M all-weather project under the INSAT program, with no defence contract yet."
+  ],
+  "risks": [
+    "Dilution has been the funding model. Weighted shares were 65.6M in the August 2026 quarter against 37.1M a year earlier, up 77%, and shares outstanding reached 67.1M. Converting the Series A preferred and counting options and PSUs takes the total to roughly 81M, and the public warrants struck at $11.50 will bring in no cash.",
+    "The cash does not reach certification. Cash fell C$8.2M in the August quarter, an annual pace of about C$33M against C$70.1M on hand, before the planned growth in engineering headcount. Certification by around 2030 needs several times the current balance, so more equity is close to certain.",
+    "Full-scale flight is unproven and the schedule has slipped. The FY2026 10-K concedes that significant parts of the aircraft have never been built or tested at full size, and the production-weight aircraft is several times heavier than the prototype that flew. A further delay of even two quarters consumes cash the company cannot replace cheaply.",
+    "The order book is intent, not orders. Every LOI is non-binding and no deposits have been disclosed, so the US$1 billion headline supports neither financing nor a valuation.",
+    "Listing compliance could become an issue again. Horizon fell below Nasdaq's $1.00 minimum bid in 2025 and regained compliance on Jun 26, 2025. No new notice was disclosed in the Oct 9, 2026 10-Q, but a sustained move under $1.00 would start the 180-day cure clock and put a reverse split on the table."
+  ],
+  "bullCharts": {},
+  "bearCharts": {"0": ["priceH"], "1": ["fcfQ"]},
+  "catalysts": [
+    "By Dec 31, 2026: first design releases to manufacturing after the Nov 10 preliminary design review; critical design review date still to be set (debate 1).",
+    "~Mid-Jan 2027: Q2 FY2027 results (quarter ended Nov 30, 2026) - cash use vs the C$11M line, ATM sales, demonstrator schedule (debates 1, 2).",
+    "By ~Mar 31, 2027: company target for completing the full-scale demonstrator, then ground and taxi testing (debate 1).",
+    "~Mid-Apr 2027: Q3 FY2027 results - whether assembly finished on time and what the test sequence looks like (debates 1, 2).",
+    "Jun 2027: Paris Air Show - the natural venue for converting V-Star or another LOI into a firm order (debate 3).",
+    "~Mid-Jul 2027: FY2027 10-K - going-concern language and year-end cash vs the C$40M marker (debate 2).",
+    "H2 2027 (Siberforge estimate, no company date): first hover and first transition attempts at full scale (debate 1)."
+  ],
+  "latestQuarter": {
+    "label": "Q1 FY2027, ended Aug 31, 2026 (reported Oct 9, 2026; statements in Canadian dollars)",
+    "points": [
+      "Revenue nil; the company remains pre-revenue.",
+      "Cash C$70.06M at Aug 31, 2026 (about US$49M at 1.43), down from C$78.28M at May 31, 2026.",
+      "R&D C$7.43M vs C$2.72M a year earlier; G&A C$1.67M vs C$3.19M, mainly lower stock-based compensation.",
+      "Net loss C$4.07M (C$0.06 per share) vs C$10.90M, helped by a C$3.82M non-cash gain on warrant revaluation.",
+      "Cash used in operations C$7.21M vs C$2.36M; investing C$0.67M on equipment and tooling.",
+      "ATM proceeds C$0.6M; C$0.96M of shares withheld for employee taxes; total liabilities C$7.7M, of which C$5.2M is warrant liability."
+    ]
+  },
+  "latestProse": "The August quarter was the first full quarter of spending the May 2026 proceeds, and the money went where it should: operating expenses of C$9.1M were more than 80% R&D, against less than half a year earlier. The reported loss understates the run-rate because of the warrant gain; the operating loss is the better guide to what the program costs. Financing was almost nil, so the change in cash is a clean read on burn. Since the quarter closed the company has signed a memorandum of understanding with Constance Lake First Nation on medical transport for remote communities (Nov 5, 2026) and completed the preliminary design reviews for the demonstrator (Nov 10, 2026). No management changes, new financing or Nasdaq notices have been disclosed since the 10-Q.",
+  "guidanceProse": "Horizon gives no financial guidance; the schedule is the guidance. The target is a completed demonstrator by the end of Q1 calendar 2027, followed by ground and taxi tests, conventional takeoff and landing, and only then vertical flight, with no date given for first hover or transition. Management's certification target is around early 2030 (per a third-party summary of the Oct 9 call; unverified against a transcript), while the 10-Q still says commercialization is expected in 2028 or 2029, a gap the company has not reconciled. The longer-term ambition is a single plant building 200-300 aircraft a year. Runway is described two ways: at least 24 months in the press release and at least 12 months in the audited-basis language of the filing.",
   "guide": {
-    "label": "Cash at May 31, 2026",
-    "val": "$78.3M",
-    "sub": "24+ mo runway | full-scale test Q1 2027",
-    "tone": "accent"
+    "label": "Cash at Aug 31, 2026",
+    "val": "C$70.1M",
+    "sub": "~US$49M | demonstrator due end of Q1 2027 | no financial guide",
+    "tone": "warn"
   },
   "segments": [
-    "Single program: the Cavorite X7, a 7-seat (pilot plus six) hybrid-electric fan-in-wing VTOL targeting ~250 kt cruise, 400-500 mile range, and ~1,500 lb VTOL useful load for regional mobility, medevac, cargo, and defense missions.",
-    "Pure OEM model built on manufacturing partnerships (RAMPF fuselage and empennage, North Aircraft Industries wings, BETA Technologies flight computers) rather than vertical integration; no operator ambitions.",
-    "Pipeline is letters of intent, led by V-Star Powered Lift Aviation (up to 100 aircraft, ~$600M potential, Jul 2026); zero contracted or delivered revenue."
+    "Single program: the Cavorite X7, a seven-seat (pilot plus six) hybrid-electric fan-in-wing VTOL aimed at regional transport, medevac, cargo and defence.",
+    "Pure OEM model built on suppliers rather than vertical integration: RAMPF Composite Solutions (fuselage and empennage), North Aircraft Industries (wings), BETA Technologies (fly-by-wire flight computers), Marshall Aerospace (flight dynamics model), with Pratt & Whitney PT6 turbine power.",
+    "Pipeline is letters of intent only: V-Star Powered Lift Aviation of Australia (5 plus 95 options, ~$600M, Jul 2026), an Indian operator LOI from Jan 2024 ($250M with options to $500M) and a five-aircraft lease LOI with Discovery Air Chile (Jan 2025)."
   ],
   "competitive": [
-    "Joby (JOBY) and Archer (ACHR) are years ahead on FAA certification, flight testing, and capital -- both are multi-billion-dollar companies aimed mainly at battery-electric urban air taxis, while HOVR targets longer regional and emergency missions with hybrid power.",
-    "EHang (EH) already delivers type-certified autonomous two-seaters in China -- a different market and mission, but proof that a certification-first strategy can reach revenue years earlier.",
-    "BETA Technologies is simultaneously HOVR's flight-computer supplier and a far better funded hybrid/electric aircraft competitor with its ALIA line.",
-    "Vertical Aerospace and several defense-focused startups are converging on hybrid VTOL configurations, crowding the niche HOVR pioneered.",
-    "The real incumbent is the helicopter: the X7 pitch to operators like V-Star is roughly twice the speed at materially lower cost per mile -- claims that stay unproven until a full-scale aircraft flies."
+    "Joby (JOBY) and Archer (ACHR) are years ahead on certification and flight hours and are funded in the billions, but they are building battery-electric air taxis for short urban hops, not 500-mile regional missions.",
+    "BETA Technologies is both Horizon's flight-computer supplier and a far better funded electric and hybrid aircraft maker with its ALIA line.",
+    "Vertical Aerospace and several defence-focused startups are moving to hybrid VTOL layouts, which narrows the niche Horizon was early to.",
+    "The real incumbent is the helicopter. The pitch to operators is roughly twice the speed at lower cost per mile, a claim that stays unproven until a full-scale aircraft flies."
   ],
-  "moat": "The patented fan-in-wing HOVR wing -- lift fans buried in the wing behind covers that close for cruise -- is genuinely differentiated IP, and hybrid propulsion dodges the battery-density wall. But nothing is proven at full scale: no full-size aircraft has flown, the certification basis is still being developed, no order is firm, and annual spend of ~C$25M is a rounding error beside Joby or Archer budgets. Today the moat is a patent portfolio and a head start on an unfashionable configuration, not a defensible business.",
-  "risks": [
-    "Full-scale transition risk: half-scale success in 2025 does not guarantee aerodynamics, weight, and thermal management close at roughly 5x the mass; initial testing already slipped from 2026 to Q1 2027.",
-    "Serial dilution: shares outstanding up ~80% YoY after ~$45M of May 2026 raises at $2.16-2.51; certification will require multiples of current cash.",
-    "Certification timeline: Transport Canada powered-lift type certification before 2030 is ambitious with no full-scale flight data yet; FAA/EASA validation would add further time and cost.",
-    "LOI fragility: the ~$600M V-Star agreement is non-binding, with deposits only due after a definitive purchase agreement; eVTOL order books have a history of evaporating.",
-    "Competitive funding gap: Joby, Archer, and BETA each raise more in a quarter than HOVR's entire ~$135M market cap.",
-    "Microcap volatility and liquidity: beta ~3.9, 52-week range $1.16-$4.18; a single schedule announcement can halve or double the stock."
-  ],
-  "catalysts": [
-    "Q1 FY2027 results (~Oct 2026): burn rate and demonstrator build progress check.",
-    "Full-scale demonstrator rollout and ground testing late 2026, then first hover and transition attempts targeted Q1 calendar 2027 -- the binary event for the equity.",
-    "Conversion of the V-Star LOI into a definitive purchase agreement with deposits (watch H2 2026).",
-    "Certification-basis milestones with Transport Canada via Cert Centre Canada, including the dual-use military pathway announced May 21, 2026.",
-    "August 2026 investor conferences (announced Jul 30, 2026) and any new Farnborough-pipeline LOIs or defense interest."
-  ],
-  "pricedIn": "At about $2.00 (Aug 10-12, 2026 closes of $2.04 and $1.99) on ~66.8M shares, market cap is ~$135M against $78.3M of cash -- an enterprise value near $57M for the entire program. That is strikingly small versus Joby or Archer, implying the market assigns low odds to full-scale success or simply prices the dilution treadmill: the share count nearly doubled in a year and will grow again before certification. Two covering analysts rate it Strong Buy with an $8.37 average target, which is really a bet that the demonstrator flies. The key debate: is ~$57M of EV an option-like bargain on differentiated fan-in-wing IP, or fair value for a pre-revenue microcap needing perhaps $200M more capital and four-plus years to first delivery?",
-  "scenarios": {
-    "bear": "The full-scale demonstrator misses Q1 2027 or exposes transition problems at weight; burn accelerates as headcount doubles; the V-Star LOI never converts to a firm order. Horizon raises again below $2, shares outstanding pass 100M, and the narrative decays from differentiated configuration to perpetual science project. With Joby and Archer certifying first and helicopter incumbency untouched, the stock drifts toward cash value -- roughly $0.80-1.20 -- with listing-compliance risk resurfacing by 2028.",
-    "base": "The demonstrator rolls out on schedule, hovers in Q1 2027, and works through envelope expansion toward transition during 2027; V-Star converts to a small firm order with deposits. Dilution continues but at better prices. Certification slides toward 2030-31 and first deliveries to 2031-32, with revenue effectively zero throughout the window. The stock oscillates roughly $2-5 on flight-test news flow -- an option repriced at every milestone rather than a cash-flow story.",
-    "bull": "Full-scale transition succeeds in 2027 -- the first fan-in-wing aircraft at scale -- validating speed, range, and cost claims rivals cannot easily replicate. Canada's domestic-procurement push and the Cert Centre Canada dual-use path bring non-dilutive defense money; V-Star firms up and a second operator signs. A strategic partner or acquirer pays for optionality the market ignored at a sub-$60M EV, and the stock reaches the $8+ analyst targets -- roughly 4x the August 2026 price."
-  },
+  "moat": "The patented fan-in-wing layout is genuine intellectual property and hybrid power avoids the battery-density limit. It is not yet a business moat: no full-size aircraft exists, the certification basis is still being agreed, and quarterly spending of about C$9M is tiny beside the budgets of Joby, Archer or BETA. A competitor with capital could not copy the patents, but it could reach the same customers first with a different design.",
   "valPresets": {
     "mode": "revenue",
     "r": 0.18,
@@ -69,17 +133,29 @@
     "bear": {"revCagr": 0.15, "fcfMargin": 0.02, "exit": 1},
     "base": {"revCagr": 0.6, "fcfMargin": 0.1, "exit": 3},
     "bull": {"revCagr": 0.95, "fcfMargin": 0.18, "exit": 6},
-    "note": "Revenue mode because there is no earnings or FCF base at all: HOVR is pre-revenue and TTM revenue is ~$0, so the implied-CAGR panel may show n/a -- that is honest, not a bug. The presets sketch worlds where first deliveries begin around 2029-2031 and scale from zero; treat outputs as scenario illustrations, not point estimates."
+    "note": "Revenue mode because there is no earnings or FCF base at all: HOVR is pre-revenue and TTM revenue is ~$0, so the implied-CAGR panel may show n/a -- that is honest, not a bug. The presets sketch worlds where first deliveries begin around 2030-2031 and scale from zero; treat outputs as scenario illustrations, not point estimates."
   },
-  "bullCharts": {"0": ["priceH"]},
-  "bearCharts": {"0": ["fcfQ"]},
   "sources": [
+    {"label": "Form 10-Q for the quarter ended Aug 31, 2026 (SEC, filed Oct 9, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/1930021/000121390026108211/ea0305755-10q_newhorizon.htm"},
+    {"label": "Q1 FY2027 results press release (Oct 9, 2026)", "url": "https://www.newswire.com/news/horizon-aircraft-reports-fiscal-2027-first-quarter-results-and-advances-full"},
+    {"label": "Quartr summary of the Q1 FY2027 report and call (certification and production targets)", "url": "https://quartr.com/events/new-horizon-aircraft-ltd-hovr-q1-2027_FRQBxUxw"},
+    {"label": "ATM prospectus supplement, up to $50M under a $200M shelf (SEC 424B5, Sep 4, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/0001930021/000121390026097676/ea0304433-424b5_newhorizon.htm"},
+    {"label": "Preliminary design review completed (Nov 10, 2026)", "url": "https://finviz.com/news/419936/horizon-aircraft-completes-preliminary-design-review-of-cavorite-x7-hybrid-evtol"},
+    {"label": "MOU with Constance Lake First Nation (Nov 5, 2026)", "url": "https://finviz.com/news/416887/horizon-aircraft-signs-mou-with-constance-lake-first-nation-to-bring-lifesaving-medical-aircraft-to-remote-and-isolated-indigenous-communities"},
+    {"label": "Aviation Week: demonstrator completion moved to spring 2027 (Jul 16, 2026)", "url": "https://aviationweek.com/business-aviation/aircraft-propulsion/horizon-targets-spring-2027-completion-full-scale-cavorite-x7"},
     {"label": "Q4 FY2026 results press release (SEC 8-K, Jul 16, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/1930021/000121390026078500/ea029810101ex99-1.htm"},
-    {"label": "AGN: V-Star LOI for up to 100 X7s at Farnborough (Jul 21, 2026)", "url": "https://aerospaceglobalnews.com/news/horizon-aircraft-cavorite-x7-100-aircraft-farnborough/"},
+    {"label": "V-Star LOI for up to 100 X7s (Jul 21, 2026)", "url": "https://finviz.com/news/370410/horizon-aircraft-secures-loi-with-v-star-powered-lift-aviation-for-the-purchase-of-up-to-100-hybrid-evtols-for-600-million"},
+    {"label": "Jan 2024 LOI: $250M of aircraft with option to $500M", "url": "https://www.asdnews.com/news/aerospace/2024/01/16/horizon-aircraft-enters-into-loi-purchase-250m-cavorite-x7-aircraft-with-option-up-500m"},
+    {"label": "Discovery Air Chile lease LOI (Jan 2025)", "url": "https://verticalmag.com/press-releases/horizon-aircraft-signs-letter-of-intent-with-discovery-air-chile/"},
     {"label": "$25M offering pricing (May 26, 2026)", "url": "https://www.accessnewswire.com/newsroom/en/industrial-and-manufacturing/new-horizon-aircraft-ltd.-announces-pricing-of-25-million-offering-of-1170393"},
     {"label": "$20M offering closing (May 11, 2026)", "url": "https://www.accessnewswire.com/newsroom/en/industrial-and-manufacturing/new-horizon-aircraft-ltd.-announces-closing-of-20-million-offering-of-1165641"},
-    {"label": "BETA Technologies flight control computers (Jul 2026)", "url": "https://www.accessnewswire.com/newsroom/en/industrial-and-manufacturing/horizon-aircraft-selects-beta-technologies-advanced-flight-control-com-1188174"},
-    {"label": "Marshall Aerospace flight dynamics model (Jun 9, 2026)", "url": "https://www.accessnewswire.com/newsroom/en/industrial-and-manufacturing/horizon-aircraft-advances-cavorite-x7-flight-model-through-partnership-1173872"},
-    {"label": "StockAnalysis HOVR overview (price, shares, mkt cap; checked Aug 10, 2026)", "url": "https://stockanalysis.com/stocks/hovr/"}
+    {"label": "Dual-use certification path with Certification Center Canada (May 21, 2026)", "url": "https://finviz.com/news/356253/horizon-aircraft-advances-dual-use-certification-path-through-cert-center-canada-partnership"},
+    {"label": "INSAT grant for the C$10.5M all-weather project", "url": "https://www.newswire.com/news/horizon-aircraft-awarded-insat-grant-to-help-fund-10-5-million-all-22661867"},
+    {"label": "Fiscal Q2 2026 earnings call summary (Jan 2026: cost outlook, seat-mile claim)", "url": "https://finance.yahoo.com/news/horizon-aircraft-q2-earnings-call-183330008.html"},
+    {"label": "Nasdaq minimum-bid compliance regained (Jun 26, 2025)", "url": "https://finviz.com/news/89992/horizon-aircraft-regains-compliance-with-nasdaq-capital-market-listing-requirements"}
+  ],
+  "changelog": [
+    {"date": "2026-11-21", "change": "Rebuilt in v3 format after Q1 FY2027 (reported Oct 9, 2026) with a first explicit stance: Neutral - a flight-test option, not a cash-backed one. New facts: cash C$70.1M at Aug 31, 2026, quarterly cash use ~C$7.9M, R&D up to C$7.4M, 67.1M shares, a new $50M ATM under a $200M shelf, going-concern doubt beyond 12 months in the 10-Q, LOIs now totalling 200 purchases plus 5 leases, preliminary design review passed Nov 10. Correction: the v2 note quoted the May 2026 cash balance of 78.3M as US dollars; it is Canadian dollars (about US$55M). Scenarios on FY2032 revenue at EV/Sales: bear nil / base $60M x 0.8 / bull $120M x 1.7. The view is slightly more cautious than v2 because the cash cushion is smaller in US dollars and is being spent."},
+    {"date": "2026-08-13", "change": "Q4 FY2026 (v2 note): May 2026 offerings of ~$45M gross, V-Star LOI for up to 100 aircraft, full-scale testing moved to Q1 calendar 2027; framed as a funded but heavily diluted bet on the full-scale demonstrator, with no formal stance."}
   ]
 }

@@ -1,55 +1,131 @@
 {
-  "asOf": "2026-10-04",
-  "oneLiner": "Peak-cycle memory printing 87% gross margins on an AI-driven DRAM/HBM/NAND shortage, guiding to a record $61.5B quarter yet trading near $1,100 at roughly 7x annualized forward earnings.",
+  "asOf": "2026-11-21",
+  "oneLiner": "One of three makers of leading-edge DRAM, plus NAND and the HBM stacks inside AI servers, earning the highest margins in memory history. The market is betting those earnings are a cycle peak that will more than halve within two years; the stock works if contracts and slow fab build-outs turn the usual collapse into a plateau.",
+  "verdict": {
+    "stance": "Positive - sized for a cycle",
+    "summary": "Nothing Micron has reported explains the fall since the September print: there has been no pre-announcement, estimates have risen, and the selling came from an AI-sector rout, NAND supply warnings and a paused Taiwan fab. The price now discounts earnings falling about a fifth a year for seven years, so the question is not whether FY2027 is a record (three quarters of it is committed) but how far FY2028 falls. Our base case, a modest step down as prices ease from mid-2027, is worth about $880 a share at end-2027 and the bull case nearly twice that; the bear case, a normal memory downturn arriving in mid-2027, is worth about $400, and it is a one-in-three outcome, not a tail. Two things would change the view: a second-quarter gross margin guide below the 86.25% that management called the floor, and 2027 DRAM bit-supply plans from Samsung, SK Hynix or CXMT that run above demand.",
+    "wtb": [
+      "The Dec 17, 2026 report shows Q1 FY2027 revenue at or above $61.5B and guides Q2 gross margin above 86.25%, keeping the 'Q1 is the floor' claim intact.",
+      "FY2028 EPS (year ending about Aug 2028) holds above ~$145, a fall of less than a fifth from the FY2027 level, rather than the 60%+ drop of a normal memory downturn.",
+      "DRAM contract prices fall no more than mid-single digits per half-year in the second half of calendar 2027, and industry DRAM bit supply grows in the low 20s percent in 2027, not the high 20s.",
+      "Micron retires at least $10B of stock by the end of FY2027 (Aug 2027) under the authorization that opens Dec 9, 2026, while keeping net cash positive through a $50B+ capex year."
+    ]
+  },
+  "scenarioModel": {
+    "horizon": "FY2028 (year ending ~Aug 2028)",
+    "valueDate": "2027-12-31",
+    "metric": "eps",
+    "bear": {
+      "p": 0.35,
+      "rev": 175,
+      "eps": 67,
+      "multiple": 6,
+      "why": "The cycle rolls in mid-2027: AI capex digests, NAND goes into surplus first and DRAM follows, price ceilings in the customer agreements turn out to matter more than floors, and the calendar-2028 HBM reset is down. Revenue falls about 37% from FY2027, gross margin drops to about 60% and net margin to 42% while depreciation from the capex surge lands. Earnings are still falling into FY2029, so the market pays 6x, roughly 1.4x our estimate of end-2027 book value. A full historical bust (FY2018 to FY2020 EPS fell 79%) sits below this case."
+    },
+    "base": {
+      "p": 0.45,
+      "rev": 270,
+      "eps": 147,
+      "multiple": 6,
+      "why": "Prices peak around mid-2027 and ease a few percent per half-year, as Citi forecasts, while bits grow about 20% and the committed volume ships; revenue is roughly flat on FY2027, gross margin settles in the mid-to-high 70s and net margin near 60%. Buybacks take the share count to about 1.10B. Earnings that step down but do not collapse still get a deep-cyclical 6x because nobody can yet see FY2029."
+    },
+    "bull": {
+      "p": 0.2,
+      "rev": 335,
+      "eps": 215,
+      "multiple": 8,
+      "why": "Supply stays short through 2028 as Micron, Samsung and SK Hynix all claim: new clean rooms do not produce until late 2028, HBM resets higher again, and revenue grows about 21% at a net margin near 70%. With FY2029 visibly up and the customer agreements renewing at similar prices, the market starts to treat the earnings as durable and pays 8x - still well below the ~14x five-year average forward multiple."
+    },
+    "note": "FY2027 base year is consensus: revenue ~$276B and EPS $176.50 (41 analysts, range $161.00-$214.70, as of early Nov 2026), against a Q1 guide that annualizes to ~$246B. EPS = revenue x net margin / ~1.10B average diluted shares in FY2028 (1.15B guided for Q1 FY2027, less buybacks): bear $175B x 42% = $73.5B; base $270B x 60% = $162B; bull $335B x 70.5% = $236B. EPS is non-GAAP. Multiples are applied to FY2028 EPS at end-2027. FY2028 is the anchor because FY2027 is largely contracted and its EPS at a peak multiple only restates that a peak is a peak; the value turns on the first year the contracts and new supply are both tested. Scenario inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "When do memory prices roll over?",
+      "bull": "Management said on the Q4 call that it has no line of sight to supply and demand balancing and that FY2027-28 will be tighter than 2026; its president repeated on Oct 21 that the shortage lasts at least two more years. KeyBanc expects HBM prices up 80-100% in Q1 2027, and Counterpoint sees no scenario for a correction in the second half of 2027.",
+      "bear": "Price increases are already slowing: Kioxia's NAND price gains fell from about 70% to the mid-20s percent in one quarter and it guided the December quarter flat. Citi (Aug 2026) has DRAM and NAND peaking in Q2 2027, then DRAM down 3% and NAND down 5% half-on-half, with Micron's gross margin sliding from the mid-80s to the mid-70s; Morgan Stanley reportedly has DRAM peaking in Q4 2026 (unverified).",
+      "view": "We side with a mid-2027 price peak and a slow fade, which is the base case. The peak date matters less than the slope after it: a few percent per half-year is a plateau, a 2018-style 20-30% is the bear case. The first hard evidence is whether Q2 margin is guided above Q1.",
+      "signpost": {
+        "metric": "Q2 FY2027 gross margin and revenue guide; TrendForce 1Q27 DRAM and NAND contract price forecasts",
+        "threshold": "bearish if gross margin is guided at or below 86.25% or revenue below ~$65B, or if 1Q27 conventional DRAM contracts are forecast flat; bullish if margin is guided to 87%+",
+        "when": "Q1 FY2027 report, Dec 17, 2026; TrendForce late Dec 2026"
+      }
+    },
+    {
+      "q": "Do the customer agreements protect price, or only volume?",
+      "bull": "Micron has 26 strategic customer agreements that management puts at over 35% of revenue through 2030, with $32B of customer financial commitments, mostly cash deposits; three quarters of that revenue has a defined pricing framework. Samsung and SK Hynix also report calendar-2027 HBM volumes and prices fully negotiated, so the HBM leg is fixed for a year.",
+      "bear": "The 10-K puts contracted minimum revenue at about $134B as of Sep 3, 2026 (the call cited ~$150B of remaining obligations), of which only about $33B falls in the next twelve months - roughly one-eighth of FY2027 consensus revenue. The largest agreements cap prices near the Q2 calendar-2026 market level, so they limit upside as well, and 'more than 75% of FY2027 output committed' is a volume statement.",
+      "view": "The contracts are a volume and financing floor, not a margin floor. They make a 2019-style loss year unlikely, which is why the bear case stops at a 60% gross margin, but they do not stop FY2028 earnings halving. We give them credit in the probabilities, not in the multiple.",
+      "signpost": {
+        "metric": "Contracted minimum revenue and customer deposits ($12.7B at Sep 3, 2026) in the Q1 10-Q; calendar-2028 HBM contract pricing",
+        "threshold": "bullish if the next-twelve-month contracted minimum rises above $45B or 2028 HBM is signed at flat-to-higher prices; bearish if deposits fall quarter on quarter",
+        "when": "Q1 FY2027 10-Q, late Dec 2026; 2028 HBM negotiations by mid-2027"
+      }
+    },
+    {
+      "q": "Does supply catch up before 2029?",
+      "bull": "Micron expects industry bit shipments to grow only in the low 20s percent for DRAM and mid-20s for NAND (per press coverage of the Q4 call), short of demand. Samsung says its sharply higher 2027 capex cannot add meaningful output before 2028 because it is mostly fab shells; Micron's own Idaho fab starts wafers in mid-2027 and its Taoyuan expansion, due 2028, is paused.",
+      "bear": "An 87% gross margin is the strongest invitation to add wafers the industry has ever had. GF Securities (Nov 17) sees NAND supply bit growth of up to 28% in 2027 and 30% in 2028, with prices flat in Q1 2027 and falling for three quarters after; CXMT says it can ship server DRAM by the end of 2026; and every supplier is raising capex at once.",
+      "view": "Supply is the slower risk and NAND is the weaker flank: it is a quarter of revenue and the place a glut shows first. Fab lead times protect calendar 2027 for DRAM, less so 2028, which is why the scenarios are struck on FY2028. We stay positive while guided 2027 DRAM bit growth stays below ~25%.",
+      "signpost": {
+        "metric": "Calendar-2027 DRAM and NAND bit-growth and capex guidance from Samsung and SK Hynix; CXMT server DRAM qualification news",
+        "threshold": "bearish if either Korean supplier guides 2027 DRAM bit growth above 25% or CXMT wins a tier-one server qualification; bullish if both guide at or below 20%",
+        "when": "Q4 2026 calls, late Jan 2027"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-21",
+      "change": "Rebuilt as a v3 decision note. No new filing since the Sep 30 Q4 FY2026 print; Q1 FY2027 is confirmed for Dec 17, 2026. Added the reasons for the post-print fall (AI-sector rout, CXMT and NAND supply warnings, paused Taoyuan fab), the $35.16B buyback authorization and balance-sheet debt. Scenario values on FY2028 EPS: bear $402 / base $882 / bull $1,720. View moved from balanced to Positive - sized for a cycle: estimates rose while the stock fell by more than a third."
+    },
+    {
+      "date": "2026-10-04",
+      "change": "Q4 FY2026 beat (revenue $54.23B, 86.8% gross margin) and record Q1 FY2027 guide; flagged the capex step-up and moderating price increases. View: balanced, peak-cycle earnings against contract backlog."
+    }
+  ],
   "thesis": [
-    "One of three companies able to make leading-edge DRAM at scale; HBM revenue grew faster than total revenue in Q4 FY2026, and Micron is working with NVIDIA on the first custom HBM4E (NV-HBM).",
-    "Contracts are turning cyclical pricing into backlog: 26 strategic customer agreements (SCAs) estimated at over 35% of revenue through 2030, ~$150B of remaining performance obligations, $32B of customer financial commitments (mostly cash deposits), and more than 75% of FY2027 output already committed (all per Q4 FY2026 call).",
-    "Q4 FY2026 revenue $54.23B (vs $11.32B a year earlier) at 86.8% GAAP gross margin and $33.2B of quarterly adjusted free cash flow; FY2026 revenue $133.19B and adjusted FCF $62.3B: earnings power without precedent in memory history.",
-    "The whole question is durability: management says supply will be tighter in FY2027-28 than in 2026 and guides sequential revenue growth every quarter of FY2027, but price increases are moderating and FY2027 capex is stepping up sharply (1H ~$25B, 2H higher)."
+    "A three-supplier market with a sold-out HBM book. Only Samsung, SK Hynix and Micron make leading-edge DRAM at scale, and the vast majority of Micron's calendar-2027 HBM bits are contracted at significantly higher prices than 2026; Nvidia lifted its supply commitments to $390B from $279B in its October quarter, mostly multi-year memory purchases.",
+    "Contracts and deposits blunt the downside. Customers have put cash on Micron's balance sheet to secure supply, which no prior memory cycle had; the agreements do not fix margins (debate 2) but they make a loss-making trough unlikely.",
+    "Cash and buybacks arrive at a depressed price. Cash and investments were $73.5B against $5.2B of debt at Sep 3, 2026, FY2026 adjusted free cash flow was $62.3B, and a $35.16B repurchase authorization opens Dec 9, 2026 - Micron never spent more than $2.66B on buybacks in any prior year.",
+    "Estimates are rising while the stock falls. In the 30 days to early November, 28 analysts raised FY2027 EPS and 2 cut, and the reverse DCF already requires earnings to fall about 20% a year for seven years; the stock needs a plateau, not growth."
   ],
   "latestQuarter": {
     "label": "Q4 FY2026 (ended Sep 3, 2026; reported Sep 30, 2026)",
     "points": [
-      "Revenue $54.23B, +379% YoY, +31% QoQ; GAAP gross margin 86.8% (non-GAAP 87.0%); GAAP operating margin 80.7% (non-GAAP 82.3%).",
-      "GAAP EPS $32.87; non-GAAP EPS $33.42 vs ~$31.6 consensus (LSEG, per press reports); GAAP net income $37.70B.",
-      "Operating cash flow $43.97B; net capex $10.77B; adjusted FCF $33.20B. Net cash $68.3B; customer deposits $12.7B on balance sheet.",
-      "DRAM $39.8B (73% of revenue, prices up high-teens % QoQ); NAND $14.1B (26%, prices up ~30% QoQ); data center SSD nearly $10B.",
-      "Guide: Q1 FY2027 revenue $61.5B +/- $1.5B, non-GAAP gross margin ~86.25%, EPS $38.15 +/- $1.00; Q1 called the FY2027 gross-margin floor."
+      "Revenue $54.23B, +379% YoY, +31% QoQ; GAAP gross margin 86.8% (non-GAAP 87.0%); GAAP operating margin 80.7%.",
+      "GAAP EPS $32.87 on 1,147M diluted shares; non-GAAP EPS $33.42 vs ~$31.4-31.6 consensus (press reports); GAAP net income $37.70B.",
+      "Operating cash flow $43.97B; net capex $10.77B; adjusted FCF $33.20B.",
+      "DRAM $39.8B (73% of revenue, prices up high-teens % QoQ); NAND $14.1B (26%, prices up ~30% QoQ).",
+      "Guide: Q1 FY2027 revenue $61.5B +/- $1.5B, non-GAAP gross margin ~86.25%, non-GAAP EPS $38.15 +/- $1.00."
     ]
   },
   "segments": [
-    "Q4 FY2026: DRAM $39.8B (73%), NAND $14.1B (26%). By business unit: core data center $18.0B (90% GM), cloud memory $16.3B (83% GM, diluted by HBM mix), mobile/client $13.1B (90% GM), auto/embedded $6.8B (84% GM). FY2026 DRAM revenue surpassed $100B.",
-    "HBM is the strategic prize: the vast majority of calendar-2027 HBM bit supply is contracted at significantly higher prices YoY, narrowing the margin gap with conventional DRAM; HBM4 ramping, custom HBM4E (NV-HBM) with NVIDIA next. Singapore HBM packaging output expected early calendar 2027."
+    "Q4 FY2026 by business unit: core data center $18.0B (90% GM), cloud memory $16.3B (83% GM, diluted by HBM mix), mobile/client $13.1B (90% GM), auto/embedded $6.8B (84% GM). FY2026 NAND revenue was $31.8B, with more than two-thirds of Q4 NAND sales from data center SSDs.",
+    "HBM is the strategic prize: HBM4 is ramping, a custom HBM4E (NV-HBM) with NVIDIA follows, and Singapore HBM packaging output is expected in early calendar 2027."
   ],
   "competitive": [
-    "HBM share remains contested and tracker-dependent: one Q2 2026 read puts SK Hynix at 50%, Samsung 32% and Micron 18%; another has SK hynix near 62% with Micron having passed Samsung.",
+    "DRAM share (TrendForce, per press, Oct 2026): Samsung 39.4%, SK Hynix 24.9%, Micron 23.3%, CXMT 9.5%.",
+    "HBM share is tracker-dependent: one Q2 2026 read puts SK Hynix at 50%, Samsung 32% and Micron 18%; another has SK Hynix near 62% with Micron ahead of Samsung.",
     "Scale is the structural gap: Samsung and SK Hynix each run roughly 150,000-200,000 HBM wafers a month, three to four times Micron's base. Micron's ID1 fab outputs mid-2027, ID2 late 2028.",
-    "NAND: fifth place (~11% share) behind Samsung, SK Hynix, Kioxia and Sandisk, though NAND revenue grew 42% QoQ in Q4 FY2026.",
-    "CXMT (China) hit 7.6% of global DRAM in Q1 2026 and IPO'd at roughly $85B; not yet at the leading edge.",
-    "Analysts raised talk of a large customer de-speccing HBM on the Q4 call; management replied that HBM demand outgrows conventional DRAM through 2028 (customer and magnitude unverified)."
+    "NAND: fifth place (~11% share) behind Samsung, SK Hynix, Kioxia and Sandisk.",
+    "CXMT announced a 4F-square DRAM cell in mid-October 2026; KeyBanc puts it two to three generations behind Micron."
   ],
-  "moat": "Leading-edge DRAM process capability (1-gamma is now its largest node), HBM4 plus a custom HBM4E program with the dominant AI platform, and take-or-pay SCAs - three quarters of SCA revenue has a defined pricing framework, mostly floor-and-ceiling bands. Breadth across HBM, LPDDR/SOCAMM, DDR5 and data center SSD lets wafers chase the highest return. The binding limit is clean-room capacity, not demand.",
+  "moat": "Leading-edge DRAM process capability (1-gamma is now its largest node), HBM4 plus a custom HBM4E program with the dominant AI platform, and take-or-pay customer agreements. Breadth across HBM, LPDDR/SOCAMM, DDR5 and data center SSD lets wafers chase the highest return. The binding limit is clean-room capacity, not demand.",
   "risks": [
-    "Peak-cycle earnings: 87% gross margins are unprecedented and mean-reverting; management guides a more moderate rate of price increases in FY2027, and Morningstar cut its fair value citing faster-than-expected pricing deceleration.",
-    "Capex step-up: 1H FY2027 net capex ~$25B with 2H higher (analysts infer more than $50B for the year), weighted to construction - raising fixed costs and depreciation if pricing softens.",
-    "Beat magnitude narrowing: Q4 non-GAAP EPS beat ~5-7% versus 20%+ earlier in the cycle; FY2027 opex guided up ~$2.5B.",
-    "Capacity race: Samsung and SK Hynix add supply from a base three to four times larger; CXMT share gains (7.6% and rising).",
-    "HBM content risk if a large customer de-specs memory per accelerator (reported, unverified), which could also release wafers back to conventional DRAM.",
-    "NAND structurally smaller at ~11% share despite the current price surge."
+    "Peak margins mean-revert. Micron's own annual report shows five-year price swings from roughly +200% to -50%, and after the last comparable peak GAAP EPS fell from $11.51 in FY2018 to $2.37 in FY2020.",
+    "Capex is rising into the peak. First-half FY2027 net capex is guided to ~$25B, close to all of FY2026's $27.37B, with the second half higher and weighted to construction; that depreciation arrives in FY2028-29 whatever prices do.",
+    "AI demand rests on a few buyers in turmoil. More than half of FY2026 revenue came from ten customers; Nvidia's chief executive resigned in mid-November 2026 (per Motley Fool) and post-midterm worries about data-center build-outs drove a 17.5% one-day fall on Nov 5 with no Micron news beyond the fab pause.",
+    "China and NAND are the soft flanks. CXMT is moving from consumer into server DRAM and NAND has no three-player discipline; either can break pricing in a quarter of the revenue base before HBM is touched.",
+    "Labour and legal friction. Bloomberg reported on Nov 5 that work on the $3.0-4.5B Taoyuan fab was all but halted by a union dispute over pay and profit-sharing (Taiwan is about 60% of Micron's DRAM output), and Micron reportedly lost a motion to dismiss a DRAM price-collusion class action on Nov 14 (unverified)."
   ],
   "catalysts": [
-    "Increased capital return beginning Dec 9, 2026 (management intends to return 100% of excess cash over time); $0.15 quarterly dividend payable Oct 29, 2026.",
-    "Q1 FY2027 earnings in late December 2026 (date unverified; guide $61.5B revenue, ~86.25% gross margin, $38.15 EPS) - first test of the 'Q1 is the margin floor' claim.",
-    "Calendar-2027 HBM price step-up taking effect from January 2027; HBM4 multi-customer ramp and NV-HBM (custom HBM4E) milestones.",
-    "Further SCA signings and 2028 supply negotiations (already under way per management).",
-    "TrendForce Q4 2026 and Q1 2027 contract-price prints, plus CXMT capacity news flow."
+    "Dec 9, 2026: repurchase window opens under the $35.16B authorization - pace is the test of 'return 100% of excess cash over time'.",
+    "Dec 17, 2026: Q1 FY2027 report - Q2 margin and revenue guide, FY2027 capex, contract disclosures (debates 1 and 2).",
+    "Late Dec 2026: TrendForce 1Q27 DRAM and NAND contract price forecasts (debate 1).",
+    "Jan 2027: calendar-2027 HBM contract prices take effect (debate 2).",
+    "Late Jan 2027: Samsung and SK Hynix Q4 calls - 2027 bit growth and capex; hyperscaler 2027 capex guides the same week (debate 3).",
+    "Mid-2027: first wafers from the Idaho fab; start of 2028 HBM pricing talks (debates 2 and 3)."
   ],
-  "pricedIn": "The stock closed at $1,097.39 on Oct 1, 2026, up 3.0% the day after the Q4 print, still about 10% below the $1,213.37 all-time closing high of Jun 25. Annualizing the Q1 FY2027 EPS guide ($38.15 x 4 = ~$153) gives roughly 7.2x forward earnings, and ~14.5x FY2026 non-GAAP EPS of $75.52 (both derived). Debate: a single-digit multiple on peak EPS is exactly what a cycle top looks like, and a $50B-plus capex year plus moderating price increases give the bears their entry - against which sit ~$150B of RPO, 75%+ of FY2027 output committed, and $32B of customer commitments that make this cycle more durable than any before it.",
-  "scenarios": {
-    "bear": "FY2027 marks the peak: price increases fade as new capacity lands in 2027-28, the capex surge becomes stranded depreciation, CXMT floods conventional DRAM, margins compress toward the 50s, SCA floors bind, EPS halves, and the stock de-rates the way every prior memory cycle ended.",
-    "base": "FY2027 is another record with sequential growth each quarter as guided; Q1 at ~86% gross margin proves the floor, calendar-2027 HBM is pre-sold at higher prices, and SCA floors cushion any conventional slowdown; earnings plateau high rather than collapse, with violent cycle-headline volatility.",
-    "bull": "Supply stays tight through 2028 as management claims; HBM pricing converges toward conventional DRAM margins, NV-HBM wins share, NAND scarcity extends, capital return to 100% of excess cash lands, and the ~7x multiple re-rates toward 10x as the market accepts a structurally higher earnings floor."
-  },
   "valPresets": {
     "mode": "fcf",
     "basis": "fwdEps",
@@ -65,11 +141,11 @@
     "bull": {
       "g": 0.08
     },
-    "note": "Basis is forward earnings: at roughly 7x annualized forward EPS (Oct 2026) the market is still pricing a memory downcycle, and the reverse DCF quantifies the implied annual earnings decline. Bear equals a deep downcycle (prior cycles saw EPS halve or worse); bull is the structural-shortage case where earnings hold and grow."
+    "note": "Basis is forward earnings: the reverse DCF quantifies the annual earnings decline the price implies. Bear equals a deep downcycle (prior cycles saw EPS fall by half or more); bull is the structural-shortage case where earnings hold and grow."
   },
   "sources": [
     {
-      "label": "Micron Q4 FY2026 press release (SEC 8-K Ex. 99.1)",
+      "label": "Micron Q4 FY2026 press release (SEC 8-K Ex. 99.1): results, balance sheet, Q1 guide",
       "url": "https://www.sec.gov/Archives/edgar/data/0000723125/000072312526000018/a2026q4ex991-pressrelease.htm"
     },
     {
@@ -77,50 +153,94 @@
       "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-micron-tops-q4-2026-estimates-as-demand-stays-hot-93CH-4925992"
     },
     {
-      "label": "Stock reaction and Oct 1 close (Yahoo Finance)",
-      "url": "https://finance.yahoo.com/technology/article/micron-stock-rises-after-blowout-earnings-and-the-answer-to-this-analysts-key-question-134446610.html"
+      "label": "Q1 FY2027 call date, Dec 17, 2026 (Micron release of Nov 19, 2026)",
+      "url": "https://www.quiverquant.com/news/Micron+Technology+Announces+Date+for+Fiscal+First+Quarter+2026+Earnings+Conference+Call"
     },
     {
-      "label": "Post-earnings analyst views (TradingKey)",
-      "url": "https://www.tradingkey.com/news/market-movers/262196875-market-movers-mu-20261001"
+      "label": "24/7 Wall St (Nov 3, 2026): $35.16B buyback, cash and debt, FY2027 consensus",
+      "url": "https://247wallst.com/investing/2026/11/03/micron-now-trades-at-under-5-times-earnings-with-a-35-billion-buyback-weeks-away/"
+    },
+    {
+      "label": "TIKR (Nov 2026): 10-K contracted minimum revenue, FY2027 consensus, price caps",
+      "url": "https://www.tikr.com/blog/micron-is-44-below-its-high-with-over-75-of-its-2027-output-already-committed"
+    },
+    {
+      "label": "TIKR: GF Securities NAND surplus warning (Nov 17, 2026)",
+      "url": "https://www.tikr.com/blog/why-is-micron-down-gf-securities-warns-a-nand-glut-could-hit-in-2027"
+    },
+    {
+      "label": "Trefis: Nov 5, 2026 sell-off and Taoyuan report",
+      "url": "https://www.trefis.com/stock/mu/articles/623345/what-sent-micron-stock-lower/2026-11-06"
+    },
+    {
+      "label": "Taipei Times: Micron pauses Taoyuan fab (Nov 6, 2026)",
+      "url": "https://taipeitimes.com/News/biz/archives/2026/11/06/2003867231"
+    },
+    {
+      "label": "Motley Fool (Oct 15, 2026): CXMT 4F-square, TrendForce DRAM share, KeyBanc price views",
+      "url": "https://www.fool.com/investing/2026/10/15/why-is-micron-stock-still-dropping/"
+    },
+    {
+      "label": "Motley Fool (Nov 16, 2026): Nvidia turmoil, DRAM class action",
+      "url": "https://www.fool.com/investing/2026/11/16/why-micron-stock-keeps-going-down/"
+    },
+    {
+      "label": "TipRanks: Citi sees memory prices peaking in Q2 2027 (Aug 7, 2026)",
+      "url": "https://www.tipranks.com/news/memory-prices-will-peak-next-year-warns-citi-as-it-cuts-micron-mu-price-target-by-18"
+    },
+    {
+      "label": "Kioxia flat December-quarter guide (Oct 30, 2026)",
+      "url": "https://fourweekmba.com/ai-kioxia-sinks-15-8-on-flat-2-trillion-guide-sk-hynix-rises/"
+    },
+    {
+      "label": "Samsung Q3 2026 call: shortage through 2028, 2027 capex",
+      "url": "https://wccftech.com/samsung-memory-shortages-worse-in-2027-supply-constraints-persist-into-2028/"
+    },
+    {
+      "label": "Nvidia Q3 FY2027 supply commitments; Micron Oct 21 webinar; top-10 customer share",
+      "url": "https://www.heygotrade.com/en/news/micron-mu-stock-news-november-19-2026/"
+    },
+    {
+      "label": "Q4 call capex and industry bit-growth coverage (Stocktwits)",
+      "url": "https://stocktwits.com/news-articles/markets/equity/mu-stock-drops-after-hours-micron-s-heightened-capex-forecast-overpowers-q4-beat-expectation-beating-q1-guidance/cZMFVZfRBLS"
+    },
+    {
+      "label": "Counterpoint view on 2H 2027 prices (PC Gamer)",
+      "url": "https://www.pcgamer.com/hardware/memory/there-is-no-scenario-where-memory-prices-correct-in-the-second-half-of-2027-according-to-new-market-research"
     },
     {
       "label": "HBM share and HBM4 capacity race",
       "url": "https://siliconanalysts.com/analysis/hbm4-market-share-race-2026"
-    },
-    {
-      "label": "CXMT IPO",
-      "url": "https://www.fool.com/investing/2026/07/26/an-85-billion-chinese-dram-rival-starts-trading-mo/"
     }
   ],
   "guide": {
     "label": "Q1 FY27 guide",
     "val": "$61.5B +/-$1.5B",
-    "sub": "GM ~86.25% - EPS $38.15 +/-$1.00",
+    "sub": "GM ~86.25% | EPS $38.15 +/-$1.00",
     "tone": "accent"
   },
-  "latestProse": "Q4 FY2026 (ended Sep 3; reported Sep 30). Revenue $54.23B versus $11.32B a year earlier (+379%) and above the $50B +/- $1B guide; GAAP gross margin 86.8%, GAAP operating margin 80.7% (operating income $43.75B). Non-GAAP EPS $33.42 against ~$31.6 consensus; GAAP net income $37.70B ($32.87 per share). Operating cash flow was $43.97B and adjusted free cash flow $33.20B after $10.77B of net capex. DRAM was a record $39.8B (73% of revenue) on high-teens price increases; NAND $14.1B (26%) on ~30% price increases, with data center SSD nearly $10B. FY2026 revenue $133.19B, non-GAAP EPS $75.52. The disclosure that matters most: 26 take-or-pay SCAs now underpin ~$150B of remaining performance obligations and $32B of customer financial commitments, with more than 75% of FY2027 output committed - the contractual floor is the entire argument against valuing this as a normal cycle top.",
-  "guidanceProse": "Q1 FY2027 guide: revenue $61.5B +/- $1.5B, non-GAAP gross margin ~86.25% (GAAP ~85.95%), opex ~$2.06B, non-GAAP EPS $38.15 +/- $1.00 on ~1.15B shares - roughly 8% above consensus. Management calls Q1 the gross-margin floor for FY2027 (higher incentive compensation lands in Q1), expects higher margins thereafter with a more moderate rate of price increases, sequential revenue growth every quarter, FY2027 opex up ~$2.5B and a ~15.5% tax rate. Net capex ~$11.5B in Q1 and ~$25B in 1H FY2027, higher in 2H and weighted to construction for clean-room space from late 2028. The market pays roughly 7x annualized forward earnings for the combination.",
+  "latestProse": "Q4 FY2026 (ended Sep 3; reported Sep 30). Revenue $54.23B against $11.32B a year earlier and above the $50B +/- $1B guide, at an 86.8% GAAP gross margin and $43.75B of operating income. DRAM was a record on high-teens price increases and NAND grew on ~30% price increases, with data center SSD nearly $10B. FY2026 revenue was $133.19B, GAAP EPS $74.33 and non-GAAP EPS $75.52. Since the print the news has been about everything except Micron's numbers: CXMT's density announcement in mid-October, Kioxia's flat guide on Oct 30, the Nov 5 fab-pause report and post-midterm AI sell-off, the Nvidia leadership crisis the following week and GF Securities' NAND surplus call on Nov 17. Micron itself has not changed guidance, and its next report is Dec 17.",
+  "guidanceProse": "Q1 FY2027 guide: revenue $61.5B +/- $1.5B, non-GAAP gross margin ~86.25% (GAAP ~85.95%), non-GAAP opex ~$2.06B and non-GAAP EPS $38.15 +/- $1.00 on ~1.15B shares, about 8% above consensus at the time. Management calls Q1 the gross-margin floor for FY2027 (higher incentive compensation lands in Q1) and expects higher margins thereafter on a more moderate rate of price increases, sequential revenue growth every quarter, FY2027 opex up ~$2.5B and a ~15.5% tax rate. Net capex is ~$11.5B in Q1, with spending aimed at clean-room space that produces from late 2028. A $0.15 quarterly dividend was paid Oct 29, 2026.",
   "bullCharts": {
-    "1": [
+    "0": [
       "revQ"
     ],
     "2": [
-      "gmA"
+      "fcfA"
     ],
-    "0": [
-      "niQ"
+    "3": [
+      "peerFpe"
     ]
   },
   "bearCharts": {
     "0": [
-      "revYoyA"
+      "gmA"
     ],
     "1": [
       "capexA"
     ],
-    "4": [
-      "priceH"
+    "2": [
+      "revYoyA"
     ]
   }
 }

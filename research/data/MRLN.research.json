@@ -1,66 +1,136 @@
 {
-  "asOf": "2026-08-25",
-  "oneLiner": "Retrofit autonomy for existing aircraft: a $105M-ceiling USSOCOM C-130J program, USAF KC-135 flight testing, and a first-of-its-kind NZ/FAA certification path -- trading near $4 with $183.9M cash and a $32M revenue promise its $2M quarters have not yet met.",
-  "thesis": [
-    "The certification lead is real and rare. Merlin completed SOI 1 and SOI 2 with the Civil Aviation Authority of New Zealand working in partnership with the FAA, and on Aug 6, 2026 announced SOI 3 for the Flight Control Computer and Automated Communication System, plus an agreed approach to certifying AI/ML natural-language components -- a first for the category.",
-    "Defense anchors the model while civil matures. The prime IDIQ with USSOCOM for C-130J autonomy carries a $105M ceiling, and the critical design review was completed Jun 4, 2026, moving the program into aircraft integration. KC-135 automation work with the USAF (agreement Feb 2024, flight testing with partner SNC since 2025) extends the tanker-fleet opportunity.",
-    "Aircraft-agnostic software is the scaling story. Merlin executed its first fully automated fixed-wing takeoffs on Apr 11 and Apr 21, 2026 (one in the US, one in New Zealand) and demonstrated an autonomous landing at EAA AirVenture Oshkosh on Jul 20, 2026; the Condor product family (announced May 14, 2026) extends Merlin Pilot to large multi-crew cargo and military aircraft.",
-    "The SPAC hangover is the price. Merlin listed Mar 17, 2026 via Inflection Point Acquisition Corp. IV at a ~$800M valuation with ~$200M of fresh capital; the stock has fallen from a $17 high to roughly $4 (it closed Aug 13 at $4.42, then dropped ~10% after hours on the Q2 print), and targets were cut through July (Roth $15 to $10, TD Cowen $11 to $8) even as all four analysts stay at Buy.",
-    "Funding is adequate near term. Cash, equivalents and short-term investments were $183.9M with no debt at Jun 30, 2026, against a $27.8M adjusted EBITDA loss in Q2 -- roughly six quarters of runway at the current burn rate."
-  ],
-  "latestQuarter": {
-    "label": "Q2 2026, ended Jun 30, 2026 (reported Aug 13, 2026)",
-    "points": [
-      "Revenue $2.2M, primarily Defense program work -- up from $1.0M in Q1 2026 but below the ~$3.8M consensus, and still minimal against the ~$32M 2026 figure shown to SPAC investors.",
-      "GAAP net loss $(58.4)M, again dominated by non-cash fair-value adjustments on SPAC-related instruments.",
-      "Adjusted EBITDA $(27.8)M vs $(23.3)M in Q1 2026; operating cash flow $(27.3)M vs $(23.6)M -- burn is accelerating, not moderating.",
-      "Cash, equivalents and short-term investments $183.9M at Jun 30, 2026; no debt.",
-      "Milestones: C-130J critical design review complete; non-binding MOU with Israel Aerospace Industries for AI-powered autonomy; first fully autonomous landing at EAA AirVenture Oshkosh (Cessna 208B); SOI 3 with the NZ CAA (Aug 6).",
-      "Shares closed the report day at $4.42 (+6.3%), then fell ~10% after hours to $3.99."
+  "asOf": "2026-11-21",
+  "oneLiner": "Retrofit autonomous-flight software for existing aircraft, in practice a single funded USSOCOM C-130J program plus a cash pile. The market is betting that the cash belongs to the Series A preferred holders, not the common, and that program revenue will not grow fast enough to change that before the money runs down.",
+  "verdict": {
+    "stance": "Cautious - option on subordinated equity",
+    "summary": "The common stock is a call option written beneath a preferred stack that is larger than the cash. Q3 2026 showed a real program (a third C-130J task order, a narrower loss) but also a business with $6.7M of nine-month revenue, no guidance, a withdrawn civil certification application and, a week later, a founder-CEO exit. Our probability-weighted value sits slightly below the stock: the bear case is worth about a third of it, the bull case about three times it, and the bull needs both a larger C-130J phase and a cost base cut by roughly half. We would move to Neutral on a next-phase USSOCOM award of $15M or more by mid-2027 together with a quarterly adjusted EBITDA loss at or below $15M. We would move lower on any financing or preferred restructuring priced under the $5.00 conversion floor.",
+    "wtb": [
+      "USSOCOM awards the next C-130J phase by about Jun 2027 at $15M or more, and FY2027 revenue reaches at least ~$16M, against $6.7M in the first nine months of 2026.",
+      "The quarterly adjusted EBITDA loss falls from $24.1M in Q3 2026 to $15M or less by Q2 2027, so that cash is still above ~$75M at Dec 31, 2027 (Siberforge estimate).",
+      "No equity, convertible or preferred amendment is priced below $5.00 before end-2027; the Series A stays a 2031 claim and not a present one.",
+      "The closing bid is back above $1.00 for ten straight sessions by mid-2027 without a reverse split, keeping the Nasdaq listing."
     ]
   },
-  "latestProse": "Q2 2026 (reported Aug 13) doubled revenue sequentially to $2.2M -- almost all defense program work -- but missed the ~$3.8M consensus, and the $(58.4)M GAAP loss was again mostly non-cash fair-value noise from SPAC-related instruments. The operating reality: adjusted EBITDA burn widened to $(27.8)M from $(23.3)M in Q1 as certification and program spending ramped, operating cash flow was $(27.3)M, and cash ended at $183.9M with no debt. Alongside the print, Merlin disclosed a non-binding MOU with Israel Aerospace Industries for AI-powered autonomy and showcased the Oshkosh autonomous landing. Shares rose 6.3% into the report and gave back ~10% after hours. The disclosure that matters most: first-half revenue totaled $3.2M against the ~$32M full-year projection shown to SPAC investors -- the credibility gap is now arithmetic, not interpretation.",
-  "guidanceProse": "Merlin still issues no formal guidance; the IPO deck's ~$32M 2026 revenue projection is effectively dead after a $3.2M first half, and management steered the Q2 call toward milestones (C-130J integration, KC-135 testing, NZ certification) rather than numbers. Funding remains solid but the clock ticks faster: $183.9M of cash, no debt, and a burn rate now near $28M a quarter imply roughly six quarters of runway before new capital is needed. The central debate is unchanged -- whether defense task orders and SOI-stage certification progress convert into contracted revenue fast enough to justify a ~$390M market cap -- but the Q2 burn acceleration moves the funding wall from a 2028 question toward late 2027. Sell-side remains Buy-rated with targets far above the ~$4 share price.",
+  "scenarioModel": {
+    "horizon": "FY2027 (year ending Dec 2027)",
+    "valueDate": "2027-12-31",
+    "metric": "sales",
+    "bear": {
+      "p": 0.5,
+      "rev": 0.009,
+      "multiple": 1.5,
+      "why": "FY2027 revenue ~$9M, flat on our FY2026 estimate: the next C-130J phase slips under a continuing resolution or arrives no larger than the $8.9M order, and AFRICOM stays a demo. Cost cuts come late, cash falls toward ~$60M against a Series A claim above $270M, and the stock is reverse-split to keep its listing. The common is priced as a residual option at ~1.5x sales after the preferred."
+    },
+    "base": {
+      "p": 0.37,
+      "rev": 0.016,
+      "multiple": 5,
+      "why": "FY2027 revenue ~$16M: the current task order runs to about May 2027, a next phase of $15M or more follows, and ground and flight testing of the C-130J starts on schedule. Opex falls enough to hold cash near ~$75M at year-end. The preferred still sits on top, so the common captures only ~5x sales of an enterprise that is worth far more gross."
+    },
+    "bull": {
+      "p": 0.13,
+      "rev": 0.028,
+      "multiple": 10,
+      "why": "FY2027 revenue ~$28M: C-130J moves into flight test with production-kit orders in sight, a second funded defense program (KC-135, AFRICOM or an Air Force follow-on) reaches eight figures, and the new CEO halves the burn. A defense-autonomy vendor with visible growth earns ~10x sales for the common even after the preferred, though the stock stays under the $5.00 conversion price."
+    },
+    "note": "Value per share = (FY2027 revenue x EV/Sales + net cash) / shares. The page uses today's ~102M common shares and ~$19M of net cash (market cap minus the data vendor's EV), not the $161.6M of reported cash. That gap is roughly the vendor netting part of the Series A preferred; how the vendor computes it is unverified. We therefore set the multiples on what is left for the common after the preferred: 18.66M Series A shares at $12.00 stated value ($223.9M) accruing 12% in kind, about $275M by Dec 2027 (Siberforge estimate), against cash we expect to fall to $60-90M. In gross terms the base case is roughly $300M of enterprise value, ~19x sales. Dilution is not in the share count: the preferred converts into roughly 47M shares at $5.00 and 40.1M warrants strike at $5.00, all out of the money in every case here, so we treat them as a cap on upside and a senior claim, and keep half the probability on the bear case. The table rounds revenue to $0.0B; dollar figures are in each case text. Inputs are Siberforge estimates, not consensus."
+  },
+  "debates": [
+    {
+      "q": "Does C-130J become a revenue run-rate, or stay a string of small task orders?",
+      "bull": "The Nov 10, 2026 order is the third under an IDIQ with a ceiling above $100M and takes the program from critical design review into integration, which management described as roughly the seventh of about eight gates. Ground and flight testing is expected within a year, and AFRICOM adds a second combatant-command customer.",
+      "bear": "A ceiling is not funding. The order is $8.9M recognised over about six months, remaining performance obligations were $0.4M at Sep 30, 2026, quarterly revenue growth has swung between +15%, -29% and +80%, and the operating loss is about nine times revenue. The next phase is only negotiated around Apr 2027 and FY2027 appropriations are unsettled.",
+      "view": "We assume the program continues but stays small: ~$16M of FY2027 revenue in the base case, which still leaves the growth the page's priced-in row asks for out of reach. The size of the next phase is the single number that separates bear from base.",
+      "signpost": {
+        "metric": "Value of the next USSOCOM C-130J task order and Q1 2027 revenue",
+        "threshold": "$15M or more and Q1 revenue above $4M = base holds, shift 10 points from bear; under $9M or no award by Jun 30, 2027 = bear",
+        "when": "Award expected ~Apr-Jun 2027; Q1 2027 report ~mid-May 2027"
+      }
+    },
+    {
+      "q": "Does the cash last into 2029 as management says?",
+      "bull": "The adjusted EBITDA loss already narrowed from $27.8M to $24.1M between Q2 and Q3 2026, there is no debt, and management has committed to 2027 operating expenses meaningfully below 2026 and to spending only where work is funded. The preferred dividend can be paid in kind, so it costs no cash.",
+      "bear": "Trailing twelve-month operating cash outflow is about $89M and capex adds ~$7M, which is 1.7 years of cover, not three. No dollar target or headcount action has been given, capex ran at about 90% of revenue as flight operations moved to Rhode Island, and the executive who made the promise left six days later.",
+      "view": "We believe roughly half of it. Opex can fall quickly because G&A and marketing doubled in a year, but reaching 2029 requires burn near $12M a quarter, which means cutting into the engineering that the C-130J work needs. We model ~$75M of cash at end-2027 and treat a raise in 2028 as likely.",
+      "signpost": {
+        "metric": "Quarterly adjusted EBITDA loss and period-end cash",
+        "threshold": "Loss at or below $15M by Q2 2027 and cash above $140M at Dec 31, 2026 = runway credible; loss still above $20M in Q1 2027 = cut base probability",
+        "when": "Q4 2026 report ~Mar 2027; Q2 2027 report ~mid-Aug 2027"
+      }
+    },
+    {
+      "q": "Is anything left for the common beneath the Series A?",
+      "bull": "The preferred has no put until the fifth anniversary of the Mar 16, 2026 closing, so holders cannot demand cash before 2031. Until then the common controls an enterprise with more cash than its own market value and gets all of the upside between today and the conversion price.",
+      "bear": "The Series A liquidation claim already exceeds the cash and compounds at 12% a year. Its conversion price has been reset twice in seven months, from $12.00 to $6.67 and then to the $5.00 floor on Oct 15, 2026, and diluted shares are up 45% year on year before any of it converts. In a sale or wind-down the common is paid last, and a sub-$1 stock invites a reverse split.",
+      "view": "This is why the stock trades below cash, and we think the market has it broadly right: the common is worth something only as a going concern with growing revenue. We would not own it for the cash. A negotiated exchange of the preferred into common would be the cleanest fix and would be heavily dilutive.",
+      "signpost": {
+        "metric": "Nasdaq bid-price status, any reverse split proposal, any amendment or exchange of the Series A",
+        "threshold": "Closing bid back above $1.00 with no new senior paper = hold; deficiency notice followed by a reverse split proxy, or new securities priced under $5.00 = move 10 points from base to bear",
+        "when": "FY2026 10-K and 2027 proxy, ~Mar-May 2027"
+      }
+    }
+  ],
+  "changelog": [
+    {
+      "date": "2026-11-21",
+      "change": "Rebuilt to the v3 format and updated for Q3 2026. View moved down from a constructive 'funded with a certification lead' read to Cautious: the small-aircraft certification application was withdrawn (Sep 9), the preferred conversion price and warrant strikes reset to $5.00 (Oct 15), no revenue guidance was given with Q3 (Nov 12) and the founder-CEO left (Nov 18). Added a numeric scenario model that values the common after the Series A."
+    },
+    {
+      "date": "2026-08-25",
+      "change": "Updated for Q2 2026: revenue $2.2M against a ~$32M full-year SPAC projection, burn rising, $183.9M of cash. View unchanged (speculative, funded for about six quarters)."
+    }
+  ],
+  "thesis": [
+    "Funded defense work is advancing. USSOCOM added a third C-130J task order two days before the Q3 report and AFRICOM signed a first contract, so the one program that pays is moving toward aircraft integration and has a second sponsor.",
+    "Expectations have been reset to almost nothing. The $32M of 2026 revenue shown to SPAC investors and the $4-6M second-half range given in August are both gone from the conversation; Q3 revenue was above the ~$2.0M analysts expected, and a single eight-figure award would now be a visible surprise.",
+    "The cost base is discretionary. Operating expenses doubled in a year, mostly in G&A and sales, so a new chief executive can cut a long way before touching the program team, and no debt means no lender sets the timetable.",
+    "An operator now runs the company. Bob Smith, who led Blue Origin from 2017 to 2024, became chairman and interim CEO on Nov 18, 2026 with stated priorities of delivering the USSOCOM and AFRICOM programs and disciplined investment; Mark Brunner was named president."
+  ],
+  "risks": [
+    "The common sits beneath a growing preferred claim. 18.66M Series A shares carry a $12.00 stated value ($223.9M, above the cash balance) and accrue 10% in cash or 12% in kind; they convert at $5.00 into roughly 47M shares (Siberforge estimate), and 40.1M PIPE warrants now strike at $5.00.",
+    "Burn still dwarfs revenue. Nine-month 2026 operating cash outflow was $70.8M and capex $7.6M against $6.7M of revenue, and the runway claim rests on cuts that have not been quantified.",
+    "Reported profit is an accounting artifact. Q3 net income came from marking the warrant liability down as the share price fell, while the loss from operations was unchanged in character; the company also reports unremediated material weaknesses in financial controls.",
+    "The civil certification story was withdrawn. On Sep 9, 2026 Merlin pulled its small-aircraft STC application with New Zealand's CAA after reaching SOI 3 and switched to a phased large-aircraft plan with no dates; the World Star and IAI agreements are non-binding and got no update in Q3.",
+    "One customer, one program, and a listing in question. US government agencies are more than 90% of revenue, FY2027 appropriations are unsettled, and a share price under $1.00 puts the Nasdaq minimum-bid rule in play; no deficiency notice had been disclosed by Nov 21, 2026 (unverified)."
+  ],
+  "latestQuarter": {
+    "label": "Q3 2026, ended Sep 30, 2026 (reported Nov 12, 2026)",
+    "points": [
+      "Revenue $3.46M, +80% YoY and +58% QoQ; nine-month revenue $6.66M. Gross loss $1.8M.",
+      "Loss from operations $31.5M (Q3 2025: $16.6M) on operating expenses of $29.7M; adjusted EBITDA loss $24.1M (Q2 2026: $27.8M).",
+      "GAAP net income $73.8M, entirely a $103.6M non-cash gain on warrant liabilities; $37.7M ($0.37 per diluted share) attributable to common after the Series A.",
+      "Operating cash outflow $19.9M, capex $3.8M. Cash and short-term investments $161.6M at Sep 30, 2026 (Jun 30: $183.9M); no debt.",
+      "Series A preferred carried at $170.6M, warrant liabilities $26.5M, stockholders' deficit $26.3M. Common shares 102.4M at Nov 10, 2026; diluted weighted average 103.2M, +45% YoY.",
+      "After the quarter: $8.9M USSOCOM C-130J task order (Nov 10) and a $0.5M AFRICOM casualty-evacuation demonstration contract (Nov 11)."
+    ]
+  },
+  "latestProse": "Q3 2026 (ended Sep 30; reported Nov 12). Revenue grew off a tiny base, almost all of it US government program work, and was still sold at a gross loss; the loss from operations nearly doubled from a year earlier. The GAAP net income is not a profit: it is the non-cash gain from revaluing warrant liabilities after the share price fell from about $5.70 to $1.88 over the quarter. Two events between the Q2 and Q3 reports matter more than the print. On Sep 9 Merlin withdrew its small-aircraft certification application in New Zealand in favour of an undated large-aircraft plan. On Oct 15 a price test reset the PIPE warrant strikes and the Series A conversion price from $6.67 to the $5.00 floor.",
+  "guidanceProse": "There is no revenue guidance. The $4-6M second-half 2026 range given on the Q2 call was not repeated (Q3 alone was $3.46M), and no Q4 or 2027 figure was offered. The only forward commitments are qualitative: 2027 operating expenses meaningfully below 2026, investment limited to programs with funded work, and a plan that management says is funded into 2029 without capital raises, a year longer than the 'into 2028' stated in August. Program timing from the call: the $8.9M task order is recognised over about six months, the following phase is negotiated around Apr 2027, C-130J ground and flight testing is expected within a year, and a first deployment of Merlin Pilot on a commercial or military aircraft is targeted within three years. The KC-135 work with the US Air Force got no update. On Nov 18 founder Matt George left the CEO, chairman and board roles for an advisory position; the board gave no reason and has opened a search for a permanent CEO, so the 2027 plan will be written by an interim team.",
   "guide": {
-    "label": "Cash at Jun 30, 2026",
-    "val": "$183.9M",
-    "sub": "no debt | adj EBITDA burn $27.8M in Q2",
-    "tone": "accent"
+    "label": "2027 plan (no revenue guide)",
+    "val": "Opex below 2026",
+    "sub": "runway 'into 2029' | no Q4 or 2027 revenue range",
+    "tone": "warn"
   },
   "segments": [
-    "Defense: USSOCOM C-130J autonomy prime IDIQ ($105M ceiling; CDR complete Jun 2026, now in aircraft integration), USAF KC-135 automation flight testing with SNC, UAE opportunity scoping via the Remah International Group teaming agreement (Apr 23, 2026), and a non-binding MOU with Israel Aerospace Industries for AI-powered autonomy (disclosed Aug 13, 2026).",
-    "Civil: Merlin Pilot certification through NZ CAA with FAA coordination (SOI 3 achieved Aug 2026), targeting the first certified fully automated takeoff-to-touchdown fixed-wing flight; Condor for large cargo aircraft with a non-binding World Star Aviation MOU.",
-    "Essentially all reported revenue today is program and development work, not product sales."
+    "Defense (more than 90% of revenue): USSOCOM C-130J autonomy under a prime IDIQ with a ceiling above $100M (critical design review Jun 2026, third task order Nov 2026, integration phase); AFRICOM autonomous casualty-evacuation demonstration on a Cessna 208B; USAF KC-135 automation testing with SNC (status not updated since mid-2026). A separate ~$16M Air Force C-130J aircrew-workload contract is cited from GovTribe data (unverified).",
+    "Civil: small-aircraft certification with New Zealand's CAA withdrawn in Sep 2026 after SOI 3; replaced by a phased large-aircraft strategy with FAA coordination and the Condor product for multi-crew cargo aircraft. New Zealand remains the Pacific flight-test base. No certified product and no civil revenue.",
+    "All revenue is development and program work recognised against milestones, not product or licence sales."
   ],
   "competitive": [
-    "Reliable Robotics is the closest comparable: Cessna Caravan continuous-autopilot STC path with the FAA plus its own USAF work -- arguably ahead on the US civil certification route, though still private.",
-    "Joby (JOBY) absorbed Xwing's autonomy division in 2024 and pairs a similar superpilot ambition with a multi-billion-dollar balance sheet spanning air taxis and defense.",
-    "Shield AI's Hivemind owns the combat-autonomy narrative at multi-billion private valuations, but targets uncrewed tactical jets rather than retrofit cargo and tanker autonomy.",
-    "Primes and incumbents bound the space: Lockheed/Sikorsky MATRIX, Airbus autonomy programs, and Garmin Autoland at the low end.",
-    "Versus platform peers Kratos (KTOS) and AeroVironment (AVAV), Merlin sells certified software retrofits for existing airframes rather than new unmanned aircraft -- a smaller market today, but capital-light if certification lands first."
+    "Reliable Robotics (private) is the closest comparable and is still pursuing a Cessna Caravan autopilot STC with the FAA, the small-aircraft route Merlin has now left.",
+    "Joby (JOBY) owns the former Xwing autonomy team; Shield AI's Hivemind leads combat autonomy. Both compete for the same defense autonomy budgets with far more capital.",
+    "Primes bound the space: Lockheed/Sikorsky MATRIX on the C-130J manufacturer's side, Airbus autonomy programs, Garmin Autoland at the light end.",
+    "Platform peers Kratos (KTOS) and AeroVironment (AVAV) trade on a few times sales with real backlog; Merlin has no production revenue."
   ],
-  "moat": "The certification archive is the intended moat: SOI 3 with the NZ CAA and an agreed pathway for certifying AI/ML-based components genuinely leads most rivals, and regulators move slowly for followers too. But nothing is certified yet, revenue runs ~$1M a quarter, the World Star and Remah agreements are non-binding, and a defense IDIQ ceiling is not backlog. Until a certified product ships or task orders convert, the moat is a well-documented head start, not a business.",
-  "risks": [
-    "Commercialization gap: $3.2M of first-half revenue against ~$32M projected for 2026 in SPAC materials; the Q2 miss ($2.2M vs ~$3.8M consensus) shows even reset expectations are hard to hit.",
-    "Certification risk: SOI 3 covers two components; full takeoff-to-touchdown certification, FAA validation of the NZ path, and operational approvals for AI/ML systems remain unproven ground for any regulator.",
-    "Defense concentration and IDIQ optics: the $105M C-130J ceiling is a maximum, not contracted revenue; USSOCOM priorities, budgets, and timelines can shift.",
-    "Burn: the adjusted EBITDA loss accelerated to $27.8M in Q2 from $23.3M in Q1, pointing to a funding wall around late 2027 absent revenue inflection; the $80M PIPE arrived barely six weeks after listing.",
-    "Competition from better-funded players: Joby/Xwing, Shield AI, Reliable Robotics, and the primes can outspend Merlin many times over.",
-    "Post-SPAC technicals: the stock has traversed $17.00 to $3.27 in five months and dropped ~10% after hours on the Q2 print; lockup expiries and warrant overhang can cap rallies and amplify drawdowns."
-  ],
+  "moat": "What remains is program incumbency: Merlin is the prime on C-130J autonomy for USSOCOM, has completed the design reviews, and has hundreds of autonomous flights on its own aircraft. The certification archive that the earlier note called the moat lost most of its value when the New Zealand application was withdrawn; the regulatory experience carries over, the place in the queue does not. Incumbency on one program with $0.4M of contracted backlog is a foothold, not a moat.",
   "catalysts": [
-    "Q3 2026 results, expected ~November 2026: first quarter where the market looks for evidence of C-130J integration-phase work billing at scale.",
-    "First certified fully automated takeoff-to-touchdown fixed-wing flight with the NZ CAA (company target; watch H2 2026 into 2027).",
-    "C-130J aircraft-integration milestones and potential USSOCOM task orders through 2026-27.",
-    "KC-135 flight-test campaign progress with USAF/SNC and any movement toward a program of record in the FY2027-28 budget cycle.",
-    "Condor commercialization: converting the World Star Aviation MOU to a definitive agreement; outcomes from the UAE (Remah) teaming."
+    "~Mar 2027 (date not announced): Q4 and FY2026 results with the first 2027 operating plan - opex target, year-end cash, any revenue outlook (debate 2).",
+    "~Apr-Jun 2027: negotiation and award of the next USSOCOM C-130J phase as the $8.9M task order runs off (debate 1).",
+    "By May 18, 2027: end of Bob Smith's initial six-month interim term; permanent CEO decision or extension.",
+    "Q1-Q2 2027: Nasdaq minimum-bid status, FY2026 10-K and the 2027 proxy - watch for a reverse split proposal or any change to the Series A (debate 3).",
+    "By ~Nov 2027: C-130J ground and flight testing, subject to integration testing and aircraft availability (debate 1)."
   ],
-  "pricedIn": "At roughly $4.00 (Aug 13 after-hours print; late-August price unverified) on ~96.5M shares, market cap is ~$390M; net of $183.9M cash, enterprise value is roughly $205M against ~$9M of TTM revenue (estimated) -- nominally ~23x sales, but the market is pricing programs, not revenue. The stock has lost ~77% from its $17 March 2026 high, so SPAC froth is largely wrung out; four analysts still average a $9.75 target. What is priced in: continued defense execution and eventual certification, with little near-term revenue. The debate after Q2: whether accelerating burn ($27.8M adjusted EBITDA loss) buys enough certification and integration progress before the roughly six-quarter runway forces either revenue inflection or dilution.",
-  "scenarios": {
-    "bear": "Q2's pattern repeats: revenue stays in the low single-digit millions, burn holds near $28M a quarter, and the $32M 2026 projection is quietly abandoned. Certification grinds -- flight-test evidence for AI/ML components takes years -- while USSOCOM task orders stay small and Condor remains an MOU. By late 2027 cash is under $60M, forcing a dilutive raise at depressed prices. The stock breaks its $3.27 low and settles toward cash value, roughly $2-3, as the market reclassifies Merlin as a funded lab rather than a product company.",
-    "base": "Defense revenue ramps as C-130J integration converts to billable task orders and KC-135 testing advances; 2026 revenue lands far below the $32M projection (perhaps $8-12M off a $3.2M first half) but roughly doubles into 2027. The first certified automated flight arrives within about a year, validating the NZ CAA path. Burn moderates as programs bill. The stock ranges $4-8, re-rating on each contract or certification headline, with the late-2027 funding question deferred rather than answered.",
-    "bull": "Certification lands: a certified takeoff-to-touchdown automated flight in late 2026 or 2027 makes Merlin the civil fixed-wing autonomy first mover, pulling Condor commitments from cargo operators and lessors. USSOCOM spends toward the full $105M ceiling and a KC-135 program of record emerges from the 2027 budget. Revenue exceeds $50M in 2027 on defense margins, and strategic interest from primes puts a floor under the story. The stock revisits $10-15 -- analyst-target territory -- without needing SPAC-era froth."
-  },
   "valPresets": {
     "mode": "revenue",
     "r": 0.18,
@@ -81,57 +151,67 @@
       "fcfMargin": 0.25,
       "exit": 8
     },
-    "note": "Revenue mode because GAAP earnings are distorted by SPAC fair-value marks (Q2 GAAP loss $58.4M vs $27.8M adjusted EBITDA loss) and FCF is deeply negative. TTM revenue (~$9M estimated) is a tiny, lumpy program-revenue base, so implied CAGRs look extreme -- read them as the growth defense task orders plus certified-product sales would need to justify the price, not as forecasts."
+    "note": "Revenue mode because GAAP earnings swing with warrant fair-value marks and free cash flow is deeply negative. The revenue base is a few million dollars of lumpy program work, so implied growth rates look extreme: read them as what task orders would have to deliver, not as forecasts. The lab does not deduct the Series A preferred, which ranks ahead of the common."
   },
   "bullCharts": {
     "0": [
-      "priceH"
+      "revQ"
     ],
     "1": [
-      "revQ"
+      "priceH"
     ]
   },
   "bearCharts": {
     "0": [
+      "priceH"
+    ],
+    "1": [
       "fcfQ"
+    ],
+    "2": [
+      "niQ"
     ]
   },
   "sources": [
     {
-      "label": "Q2 2026 results press release (Aug 13, 2026)",
-      "url": "https://www.stocktitan.net/news/MRLN/merlin-inc-reports-second-quarter-2026-niox43oh9p7j.html"
+      "label": "Q3 2026 results press release (SEC 8-K exhibit, Nov 12, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0002028707/000162828026073408/merlininc8-kxex991110626.htm"
     },
     {
-      "label": "Q2 2026 earnings call transcript (Investing.com, Aug 13, 2026)",
-      "url": "https://www.investing.com/news/transcripts/earnings-call-transcript-merlin-labs-posts-q2-2026-loss-as-shares-fall-after-hours-93CH-4859356"
+      "label": "Form 10-Q for the quarter ended Sep 30, 2026 (shares, Series A, warrants, cash flow, RPO)",
+      "url": "https://www.sec.gov/Archives/edgar/data/2028707/000162828026073397/mrln-20260930.htm"
     },
     {
-      "label": "Q1 2026 results press release (SEC 8-K, May 14, 2026)",
-      "url": "https://www.sec.gov/Archives/edgar/data/2028707/000121390026056230/ea029055601ex99-1.htm"
+      "label": "StockTitan summary of the Q3 2026 10-Q (Series A terms, warrant counts and reset clause)",
+      "url": "https://www.stocktitan.net/sec-filings/MRLN/10-q-merlin-inc-quarterly-earnings-report-8aea11ca82cf.html"
     },
     {
-      "label": "SOI 3 certification milestone with NZ CAA (Aug 6, 2026)",
-      "url": "https://www.globenewswire.com/news-release/2026/08/06/3340227/0/en/merlin-achieves-next-stage-in-certification-of-its-autonomous-flight-technology.html"
+      "label": "Panabee: Q3 2026 summary incl. Oct 15, 2026 reset to $5.00 and 40.1M warrants",
+      "url": "https://www.panabee.com/news/merlin-earnings-q3-2026"
     },
     {
-      "label": "AIN: SPAC listing raises $200M (Mar 17, 2026)",
+      "label": "Finviz: Q3 2026 analysis - call detail, estimates, dropped H2 range, runway (Nov 2026)",
+      "url": "https://finviz.com/news/422360/merlins-revenue-beat-and-longer-runway-cant-mask-a-wider-loss-and-a-strategic-retreat"
+    },
+    {
+      "label": "Quartr: Q3 2026 call summary (testing and deployment timing)",
+      "url": "https://quartr.com/events/merlin-inc-mrln-q3-2026_FTaCKbov"
+    },
+    {
+      "label": "Quartr: Q2 2026 call summary ($4-6M second-half range, runway into 2028)",
+      "url": "https://quartr.com/events/merlin-inc-mrln-q2-2026_FTaCKHqi"
+    },
+    {
+      "label": "Washington Technology: Bob Smith named interim CEO and chairman (Nov 19, 2026)",
+      "url": "https://www.washingtontechnology.com/companies/2026/11/merlin-appoints-former-blue-origin-leader-interim-ceo-chairman/417339/"
+    },
+    {
+      "label": "Merlin press release: large-aircraft civil certification strategy, CAANZ STC application withdrawn (Sep 9, 2026)",
+      "url": "https://finviz.com/news/390110/merlin-announces-plans-to-pursue-a-civil-certification-strategy-for-large-aircraft"
+    },
+    {
+      "label": "AIN: SPAC listing raises $200M, $32M 2026 revenue projection (Mar 17, 2026)",
       "url": "https://www.ainonline.com/aviation-news/futureflight/2026-03-17/merlin-ipo-raises-200-million-autonomous-flight-goals"
-    },
-    {
-      "label": "C-130J critical design review complete with USSOCOM (Jun 4, 2026)",
-      "url": "https://www.globenewswire.com/news-release/2026/06/04/3307093/0/en/Merlin-Successfully-Completes-Critical-Design-Review-for-C-130J-Autonomy-Program-with-USSOCOM.html"
-    },
-    {
-      "label": "$80M PIPE announcement (Apr 29, 2026)",
-      "url": "https://www.globenewswire.com/news-release/2026/04/29/3283860/0/en/Merlin-Inc-Announces-80-Million-PIPE-Investment-to-Accelerate-Program-Execution-and-Unlock-New-Growth-Opportunities.html"
-    },
-    {
-      "label": "KC-135 autonomous flight test campaign (Aerospace Testing Intl)",
-      "url": "https://www.aerospacetestinginternational.com/news/merlin-begins-autonomous-flight-test-campaign-on-kc-135.html"
-    },
-    {
-      "label": "StockAnalysis MRLN overview (price, shares, mkt cap; checked Aug 13, 2026)",
-      "url": "https://stockanalysis.com/stocks/mrln/"
     }
   ]
 }
