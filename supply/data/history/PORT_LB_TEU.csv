@@ -1,4 +1,4 @@
-# LA-Long Beach - Container Ship Calls  source=scrape:imf-portwatch  generated=2026-11-16T14:25:22.504Z
+# LA-Long Beach - Container Ship Calls  source=scrape:imf-portwatch  generated=2026-11-23T16:59:47.034Z
 date,value
 2019-01-01,175
 2019-02-01,142
@@ -93,4 +93,4 @@ date,value
 2026-07-01,170
 2026-08-01,173
 2026-09-01,171
-2026-10-01,172
+2026-10-01,174
