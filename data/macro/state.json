@@ -1,5 +1,5 @@
 {
- "asOf": "2026-11-22",
+ "asOf": "2026-11-24",
  "headline": {
   "regime": "reflation",
   "title": "Reflation",
@@ -22,11 +22,11 @@
    "phase": "Tight"
   },
   "inflation": {
-   "score": 63,
+   "score": 62,
    "phase": "Sticky"
   },
   "credit": {
-   "score": 46,
+   "score": 47,
    "phase": "Neutral"
   },
   "housing": {
@@ -45,7 +45,7 @@
  },
  "nfci": -0.48,
  "recession": {
-  "curveOdds": 16.2,
+  "curveOdds": 16.4,
   "sahm": 0
  },
  "trail": [
