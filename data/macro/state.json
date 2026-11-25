@@ -14,7 +14,7 @@
  "inflationZ": 0.05,
  "scores": {
   "cycle": {
-   "score": 40,
+   "score": 41,
    "phase": "Late Expansion"
   },
   "labor": {
@@ -22,15 +22,15 @@
    "phase": "Tight"
   },
   "inflation": {
-   "score": 63,
+   "score": 62,
    "phase": "Sticky"
   },
   "credit": {
-   "score": 46,
+   "score": 49,
    "phase": "Neutral"
   },
   "housing": {
-   "score": 69,
+   "score": 67,
    "phase": "Cooling"
   },
   "consumer": {
@@ -39,13 +39,13 @@
   }
  },
  "policy": {
-  "realFF": 0.76,
+  "realFF": 0.62,
   "neutralReal": 1.2,
-  "stance": "close to neutral"
+  "stance": "modestly accommodative"
  },
- "nfci": -0.48,
+ "nfci": -0.44,
  "recession": {
-  "curveOdds": 16.6,
+  "curveOdds": 16.7,
   "sahm": 0
  },
  "trail": [
