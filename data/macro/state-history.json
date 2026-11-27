@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-26",
+  "asOf": "2026-11-27",
   "kinds": ["cycle","labor","inflation","credit","housing","consumer"],
   "note": "s = composite scores in `kinds` order, c = share of each score's weight that had data (percent), g/i = regime growth and inflation z, r = that month's regime, ff = real fed funds, n = NFCI, u12 = change in the unemployment rate over the following 12 months (points), rec = recession status over the following 12 months. Values are what the site would have shown on that date: publication lags applied, today's revised data.",
-  "today": {"d":"2026-11-26","s":[41,38,62,49,67,58],"g":0.01,"i":0.05,"r":"reflation","ff":0.74,"n":-0.45},
+  "today": {"d":"2026-11-27","s":[41,38,62,49,67,58],"g":0.01,"i":0.05,"r":"reflation","ff":0.74,"n":-0.45},
   "rows": [
     {"d":"1990-01-31","s":[66,49,34,43,65,66],"c":[80,80,65,60,80,40],"g":-0.39,"i":-0.16,"r":"disinflation","ff":4.56,"n":0.06,"u12":1,"rec":"began within 12 months"},
     {"d":"1990-02-28","s":[65,45,38,46,53,59],"c":[80,80,65,60,80,40],"g":-0.1,"i":0.01,"r":"stagflation","ff":4.56,"n":0.06,"u12":1.3,"rec":"began within 12 months"},
