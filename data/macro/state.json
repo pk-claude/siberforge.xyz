@@ -22,11 +22,11 @@
    "phase": "Tight"
   },
   "inflation": {
-   "score": 62,
+   "score": 63,
    "phase": "Sticky"
   },
   "credit": {
-   "score": 49,
+   "score": 48,
    "phase": "Neutral"
   },
   "housing": {
@@ -45,7 +45,7 @@
  },
  "nfci": -0.44,
  "recession": {
-  "curveOdds": 16.7,
+  "curveOdds": 16.8,
   "sahm": 0
  },
  "trail": [
