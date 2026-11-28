@@ -1,8 +1,8 @@
 {
-  "asOf": "2026-11-21",
-  "oneLiner": "The dominant AI accelerator franchise, priced like a cyclical at its peak and now carrying a founder-exit discount on top. The market is betting that FY2028 is the high-water mark and that the company runs worse without Jensen Huang; the stock works if earnings merely plateau and the roadmap keeps its cadence.",
+  "asOf": "2026-11-28",
+  "oneLiner": "The dominant AI accelerator franchise, priced like a cyclical at its peak, with the founder back after an eleven-day exit and an investigation still open. The market is betting that FY2028 is the high-water mark and that Washington, not demand, sets the ceiling; the stock works if earnings merely plateau and the governance overhang clears.",
   "thesis": [
-    "Full-stack lock-in. CUDA plus full-system integration (GPU + Vera CPU + NVLink + racks) and an annual Hopper-Blackwell-Rubin cadence keep rivals aiming at a moving target; the roadmap through Rubin is set and was reaffirmed as on plan on the first call without the founder.",
+    "Full-stack lock-in. CUDA plus full-system integration (GPU + Vera CPU + NVLink + racks) and an annual Hopper-Blackwell-Rubin cadence keep rivals aiming at a moving target; the roadmap through Rubin is set and was reaffirmed as on plan on Nov 17, and the architect of that cadence is back in the chair.",
     "Supply-limited growth, raised again. The FY2028 framework moved from ~70% to ~75% growth (about $740B) on demand plus additional secured supply - management keeps buying capacity ahead of orders it believes it has.",
     "Demand is broadening beyond the hyperscalers. AI cloud, industrial and enterprise customers were $47.5B of Q3 Data Center revenue, +195% YoY against +71% for hyperscalers, which dilutes the single-customer capex-pause risk that defined the bear case a year ago.",
     "Cheap against its own earnings path. The stock needs no re-rating, only for earnings to hold up past FY2028, and the company is leaning in: $22.1B of buybacks in Q3 and $227.3B of authorization left after the board added $150B in September."
@@ -30,19 +30,20 @@
     "Hyperscaler in-house silicon (TPU v7, Trainium 3, Maia 2) grows faster than merchant GPUs in 2026 (TrendForce estimate: +45% vs +16%).",
     "Equity-and-financing ties (Intel co-development, SpaceX/xAI, OpenAI Ohio) lock large buyers to NVDA silicon in ways rivals cannot match - and invite circularity critiques."
   ],
-  "moat": "CUDA and the surrounding software stack, compounded by full-system integration competitors must replicate across six-plus co-designed chips, an annual platform cadence, and a supply chain locked up years ahead through purchase commitments. Reinforced by capital: equity stakes and financing guarantees that make NVDA the anchor allocator of the AI buildout. The untested part is how much of the cadence depended on one person.",
+  "moat": "CUDA and the surrounding software stack, compounded by full-system integration competitors must replicate across six-plus co-designed chips, an annual platform cadence, and a supply chain locked up years ahead through purchase commitments. Reinforced by capital: equity stakes and financing guarantees that make NVDA the anchor allocator of the AI buildout. The eleven days without Jensen Huang showed how much of that value the market assigns to one person.",
   "risks": [
-    "Succession with no named successor. Jensen Huang resigned as President, CEO and director on Nov 12, 2026 with no reason given in the 8-K; CFO Colette Kress is interim CEO while also remaining CFO, Harvey Jones became the board's first chair, and the search covers internal and external candidates. Press reports of a board investigation are unverified here; the shares fell nearly 12% the next morning.",
+    "Governance and Washington. Jensen Huang resigned on Nov 12, 2026 after press reports of affairs, one with a former executive of Megaspeed, a Singapore cloud customer under US export-control investigation since 2024, and was reinstated by a unanimous board on Nov 23 after it said senior US government officials saw no national-security risk. The independent directors' investigation continues, Congress is questioning him, and reports that S&P may cut the AA rating over board governance and that Megaspeed was added to the Entity List are unverified here.",
     "Cyclical peak. The Q4 guide has 14 weeks, so per week it is only ~4% above Q3; if FY2029 looks down, the market will value FY2028 EPS at a peak-cycle multiple whatever FY2028 itself delivers.",
     "Supply bought ahead of orders. Commitments of $390B (more than half reportedly due in FY2028, unverified) plus $102B of cloud-service and lease commitments exceed a full year of cost of revenue, and inventory rose to $39.7B from $21.4B in January - a demand pause would turn into write-downs, and trailing cash conversion is still only ~70%.",
     "Margin step-down. Gross margin is guided to 71-72% for Q4 from 74.8%, and 72-73% for FY2028, as memory costs and the Rubin ramp bite; each point is roughly $7B of FY2028 operating profit.",
     "Concentration and custom silicon. Hyperscalers are still 56% of Data Center revenue and are the same customers funding Broadcom and Marvell ASIC programmes."
   ],
   "catalysts": [
+    "Dec 1-3, 2026: Huang's closed-door interview with three House committees (Dec 1), general counsel Tim Teter (Dec 2), public Senate Banking hearing (Dec 3, reported) (debate 4).",
     "Mid-Dec 2026: Broadcom Q4 FY26 - AI semiconductor guide as the custom-ASIC read (debate 3).",
     "Late Jan to early Feb 2027: MSFT, GOOGL, META, AMZN Q4 calls - first dollar 2027 capex guides (debate 1).",
     "Late Feb 2027 (date unconfirmed): Q4 FY2027 report - $130B guide, 71-72% gross margin, cash conversion, supply commitments and the first FY2028 quarterly guide (debates 1 and 2).",
-    "By GTC, mid-Mar 2027 (date unconfirmed): permanent CEO decision and the first roadmap keynote without the founder (debate 4)."
+    "Undated: conclusion of the independent directors' investigation; any export-control legislation that follows the hearings (debate 4)."
   ],
   "valPresets": {
     "mode": "fcf",
@@ -61,6 +62,26 @@
     "note": "Growth presets are year-1 rates that fade to terminal. Compare them with the constant growth rate the reverse DCF row says is priced in: even the bear preset starts near it."
   },
   "sources": [
+    {
+      "label": "NVIDIA newsroom: board reinstates Jensen Huang as President, CEO and director (Nov 23, 2026)",
+      "url": "https://nvidianews.nvidia.com/news/nvidia-board-reinstates-jensen-huang-as-president-ceo-and-board-director"
+    },
+    {
+      "label": "Yahoo Finance: reinstatement, board statement, background to the resignation, share reaction (Nov 23, 2026)",
+      "url": "https://finance.yahoo.com/technology/article/nvidia-stock-has-best-day-since-may-2003-gaining-nearly-1t-in-market-cap-after-jensen-huang-is-reinstated-as-ceo-212735744.html"
+    },
+    {
+      "label": "CBS News: the investigations involving Nvidia, Jensen Huang and Megaspeed (Nov 2026)",
+      "url": "https://www.cbsnews.com/news/nvidia-jensen-huang-megaspeed-investigations/"
+    },
+    {
+      "label": "CNBC: Huang's congressional schedule, Dec 1-3 (Nov 24, 2026)",
+      "url": "https://www.cnbc.com/2026/11/24/jensen-huang-nvidia-congress-gtc.html"
+    },
+    {
+      "label": "AIStockWire: week of Nov 23 recap - reported S&P governance warning and Megaspeed Entity List addition (unverified)",
+      "url": "https://aistockwire.com/blog/s-p-500-best-week-since-april-2025-nvidia-huang-marvell-week-ahead-november-2026"
+    },
     {
       "label": "NVIDIA Q3 FY2027 press release (Nov 17, 2026): results, cash flow, buybacks, Q4 outlook",
       "url": "https://investor.nvidia.com/news/press-release-details/2026/NVIDIA-Announces-Financial-Results-for-Third-Quarter-Fiscal-2027/default.aspx"
@@ -125,7 +146,7 @@
     "tone": "accent"
   },
   "latestProse": "Q3 FY2027 (ended Oct 25, 2026; reported Nov 17), the first print with Colette Kress as interim CEO. Revenue $115.8B, +103% YoY and +20% QoQ, $7.8B above the guide midpoint; $2.4B of that was licensed Hopper product shipped to China that the guide had excluded, and those shipments have since stopped. Data Center $107.6B (+110%) is ~93% of the company. GAAP gross margin 74.8%, operating income $77.5B, GAAP diluted EPS $2.70 (non-GAAP $2.68) on 24.19B diluted shares. Unlike the first half, the EPS is almost all operating: net equity gains were $1.8B. Operating cash flow was $48.3B and free cash flow $43.8B; inventory reached $39.7B and supply commitments $390B, up from $279B, mostly multi-year memory.",
-  "guidanceProse": "Q4 FY2027 guide: revenue $130.0B plus or minus 3%, gross margin 71-72% (GAAP and non-GAAP), GAAP operating expenses ~$11.0B, no China Data Center compute revenue. The quarter has an extra week, so the +12% sequential step is closer to +4% per week - a softer guide than the headline, though NVDA has beaten its midpoint by $5-8B in each of the last two quarters. That puts FY2027 revenue near $424B. On the call the FY2028 framework was raised from ~70% to ~75% growth with gross margin of 72-73% (per call coverage; the press release itself is silent on FY2028). The board said operations, customer commitments and the product roadmap continue without interruption; no timetable was given for the CEO search. The vendor-finance overlay stands: a backstop of up to $105B for OpenAI's Ohio campus.",
+  "guidanceProse": "Q4 FY2027 guide: revenue $130.0B plus or minus 3%, gross margin 71-72% (GAAP and non-GAAP), GAAP operating expenses ~$11.0B, no China Data Center compute revenue. The quarter has an extra week, so the +12% sequential step is closer to +4% per week - a softer guide than the headline, though NVDA has beaten its midpoint by $5-8B in each of the last two quarters. That puts FY2027 revenue near $424B. On the call the FY2028 framework was raised from ~70% to ~75% growth with gross margin of 72-73% (per call coverage; the press release itself is silent on FY2028). On that call the chair said the board had no plans to bring Huang back; six days later it reinstated him, and Kress returned to the CFO role alone. The vendor-finance overlay stands: a backstop of up to $105B for OpenAI's Ohio campus.",
   "bullCharts": {
     "0": [
       "gmA"
@@ -155,12 +176,12 @@
     ]
   },
   "verdict": {
-    "stance": "Positive - sized for a cycle and a succession",
-    "summary": "The founder left and the numbers got better in the same week: a beat, a raised FY2028 framework and the first quarter in a year where reported EPS was nearly all operating. The shares have lost about a third from their October high, more than the value we would take off for an interim CEO, so the asymmetry improved even though we cut every multiple. We stay positive, sized so that the bear case - a 2027 capex digestion landing on supply that is already committed, with flat EPS and a peak multiple - is survivable. Two things would change the view: dollar 2027 capex guides in late January that come in flat, or a roadmap slip or senior engineering exits before a permanent CEO is named.",
+    "stance": "Positive - sized for a cycle and a governance overhang",
+    "summary": "The board reversed itself: Jensen Huang is CEO again, and the shares had their best day since 2003 on the news. That removes the succession discount we took a week ago, so we restore one of the two turns of multiple we cut. The other stays off because the investigation is open, Congress is involved and the episode proved the key-man risk rather than retiring it. Fundamentals are unchanged since the Q3 print and the probability-weighted value is still well above the price after the rebound, so we stay positive, sized so that the bear case - a 2027 capex digestion landing on committed supply, with tighter export enforcement on top - is survivable. Two things would change the view: dollar 2027 capex guides in late January that come in flat, or findings or legislation that remove Huang again or restrict sales beyond China.",
     "wtb": [
       "FY2028 revenue lands within ~10% of the ~75% framework (about $670-740B), which needs combined 2027 capex at MSFT, GOOGL, AMZN and META to be guided up 25% or more.",
       "Gross margin holds at 72% or better in FY2028 after the guided Q4 FY2027 dip to 71-72%.",
-      "A permanent CEO is named by mid-2027 and Rubin volume shipments stay on the schedule reaffirmed on Nov 17, 2026.",
+      "Huang is still CEO when the independent directors' investigation concludes, no export restrictions beyond China follow the Dec 1-3 hearings, and Rubin volume shipments stay on the schedule reaffirmed on Nov 17, 2026.",
       "Operating cash flow reaches 80%+ of net income over the next two quarters as committed supply turns into shipped product rather than inventory."
     ]
   },
@@ -171,23 +192,23 @@
     "bear": {
       "p": 0.3,
       "rev": 500,
-      "eps": 10.0,
+      "eps": 10,
       "multiple": 11,
-      "why": "2027 hyperscaler capex flattens; FY2028 revenue grows ~18% on FY2027's ~$424B, committed memory and capacity arrive anyway and gross margin falls to ~68% with write-downs (net margin ~48%). EPS is flat on FY2027, the market calls the peak and adds a leadership discount: a trough-style multiple."
+      "why": "2027 hyperscaler capex flattens; FY2028 revenue grows ~18% on FY2027's ~$424B, committed memory and capacity arrive anyway and gross margin falls to ~68% with write-downs (net margin ~48%). EPS is flat on FY2027, the market calls the peak and adds a governance and export-enforcement discount: a trough-style multiple."
     },
     "base": {
       "p": 0.5,
       "rev": 690,
-      "eps": 15.0,
-      "multiple": 16,
-      "why": "Rubin ramps on schedule but supply and power cap the year below the 75% framework (~+63%); gross margin ~72%, net margin ~52%. A credible CEO is in place but FY2029 visibility is mixed, so the multiple sits two turns below our October base and far below the 2023-25 range."
+      "eps": 15,
+      "multiple": 17,
+      "why": "Rubin ramps on schedule but supply and power cap the year below the 75% framework (~+63%); gross margin ~72%, net margin ~52%. The founder is back, but an open investigation and mixed FY2029 visibility keep the multiple one turn below our October base and far below the 2023-25 range."
     },
     "bull": {
       "p": 0.2,
       "rev": 740,
       "eps": 16.7,
-      "multiple": 20,
-      "why": "The ~75% framework is met with gross margin ~73% (net margin ~54%); 2027 capex guides rise 30%+, non-hyperscale demand keeps compounding and succession is settled with the roadmap intact. FY2029 growth looks positive, earning a 20x multiple."
+      "multiple": 21,
+      "why": "The ~75% framework is met with gross margin ~73% (net margin ~54%); 2027 capex guides rise 30%+, non-hyperscale demand keeps compounding and the investigation closes with Huang in place and the roadmap intact. FY2029 growth looks positive, earning a 21x multiple."
     },
     "note": "FY2027 revenue = Q1 $81.6B + Q2 $96.2B + Q3 $115.8B + Q4 guide $130B = ~$424B; FY2027 GAAP EPS ~ $10.4 ($2.39 + $2.46 + $2.70 + ~$2.85 est). FY2028 EPS = revenue x net margin / ~24.0B diluted shares: bear 500 x 48% / 24.0 = 10.0; base 690 x 52% / 24.0 = 15.0; bull 740 x 54% / 24.0 = 16.7. Multiples are applied to FY2028 EPS at end-2027. Base EPS sits slightly below the $15.64 calendar-2027 consensus. Scenario inputs are Siberforge estimates."
   },
@@ -226,18 +247,22 @@
       }
     },
     {
-      "q": "Does NVDA keep its cadence and its multiple without the founder?",
-      "bull": "The roadmap through Rubin is taped out and supply is contracted for years; the interim CEO has run finance since 2013 and delivered a beat-and-raise five days after the exit.",
-      "bear": "Huang was the product strategist, the chief salesman to every major buyer and the reason engineers stayed. A CFO holding both jobs is a caretaker, an external hire is a culture risk, and the unexplained exit leaves open what else the board may disclose.",
-      "view": "A real cost, worth about two turns of multiple in every scenario, but not a thesis-breaker while the next two platform generations are already in the pipeline. It becomes one if the search drags past mid-2027 or key architects leave.",
+      "q": "Is the founder's return durable, and what does Washington charge for it?",
+      "bull": "The reinstatement vote was unanimous and followed US government input that his return poses no national-security risk. The interim period produced a beat-and-raise, so nothing operational broke, and the roadmap keeps its architect.",
+      "bear": "The investigation was not closed, only outlasted: the independent committee and its counsel continue, the Megaspeed export-control probe is live, and lawmakers are using the episode to push tighter chip-export rules such as the AI Overwatch Act. A board that reversed itself in six days has less authority over the CEO than before, and a second exit would be worse than the first.",
+      "view": "We give back one turn of multiple, not two. The one-day move measured the key-man premium; it did not price the tail in which findings or legislation take him out again or put licence requirements on third-country cloud customers. That tail sits in the bear case until the investigation closes.",
       "signpost": {
-        "metric": "Permanent CEO appointment; Rubin shipment schedule; senior engineering departures",
-        "threshold": "positive if a technically credible CEO is named and Rubin is on plan; negative on any slip or exits",
-        "when": "By GTC, mid-Mar 2027"
+        "metric": "Congressional sessions; conclusion of the independent directors' investigation; new export-control rules or Entity List actions touching NVDA customers",
+        "threshold": "positive if the investigation closes with Huang in place and no restrictions beyond China; negative on a second departure or licence requirements for third-country cloud buyers",
+        "when": "Hearings Dec 1-3, 2026; investigation conclusion undated; Q4 FY27 report, late Feb 2027"
       }
     }
   ],
   "changelog": [
+    {
+      "date": "2026-11-28",
+      "change": "Jensen Huang reinstated as President, CEO and director on Nov 23 (unanimous board vote, eleven days after resigning); Kress back to CFO only; the independent directors' investigation continues and Huang faces House and Senate sessions Dec 1-3. Restored one of the two turns of multiple cut on Nov 21 in the base and bull cases (17x and 21x; bear stays 11x): bear $110 / base $255 / bull $351. Succession debate replaced by a governance and export-enforcement debate. No new financials. View unchanged (Positive); the overhang moved from succession to Washington."
+    },
     {
       "date": "2026-11-21",
       "change": "Q3 FY27 beat ($115.8B vs $108B guide), Q4 guide $130B on 14 weeks, FY2028 framework raised to ~75%; Jensen Huang resigned Nov 12 with CFO Colette Kress as interim CEO. Scenarios rolled forward: EPS up, every multiple cut ~2 turns (bear $110 / base $240 / bull $334). Cash-conversion signpost passed (74% vs 65% threshold); capex signpost resolved up in words, not dollars. Added succession debate and supply-commitment risk; China removed from the thesis. View unchanged in direction (Positive); asymmetry better after the drawdown."

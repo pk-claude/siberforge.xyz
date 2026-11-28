@@ -1,9 +1,9 @@
 {
-  "asOf": "2026-11-07",
+  "asOf": "2026-11-28",
   "oneLiner": "The enterprise and defense operating system for AI agents, growing near 100% at 60%+ adjusted margins. The market is betting that US commercial demand compounds for years, so that FY2027-28 earnings grow into a multiple no other large-cap software company carries.",
   "verdict": {
     "stance": "Neutral - best-in-class, fully priced",
-    "summary": "Nothing in Q3 2026 weakens the business case: growth accelerated again and US commercial overtook US government. The problem is the price, not the company. Our base case (FY2027 revenue +50%, a mid-70s multiple on GAAP EPS at end-2027) lands near today's level, and the probability-weighted value sits slightly below it, because the bear case loses more than half while the bull case adds about 40%. Two things would move us to Positive: US commercial growth holding above 120% into Q4 with bookings re-accelerating, or a reset in price that puts the base case 25%+ above it. We would turn Cautious if US commercial falls below ~90% growth or the near-zero tax rate starts to show up in EPS without margin offset.",
+    "summary": "Nothing in Q3 2026 weakens the business case: growth accelerated again and US commercial overtook US government. The Maven contract Poland signed since then, about $60M a year, is evidence for the international-government leg rather than a change to the numbers. The problem is the price, not the company. Our base case (FY2027 revenue +50%, a mid-70s multiple on GAAP EPS at end-2027) lands near today's level, and the probability-weighted value sits slightly below it, because the bear case loses more than half while the bull case adds about 40%. Two things would move us to Positive: US commercial growth holding above 120% into Q4 with bookings re-accelerating, or a reset in price that puts the base case 25%+ above it. We would turn Cautious if US commercial falls below ~90% growth or the near-zero tax rate starts to show up in EPS without margin offset.",
     "wtb": [
       "FY2027 revenue of at least ~$12.5B (+47% on the ~$8.53B FY2026 guide), which needs US commercial to keep growing near 100% for most of the year.",
       "GAAP net margin stays at or above ~45% in FY2027 even as the effective tax rate rises from ~1% (Q3 2026) toward a normal rate.",
@@ -31,7 +31,7 @@
     },
     "bull": {
       "p": 0.2,
-      "rev": 14.0,
+      "rev": 14,
       "eps": 2.69,
       "multiple": 95,
       "why": "Revenue +64%: AIP becomes the default enterprise agent platform, US commercial stays above 100% and Golden Dome and NGC2 convert into large production programs. Net margin holds ~50% and FY2028 looks like another 50% year, so the multiple stays near the 2025-26 range."
@@ -76,7 +76,7 @@
   "thesis": [
     "AIP is winning enterprise agent deployment. US commercial reached $984M in Q3 2026 and passed US government for the first time; it has more than quintupled in two years.",
     "Growth is still accelerating at scale. Total revenue growth went from +85% to +93% to +96% over the last three quarters, and the FY2026 guide was raised from $8.15B to ~$8.53B.",
-    "Government is moving from prototype to production. The $10B/10-year Army Enterprise Agreement, NATO Maven, NGC2 and the Sep 2026 TITAN production orders embed Palantir in programs of record.",
+    "Government is moving from prototype to production. The $10B/10-year Army Enterprise Agreement, NATO Maven, NGC2 and the Sep 2026 TITAN production orders embed Palantir in programs of record, and Poland's five-year, ~$300M purchase of the Maven Smart System for all service branches (Nov 27, 2026) takes that outside the US.",
     "Operating leverage is elite. Adjusted operating margin held at 62% and GAAP operating margin at 47% while revenue nearly doubled, with capex under 1% of revenue."
   ],
   "latestQuarter": {
@@ -159,6 +159,10 @@
   },
   "sources": [
     {
+      "label": "Notes from Poland: Poland signs $300M, five-year deal with Palantir for the Maven Smart System (Nov 27, 2026)",
+      "url": "https://notesfrompoland.com/2026/11/27/poland-signs-300m-deal-with-palantir-for-ai-powered-battlefield-software-platform/"
+    },
+    {
       "label": "Palantir Q3 2026 press release (8-K, Nov 2, 2026)",
       "url": "https://www.sec.gov/Archives/edgar/data/0001321655/000132165526000045/a2026q3ex991pressrelease.htm"
     },
@@ -204,6 +208,10 @@
     }
   ],
   "changelog": [
+    {
+      "date": "2026-11-28",
+      "change": "No new financials. Poland's defence ministry signed a five-year, ~$300M agreement for the Maven Smart System on Nov 27 (about $60M a year, under 1% of the FY2026 revenue guide), converting the Oct 2025 letter of intent. Supports the government thesis but is too small to move the scenarios (bear $80 / base $170 / bull $256, weighted ~$160). View unchanged (Neutral); the Q4 US commercial growth signpost in early Feb 2027 is still what decides it."
+    },
     {
       "date": "2026-11-07",
       "change": "Migrated to v3 on the Q3 2026 print (revenue $2.31B, +96%; FY2026 guide raised to ~$8.53B). Added verdict (Neutral), FY2027 EPS scenarios (bear $80 / base $170 / bull $256, weighted ~$160), three debates including the TCV dip and NI above operating income. First explicit stance, so no prior view to move; the quarter strengthened the business case but not the valuation case."

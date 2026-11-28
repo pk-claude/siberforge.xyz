@@ -1,9 +1,9 @@
 {
-  "asOf": "2026-10-24",
+  "asOf": "2026-11-28",
   "oneLiner": "A flat-revenue car and storage business with a 2-3% operating margin, valued as if it were an autonomy and robotics platform. The market is betting that unsupervised robotaxi and Optimus turn into revenue in 2027-2028, before the AI spend finishes eating the car profits.",
   "verdict": {
-    "stance": "Cautious",
-    "summary": "Q3 2026 was a relief print, not a turn: a small non-GAAP beat, positive free cash flow because capex came in below plan, and real autonomy progress (Cybercab rides in Austin, ~2M unsupervised miles). Revenue is flat, operating margin is under 3% and opex is still rising ~40% a year, and the price needs earnings to compound far faster than the business has ever grown revenue. Our base case (a modest margin recovery and the multiple held at a very high level) is worth about what the stock trades at today. The bear case needs only for the autonomy timeline to slip again, and that has happened every year since 2019, so the skew is negative. Two things would change the view: unsupervised service scaling to a four-digit fleet across several metros by mid-2027, or operating margin back above 5% while R&D keeps climbing.",
+    "stance": "Cautious - on fundamentals; a SpaceX deal is the swing factor",
+    "summary": "Nothing since the Q3 2026 print changes the fundamental picture: revenue is flat, operating margin is under 3% and opex is still rising ~40% a year, while the price needs earnings to compound far faster than the business has ever grown revenue. Autonomy kept moving in November, with unsupervised service in eight cities and Cybercab rides in a second metro, but fleet size is still undisclosed. What changed is event risk: Tesla and SpaceX are reported to be negotiating a combination, and the one public estimate of terms is well above our standalone values. Our base case is worth less than the stock and the bear case needs only another autonomy slip, so we stay Cautious on the business while accepting that a bid would override that view in the short run. Two things would change the standalone view: unsupervised service scaling to a four-digit fleet by mid-2027, or operating margin back above 5% while R&D keeps climbing.",
     "wtb": [
       "FY2027 revenue grows at least 10% (to ~$116B+ on FY2026's ~$106B) as battery supply unlocks the backlog Tesla calls its largest in four years.",
       "Unsupervised FSD in customer-owned cars launches on the Q2 2027 date, and the unsupervised fleet passes ~1,000 vehicles across 5+ metros by end of Q2 2027.",
@@ -41,9 +41,9 @@
   "debates": [
     {
       "q": "Does unsupervised autonomy scale in 2027, or slip again?",
-      "bull": "Cybercab rides started in Austin on Sep 3, cumulative unsupervised miles rose eightfold q/q to nearly 2M, and unsupervised service now runs beyond Texas (Miami, Orlando, Tampa per the Q2 call). Customer cars join the fleet in Q2 2027.",
+      "bull": "Cybercab rides started in Austin on Sep 3, cumulative unsupervised miles rose eightfold q/q to nearly 2M, and unsupervised service now runs beyond Texas (Miami, Orlando, Tampa per the Q2 call). Customer cars join the fleet in Q2 2027. By late November the unsupervised service ran in eight cities (San Antonio added Nov 9), Cybercab rides had reached Dallas (Nov 19) and Tesla put the Austin Cybercab fleet at more than 300 vehicles.",
       "bear": "The Q2 2027 'unsupervised' product is narrower than promised: owners add cars to Tesla's managed fleet, in Tesla's zones. Personal unsupervised use was promised for end-2025. Fleet size is still undisclosed, and the NHTSA FSD probe is open.",
-      "view": "This debate sets the multiple, 80x versus 180x. Miles are progress, but the number that matters is fleet size, and Tesla does not report it. We hold the base case until a fleet count is disclosed.",
+      "view": "This debate sets the multiple, 80x versus 180x. The metro half of our threshold is met (eight cities against five); the fleet half is not, because the only count is 300+ Cybercabs in Austin. We hold the base case until a company-wide fleet number is disclosed.",
       "signpost": {
         "metric": "Disclosed unsupervised robotaxi fleet size and metros; customer-car unsupervised launch",
         "threshold": "bullish if 1,000+ vehicles in 5+ metros and the Q2 2027 launch holds; bearish if the launch slips past Q2 2027",
@@ -70,6 +70,17 @@
         "metric": "FY2027 capex guidance vs trailing operating cash flow (~$19B)",
         "threshold": "bearish if 2027 capex is guided above $30B with no revenue timeline attached",
         "when": "Q4 2026 report, late Jan 2027"
+      }
+    },
+    {
+      "q": "Does a SpaceX combination pay Tesla holders more than the business is worth?",
+      "bull": "Both boards have had special committees since Oct 20, Bloomberg reported on Nov 27 that talks could produce an announcement in December, and a deal needs a majority of all outstanding Tesla shares, which pushes terms toward a premium. HSBC estimates $507 per share, 33% above the 30-day average.",
+      "bear": "No exchange ratio is agreed and Musk has called a merger 'not a certainty'. Payment would be SPCX stock, itself priced for a compute build-out that needs outside funding, and Tesla's 10-Q says any arrangement needs Musk's approval, so the committees' independence will be tested as it was with SolarCity in 2016.",
+      "view": "A bid near the HSBC figure would be above our base case and about 1.6x our probability-weighted standalone value, so the event limits how far the Cautious view can pay off in the near term. It does not change what the business earns: holders would swap one stretched valuation for another, and the paper received should be judged on the SPCX note's terms.",
+      "signpost": {
+        "metric": "Announced exchange ratio, implied premium and form of payment",
+        "threshold": "a firm all-stock offer at a 20%+ premium = value the SPCX paper instead of the standalone scenarios; talks ended = standalone scenarios apply in full",
+        "when": "Reported as possible in December 2026; annual meeting Dec 3, 2026 (date per Barclays, unverified)"
       }
     }
   ],
@@ -115,9 +126,10 @@
     "Opex is outrunning gross profit. Operating margin fell from ~6% to 1.4% over four quarters to Q2 2026 and was only 2.6% in Q3, with R&D +69% YoY. That spend is committed, while the revenue it is meant to produce is not.",
     "Capex is stepping up with no revenue attached. Capex/revenue has risen from ~9% in 2022 to ~12.5% TTM and is heading higher on the >$25B plan. 2027 capex is likely larger, and Q3 FCF was positive only because spend lagged plan.",
     "Autonomy timelines and regulators. Unsupervised personal use has slipped from end-2025 to a narrower Q2 2027 product. NHTSA's FSD engineering analysis (~3.2M vehicles, degraded-visibility crashes) and China's 2.98M-vehicle door-handle recall show regulatory exposure in both flagship markets.",
-    "Governance is part of the valuation. The ~$1T CEO award (path to ~29% ownership, $1.17B of Q3 stock comp including it) and Tesla's $2B xAI stake tie the AI narrative to the CEO's other companies, and brand backlash still weighs on European demand."
+    "Governance is part of the valuation. The ~$1T CEO award (path to ~29% ownership, $1.17B of Q3 stock comp including it) and Tesla's $2B xAI stake tie the AI narrative to the CEO's other companies, and brand backlash still weighs on European demand. A SpaceX combination would add a related-party exchange ratio to that list (debate 4)."
   ],
   "catalysts": [
+    "Dec 2026: possible SpaceX merger announcement (reported Nov 27, no exchange ratio agreed); annual meeting Dec 3 (date unverified) (debate 4).",
     "Early Jan 2027: Q4 2026 deliveries - whether battery supply lets volume grow off the backlog (debate 2).",
     "Late Jan 2027: Q4 2026 report - operating margin, opex growth, and the first 2027 capex framing (debates 2 and 3).",
     "Through 1H 2027: robotaxi metro launches and any first disclosure of fleet size; NHTSA FSD probe rulings (debate 1).",
@@ -130,33 +142,101 @@
     "r": 0.11,
     "gT": 0.035,
     "years": 10,
-    "bear": {"g": 0.08},
-    "base": {"g": 0.18},
-    "bull": {"g": 0.30},
+    "bear": {
+      "g": 0.08
+    },
+    "base": {
+      "g": 0.18
+    },
+    "bull": {
+      "g": 0.3
+    },
     "note": "Forward-EPS basis because trailing GAAP earnings are depressed by the AI spend cycle and the market is explicitly paying for the future. The reverse DCF shows the implied growth (~39% a year for a decade), which even the bull preset does not reach."
   },
   "bullCharts": {
-    "2": ["fcfQ"]
+    "2": [
+      "fcfQ"
+    ]
   },
   "bearCharts": {
-    "0": ["peerFpe"],
-    "1": ["omA"],
-    "2": ["capexPctA", "capexA"]
+    "0": [
+      "peerFpe"
+    ],
+    "1": [
+      "omA"
+    ],
+    "2": [
+      "capexPctA",
+      "capexA"
+    ]
   },
   "sources": [
-    {"label": "Tesla Q3 2026 Update (8-K Exhibit 99.1, Oct 21, 2026)", "url": "https://www.sec.gov/Archives/edgar/data/0001318605/000162828026066738/exhibit9914.htm"},
-    {"label": "Electrek: Tesla Q3 2026 financial results - consensus, margins, capex vs >$25B guide (Oct 21, 2026)", "url": "https://electrek.co/2026/10/21/tesla-tsla-q3-2026-financial-results/"},
-    {"label": "Electrek: unsupervised FSD for customer cars moved to Q2 2027 (Oct 21, 2026)", "url": "https://electrek.co/2026/10/21/tesla-unsupervised-fsd-q2-2027-robotaxi-fleet/"},
-    {"label": "Drive Tesla: Q3 2026 results - FSD attach >75%, Megafactory Texas, 400 MW SI compute (Oct 2026)", "url": "https://driveteslacanada.ca/?p=126151"},
-    {"label": "Basenor: Q3 2026 recap incl. $20B capex claim (unverified)", "url": "https://www.basenor.com/blogs/news/tesla-q3-2026-earnings-28-05b-revenue-486-532-deliveries-fsd-subs-up-67"},
-    {"label": "Yahoo Finance: Q1 2026 call - 2026 capex 'over $25 billion' (Apr 2026)", "url": "https://finance.yahoo.com/sectors/technology/article/tesla-stock-on-track-to-end-week-lower-after-capex-guidance-spooks-investors-160128168.html"},
-    {"label": "Not a Tesla App: Q2 2026 call summary - unsupervised in Miami, Orlando, Tampa (Jul 2026)", "url": "https://notateslaapp.com/news/4481/summary-of-teslas-2026-q2-earnings-call-cybercab-fsd-ai4-and-more"},
-    {"label": "CNBC: Tesla Q2 2026 earnings report (Jul 22, 2026)", "url": "https://www.cnbc.com/2026/07/22/tesla-tsla-q2-2026-earnings-report.html"},
-    {"label": "NPR: Shareholders approve $1T Musk pay package (Nov 6, 2025)", "url": "https://npr.org/2025/11/06/nx-s1-5596440/tesla-musk-2025-trillion-dollar-compensation-vote"},
-    {"label": "Engadget: 4.3M-vehicle China recall over hidden door handles (2026)", "url": "https://www.engadget.com/2241760/tesla-and-others-recall-over-4-million-vehicles-in-china-over-hidden-door-handles/"},
-    {"label": "The Hill: NHTSA steps up Tesla FSD investigation (2026)", "url": "https://thehill.com/policy/technology/5791223-nhtsa-tesla-crash-investigation/"}
+    {
+      "label": "Wisevoter (citing Bloomberg): Tesla and SpaceX weigh a merger announcement in December; HSBC $507 estimate; committee and approval details (Nov 27, 2026)",
+      "url": "https://wisevoter.com/world/us/2026/11/27/tesla-spacex-possible-merger-december"
+    },
+    {
+      "label": "Tesla Oracle: unsupervised Robotaxi launches in San Antonio, eighth city (Nov 9, 2026)",
+      "url": "https://teslaoracle.com/2026/11/09/after-fort-worth-tesla-launches-robotaxi-service-in-san-antonio-texas-today-nov-9-now-available-in-8-cities"
+    },
+    {
+      "label": "Stocktwits: Cybercab expands to Dallas; Austin Cybercab fleet above 300 (Nov 19, 2026)",
+      "url": "https://stocktwits.com/news-articles/markets/equity/tesla-expands-cybercab-to-dallas-in-first-move-outside-austin/cNbik2YR90r"
+    },
+    {
+      "label": "CappNotes Closing Look: German antitrust filing on EMAG assets (Nov 27, 2026)",
+      "url": "https://cappnotes.substack.com/p/closing-look-friday-november-27-2026"
+    },
+    {
+      "label": "Tesla Q3 2026 Update (8-K Exhibit 99.1, Oct 21, 2026)",
+      "url": "https://www.sec.gov/Archives/edgar/data/0001318605/000162828026066738/exhibit9914.htm"
+    },
+    {
+      "label": "Electrek: Tesla Q3 2026 financial results - consensus, margins, capex vs >$25B guide (Oct 21, 2026)",
+      "url": "https://electrek.co/2026/10/21/tesla-tsla-q3-2026-financial-results/"
+    },
+    {
+      "label": "Electrek: unsupervised FSD for customer cars moved to Q2 2027 (Oct 21, 2026)",
+      "url": "https://electrek.co/2026/10/21/tesla-unsupervised-fsd-q2-2027-robotaxi-fleet/"
+    },
+    {
+      "label": "Drive Tesla: Q3 2026 results - FSD attach >75%, Megafactory Texas, 400 MW SI compute (Oct 2026)",
+      "url": "https://driveteslacanada.ca/?p=126151"
+    },
+    {
+      "label": "Basenor: Q3 2026 recap incl. $20B capex claim (unverified)",
+      "url": "https://www.basenor.com/blogs/news/tesla-q3-2026-earnings-28-05b-revenue-486-532-deliveries-fsd-subs-up-67"
+    },
+    {
+      "label": "Yahoo Finance: Q1 2026 call - 2026 capex 'over $25 billion' (Apr 2026)",
+      "url": "https://finance.yahoo.com/sectors/technology/article/tesla-stock-on-track-to-end-week-lower-after-capex-guidance-spooks-investors-160128168.html"
+    },
+    {
+      "label": "Not a Tesla App: Q2 2026 call summary - unsupervised in Miami, Orlando, Tampa (Jul 2026)",
+      "url": "https://notateslaapp.com/news/4481/summary-of-teslas-2026-q2-earnings-call-cybercab-fsd-ai4-and-more"
+    },
+    {
+      "label": "CNBC: Tesla Q2 2026 earnings report (Jul 22, 2026)",
+      "url": "https://www.cnbc.com/2026/07/22/tesla-tsla-q2-2026-earnings-report.html"
+    },
+    {
+      "label": "NPR: Shareholders approve $1T Musk pay package (Nov 6, 2025)",
+      "url": "https://npr.org/2025/11/06/nx-s1-5596440/tesla-musk-2025-trillion-dollar-compensation-vote"
+    },
+    {
+      "label": "Engadget: 4.3M-vehicle China recall over hidden door handles (2026)",
+      "url": "https://www.engadget.com/2241760/tesla-and-others-recall-over-4-million-vehicles-in-china-over-hidden-door-handles/"
+    },
+    {
+      "label": "The Hill: NHTSA steps up Tesla FSD investigation (2026)",
+      "url": "https://thehill.com/policy/technology/5791223-nhtsa-tesla-crash-investigation/"
+    }
   ],
   "changelog": [
+    {
+      "date": "2026-11-28",
+      "change": "No new financials. Bloomberg reports Tesla and SpaceX are negotiating a merger that could be announced in December; HSBC estimates $507 per share. Added a fourth debate on the deal. Robotaxi now in eight cities and Cybercab in Dallas: the metro half of the autonomy signpost is met, fleet size still undisclosed. A German antitrust filing reportedly shows Tesla buying assets of machine-tool maker EMAG (per market recap, unverified). Scenarios unchanged (bear $111 / base $321 / bull $641, weighted ~$311). View unchanged on fundamentals (Cautious), now qualified for the deal."
+    },
     {
       "date": "2026-10-24",
       "change": "Rebuilt as a v3 decision note after the Oct 21 Q3 2026 report (non-GAAP EPS $0.48 beat, op margin 2.6%, FCF $1.53B on capex below plan, customer unsupervised FSD moved to Q2 2027). Added verdict (Cautious), FY2027 scenario values (bear $111 / base $321 / bull $641) and three debates. View unchanged: the price still needs autonomy to scale on schedule."
